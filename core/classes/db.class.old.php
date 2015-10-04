@@ -46,13 +46,16 @@
 			$db_password = $this->password ? $this->password : DB_PASSWORD;
 			$db_name = $this->db_name ? $this->db_name : DB_NAME;
 
-		    if (($this->connection = mysqli_connect($db_host, $db_user, $db_password, $db_name)) === FALSE) {
+		    if (($this->connection = mysql_connect($db_host, $db_user, $db_password, true)) === FALSE) {
 			    throw new Exception('Couldn\'t connect to DB');
+		    }
+		    if (($this->selectDB($db_name)) === FALSE) {
+			    throw new Exception('Couldn\'t select DB');
 		    }
 
 		    if (defined('DB_INIT'))
 			    if (DB_INIT){
-				    $this->connection->query(DB_INIT);
+					    mysql_query(DB_INIT, $this->connection);
 			    }
         }
 
@@ -61,7 +64,7 @@
          */
         public function disconnect()
         {
-            if (!$this->connection->close()) {
+            if (!mysql_close($this->connection)) {
                 throw new Exception('Couldn\'t close connection');
             }
         }
@@ -75,7 +78,7 @@
          */
         public function selectDB($db_name = '')
         {
-            return $this->connection->select_db($db_name);
+            return mysql_select_db($db_name, $this->connection);
         }
 
         /**
@@ -84,12 +87,12 @@
          */
         public function error()
         {
-            return $this->connection->error;
+            return mysql_error($this->connection);
         }
 
         public function error_code()
         {
-            return $this->connection->errno;
+            return mysql_errno($this->connection);
         }
 
         /**
@@ -98,7 +101,7 @@
          */
         public function queryInfo()
         {
-            return $this->connection->info;
+            return mysql_info($this->connection);
         }
 
         /**
@@ -118,16 +121,15 @@
 
             $profiler->startTime('mysql');
 
-		        $this->query = $this->connection->query($query);
+		        $this->query = mysql_query($query, $this->connection);
             $profiler->stopTime('mysql', $query);
 
             if ($this->query === FALSE) {
-                throw new Exception($this->connection->error . "\r\n" . $query);
+                throw new Exception(mysql_error($this->connection) . "\r\n" . $query);
             }
 
             return $this->query;
         }
-
 
         /**
          * Execute query and fetch result
@@ -144,9 +146,10 @@
 
             $query = $this->post($query, $params);
 
+
             $result = array();
             if (($this->query != NULL) && (!is_bool($this->query))) {
-                while ($row = mysqli_fetch_array($this->query, MYSQLI_ASSOC)) {
+                while ($row = mysql_fetch_array($this->query, MYSQL_ASSOC)) {
                     $result[] = $row;
                 }
             }
@@ -207,7 +210,7 @@
          */
         public function getAffectedRows()
         {
-            return $this->connection->affected_rows;
+            return mysql_affected_rows($this->connection);
         }
 
         /**
@@ -216,7 +219,7 @@
          */
         public function getNumRows()
         {
-            return $this->connection->num_rows;
+            return mysql_num_rows($this->query);
         }
 
         /**
@@ -225,7 +228,7 @@
          */
         public function lastInsertId()
         {
-            return $this->connection->insert_id;
+            return mysql_insert_id($this->connection);
         }
 
         /**
@@ -247,10 +250,10 @@
                 foreach ($params as $key => $value) {
                     if (is_array($value)) {
                         foreach ($value as $k=> $v)
-                            $value[$k] = $this->connection->real_escape_string($v);
+                            $value[$k] = mysql_real_escape_string($v);
                         $value = "('" . join("', '", $value) . "')";
                     } else {
-                        $value = "'" . $this->connection->real_escape_string($value) . "'";
+                        $value = "'" . mysql_real_escape_string($value) . "'";
                     }
                     $query = preg_replace('/\?/is', $value, $query, 1);
                 }
@@ -287,7 +290,4 @@
 			return $data;
 		}
 
-	  public function escape($string) {
-		  return $this->connection->real_escape_string($string);
-	  }
-}
+    }

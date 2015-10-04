@@ -14,18 +14,18 @@ DirectoryIndex index.php index.html
   # getting no_script_name to work
   RewriteBase /
 
-  RewriteRule ^\/?spec\/([^\/]+)\/([A-Za-z]+)(\/[^.]+)?\/?$ http://$2.lookmedbook.ru/doctor/$1/$3 [R=301,L]
+  RewriteRule ^\/?spec\/([^\/]+)\/([A-Za-z]+)(\/[^.]+)?\/?$ http://$2.lookmedbook.cyb/doctor/$1/$3 [R=301,L]
 
-  RewriteCond %{HTTP_HOST} ^moskva\.lookmedbook\.ru [NC]
-  RewriteRule ^\/?(.*)$ http://lookmedbook.ru/$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^moskva\.lookmedbook\.cyb [NC]
+  RewriteRule ^\/?(.*)$ http://lookmedbook.cyb/$1 [R=301,L]
   
-  RewriteCond %{HTTP_HOST} ^www\.lookmedbook\.ru$ [NC]
-  RewriteRule ^(.*)$ http://lookmedbook.ru/$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^www\.lookmedbook\.cyb$ [NC]
+  RewriteRule ^(.*)$ http://lookmedbook.cyb/$1 [R=301,L]
 
-  RewriteCond %{HTTP_HOST} ^(.*)\.lookmedbook\.ru$ [NC]
+  RewriteCond %{HTTP_HOST} ^(.*)\.lookmedbook\.cyb$ [NC]
   RewriteRule ^robots\.txt$ robots/robots_%1.txt [L]
 
-  RewriteCond %{HTTP_HOST} ^(.*)\.lookmedbook\.ru$ [NC]
+  RewriteCond %{HTTP_HOST} ^(.*)\.lookmedbook\.cyb$ [NC]
   RewriteRule ^yandex_([a-zA-Z0-9]+)\.html$ yandex_files/yandex_$1.html [L]
 
   # no, so we redirect to our front web controller
@@ -36,51 +36,51 @@ DirectoryIndex index.php index.html
      
 
 RewriteEngine On 
-#RewriteCond %{HTTP_HOST} ^[_A-Za-z0-9\-]+\.lookmedbook\.ru$ [NC] 
+#RewriteCond %{HTTP_HOST} ^[_A-Za-z0-9\-]+\.lookmedbook\.cyb$ [NC]
 #RewriteCond %{REQUEST_URI} !^/robots\.txt$ 
-#RewriteRule ^(.*)$ http://lookmedbook.ru/$1 [R=301,L]
+#RewriteRule ^(.*)$ http://lookmedbook.cyb/$1 [R=301,L]
 
-RewriteCond %{HTTP_HOST} ^www\.lookmedbook\.ru$ [NC]
+RewriteCond %{HTTP_HOST} ^www\.lookmedbook\.cyb$ [NC]
 RewriteCond %{REQUEST_URI} !^/booking/test\.xml$
-RewriteRule ^(.*)$ http://lookmedbook.ru/$1 [R=301,L]
+RewriteRule ^(.*)$ http://lookmedbook.cyb/$1 [R=301,L]
 
-RewriteCond %{HTTP_HOST} ^www\.lookmedbook\.ru$ [NC]
+RewriteCond %{HTTP_HOST} ^www\.lookmedbook\.cyb$ [NC]
 RewriteCond %{REQUEST_URI} !^/yandex_5e37f2f3f5a8ea9d\.txt$
-RewriteRule ^(.*)$ http://lookmedbook.ru/$1 [R=301,L]
+RewriteRule ^(.*)$ http://lookmedbook.cyb/$1 [R=301,L]
 
 ErrorDocument 404 /404.html
 
 RewriteCond %{HTTP_HOST} ^80\.108\.77\.130$ [NC] 
 RewriteCond %{REQUEST_URI} !^/robots\.txt$ 
-RewriteRule ^(.*)$ http://lookmedbook.ru/$1 [R=301,L]
+RewriteRule ^(.*)$ http://lookmedbook.cyb/$1 [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^vm6253\.vps\.agava\.net$ [NC] 
 RewriteCond %{REQUEST_URI} !^/robots\.txt$ 
-RewriteRule ^(.*)$ http://lookmedbook.ru/$1 [R=301,L] 
+RewriteRule ^(.*)$ http://lookmedbook.cyb/$1 [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^80\.108\.77\.130$ [NC]
 RewriteCond %{REQUEST_URI} !^/booking/test\.xml$
-RewriteRule ^(.*)$ http://lookmedbook.ru/$1 [R=301,L]
+RewriteRule ^(.*)$ http://lookmedbook.cyb/$1 [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^vm6253\.vps\.agava\.net$ [NC]
 RewriteCond %{REQUEST_URI} !^/booking/test\.xml$
-RewriteRule ^(.*)$ http://lookmedbook.ru/$1 [R=301,L]
+RewriteRule ^(.*)$ http://lookmedbook.cyb/$1 [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^80\.108\.77\.130$ [NC]
 RewriteCond %{REQUEST_URI} !^/yandex_5e37f2f3f5a8ea9d\.txt$
-RewriteRule ^(.*)$ http://lookmedbook.ru/$1 [R=301,L]
+RewriteRule ^(.*)$ http://lookmedbook.cyb/$1 [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^vm6253\.vps\.agava\.net$ [NC]
 RewriteCond %{REQUEST_URI} !^/yandex_5e37f2f3f5a8ea9d\.txt$
-RewriteRule ^(.*)$ http://lookmedbook.ru/$1 [R=301,L]
+RewriteRule ^(.*)$ http://lookmedbook.cyb/$1 [R=301,L]
 
-#RewriteCond %{HTTP_HOST} ^www\.lookmedbook\.ru$ [NC]
-#RewriteRule ^(.*)$ http://lookmedbook.ru/$1 [L,R=301]
+#RewriteCond %{HTTP_HOST} ^www\.lookmedbook\.cyb$ [NC]
+#RewriteRule ^(.*)$ http://lookmedbook.cyb/$1 [L,R=301]
 
 #RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteCond %{REQUEST_URI} !\..{1,10}$
 #RewriteCond %{REQUEST_URI} !(.*)/$
-#RewriteRule ^(.*)$ http://lookmedbook.ru/$1/ [L,R=301]
+#RewriteRule ^(.*)$ http://lookmedbook.cyb/$1/ [L,R=301]
 
 AddEncoding gzip .gz
 RewriteCond %{HTTP:Accept-encoding} gzip
@@ -115,15 +115,23 @@ RewriteRule ^(.*)$ $1.gz [QSA,L]
         </FilesMatch>
 </IfModule>
 
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE application/javascript
-  AddOutputFilterByType DEFLATE text/javascript
-  DeflateCompressionLevel 8
-  <IfModule mod_setenvif.c>
-    BrowserMatch ^Mozilla/4 gzip-only-text/html
-    BrowserMatch ^Mozilla/4\.0[678] no-gzip
-    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-  </IfModule>
-</IfModule>
+#<IfModule mod_deflate.c>
+#  AddOutputFilterByType DEFLATE application/javascript
+#  AddOutputFilterByType DEFLATE text/javascript
+#  DeflateCompressionLevel 8
+#  <IfModule mod_setenvif.c>
+#    BrowserMatch ^Mozilla/4 gzip-only-text/html
+#    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+#    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+#  </IfModule>
+#</IfModule>
 
-AddType text/x-component .htc
+#AddType text/x-component .htc
+
+
+
+  php_flag display_startup_errors on
+    php_flag display_errors on
+    php_value error_reporting 30719
+    #php_value error_reporting -1
+

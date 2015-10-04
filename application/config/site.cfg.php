@@ -10,6 +10,6 @@ define('UPLOAD_IMAGES_HEIGHT', 800);
 define('ADMIN_FOLDER', '/admin');
 define('MANAGE_FOLDER', '/registry/manage');
 define('REGISTRY_FOLDER', '/registry');
-define('SITE_URL', "http://lookmedbook.ru");
+define('SITE_URL', "http://look.cyb");
 define('SHOP_ENABLE', 1);
 define('RELEASE_NUMBER', 43);

@@ -40,12 +40,14 @@
 
 	Application::afterInit();
 
-    if (strpos($_SERVER['REQUEST_URI'], 'admin') !== FALSE)
-        Application::loadAllConfigInFolder('cms_generator_configs');
-
-    if (strpos($_SERVER['REQUEST_URI'], 'registry') !== FALSE)
-        Application::loadAllConfigInFolder('manage_configs');
-
+		if (isset($_SERVER['REQUEST_URI'])) {
+			if (strpos($_SERVER['REQUEST_URI'], 'admin') !== FALSE) {
+				Application::loadAllConfigInFolder('cms_generator_configs');
+			}
+			if (strpos($_SERVER['REQUEST_URI'], 'registry') !== FALSE) {
+				Application::loadAllConfigInFolder('manage_configs');
+			}
+		}
 
     Register::add('db', new Db());
     Register::add('utils', new Utils());

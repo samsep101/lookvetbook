@@ -7,7 +7,7 @@
     define('PROFILE_LOG_TYPE', 'file');
 
 	$profiler = ProfilerFactory::getProfiler();
-	$profiler->setIp($_SERVER['REMOTE_ADDR']);
+	$profiler->setIp(empty($_SERVER['REMOTE_ADDR'])?'127.0.0.1':$_SERVER['REMOTE_ADDR']);
 
 	if(isset($_SERVER['HTTP_REFERER']))
 		$profiler->setReferer($_SERVER['HTTP_REFERER']);

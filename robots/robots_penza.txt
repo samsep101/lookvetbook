@@ -1,0 +1,19 @@
+User-agent: Yandex
+	Disallow: /*search*
+	Disallow: /*utm_
+	Disallow: /*_openstat
+	Disallow: /*?
+	Disallow: /*booking*
+	Disallow: /media/js/linkHidingIndexing.js
+	Sitemap: http://penza.lookmedbook.ru/sitemaps/penza.sitemap.xml
+
+User-agent: *
+	Disallow: /*search*
+	Disallow: /*utm_
+	Disallow: /*_openstat
+	Disallow: /*?
+	Disallow: /*booking*
+	Disallow: /media/js/linkHidingIndexing.js
+	Sitemap: http://penza.lookmedbook.ru/sitemaps/penza.sitemap.xml
+
+Host: penza.lookmedbook.ru

@@ -1,0 +1,19 @@
+User-agent: Yandex
+	Disallow: /*search*
+	Disallow: /*utm_
+	Disallow: /*_openstat
+	Disallow: /*?
+	Disallow: /*booking*
+	Disallow: /media/js/linkHidingIndexing.js
+	Sitemap: http://mytischi.lookmedbook.ru/sitemaps/mytischi.sitemap.xml
+
+User-agent: *
+	Disallow: /*search*
+	Disallow: /*utm_
+	Disallow: /*_openstat
+	Disallow: /*?
+	Disallow: /*booking*
+	Disallow: /media/js/linkHidingIndexing.js
+	Sitemap: http://mytischi.lookmedbook.ru/sitemaps/mytischi.sitemap.xml
+
+Host: mytischi.lookmedbook.ru

@@ -1,0 +1,19 @@
+User-agent: Yandex
+	Disallow: /*search*
+	Disallow: /*utm_
+	Disallow: /*_openstat
+	Disallow: /*?
+	Disallow: /*booking*
+	Disallow: /media/js/linkHidingIndexing.js
+	Sitemap: http://magnitogorsk.lookmedbook.ru/sitemaps/magnitogorsk.sitemap.xml
+
+User-agent: *
+	Disallow: /*search*
+	Disallow: /*utm_
+	Disallow: /*_openstat
+	Disallow: /*?
+	Disallow: /*booking*
+	Disallow: /media/js/linkHidingIndexing.js
+	Sitemap: http://magnitogorsk.lookmedbook.ru/sitemaps/magnitogorsk.sitemap.xml
+
+Host: magnitogorsk.lookmedbook.ru

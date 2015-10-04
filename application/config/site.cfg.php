@@ -1,0 +1,15 @@
+<?php
+define('SITE_NAME','');
+define('CONTACT_EMAIL','');
+define('OUTPUT_LANGUAGE','RUSSIAN');
+define('USE_SET_NAMES',1);
+define('HTTP_ROOT','');
+define('MEDIA_UPLOAD_PATH', '/media/upload/');
+define('UPLOAD_IMAGES_WIDTH', 1000);
+define('UPLOAD_IMAGES_HEIGHT', 800);
+define('ADMIN_FOLDER', '/admin');
+define('MANAGE_FOLDER', '/registry/manage');
+define('REGISTRY_FOLDER', '/registry');
+define('SITE_URL', "http://lookmedbook.ru");
+define('SHOP_ENABLE', 1);
+define('RELEASE_NUMBER', 43);

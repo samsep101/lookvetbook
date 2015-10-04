@@ -1,0 +1,30 @@
+<?php
+    class MetroStationToClinicManager extends ModelManager
+    {
+        protected $model_name = 'MetroStationToClinicModel';
+        protected $table_name = 'metro_station_to_clinic';
+
+        public function getListByClinicId($clinic_id)
+        {
+            $data = $this->orm_model->select()->where('clinic_id = ?', $clinic_id)->fetchAll();
+            return $this->initList($data);
+        }
+
+        public function deleteByClinicId($clinic_id)
+        {
+            $sql = 'DELETE FROM ' . $this->table_name . '
+					WHERE clinic_id = ' . (int)$clinic_id;
+
+            $this->db->query($sql);
+        }
+
+        public function getOneByClinicId($clinic_id)
+        {
+            $sql = 'SELECT *
+                    FROM metro_station_to_clinic
+                    WHERE clinic_id = ' .(int)$clinic_id;
+            $data = $this->db->query($sql);
+
+            return ($data) ? $this->initOne($data[0]) : null;
+        }
+    }

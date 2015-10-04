@@ -24,7 +24,7 @@
 
             $this->setBrowser("*firefox");
             //$this->setBrowserUrl("http://admin:21506@dev.lookmedbook.ru/");
-            $this->setBrowserUrl("http://lookmedbook.ru/");
+            $this->setBrowserUrl(SITE_URL);
 
             $account_manager = new AccountManager();
             $this->test_account = $account_manager->getOneByEmail($this->test_account_login);

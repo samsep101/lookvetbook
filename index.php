@@ -22,7 +22,7 @@
 		require('application/config/init.php');
 
 		// редирект со страницы со слешем на конце на страницу без слеша на конце
-		if(preg_match('/^(.+)\/$/ims', $_SERVER['REQUEST_URI'], $matches))
+		if(isset($_SERVER['REQUEST_URI']) and preg_match('/^(.+)\/$/ims', $_SERVER['REQUEST_URI'], $matches))
 		{
 			RedirectManager::redirect301($matches[1]);
 		}

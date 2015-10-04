@@ -18,7 +18,7 @@
             // prepare URI
             $profiler = ProfilerFactory::getProfiler();
             $profiler->startTime('page');
-            $profiler->setPage($_SERVER['REQUEST_URI']);
+            $profiler->setPage(isset($_SERVER['REQUEST_URI'])?$_SERVER['REQUEST_URI']:'');
 
             $uri = $this->prepareUri($uri);
 

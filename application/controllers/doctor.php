@@ -691,7 +691,7 @@
             $this->view->address->district_id = $district ? $district->getId() : FALSE;
             $this->view->address->region_id   = $region ? $region->getId() : FALSE;
             $this->view->address->street_id   = $street ? $street->getId() : FALSE;
-            $this->view->setDefaultSpecialty  = $setDefaultSpecialty ? $setDefaultSpecialty : 0;
+            $this->view->setDefaultSpecialty  = !empty($setDefaultSpecialty) ? $setDefaultSpecialty : 0;
 
             if(($this->view->address->district_id ||
                     $this->view->address->region_id ||
@@ -1193,7 +1193,7 @@
         {
             $class = 'DoctorModel';
 
-            if($_SESSION[$class]['doctor_search_params'])
+            if(!empty($_SESSION[$class]['doctor_search_params']))
             {
                 return $_SESSION[$class]['doctor_search_params'];
             }
@@ -1214,7 +1214,8 @@
 
             $url_parts = explode("/", $_SERVER['HTTP_REFERER']);
             $last_part = $url_parts[count($url_parts) - 1];
-            list($search_params_key, $get_params) = explode("?", $last_part);
+	          $url_params = explode("?", $last_part);
+	          $search_params_key = $url_params[0];
 
             $_SESSION['last_search_params']                    = $doctor_search_params;
             $_SESSION['last_search_params']->search_params_key = $search_params_key;

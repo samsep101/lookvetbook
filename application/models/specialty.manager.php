@@ -64,7 +64,7 @@
         {
             $sql = 'SELECT *
                     FROM specialty
-                    WHERE name LIKE "' . mysql_real_escape_string($name) . '";';
+                    WHERE name LIKE "' . $this->db->escape($name) . '";';
 
             $data = $this->db->query($sql);
 

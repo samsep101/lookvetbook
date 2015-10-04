@@ -24,7 +24,7 @@
 			// todo: сделать номральную проверку на уникальное значение.
 			$sql = 'SELECT COUNT(*) as result
                     FROM `' . $fields[0] . '`
-                    WHERE `' . $fields[1] . '` = "' . mysql_real_escape_string($value) . '"';
+                    WHERE `' . $fields[1] . '` = "' . Register::get('db')->escape($value) . '"';
 
 			if($check_account_id)
 			{
@@ -49,7 +49,7 @@
 
 			$sql = 'SELECT COUNT(*) as result
                     FROM `account_phone`
-                    WHERE `phone` = "' . mysql_real_escape_string($phone) . '"';
+                    WHERE `phone` = "' . Register::get('db')->escape($phone) . '"';
 
 			$data = Register::get('db')->query($sql);
 
@@ -75,7 +75,7 @@
 
 			$sql = 'SELECT COUNT(*) as result
                     FROM `account`
-                    WHERE `email` = "' . mysql_real_escape_string($email) . '"';
+                    WHERE `email` = "' . Register::get('db')->escape($email) . '"';
 
 			$data = Register::get('db')->query($sql);
 
@@ -100,7 +100,7 @@
 
 			$sql = 'SELECT COUNT(*) as result
                     FROM `user`
-                    WHERE `email` = "' . mysql_real_escape_string($email) . '"';
+                    WHERE `email` = "' . Register::get('db')->escape($email) . '"';
 
 			$data = Register::get('db')->query($sql);
 
@@ -125,7 +125,7 @@
 
 			$sql = 'SELECT COUNT(*) as result
                     FROM `account`
-                    WHERE `login` = "' . mysql_real_escape_string($login) . '"';
+                    WHERE `login` = "' . Register::get('db')->escape($login) . '"';
 
 			$data = Register::get('db')->query($sql);
 
@@ -150,7 +150,7 @@
 
 			$sql = 'SELECT COUNT(*) as result
                     FROM `account`
-                    WHERE `nick` = "' . mysql_real_escape_string($nick) . '"';
+                    WHERE `nick` = "' . Register::get('db')->escape($nick) . '"';
 
 			$data = Register::get('db')->query($sql);
 
@@ -175,7 +175,7 @@
 
 			$sql = 'SELECT COUNT(*) as result
                     FROM `account_phone`
-                    WHERE `phone` = "' . mysql_real_escape_string($phone) . '"
+                    WHERE `phone` = "' . Register::get('db')->escape($phone) . '"
                         AND is_confirmed = 1';
 
 			$data = Register::get('db')->query($sql);
@@ -201,7 +201,7 @@
 
 			$sql = 'SELECT COUNT(*) as result
                     FROM `account_phone`
-                    WHERE `phone` = "' . mysql_real_escape_string($phone) . '"
+                    WHERE `phone` = "' . Register::get('db')->escape($phone) . '"
                         AND is_confirmed = 1';
 
 			$data = Register::get('db')->query($sql);
@@ -2160,7 +2160,7 @@ if (!Acc::isAuthed())
 
             $sql = 'SELECT COUNT(*) as result
                     FROM widget
-                    WHERE name = "' . mysql_real_escape_string($name) . '"';
+                    WHERE name = "' . Register::get('db')->escape($name) . '"';
 
             $data = Register::get('db')->query($sql);
 
@@ -2185,7 +2185,7 @@ if (!Acc::isAuthed())
 
             $sql = 'SELECT COUNT(*) as result
                     FROM widget
-                    WHERE folder = "' . mysql_real_escape_string($folder) . '"';
+                    WHERE folder = "' . Register::get('db')->escape($folder) . '"';
 
             $data = Register::get('db')->query($sql);
 

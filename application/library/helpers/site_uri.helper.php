@@ -8,7 +8,7 @@
             $preg = str_replace('/', '\/', $preg);
             $preg = '/^' . $preg . '\/doctor(\?.*)?$/ims';
 
-            if(isset($_SERVER['HTTP_REFERER']) && preg_match($preg, $_SERVER['HTTP_REFERER']))
+            if(isset($_SERVER['HTTP_REFERER']) and preg_match($preg, $_SERVER['HTTP_REFERER']))
             {
                 return TRUE;
             }
@@ -104,7 +104,7 @@
             $preg = str_replace('/', '\/', $preg);
             $preg = '/^' . $preg . '\/doctor/';
 
-            if(!preg_match($preg, $_SERVER['HTTP_REFERER']))
+            if(!isset($_SERVER['HTTP_REFERER']) or !preg_match($preg, $_SERVER['HTTP_REFERER']))
             {
                 return 0;
             }

@@ -121,7 +121,7 @@
             $step = 7;
 
             foreach($diseases AS $dKey => $dValue) {
-                if(!$specialization) $specialization = $dValue['name'];
+                if(!$specialization) $specialization = empty($dValue['name'])?'':$dValue['name'];
 
                 if($currentDisease->id == $dValue['disease_id']) {
                     $numberFroListDiseases = $dKey + 1;

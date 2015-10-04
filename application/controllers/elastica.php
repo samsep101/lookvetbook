@@ -22,7 +22,7 @@
         {
             $manager = new ElasticSearchIndexControl();
             $manager->createIndex(Register::get('ELASTIC_SEARCH_INDEX'));
-			exit;
+			exit;//так было на сервере!!
         }
 
         public function applyMapping()

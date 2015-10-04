@@ -16,7 +16,7 @@
 		{
 			$sql = 'SELECT *
                     FROM specialty_descr
-                    WHERE specialty_id = "' . mysql_real_escape_string($specialty_id) . '";';
+                    WHERE specialty_id = "' . $this->db->escape($specialty_id) . '";';
 			$data = $this->db->query($sql);
 			return (isset($data[0])) ? $data[0]['specialty_page_descr'] : null;
 		}
@@ -28,7 +28,7 @@
 		{
 			$sql = 'SELECT *
                     FROM specialty_descr
-                    WHERE specialty_id = "' . mysql_real_escape_string($specialty_id) . '";';
+                    WHERE specialty_id = "' . $this->db->escape($specialty_id) . '";';
 			$data = $this->db->query($sql);
 			return (isset($data[0])) ? $data[0]['clinic_page_descr'] : null;
 		}

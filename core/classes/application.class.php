@@ -23,7 +23,7 @@
         public function __construct()
         {
             // todo: костыль
-            if (($_SERVER['REQUEST_URI'] == '/account/ajaxLogin') && !isset($_POST['remember'])) {
+            if (isset($_SERVER['REQUEST_URI']) and ($_SERVER['REQUEST_URI'] == '/account/ajaxLogin') && !isset($_POST['remember'])) {
                 session_set_cookie_params(5);
             }
 

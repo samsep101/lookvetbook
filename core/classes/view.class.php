@@ -51,7 +51,8 @@
             else
                 include($this->__template);
             $html = ob_get_contents();
-            ob_clean();
+            //ob_clean();
+	          ob_end_clean();
 
             echo $this->filter($html);
         }

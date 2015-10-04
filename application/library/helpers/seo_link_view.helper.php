@@ -57,7 +57,8 @@
         public static function convertLinks($html) {
             include_once dirname(dirname(__FILE__)) . '/classes/simple_html_dom.php';
 
-            $regPermissibleLinks = '/http(.){0,1}:\/\/(?!(.)*lookmedbook)/';
+	          $domen = preg_replace('|^http://([^.]+)\.\w+$|', '$1', SITE_URL);
+            $regPermissibleLinks = '/http(.){0,1}:\/\/(?!(.)*'.$domen.')/';
             $linksProcessed = array();
             $externalReference = array();
 

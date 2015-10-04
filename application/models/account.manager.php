@@ -40,11 +40,11 @@
 		 */
 		public function getOneByEmailAndPasswordHash($email, $password_hash)
 		{
+			$db = Register::get('db');
 			$sql = 'SELECT ' . $this->selected_fields . '
                     FROM account
-                    WHERE email = "' . mysql_real_escape_string($email) . '"
-                        AND password_hash = "' . mysql_real_escape_string($password_hash) . '"';
-			$db = Register::get('db');
+                    WHERE email = "' . $db->escape($email) . '"
+                        AND password_hash = "' . $db->escape($password_hash) . '"';
 			$data = $db->query($sql);
 			return (isset($data[0])) ? $this->initOne($data[0]) : null;
 		}
@@ -55,10 +55,10 @@
 		public function getOneByEmail($email)
 		{
 			$db = Register::get('db');
-
+			
 			$sql = 'SELECT *
                     FROM account
-                    WHERE `email` = "' . mysql_real_escape_string($email) . '"';
+                    WHERE `email` = "' . $db->escape($email) . '"';
 
 			$data = $db->query($sql);
 
@@ -74,7 +74,7 @@
 
 			$sql = 'SELECT *
                     FROM account
-                    WHERE `nick` = "' . mysql_real_escape_string($nick) . '"';
+                    WHERE `nick` = "' . $db->escape($nick) . '"';
 
 			$data = $db->query($sql);
 
@@ -91,8 +91,8 @@
 
 			$sql = 'SELECT *
                     FROM account
-                    WHERE `email` = "' . mysql_real_escape_string($email) . '"
-                        AND `email_confirm_code` = "' . mysql_real_escape_string($email_confirm_code) . '";';
+                    WHERE `email` = "' . $db->escape($email) . '"
+                        AND `email_confirm_code` = "' . $db->escape($email_confirm_code) . '";';
 
 			$data = $db->query($sql);
 
@@ -113,7 +113,7 @@
 		public function deleteByEmail($email)
 		{
 			$sql = 'DELETE FROM account
-                    WHERE  email="' . mysql_real_escape_string($email) . '"';
+                    WHERE  email="' . $this->db->escape($email) . '"';
 
 			$this->db->query($sql);
 		}
@@ -121,14 +121,15 @@
 		public function deleteByNick($nick)
 		{
 			$sql = 'DELETE FROM account
-                    WHERE  nick="' . mysql_real_escape_string($nick) . '"';
+                    WHERE  nick="' . $this->db->escape($nick) . '"';
 
 			$this->db->query($sql);
 		}
 
 		public function setNewPasswordHashByEmail($password_hash, $email)
 		{
-			$this->orm_model->update(array('password_hash' => $password_hash), 'email = "' . mysql_real_escape_string($email) . '"');
+			$db = Register::get('db');
+			$this->orm_model->update(array('password_hash' => $password_hash), 'email = "' . $db->escape($email) . '"');
 		}
 
 		public function setEmailAndEmailConfirmCodeAndPasswordHashByAccountId($email, $email_confirm_code, $account_id, $password_hash)
@@ -138,11 +139,12 @@
 
 		public static function setFullNameByAccountId($account_id, $full_name)
 		{
+			$db = Register::get('db');
 			$sql = 'UPDATE account
-                    SET full_name = "' . mysql_real_escape_string($full_name) . '"
+                    SET full_name = "' . $db->escape($full_name) . '"
                     WHERE id = ' . $account_id;
 
-			Register::get('db')->query($sql);
+			$db->query($sql);
 		}
 
         /**
@@ -154,7 +156,7 @@
 
 			$sql = 'SELECT *
                     FROM account
-                    WHERE full_name = "' . mysql_real_escape_string($full_name) . '"';
+                    WHERE full_name = "' . $db->escape($full_name) . '"';
 
 			$data = $db->query($sql);
 
@@ -170,10 +172,10 @@
 
 			$sql = 'SELECT *
                     FROM account
-                    WHERE first_name = "' . mysql_real_escape_string($first_name) . '"
-						AND last_name = "' . mysql_real_escape_string($last_name) . '"
-						AND middle_name = "' . mysql_real_escape_string($middle_name) . '"
-						AND email = "' . mysql_real_escape_string($email) . '"';
+                    WHERE first_name = "' . $db->escape($first_name) . '"
+						AND last_name = "' . $db->escape($last_name) . '"
+						AND middle_name = "' . $db->escape($middle_name) . '"
+						AND email = "' . $db->escape($email) . '"';
 
 			$data = $db->query($sql);
 
@@ -189,9 +191,9 @@
 
 			$sql = 'SELECT *
                     FROM account
-                    WHERE first_name = "' . mysql_real_escape_string($first_name) . '"
-                    AND last_name = "' . mysql_real_escape_string($last_name) . '"
-                    AND middle_name = "' . mysql_real_escape_string($middle_name) . '"';
+                    WHERE first_name = "' . $db->escape($first_name) . '"
+                    AND last_name = "' . $db->escape($last_name) . '"
+                    AND middle_name = "' . $db->escape($middle_name) . '"';
 
 			$data = $db->query($sql);
 
@@ -221,7 +223,7 @@
                     FROM account a
                     INNER JOIN account_phone ap ON ap.account_id = a.id
                         AND ap.is_confirmed = 1
-                    WHERE ap.phone = "'.mysql_real_escape_string($phone_number).'"
+                    WHERE ap.phone = "'.$this->db->escape($phone_number).'"
                     LIMIT 1';
 
             $data = $this->db->query($sql);
@@ -238,7 +240,7 @@
 			$sql = 'SELECT a.*
 					FROM account a
 					INNER JOIN account_session asess ON asess.account_id = a.id
-					WHERE asess.session_hash = "'.mysql_real_escape_string($session_hash).'"
+					WHERE asess.session_hash = "'.$this->db->escape($session_hash).'"
 					LIMIT 1';
 
 			$data = $this->db->query($sql);

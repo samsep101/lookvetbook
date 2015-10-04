@@ -17,20 +17,20 @@
         <label>Специализация</label>
             <select class="specialty-pick">
                 <option value="">Все</option>
-                <?if ($specialties):?>
-                    <?foreach ($specialties as $specialty):?>
-                        <option value="<?=$specialty->getId()?>"><?=$specialty->name?></option>
-                    <?endforeach?>
-                <?endif?>
+                <?php if ($specialties):?>
+                    <?php foreach ($specialties as $specialty):?>
+                        <option value="<?php echo $specialty->getId(); ?>"><?php echo $specialty->name; ?></option>
+                    <?php endforeach?>
+                <?php endif?>
             </select>
 
         <a class="btn-appoint" href="/registry/doctor/add<?php echo $param; ?>">Добавить врача</a>
     </div>
 
-    <?if ($doctors):?>
+    <?php if ($doctors):?>
         <div class="doctor-list">
 
         </div>
-    <?endif?>
+    <?php endif?>
 
 </div>

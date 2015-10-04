@@ -23,7 +23,7 @@
         <div class="row-record">
             <p class="h-region-left">Регионы</p>
             <div class="search-box flo">
-                <input data-id="<?php echo $menu_active; ?>" class="txt" type="text" value="<?if ($query){echo strip_tags($query);}?>" placeholder="Остион" style="width: 350px;">
+                <input data-id="<?php echo $menu_active; ?>" class="txt" type="text" value="<?php if ($query){echo strip_tags($query);}?>" placeholder="Остион" style="width: 350px;">
                 <input data-id="<?php echo $menu_active; ?>" class="btn-search" type="submit">
                 <ul class="drop-menu"> </ul>
             </div>

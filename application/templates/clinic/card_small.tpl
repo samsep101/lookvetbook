@@ -147,7 +147,7 @@
 
         <div class="specialization-link">
             <?php
-                $count = $clinic->additional_params['doctors_main_specialty']['count'];
+                $count = isset($clinic->additional_params['doctors_main_specialty']['count']) ? $clinic->additional_params['doctors_main_specialty']['count'] : 0;
                 if(!empty($specialization) && $count) {
             ?>
                 По специализации <span class="specialization-name"><?php echo $specialization->name; ?></span> в клинике  <a href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>?spzn_id=<?php echo $specialization->getId(); ?>#divider-shadow"><?php echo $count; ?> <?php echo SpecialtyHelper::getDoctorWordForm($count); ?></a>

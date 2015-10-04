@@ -22,7 +22,7 @@
                             <strong><?php echo $review->clinic->name; ?></strong> <br>
                             <?php if ($review->clinic->metro_station): ?>
                                 <?php if ($review->clinic->metro_station->metro_branch): ?>
-                                    <?echo MetroBranchIconViewHelper::getImage($review->clinic->metro_station->metro_branch)?>
+                                    <?php echo MetroBranchIconViewHelper::getImage($review->clinic->metro_station->metro_branch)?>
                                 <?php endif; ?>
                                 <?php echo $review->clinic->metro_station->name; ?> <br  />
                             <?php endif; ?>

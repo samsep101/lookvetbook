@@ -45,21 +45,21 @@
                 <input data-id="regions" class="btn-search" type="">
                 <ul class="drop-menu"> </ul>
             </div>
-            <?if ($region_clinics):?>
+            <?php if ($region_clinics):?>
                 <ul class="updates-list">
-                    <?foreach ($region_clinics as $clinic):?>
+                    <?php foreach ($region_clinics as $clinic):?>
                         <li>
                             <?php echo ModeratePageLinkViewHelper::getClinicOrDoctorLinkView($clinic, 'clinic'); ?>
                             <?php echo RegionStatusViewHelper::getStatusImage($clinic->clinic_status_id); ?>
                         </li>
-                    <?endforeach?>
+                    <?php endforeach?>
                 </ul>
                 <a class="show-all" href="/registry/manage/regions">Показать все</a>
-            <?else:?>
+            <?php else:?>
                 <div style="clear: both; margin-top: 10px;">
                     нет данных
                 </div>
-            <?endif?>
+            <?php endif?>
         </div>
     </div>
 </div>
@@ -81,18 +81,18 @@
                 <ul class="drop-menu"> </ul>
             </div>
             <div class="filter-clinic-list">
-                <?if ($clinics):?>
+                <?php if ($clinics):?>
                     <ul class="updates-list">
-                        <?foreach ($clinics as $clinic):?>
+                        <?php foreach ($clinics as $clinic):?>
                         <li><?php echo ModeratePageLinkViewHelper::getClinicOrDoctorLinkView($clinic, 'clinic'); ?></li>
-                        <?endforeach?>
+                        <?php endforeach?>
                     </ul>
                     <a class="show-all" href="/registry/manage/clinics">Показать все</a>
-                    <?else:?>
+                    <?php else:?>
                     <div style="clear: both; margin-top: 10px;">
                         нет данных
                     </div>
-                <?endif?>
+                <?php endif?>
             </div>
         </div>
     </div>
@@ -111,16 +111,16 @@
                 <ul class="drop-menu"> </ul>
             </div>
             <div class="filter-doctor-list">
-                <?if ($doctors):?>
+                <?php if ($doctors):?>
                     <ul class="updates-list">
-                        <?foreach ($doctors as $doctor):?>
+                        <?php foreach ($doctors as $doctor):?>
                             <li><?php echo ModeratePageLinkViewHelper::getClinicOrDoctorLinkView($doctor, 'doctor'); ?></li>
-                        <?endforeach?>
+                        <?php endforeach?>
                     </ul>
                     <a class="show-all" href="/registry/manage/doctors">Показать все</a>
-                <?else:?>
+                <?php else:?>
                     <div style="clear: both; margin-top: 10px;">нет данных</div>
-                <?endif?>
+                <?php endif?>
             </div>
             <!--<input class="manage-add" type="button" value="Добавить врача">-->
         </div>

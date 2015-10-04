@@ -8,7 +8,7 @@
 
 <?php $cache_id = 'counters_city'.$city->getId(); ?>
 
-	<?php if(!$cache->start($cache_id, 'counters_city')): ?>
+	<?php if(!isset($cache) or !$cache->start($cache_id, 'counters_city')): ?>
 <!--LiveInternet counter-->
 <script type="text/javascript">
 document.write("<a href='http://www.liveinternet.ru/click' target=_blank><img style='display: none' src='//counter.yadro.ru/hit?t44.6;r" + escape(top.document.referrer) + ((typeof(screen) == "undefined") ? "" : ";s" + screen.width + "*" + screen.height + "*" + (screen.colorDepth ? screen.colorDepth : screen.pixelDepth)) + ";u" + escape(document.URL) + ";h" + escape(document.title.substring(0, 80)) + ";" + Math.random() + "' border=0 width=31 height=31 alt='' title='LiveInternet'><\/a>")</script><!--/LiveInternet-->
@@ -87,5 +87,5 @@ document.write("<a href='http://www.liveinternet.ru/click' target=_blank><img st
     </script>
     <noscript><img src="//ad.adriver.ru/cgi-bin/rle.cgi?sid=194132&bt=21&pz=0&rnd=873783956" border=0 width=1 height=1></noscript>
     <!--  AdRiver code END  -->
-	<?php $cache->end(); ?>
+	<?php empty($cache)?'':$cache->end(); ?>
 	<?php endif; ?>

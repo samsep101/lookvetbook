@@ -12,7 +12,7 @@
         <div class="doctor-record">
             <?php echo DoctorAvatarViewHelper::viewOnCard($doctor, 74, 111, $param); ?>
             <div class="doctor-info">
-                <?=$doctor->full_name?>
+                <?php echo $doctor->full_name; ?>
             </div>
         </div>
 
@@ -59,11 +59,11 @@
                 <label>Специализации врача</label>
                 <select class="specialty-pick">
                     <option value="">Выберите специализацию врача</option>
-                    <?if ($specialties):?>
-                        <?foreach ($specialties as $specialty):?>
-                            <option value="<?=$specialty->getId()?>"><?=$specialty->name?></option>
-                        <?endforeach?>
-                    <?endif?>
+                    <?php if ($specialties):?>
+                        <?php foreach ($specialties as $specialty):?>
+                            <option value="<?php echo $specialty->getId(); ?>"><?php echo $specialty->name; ?></option>
+                        <?php endforeach?>
+                    <?php endif?>
                 </select>
             </div>
             <div class="row-record">

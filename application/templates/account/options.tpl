@@ -13,7 +13,7 @@
         <?php $this->active_left_menu = 'options'; ?>
         <?php $this->block('blocks/personal-room-left-menu'); ?>
 
-        <?if ($account->notifications):?>
+        <?php if ($account->notifications):?>
         <div class="cab-cont">
             <?php if (!$close_settings_note_attribute): ?>
                 <div class="owl-block">
@@ -30,36 +30,36 @@
             <div class="settings">
                 <div class="setting-section">
                     <h3>Мобильный телефон</h3>
-                    <div class="chekBox sms-chk phone-settings-checkbox-main <?if ($account->notifications->sms_notify){?>act<?}?>">
+                    <div class="chekBox sms-chk phone-settings-checkbox-main <?php if ($account->notifications->sms_notify){?>act<?php }?>">
                         <span></span> включить SMS оповещения
                         <input id="sms-checkbox-main" type="hidden"
-                            <?if ($account->notifications->sms_notify){?>value="1"<?}?>>
+                            <?php if ($account->notifications->sms_notify){?>value="1"<?php }?>>
                     </div>
                     <div class="options options-mobile"> <span class="lab">На номер</span>
                         <div class="sel-box">
                             <select class="chzn-select options-phones" style="width:303px;">
                                 <option value="0">Выберите номер</option>
-                                <?foreach($account->phones as $phone):?>
-                                    <option value="<?=$phone->id?>" <?if ($phone->id == $account->notifications->sms_notify_phone_id){?>selected<?}?>><?=$phone->phone?></option>
-                                <?endforeach?>
+                                <?php foreach($account->phones as $phone):?>
+                                    <option value="<?php echo $phone->id; ?>" <?php if ($phone->id == $account->notifications->sms_notify_phone_id){?>selected<?php }?>><?php echo $phone->phone; ?></option>
+                                <?php endforeach?>
                             </select>
                         </div>
                         <!-- <a class="lnk" href="about">редактировать номер телефона</a> -->
                         <div class="chk-opt phone-settings-checkboxes">
-                            <div class="chekBox phone-settings-checkbox <?if ($account->notifications->sms_notify_visit){?>act<?}?>">
+                            <div class="chekBox phone-settings-checkbox <?php if ($account->notifications->sms_notify_visit){?>act<?php }?>">
                                 <span></span> Напомнить про визит к врачу
                                 <input id="sms-checkbox-1" type="hidden"
-                                    <?if ($account->notifications->sms_notify_visit){?>value="1"<?}?>>
+                                    <?php if ($account->notifications->sms_notify_visit){?>value="1"<?php }?>>
                             </div>
-                            <div class="chekBox phone-settings-checkbox <?if ($account->notifications->sms_notify_change){?>act<?}?>">
+                            <div class="chekBox phone-settings-checkbox <?php if ($account->notifications->sms_notify_change){?>act<?php }?>">
                                 <span></span> Оповещение об изменениях
                                 <input id="sms-checkbox-2" type="hidden"
-                                    <?if ($account->notifications->sms_notify_change){?>value="1"<?}?>>
+                                    <?php if ($account->notifications->sms_notify_change){?>value="1"<?php }?>>
                             </div>
-                            <div class="chekBox phone-settings-checkbox <?if ($account->notifications->sms_notify_news){?>act<?}?>">
+                            <div class="chekBox phone-settings-checkbox <?php if ($account->notifications->sms_notify_news){?>act<?php }?>">
                                 <span></span> Новости ресурса
                                 <input id="sms-checkbox-3" type="hidden"
-                                    <?if ($account->notifications->sms_notify_news){?>value="1"<?}?>>
+                                    <?php if ($account->notifications->sms_notify_news){?>value="1"<?php }?>>
                             </div>
                         </div>
                     </div>
@@ -69,20 +69,20 @@
                     <p class="txt">Отправлять сообщения на e-mail:</p>
                     <div class="options">
                         <div class="chk-opt">
-                            <div class="chekBox mail-settings-checkbox <? if ($account->notifications->email_notify_bonus){?>act<?}?>">
+                            <div class="chekBox mail-settings-checkbox <?php  if ($account->notifications->email_notify_bonus){?>act<?php }?>">
                                 <span></span> Предлагать хорошие акции и бонусы клуба
                                 <input id="mail-checkbox-1" type="hidden"
-                                    <?if ($account->notifications->email_notify_bonus){?>value="1"<?}?>>
+                                    <?php if ($account->notifications->email_notify_bonus){?>value="1"<?php }?>>
                             </div>
-                            <div class="chekBox mail-settings-checkbox <? if ($account->notifications->email_notify_visit){?>act<?}?>">
+                            <div class="chekBox mail-settings-checkbox <?php  if ($account->notifications->email_notify_visit){?>act<?php }?>">
                                 <span></span> Напоминать о визите к врачу
                                 <input id="mail-checkbox-2" type="hidden"
-                                    <?if ($account->notifications->email_notify_visit){?>value="1"<?}?>>
+                                    <?php if ($account->notifications->email_notify_visit){?>value="1"<?php }?>>
                             </div>
-                            <div class="chekBox mail-settings-checkbox <? if ($account->notifications->email_notify_change){?>act<?}?>">
+                            <div class="chekBox mail-settings-checkbox <?php  if ($account->notifications->email_notify_change){?>act<?php }?>">
                                 <span></span> Уведомлять об изменениях в расписании
                                 <input id="mail-checkbox-3" type="hidden"
-                                    <?if ($account->notifications->email_notify_change){?>value="1"<?}?>>
+                                    <?php if ($account->notifications->email_notify_change){?>value="1"<?php }?>>
                             </div>
                         </div>
                     </div>
@@ -93,6 +93,6 @@
 
             </div>
         </div>
-        <?endif?>
+        <?php endif?>
     </div>
 </div>

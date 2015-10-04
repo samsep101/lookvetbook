@@ -24,7 +24,7 @@
         <?php $this->specialty_id = (isset($specialty_id)) ? $specialty_id : null; ?>
         <?php $this->purpose_of_visit_id = (isset($purpose_of_visit_id)) ? $purpose_of_visit_id : null; ?>
         <?php $this->columned_list = 1; ?>
-        <?php $this->page_type = $page_type; ?>
+        <?php $this->page_type = empty($page_type)?'':$page_type; ?>
 
         <?php $this->block('doctor/card_big'); ?>
 

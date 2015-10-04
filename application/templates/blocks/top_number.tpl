@@ -63,7 +63,7 @@
     <div class="top_number">
         <div class="number_left">Есть вопросы? Не нашел нужного специалиста?</div>
         <?php
-            if($clinic->top_phone) {
+            if(!empty($clinic) and is_object($clinic) and $clinic->top_phone) {
                 $phone = $clinic->top_phone;
             } else {
                 $phone = HelpPhoneNumberViewHelper::getPhoneNumber($city);

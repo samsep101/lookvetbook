@@ -26,15 +26,15 @@
                         </div>
                     </div>
                 </div>
-            <?endif?>
+            <?php endif?>
             <h2>Прошедшие</h2>
 
-            <?if (count($visits)): ?>
+            <?php if (count($visits)): ?>
 
-                <?foreach ($visits as $visit): ?>
-                    <?if (!$visit->checkVisitReviewByAccountId(Acc::accountId())): ?>
+                <?php foreach ($visits as $visit): ?>
+                    <?php if (!$visit->checkVisitReviewByAccountId(Acc::accountId())): ?>
                         <div class="appoint appoint-var">
-                            <h3>Вы были на приеме <?=DateViewHelper::date($visit->visit_start_time, 'full');?>. Ваша оценка <br>
+                            <h3>Вы были на приеме <?php echo DateViewHelper::date($visit->visit_start_time, 'full'); ?>. Ваша оценка <br>
                                 поможет другим пользователям!</h3>
                             <?php $this->visit = $visit; ?>
                             <?php if ($visit->status_id == VisitModel::VISITED || $visit->status_id == VisitModel::FEDDBACK): ?>
@@ -44,14 +44,14 @@
                             <?php endif; ?>
                             <?php $this->block('doctor/card_tiny'); ?>
                         </div>
-                    <?endif?>
-                <?endforeach?>
+                    <?php endif?>
+                <?php endforeach?>
 
                 <div class="rev-block rev-past">
                     <div class="section visible">
-                        <?foreach ($visits as $visit): ?>
-                            <?if ($visit->checkVisitReviewByAccountId(Acc::accountId())): ?>
-                                <h4><?=DateViewHelper::date($visit->schedule->dt_start, 'full');?></h4>
+                        <?php foreach ($visits as $visit): ?>
+                            <?php if ($visit->checkVisitReviewByAccountId(Acc::accountId())): ?>
+                                <h4><?php echo DateViewHelper::date($visit->schedule->dt_start, 'full'); ?></h4>
                                 <div class="review-item flo">
 
                                     <?php $this->visit = $visit; ?>
@@ -62,19 +62,19 @@
                                         <!--<p><a href="#">Посмотреть мой отзыв</a></p>-->
                                         <div class="rev-status-block">
                                             <p>Состояние отзыва</p>
-                                            <?if (!$visit->checkConfirmedReviews()):?>
+                                            <?php if (!$visit->checkConfirmedReviews()):?>
                                                 <span class="rev-status">На модерации</span>
-                                            <?else:?>
+                                            <?php else:?>
                                                 <span class="rev-status published">Опубликован</span>
-                                            <?endif?>
+                                            <?php endif?>
                                         </div>
                                     </div>
                                 </div>
-                            <?endif?>
-                        <?endforeach?>
+                            <?php endif?>
+                        <?php endforeach?>
                     </div>
                 </div>
-            <?endif?>
+            <?php endif?>
         </div>
     </div>
 </div>

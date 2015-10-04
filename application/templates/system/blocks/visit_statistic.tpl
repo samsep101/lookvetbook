@@ -21,7 +21,7 @@
         <option value="12">Декабря</option>
     </select>
     <select class="visit-year-from">
-        <?for ($i = 2013; $i<=$this_year; $i++):?>
+        <?php for ($i = 2013; $i<=$this_year; $i++):?>
             <option value="<?php echo $i;?>"><?php echo $i;?></option>
         <?php endfor;?>
     </select>
@@ -43,7 +43,7 @@
         <option value="12">Декабрь</option>
     </select>
     <select class="visit-year-to">
-        <?for ($i = 2013; $i<=$this_year; $i++):?>
+        <?php for ($i = 2013; $i<=$this_year; $i++):?>
             <option value="<?php echo $i;?>"><?php echo $i;?></option>
         <?php endfor;?>
     </select>

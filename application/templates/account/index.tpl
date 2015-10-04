@@ -49,7 +49,7 @@
                                     <?php if (!$this->cache->start('visit_notify_'.$visit->getId(), 'visit_notify')): ?>
                                         <div class="reg-info">
                                             <p><strong><a href="/account/doctorsVisitsComing">Запись на прием</a></strong> <br>
-                                                <?php echo DateViewHelper::date($visit->dt, 'number'); ?> <br/>  <?if ($visit->visit_start_time) echo DateViewHelper::date($visit->visit_start_time, 'time'); ?><br>
+                                                <?php echo DateViewHelper::date($visit->dt, 'number'); ?> <br/>  <?php if ($visit->visit_start_time) echo DateViewHelper::date($visit->visit_start_time, 'time'); ?><br>
                                                 <?php if ($visit->specialty_id):?>
                                                     <?php echo $visit->specialty->name; ?><br>
                                                 <?php elseif ($visit->doctor_id && $visit->doctor_id != DoctorModel::RESERVED_DOCTOR_SLOT):?>
@@ -68,7 +68,7 @@
                                                     <?php if ($visit->clinic->metro_station): ?>
                                                         <br />
                                                         <?php if ($visit->clinic->metro_station->metro_branch): ?>
-                                                            <?echo MetroBranchIconViewHelper::getImage($visit->clinic->metro_station->metro_branch)?>
+                                                            <?php echo MetroBranchIconViewHelper::getImage($visit->clinic->metro_station->metro_branch)?>
                                                         <?php endif; ?>
                                                         <?php echo $visit->clinic->metro_station->name; ?>
                                                     <?php endif; ?>
@@ -76,7 +76,7 @@
                                                 <?php echo $visit->clinic->address; ?>
                                                 </p>
                                             <?php endif;?>
-                                            <a class="review-link rev-popup-open cancel-visit" data-id="<?=$visit->getid()?>"><span></span>Отменить</a>
+                                            <a class="review-link rev-popup-open cancel-visit" data-id="<?php echo $visit->getid(); ?>"><span></span>Отменить</a>
 
                                         </div>
                                     <?php $this->cache->end(); ?>
@@ -108,7 +108,7 @@
                                 <div class="descr">
                                     <p>
                                         <?php if ($account->last_uncommented_visit->doctor_id && $account->last_uncommented_visit->doctor_id != DoctorModel::RESERVED_DOCTOR_SLOT):?>
-                                            <a href="<?=DoctorPageLinkViewHelper::getLink($account->last_uncommented_visit->doctor); ?>">
+                                            <a href="<?php echo DoctorPageLinkViewHelper::getLink($account->last_uncommented_visit->doctor); ; ?>">
                                             <span class="post"><?php echo $account->last_uncommented_visit->doctor->specialties_names; ?> </span>
                                             <?php echo $account->last_uncommented_visit->doctor->full_name; ?></a>
                                         <?php elseif ($account->last_uncommented_visit->clinic_id && $account->last_uncommented_visit->specialty_id):?>
@@ -173,11 +173,11 @@
                             <?php if ($count > 2) break; ?>
                             <div class="doctor-item flo">
                                 <div class="avatar">
-                                    <?if($clinic->image_id):?>
-                                        <img src="<?=$clinic->image->resize(66,64)->path; ?>" />
-                                    <?else:?>
+                                    <?php if($clinic->image_id):?>
+                                        <img src="<?php echo $clinic->image->resize(66,64)->path; ; ?>" />
+                                    <?php else:?>
                                         <img style="width:66px;height:64px" src="/media/images/no-photo.gif" />
-                                    <?endif?>
+                                    <?php endif?>
                                 </div>
                                 <div class="descr">
                                     <p><a href="/clinic/get?id=<?php echo $clinic->getId(); ?>"><span class="post"><?php echo $clinic->name; ?></span></a></p>
@@ -185,7 +185,7 @@
                                     <div class="address">
                                         <?php if ($clinic->metro_station): ?>
                                             <?php if ($clinic->metro_station->metro_branch): ?>
-                                                <?echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
+                                                <?php echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
                                             <?php endif; ?>
                                             <?php echo $clinic->metro_station->name; ?>
                                         <?php endif; ?>

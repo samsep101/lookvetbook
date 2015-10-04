@@ -5,7 +5,7 @@
             $clinic_numbers = array();
          ?>
 
-        <?foreach($doctor->clinics as $clinic):?>
+        <?php foreach($doctor->clinics as $clinic):?>
             <?php
                 if ($number == 1)
                     $clinic_numbers[$clinic->getId()] = '';
@@ -20,17 +20,17 @@
     </ul>
     <div class="box">
         <?php $section_number = 1; ?>
-        <?foreach($doctor->clinics as $clinic):?>
-        <div class="section section-<?=$section_number?> visible flo">
-            <p class="name-center"><strong><?=$clinic->name?></strong></p>
+        <?php foreach($doctor->clinics as $clinic):?>
+        <div class="section section-<?php echo $section_number; ?> visible flo">
+            <p class="name-center"><strong><?php echo $clinic->name; ?></strong></p>
             <div class="location">
                 <!--<div class="trigger">
-                    <?=$section_number?>
+                    <?php echo $section_number; ?>
                 </div>-->
                 <p class="name-inf">
                     <?php if ($clinic->metro_station): ?>
                         <?php if ($clinic->metro_station->metro_branch): ?>
-                            <?echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
+                            <?php echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
                         <?php endif; ?>
                     <?php echo $clinic->metro_station->name; ?> <br  />
                     <?php endif; ?>
@@ -83,27 +83,27 @@
                 <a class="prev-nav" href="#"></a> <a class="next-nav" href="#"></a>
             </div>
 
-            <? 
+            <?php
             	// @TODO Для вывода 1 расписания
             	$doctor_clinic_specialties = $doctor->getSpecialtiesByClinicId($clinic->getId());
             ?>
 
             <div class="time-scroll">
-                <?$specialty_counter = 0;?>
-                <?foreach ($doctor_clinic_specialties as $specialty):?>
+                <?php $specialty_counter = 0;?>
+                <?php foreach ($doctor_clinic_specialties as $specialty):?>
 	                <?php if ($specialty_counter == 0) {?>
 <!--	                <p class="post"><?php echo $specialty->name; ?></p>-->
 	                <div class="scroll-pane flo">
 	                    <?php for($i = 1; $i <= 30; $i++): ?>
-	                    <ul class="time clinic-<?=$section_number-1?> specialty-<?=$specialty_counter?> dday-var active day-<?php echo date('Y-m-d', $time+($i-1)*86400); ?>">
+	                    <ul class="time clinic-<?php echo $section_number-1; ?> specialty-<?php echo $specialty_counter; ?> dday-var active day-<?php echo date('Y-m-d', $time+($i-1)*86400); ?>">
 	                        <li class="unactive">
 	                        </li>
 	                    </ul>
 	                    <?php endfor; ?>
 	                </div>
-	                <?$specialty_counter++;?>
+	                <?php $specialty_counter++;?>
 	                <?php }?>
-                <?endforeach?>
+                <?php endforeach?>
             </div>
         </div>
         <?php $section_number++;?>

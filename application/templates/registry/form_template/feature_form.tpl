@@ -4,7 +4,7 @@
         <input type="hidden" name="feature_id" value="<?php echo $model->id; ?>" />
         <div class="chekBox <?php echo $class; ?>">
             <span></span>
-            <?=$model->name?>
+            <?php echo $model->name; ?>
             <input type="hidden" name="is_selected" value="<?php echo $model->is_selected; ?>" />
         </div>
     </li>

@@ -4,7 +4,7 @@
             <?php echo DoctorAvatarViewHelper::viewOnCard($doctor, 74, 111, '', $do_not_show_url = true); ?>
             <?php if (($doctor->advice_rate)||($doctor->about)||($doctor->education)||($doctor->cabinet_rate)||($doctor->waiting_time_rate)||($doctor->relationship_rate)||($doctor->value_for_money_rate)||($doctor->diagnosis_is_clear_rate)): ?>
             <div class="card-popup flo"><span class="corn"></span>
-                <?if (($doctor->cabinet_rate)||($doctor->waiting_time_rate)||($doctor->relationship_rate)||($doctor->value_for_money_rate)||($doctor->diagnosis_is_clear_rate)):?>
+                <?php if (($doctor->cabinet_rate)||($doctor->waiting_time_rate)||($doctor->relationship_rate)||($doctor->value_for_money_rate)||($doctor->diagnosis_is_clear_rate)):?>
                     <div class="aside">
                         <h5>Рейтинг</h5>
 
@@ -29,8 +29,8 @@
                             <?php echo RateViewHelper::view($doctor->diagnosis_is_clear_rate); ?>
                         </div>
                     </div>
-                    <?endif?>
-                <?if (($doctor->advice_rate)||($doctor->about)||($doctor->education)):?>
+                    <?php endif?>
+                <?php if (($doctor->advice_rate)||($doctor->about)||($doctor->education)):?>
                     <div class="cont">
                         <div class="inner-cont">
                             <?php if ($doctor->advice_rate): ?>
@@ -50,15 +50,15 @@
                             <h5>Образование</h5>
 
                             <p>
-                                <?foreach ($doctor->education as $place):?>
+                                <?php foreach ($doctor->education as $place):?>
                                 <?php echo $place->name; ?><br>
-                                <?endforeach?>
+                                <?php endforeach?>
                             </p>
                             <?php endif; ?>
                         </div>
                         <a class="more-link">Узнать больше</a>
                     </div>
-                    <?endif?>
+                    <?php endif?>
             </div>
             <?php endif; ?>
         </div>
@@ -68,12 +68,12 @@
             <a class="btn-appoint">Записаться</a>
 
             <?php if ($doctor->my_doctor): ?>
-            <a class="btn-bookmark doctor_bookmark btn-bookmark-added doctor_bookmark<?=$doctor->getId();?>">
+            <a class="btn-bookmark doctor_bookmark btn-bookmark-added doctor_bookmark<?php echo $doctor->getId(); ?>">
                 <i class="icon-add"></i>
                 <span class="txt txt-added">В закладках</span>
             </a>
             <?php else: ?>
-            <a class="btn-bookmark doctor_bookmark doctor_bookmark<?=$doctor->getId();?>">
+            <a class="btn-bookmark doctor_bookmark doctor_bookmark<?php echo $doctor->getId(); ?>">
                 <i class="icon-add"></i>
                 <span class="txt">Добавить в закладки</span>
             </a>
@@ -108,7 +108,7 @@
                 </div>
 
                 <a href="javascript:void(0)">
-                    <p class="doctorname_clear"><?=$doctor->full_name;?></p>
+                    <p class="doctorname_clear"><?php echo $doctor->full_name; ?></p>
                 </a>
             </div>
         </div>
@@ -119,25 +119,25 @@
             <div class="location-box">
                 <ul class="tabs flo">
 
-                    <?if ($specialty_id):?>
-                        <?$specialty_clinics = $doctor->getClinicsBySpecialtyId($specialty_id);?>
-                    <?else:?>
-                        <?$specialty_clinics = $doctor->clinics;?>
-                    <?endif;?>
+                    <?php if ($specialty_id):?>
+                        <?php $specialty_clinics = $doctor->getClinicsBySpecialtyId($specialty_id);?>
+                    <?php else:?>
+                        <?php $specialty_clinics = $doctor->clinics;?>
+                    <?php endif;?>
 
                     <?php
                     $number = 1;
                     $clinic_numbers = array();
                     ?>
-                    <?if (isset($clinic_id) && $clinic_id):?>
-                        <?$doctor_clinic = $doctor->getOneClinicbyId($clinic_id); ?>
-                        <?$clinic_numbers[$clinic_id] = '';?>
+                    <?php if (isset($clinic_id) && $clinic_id):?>
+                        <?php $doctor_clinic = $doctor->getOneClinicbyId($clinic_id); ?>
+                        <?php $clinic_numbers[$clinic_id] = '';?>
                         <li data-id="<?php echo $doctor_clinic->getId();?>" class="loc-<?php echo $number ?> clinic-<?php echo $doctor_clinic->getId(); ?>-button">
                             <span>
-                                <?=$number?>
+                                <?php echo $number; ?>
                             </span>
                         </li>
-                    <?else:?>
+                    <?php else:?>
                         <?php foreach($specialty_clinics as $clinic): ?>
                             <?php
                             if ($number == 1)
@@ -147,18 +147,18 @@
                             ?>
                             <li data-id="<?php echo $clinic->getId();?>" class="loc-<?php echo $number ?> clinic-<?php echo $clinic->getId(); ?>-button">
                             <span>
-                                <?=$number?>
+                                <?php echo $number; ?>
                             </span>
                             </li>
                             <?php $number++; ?>
                         <?php endforeach; ?>
-                    <?endif?>
+                    <?php endif?>
                 </ul>
 
                 <div class="box">
                     <?php $section_number = 1; ?>
-                    <?if (isset($clinic_id) && $clinic_id):?>
-                        <div class="section section-<?=$section_number?> visible flo">
+                    <?php if (isset($clinic_id) && $clinic_id):?>
+                        <div class="section section-<?php echo $section_number; ?> visible flo">
                             <p class="name-center">
                                 <strong>
                                     <?php if (!Acc::isAuthed()):?>
@@ -166,19 +166,19 @@
                                         <?php else:?>
                                         <a>
                                             <?php endif;?>
-                                            <?=$doctor_clinic->name?>
+                                            <?php echo $doctor_clinic->name; ?>
                                         </a>
                                 </strong>
                             </p>
                             <div class="location">
                                 <!--<div class="trigger">
-                                    <?=$section_number?>
+                                    <?php echo $section_number; ?>
                                 </div>-->
                                 <p class="name-inf">
 
                                     <?php if ($doctor_clinic->metro_station): ?>
                                         <?php if ($doctor_clinic->metro_station->metro_branch): ?>
-                                            <?echo MetroBranchIconViewHelper::getImage($doctor_clinic->metro_station->metro_branch)?>
+                                            <?php echo MetroBranchIconViewHelper::getImage($doctor_clinic->metro_station->metro_branch)?>
                                             <?php endif; ?>
                                         <?php echo $doctor_clinic->metro_station->name; ?> <br  />
                                         <?php endif; ?>
@@ -220,27 +220,27 @@
                                 <?php endif; ?>
                             </div>
 
-                            <?if ($specialty_id):?>
-                                <?$doctor_clinic_specialties = $doctor->getSuggestedSpecialtiesListBySpecialtyIdAndClinicId($specialty_id, $clinic->getId());?>
-                            <?else:?>
-                                <?$doctor_clinic_specialties = $doctor->getSpecialtiesByClinicId($clinic->getId());?>
-                            <?endif;?>
+                            <?php if ($specialty_id):?>
+                                <?php $doctor_clinic_specialties = $doctor->getSuggestedSpecialtiesListBySpecialtyIdAndClinicId($specialty_id, $clinic->getId());?>
+                            <?php else:?>
+                                <?php $doctor_clinic_specialties = $doctor->getSpecialtiesByClinicId($clinic->getId());?>
+                            <?php endif;?>
                             <?php $existing_schedule = $doctor->checkExistingDoctorScheduleByClinicIdAndClinicSpecialties($clinic->getId(), $doctor_clinic_specialties);?>
 
                             <div class="location-box_schedule">
                                 <ul class="tabs_schedule">
                                     <?php if ($existing_schedule):?>
-                                        <?$specialty_counter=1;?>
-                                        <?foreach ($doctor_clinic_specialties as $specialty):?>
-                                            <li <?if ($specialty_counter == 1){?>class="active"<?}?>><span><?if (mb_strlen($specialty->name,'UTF-8')>15) { echo StringHelper::startProposalWord(mb_substr($specialty->name,0,15,'UTF-8'));?>... <?} else {echo StringHelper::startProposalWord($specialty->name);}?></span></li>
-                                            <?$specialty_counter++;?>
-                                        <?endforeach?>
+                                        <?php $specialty_counter=1;?>
+                                        <?php foreach ($doctor_clinic_specialties as $specialty):?>
+                                            <li <?php if ($specialty_counter == 1){?>class="active"<?php }?>><span><?php if (mb_strlen($specialty->name,'UTF-8')>15) { echo StringHelper::startProposalWord(mb_substr($specialty->name,0,15,'UTF-8'));?>... <?php } else {echo StringHelper::startProposalWord($specialty->name);}?></span></li>
+                                            <?php $specialty_counter++;?>
+                                        <?php endforeach?>
                                     <?php endif;?>
                                 </ul>
                                 <div class="box">
-                                    <?foreach ($doctor_clinic_specialties as $specialty):?>
+                                    <?php foreach ($doctor_clinic_specialties as $specialty):?>
                                     <div class="section-in visible flo">
-                                        <div class="schedule-extended <?php if (!$existing_schedule) {?>rounded-single-schedule<?}?>">
+                                        <div class="schedule-extended <?php if (!$existing_schedule) {?>rounded-single-schedule<?php }?>">
                                             <ul class="schedule flo">
 
                                                 <?php $monday = date("d.m.Y", strtotime("Monday this week")); ?>
@@ -258,7 +258,7 @@
                                                         <?php endif;?>
                                                         <li class="day active schedule-tim <?php echo $work_time ? 'day-var' : '' ; ?>"><i><?php echo DayViewHelper::shortDay(date($cur_day_time));?></i>
                                                             <?php if ($work_time): ?>
-                                                                <a class="record-day-pick" <?if (!Acc::isAuthed()) {?>data-url="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>"<?}?>>
+                                                                <a class="record-day-pick" <?php if (!Acc::isAuthed()) {?>data-url="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>"<?php }?>>
                                                                     <?php echo $work_time;?>
                                                                 </a>
                                                             <?php endif; ?>
@@ -267,7 +267,7 @@
                                                         <?php $work_time = $clinic->getClinicWorkTimeByDate(date('Y-m-d', $cur_day_time)); ?>
                                                         <li class="day active schedule-tim <?php echo $work_time ? 'day-var' : '' ; ?>"><i><?php echo DayViewHelper::shortDay(date($cur_day_time));?></i>
                                                             <?php if ($work_time): ?>
-                                                                <a class="record-day-pick" <?if (!Acc::isAuthed()) {?>data-url="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>"<?}?>>
+                                                                <a class="record-day-pick" <?php if (!Acc::isAuthed()) {?>data-url="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>"<?php }?>>
                                                                     <?php echo $work_time;?>
                                                                 </a>
                                                             <?php endif; ?>
@@ -281,24 +281,24 @@
                                             <?php endif; ?>
                                         </div>
                                     </div>
-                                    <?endforeach?>
+                                    <?php endforeach?>
                                 </div>
                             </div>
                         </div>
-                    <?else:?>
-                        <?foreach($specialty_clinics as $clinic):?>
-                            <div class="section section-<?=$section_number?> visible flo">
+                    <?php else:?>
+                        <?php foreach($specialty_clinics as $clinic):?>
+                            <div class="section section-<?php echo $section_number; ?> visible flo">
                                 <p class="name-center">
                                     <strong>
                                         <a>
-                                            <?=$clinic->name?>
+                                            <?php echo $clinic->name; ?>
                                         </a></strong>
                                 </p>
                                 <div class="location">
                                     <p class="name-inf">
                                         <?php if ($clinic->metro_station): ?>
                                         <?php if ($clinic->metro_station->metro_branch): ?>
-                                            <?echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
+                                            <?php echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
                                             <?php endif; ?>
                                         <?php echo $clinic->metro_station->name; ?> <br  />
                                         <?php endif; ?>
@@ -340,27 +340,27 @@
                                     <?php endif; ?>
                                 </div>
 
-                                <?if ($specialty_id):?>
-                                    <?$doctor_clinic_specialties = $doctor->getSuggestedSpecialtiesListBySpecialtyIdAndClinicId($specialty_id, $clinic->getId());?>
-                                <?else:?>
-                                    <?$doctor_clinic_specialties = $doctor->getSpecialtiesByClinicId($clinic->getId());?>
-                                <?endif;?>
-                                <?$existing_schedule = $doctor->checkExistingDoctorScheduleByClinicIdAndClinicSpecialties($clinic->getId(), $doctor_clinic_specialties);?>
+                                <?php if ($specialty_id):?>
+                                    <?php $doctor_clinic_specialties = $doctor->getSuggestedSpecialtiesListBySpecialtyIdAndClinicId($specialty_id, $clinic->getId());?>
+                                <?php else:?>
+                                    <?php $doctor_clinic_specialties = $doctor->getSpecialtiesByClinicId($clinic->getId());?>
+                                <?php endif;?>
+                                <?php $existing_schedule = $doctor->checkExistingDoctorScheduleByClinicIdAndClinicSpecialties($clinic->getId(), $doctor_clinic_specialties);?>
 
                                 <div class="location-box_schedule">
                                     <ul class="tabs_schedule">
                                         <?php if ($existing_schedule):?>
-                                            <?$specialty_counter=1;?>
-                                            <?foreach ($doctor_clinic_specialties as $specialty):?>
-                                                <li <?if ($specialty_counter == 1){?>class="active"<?}?>><span><?if (mb_strlen($specialty->name,'UTF-8')>15) { echo StringHelper::startProposalWord(mb_substr($specialty->name,0,15,'UTF-8'));?>... <?} else {echo StringHelper::startProposalWord($specialty->name);}?></span></li>                                <?$specialty_counter++;?>
-                                                <?$specialty_counter++;?>
-                                            <?endforeach?>
-                                        <?endif?>
+                                            <?php $specialty_counter=1;?>
+                                            <?php foreach ($doctor_clinic_specialties as $specialty):?>
+                                                <li <?php if ($specialty_counter == 1){?>class="active"<?php }?>><span><?php if (mb_strlen($specialty->name,'UTF-8')>15) { echo StringHelper::startProposalWord(mb_substr($specialty->name,0,15,'UTF-8'));?>... <?php } else {echo StringHelper::startProposalWord($specialty->name);}?></span></li>                                <?php $specialty_counter++;?>
+                                                <?php $specialty_counter++;?>
+                                            <?php endforeach?>
+                                        <?php endif?>
                                     </ul>
                                     <div class="box">
-                                        <?foreach ($doctor_clinic_specialties as $specialty):?>
+                                        <?php foreach ($doctor_clinic_specialties as $specialty):?>
                                         <div class="section-in visible flo">
-                                            <div class="schedule-extended <?php if (!$existing_schedule) {?>rounded-single-schedule<?}?>">
+                                            <div class="schedule-extended <?php if (!$existing_schedule) {?>rounded-single-schedule<?php }?>">
                                                 <ul class="schedule flo">
 
                                                     <?php $monday = date("d.m.Y", strtotime("last Monday")); ?>
@@ -378,7 +378,7 @@
                                                             <?php endif;?>
                                                             <li class="day active schedule-tim <?php echo $work_time ? 'day-var' : '' ; ?>"><i><?php echo DayViewHelper::shortDay(date($cur_day_time));?></i>
                                                                 <?php if ($work_time): ?>
-                                                                    <a class="record-day-pick" <?if (!Acc::isAuthed()) {?>data-url="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>"<?}?>>
+                                                                    <a class="record-day-pick" <?php if (!Acc::isAuthed()) {?>data-url="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>"<?php }?>>
                                                                         <?php echo $work_time;?>
                                                                     </a>
                                                                 <?php endif; ?>
@@ -387,7 +387,7 @@
                                                             <?php $work_time = $clinic->getClinicWorkTimeByDate(date('Y-m-d', $cur_day_time)); ?>
                                                             <li class="day active schedule-tim <?php echo $work_time ? 'day-var' : '' ; ?>"><i><?php echo DayViewHelper::shortDay(date($cur_day_time));?></i>
                                                                 <?php if ($work_time): ?>
-                                                                    <a class="record-day-pick" <?if (!Acc::isAuthed()) {?>data-url="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>"<?}?>>
+                                                                    <a class="record-day-pick" <?php if (!Acc::isAuthed()) {?>data-url="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>"<?php }?>>
                                                                         <?php echo $work_time;?>
                                                                     </a>
                                                                 <?php endif; ?>
@@ -401,13 +401,13 @@
                                                 <?php endif; ?>
                                             </div>
                                         </div>
-                                        <?endforeach?>
+                                        <?php endforeach?>
                                     </div>
                                 </div>
                             </div>
                             <?php $section_number++;?>
                         <?php endforeach; ?>
-                    <?endif?>
+                    <?php endif?>
                 </div>
             </div>
         </div>

@@ -1,13 +1,13 @@
 <?php if ($type==1):?>
     <label>ВУЗ</label>
-<?else:?>
+<?php else:?>
     <label>Учебное заведение</label>
-<?endif?>
+<?php endif?>
 
 <?php if ($universities):?>
-    <select name="form[<?=$field_name?>]">
+    <select name="form[<?php echo $field_name; ?>]">
         <?php foreach ($universities as $university):?>
-            <option value="<?=$university->getId();?>"><?=$university->name?></option>
-        <?endforeach?>
+            <option value="<?php echo $university->getId(); ?>"><?php echo $university->name; ?></option>
+        <?php endforeach?>
     </select>
-<?endif?>
+<?php endif?>

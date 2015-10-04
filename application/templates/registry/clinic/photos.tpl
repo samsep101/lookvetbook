@@ -26,7 +26,7 @@
                     <?php if ($model->card_image): ?>
                     <img src="<?php echo $model->card_image->crop(74, 31)->path; ?>" />
                     <?php endif; ?>
-                    <input class="hidden" name="form[card_image_id]" value="<?=$model->card_image_id?>"/>
+                    <input class="hidden" name="form[card_image_id]" value="<?php echo $model->card_image_id; ?>"/>
                     <div class="image-block">
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                                     <?php foreach($clinic_images as $clinic_image): ?>
                                         <li data-name="image_to_clinic">
                                             <img src="<?php echo $clinic_image->image->crop(660, 360)->path; ?>">
-                                            <input class="hidden" name="image_id" value="<?=$clinic_image->image_id?>"/>
+                                            <input class="hidden" name="image_id" value="<?php echo $clinic_image->image_id; ?>"/>
                                         </li>
                                     <?php endforeach; ?>
                                     <?php else: ?>

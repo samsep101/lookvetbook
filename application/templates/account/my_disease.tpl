@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="btns">
                                     <!--<a class="btn-4" href="/disease/get?id=<?php echo $my_disease->current_disease->getId();?>">-->
-                                    <a class="btn-4" data-id="<?=$my_disease->current_disease->getId();?>">
+                                    <a class="btn-4" data-id="<?php echo $my_disease->current_disease->getId(); ?>">
                                         <span>Прочитать</span>
                                     </a>
                                     <?php if (!$my_disease->is_archive): ?>

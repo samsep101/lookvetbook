@@ -89,7 +89,7 @@
                     <div class="row flo search-city-block search-block">
                         <label class="lab">Город</label>
                             <div class="txt">
-                                <input class="city-search-input" type="text" <?php if ($account->city_id) {?> value="<?php echo $account->city->name?>, <?php echo $account->city->region?>" data-id="<?php echo $account->city_id?>" <?}?> autocomplete="off" name="city_query" placeholder="<?php if ($account->city_id) { echo $account->city->name?>, <?php echo $account->city->region?><?} else {?>Укажите Ваш город<?}?>" />
+                                <input class="city-search-input" type="text" <?php if ($account->city_id) {?> value="<?php echo $account->city->name?>, <?php echo $account->city->region?>" data-id="<?php echo $account->city_id?>" <?php }?> autocomplete="off" name="city_query" placeholder="<?php if ($account->city_id) { echo $account->city->name?>, <?php echo $account->city->region?><?php } else {?>Укажите Ваш город<?php }?>" />
                             </div>
                             <ul class="drop-menu" style="clear:both">
                             </ul>

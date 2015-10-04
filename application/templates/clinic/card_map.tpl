@@ -18,28 +18,28 @@
                 <p>
                     <?php if ($clinic->metro_station): ?>
                         <?php if ($clinic->metro_station->metro_branch): ?>
-                            <?echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
+                            <?php echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
                         <?php endif; ?>
                         <?php echo $clinic->metro_station->name;?><br>
                     <?php endif; ?>
                     <?php echo $clinic->address; ?>
                 </p>
             </div>
-            <?if ($clinic->specialties):?>
+            <?php if ($clinic->specialties):?>
                 <p><strong>Врачи клиники</strong></p>
                 <ul class="specializations">
-                    <?$counter = 1?>
-                    <?foreach ($clinic->specialties as $specialty) :?>
-                        <?if ($counter < 3):?>
-                            <li><?=$specialty->name?></li>
-                            <?$counter++?>
-                        <?endif?>
-                    <?endforeach?>
+                    <?php $counter = 1?>
+                    <?php foreach ($clinic->specialties as $specialty) :?>
+                        <?php if ($counter < 3):?>
+                            <li><?php echo $specialty->name; ?></li>
+                            <?php $counter++?>
+                        <?php endif?>
+                    <?php endforeach?>
                 </ul>
-                    <?if ($counter > 2):?>
+                    <?php if ($counter > 2):?>
                         <a class="more" href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>">Подробнее</a>
-                    <?endif?>
-            <?endif?>
+                    <?php endif?>
+            <?php endif?>
         </div>
     </div>
     <div class="btns flo">
@@ -60,7 +60,7 @@
                 block.block_over_textbox = 'Получите доступ ко всем возможностям Lookmedbook!';
                 block.init();
             }
-            " class="btn-bookmark btn-bookmark-sm clinic-bookmark-<?=$clinic->getId();?>">
+            " class="btn-bookmark btn-bookmark-sm clinic-bookmark-<?php echo $clinic->getId(); ?>">
             <?php if ($clinic->my_clinic): ?>
                 <i class="icon-add" style="background-position: 0 100%;"></i>
                 <span class="txt txt-added" style="display: inline; line-height: 26px;">В закладках</span>

@@ -17,7 +17,7 @@
 <div class="cab-page-2">
     <?php if (in_array(Acl::userRole(), array(RoleModel::ACCOUNT_SUPER_MANAGER, RoleModel::ACCOUNT_MANAGER))): ?>
         <div class="nav-2">
-    <?else:?>
+    <?php else:?>
         <div class="nav-2 grey">
     <?php endif?>
         <ul>

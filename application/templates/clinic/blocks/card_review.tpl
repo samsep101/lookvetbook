@@ -2,7 +2,7 @@
     <div class="review-box flo <?php if ($counter % 2 === 0) echo 'fright'; ?>">
         <span class="chk-pic"></span>
         <div class="aside">
-            <p class="name"><?=$review->visit->account->full_name?></p>
+            <p class="name"><?php echo $review->visit->account->full_name; ?></p>
             <div class="rating-item">
                 <p>Сервис в регистратуре</p>
                 <?php echo RateViewHelper::view($review->service_at_the_reception); ?>
@@ -32,6 +32,6 @@
                 <span>Посоветуют друзьям</span>
             </div>
             <?php endif; ?>
-            <p><?=$review->text;?></p>
+            <p><?php echo $review->text; ?></p>
         </div>
     </div>

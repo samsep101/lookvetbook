@@ -69,7 +69,7 @@
             <?php echo (isset($is_closed_card) && $is_closed_card == 1) ? '<span class="close" data-id="'.$doctor->getId().'"></span>' : ''; ?>
             <?php if (isset($map_card)): ?>
                  <span class="corn-top"></span>
-            <?endif?>
+            <?php endif?>
             <div class="avatar_buttons">
                 <div class="avatar">
                     <?php if($is_seo_page) { ?>
@@ -111,7 +111,7 @@
                                     <a class="showTip el" data-url="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>#reviews" href="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>#reviews">
                                 <?php else: ?>
                                     <a class="showTip el" href="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>#reviews">
-                                <?endif?>
+                                <?php endif?>
                                     <span itemprop="count">
                                         <?php echo ($doctor->reviews_count) ? StringHelper::getCorrectSuffixForReview($doctor->reviews_count) : ''; ?>
                                     </span>

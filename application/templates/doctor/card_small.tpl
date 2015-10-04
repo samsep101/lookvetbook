@@ -42,7 +42,7 @@
                         <p>
                             <?php if ($doctor_clinic->metro_station): ?>
                                 <?php if ($doctor_clinic->metro_station->metro_branch): ?>
-                                    <?echo MetroBranchIconViewHelper::getImage($doctor_clinic->metro_station->metro_branch)?>
+                                    <?php echo MetroBranchIconViewHelper::getImage($doctor_clinic->metro_station->metro_branch)?>
                                 <?php endif; ?>
                                 <?php echo $doctor_clinic->metro_station->name; ?> <br  />
                             <?php endif; ?>

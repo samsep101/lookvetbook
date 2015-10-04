@@ -3,16 +3,16 @@
         <div class="carousel carousel-stage">
             <?php if($this->doctor->image_id):?>
             <ul>
-                <li><img src="<?=$doctor->image->resize(658,279)->path?>" alt="<?=$doctor->full_name;?>" /></li>
+                <li><img src="<?php echo $doctor->image->resize(658,279)->path; ?>" alt="<?php echo $doctor->full_name; ?>" /></li>
                 <?php if ($doctor->images): ?>
                 <?php foreach($doctor->images as $image):?>
-                    <li><img src="<?=$image->resize(658,279)->path?>" alt="<?=$doctor->full_name;?>"></li>
+                    <li><img src="<?php echo $image->resize(658,279)->path; ?>" alt="<?php echo $doctor->full_name; ?>"></li>
                     <?php endforeach;?>
                 <?php endif; ?>
             </ul>
             <?php else: ?>
             <ul>
-                <li><img src="/media/images/no-photo.gif" alt="<?=$doctor->full_name;?>" /></li>
+                <li><img src="/media/images/no-photo.gif" alt="<?php echo $doctor->full_name; ?>" /></li>
             </ul>
             <?php endif; ?>
         </div>
@@ -26,9 +26,9 @@
         <div class="carousel carousel-navigation">
             <?php if($this->doctor->image_id):?>
             <ul>
-                <li><img src="<?=$doctor->image->crop(101,56)->path?>" alt="<?=$doctor->full_name;?>" /></a></li>
+                <li><img src="<?php echo $doctor->image->crop(101,56)->path; ?>" alt="<?php echo $doctor->full_name; ?>" /></a></li>
                 <?php foreach($doctor->images as $image):?>
-                <li><img src="<?=$image->crop(101,56)->path?>"alt="<?=$doctor->full_name;?>"></li>
+                <li><img src="<?php echo $image->crop(101,56)->path; ?>"alt="<?php echo $doctor->full_name; ?>"></li>
                 <?php endforeach;?>
             </ul>
             <?php endif; ?>
@@ -39,8 +39,8 @@
 
 <script>
     $(function() {
-    <?if (count($doctor->images)>5){?>
+    <?php if (count($doctor->images)>5){?>
         $('.connected-carousels .next-navigation').removeClass('inactive');
-        <?}?>
+        <?php }?>
     });
 </script>

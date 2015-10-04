@@ -15,40 +15,40 @@ $(function() {
 
 <p class="actionBar">
 		<span class="button">
-			<a class="taskIndexLink" href="javascript:void(0)" onclick="ajax('<?=$this->dataModel->getModelName();?>/?ajax=1','generatorData')"><img class="cursorPointer" src="/media/admin/icons/clipboard-audit-24-ns.png" align="absmiddle" border="0" /></a>
-			<a href="javascript:void(0)" onclick="ajax('<?=$this->dataModel->getModelName();?>/?ajax=1','generatorData')"><?=$dataModel->getListTitle()?></a>
+			<a class="taskIndexLink" href="javascript:void(0)" onclick="ajax('<?php echo $this->dataModel->getModelName(); ?>/?ajax=1','generatorData')"><img class="cursorPointer" src="/media/admin/icons/clipboard-audit-24-ns.png" align="absmiddle" border="0" /></a>
+			<a href="javascript:void(0)" onclick="ajax('<?php echo $this->dataModel->getModelName(); ?>/?ajax=1','generatorData')"><?php echo $dataModel->getListTitle(); ?></a>
 		</span> 
 </p>
 <div style="clear:both"></div>
 
 
 <div id="tabs" class="tabs">
-<?/*
+<?php /*
 	<ul>
-		<? $i = 0;?>
-		<?foreach ($groups as $groupName=>$groupSettings){?>
-			<li><a href="#tab-<?=$i;?>"><?=$groupName;?></a></li>
-			<? $i++;?>
-		<?}?>
+		<?php  $i = 0;?>
+		<?php foreach ($groups as $groupName=>$groupSettings){?>
+			<li><a href="#tab-<?php echo $i; ?>"><?php echo $groupName; ?></a></li>
+			<?php  $i++;?>
+		<?php }?>
 	</ul>
 */?>	
-	<? $i = 0;?>
-	<?foreach ($groups as $groupName=>$groupSettings){?>
-		<div id="tabSettings-<?=$i;?>" class="generatorEditDiv">
-		<h4><?=$groupName?></h4>
-		    <div <?=(isset($tabs) && count($tabs) != 1)?'style="display:none;"':'';?>>
+	<?php  $i = 0;?>
+	<?php foreach ($groups as $groupName=>$groupSettings){?>
+		<div id="tabSettings-<?php echo $i; ?>" class="generatorEditDiv">
+		<h4><?php echo $groupName; ?></h4>
+		    <div <?php =(isset($tabs) && count($tabs) != 1)?'style="display:none;"':'';?>>
 				<table width="100%" cellspacing="0" cellpadding="0" class="list">
 					
 					<tbody>
-					<?foreach ($groupSettings as $settings){?>
-						<?if($settings['code'] != 'work_access'){?>
+					<?php foreach ($groupSettings as $settings){?>
+						<?php if($settings['code'] != 'work_access'){?>
 						<tr>
-							<td><span class="grey"><?=$settings['name'];?>:</span> 
-							<?if ($settings['type'] == 'text'){?>
+							<td><span class="grey"><?php echo $settings['name']; ?>:</span>
+							<?php if ($settings['type'] == 'text'){?>
 							<i>... текст ...</i>
-							<?}elseif ($settings['type'] == 'htmlarea'){?>
+							<?php }elseif ($settings['type'] == 'htmlarea'){?>
 							<i>... html-код ...</i>
-							<?}elseif ($settings['type'] == 'firstprice'){
+							<?php }elseif ($settings['type'] == 'firstprice'){
 							
 								switch($settings['value'])
 								{
@@ -76,19 +76,19 @@ $(function() {
 								}
 							
 							}else{?>
-							<?=$settings['value'];?>
-							<?}?>
-							<a  href="javascript:void(0)" onclick="ajax('settings/edit/?id=<?=$settings['id'];?>&ajax=1','generatorData')"><img title="Редактировать" border="0" src="/media/admin/icons/pencil-16-ns.png" border="0"/></a>
+							<?php echo $settings['value']; ?>
+							<?php }?>
+							<a  href="javascript:void(0)" onclick="ajax('settings/edit/?id=<?php echo $settings['id']; ?>&ajax=1','generatorData')"><img title="Редактировать" border="0" src="/media/admin/icons/pencil-16-ns.png" border="0"/></a>
 							</td>
 						</tr>
-						<?}?>
-					<?}?>
+						<?php }?>
+					<?php }?>
 					</tbody>
 				</table>
 			</div>
 		</div>
-		<? $i++;?>
-	<?}?>
+		<?php  $i++;?>
+	<?php }?>
 </div>
 
 

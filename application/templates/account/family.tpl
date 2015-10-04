@@ -56,11 +56,11 @@
                         <div class="data-box">
                             <div class="sel-box">
                                 <select name="relation" data-placeholder="Выберите связь" class="chzn-select add-relation-status" style="width:260px;">
-                                    <?foreach($relations as $relation):?>
-                                        <?if ($relation->name!='Я'):?>
-                                            <option value="<?=$relation->id?>"><?=$relation->name?></option>
-                                        <?endif?>
-                                    <?endforeach?>
+                                    <?php foreach($relations as $relation):?>
+                                        <?php if ($relation->name!='Я'):?>
+                                            <option value="<?php echo $relation->id; ?>"><?php echo $relation->name; ?></option>
+                                        <?php endif?>
+                                    <?php endforeach?>
                                 </select>
                             </div>
                         </div>

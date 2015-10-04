@@ -1,48 +1,51 @@
 <?php
+
 	/**
 	 *	@var DoctorModel $doctor;
 	 *  @var View $this;
-     *  @var AccountModel $current_account
+   *  @var AccountModel $current_account
 	 * @var IHtmlCache $cache
-  	 */
+ 	 */
+
+$this->is_red = (isset($is_red) && $is_red) ? $is_red : 0;
+if (isset($_COOKIE['already_registred_account'])) {
+    $already_registred_account = 1;
+}else{
+    $already_registred_account = 0;
+}
+$uncommented_visit = '';
+
+if (isset($current_account) && $current_account) {
+	$uncommented_visit = $doctor->getOneLastUncommentedVisitByAccountId($current_account->getId());
+}
+if ($uncommented_visit) {
+	$unique_id = $uncommented_visit->getUniqueId().rand(0,100000);
+}
 ?>
-
-<?php
-    $this->is_red = (isset($is_red) && $is_red) ? $is_red : 0;
-    if (isset($_COOKIE['already_registred_account']))
-        $already_registred_account = 1;
-    else
-        $already_registred_account = 0;
-?>
-<?php $uncommented_visit = ''; ?>
-
-<?php if (isset($current_account) && $current_account) {$uncommented_visit = $doctor->getOneLastUncommentedVisitByAccountId($current_account->getId());}?>
-<?php if ($uncommented_visit) $unique_id = $uncommented_visit->getUniqueId().rand(0,100000); ?>
-
     <script>
         $(document).ready(function () {
             var block_controller = new DoctorBigCardController('#doctor-big-card-<?php echo $doctor->getUniqueId(); ?>', <?php echo $doctor->getId(); ?>, <?php echo ($doctor->my_doctor) ? 1 : 2; ?>, <?php echo ((isset($counter))&&($counter % 2 == 0) && $columned_list) ? 1 : 2; ?>);
 
             <?php if (isset($current_account) && $current_account):?>
                 block_controller.is_current_account = 1;
-            <?php endif;?>
+            <?php endif; ?>
             <?php if (isset($current_account) && $current_account && $current_account->is_call_centre_operator):?>
                 block_controller.is_call_center_operator = 1;
             <?php endif;?>
             <?php if ($uncommented_visit):?>
                 block_controller.is_uncommented_visit = 1;
-                block_controller.review_block_unique_id = <?php echo $unique_id;?>;
-                block_controller.review_unique_id = <?php echo $uncommented_visit->getUniqueId();?>;
+                block_controller.review_block_unique_id = <?php echo $unique_id; ?>;
+                block_controller.review_unique_id = <?php echo $uncommented_visit->getUniqueId(); ?>;
             <?php endif;?>
-            <?php if ($doctor->last_review):?>
+            <?php if ($doctor->last_review): ?>
                 block_controller.is_doctor_last_review = 1;
                 block_controller.doctor_link = "<?php echo DoctorPageLinkViewHelper::getLink($doctor);?>";
                 block_controller.review_text = "<?php echo StringHelper::trim($doctor->last_review->text, 70);?>";
-            <?php endif;?>
-            <?php if (Acc::isAuthed()):?>
+            <?php endif; ?>
+            <?php if (Acc::isAuthed()): ?>
                 block_controller.authed_user = 1;
             <?php endif;?>
-            <?php if ($doctor->reviews_count):?>
+            <?php if ($doctor->reviews_count): ?>
                 block_controller.is_reviews_count = 1;
             <?php endif;?>
 
@@ -50,33 +53,34 @@
         });
     </script>
 
-    <?php $cache_id = 'doctor_card_without_seo'.$doctor->getId(); ?>
-    <?php if (isset($specialty_id) && $specialty_id): ?>
-        <?php $cache_id.='_specialty_'.$specialty_id; ?>
-    <?php endif; ?>
-    <?php if (isset($clinic_id) && $clinic_id): ?>
-        <?php $cache_id.='_clinic_'.$clinic_id; ?>
-    <?php endif; ?>
-    <?php if (isset($purpose_of_visit_id) && $purpose_of_visit_id): ?>
-        <?php $cache_id.='_purpose_'.$purpose_of_visit_id; ?>
-    <?php endif; ?>
-    <?php if ($current_account && $current_account->is_call_centre_operator): ?>
-        <?php $cache_id.='_call_center_operator'; ?>
-    <?php endif; ?>
-	
+    <?php
+$cache_id = 'doctor_card_without_seo'.$doctor->getId();
+if (isset($specialty_id) && $specialty_id) {
+	$cache_id.='_specialty_'.$specialty_id;
+}
+if (isset($clinic_id) && $clinic_id) {
+	$cache_id.='_clinic_'.$clinic_id;
+}
+if (isset($purpose_of_visit_id) && $purpose_of_visit_id) {
+	$cache_id.='_purpose_'.$purpose_of_visit_id;
+}
+if ($current_account && $current_account->is_call_centre_operator) {
+	$cache_id.='_call_center_operator';
+}
+?>
     <?php if (!$cache->start($cache_id,  'doctor_card_block_without_seo')): ?>
         <div class="info-card doctor-card-<?php echo $doctor->getId(); ?> doctor-big-card flo" id="doctor-big-card-<?php echo $doctor->getUniqueId(); ?>">
 
             <?php echo (isset($is_closed_card) && $is_closed_card == 1) ? '<span class="close" data-id="'.$doctor->getId().'"></span>' : ''; ?>
             <?php if (isset($map_card)): ?>
                  <span class="corn-top"></span>
-            <?endif?>
+            <?php endif; ?>
             <div class="avatar_buttons">
                 <div class="avatar">
                     <?php echo DoctorAvatarViewHelper::viewOnCard($doctor, 74, 111); ?>
                 </div>
 
-            <?php if($is_virtual): ?>
+            <?php if(isset($is_virtual) and $is_virtual): ?>
                 <?php $this->block('doctor/blocks/card_buttons_virtual'); ?>
             <?php else: ?>
                 <?php $this->block('doctor/blocks/card_buttons'); ?>
@@ -107,7 +111,7 @@
                                     <a class="showTip el" data-url="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>#reviews" href="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>#reviews">
                                 <?php else: ?>
                                     <a class="showTip el" href="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>#reviews">
-                                <?endif?>
+                                <?php endif?>
                                     <?php echo ($doctor->reviews_count) ? StringHelper::getCorrectSuffixForReview($doctor->reviews_count) : ''; ?>
                                 </a>
                             </div>
@@ -127,8 +131,8 @@
                     <?php $this->purpose_of_visit_id = (isset($purpose_of_visit_id)) ? $purpose_of_visit_id : null; ?>
                     <?php $this->week_schedule = 1; ?>
                     <?php $this->is_big_card = 1; ?>
-                    <?php $this->is_seo_page = $is_seo_page; ?>
-                    <?php $this->page_type = $page_type; ?>
+                    <?php $this->is_seo_page = empty($is_seo_page)?'':$is_seo_page; ?>
+                    <?php $this->page_type = empty($page_type)?'':$page_type; ?>
                     <?php $this->block('doctor/blocks/schedule_and_clinics'); ?>
                 </div>
             </div>

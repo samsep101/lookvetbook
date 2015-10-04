@@ -38,7 +38,7 @@
                 <option value="">Все</option>
                 <?php if ($specialties): ?>
 					<?php foreach ($specialties as $specialty): ?>
-						<option value="<?=$specialty->getId()?>"><?=$specialty->name?></option>
+						<option value="<?php echo $specialty->getId(); ?>"><?php echo $specialty->name; ?></option>
 					<?php endforeach; ?>
                 <?php endif; ?>
             </select>

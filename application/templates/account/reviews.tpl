@@ -49,12 +49,12 @@
                 </div>
             <?php endif; ?>
             <div class="rev-block">
-                <?if ($review_tabs):?>
+                <?php if ($review_tabs):?>
                     <ul class="switch flo">
                         <li class="doctors_switch active"><a><i></i>Доктора</a></li>
                         <li class="clinics_switch"><a><i></i>Клиники</a></li>
                     </ul>
-                <?endif?>
+                <?php endif?>
                 <div class="section visible">
 
                     <div id="last_doctors_reviews_container">

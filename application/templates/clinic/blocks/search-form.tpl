@@ -2,9 +2,9 @@
     <div class="search-form">
         <div class="box flo">
             <div class="section find-clinic visible">
-                <?if ((isset($menu_active)) && ($menu_active == 'clinic')):?>
+                <?php if ((isset($menu_active)) && ($menu_active == 'clinic')):?>
                     <h1 id="box_h1">Найти клинику</h1>
-                <?endif?>
+                <?php endif?>
                 <div class="colapse"> </div>
 
                 <div class="in_colapse">
@@ -15,7 +15,7 @@
 
                         <select data-placeholder="Специализация" id="specialties_to_search_clinic" class="chzn-select" name="specialty_id" style="width:290px;">
                         <?php
-                            $this->specialization = $specialization;
+                            $this->specialization = empty($specialization)?'':$specialization;
                             $this->show_all_option = TRUE;
                             $this->block('blocks/specialization_options');
                         ?>

@@ -61,7 +61,7 @@
                     <h1>
                         <p class="name refactor-name-style">
                             <span itemprop="name">
-                                <?=$doctor->full_name;?>
+                                <?php echo $doctor->full_name; ?>
                             </span>
                         </p>
                         <div class="specialties">
@@ -75,11 +75,11 @@
                         <meta itemprop="itemreviewed" content="<?php echo $doctor->full_name; ?>"/>
 
                         <?php echo RateViewHelper::view($doctor->rate); ?>
-                        <?if ($doctor->reviews_count!=0):?>
+                        <?php if ($doctor->reviews_count!=0):?>
                             <a href="#reviews" class="comments-count refactor-comments-count-styles">
                                 читать отзывы (<span itemprop="count"><?php echo $doctor->reviews_count; ?></span>)
                             </a>
-                        <?endif?>
+                        <?php endif?>
 
                         <?php $work_experience = $doctor->work_experience; ?>
                         <?php if($work_experience) { ?>
@@ -93,11 +93,11 @@
                                 foreach($purpose_prices AS $ppKey => $ppValue) {
                             ?>
                             <div class="cost-visit-clinic" data-clinik-id="<?php echo $ppKey; ?>">
-                                <?php if($ppValue['first_price'][price]) { ?>
-                                    <?php echo $ppValue['first_price'][name]; ?>: <span>от <?php echo $ppValue['first_price'][price]; ?> руб.</span><br />
+                                <?php if($ppValue['first_price']['price']) { ?>
+                                    <?php echo $ppValue['first_price']['name']; ?>: <span>от <?php echo $ppValue['first_price']['price']; ?> руб.</span><br />
                                 <?php } ?>
-                                <?php if($ppValue['second_price'][price]) { ?>
-                                    <?php echo $ppValue['second_price'][name]; ?>: <span>от <?php echo $ppValue['second_price'][price]; ?> руб.</span><br />
+                                <?php if($ppValue['second_price']['price']) { ?>
+                                    <?php echo $ppValue['second_price']['name']; ?>: <span>от <?php echo $ppValue['second_price']['price']; ?> руб.</span><br />
                                 <?php } ?>
                             </div>
                             <?php
@@ -126,7 +126,7 @@
                                 $number = 1;
                                 $clinic_numbers = array();
                              ?>
-                            <?foreach($doctor->clinics as $clinic):?>
+                            <?php foreach($doctor->clinics as $clinic):?>
                                 <?php
                                     if ($number == 1)
                                         $clinic_numbers[$clinic->getId()] = '';
@@ -135,7 +135,7 @@
                                 ?>
                                 <li data-id="<?php echo $clinic->getId();?>" class="loc-<?php echo $number ?>">
                                     <span>
-                                        <?=$number?>
+                                        <?php echo $number; ?>
                                     </span>
                                 </li>
                                 <?php $number++; ?>
@@ -144,24 +144,24 @@
 
                         <div class="box">
                             <?php $section_number = 1; ?>
-                            <?foreach($doctor->clinics as $clinic):?>
-                                <div class="section refactor-section-styles section-<?=$section_number?> visible flo"<?php if(!$clinic->latitude || !$clinic->longitude) { ?> style="height: 45px;" <?php } ?>>
+                            <?php foreach($doctor->clinics as $clinic):?>
+                                <div class="section refactor-section-styles section-<?php echo $section_number; ?> visible flo"<?php if(!$clinic->latitude || !$clinic->longitude) { ?> style="height: 45px;" <?php } ?>>
                                     <div class="avatar refactor-avatar-styles">
                                         <?php echo ClinicAvatarViewHelper::viewOnCard($clinic, 74, 31); ?>
                                     </div>
                                     <p class="name-center">
-                                        <strong><a href="<?=ClinicPageLinkViewHelper::getLink($clinic);?>"><?=$clinic->name?></a></strong>
+                                        <strong><a href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>"><?php echo $clinic->name; ?></a></strong>
                                     </p>
                                     <div class="location">
                                         <!-- <div class="trigger">
-                                             <?=$section_number?>
+                                             <?php echo $section_number; ?>
                                          </div>-->
                                         <meta content="Клиника" itemprop="affiliation">
                                         <p class="name-inf" itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
 
                                             <?php if ($clinic->metro_station): ?>
                                                 <?php if ($clinic->metro_station->metro_branch): ?>
-                                                    <?echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
+                                                    <?php echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
                                                 <?php endif; ?>
                                                 <?php echo $clinic->metro_station->name; ?> <br  />
                                             <?php endif; ?>
@@ -222,8 +222,8 @@
 
                                     </div>
 -->
-                                    <?$doctor_clinic_specialties = $doctor->getSpecialtiesByClinicId($clinic->getId());?>
-                                    <?$existing_schedule = $doctor->checkExistingDoctorScheduleByClinicIdAndClinicSpecialties($clinic->getId(), $doctor_clinic_specialties);?>
+                                    <?php $doctor_clinic_specialties = $doctor->getSpecialtiesByClinicId($clinic->getId());?>
+                                    <?php $existing_schedule = $doctor->checkExistingDoctorScheduleByClinicIdAndClinicSpecialties($clinic->getId(), $doctor_clinic_specialties);?>
 
                                     <div class="schedule-extended">
                                         <h2>График приема врача:</h2>
@@ -253,7 +253,7 @@
                                                                     <?php endif; ?>
                                                                 <?php endif; ?>
                                                         <?php endforeach; ?>
-                                                    <?else:?>
+                                                    <?php else:?>
                                                         <?php $work_time = $clinic->getClinicWorkTimeByDate(date('Y-m-d', $cur_day_time)); ?>
 
                                                         <div class="gray-separator"></div>
@@ -263,7 +263,7 @@
                                                         <?php else: ?>
                                                             <a href="javascript:void(0)" class="record-day-pick hide"></a>
                                                         <?php endif; ?>
-                                                    <?endif?>
+                                                    <?php endif?>
                                                 </li>
                                             <?php endfor; ?>
                                         </ul>
@@ -324,7 +324,7 @@
                 </div>
                 <?php endif; ?>
 
-                <?if($doctor->certificate):?>
+                <?php if($doctor->certificate):?>
                     <div class="info-col col-cert">
                         <i class="icon"></i>
                         <h3>Сертификаты</h3>
@@ -332,16 +332,16 @@
                             <?php echo $doctor->certificate; ?>
                         </div>
                     </div>
-                <?endif?>
+                <?php endif?>
 
-                <?if($doctor->course):?>
+                <?php if($doctor->course):?>
                     <div class="info-col col-associations"><i class="icon"></i>
                         <h3>Курсы повышения квалификации</h3>
                         <div id="course-content">
                             <?php echo $doctor->course; ?>
                         </div>
                     </div>
-                <?endif?>
+                <?php endif?>
 
             </div>
         </div>

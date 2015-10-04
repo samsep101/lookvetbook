@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><?=$this->company?></title>
+    <title><?php echo $this->company; ?></title>
     <?php echo $this->block('admin/blocks/head');?>
 	<script type="text/javascript">
 		SessionInfo.csrf = '<?php echo (isset($csrf)) ? $csrf : ''; ?>';
@@ -19,7 +19,7 @@
 
 <div class="clear"></div>
 
-<?if(Acl::userId()){?>
+<?php if(Acl::userId()){?>
     <img src="/media/images/eyes_owl_line_tr.png" id="logo">
     <p align="right"><a href="/admin/security/logout"><b>Выйти</b></a></p>
 
@@ -33,13 +33,13 @@
         </td>
 
         <td valign="top" id="rightContent">
-<?}?>
+<?php }?>
             <?php echo $this->content(); ?>
-<?if(Acl::userId()){?>
+<?php if(Acl::userId()){?>
         </td>
     </tr>
 </table>
-<?}?>
+<?php }?>
 <div class="clear"></div>
 </body>
 </html>

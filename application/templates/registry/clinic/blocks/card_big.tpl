@@ -3,9 +3,9 @@
 <div class="info-card clinic-card flo">
     <div class="rating">
         <?php echo RateViewHelper::view($clinic->rate); ?>
-        <?if ($clinic->reviews):?>
+        <?php if ($clinic->reviews):?>
             <div class="comments-count"><a><?php echo StringHelper::getCorrectSuffixForReview(count($clinic->reviews));?></a></div>
-        <?endif?>
+        <?php endif?>
     </div>
 
     <div class="avatar">
@@ -19,7 +19,7 @@
                     <p class="name-inf">
                         <?php if ($clinic->metro_station): ?>
                         <?php if ($clinic->metro_station->metro_branch): ?>
-                            <?echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
+                            <?php echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
                             <?php endif; ?>
                         <?php echo $clinic->metro_station->name;?><br>
                         <?php endif; ?>
@@ -28,27 +28,27 @@
                 </div>
                 <div class="price-inf">
                     <p>
-                        <?if($clinic->is_day_and_night){?>
+                        <?php if($clinic->is_day_and_night){?>
                             круглосуточная
-                            <?} else {?>
+                            <?php } else {?>
                             <?php echo ScheduleViewHelper::view($clinic); ?>
-                            <?}?></p>
+                            <?php }?></p>
                 </div>
             </div>
 
-            <?if ($clinic->specialties):?>
+            <?php if ($clinic->specialties):?>
             <p><strong>Врачи клиники</strong></p>
             <ul class="specializations">
-                <?$counter = 1?>
-                <?foreach ($clinic->specialties as $specialty) :?>
-                <?if ($counter < 5):?>
-                    <li><?=$specialty->name?></li>
-                    <?$counter++?>
-                    <?endif?>
-                <?endforeach?>
+                <?php $counter = 1?>
+                <?php foreach ($clinic->specialties as $specialty) :?>
+                <?php if ($counter < 5):?>
+                    <li><?php echo $specialty->name; ?></li>
+                    <?php $counter++?>
+                    <?php endif?>
+                <?php endforeach?>
             </ul>
             <a class="more">Подробнее</a><br>
-            <?endif?>
+            <?php endif?>
             <br>
             <!--<p><strong>Название цели визита:</strong> от 1000 руб.</p>-->
         </div>
@@ -57,12 +57,12 @@
 
             <?php if ($clinic->my_clinic): ?>
 
-            <a class="btn-bookmark btn-bookmark-clinic btn-bookmark-added clinic-bookmark-<?=$clinic->getId();?>">
+            <a class="btn-bookmark btn-bookmark-clinic btn-bookmark-added clinic-bookmark-<?php echo $clinic->getId(); ?>">
                 <i class="icon-add"></i>
                 <span class="txt txt-added">В закладках</span>
             </a>
             <?php else: ?>
-            <a class="btn-bookmark btn-bookmark-clinic clinic-bookmark-<?=$clinic->getId();?>">
+            <a class="btn-bookmark btn-bookmark-clinic clinic-bookmark-<?php echo $clinic->getId(); ?>">
                 <i class="icon-add"></i>
                 <span class="txt">Добавить в закладки</span>
             </a>

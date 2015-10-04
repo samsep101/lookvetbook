@@ -97,7 +97,7 @@
         </div>
     </div>
 
-    <div class="landing-center symptoms-block <?php if (isset($specialty) && $specialty->getId() == SpecialtyModel::OTOLARYNGOLOGIST) {?>short-symptom-list<?}?>">
+    <div class="landing-center symptoms-block <?php if (isset($specialty) && $specialty->getId() == SpecialtyModel::OTOLARYNGOLOGIST) {?>short-symptom-list<?php }?>">
         <div class="white-symptom-block">
             <div class="white-symptom-header">
                 Записаться на прием к <span class="bolder"><?php if (isset($specialty)) echo $specialty->lp_dative_name;?></span> необходимо при появлении любого из следующих симптомов:

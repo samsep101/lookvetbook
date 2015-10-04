@@ -21,17 +21,17 @@
         <div class="ilness-result">
             <h1>Результаты</h1>
             <ol class="illness-results-list">
-                <?foreach ($materials as $material):?>
-                <li> <a class="help-result" ><?=$material->title?></a>
+                <?php foreach ($materials as $material):?>
+                <li> <a class="help-result" ><?php echo $material->title; ?></a>
                     <div class="drop">
-                        <p><?=$material->content?></p>
+                        <p><?php echo $material->content; ?></p>
                     </div>
                 </li>
-                <?endforeach?>
+                <?php endforeach?>
             </ol>
-            <?if (isset($next_button)):?>
-            <?=$next_button?>
-            <?endif?>
+            <?php if (isset($next_button)):?>
+            <?php echo $next_button; ?>
+            <?php endif?>
         </div>
     </div>
 </div>

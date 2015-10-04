@@ -88,7 +88,7 @@
                                     echo $current_account->last_name.' '.$current_account->first_name.' '.$current_account->middle_name;
                                 else if ($current_account->email)
                                     echo $current_account->email;
-                                else{?>&nbsp<?}
+                                else{?>&nbsp<?php }
                             ?>
                         </a>
                         <ul class="header-usermenu">

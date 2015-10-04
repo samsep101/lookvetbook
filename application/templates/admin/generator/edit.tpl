@@ -21,19 +21,19 @@ $(function() {
 <?php ini_set("memory_limit", "128M");?>
 <p class="actionBar">
 		<span class="button">
-			<a href="javascript:void(0)" onclick="ajax('/<?=$this->dataModel->getModelName();?>/?ajax=1','generatorData')"><img class="cursorPointer" src="/media/admin/icons/clipboard-audit-24-ns.png" align="absmiddle" border="0" /></a>
-			<a href="<?=ADMIN_FOLDER.'/'.$this->dataModel->getModelName();?>"><?=$this->dataModel->getListTitle()?></a>
+			<a href="javascript:void(0)" onclick="ajax('/<?php echo $this->dataModel->getModelName(); ?>/?ajax=1','generatorData')"><img class="cursorPointer" src="/media/admin/icons/clipboard-audit-24-ns.png" align="absmiddle" border="0" /></a>
+			<a href="<?php echo ADMIN_FOLDER.'/'.$this->dataModel->getModelName(); ?>"><?php echo $this->dataModel->getListTitle(); ?></a>
 		</span> 
-	<? if ($acl->hasRights($this->dataModel->getModelName(),'add')){?>
+	<?php  if ($acl->hasRights($this->dataModel->getModelName(),'add')){?>
 		<span class="button">
 			<img class="cursorPointer" src="/media/admin/icons/badge-circle-plus-24-ns.png" align="absmiddle" />
-			<a href="<?=ADMIN_FOLDER.'/'.$this->dataModel->getModelName();?>/add/"><?=$this->dataModel->getAddTitle();?></a>
+			<a href="<?php echo ADMIN_FOLDER.'/'.$this->dataModel->getModelName(); ?>/add/"><?php echo $this->dataModel->getAddTitle(); ?></a>
 		</span> 
-	<?}?>
+	<?php }?>
 </p>
 <div style="clear:both"></div>
 
-<form action="<?php echo ADMIN_FOLDER; ?>/<?php echo $this->dataModel->getModelName();?>/edit/?id=<?=$indexValue;?>&destination=<?php echo $destination; ?>" method="POST" enctype="multipart/form-data">
+<form action="<?php echo ADMIN_FOLDER; ?>/<?php echo $this->dataModel->getModelName();?>/edit/?id=<?php echo $indexValue; ?>&destination=<?php echo $destination; ?>" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="csrf" value=<?php echo isset($csrf) ? '\''.$csrf.'\'' : 'null'; ?>>
 
 	<?php echo $this->dataModel->getEditTooltip()?>
@@ -41,7 +41,7 @@ $(function() {
 	<?php $tab_num = 1; ?>
     <?php foreach ($tabs as $tabId=>$tabName): ?>
 
-    <div id="tab-<?=$tabId;?>" class="generatorEditDiv">
+    <div id="tab-<?php echo $tabId; ?>" class="generatorEditDiv">
 			<h4><?php echo $tabName?></h4>
 			<div <?php echo ($tab_num != 1) ? 'style="display:none;"' : ''; ?>>
 	    <br />
@@ -50,8 +50,8 @@ $(function() {
 				<?php if ($field->hasLayout): ?>
 				<tr>
 						<?php if($this->dataModel->checkUserFilter($fieldName) && Acl::userGrant($this->dataModel->getModelName().'_list_my')): ?>
-							<input name="form[<?=$fieldName?>]" type="
-							hidden" value="<?=Acl::userId();?>" />
+							<input name="form[<?php echo $fieldName; ?>]" type="
+							hidden" value="<?php echo Acl::userId(); ?>" />
 						<?php else: ?>
                         <?php
                             $form_value = $model;
@@ -79,7 +79,7 @@ $(function() {
     <?php endforeach; ?>
 </div>
 
-<input type="hidden" name="form[<?=$indexField;?>]" value="<?=$indexValue;?>" />
+<input type="hidden" name="form[<?php echo $indexField; ?>]" value="<?php echo $indexValue; ?>" />
 <p>
     <input type="button" onclick="$($($(this).parent()).parent()).submit()" value="Сохранить" id="submit_action">
     <input type="button" onclick="window.location.reload()" value="Отменить" id="cancel_action">
@@ -93,7 +93,7 @@ $(function() {
         <?php continue; ?>
         <?php endif; ?>
         <div id="extra-<?php echo $extra_id; ?>" class="generatorEditDiv">
-            <h4><?=$v['title'];?></h4>
+            <h4><?php echo $v['title']; ?></h4>
             <div id="extra-<?php echo $extra_id; ?>-container">
 
             </div>

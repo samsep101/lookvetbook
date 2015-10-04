@@ -65,9 +65,9 @@
     <?php if ($city_current_statistic_information): ?>
         <label>Статистика по городам</label>
         <select>
-            <?foreach ($city_current_statistic_information as $information):?>
+            <?php foreach ($city_current_statistic_information as $information):?>
                 <option value="<?php echo $information['city_id']?>"><?php echo $information['city_name']?></option>
-            <?endforeach?>
+            <?php endforeach?>
             <option value="all">Все</option>
         </select>
     <?php endif; ?>

@@ -20,18 +20,18 @@
             <div id="datepicker" class="calendar"></div>
             <div class="record-block">
 
-            <?if (count($visits)):?>
-                <?foreach ($visits as $visit):?>
+            <?php if (count($visits)):?>
+                <?php foreach ($visits as $visit):?>
 
                 <div class="record-cart">
                     <div class="cont flo">
                         <h3>
                             <?php echo ($visit->visit_start_time) ? DateViewHelper::date($visit->visit_start_time, 'full') : DateViewHelper::date($visit->schedule->dt_end, 'full');?> года
                             <?php if ($visit->visit_start_time): ?>
-                                на <?=DateViewHelper::date($visit->visit_start_time, 'time');?>
+                                на <?php echo DateViewHelper::date($visit->visit_start_time, 'time'); ?>
                             <?php endif; ?>
                             <?php if ($visit->status_id): ?>
-                                (<?=VisitStatusViewHelper::view($visit->status_id);?>)
+                                (<?php echo VisitStatusViewHelper::view($visit->status_id); ?>)
                             <?php endif; ?>
                         </h3>
 
@@ -39,7 +39,7 @@
                         <?php $this->block('doctor/card_tiny'); ?>
                             <div class="btns">
                                 <span class="btn-5">
-                                    <input type="submit" class="cancel_visit_button" data-id="<?=$visit->getid()?>" value="Отменить">
+                                    <input type="submit" class="cancel_visit_button" data-id="<?php echo $visit->getid(); ?>" value="Отменить">
                                 </span>
                             </div>
                         <div class="bott-info flo">
@@ -50,12 +50,12 @@
                     </div>
                 </div>
 
-                <?endforeach?>
-            <?else: ?>
+                <?php endforeach?>
+            <?php else: ?>
                 <div class="coming_visit">
                     Записей нет
                 </div>
-            <?endif?>
+            <?php endif?>
             </div>
 
         </div>

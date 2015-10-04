@@ -64,7 +64,7 @@
                 <?php /*
                     <div class="buy">
                         <div class="buy-left">
-                        <span class="product_price"><span class="gprice"><? echo (float)$product->price;?></span>&nbsp;<span>р.</span></span>
+                        <span class="product_price"><span class="gprice"><?php  echo (float)$product->price;?></span>&nbsp;<span>р.</span></span>
                         <span class="showhide">x</span>
                         <ul class="numeric">
                             <li class="decrement">-</li>
@@ -94,19 +94,19 @@
                     </div>
                     <div class="good_info">
                         <ul class="left_nav">
-                            <?php if ($product->zip_info || $product->composition):?><li><a href="javascript:void(0)">Состав и форма выпуска</a></li><?endif;?>
-                            <?php if ($product->dosage):?><li><a href="javascript:void(0)">Способ применения и дозы</a></li><?endif;?>
-                            <?php if ($product->side_effects):?><li><a href="javascript:void(0)">Побочные действия</a></li><?endif;?>
-                            <?php if ($product->overdosage):?><li><a href="javascript:void(0)">Передозировка</a></li><?endif;?>
-                            <?php if ($product->storage_condition):?><li><a href="javascript:void(0)">Условия хранения</a></li><?endif;?>
-                            <?php if ($product->pharma_effects):?><li><a href="javascript:void(0)">Фармакологическое действие</a></li><?endif;?>
-                            <?php if ($product->information->pharmacokinetics):?><li><a href="javascript:void(0)">Фармакокинектика</a></li><?endif;?>
-                            <?php if ($product->indications):?><li><a href="javascript:void(0)">Показания</a></li><?endif;?>
-                            <?php if ($product->contra_indications):?><li><a href="javascript:void(0)">Противопоказания</a></li><?endif;?>
-                            <?php if ($product->extend_information->interaction):?><li><a href="javascript:void(0)">Лекарственное взаимодействие</a></li><?endif;?>
-                            <?php if ($product->extend_information->lactation):?><li><a href="javascript:void(0)">Беременность и лактация</a></li><?endif;?>
-                            <?php if ($product->extend_information->special_information):?><li><a href="javascript:void(0)">Особые указания</a></li><?endif;?>
-                            <?php if ($product->extend_information->pharm_delivery):?><li><a href="javascript:void(0)">Условия отпуска из аптек</a></li><?endif;?>
+                            <?php if ($product->zip_info || $product->composition):?><li><a href="javascript:void(0)">Состав и форма выпуска</a></li><?php endif;?>
+                            <?php if ($product->dosage):?><li><a href="javascript:void(0)">Способ применения и дозы</a></li><?php endif;?>
+                            <?php if ($product->side_effects):?><li><a href="javascript:void(0)">Побочные действия</a></li><?php endif;?>
+                            <?php if ($product->overdosage):?><li><a href="javascript:void(0)">Передозировка</a></li><?php endif;?>
+                            <?php if ($product->storage_condition):?><li><a href="javascript:void(0)">Условия хранения</a></li><?php endif;?>
+                            <?php if ($product->pharma_effects):?><li><a href="javascript:void(0)">Фармакологическое действие</a></li><?php endif;?>
+                            <?php if ($product->information->pharmacokinetics):?><li><a href="javascript:void(0)">Фармакокинектика</a></li><?php endif;?>
+                            <?php if ($product->indications):?><li><a href="javascript:void(0)">Показания</a></li><?php endif;?>
+                            <?php if ($product->contra_indications):?><li><a href="javascript:void(0)">Противопоказания</a></li><?php endif;?>
+                            <?php if ($product->extend_information->interaction):?><li><a href="javascript:void(0)">Лекарственное взаимодействие</a></li><?php endif;?>
+                            <?php if ($product->extend_information->lactation):?><li><a href="javascript:void(0)">Беременность и лактация</a></li><?php endif;?>
+                            <?php if ($product->extend_information->special_information):?><li><a href="javascript:void(0)">Особые указания</a></li><?php endif;?>
+                            <?php if ($product->extend_information->pharm_delivery):?><li><a href="javascript:void(0)">Условия отпуска из аптек</a></li><?php endif;?>
                         </ul>
                         <?php if ($product->zip_info || $product->composition):?>
                             <div class="goods_txt visible">
@@ -116,7 +116,7 @@
                                     <?php echo HtmlTextViewHelper::getView($product->zip_info);?>
                                 </div>
                             </div>
-                        <?endif;?>
+                        <?php endif;?>
                         <?php if ($product->dosage):?>
                             <div class="goods_txt">
                                 <h2 class="h-txt">Способ применения дозы</h2>
@@ -124,7 +124,7 @@
                                     <?php echo HtmlTextViewHelper::getView($product->dosage);?>
                                 </div>
                             </div>
-                        <?endif;?>
+                        <?php endif;?>
                         <?php if ($product->side_effects):?>
                             <div class="goods_txt">
                                 <h2 class="h-txt">Побочные действия</h2>
@@ -132,7 +132,7 @@
                                     <?php echo HtmlTextViewHelper::getView($product->side_effects);?>
                                 </div>
                             </div>
-                        <?endif;?>
+                        <?php endif;?>
                         <?php if ($product->overdosage):?>
                             <div class="goods_txt">
                                 <h2 class="h-txt">Передозировка</h2>
@@ -140,7 +140,7 @@
                                     <?php echo HtmlTextViewHelper::getView($product->overdosage);?>
                                 </div>
                             </div>
-                        <?endif;?>
+                        <?php endif;?>
                         <?php if ($product->storage_condition):?>
                             <div class="goods_txt">
                                 <h2 class="h-txt">Условия хранения</h2>
@@ -148,7 +148,7 @@
                                     <?php echo HtmlTextViewHelper::getView($product->storage_condition);?>
                                 </div>
                             </div>
-                        <?endif;?>
+                        <?php endif;?>
                         <?php if ($product->pharma_effects):?>
                             <div class="goods_txt">
                                 <h2 class="h-txt">Фармакологическое действие</h2>
@@ -156,7 +156,7 @@
                                     <?php echo HtmlTextViewHelper::getView($product->pharma_effects);?>
                                 </div>
                             </div>
-                        <?endif;?>
+                        <?php endif;?>
                         <?php if ($product->pharmacokinetics):?>
                             <div class="goods_txt">
                                 <h2 class="h-txt">Фармакокинектика</h2>

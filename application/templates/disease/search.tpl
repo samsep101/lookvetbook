@@ -18,9 +18,9 @@
             </form>
         </div>
         <div class="ilness-list flo">
-            <?if (isset($_GET['disease_query'])):?>
+            <?php if (isset($_GET['disease_query'])):?>
             <div class="illness-catalog-error">По запросу мы не нашли заболевания. Уточни название в каталоге.</div>
-            <?endif?>
+            <?php endif?>
             <?php for($j = 0; $j <= 3; $j++): ?>
                 <div class="list-col">
                     <?php for ($i=0; $i < count($divided_diseases); $i += 4): ?>

@@ -24,15 +24,15 @@
                 </div>
 
                 <div class="publish-button">
-                    <?if ($doctor->is_active == 1):?>
-                        <input class="btn-1" data-id="<?=$doctor->getId()?>" type="submit" value="Снять">
-                    <?else:?>
-                        <input class="btn-appoint" data-id="<?=$doctor->getId()?>" type="submit" value="Опубликовать">
-                    <?endif?>
+                    <?php if ($doctor->is_active == 1):?>
+                        <input class="btn-1" data-id="<?php echo $doctor->getId(); ?>" type="submit" value="Снять">
+                    <?php else:?>
+                        <input class="btn-appoint" data-id="<?php echo $doctor->getId(); ?>" type="submit" value="Опубликовать">
+                    <?php endif?>
                 </div>
             </div>
         <?php endif?>
-        <?$doctors_count++;?>
+        <?php $doctors_count++;?>
     <?php endforeach; ?>
 <?php else: ?>
     <p>По вашему запросу врачей не найдено</p>

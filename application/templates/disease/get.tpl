@@ -26,28 +26,28 @@
             });
 
 
-            <?if ($disease->my_disease) {?>
+            <?php if ($disease->my_disease) {?>
             $('.btn-bookmark-illness').addClass('btn-bookmark-added');
             $('.btn-bookmark-illness').html('<i class="icon-add"></i> <span class="txt txt-added">В закладках</span>');
-            <?} else if (Acc::isAuthed()) {?>
+            <?php } else if (Acc::isAuthed()) {?>
             $('.btn-bookmark-illness').removeClass('btn-bookmark-added');
             $('.btn-bookmark-illness').html('<i class="icon-add"></i> <span class="txt">Добавить в закладки</span>');
-            <?}?>
+            <?php }?>
 
         });
 
     </script>
-<?if ($disease) :?>
+<?php if ($disease) :?>
 
     <div class="inner">
         <div class="about-ilness-content flo">
             <div class="main-column">
                 <div class="main-cont flo">
                 <div class="illness-header flo">
-                    <h1 id="disease-title" data-id="<?=$disease->id?>" data-title="<?=$disease->title?>"><?=$disease->title?></h1>
-                    <?if (Acc::isAuthed()):?>
+                    <h1 id="disease-title" data-id="<?php echo $disease->id; ?>" data-title="<?php echo $disease->title; ?>"><?php echo $disease->title; ?></h1>
+                    <?php if (Acc::isAuthed()):?>
                         <a class="btn-bookmark btn-bookmark-illness"></a>
-                    <?endif?>
+                    <?php endif?>
                     <?php if ($disease->alt_names):?>
                         <p class="another"><span>...или:</span>
                             <?php echo $disease->alt_names_string; ?>
@@ -55,33 +55,33 @@
                     <?php endif; ?>
                 </div>
                 <div class="illness-description">
-                    <?$disease->content = preg_replace('/<br \/>/','',$disease->content);?>
-                    <?$disease->content = preg_replace('/<br\/>/','',$disease->content);?>
-                    <div class="like_p"><?=html_entity_decode($disease->content,ENT_COMPAT,'UTF-8')?></div>
+                    <?php $disease->content = preg_replace('/<br \/>/','',$disease->content);?>
+                    <?php $disease->content = preg_replace('/<br\/>/','',$disease->content);?>
+                    <div class="like_p"><?php echo html_entity_decode($disease->content,ENT_COMPAT,'UTF-8'); ?></div>
                 </div>
 
-                <?if ($disease_blocks) :?>
+                <?php if ($disease_blocks) :?>
                     <div id="tabs">
                         <div class="illness-nav-wrap">
                             <div class="illness-nav" data-spy="affix">
                                 <div class="nav">
                                     <ul>
-                                        <?foreach ($disease_tabs_flags as $key=>$value):?>
-                                            <?if ($value):?>
-                                                <li data-tab-name="<?php echo $key; ?>" class="tab-people tab-<?=$key?> <?php echo $key == $card ? 'ui-state-active' : ''; ?>"><a href="<?php echo DiseasePageLinkViewHelper::getLink($disease); ?>/<?=$key?><?php if ($disease_green_btn) echo "?dis=new3"; ?>" onclick="return false;" id="<?=$key?>"><?php echo DiseaseTabNameViewHelper::getNameByTabFlag($key); ?></a></li>
-                                            <?endif?>
-                                        <?endforeach?>
+                                        <?php foreach ($disease_tabs_flags as $key=>$value):?>
+                                            <?php if ($value):?>
+                                                <li data-tab-name="<?php echo $key; ?>" class="tab-people tab-<?php echo $key; ?> <?php echo $key == $card ? 'ui-state-active' : ''; ?>"><a href="<?php echo DiseasePageLinkViewHelper::getLink($disease); ?>/<?php echo $key; ?><?php if ($disease_green_btn) echo "?dis=new3"; ?>" onclick="return false;" id="<?php echo $key; ?>"><?php echo DiseaseTabNameViewHelper::getNameByTabFlag($key); ?></a></li>
+                                            <?php endif?>
+                                        <?php endforeach?>
                                     </ul>
                                 </div>
                                 <div id="MyBigAjaxElement"></div>
                                 <!--add class "carousel" to sub-nav for sliding-->
 
-                                <?foreach ($disease_tabs_flags as $key=>$value):?>
+                                <?php foreach ($disease_tabs_flags as $key=>$value):?>
 
-                                    <?if ($value):?>
+                                    <?php if ($value):?>
                                         <?php $display = ($key == $card); ?>
 
-                                        <div class="sub-nav sub-nav-<?=$key?>" id="<?=$key?>" style="<?php echo $display ? 'display: block' : 'display:none'; ?>">
+                                        <div class="sub-nav sub-nav-<?php echo $key; ?>" id="<?php echo $key; ?>" style="<?php echo $display ? 'display: block' : 'display:none'; ?>">
                                             <?php $sub_counter = 0; ?>
                                             <ul>
                                                 <?php foreach ($disease_blocks as $block):?>
@@ -89,10 +89,10 @@
                                                     <?php $field_name = $key.'_flag';?>
                                                     <?php $field_anchor = 'b'.$block->id;?>
 
-                                                    <?if ($block->$field_name == 1):?>
-                                                        <li><a data-section-id="<?php echo $block->disease_block_type_id?>" class="section-name content-active-<?php echo DiseaseBlockAliasViewHelper::getAlias($block->disease_block_type_id); ?>" data-section-name="content-active-<?php echo DiseaseBlockAliasViewHelper::getAlias($block->disease_block_type_id); ?>" data-t="<?=$field_anchor?>" href="<?php echo DiseasePageLinkViewHelper::getLink($disease); ?>/<?=$key?>#<?=$field_anchor?>"><?=$block->disease_block_type->name?></a></li>
-                                                        <?$sub_counter++;?>
-                                                    <?endif?>
+                                                    <?php if ($block->$field_name == 1):?>
+                                                        <li><a data-section-id="<?php echo $block->disease_block_type_id?>" class="section-name content-active-<?php echo DiseaseBlockAliasViewHelper::getAlias($block->disease_block_type_id); ?>" data-section-name="content-active-<?php echo DiseaseBlockAliasViewHelper::getAlias($block->disease_block_type_id); ?>" data-t="<?php echo $field_anchor; ?>" href="<?php echo DiseasePageLinkViewHelper::getLink($disease); ?>/<?php echo $key; ?>#<?php echo $field_anchor; ?>"><?php echo $block->disease_block_type->name; ?></a></li>
+                                                        <?php $sub_counter++;?>
+                                                    <?php endif?>
                                                 <?php endforeach; ?>
 
                                             </ul>
@@ -100,7 +100,7 @@
                                                 <script type="text/javascript">
                                                     $(document).ready(function(){
                                                         first_tab = '<?php echo $card; ?>';
-                                                        $('.sub-nav-<?=$key?>').addClass('carousel');
+                                                        $('.sub-nav-<?php echo $key; ?>').addClass('carousel');
                                                         $('.sub-nav-'+first_tab+'.carousel ul').each(function(){
                                                             if($(this).find('li').length >= 7)
                                                             {
@@ -122,14 +122,14 @@
                                                 <script>
 
                                                     $(document).ready(function(){
-                                                        $('.sub-nav-<?=$key?>').removeClass('carousel');
+                                                        $('.sub-nav-<?php echo $key; ?>').removeClass('carousel');
                                                         $('#<?php echo $key; ?>.sub-nav ul').css('width', '<?php echo $sub_width; ?>');
                                                     });
                                                 </script>
                                             <?php endif; ?>
                                         </div>
                                     <?php endif; ?>
-                                <?endforeach?>
+                                <?php endforeach?>
 
                             </div>
                         </div>
@@ -147,34 +147,34 @@
                             </div>
                         </div>-->
                     </div>
-                <?endif?>
+                <?php endif?>
 
-                <?if ($disease->extended_content || $disease->sources):?>
+                <?php if ($disease->extended_content || $disease->sources):?>
                     <div class="other-links">
                         <ul>
-                            <?if ($disease->sources):?>
+                            <?php if ($disease->sources):?>
                                 <li> <span>Источники</span>
                                     <div class="drop-box">
-                                        <?$disease->sources = preg_replace('/<br \/>/','',$disease->sources);?>
-                                        <?$disease->sources = preg_replace('/<br\/>/','',$disease->sources);?>
-                                        <p><?=html_entity_decode($disease->sources,ENT_COMPAT,'UTF-8')?></p>
+                                        <?php $disease->sources = preg_replace('/<br \/>/','',$disease->sources);?>
+                                        <?php $disease->sources = preg_replace('/<br\/>/','',$disease->sources);?>
+                                        <p><?php echo html_entity_decode($disease->sources,ENT_COMPAT,'UTF-8'); ?></p>
                                     </div>
                                 </li>
-                            <?endif?>
-                            <?if ($disease->extended_content):?>
+                            <?php endif?>
+                            <?php if ($disease->extended_content):?>
                                 <li> <span>Расширенное описание</span>
                                     <div class="drop-box">
-                                        <?$disease->extended_content = preg_replace('/<br \/>/','',$disease->extended_content);?>
-                                        <?$disease->extended_content = preg_replace('/<br\/>/','',$disease->extended_content);?>
-                                        <p><?=html_entity_decode($disease->extended_content,ENT_COMPAT,'UTF-8')?></p>
+                                        <?php $disease->extended_content = preg_replace('/<br \/>/','',$disease->extended_content);?>
+                                        <?php $disease->extended_content = preg_replace('/<br\/>/','',$disease->extended_content);?>
+                                        <p><?php echo html_entity_decode($disease->extended_content,ENT_COMPAT,'UTF-8'); ?></p>
                                     </div>
                                 </li>
-                            <?endif?>
+                            <?php endif?>
                         </ul>
                     </div>
-                <?endif?>
+                <?php endif?>
 
-                <?if ($disease_specialties):?>
+                <?php if ($disease_specialties):?>
                     <div class="other-links bottom-what-to-do">
                         <div class="info-box doing-box not-hide">
                             <h3 class="attention-block">Что делать при <span><?php echo trim($disease->prepositional_name);?>?</span></h3>
@@ -183,42 +183,42 @@
                                     <?php if (!Acc::isAuthed()): ?>
                                         <p>Врач
                                             <?php foreach ($disease_specialties as $specialty):?>
-                                                <a class="disease-doctor des-page <?if ($specialty->is_adult){?>adult-block male-block female-block <?}?><?if ($specialty->is_male){?>male-block <?}?><?if ($specialty->is_female){?>female-block <?}?><?if ($specialty->is_children){?>children-block <?}?><?if ($specialty->is_newborn){?>newborn-block <?}?><?if ($specialty->is_pregnant){?>pregnant-block<?}?>" data-id="<?=$specialty->specialty_id?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Right" data-text="<?=$specialty->plural_name?>" data-url="<?php echo $specialty->specialtyUrl ?>" href="<?php echo $specialty->specialtyUrl ?>"><?=$specialty->name?></a>
-                                            <?endforeach;?>
+                                                <a class="disease-doctor des-page <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Right" data-text="<?php echo $specialty->plural_name; ?>" data-url="<?php echo $specialty->specialtyUrl ?>" href="<?php echo $specialty->specialtyUrl ?>"><?php echo $specialty->name; ?></a>
+                                            <?php endforeach;?>
                                             поможет при лечении заболевания
                                         </p>
                                         <?php foreach ($disease_specialties as $specialty):?>
-                                            <a class="btn-double-floor des-page disease-doctor <?if ($specialty->is_adult){?>adult-block male-block female-block <?}?><?if ($specialty->is_male){?>male-block <?}?><?if ($specialty->is_female){?>female-block <?}?><?if ($specialty->is_children){?>children-block <?}?><?if ($specialty->is_newborn){?>newborn-block <?}?><?if ($specialty->is_pregnant){?>pregnant-block<?}?>" data-action-for-counters="find-doctor" data-category-counters="find-doctor" data-action="FindDocButton" data-position="Right" data-url="<?php echo $specialty->specialtyUrl ?>" data-id="<?=$specialty->specialty_id?>" href="<?php echo $specialty->specialtyUrl ?>">
+                                            <a class="btn-double-floor des-page disease-doctor <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-action-for-counters="find-doctor" data-category-counters="find-doctor" data-action="FindDocButton" data-position="Right" data-url="<?php echo $specialty->specialtyUrl ?>" data-id="<?php echo $specialty->specialty_id; ?>" href="<?php echo $specialty->specialtyUrl ?>">
                                                 <?php $btn_text = (!$disease_green_btn)?'Записаться к врачу '.$specialty->dative_name:'Найти врача '.$specialty->genitive_name?>
                                                 <span <?php echo ButtonPaddingHelper::getWideButtonSpecialtyPadding($specialty->dative_name);?> class="just-text"><?php echo $btn_text;?></span>
                                             </a>
-                                        <?endforeach;?>
+                                        <?php endforeach;?>
                                     <?php else: ?>
                                         <p>Врач
                                             <?php foreach ($disease_specialties as $specialty):?>
-                                                <a class="disease-doctor des-page <?if ($specialty->is_adult){?>adult-block male-block female-block <?}?><?if ($specialty->is_male){?>male-block <?}?><?if ($specialty->is_female){?>female-block <?}?><?if ($specialty->is_children){?>children-block <?}?><?if ($specialty->is_newborn){?>newborn-block <?}?><?if ($specialty->is_pregnant){?>pregnant-block<?}?>" data-id="<?=$specialty->specialty_id?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Right" href="<?php echo $specialty->specialtyUrl ?>" data-text="<?=$specialty->plural_name?>"><?=$specialty->name?></a>
-                                            <?endforeach;?>
+                                                <a class="disease-doctor des-page <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Right" href="<?php echo $specialty->specialtyUrl ?>" data-text="<?php echo $specialty->plural_name; ?>"><?php echo $specialty->name; ?></a>
+                                            <?php endforeach;?>
                                             поможет при лечении заболевания
                                         </p>
                                         <?php foreach ($disease_specialties as $specialty):?>
-                                            <a class="btn-double-floor des-page disease-doctor <?if ($specialty->is_adult){?>adult-block male-block female-block <?}?><?if ($specialty->is_male){?>male-block <?}?><?if ($specialty->is_female){?>female-block <?}?><?if ($specialty->is_children){?>children-block <?}?><?if ($specialty->is_newborn){?>newborn-block <?}?><?if ($specialty->is_pregnant){?>pregnant-block<?}?>" data-id="<?=$specialty->specialty_id?>" data-category-counters="find-doctor" data-action-for-counters="find-doctor" data-action="FindDocButton" data-position="Right" href="<?php echo $specialty->specialtyUrl ?>">
+                                            <a class="btn-double-floor des-page disease-doctor <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="find-doctor" data-action="FindDocButton" data-position="Right" href="<?php echo $specialty->specialtyUrl ?>">
                                                 <?php $btn_text = (!$disease_green_btn)?'Записаться к врачу '.$specialty->dative_name:'Найти врача '.$specialty->genitive_name?>
                                                 <span <?php echo ButtonPaddingHelper::getWideButtonSpecialtyPadding($specialty->dative_name);?> class="just-text"><?php echo $btn_text;?></span>
                                             </a>
-                                        <?endforeach;?>
+                                        <?php endforeach;?>
                                     <?php endif; ?>
                                 </li>
                             </ol>
                         </div>
                     </div>
-                <?endif?>
+                <?php endif?>
 
                 </div>
                 <div id="cards-wrap"></div>
             </div>
 
             <div class="side-column" <?php /* ?>data-spy="affix" data-offset-top="100"<?php */ ?>>
-                <?if ($disease_specialties):?>
+                <?php if ($disease_specialties):?>
                     <div class="info-box doing-box what-to-do">
                         <h3>Что делать при <span><?php echo trim($disease->prepositional_name);?>?
                             </span></h3>
@@ -227,51 +227,51 @@
                                 <?php if (!Acc::isAuthed()): ?>
                                     <p>Врач
                                         <?php foreach ($disease_specialties as $specialty):?>
-                                            <a class="disease-doctor des-page <?if ($specialty->is_adult){?>adult-block male-block female-block <?}?><?if ($specialty->is_male){?>male-block <?}?><?if ($specialty->is_female){?>female-block <?}?><?if ($specialty->is_children){?>children-block <?}?><?if ($specialty->is_newborn){?>newborn-block <?}?><?if ($specialty->is_pregnant){?>pregnant-block<?}?>" data-id="<?=$specialty->specialty_id?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Right" data-text="<?=$specialty->plural_name?>" data-url="<?php echo $specialty->specialtyUrl ?>" href="<?php echo $specialty->specialtyUrl ?>"><?=$specialty->name?></a>
-                                        <?endforeach;?>
+                                            <a class="disease-doctor des-page <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Right" data-text="<?php echo $specialty->plural_name; ?>" data-url="<?php echo $specialty->specialtyUrl ?>" href="<?php echo $specialty->specialtyUrl ?>"><?php echo $specialty->name; ?></a>
+                                        <?php endforeach;?>
                                         поможет при лечении заболевания
                                     </p>
                                     <?php foreach ($disease_specialties as $specialty):?>
-                                        <a class="btn-double-floor des-page disease-doctor <?if ($specialty->is_adult){?>adult-block male-block female-block <?}?><?if ($specialty->is_male){?>male-block <?}?><?if ($specialty->is_female){?>female-block <?}?><?if ($specialty->is_children){?>children-block <?}?><?if ($specialty->is_newborn){?>newborn-block <?}?><?if ($specialty->is_pregnant){?>pregnant-block<?}?>" data-action-for-counters="find-doctor" data-category-counters="find-doctor" data-action="FindDocButton" data-position="Right" data-url="<?php echo $specialty->specialtyUrl ?>" data-id="<?=$specialty->specialty_id?>" href="<?php echo $specialty->specialtyUrl ?>">
+                                        <a class="btn-double-floor des-page disease-doctor <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-action-for-counters="find-doctor" data-category-counters="find-doctor" data-action="FindDocButton" data-position="Right" data-url="<?php echo $specialty->specialtyUrl ?>" data-id="<?php echo $specialty->specialty_id; ?>" href="<?php echo $specialty->specialtyUrl ?>">
                                             <?php $btn_text = (!$disease_green_btn)?'Записаться к врачу '.$specialty->dative_name:'Найти врача '.$specialty->genitive_name?>
                                             <span <?php echo ButtonPaddingHelper::getWideButtonSpecialtyPadding($specialty->dative_name);?> class="just-text"><?php echo $btn_text;?></span>
                                         </a>
-                                    <?endforeach;?>
+                                    <?php endforeach;?>
                                 <?php else: ?>
                                     <p>Врач
                                         <?php foreach ($disease_specialties as $specialty):?>
-                                            <a class="disease-doctor des-page <?if ($specialty->is_adult){?>adult-block male-block female-block <?}?><?if ($specialty->is_male){?>male-block <?}?><?if ($specialty->is_female){?>female-block <?}?><?if ($specialty->is_children){?>children-block <?}?><?if ($specialty->is_newborn){?>newborn-block <?}?><?if ($specialty->is_pregnant){?>pregnant-block<?}?>" data-id="<?=$specialty->specialty_id?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Right" href="<?php echo $specialty->specialtyUrl ?>" data-text="<?=$specialty->plural_name?>"><?=$specialty->name?></a>
-                                        <?endforeach;?>
+                                            <a class="disease-doctor des-page <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Right" href="<?php echo $specialty->specialtyUrl ?>" data-text="<?php echo $specialty->plural_name; ?>"><?php echo $specialty->name; ?></a>
+                                        <?php endforeach;?>
                                         поможет при лечении заболевания
                                     </p>
                                     <?php foreach ($disease_specialties as $specialty):?>
-                                        <a class="btn-double-floor des-page disease-doctor <?if ($specialty->is_adult){?>adult-block male-block female-block <?}?><?if ($specialty->is_male){?>male-block <?}?><?if ($specialty->is_female){?>female-block <?}?><?if ($specialty->is_children){?>children-block <?}?><?if ($specialty->is_newborn){?>newborn-block <?}?><?if ($specialty->is_pregnant){?>pregnant-block<?}?>" data-id="<?=$specialty->specialty_id?>" data-category-counters="find-doctor" data-action-for-counters="find-doctor" data-action="FindDocButton" data-position="Right" href="<?php echo $specialty->specialtyUrl ?>">
+                                        <a class="btn-double-floor des-page disease-doctor <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="find-doctor" data-action="FindDocButton" data-position="Right" href="<?php echo $specialty->specialtyUrl ?>">
                                             <?php $btn_text = (!$disease_green_btn)?'Записаться к врачу '.$specialty->dative_name:'Найти врача '.$specialty->genitive_name?>
                                             <span <?php echo ButtonPaddingHelper::getWideButtonSpecialtyPadding($specialty->dative_name);?> class="just-text"><?php echo $btn_text;?></span>
                                         </a>
-                                    <?endforeach;?>
+                                    <?php endforeach;?>
                                 <?php endif; ?>
                             </li>
                         </ol>
                     </div>
-                <?endif?>
+                <?php endif?>
 
-                <?if ($disease->medicine):?>
+                <?php if ($disease->medicine):?>
                     <div class="info-box">
                         <h3>Медикаменты</h3>
                         <div class="medicament-block">
-                            <p class="medicament-title"><?=$disease->medicine->name?></p>
+                            <p class="medicament-title"><?php echo $disease->medicine->name; ?></p>
                             <a class="medicament-url" href="#">Список аптек</a>
-                            <?if ($disease->medicine->image):?>
-                                <img src="<?=$disease->medicine->image->resize(234,200)->path?>" class="medicament-logo" alt="" />
-                            <? else:?>
+                            <?php if ($disease->medicine->image):?>
+                                <img src="<?php echo $disease->medicine->image->resize(234,200)->path; ?>" class="medicament-logo" alt="" />
+                            <?php  else:?>
                                 <img src="/media/images/no-photo.gif" class="medicament-logo" alt="" />
-                            <?endif?>
-                            <div class="center-align"><a class="medicament-btn" href="#">Купить онлайн <?=$disease->medicine->price?> P</a></div>
+                            <?php endif?>
+                            <div class="center-align"><a class="medicament-btn" href="#">Купить онлайн <?php echo $disease->medicine->price; ?> P</a></div>
                             <p class="medicament-info">Перед приемом лекарства проконсультируйтесь у врача</p>
                         </div>
                     </div>
-                <?endif?>
+                <?php endif?>
 
                 <?php /* Яндекс.Директ */ ?>
                 <div class="info-box disease-banner" style="padding:8px; background: none; box-shadow: none;">
@@ -312,9 +312,9 @@
                 <script src="http://secondopinions.ru/lp7/js/banner_lite.js" type="text/javascript"></script>
                 <div id="ban2"></div>
 
-                <!--script>
+                <script>
                     get_banner_lite("ban2");
-                </script-->
+                </script>
 
                 <script>(function() {
                         var _fbq = window._fbq || (window._fbq = []);
@@ -373,4 +373,4 @@
         </div>
     </div>
 
-<?endif?>
+<?php endif?>

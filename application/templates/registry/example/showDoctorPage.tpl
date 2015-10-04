@@ -37,15 +37,15 @@
                             <span class="post">
                                 <?php echo $doctor->specialties_names; ?>
                             </span>
-                            <?=$doctor->full_name;?>
+                            <?php echo $doctor->full_name; ?>
                         </a>
                     </p>
 
                     <div class="rating">
                         <?php echo RateViewHelper::view($doctor->rate); ?>
-                        <?if ($doctor->reviews_count!=0):?>
+                        <?php if ($doctor->reviews_count!=0):?>
                             <a href="#reviews" class="comments-count"><?php echo StringHelper::getCorrectSuffixForReview($doctor->reviews_count);?></a>
-                        <?endif?>
+                        <?php endif?>
                         <div class="btns">
                             <div id="btn-block"></div>
                             <?php $example_page = (isset($example_page)) ? true : false; ?>
@@ -64,7 +64,7 @@
                             $number = 1;
                             $clinic_numbers = array();
                             ?>
-                            <?foreach($doctor->clinics as $clinic):?>
+                            <?php foreach($doctor->clinics as $clinic):?>
                             <?php
                             if ($number == 1)
                                 $clinic_numbers[$clinic->getId()] = '';
@@ -73,7 +73,7 @@
                             ?>
                             <li data-id="<?php echo $clinic->getId();?>" class="loc-<?php echo $number ?> active">
                                     <span>
-                                        <?=$number?>
+                                        <?php echo $number; ?>
                                     </span>
                             </li>
                             <?php $number++; ?>
@@ -82,23 +82,23 @@
 
                         <div class="box">
                             <?php $section_number = 1; ?>
-                            <?foreach($doctor->clinics as $clinic):?>
-                            <div class="section section-<?=$section_number?> visible flo">
+                            <?php foreach($doctor->clinics as $clinic):?>
+                            <div class="section section-<?php echo $section_number; ?> visible flo">
                                 <div class="avatar">
                                     <?php echo ClinicAvatarViewHelper::viewOnCard($clinic, 74, 31); ?>
                                 </div>
                                 <p class="name-center">
-                                    <strong><a><?=$clinic->name?></a></strong>
+                                    <strong><a><?php echo $clinic->name; ?></a></strong>
                                 </p>
                                 <div class="location">
                                     <!-- <div class="trigger">
-                                             <?=$section_number?>
+                                             <?php echo $section_number; ?>
                                          </div>-->
 
                                     <p class="name-inf">
                                         <?php if ($clinic->metro_station): ?>
                                         <?php if ($clinic->metro_station->metro_branch): ?>
-                                            <?echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
+                                            <?php echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
                                             <?php endif; ?>
                                         <?php echo $clinic->metro_station->name; ?> <br  />
                                         <?php endif; ?>
@@ -123,8 +123,8 @@
 
                                 </div>
 -->
-                                <?$doctor_clinic_specialties = $doctor->getSpecialtiesByClinicId($clinic->getId());?>
-                                <?$existing_schedule = $doctor->checkExistingDoctorScheduleByClinicIdAndClinicSpecialties($clinic->getId(), $doctor_clinic_specialties);?>
+                                <?php $doctor_clinic_specialties = $doctor->getSpecialtiesByClinicId($clinic->getId());?>
+                                <?php $existing_schedule = $doctor->checkExistingDoctorScheduleByClinicIdAndClinicSpecialties($clinic->getId(), $doctor_clinic_specialties);?>
 
                                 <div class="schedule-extended">
                                     <h2>График приема врача:</h2>
@@ -184,7 +184,7 @@
                     <i class="icon"></i>
                     <div class="about-cont">
                         <h3>О враче</h3>
-                        <p><?=$doctor->about;?></p>
+                        <p><?php echo $doctor->about; ?></p>
                     </div>
                     <a class="more-link">Узнать больше</a>
                 </div>
@@ -204,27 +204,27 @@
                 </div>
                 <?php endif; ?>
 
-                <?if($doctor->certificate):?>
+                <?php if($doctor->certificate):?>
                     <div class="info-col col-cert">
                         <i class="icon"></i>
                         <h3>Сертификаты</h3>
                         <p><?php echo $doctor->certificate; ?></p>
                     </div>
-                <?endif?>
+                <?php endif?>
 
-                <?if($doctor->course):?>
+                <?php if($doctor->course):?>
                     <div class="info-col col-associations"><i class="icon"></i>
                         <h3>Курсы повышения квалификации</h3>
                         <p><?php echo $doctor->course; ?></p>
                     </div>
-                <?endif?>
+                <?php endif?>
 
             </div>
         </div>
     </div>
 
     <div class="inner-2">
-        <?if(count($reviews)):?>
+        <?php if(count($reviews)):?>
             <div id="reviews">
                 <div class="heading-line">
                     <h2><span>ОТЗЫВЫ О ВРАЧЕ</span></h2>
@@ -236,7 +236,7 @@
                             <span class="chk-pic"></span>
 
                             <div class="aside">
-                                <p class="name"><?=$review->account->full_name?></p>
+                                <p class="name"><?php echo $review->account->full_name; ?></p>
 
                                 <div class="rating-item">
                                     <p>Сервис в регистратуре</p>

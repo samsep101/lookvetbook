@@ -25,7 +25,7 @@
                     <p>
                         <?php if ($clinic->metro_station): ?>
                             <?php if ($clinic->metro_station->metro_branch): ?>
-                                <?echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
+                                <?php echo MetroBranchIconViewHelper::getImage($clinic->metro_station->metro_branch)?>
                             <?php endif; ?>
                             <?php echo $clinic->metro_station->name; ?> <br  />
                         <?php endif; ?>
@@ -104,14 +104,14 @@
                 </div>
             <?php endif; ?>
 
-            <?if ($clinic->features):?>
+            <?php if ($clinic->features):?>
                 <div class="info-col col-comfort">
                     <i class="icon"></i>
                     <h3>Удобства</h3>
                     <ul>
-                        <?foreach ($clinic->features as $feature) :?>
-                            <li><?=$feature->name?></li>
-                        <?endforeach?>
+                        <?php foreach ($clinic->features as $feature) :?>
+                            <li><?php echo $feature->name; ?></li>
+                        <?php endforeach?>
                     </ul>
                     <?php if (count($clinic->features)>14): ?>
                         <a class="more-link">Узнать больше</a>
@@ -123,7 +123,7 @@
 
 
     <div class="inner-2">
-        <?if ($clinic_reviews):?>
+        <?php if ($clinic_reviews):?>
             <div id="reviews">
                 <div class="heading-line">
                     <h2><span>ОТЗЫВЫ О КЛИНИКЕ</span></h2>
@@ -134,7 +134,7 @@
                         <div id="clinic-review-<?php echo $review->getId(); ?>" class="review-box flo <?php if ($counter % 2 === 0) echo 'fright'; ?>">
                             <span class="chk-pic"></span>
                             <div class="aside">
-                                <p class="name"><?=$review->visit->account->full_name?></p>
+                                <p class="name"><?php echo $review->visit->account->full_name; ?></p>
                                 <div class="rating-item">
                                     <p>Сервис в регистратуре</p>
                                     <?php echo RateViewHelper::view($review->service_at_the_reception); ?>
@@ -164,7 +164,7 @@
                                         <span>Посоветуют друзьям</span>
                                     </div>
                                 <?php endif; ?>
-                                <p><?=$review->text;?></p>
+                                <p><?php echo $review->text; ?></p>
                             </div>
                         </div>
 

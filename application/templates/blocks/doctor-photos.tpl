@@ -20,7 +20,7 @@
             <ul>
                 <?php if (count($doctor->images)): ?>
                     <?php foreach($doctor->images as $image):?>
-                        <li><img src="<?php echo $image->resizeWithWatermark(658,279)->path?>" alt="<?=$doctor->full_name;?>"></li>
+                        <li><img src="<?php echo $image->resizeWithWatermark(658,279)->path?>" alt="<?php echo $doctor->full_name; ?>"></li>
                     <?php endforeach;?>
                 <?php endif; ?>
             </ul>
@@ -36,7 +36,7 @@
             <ul>
                 <?php if (count($doctor->images)): ?>
                     <?php foreach($doctor->images as $image):?>
-                        <li><img src="<?=$image->resizeWithWatermark(101,56)->path?>"alt="<?=$doctor->full_name;?>"></li>
+                        <li><img src="<?php echo $image->resizeWithWatermark(101,56)->path; ?>"alt="<?php echo $doctor->full_name; ?>"></li>
                     <?php endforeach;?>
                 <?php endif; ?>
             </ul>
@@ -47,8 +47,8 @@
 
 <script>
     $(function() {
-        <?if (count($doctor->images)>5){?>
+        <?php if (count($doctor->images)>5){?>
             $('.connected-carousels .next-navigation').removeClass('inactive');
-        <?}?>
+        <?php }?>
     });
 </script>

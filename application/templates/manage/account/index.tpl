@@ -56,7 +56,7 @@
 <input class="btn-appoint block-button" type="submit" value="Добавить" onclick="window.location='/manage/account/create';" />
 
 <?php if ($users): ?>
-<?$counter = 1;?>
+<?php $counter = 1;?>
     <table class="styled-table block users-list">
         <thead>
             <th>Логин</th>
@@ -86,7 +86,7 @@
                     </td>
                 <?php endif;?>
             </tr>
-        <?$counter++;?>
+        <?php $counter++;?>
         <?php endforeach; ?>
     </table>
 <?php else: ?>

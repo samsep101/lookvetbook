@@ -17,50 +17,50 @@
             </ul>
         </form>
     </div>
-    <?if (isset($_GET['help_query'])):?>
+    <?php if (isset($_GET['help_query'])):?>
         <div class="illness-catalog-error">По Вашему запросу ничего не найдено.</div>
-    <?endif?>
+    <?php endif?>
     <div class="help-page flo" id="tabs">
         <div class="nav" style="display:none">
             <ul>
-                <?foreach ($rubrics as $rubric):?>
-                    <li id="<?=$rubric->id?>"><a href="#tabs-<?=$rubric->id?>"><i></i><?=$rubric->title?></a></li>
-                <?endforeach?>
+                <?php foreach ($rubrics as $rubric):?>
+                    <li id="<?php echo $rubric->id; ?>"><a href="#tabs-<?php echo $rubric->id; ?>"><i></i><?php echo $rubric->title; ?></a></li>
+                <?php endforeach?>
             </ul>
         </div>
 
-        <?foreach ($rubrics as $rubric):?>
+        <?php foreach ($rubrics as $rubric):?>
 
-            <div id="tabs-<?=$rubric->id?>">
+            <div id="tabs-<?php echo $rubric->id; ?>">
 
                 <ul class="sub-menu">
-                    <?foreach ($subrubrics as $subrubric):?>
-                        <?if ($subrubric->help_rubric_id == $rubric->id):?>
-                            <li><a href="#sub-<?=$rubric->id?>-<?=$subrubric->id?>"><?=$subrubric->title?></a></li>
-                        <?endif?>
-                    <?endforeach?>
+                    <?php foreach ($subrubrics as $subrubric):?>
+                        <?php if ($subrubric->help_rubric_id == $rubric->id):?>
+                            <li><a href="#sub-<?php echo $rubric->id; ?>-<?php echo $subrubric->id; ?>"><?php echo $subrubric->title; ?></a></li>
+                        <?php endif?>
+                    <?php endforeach?>
                 </ul>
                 <div class="help-cont">
-                    <?foreach ($subrubrics as $subrubric):?>
-                        <?if ($subrubric->help_rubric_id == $rubric->id):?>
-                            <h2 id="sub-<?=$rubric->id?>-<?=$subrubric->id?>"><?=$subrubric->title?></h2>
+                    <?php foreach ($subrubrics as $subrubric):?>
+                        <?php if ($subrubric->help_rubric_id == $rubric->id):?>
+                            <h2 id="sub-<?php echo $rubric->id; ?>-<?php echo $subrubric->id; ?>"><?php echo $subrubric->title; ?></h2>
                             <ul class="help-list">
-                                <?foreach ($materials as $material):?>
-                                    <?if ($material->help_subrubric_id == $subrubric->id):?>
-                                        <li> <a class="help-target" href="#"><?=$material->title?></a>
+                                <?php foreach ($materials as $material):?>
+                                    <?php if ($material->help_subrubric_id == $subrubric->id):?>
+                                        <li> <a class="help-target" href="#"><?php echo $material->title; ?></a>
                                             <div class="drop">
-                                                <p><?=$material->content?></p>
+                                                <p><?php echo $material->content; ?></p>
                                             </div>
                                         </li>
-                                    <?endif?>
-                                <?endforeach?>
+                                    <?php endif?>
+                                <?php endforeach?>
                             </ul>
-                        <?endif?>
-                    <?endforeach?>
+                        <?php endif?>
+                    <?php endforeach?>
                 </div>
             </div>
 
-        <?endforeach?>
+        <?php endforeach?>
 
     </div>
 </div>

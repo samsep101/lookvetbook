@@ -1,4 +1,4 @@
-<?foreach ($disease_blocks_content as $block):?>
+<?php foreach ($disease_blocks_content as $block):?>
     <?php $field_anchor = 'b'.$block->id;?>
 
     <?php if ($block->disease_block_type_id == 5): ?>
@@ -7,56 +7,56 @@
             <div class="like_p with-sign">
                 LookMedBook напоминает: чем раньше Вы обратитесь за помощью к специалисту, тем больше шансов сохранить здоровье и снизить риск развития осложнений:
             </div>
-            <?if ($disease_specialties):?>
+            <?php if ($disease_specialties):?>
                 <div class="doing-box not-hide in-middle">
                     <ol class="todo-list">
                         <li>
                             <?php if (!Acc::isAuthed()): ?>
                             <p>Врач
                                 <?php foreach ($disease_specialties as $specialty):?>
-                                    <a class="disease-doctor des-page <?if ($specialty->is_adult){?>adult-block male-block female-block <?}?><?if ($specialty->is_male){?>male-block <?}?><?if ($specialty->is_female){?>female-block <?}?><?if ($specialty->is_children){?>children-block <?}?><?if ($specialty->is_newborn){?>newborn-block <?}?><?if ($specialty->is_pregnant){?>pregnant-block<?}?>" data-id="<?=$specialty->specialty_id?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Center" data-text="<?=$specialty->plural_name?>" data-url="/doctor?specialty_id=<?=$specialty->specialty_id?>&time_of_visit=any&sort_by=recomend" href="/doctor?specialty_id=<?=$specialty->specialty_id?>&time_of_visit=any&sort_by=recomend"><?=$specialty->name?></a>
-                                <?endforeach;?>
+                                    <a class="disease-doctor des-page <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Center" data-text="<?php echo $specialty->plural_name; ?>" data-url="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend" href="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend"><?php echo $specialty->name; ?></a>
+                                <?php endforeach;?>
                                 поможет при лечении заболевания                              
                             </p>
                             <?php foreach ($disease_specialties as $specialty):?>
-                                <a class="btn-double-floor des-page disease-doctor <?if ($specialty->is_adult){?>adult-block male-block female-block <?}?><?if ($specialty->is_male){?>male-block <?}?><?if ($specialty->is_female){?>female-block <?}?><?if ($specialty->is_children){?>children-block <?}?><?if ($specialty->is_newborn){?>newborn-block <?}?><?if ($specialty->is_pregnant){?>pregnant-block<?}?>" data-action-for-counters="find-doctor" data-category-counters="find-doctor" data-action="FindDocButton" data-position="Right" data-url="<?php echo $specialty->specialtyUrl ?>" data-id="<?=$specialty->specialty_id?>" href="<?php echo $specialty->specialtyUrl ?>">
+                                <a class="btn-double-floor des-page disease-doctor <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-action-for-counters="find-doctor" data-category-counters="find-doctor" data-action="FindDocButton" data-position="Right" data-url="<?php echo $specialty->specialtyUrl ?>" data-id="<?php echo $specialty->specialty_id; ?>" href="<?php echo $specialty->specialtyUrl ?>">
   									<?php $btn_text = (!$disease_green_btn)?'Записаться к врачу '.$specialty->dative_name:'Найти врача '.$specialty->genitive_name?>
                                     <span <?php echo ButtonPaddingHelper::getWideButtonSpecialtyPadding($specialty->dative_name);?> class="just-text"><?php echo $btn_text;?></span>
                                 </a>
-                            <?endforeach;?>
+                            <?php endforeach;?>
                             <?php else: ?>
                             <p>Врач
                                 <?php foreach ($disease_specialties as $specialty):?>
-                                    <a class="disease-doctor des-page <?if ($specialty->is_adult){?>adult-block male-block female-block <?}?><?if ($specialty->is_male){?>male-block <?}?><?if ($specialty->is_female){?>female-block <?}?><?if ($specialty->is_children){?>children-block <?}?><?if ($specialty->is_newborn){?>newborn-block <?}?><?if ($specialty->is_pregnant){?>pregnant-block<?}?>" data-id="<?=$specialty->specialty_id?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Center" href="/doctor?specialty_id=<?=$specialty->specialty_id?>&time_of_visit=any&sort_by=recomend" data-text="<?=$specialty->plural_name?>"><?=$specialty->name?></a>
-                                <?endforeach;?>
+                                    <a class="disease-doctor des-page <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Center" href="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend" data-text="<?php echo $specialty->plural_name; ?>"><?php echo $specialty->name; ?></a>
+                                <?php endforeach;?>
                                 поможет при лечении заболевания
                             </p>
                             <?php foreach ($disease_specialties as $specialty):?>
-                                <a class="btn-double-floor des-page disease-doctor <?if ($specialty->is_adult){?>adult-block male-block female-block <?}?><?if ($specialty->is_male){?>male-block <?}?><?if ($specialty->is_female){?>female-block <?}?><?if ($specialty->is_children){?>children-block <?}?><?if ($specialty->is_newborn){?>newborn-block <?}?><?if ($specialty->is_pregnant){?>pregnant-block<?}?>" data-id="<?=$specialty->specialty_id?>" data-category-counters="find-doctor" data-action-for-counters="find-doctor" data-action="FindDocButton" data-position="Center" href="/doctor?specialty_id=<?=$specialty->specialty_id?>&time_of_visit=any&sort_by=recomend">
+                                <a class="btn-double-floor des-page disease-doctor <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="find-doctor" data-action="FindDocButton" data-position="Center" href="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend">
  									<?php $btn_text = (!$disease_green_btn)?'Записаться к врачу '.$specialty->dative_name:'Найти врача '.$specialty->genitive_name?>
                                     <span <?php echo ButtonPaddingHelper::getWideButtonSpecialtyPadding($specialty->dative_name);?> class="just-text"><?php echo $btn_text;?></span>
                                 </a><h1>~11</h1>
-                            <?endforeach;?>
+                            <?php endforeach;?>
                             <?php endif; ?>
                         </li>
                     </ol>
                 </div>
-            <?endif?>
+            <?php endif?>
         </div>
     <?php endif; ?>
 
-    <div class="section" id="<?=$field_anchor?>">
+    <div class="section" id="<?php echo $field_anchor; ?>">
         <h2>
             <?php if ($block->disease_block_type_id == 1 || $block->disease_block_type_id == 6 || $block->disease_block_type_id == 8): ?>
-                <?=$block->disease_block_type->name . ' ' . $disease->genitive_name?>
+                <?php echo $block->disease_block_type->name . ' ' . $disease->genitive_name; ?>
             <?php else: ?>
-                <?=$block->disease_block_type->name?>
+                <?php echo $block->disease_block_type->name; ?>
             <?php endif; ?>
         </h2>
         <div class="like_p">
-            <?$block->content = preg_replace('/<br \/>/','',$block->content);?>
-            <?$block->content = preg_replace('/<br\/>/','',$block->content);?>
-            <?=html_entity_decode($block->content,ENT_COMPAT,'UTF-8')?>
+            <?php $block->content = preg_replace('/<br \/>/','',$block->content);?>
+            <?php $block->content = preg_replace('/<br\/>/','',$block->content);?>
+            <?php echo html_entity_decode($block->content,ENT_COMPAT,'UTF-8'); ?>
         </div>
     </div>
     
@@ -123,4 +123,4 @@
         <?php } ?>
 
     <?php */ ?>
-<?endforeach?>
+<?php endforeach?>

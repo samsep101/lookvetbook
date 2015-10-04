@@ -21,20 +21,20 @@
         <div class="descr">
             <?php if ($visit->doctor_id && $visit->doctor_id != DoctorModel::RESERVED_DOCTOR_SLOT):?>
                 <p class="name">
-                    <a href="<?=DoctorPageLinkViewHelper::getLink($visit->doctor); ?>">
-                        <span class="post"><?=$visit->doctor->specialties_names?></span>
+                    <a href="<?php echo DoctorPageLinkViewHelper::getLink($visit->doctor); ; ?>">
+                        <span class="post"><?php echo $visit->doctor->specialties_names; ?></span>
                         <?php echo $visit->doctor->full_name; ?>
                     </a>
                 </p>
             <?php elseif ($visit->clinic_id && $visit->specialty_id):?>
-                <p class="name"><span class="post"><?=StringHelper::startProposalWord($visit->specialty->name)?></span></p>
+                <p class="name"><span class="post"><?php echo StringHelper::startProposalWord($visit->specialty->name); ?></span></p>
             <?php endif;?>
             <?php if ($visit->clinic_id):?>
                 <div class="location">
-                    <p><strong><a href="<?=ClinicPageLinkViewHelper::getLink($visit->clinic);?>"><?php echo $visit->clinic->name; ?></a></strong> <br>
+                    <p><strong><a href="<?php echo ClinicPageLinkViewHelper::getLink($visit->clinic); ?>"><?php echo $visit->clinic->name; ?></a></strong> <br>
                     <?php if ($visit->clinic->metro_station): ?>
                         <?php if ($visit->clinic->metro_station->metro_branch): ?>
-                            <?echo MetroBranchIconViewHelper::getImage($visit->clinic->metro_station->metro_branch)?>
+                            <?php echo MetroBranchIconViewHelper::getImage($visit->clinic->metro_station->metro_branch)?>
                         <?php endif; ?>
                         <?php echo $visit->clinic->metro_station->name; ?> <br/>
                     <?php endif; ?>

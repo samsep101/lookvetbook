@@ -21,14 +21,14 @@
         <?php if(!$ajax): ?>
             <span class="button">
                 <a class="taskIndexLink" href="/<?php echo $this->dataModel->getModelName(); ?>"><img class="cursorPointer" src="/media/admin/icons/clipboard-audit-24-ns.png" align="absmiddle" border="0" /></a>
-                <a href="<?php echo ADMIN_FOLDER.'/'.$this->dataModel->getModelName();?>"><?=$dataModel->getListTitle()?></a>
+                <a href="<?php echo ADMIN_FOLDER.'/'.$this->dataModel->getModelName();?>"><?php echo $dataModel->getListTitle(); ?></a>
             </span>
         <?php endif; ?>
 
         <?php if ($acl->hasRights($dataModel->getModelName(),'add')): ?>
             <span class="button">
                 <img class="cursorPointer" src="/media/admin/icons/badge-circle-plus-24-ns.png" align="absmiddle" />
-                <a href="<?=ADMIN_FOLDER.$addUrl;?>?destination=<?php echo $destination; ?>&<?php echo $params; ?>"><?=$addTitle;?></a>
+                <a href="<?php echo ADMIN_FOLDER.$addUrl; ?>?destination=<?php echo $destination; ?>&<?php echo $params; ?>"><?php echo $addTitle; ?></a>
             </span>
         <?php endif; ?>
     </p>
@@ -43,9 +43,9 @@
 
     <?php if(Acl::userGrant($dataModel->getModelName().'_xls')){?>
         <p class="controls">
-            <img src="/mhadmin/media/img/xls.gif" align="absmiddle" />&nbsp;<a href="/mhadmin/<?=$dataModel->getModelName()?>/xls/">Сохранить</a>
+            <img src="/mhadmin/media/img/xls.gif" align="absmiddle" />&nbsp;<a href="/mhadmin/<?php echo $dataModel->getModelName(); ?>/xls/">Сохранить</a>
         </p>
-    <?}?>
+    <?php }?>
 
     <?php if(isset($_controller) && $_controller == 'search_log') echo SearchLogAdminHelper::additionalData((isset($csrf) && $csrf) ? $csrf : null); ?>
 
@@ -114,18 +114,18 @@
         </div>
     <?php endif; ?>
 
-    <?if ($dataModel->getModelName()=='disease'):?>
+    <?php if ($dataModel->getModelName()=='disease'):?>
         <form method="post" action="/disease/parseDiseasesAndDiseaseBlocks" >
             <input type="hidden" name="csrf" value=<?php echo isset($csrf) ? '\''.$csrf.'\'' : 'null'; ?>>
             <input class="make-xml" style="margin:10px 0 0 0;padding:5px;font-size: 15px" type="button" value="Импортировать данные"/>
         </form>
-    <?endif?>
+    <?php endif?>
 
-    <?if ($dataModel->getModelName()=='yandex_content_log'):?>
+    <?php if ($dataModel->getModelName()=='yandex_content_log'):?>
         <a class="classic-href" target="_blank" href="/test/getYandexContentToken"><input class="make-xml" style="margin:10px 0 0 0;padding:5px;font-size: 15px" type="button" value="Получить токен отправки текстов"/></a>
-    <?endif?>
+    <?php endif?>
 
-<form id="<?=$dataModel->getModelName();?>form" action="/admin/<?=$dataModel->getModelName();?>/delete_list/?destination=<?php echo $destination; ?>" method="POST" onsubmit="return confirm('Вы действительно хотите удалить эти записи?');return false;">
+<form id="<?php echo $dataModel->getModelName(); ?>form" action="/admin/<?php echo $dataModel->getModelName(); ?>/delete_list/?destination=<?php echo $destination; ?>" method="POST" onsubmit="return confirm('Вы действительно хотите удалить эти записи?');return false;">
     <input type="hidden" name="csrf" value=<?php echo isset($csrf) ? '\''.$csrf.'\'' : 'null'; ?>>
 
 
@@ -137,17 +137,17 @@
             <?php endif; ?>
 
 
-		<?foreach ($fieldTitles as $fieldTitle){?>
-			<th><?=$fieldTitle;?></th>
-		<?}?>
+		<?php foreach ($fieldTitles as $fieldTitle){?>
+			<th><?php echo $fieldTitle; ?></th>
+		<?php }?>
 
-		<?if ($acl->hasRights($dataModel->getModelName(),'edit')){?>
+		<?php if ($acl->hasRights($dataModel->getModelName(),'edit')){?>
 			<th>&nbsp;</th>
-		<?}?>
+		<?php }?>
 
-		<?if ($acl->hasRights($dataModel->getModelName(),'delete')){?>
+		<?php if ($acl->hasRights($dataModel->getModelName(),'delete')){?>
 			<th>&nbsp;</th>
-		<?}?>
+		<?php }?>
 
 		<?php $buttons = $dataModel->getListButtons(); ?>
 		<?php if ($buttons): ?>
@@ -159,10 +159,10 @@
 	</thead>
 	<tbody data-model="<?php echo $dataModel->getModelName(); ?>">
 	<?php foreach ($data as $row): ?>
-		<? $dataModel->setValues($row);?>
-		<tr id="key[<?=$row->getId()?>][]" data-id="<?php echo $row->getId(); ?>" >
+		<?php  $dataModel->setValues($row);?>
+		<tr id="key[<?php echo $row->getId(); ?>][]" data-id="<?php echo $row->getId(); ?>" >
                 <?php if ($acl->hasRights($dataModel->getModelName(),'delete_list')): ?>
-                    <td><input class="input_check"  type="checkbox" name="delete_list[]" onclick="unchecked($(this));" value="<?=$row->getId();?>"/></td>
+                    <td><input class="input_check"  type="checkbox" name="delete_list[]" onclick="unchecked($(this));" value="<?php echo $row->getId(); ?>"/></td>
                 <?php endif; ?>
 			<?php foreach ($dataModel->getListFields() as $field): ?>
                 <?php if ($hide_fields && in_array($field->fieldName, $hide_fields)) continue; ?>
@@ -207,14 +207,14 @@
                 </td>
 			<?php endforeach; ?>
 
-			<?if ($acl->hasRights($dataModel->getModelName(),'edit')){?>
+			<?php if ($acl->hasRights($dataModel->getModelName(),'edit')){?>
                 <?php $page_region = (isset($_controller) && $_controller == 'visit') ? '' : '#key[' .$row->getId() .'][]'; ?>
-				<td width="25px;" style="text-align:right;"><a href="<?=ADMIN_FOLDER.'/'.$dataModel->getModelName();?>/edit/?<?=$indexField;?>=<?=$row->getId();?>&destination=<?php echo ($destination) ? $destination : urlencode($_SERVER['REQUEST_URI'] .$page_region); ?>"><img title="Редактировать" border="0" class="edit-image" src="/media/admin/icons/pencil-16-ns.png"/></a></td>
-			<?} ?>
+				<td width="25px;" style="text-align:right;"><a href="<?php echo ADMIN_FOLDER.'/'.$dataModel->getModelName(); ?>/edit/?<?php echo $indexField; ?>=<?php echo $row->getId(); ?>&destination=<?php echo ($destination) ? $destination : urlencode($_SERVER['REQUEST_URI'] .$page_region); ?>"><img title="Редактировать" border="0" class="edit-image" src="/media/admin/icons/pencil-16-ns.png"/></a></td>
+			<?php } ?>
 
-			<?if ($acl->hasRights($dataModel->getModelName(),'delete')){?>
-				<td width="25px;" style="text-align:right;"><a href="<?php echo ADMIN_FOLDER; ?>/<?=$dataModel->getModelName();?>/delete/?<?=$indexField;?>=<?=$row->getId();?>&destination=<?php echo $destination; ?>" onclick="return confirm('Вы действительно хотите удалить эту запись?');"><img title="Удалить" border="0" src="/media/admin/icons/badge-square-cross-16-ns.png"/></a></td>
-			<?}?>
+			<?php if ($acl->hasRights($dataModel->getModelName(),'delete')){?>
+				<td width="25px;" style="text-align:right;"><a href="<?php echo ADMIN_FOLDER; ?>/<?php echo $dataModel->getModelName(); ?>/delete/?<?php echo $indexField; ?>=<?php echo $row->getId(); ?>&destination=<?php echo $destination; ?>" onclick="return confirm('Вы действительно хотите удалить эту запись?');"><img title="Удалить" border="0" src="/media/admin/icons/badge-square-cross-16-ns.png"/></a></td>
+			<?php }?>
 
 			<?php if ($buttons): ?>
 				<?php foreach($buttons as $button): ?>
@@ -227,11 +227,11 @@
 </table>
 <br />
 
-        <?if ($acl->hasRights($dataModel->getModelName(),'delete_list')){?>
+        <?php if ($acl->hasRights($dataModel->getModelName(),'delete_list')){?>
             <div class="clear"><!-- --></div>
-            <input type="button" value="Удалить выделенные" id="submit_action" onclick="$('#<?=$dataModel->getModelName();?>form').submit()" />
+            <input type="button" value="Удалить выделенные" id="submit_action" onclick="$('#<?php echo $dataModel->getModelName(); ?>form').submit()" />
             <br />
-        <?}?>
+        <?php }?>
 </form>
 <br />
 
@@ -254,16 +254,16 @@
 
 <?php else: ?>
 
-    <?if ($dataModel->getModelName()=='disease'):?>
+    <?php if ($dataModel->getModelName()=='disease'):?>
         <form method="post" action="/disease/parseDiseasesAndDiseaseBlocks" >
             <input type="hidden" name="csrf" value=<?php echo isset($csrf) ? '\''.$csrf.'\'' : 'null'; ?>>
             <input class="make-xml" style="margin:10px 0 0 0;padding:5px;font-size: 15px" type="button" value="Импортировать данные"/>
         </form>
-    <?endif?>
+    <?php endif?>
 
-    <?if ($dataModel->getModelName()=='yandex_content_log'):?>
+    <?php if ($dataModel->getModelName()=='yandex_content_log'):?>
         <a class="classic-href" target="_blank" href="/test/getYandexContentToken"><input class="make-xml" style="margin:10px 0 0 0;padding:5px;font-size: 15px" type="button" value="Получить токен отправки текстов"/></a>
-    <?endif?>
+    <?php endif?>
 
 	<p>Пока нет данных.</p>
 <?php endif; ?>

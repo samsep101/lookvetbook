@@ -13,7 +13,7 @@
         <div class="doctor-record">
             <?php echo DoctorAvatarViewHelper::viewOnCard($doctor, 74, 111, $param); ?>
             <div class="doctor-info">
-                <?=$doctor->full_name?>
+                <?php echo $doctor->full_name; ?>
             </div>
         </div>
 

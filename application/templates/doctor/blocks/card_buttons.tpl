@@ -9,8 +9,8 @@
 <div class="btns flo">
     <?php if (isset($example_page)) { ?>
         <a href="javascript:void(0)" class="btn-appoint">Записаться</a>
-        <a href="javascript:void(0)" class="btn-bookmarkt btn-bookmark doctor_bookmark doctor_bookmark<?=$doctor->getId();?>"><i class="icon-add"></i><span class="txt">Добавить в закладки</span></a>
-    <?php } else if($single_doctor_page) { ?>
+        <a href="javascript:void(0)" class="btn-bookmarkt btn-bookmark doctor_bookmark doctor_bookmark<?php echo $doctor->getId(); ?>"><i class="icon-add"></i><span class="txt">Добавить в закладки</span></a>
+    <?php } else if(!empty($single_doctor_page)) { ?>
         <a onclick=" if (window.is_test == 1) $(this).attr('href','javascript:void(0)');
                     else {
                     //if (SessionInfo.is_authed)

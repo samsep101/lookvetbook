@@ -4,7 +4,9 @@
 <?php endif;?>
 <?php if (count($specializations)):?>
     <?php foreach($specializations as $specialization): ?>
-        <option <?php if(isset($current_setialization) && !isset($home_page) && $current_setialization->id == $specialization->getId()) echo 'selected="selected"'; ?>
+			<?php
+			if(!is_object($specialization)) { continue; } ?>
+        <option <?php if(isset($current_setialization) and is_object($current_setialization) and !isset($home_page) && $current_setialization->id == $specialization->getId()) echo 'selected="selected"'; ?>
             value="<?php echo $specialization->getId(); ?>"
             class="specialization"
             data-specialty_alias="<?php echo $specialization->alias; ?>"

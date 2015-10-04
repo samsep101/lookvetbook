@@ -76,7 +76,7 @@
     <meta name="description" content="<?php echo (isset($page_description)) ? $page_description : 'Lookmedbook - поиск врача и запись на прием, информация обо всех известных заболеваниях.'; ?>">
     <link rel="icon" href="/media/images/favicon.ico" type="image/x-icon">
     <?php $this->block('blocks/head'); ?>
-    <?if (isset($home_page)):?>
+    <?php if (isset($home_page)):?>
     <link rel="stylesheet" href="/media/css/home_page/style.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />
     <!--[if lt IE 8]>
     <link rel="stylesheet" href="/media/css/home_page/ie/ie-7.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />
@@ -84,7 +84,7 @@
     <!--[if lt IE 9]>
     <link rel="stylesheet" href="/media/css/home_page/ie/ie.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />
     <![endif]-->
-    <?endif?>
+    <?php endif?>
 
     <meta name='yandex-verification' content='76535cc7dd5d586f' />
 

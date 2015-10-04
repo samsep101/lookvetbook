@@ -27,9 +27,9 @@ $(function() {
     <div id="tab-0">
 	<table class="generatorTable" cellpadding="3" cellspacing="3">
 		<tr>
-			<td class="label"><?=$setting['name'];?>:</td>
+			<td class="label"><?php echo $setting['name']; ?>:</td>
 			<td>
-				<?
+				<?php
 					$typeClass = ucfirst($setting['type']).'Type';
 					if ($setting['type'] == 'file')
 					{
@@ -56,13 +56,13 @@ $(function() {
 					}
 					$type = new $typeClass('value',$typeSettings,$setting['value']);
 				?>
-				<?=$type->getFormValue($setting['value']);?>
+				<?php echo $type->getFormValue($setting['value']); ?>
 			</td>
 		</tr>
 	</table>
 	</div>
 </div>
-<input type="hidden" name="form[id]" value="<?=$setting['id'];?>" />
+<input type="hidden" name="form[id]" value="<?php echo $setting['id']; ?>" />
 <p><input type="button" value="Сохранить" id="submit_action" onclick="$('#settingsForm').submit()" />
 <input type="button" onclick="ajax('settings/?ajax=1','generatorData')" value="Отменить" id="submit_action"></p>
 </form>

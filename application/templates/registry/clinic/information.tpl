@@ -189,7 +189,7 @@
                 <div class="row-record">
                     <label style="width: 350px"><a target="_blank" href="http://api.yandex.ru/maps/tools/getlonglat/">Определение координат</a></label>
                 </div>
-            <?endif?>
+            <?php endif?>
         </div>
     </div>
     <div class="fields-block flo">

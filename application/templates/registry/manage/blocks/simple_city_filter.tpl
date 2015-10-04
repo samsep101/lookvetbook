@@ -10,7 +10,7 @@
     <option value="0">Все</option>
     <?php if ($cities):?>
     <?php foreach ($cities as $city):?>
-        <option value="<?php echo $city->getId();?>" <?if (isset($city_id) && $city_id == $city->getId()){?>selected="selected"<?}?>><?php echo $city->name;?></option>
+        <option value="<?php echo $city->getId();?>" <?php if (isset($city_id) && $city_id == $city->getId()){?>selected="selected"<?php }?>><?php echo $city->name;?></option>
         <?php endforeach;?>
     <?php endif;?>
 </select>

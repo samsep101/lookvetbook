@@ -32,17 +32,17 @@
                             <select name="form[high_education_university_id]">
                                 <option value=""></option>
                                 <?php foreach ($universities as $university):?>
-                                    <option <?if ($model->high_education_university_id == $university->getId()) {?>selected<?}?> value="<?=$university->getId();?>"><?=$university->name?></option>
-                                <?endforeach?>
+                                    <option <?php if ($model->high_education_university_id == $university->getId()) {?>selected<?php }?> value="<?php echo $university->getId(); ?>"><?php echo $university->name; ?></option>
+                                <?php endforeach?>
                             </select>
-                        <?endif?>
+                        <?php endif?>
                     </div>
                     <div class="education-parameter button">
                         <input type="button" class="add-education" data-type="1" value="Добавить">
                     </div>
                     <div class="education-parameter short-parameter">
                         <label>Год окончания</label>
-                        <!--<input type="text" value="<?=$model->high_education_end_year?>" name="form[high_education_end_year]">-->
+                        <!--<input type="text" value="<?php echo $model->high_education_end_year; ?>" name="form[high_education_end_year]">-->
                         <?php echo $view_processor->getView('high_education_end_year'); ?>
                     </div>
                     <div class="education-parameter short-parameter">
@@ -58,10 +58,10 @@
                             <select name="form[secondary_education_university_id]">
                                 <option value=""></option>
                                 <?php foreach ($secondary_universities as $secondary_university):?>
-                                    <option <?if ($model->secondary_education_university_id == $secondary_university->getId()) {?>selected<?}?> value="<?=$secondary_university->getId();?>"><?=$secondary_university->name?></option>
-                                <?endforeach?>
+                                    <option <?php if ($model->secondary_education_university_id == $secondary_university->getId()) {?>selected<?php }?> value="<?php echo $secondary_university->getId(); ?>"><?php echo $secondary_university->name; ?></option>
+                                <?php endforeach?>
                             </select>
-                        <?endif?>
+                        <?php endif?>
                     </div>
                     <div class="education-parameter button">
                         <input type="button" class="add-education" data-type="2" value="Добавить">
@@ -93,21 +93,21 @@
                         <?php foreach($doctor_educations as $doctor_education): ?>
                             <?php if ($doctor_education->doctor_education_type_id == DoctorEducationModel::INTERNSHIP): ?>
                                 <div class="internship-single-block" data-name="doctor-education">
-                                    <input style="display:none" name="doctor_education_type_id" value="<?=DoctorEducationModel::INTERNSHIP?>">
+                                    <input style="display:none" name="doctor_education_type_id" value="<?php echo DoctorEducationModel::INTERNSHIP; ?>">
                                     <div class="education-parameter short-parameter">
                                         <label>Специализация</label>
                                         <?php if ($specialties):?>
                                             <select name="specialty_id">
                                                 <option value=""></option>
                                                 <?php foreach ($specialties as $specialty):?>
-                                                    <option <?if ($doctor_education->specialty_id == $specialty->getId()) {?>selected<?}?> value="<?=$specialty->getId();?>"><?=$specialty->name?></option>
-                                                <?endforeach?>
+                                                    <option <?php if ($doctor_education->specialty_id == $specialty->getId()) {?>selected<?php }?> value="<?php echo $specialty->getId(); ?>"><?php echo $specialty->name; ?></option>
+                                                <?php endforeach?>
                                             </select>
-                                        <?endif?>
+                                        <?php endif?>
                                     </div>
                                     <div class="education-parameter short-parameter">
                                         <label>Год окончания</label>
-                                        <input type="text" name="end_year" value="<?=$doctor_education->end_year?>">
+                                        <input type="text" name="end_year" value="<?php echo $doctor_education->end_year; ?>">
                                     </div>
                                     <div class="education-parameter institution-list-1 long-parameter">
                                         <label>ВУЗ</label>
@@ -115,10 +115,10 @@
                                             <select name="university_id">
                                                 <option value=""></option>
                                                 <?php foreach ($universities as $university):?>
-                                                    <option <?if ($doctor_education->university_id == $university->getId()) {?>selected<?}?> value="<?=$university->getId();?>"><?=$university->name?></option>
-                                                <?endforeach?>
+                                                    <option <?php if ($doctor_education->university_id == $university->getId()) {?>selected<?php }?> value="<?php echo $university->getId(); ?>"><?php echo $university->name; ?></option>
+                                                <?php endforeach?>
                                             </select>
-                                        <?endif?>
+                                        <?php endif?>
                                     </div>
                                     <div class="education-parameter button">
                                         <input type="button" class="add-education" data-type="1" value="Добавить новый ВУЗ">
@@ -130,21 +130,21 @@
                                         <input type="button" class="delete-education" value="Удалить">
                                     </div>
                                 </div>
-                            <?endif?>
-                        <?endforeach?>
-                    <?else:?>
+                            <?php endif?>
+                        <?php endforeach?>
+                    <?php else:?>
                         <div class="internship-single-block" data-name="doctor-education">
-                            <input style="display:none" name="doctor_education_type_id" value="<?=DoctorEducationModel::INTERNSHIP?>">
+                            <input style="display:none" name="doctor_education_type_id" value="<?php echo DoctorEducationModel::INTERNSHIP; ?>">
                             <div class="education-parameter short-parameter">
                                 <label>Специализация</label>
                                 <?php if ($specialties):?>
                                     <select name="specialty_id">
                                         <option value=""></option>
                                         <?php foreach ($specialties as $specialty):?>
-                                            <option value="<?=$specialty->getId();?>"><?=$specialty->name?></option>
-                                        <?endforeach?>
+                                            <option value="<?php echo $specialty->getId(); ?>"><?php echo $specialty->name; ?></option>
+                                        <?php endforeach?>
                                     </select>
-                                <?endif?>
+                                <?php endif?>
                             </div>
                             <div class="education-parameter short-parameter">
                                 <label>Год окончания</label>
@@ -156,10 +156,10 @@
                                     <select name="university_id">
                                         <option value=""></option>
                                         <?php foreach ($universities as $university):?>
-                                            <option value="<?=$university->getId();?>"><?=$university->name?></option>
-                                        <?endforeach?>
+                                            <option value="<?php echo $university->getId(); ?>"><?php echo $university->name; ?></option>
+                                        <?php endforeach?>
                                     </select>
-                                <?endif?>
+                                <?php endif?>
                             </div>
                             <div class="education-parameter button">
                                 <input type="button" class="add-education" data-type="1" value="Добавить новый ВУЗ">
@@ -171,7 +171,7 @@
                                 <input type="button" class="delete-education" value="Удалить">
                             </div>
                         </div>
-                    <?endif?>
+                    <?php endif?>
                 </div>
 
                 <div class="second-tab">
@@ -179,21 +179,21 @@
                         <?php foreach($doctor_educations as $doctor_education): ?>
                             <?php if ($doctor_education->doctor_education_type_id == DoctorEducationModel::TRAINEESHIP): ?>
                                 <div class="traineeship-single-block" data-name="doctor-education">
-                                    <input style="display:none" name="doctor_education_type_id" value="<?=DoctorEducationModel::TRAINEESHIP?>">
+                                    <input style="display:none" name="doctor_education_type_id" value="<?php echo DoctorEducationModel::TRAINEESHIP; ?>">
                                     <div class="education-parameter short-parameter">
                                         <label>Специализация</label>
                                         <?php if ($specialties):?>
                                             <select name="specialty_id">
                                                 <option value=""></option>
                                                 <?php foreach ($specialties as $specialty):?>
-                                                    <option <?if ($doctor_education->specialty_id == $specialty->getId()) {?>selected<?}?> value="<?=$specialty->getId();?>"><?=$specialty->name?></option>
-                                                <?endforeach?>
+                                                    <option <?php if ($doctor_education->specialty_id == $specialty->getId()) {?>selected<?php }?> value="<?php echo $specialty->getId(); ?>"><?php echo $specialty->name; ?></option>
+                                                <?php endforeach?>
                                             </select>
-                                        <?endif?>
+                                        <?php endif?>
                                     </div>
                                     <div class="education-parameter short-parameter">
                                         <label>Год окончания</label>
-                                        <input type="text" name="end_year" value="<?=$doctor_education->end_year?>">
+                                        <input type="text" name="end_year" value="<?php echo $doctor_education->end_year; ?>">
                                     </div>
                                     <div class="education-parameter institution-list-1 long-parameter">
                                         <label>ВУЗ</label>
@@ -201,10 +201,10 @@
                                             <select name="university_id">
                                                 <option value=""></option>
                                                 <?php foreach ($universities as $university):?>
-                                                    <option <?if ($doctor_education->university_id == $university->getId()) {?>selected<?}?> value="<?=$university->getId();?>"><?=$university->name?></option>
-                                                <?endforeach?>
+                                                    <option <?php if ($doctor_education->university_id == $university->getId()) {?>selected<?php }?> value="<?php echo $university->getId(); ?>"><?php echo $university->name; ?></option>
+                                                <?php endforeach?>
                                             </select>
-                                        <?endif?>
+                                        <?php endif?>
                                     </div>
                                     <div class="education-parameter button">
                                         <input type="button" class="add-education" data-type="1" value="Добавить новый ВУЗ">
@@ -216,9 +216,9 @@
                                         <input type="button" class="delete-education" value="Удалить">
                                     </div>
                                 </div>
-                            <?endif?>
-                        <?endforeach?>
-                    <?else:?>
+                            <?php endif?>
+                        <?php endforeach?>
+                    <?php else:?>
                         <div class="traineeship-single-block" data-name="doctor-education">
                             <div class="education-parameter short-parameter">
                                 <label>Специализация</label>
@@ -226,10 +226,10 @@
                                     <select name="specialty_id">
                                         <option value=""></option>
                                         <?php foreach ($specialties as $specialty):?>
-                                            <option value="<?=$specialty->getId();?>"><?=$specialty->name?></option>
-                                        <?endforeach?>
+                                            <option value="<?php echo $specialty->getId(); ?>"><?php echo $specialty->name; ?></option>
+                                        <?php endforeach?>
                                     </select>
-                                <?endif?>
+                                <?php endif?>
                             </div>
                             <div class="education-parameter short-parameter">
                                 <label>Год окончания</label>
@@ -241,10 +241,10 @@
                                     <select name="university_id">
                                         <option value=""></option>
                                         <?php foreach ($universities as $university):?>
-                                            <option value="<?=$university->getId();?>"><?=$university->name?></option>
-                                        <?endforeach?>
+                                            <option value="<?php echo $university->getId(); ?>"><?php echo $university->name; ?></option>
+                                        <?php endforeach?>
                                     </select>
-                                <?endif?>
+                                <?php endif?>
                             </div>
                             <div class="education-parameter button">
                                 <input type="button" class="add-education" data-type="1" value="Добавить новый ВУЗ">
@@ -256,7 +256,7 @@
                                 <input type="button" class="delete-education" value="Удалить">
                             </div>
                         </div>
-                    <?endif?>
+                    <?php endif?>
                 </div>
             </div>
         </div>
@@ -280,18 +280,18 @@
                                         <select name="specialty_id">
                                             <option value=""></option>
                                             <?php foreach ($specialties as $specialty):?>
-                                                <option <?if ($doctor_certificate->specialty_id == $specialty->getId()) {?>selected<?}?> value="<?=$specialty->getId();?>"><?=$specialty->name?></option>
-                                            <?endforeach?>
+                                                <option <?php if ($doctor_certificate->specialty_id == $specialty->getId()) {?>selected<?php }?> value="<?php echo $specialty->getId(); ?>"><?php echo $specialty->name; ?></option>
+                                            <?php endforeach?>
                                         </select>
-                                    <?endif?>
+                                    <?php endif?>
                                 </div>
                                 <div class="education-parameter shortest-parameter">
                                     <label>Дата выдачи</label>
-                                    <input type="text" name="date" value="<?if ($doctor_certificate->date) echo DateViewHelper::date($doctor_certificate->date,'dd-mm-yyyy')?>">
+                                    <input type="text" name="date" value="<?php if ($doctor_certificate->date) echo DateViewHelper::date($doctor_certificate->date,'dd-mm-yyyy')?>">
                                 </div>
                                 <div class="education-parameter shortest-parameter">
                                     <label>Срок действия, лет</label>
-                                    <input type="text" name="duration" value="<?=$doctor_certificate->duration?>">
+                                    <input type="text" name="duration" value="<?php echo $doctor_certificate->duration; ?>">
                                 </div>
                                 <div class="education-parameter institution-list-2 long-parameter">
                                     <label>Учебное заведение</label>
@@ -299,10 +299,10 @@
                                         <select name="university_id">
                                             <option value=""></option>
                                             <?php foreach ($secondary_universities as $secondary_university):?>
-                                                <option <?if ($doctor_certificate->university_id == $secondary_university->getId()) {?>selected<?}?> value="<?=$secondary_university->getId();?>"><?=$secondary_university->name?></option>
-                                            <?endforeach?>
+                                                <option <?php if ($doctor_certificate->university_id == $secondary_university->getId()) {?>selected<?php }?> value="<?php echo $secondary_university->getId(); ?>"><?php echo $secondary_university->name; ?></option>
+                                            <?php endforeach?>
                                         </select>
-                                    <?endif?>
+                                    <?php endif?>
                                 </div>
                                 <div class="education-parameter button">
                                     <input type="button" class="add-education" data-type="2" value="Добавить учебное заведение">
@@ -314,8 +314,8 @@
                                     <input type="button" class="delete-education" value="Удалить">
                                 </div>
                             </div>
-                        <?endforeach?>
-                    <?else:?>
+                        <?php endforeach?>
+                    <?php else:?>
                         <div class="certificate-single-block flo" data-name="doctor-certificate">
                             <div class="education-parameter short-parameter">
                                 <label>Специализация</label>
@@ -323,10 +323,10 @@
                                     <select name="specialty_id">
                                         <option value=""></option>
                                         <?php foreach ($specialties as $specialty):?>
-                                            <option value="<?=$specialty->getId();?>"><?=$specialty->name?></option>
-                                        <?endforeach?>
+                                            <option value="<?php echo $specialty->getId(); ?>"><?php echo $specialty->name; ?></option>
+                                        <?php endforeach?>
                                     </select>
-                                <?endif?>
+                                <?php endif?>
                             </div>
                             <div class="education-parameter shortest-parameter">
                                 <label>Дата выдачи</label>
@@ -342,10 +342,10 @@
                                     <select name="university_id">
                                         <option value=""></option>
                                         <?php foreach ($secondary_universities as $secondary_university):?>
-                                            <option value="<?=$secondary_university->getId();?>"><?=$secondary_university->name?></option>
-                                        <?endforeach?>
+                                            <option value="<?php echo $secondary_university->getId(); ?>"><?php echo $secondary_university->name; ?></option>
+                                        <?php endforeach?>
                                     </select>
-                                <?endif?>
+                                <?php endif?>
                             </div>
                             <div class="education-parameter button">
                                 <input type="button" class="add-education" data-type="2" value="Добавить учебное заведение">
@@ -357,7 +357,7 @@
                                 <input type="button" class="delete-education" value="Удалить">
                             </div>
                         </div>
-                    <?endif?>
+                    <?php endif?>
                 </div>
             </div>
         </div>

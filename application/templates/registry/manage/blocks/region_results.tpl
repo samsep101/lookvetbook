@@ -16,7 +16,7 @@
                 <?php echo ModeratePageLinkViewHelper::getClinicOrDoctorLinkView($clinic, 'clinic'); ?>
                 <?php echo RegionStatusViewHelper::getStatusImage($clinic->clinic_status_id); ?>
             </li>
-        <?endforeach?>
+        <?php endforeach?>
     </ul>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -33,6 +33,6 @@
     <div class="pager">
         <?php echo PagingViewHelper::paging($page_url.'?query='.$query.'&city_id='.$city_id.'&page=:page:', $pages_total, $current_page); ?>
     </div>
-<?else:?>
+<?php else:?>
     <p class="no-results">По вашему запросу клиник не найдено</p>
-<?endif?>
+<?php endif?>

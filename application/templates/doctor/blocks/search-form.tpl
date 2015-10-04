@@ -18,7 +18,7 @@
                         <option value=""></option>
                     </select>
                 </div>-->
-                <div class="choose-section flo <?php if (isset($home_page) && $home_page == 1){?>choose-section-free<?}?>">
+                <div class="choose-section flo <?php if (isset($home_page) && $home_page == 1){ ?>choose-section-free<?php } ?>">
                     <div class="col colleft">
                         <!--<div class="head-label first-label">
                             <div class="radioBox visit-type visit-type-clinic act"><span></span> Я могу прийти к врачу:

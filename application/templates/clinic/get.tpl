@@ -219,14 +219,14 @@
                 </div>
             <?php endif; ?>
 
-            <?if ($clinic->features):?>
+            <?php if ($clinic->features):?>
                 <div class="info-col col-comfort">
                     <i class="icon"></i>
                     <h3>Удобства</h3>
                     <ul>
-                        <?foreach ($clinic->features as $feature) :?>
-                            <li><?=$feature->name?></li>
-                        <?endforeach?>
+                        <?php foreach ($clinic->features as $feature) :?>
+                            <li><?php echo $feature->name; ?></li>
+                        <?php endforeach?>
                     </ul>
                     <?php if (count($clinic->features)>14): ?>
                         <a class="more-link">Узнать больше</a>
@@ -238,7 +238,7 @@
 
 
     <div class="inner-2">
-        <?if ($clinic_reviews):?>
+        <?php if ($clinic_reviews):?>
             <div id="reviews">
                 <div class="heading-line">
                     <h2>

@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><?=$this->company?></title>
-    <?=$this->block('registry/blocks/head');?>
+    <title><?php echo $this->company; ?></title>
+    <?php echo $this->block('registry/blocks/head'); ?>
 </head>
 <body>
 

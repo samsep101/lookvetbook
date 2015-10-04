@@ -1,29 +1,29 @@
-<?=$this->block('blocks/help-search-block');?>
+<?php echo $this->block('blocks/help-search-block'); ?>
 
 <div id="content" style="padding:20px; width:95%">
 						<h1 class="title">Результаты</h1>
 						<div class="searchResult">
 						
-						<?if (isset($_REQUEST['query'])){?>
-							<p style="font-size:11px;">Для: "<?=strip_tags($query);?>".
+						<?php if (isset($_REQUEST['query'])){?>
+							<p style="font-size:11px;">Для: "<?php echo strip_tags($query); ?>".
 							
-							<?if (!$err){?>
+							<?php if (!$err){?>
 								<ul class="searchResultUl">
-									<?$i=1;?>
-									<?foreach($results as $key=>$result){?>
+									<?php $i=1;?>
+									<?php foreach($results as $key=>$result){?>
 									<li>
-										<b><?=$i++;?>.</b> <?=$result['search_content'];?>
+										<b><?php echo $i++; ?>.</b> <?php echo $result['search_content']; ?>
 										<br />
-										<span class="searchSmall"><a href="<?=$result['url'];?>"><?=$_SERVER['SERVER_NAME']?><?=$result['url'];?></a></span>
+										<span class="searchSmall"><a href="<?php echo $result['url']; ?>"><?php echo $_SERVER['SERVER_NAME']; ?><?php echo $result['url']; ?></a></span>
 									</li>	
-									<?}?>
+									<?php }?>
 								</ul>
-							<?}elseif ($err == 'wrong_query'){?>
+							<?php }elseif ($err == 'wrong_query'){?>
 								<br />Строка запроса должна содержать не менее 3 символов, не считая пробелы.</p>
-							<?}elseif ($err == 'not_found'){?>
+							<?php }elseif ($err == 'not_found'){?>
 								<br />К сожалению, по Вашему запросу ничего не найдено.</p>
-							<?}?>
-						<?}?>
+							<?php }?>
+						<?php }?>
 							</ul>
 						</div>
 </div>

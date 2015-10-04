@@ -1,7 +1,7 @@
-<?if ($doctors):?>
+<?php if ($doctors):?>
     <div class="doctor-list">
         <?php $this->block('registry/manage/blocks/doctor_results'); ?>
     </div>
-<?else:?>
+<?php else:?>
     <p class="no-results">По вашему запросу врачей не найдено</p>
-<?endif?>
+<?php endif?>

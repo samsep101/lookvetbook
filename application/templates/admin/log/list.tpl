@@ -3,15 +3,15 @@
     <p class="actionBar">
         <?php if(!$ajax): ?>
             <span class="button">
-                <a class="taskIndexLink" href="/<?=$this->dataModel->getModelName();?>"><img class="cursorPointer" src="/media/admin/icons/clipboard-audit-24-ns.png" align="absmiddle" border="0" /></a>
-                <a href="<?=ADMIN_FOLDER.'/'.$this->dataModel->getModelName();?>"><?=$dataModel->getListTitle()?></a>
+                <a class="taskIndexLink" href="/<?php echo $this->dataModel->getModelName(); ?>"><img class="cursorPointer" src="/media/admin/icons/clipboard-audit-24-ns.png" align="absmiddle" border="0" /></a>
+                <a href="<?php echo ADMIN_FOLDER.'/'.$this->dataModel->getModelName(); ?>"><?php echo $dataModel->getListTitle(); ?></a>
             </span>
         <?php endif; ?>
 
         <?php if ($acl->hasRights($dataModel->getModelName(),'add')): ?>
             <span class="button">
                 <img class="cursorPointer" src="/media/admin/icons/badge-circle-plus-24-ns.png" align="absmiddle" />
-                <a href="<?=ADMIN_FOLDER.$addUrl;?>?destination=<?php echo $destination; ?>&<?php echo $params; ?>"><?=$addTitle;?></a>
+                <a href="<?php echo ADMIN_FOLDER.$addUrl; ?>?destination=<?php echo $destination; ?>&<?php echo $params; ?>"><?php echo $addTitle; ?></a>
             </span>
         <?php endif; ?>
     </p>
@@ -24,61 +24,61 @@
 
     <div style="clear:both"></div>
 
-    <?if(Acl::userGrant($dataModel->getModelName().'_xls')){?>
+    <?php if(Acl::userGrant($dataModel->getModelName().'_xls')){?>
         <p class="controls">
-            <img src="/mhadmin/media/img/xls.gif" align="absmiddle" />&nbsp;<a href="/mhadmin/<?=$dataModel->getModelName()?>/xls/">Сохранить</a>
+            <img src="/mhadmin/media/img/xls.gif" align="absmiddle" />&nbsp;<a href="/mhadmin/<?php echo $dataModel->getModelName(); ?>/xls/">Сохранить</a>
         </p>
-    <?}?>
+    <?php }?>
 
 
-    <?if(count($data)){?>
+    <?php if(count($data)){?>
 
-    <? $filters = $dataModel->getFilters();?>
+    <?php  $filters = $dataModel->getFilters();?>
 
-    <?/* Автофильтры */?>
-    <?/*if(count($filters)){?>
+    <?php /* Автофильтры */?>
+    <?php /*if(count($filters)){?>
         <form method="POST" id="filterForm">
             <table cellpadding="2" cellspacing="2">
                 <tr>
                     <td><img src="/mhadmin/media/img/filter.png" /></td>
 
-                <?foreach ($filters as $filter => $title){?>
-                        <?$fileterValues = array();?>
-                        <?foreach ($data as $row){?>
-                            <? $dataModel->setValues($row);?>
-                            <?foreach ($dataModel->getListFields() as $field){?>
-                                <?if($field->getFieldName() == $filter){?>
-                                    <?if($row[$filter] != 0){?>
-                                        <?$fileterValues[$row[$filter]] = $field->getViewValue()?>
-                                    <?}?>
-                                <?}?>
-                            <?}?>
-                        <?}?>
+                <?php foreach ($filters as $filter => $title){?>
+                        <?php $fileterValues = array();?>
+                        <?php foreach ($data as $row){?>
+                            <?php  $dataModel->setValues($row);?>
+                            <?php foreach ($dataModel->getListFields() as $field){?>
+                                <?php if($field->getFieldName() == $filter){?>
+                                    <?php if($row[$filter] != 0){?>
+                                        <?php $fileterValues[$row[$filter]] = $field->getViewValue()?>
+                                    <?php }?>
+                                <?php }?>
+                            <?php }?>
+                        <?php }?>
 
-                        <?if(count($fileterValues) > 0){?>
+                        <?php if(count($fileterValues) > 0){?>
                             <td>
-                            <?if((int) $_GET[$filter] and count($fileterValues)==1){?>
-                                <?foreach($fileterValues as $filterKey=>$filterVal){?>
-                                    <span class="grey"><?=$title?>:</span> <?=$filterVal;?> <img src="/mhadmin/media/img/icons/badge-circle-cross-16-ns.png" class="cursorPointer" align="absmiddle" onclick="filterDel('<?=$filter?>')" />
-                                    <input type="hidden" name="<?=$filter?>" value="<?=$filterKey?>" />
-                                <?}?>
-                            <?} else {?>
-                                <span class="grey"><?=$title?>:</span> <select style="width:150px;" name="<?=$filter?>" onchange="$('#filterForm').submit();">
+                            <?php if((int) $_GET[$filter] and count($fileterValues)==1){?>
+                                <?php foreach($fileterValues as $filterKey=>$filterVal){?>
+                                    <span class="grey"><?php echo $title; ?>:</span> <?php echo $filterVal; ?> <img src="/mhadmin/media/img/icons/badge-circle-cross-16-ns.png" class="cursorPointer" align="absmiddle" onclick="filterDel('<?php echo $filter; ?>')" />
+                                    <input type="hidden" name="<?php echo $filter; ?>" value="<?php echo $filterKey; ?>" />
+                                <?php }?>
+                            <?php } else {?>
+                                <span class="grey"><?php echo $title; ?>:</span> <select style="width:150px;" name="<?php echo $filter; ?>" onchange="$('#filterForm').submit();">
                                     <option value=''>...</option>
-                                    <?foreach($fileterValues as $filterKey=>$filterVal){?>
-                                        <?if((int) $filterKey){?>
-                                            <?if((int) $_GET[$filter] == (int) $filterKey){?>
-                                            <option value="<?=$filterKey?>" selected><?=$filterVal?></option>
-                                            <?} else {?>
-                                            <option value="<?=$filterKey?>"><?=$filterVal?></option>
-                                            <?}?>
-                                        <?}?>
-                                    <?}?>
+                                    <?php foreach($fileterValues as $filterKey=>$filterVal){?>
+                                        <?php if((int) $filterKey){?>
+                                            <?php if((int) $_GET[$filter] == (int) $filterKey){?>
+                                            <option value="<?php echo $filterKey; ?>" selected><?php echo $filterVal; ?></option>
+                                            <?php } else {?>
+                                            <option value="<?php echo $filterKey; ?>"><?php echo $filterVal; ?></option>
+                                            <?php }?>
+                                        <?php }?>
+                                    <?php }?>
                                 </select>
-                            <?}?>
+                            <?php }?>
                             </td>
-                        <?}?>
-                <?}?>
+                        <?php }?>
+                <?php }?>
                 </tr>
             </table>
             <br />
@@ -93,7 +93,7 @@
                                     url = url+'&'+$(this).attr('name')+'='+$(this).val();
                                 }
                             });
-                            ajax('/<?=$dataModel->getModelName();?>/?ajax=1'+url,'<?=$dataModel->getModelName();?>Content');
+                            ajax('/<?php echo $dataModel->getModelName(); ?>/?ajax=1'+url,'<?php echo $dataModel->getModelName(); ?>Content');
                         }
                     });
                 });
@@ -105,19 +105,19 @@
                             url = url+'&'+$(this).attr('name')+'='+$(this).val();
                         }
                     });
-                    ajax('/<?php echo ADMIN_FOLDER; ?>/<?php echo $dataModel->getModelName();?>/?ajax=1'+url,'<?=$dataModel->getModelName();?>Content');
+                    ajax('/<?php echo ADMIN_FOLDER; ?>/<?php echo $dataModel->getModelName();?>/?ajax=1'+url,'<?php echo $dataModel->getModelName(); ?>Content');
                 }
         </script>
-    <?}*/?>
+    <?php }*/?>
 
-    <?if ($dataModel->getModelName()=='disease'):?>
+    <?php if ($dataModel->getModelName()=='disease'):?>
         <form method="post" action="/disease/parseDiseasesAndDiseaseBlocks" >
             <input type="hidden" name="csrf" value=<?php echo isset($csrf) ? '\''.$csrf.'\'' : 'null'; ?>>
             <input class="make-xml" style="margin:10px 0 0 0;padding:5px;font-size: 15px" type="button" value="Импортировать данные"/>
         </form>
-    <?endif?>
+    <?php endif?>
 
-<form id="<?=$dataModel->getModelName();?>form" action="/admin/<?=$dataModel->getModelName();?>/delete_list/?destination=<?php echo $destination; ?>" method="POST" onsubmit="return confirm('Вы действительно хотите удалить эти записи?');return false;">
+<form id="<?php echo $dataModel->getModelName(); ?>form" action="/admin/<?php echo $dataModel->getModelName(); ?>/delete_list/?destination=<?php echo $destination; ?>" method="POST" onsubmit="return confirm('Вы действительно хотите удалить эти записи?');return false;">
     <input type="hidden" name="csrf" value=<?php echo isset($csrf) ? '\''.$csrf.'\'' : 'null'; ?>>
 
 <table class="list">
@@ -129,50 +129,50 @@
             <?php endif; ?>
 
 
-		<?foreach ($fieldTitles as $fieldTitle){?>
-			<th><?=$fieldTitle;?></th>
-		<?}?>
+		<?php foreach ($fieldTitles as $fieldTitle){?>
+			<th><?php echo $fieldTitle; ?></th>
+		<?php }?>
 
-		<?if ($acl->hasRights($dataModel->getModelName(),'edit')){?>
+		<?php if ($acl->hasRights($dataModel->getModelName(),'edit')){?>
 			<th>&nbsp;</th>
-		<?}?>
+		<?php }?>
 
-		<?if ($acl->hasRights($dataModel->getModelName(),'delete')){?>
+		<?php if ($acl->hasRights($dataModel->getModelName(),'delete')){?>
 			<th>&nbsp;</th>
-		<?}?>
+		<?php }?>
 	</tr>
 	</thead>
 	<tbody>
 	<?php foreach ($data as $row): ?>
-		<? $dataModel->setValues($row);?>
-		<tr id="key[<?=$row->getId()?>][]">
+		<?php  $dataModel->setValues($row);?>
+		<tr id="key[<?php echo $row->getId(); ?>][]">
                 <?php if ($acl->hasRights($dataModel->getModelName(),'delete_list')): ?>
-                    <td><input class="input_check"  type="checkbox" name="delete_list[]" value="<?=$row->getId();?>"/></td>
+                    <td><input class="input_check"  type="checkbox" name="delete_list[]" value="<?php echo $row->getId(); ?>"/></td>
                 <?php endif; ?>
 
 			<?php foreach ($dataModel->getListFields() as $field): ?>
                 <?php if ($field->fieldName == $hide_field) continue; ?>
-				<td><?=$field->getViewValue($row->{$field->fieldName});?></td>
+				<td><?php echo $field->getViewValue($row->{$field->fieldName}); ?></td>
 			<?php endforeach; ?>
 
-			<?if ($acl->hasRights($dataModel->getModelName(),'edit')){?>
-				<td width="25px;" style="text-align:right;"><a href="<?=ADMIN_FOLDER.'/'.$dataModel->getModelName();?>/edit/?<?=$indexField;?>=<?=$row->getId();?>&destination=<?php echo $destination; ?>"><img title="Редактировать" border="0" src="/media/admin/icons/pencil-16-ns.png"/></a></td>
-			<?} ?>
+			<?php if ($acl->hasRights($dataModel->getModelName(),'edit')){?>
+				<td width="25px;" style="text-align:right;"><a href="<?php echo ADMIN_FOLDER.'/'.$dataModel->getModelName(); ?>/edit/?<?php echo $indexField; ?>=<?php echo $row->getId(); ?>&destination=<?php echo $destination; ?>"><img title="Редактировать" border="0" src="/media/admin/icons/pencil-16-ns.png"/></a></td>
+			<?php } ?>
 
-			<?if ($acl->hasRights($dataModel->getModelName(),'delete')){?>
-				<td width="25px;" style="text-align:right;"><a href="<?php echo ADMIN_FOLDER; ?>/<?=$dataModel->getModelName();?>/delete/?<?=$indexField;?>=<?=$row->getId();?>&destination=<?php echo $destination; ?>" onclick="return confirm('Вы действительно хотите удалить эту запись?');"><img title="Удалить" border="0" src="/media/admin/icons/badge-square-cross-16-ns.png"/></a></td>
-			<?}?>
+			<?php if ($acl->hasRights($dataModel->getModelName(),'delete')){?>
+				<td width="25px;" style="text-align:right;"><a href="<?php echo ADMIN_FOLDER; ?>/<?php echo $dataModel->getModelName(); ?>/delete/?<?php echo $indexField; ?>=<?php echo $row->getId(); ?>&destination=<?php echo $destination; ?>" onclick="return confirm('Вы действительно хотите удалить эту запись?');"><img title="Удалить" border="0" src="/media/admin/icons/badge-square-cross-16-ns.png"/></a></td>
+			<?php }?>
 		</tr>
 	<?php endforeach; ?>
 	</tbody>
 </table>
 <br />
 
-        <?if ($acl->hasRights($dataModel->getModelName(),'delete_list')){?>
+        <?php if ($acl->hasRights($dataModel->getModelName(),'delete_list')){?>
             <div class="clear"><!-- --></div>
-            <input type="button" value="Удалить выделенные" id="submit_action" onclick="$('#<?=$dataModel->getModelName();?>form').submit()" />
+            <input type="button" value="Удалить выделенные" id="submit_action" onclick="$('#<?php echo $dataModel->getModelName(); ?>form').submit()" />
             <br />
-        <?}?>
+        <?php }?>
 </form>
 <br />
 <?php if($this->pages_num>1): ?>
@@ -181,16 +181,16 @@
 	</div>
 <?php endif; ?>
 
-<?} else {?>
+<?php } else {?>
 
-    <?if ($dataModel->getModelName()=='disease'):?>
+    <?php if ($dataModel->getModelName()=='disease'):?>
         <form method="post" action="/disease/parseDiseasesAndDiseaseBlocks" >
             <input type="hidden" name="csrf" value=<?php echo isset($csrf) ? '\''.$csrf.'\'' : 'null'; ?>>
             <input class="make-xml" style="margin:10px 0 0 0;padding:5px;font-size: 15px" type="button" value="Импортировать данные"/>
         </form>
-    <?endif?>
+    <?php endif?>
 
 	<p>Пока нет данных.</p>
-<?}?>
+<?php }?>
 
 </div>

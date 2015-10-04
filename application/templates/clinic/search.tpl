@@ -24,16 +24,16 @@
             window.controller.specialty_id = <?php echo $specialization->getId(); ?>;
             window.controller.specialty_alias = '<?php echo $specialization->alias; ?>';
         <?php } ?>
-        <?php if ($district): ?>
+        <?php if (!empty($district) and is_object($district)): ?>
             window.controller.district_id = <?php echo $district->getId(); ?>;
         <?php endif; ?>
-        <?php if ($region): ?>
+        <?php if (!empty($region) and is_object($region)): ?>
             window.controller.region_id = <?php echo $region->getId(); ?>;
         <?php endif; ?>
-        <?php if ($street): ?>
+        <?php if (!empty($street) and is_object($street)): ?>
             window.controller.street_id = <?php echo $street->getId(); ?>;
         <?php endif; ?>
-        <?php if ($metro_station): ?>
+        <?php if (!empty($metro_station) and is_object($metro_station)): ?>
             window.controller.metro_station_id = <?php echo $metro_station->getId(); ?>;
         <?php endif; ?>
 

@@ -45,7 +45,7 @@
                 </div>-->
             </div>
 
-            <?if (isset($day)):?>
+            <?php if (isset($day)):?>
 
                 <div class="info-box loc-single">
                     <div class="location-box">
@@ -87,9 +87,9 @@
                         <div class="sel-box">
                             <select name="schedule_time" class="chzn-select" style="width:296px;">
                                 <?php foreach ($schedule_times as $time): ?>
-                                    <?$time_from = date_create($time->dt_start);?>
-                                    <?$time_from = date_format($time_from, 'H:i');?>
-                                    <?if ($time_from >= date('H:i'))?>
+                                    <?php $time_from = date_create($time->dt_start);?>
+                                    <?php $time_from = date_format($time_from, 'H:i');?>
+                                    <?php if ($time_from >= date('H:i'))?>
                                     <option value="<?php echo $time->id?>"><?php echo $time_from?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -97,13 +97,13 @@
                     </div>
                 </div>
 
-            <?else:?>
+            <?php else:?>
 
                 <div class="info-box">
                     <?php $this->record_flag = true; ?>
                     <?php $this->block('doctor/blocks/clinics'); ?>
                 </div>
-            <?endif?>
+            <?php endif?>
             <div class="btns flo">
                 <input type="button" value="Продолжить" class="btn-1 resume-btn">
                 <div class="error-msg error-msg-1">Пожалуйста выбери время</div>

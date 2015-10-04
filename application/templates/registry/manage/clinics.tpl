@@ -13,19 +13,19 @@
         <div class="row-record">
             <p>Клиники</p>
             <div class="search-box flo">
-                <input data-id="clinic" class="txt" type="text" value="<?if ($query){echo strip_tags($query);}?>" placeholder="Остион" style="width: 350px;">
+                <input data-id="clinic" class="txt" type="text" value="<?php if ($query){echo strip_tags($query);}?>" placeholder="Остион" style="width: 350px;">
                 <input data-id="clinic" class="btn-search" type="submit">
                 <ul class="drop-menu"> </ul>
             </div>
 
             <div class="filter-clinic-list">
-                <?if ($clinics):?>
+                <?php if ($clinics):?>
                     <div class="clinic-list">
                         <?php $this->block('registry/manage/blocks/clinic_results'); ?>
                     </div>
-                <?else:?>
+                <?php else:?>
                     <p class="no-results">По вашему запросу клиник не найдено</p>
-                <?endif?>
+                <?php endif?>
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@
                 <?php foreach ($doctors as $doctor):?>
                 <?php if (RegistryAccessHelper::checkSuperManagerAccess()):?>
                     <?php $doctor_href = '/registry/doctor/information?id='.$doctor->getId().$param;?>
-                <?else:?>
+                <?php else:?>
                     <?php $doctor_href = 'javascript:void(0)';?>
                 <?php endif;?>
                 <?php echo DoctorAvatarViewHelper::viewOnCard($doctor, 74, 111, $param, true); ?>

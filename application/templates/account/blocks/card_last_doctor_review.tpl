@@ -10,15 +10,15 @@
             <div class="descr">
                 <?php if ($review->doctor_id && $review->doctor_id != DoctorModel::RESERVED_DOCTOR_SLOT):?>
                     <p class="name">
-                        <a href="<?=DoctorPageLinkViewHelper::getLink($review->doctor); ?>">
+                        <a href="<?php echo DoctorPageLinkViewHelper::getLink($review->doctor); ; ?>">
                             <span class="post">
-                                <?=$review->doctor->specialties_names?>
+                                <?php echo $review->doctor->specialties_names; ?>
                             </span>
                             <?php echo $review->doctor->full_name; ?>
                         </a>
                     </p>
                 <?php elseif ($review->clinic && $review->specialty):?>
-                    <p class="name"><span class="post"><?=StringHelper::startProposalWord($review->specialty->name)?></span></p>
+                    <p class="name"><span class="post"><?php echo StringHelper::startProposalWord($review->specialty->name); ?></span></p>
                 <?php endif;?>
 
                 <?php if ($review->clinic):?>
@@ -27,7 +27,7 @@
                             <strong><?php echo $review->clinic->name; ?></strong> <br>
                             <?php if ($review->clinic->metro_station): ?>
                                 <?php if ($review->clinic->metro_station->metro_branch): ?>
-                                    <?echo MetroBranchIconViewHelper::getImage($review->clinic->metro_station->metro_branch)?>
+                                    <?php echo MetroBranchIconViewHelper::getImage($review->clinic->metro_station->metro_branch)?>
                                 <?php endif; ?>
                                 <?php echo $review->clinic->metro_station->name; ?> <br  />
                             <?php endif; ?>

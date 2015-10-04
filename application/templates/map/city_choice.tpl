@@ -45,7 +45,7 @@
         <?php if ($main_cities): ?>
             <ul class="not-empty-cities flo">
                 <?php foreach ($main_cities as $main_city):?>
-                <?//php if (!$selected_city || ($selected_city->getId() != $city->getId())):?>
+                <?php //php if (!$selected_city || ($selected_city->getId() != $city->getId())):?>
                 <li>
                     <div class="for_icons">
                         <?php if($main_city->is_has_laboratories): ?>

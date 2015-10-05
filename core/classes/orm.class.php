@@ -94,27 +94,29 @@
 
         public function update($data, $cond = '1=1')
         {
+	          $db = $this->getDb();
             $cond = $this->prepareCondition($cond);
             $items = array();
             foreach ($data as $key=> $value) {
                 if ($value === null) {
                     $items[] = "`{$key}` = NULL";
                 } else {
-                    $items[] = "`{$key}` = '" . mysql_real_escape_string($value) . "'";
+                    $items[] = "`{$key}` = '" . $db->escape($value) . "'";
                 }
             }
 	        $sql = "UPDATE `{$this->table}` SET " . join(', ', $items) . " WHERE " . $cond;
-            $db = $this->getDb();
+
             $db->post($sql);
         }
 
         public function insert($data, $delayed = false)
         {
-            $values_string = '';
+	        $db = $this->getDb();
+	        $values_string = '';
             foreach ($data as $key=> $value) {
                 if ($value !== null)
-                    $value = mysql_real_escape_string($value);
-                $data[$key] = mysql_real_escape_string($value);
+                    $value = $db->escape($value);
+                $data[$key] = $db->escape($value);
                 if (($value === null) || ($value === '')) {
                     $values_string .= ' NULL, ';
                 } else {
@@ -132,7 +134,7 @@
             $sql .= " INTO `{$this->table}` (`" . join('`, `', array_keys($data)) . "`) VALUES (" . $values_string . ")";
 
 
-            $db = $this->getDb();
+
 
             $db->post($sql);
 
@@ -204,7 +206,7 @@
             if (is_array($condition)) {
                 $conditionTerms = array();
                 foreach ($condition as $key=> $value)
-                    $conditionTerms[] = "`{$key}` = '" . mysql_real_escape_string($value) . "'";
+                    $conditionTerms[] = "`{$key}` = '" . $this->getDb()->escape($value) . "'";
                 $conditionSql = join(' AND ', $conditionTerms);
                 return $conditionSql;
             }

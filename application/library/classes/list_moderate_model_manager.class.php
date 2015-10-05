@@ -210,7 +210,7 @@ class ListModerateModelManager extends ModerateModelManager
 			$where_string = '';
 			foreach($revision_condition as $key => $value)
 			{
-				$where_string .= $key.' = "'.mysql_real_escape_string($value).'" AND ';
+				$where_string .= $key.' = "'.Register::get('db')->escape($value).'" AND ';
 			}
 			$where_string = preg_replace('/^(.+) AND $/', '$1', $where_string);
 			$where_string .= ' AND revision_number = '.(int)$revision_number;

@@ -20,7 +20,7 @@
 
             $sql = 'SELECT COUNT(*) as result
                         FROM `' . $table . '`
-                    WHERE `' . $field . '` = "' . mysql_real_escape_string($validate_value) . '"
+                    WHERE `' . $field . '` = "' . $db->escape($validate_value) . '"
                         AND id != ' . (int)$model->getId();
 
             $data = $db->query($sql);

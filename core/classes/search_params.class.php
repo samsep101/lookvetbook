@@ -377,7 +377,7 @@
                             $str = '';
                             foreach ($query_param['value'] as $val) {
                                 if ($val !== NULL) {
-                                    $str .= $param . ' = "' . mysql_real_escape_string($val) . '" OR ';
+                                    $str .= $param . ' = "' . Register::get('db')->escape($val) . '" OR ';
                                 }
                             }
 
@@ -385,7 +385,7 @@
 
                             $this->sql .= ' (' . $str . ')';
                         } else {
-                            $this->sql .= $param . ' = "' . mysql_real_escape_string($query_param['value']) . '" OR ';
+                            $this->sql .= $param . ' = "' . Register::get('db')->escape($query_param['value']) . '" OR ';
                         }
                         $where_num++;
                     } else {
@@ -394,7 +394,7 @@
 							$this->sql .= $param . ' ' . $query_param['operator'].' ('.join($query_param['value'], ',').') ';
 	                    } else {
 		                    if (($query_param['value'] !== FALSE) && ($query_param['value'] !== NULL)) {
-			                    $this->sql .= $param . ' ' . $query_param['operator'] . ' "' . mysql_real_escape_string($query_param['value']) . '"';
+			                    $this->sql .= $param . ' ' . $query_param['operator'] . ' "' . Register::get('db')->escape($query_param['value']) . '"';
 		                    } else {
 			                    $this->sql .= $param . ' IS NULL';
 		                    }

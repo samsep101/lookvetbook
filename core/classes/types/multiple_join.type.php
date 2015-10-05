@@ -110,7 +110,7 @@
             if (is_array($values)) {
                 foreach ($values as $val) {
                     $sql = 'INSERT INTO ' . $link['table'] . ' (`' . $link['source_id'] . '`, `' . $link['foreign_id'] . '`)
-					VALUES (\'' . $this->indexValue . '\', \'' . mysql_real_escape_string($val) . '\')';
+					VALUES (\'' . $this->indexValue . '\', \'' . $db->escape($val) . '\')';
                     $db->query($sql);
                 }
             }

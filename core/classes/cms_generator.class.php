@@ -319,7 +319,7 @@
         {
             $indexField = $this->dataModel->getIndexField();
             $id = $this->request('id', 0);
-            $id = mysql_real_escape_string($id);
+            $id = Register::get('db')->escape($id);
 
             $model = ModelManagerFactory::getManagerOrDefaultManager($this->dataModel->getModelName())->getOneById($id);
 

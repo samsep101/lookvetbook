@@ -283,7 +283,7 @@
             if($pattern && mb_strlen($pattern, 'utf-8') > 2)
             {
                 $this->view->by_page    = 16;
-                $this->view->pattern    = mysql_real_escape_string($pattern);
+                $this->view->pattern    = Register::get('db')->escape($pattern);
                 $this->view->page_title = 'Лекарства';
 
                 $this->render('shop/catalog/index');

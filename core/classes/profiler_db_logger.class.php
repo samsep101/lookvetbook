@@ -18,20 +18,20 @@
             $table_name = 'performance_log_'.date('Y_m_d');
 
             $sql = 'INSERT DELAYED INTO '.$table_name.'
-                    SET ip = "'.mysql_real_escape_string($data['ip']).'",
-                        page = "'.mysql_real_escape_string($data['page']).'",
-                        controller = "'.mysql_real_escape_string($data['controller']).'",
-                        action = "'.mysql_real_escape_string($data['action']).'",
-                        params = "'.mysql_real_escape_string($data['params']).'",
-                        utime = "'.(float)mysql_real_escape_string($data['utime']).'",
-                        stime = "'.(float)mysql_real_escape_string($data['stime']).'",
-                        mysql_time = "'.(float)mysql_real_escape_string($data['mysql_time']).'",
-                        memcache_time = "'.(float)mysql_real_escape_string($data['memcache_time']).'",
-                        mysql_count_queries = "'.(int)mysql_real_escape_string($data['mysql_count_queries']).'",
-                        memcache_count_queries = "'.(int)mysql_real_escape_string($data['memcache_count_queries']).'",
-                        mysql_queries = "'.mysql_real_escape_string($data['mysql_queries']).'",
-                        total_time = "'.(float)mysql_real_escape_string($data['total_time']).'",
-                        referer = "'.mysql_real_escape_string($data['referer']).'"
+                    SET ip = "'.$this->db->escape($data['ip']).'",
+                        page = "'.$this->db->escape($data['page']).'",
+                        controller = "'.$this->db->escape($data['controller']).'",
+                        action = "'.$this->db->escape($data['action']).'",
+                        params = "'.$this->db->escape($data['params']).'",
+                        utime = "'.(float)$this->db->escape($data['utime']).'",
+                        stime = "'.(float)$this->db->escape($data['stime']).'",
+                        mysql_time = "'.(float)$this->db->escape($data['mysql_time']).'",
+                        memcache_time = "'.(float)$this->db->escape($data['memcache_time']).'",
+                        mysql_count_queries = "'.(int)$this->db->escape($data['mysql_count_queries']).'",
+                        memcache_count_queries = "'.(int)$this->db->escape($data['memcache_count_queries']).'",
+                        mysql_queries = "'.$this->db->escape($data['mysql_queries']).'",
+                        total_time = "'.(float)$this->db->escape($data['total_time']).'",
+                        referer = "'.$this->db->escape($data['referer']).'"
                         ';
 
             try {

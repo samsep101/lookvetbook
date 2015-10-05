@@ -32,8 +32,8 @@
 
             $sql = 'SELECT COUNT(*) as result
                     FROM '.$table.'
-                    WHERE '.$field_1.' LIKE "'.mysql_real_escape_string($validate_1).'"
-                    AND '.$field_2.' LIKE "'.mysql_real_escape_string($validate_2).'"
+                    WHERE '.$field_1.' LIKE "'.$db->escape($validate_1).'"
+                    AND '.$field_2.' LIKE "'.$db->escape($validate_2).'"
                     AND id != '.(int)$model->getId();
 
             $data = $db->query($sql);

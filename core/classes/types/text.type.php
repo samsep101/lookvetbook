@@ -34,7 +34,7 @@
         public function getSaveValue($value)
         {
             if (!empty($value)) {
-                return trim(mysql_real_escape_string($value));
+                return trim(Register::get('db')->escape($value));
             } else {
                 return null;
             }

@@ -10,8 +10,8 @@
         {
             $sql = 'SELECT *
                     FROM '.$this->table_name.'
-                    WHERE date BETWEEN "'.mysql_real_escape_string($date_from).'"
-                        AND "'.mysql_real_escape_string($date_to).'"
+                    WHERE date BETWEEN "'.$this->db->escape($date_from).'"
+                        AND "'.$this->db->escape($date_to).'"
                         AND user_id = '.(int)$user_id;
 
             $data = $this->db->query($sql);
@@ -38,7 +38,7 @@
         public function deleteByDateAndUserId($date, $user_id)
         {
             $sql = 'DELETE FROM '.$this->table_name.'
-                    WHERE date="'.mysql_real_escape_string($date).'"
+                    WHERE date="'.$this->db->escape($date).'"
                         AND user_id = '.(int)$user_id;
 
             $this->db->query($sql);

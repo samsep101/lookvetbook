@@ -18,8 +18,8 @@
 		{
 			$sql = 'SELECT COUNT(*) as `result`
                     FROM ' . $this->table_name . '
-                    WHERE sn_name = "' . mysql_real_escape_string($sn_name) . '"
-                    AND token = "' . mysql_real_escape_string($token) . '"';
+                    WHERE sn_name = "' . $this->db->escape($sn_name) . '"
+                    AND token = "' . $this->db->escape($token) . '"';
 
 			$data = $this->db->query($sql);
 
@@ -35,7 +35,7 @@
 			$sql = 'SELECT *
                     FROM ' . $this->table_name . '
                     WHERE account_id = ' . (int)$account_id . '
-                    AND sn_name = "' . mysql_real_escape_string($sn_name) . '";';
+                    AND sn_name = "' . $this->db->escape($sn_name) . '";';
 
 			$data = $this->db->query($sql);
 

@@ -8,7 +8,7 @@
         {
             $sql = 'SELECT *
                     FROM target_call
-                    WHERE phone = ' .mysql_real_escape_string($phone);
+                    WHERE phone = ' .$this->db->escape($phone);
             $data = $this->db->query($sql);
 
             return ($data) ? $this->initOne($data[0]) : null;

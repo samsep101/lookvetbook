@@ -490,7 +490,7 @@
         {
             $sql = 'SELECT id
                     FROM ' . $this->table_name . '
-                    WHERE name = "' . mysql_real_escape_string($name) . '"';
+                    WHERE name = "' . $this->db->escape($name) . '"';
 
             $data = $this->db->query($sql);
 
@@ -713,10 +713,10 @@
         {
             $sql = 'SELECT *
 					FROM ' . $this->table_name . '
-					WHERE name = "' . mysql_real_escape_string($name) . '"
-						OR genitive_name = "' . mysql_real_escape_string($name) . '"
-						OR dative_name = "' . mysql_real_escape_string($name) . '"
-						OR plural_name = "' . mysql_real_escape_string($name) . '"';
+					WHERE name = "' . $this->db->escape($name) . '"
+						OR genitive_name = "' . $this->db->escape($name) . '"
+						OR dative_name = "' . $this->db->escape($name) . '"
+						OR plural_name = "' . $this->db->escape($name) . '"';
 
             $data = $this->db->query($sql);
 

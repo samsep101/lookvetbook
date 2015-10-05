@@ -42,10 +42,10 @@
                     FROM help_material
                     LEFT JOIN help_subrubric ON help_material.help_subrubric_id = help_subrubric.id
                     LEFT JOIN help_rubric ON help_subrubric.help_rubric_id = help_rubric.id
-                    WHERE (help_material.title LIKE  "%' . mysql_real_escape_string($query) . '%"
-                    OR help_subrubric.title LIKE  "%' . mysql_real_escape_string($query) . '%"
-                    OR help_rubric.title LIKE  "%' . mysql_real_escape_string($query) . '%"
-                    OR help_material.content LIKE "%' . mysql_real_escape_string($query) . '%")
+                    WHERE (help_material.title LIKE  "%' . $this->db->escape($query) . '%"
+                    OR help_subrubric.title LIKE  "%' . $this->db->escape($query) . '%"
+                    OR help_rubric.title LIKE  "%' . $this->db->escape($query) . '%"
+                    OR help_material.content LIKE "%' . $this->db->escape($query) . '%")
                     AND help_material.is_active = 1
                     AND help_subrubric.is_active = 1
                     AND help_rubric.is_active = 1

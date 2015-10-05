@@ -446,7 +446,7 @@
 		{
 			$sql = 'SELECT *
                 FROM ' . $this->table_name . '
-                WHERE name LIKE  "%' . mysql_real_escape_string($name) . '%"
+                WHERE name LIKE  "%' . $this->db->escape($name) . '%"
                 LIMIT 0,' . $by_page;
 
 			$data = $this->db->query($sql);
@@ -466,7 +466,7 @@
 			}
 			$sql = 'SELECT SQL_CALC_FOUND_ROWS *
                     FROM ' . $this->table_name . '
-                    WHERE name LIKE  "%' . mysql_real_escape_string($query) . '%"
+                    WHERE name LIKE  "%' . $this->db->escape($query) . '%"
                     LIMIT ' . $offset . ',' . $by_page;
 
 			$data = $this->db->query($sql);
@@ -891,7 +891,7 @@
         {
             $sql = 'SELECT *
                 FROM ' . $this->table_name . '
-                WHERE name LIKE  "%' . mysql_real_escape_string($name) . '%"
+                WHERE name LIKE  "%' . $this->db->escape($name) . '%"
                 AND city_id != ' . (int)CityModel::MOSCOW_ID . '
                 LIMIT 0,' . $by_page;
 

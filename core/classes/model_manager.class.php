@@ -352,7 +352,7 @@
         {
             $sql = 'SELECT COUNT(*) as `result`
                     FROM ' . $this->table_name . '
-                    WHERE `' . $this->id_field_name . '` = "' . mysql_real_escape_string($id) . '"';
+                    WHERE `' . $this->id_field_name . '` = "' . $this->db->escape($id) . '"';
 
             $data = $this->db->query($sql);
 

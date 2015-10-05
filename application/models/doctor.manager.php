@@ -260,7 +260,7 @@
         public function deleteByFirstName($first_name)
         {
             $sql = 'DELETE FROM ' . $this->table_name . '
-                    WHERE  first_name = "' . mysql_real_escape_string($first_name) . '"';
+                    WHERE  first_name = "' . $this->db->escape($first_name) . '"';
             $this->db->query($sql);
         }
 
@@ -273,7 +273,7 @@
 
             $sql = 'SELECT *
                     FROM ' . $this->table_name . '
-                    WHERE `first_name` = "' . mysql_real_escape_string($first_name) . '"';
+                    WHERE `first_name` = "' . $this->db->escape($first_name) . '"';
 
             $data = $db->query($sql);
 
@@ -371,7 +371,7 @@
                         WHERE doctor_id = doctor.id
                         AND clinic_id = ' . (int)$clinic_id . '
                     )>0
-                    AND doctor.full_lower_name LIKE  "%' . mysql_real_escape_string($disease_query) . '%"';
+                    AND doctor.full_lower_name LIKE  "%' . $this->db->escape($disease_query) . '%"';
 
             $data = $this->db->query($sql);
 
@@ -385,7 +385,7 @@
         {
             $sql = 'SELECT *
                 FROM ' . $this->table_name . '
-                WHERE full_lower_name LIKE  "%' . mysql_real_escape_string($full_lower_name) . '%"
+                WHERE full_lower_name LIKE  "%' . $this->db->escape($full_lower_name) . '%"
                 LIMIT 0,' . $by_page;
 
             $data = $this->db->query($sql);
@@ -405,7 +405,7 @@
             }
             $sql = 'SELECT SQL_CALC_FOUND_ROWS *
                     FROM ' . $this->table_name . '
-                    WHERE full_lower_name LIKE  "%' . mysql_real_escape_string($query) . '%"
+                    WHERE full_lower_name LIKE  "%' . $this->db->escape($query) . '%"
                     LIMIT ' . $offset . ',' . $by_page;
 
             $data = $this->db->query($sql);
@@ -660,7 +660,7 @@
         {
             $sql = 'SELECT *
                     FROM doctor
-                    WHERE full_lower_name LIKE "%' . mysql_real_escape_string($name) . '%"
+                    WHERE full_lower_name LIKE "%' . $this->db->escape($name) . '%"
                     AND is_virtual is null
                     LIMIT ' . (int)$page . ', ' . (int)$by_page;
 

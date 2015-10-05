@@ -13,7 +13,7 @@
 		{
 			$sql = 'SELECT *
 					FROM '.$this->table_name.'
-					WHERE name LIKE "'.mysql_real_escape_string($name_part).'%"';
+					WHERE name LIKE "'.$this->db->escape($name_part).'%"';
 
 			$data = $this->db->query($sql);
 

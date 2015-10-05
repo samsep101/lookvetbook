@@ -109,7 +109,7 @@
 			$sql = 'SELECT (MAX(date_to) + INTERVAL 1 DAY) as min_date
 				FROM doctor_schedule
 				WHERE date_to > NOW()
-					AND ((date_to IS NULL ) OR (date_to < "' . mysql_real_escape_string($doctor_schedule->date_from) . '"))
+					AND ((date_to IS NULL ) OR (date_to < "' . $this->db->escape($doctor_schedule->date_from) . '"))
 					AND doctor_id = ' . (int)$doctor_schedule->doctor_id . '
 					AND clinic_id = ' . (int)$doctor_schedule->clinic_id . '
 					AND specialty_id = ' . (int)$doctor_schedule->specialty_id . '
@@ -124,7 +124,7 @@
 			$sql = 'SELECT (MIN(date_from) - INTERVAL 1 DAY) as max_date
 				FROM doctor_schedule
 				WHERE date_from > NOW()
-					AND date_from > "' . mysql_real_escape_string($doctor_schedule->date_from) . '"
+					AND date_from > "' . $this->db->escape($doctor_schedule->date_from) . '"
 					AND doctor_id = ' . (int)$doctor_schedule->doctor_id . '
 					AND clinic_id = ' . (int)$doctor_schedule->clinic_id . '
 					AND specialty_id = ' . (int)$doctor_schedule->specialty_id . '

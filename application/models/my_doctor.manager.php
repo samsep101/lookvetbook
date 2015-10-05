@@ -12,8 +12,8 @@
 
             $sql = 'SELECT COUNT(*) as `result`
                 FROM ' . $this->table_name . '
-                WHERE `doctor_id` = "' . mysql_real_escape_string($doctor_id) . '"
-                    AND `account_id` = "' . mysql_real_escape_string($account_id) . '"';
+                WHERE `doctor_id` = "' . $this->db->escape($doctor_id) . '"
+                    AND `account_id` = "' . $this->db->escape($account_id) . '"';
 
             $data = $this->db->query($sql);
 

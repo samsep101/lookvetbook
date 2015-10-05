@@ -85,7 +85,7 @@
                     FROM my_disease md
                     INNER JOIN disease d ON md.disease_id = d.id
                     WHERE md.account_id = ' . (int)$account_id . '
-                        AND d.title LIKE "' . mysql_real_escape_string($letter) . '%"
+                        AND d.title LIKE "' . $this->db->escape($letter) . '%"
                         AND md.is_archive != 1
                     ORDER BY d.title
                     LIMIT ' . $page . ',' . $per_page . ';';
@@ -103,7 +103,7 @@
                     INNER JOIN disease d ON md.disease_id = d.id
                     WHERE md.account_id = ' . (int)$account_id . '
                     AND md.is_archive = 1
-                    AND d.title LIKE "' . mysql_real_escape_string($letter) . '%"
+                    AND d.title LIKE "' . $this->db->escape($letter) . '%"
                     ORDER BY d.title
                     LIMIT ' . $page . ',' . $per_page . ';';
 			$data = $this->db->query($sql);
@@ -117,7 +117,7 @@
                     FROM my_disease md
                     INNER JOIN disease d ON md.disease_id = d.id
                     WHERE md.account_id = ' . (int)$account_id . '
-                    AND d.title LIKE "' . mysql_real_escape_string($letter) . '%"
+                    AND d.title LIKE "' . $this->db->escape($letter) . '%"
                     ORDER BY d.title;';
 			$data = $this->db->query($sql);
 
@@ -131,7 +131,7 @@
                     INNER JOIN disease d ON md.disease_id = d.id
                     WHERE md.account_id = ' . (int)$account_id . '
                     AND md.is_archive = 1
-                    AND d.title LIKE "' . mysql_real_escape_string($letter) . '%"
+                    AND d.title LIKE "' . $this->db->escape($letter) . '%"
                     ORDER BY d.title;';
 			$data = $this->db->query($sql);
 

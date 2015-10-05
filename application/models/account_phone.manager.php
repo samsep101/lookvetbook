@@ -58,7 +58,7 @@
 		{
 			$sql = 'UPDATE account_phone
                     SET is_confirmed = 1
-                    WHERE phone = "' . mysql_real_escape_string($phone) . '"
+                    WHERE phone = "' . $this->db->escape($phone) . '"
                     AND account_id = ' . (int)$account_id . ';';
 
 			$this->db->query($sql);
@@ -66,12 +66,13 @@
 
 		public static function setCodeAndDtById($id, $code, $date)
 		{
+			$db = Register::get('db');
 			$sql = 'UPDATE account_phone
-                    SET code = "' . mysql_real_escape_string($code) . '",
-                        dt = "' . mysql_real_escape_string($date) . '"
+                    SET code = "' . $db->escape($code) . '",
+                        dt = "' . $db->escape($date) . '"
                     WHERE id = ' . $id;
 
-			Register::get('db')->query($sql);
+			$db->query($sql);
 		}
 
 		/**
@@ -95,8 +96,8 @@
 			$sql = 'SELECT ' . $this->selected_fields . '
                     FROM account_phone
                     WHERE account_id = ' . $account_id . '
-                    AND phone = "' . mysql_real_escape_string($phone) . '"
-                    AND code = "' . mysql_real_escape_string($code) . '"';
+                    AND phone = "' . $this->db->escape($phone) . '"
+                    AND code = "' . $this->db->escape($code) . '"';
 			$db = Register::get('db');
 			$data = $db->query($sql);
 
@@ -116,7 +117,7 @@
 		{
 			$phone = preg_replace('/[^0-9]/', '', $phone);
 			$sql = 'DELETE FROM account_phone
-                    WHERE phone = "' . mysql_real_escape_string($phone) . '"';
+                    WHERE phone = "' . $this->db->escape($phone) . '"';
 
 			$this->db->query($sql);
 		}
@@ -130,7 +131,7 @@
 
 			$sql = 'SELECT ' . $this->selected_fields . '
                     FROM account_phone
-                    WHERE phone = "' . mysql_real_escape_string($phone) . '"';
+                    WHERE phone = "' . $this->db->escape($phone) . '"';
 			$db = Register::get('db');
 			$data = $db->query($sql);
 
@@ -153,7 +154,7 @@
 			$sql = 'SELECT *
                     FROM ' . $this->table_name . '
                     WHERE account_id = ' . (int)$account_id . '
-                    AND phone = "' . mysql_real_escape_string($phone) . '"
+                    AND phone = "' . $this->db->escape($phone) . '"
                     AND is_confirmed = 1';
 
 			$data = $this->db->query($sql);
@@ -163,7 +164,7 @@
         public function deleteNotConfirmedByPhone($phone)
         {
             $sql = 'DELETE FROM '.$this->table_name.'
-                    WHERE phone = "'.mysql_real_escape_string($phone).'"
+                    WHERE phone = "'.$this->db->escape($phone).'"
                         AND is_confirmed = 0';
 
             $this->db->query($sql);

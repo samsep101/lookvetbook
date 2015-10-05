@@ -11,7 +11,7 @@
 		{
 			$sql = 'SELECT *
                     FROM mail_template
-                    WHERE code = "' . mysql_real_escape_string($code) . '"';
+                    WHERE code = "' . $this->db->escape($code) . '"';
 
 			$data = $this->db->query($sql);
 

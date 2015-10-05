@@ -52,7 +52,7 @@
 			$sql = 'SELECT COUNT(*) as `result`
                     FROM family_relation_moderate
                     WHERE account_id = ' . (int)$account_id . '
-                    AND full_name = "' . mysql_real_escape_string($full_name) . '"
+                    AND full_name = "' . $this->db->escape($full_name) . '"
                     AND is_confirmed is null';
 
 			$data = $this->db->query($sql);

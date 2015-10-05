@@ -6,7 +6,7 @@
 
 		public function getIdByName($name)
 		{
-			$data = $this->orm_model->select()->where('name=?', mysql_real_escape_string($name))->fetchOne();
+			$data = $this->orm_model->select()->where('name=?', $this->db->escape($name))->fetchOne();
 			return count($data) ? $data['id'] : null;
 		}
 	}

@@ -28,7 +28,7 @@
 			$sql = 'SELECT *
 					FROM '.$this->table_name.'
 					WHERE id="'.(int)$id.'"
-						AND phone_number = "'.mysql_real_escape_string($phone_number).'"';
+						AND phone_number = "'.$this->db->escape($phone_number).'"';
 
 			$data = $this->db->query($sql);
 

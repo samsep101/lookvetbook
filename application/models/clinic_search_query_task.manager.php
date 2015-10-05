@@ -34,7 +34,7 @@
 		public function deleteOneByHash($hash)
 		{
 			$sql = 'DELETE FROM ' . $this->table_name . '
-                    WHERE  hash="' . mysql_real_escape_string($hash) . '"';
+                    WHERE  hash="' . $this->db->escape($hash) . '"';
 			$this->db->query($sql);
 		}
 

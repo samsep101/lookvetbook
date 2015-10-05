@@ -115,7 +115,7 @@
 		{
 			$sql = 'SELECT id
                     FROM ' . $this->table_name . '
-                    WHERE title = "' . mysql_real_escape_string($title) . '"';
+                    WHERE title = "' . $this->db->escape($title) . '"';
 
 			$data = $this->db->query($sql);
 
@@ -129,7 +129,7 @@
 		{
 			$sql = 'SELECT *
                     FROM ' . $this->table_name . '
-                    WHERE title = "' . mysql_real_escape_string($title) . '"';
+                    WHERE title = "' . $this->db->escape($title) . '"';
 			$db = Register::get('db');
 			$data = $db->query($sql);
 
@@ -139,7 +139,7 @@
 		public function setContentById($content, $disease_id)
 		{
 			$sql = 'UPDATE ' . $this->table_name . '
-                    SET content = "' . mysql_real_escape_string($content) . '"
+                    SET content = "' . $this->db->escape($content) . '"
                     WHERE id = ' . $disease_id;
 
 			Register::get('db')->query($sql);
@@ -148,7 +148,7 @@
 		public function setExtendedContentById($extended_content, $disease_id)
 		{
 			$sql = 'UPDATE ' . $this->table_name . '
-                    SET extended_content = "' . mysql_real_escape_string($extended_content) . '"
+                    SET extended_content = "' . $this->db->escape($extended_content) . '"
                     WHERE id = ' . $disease_id;
 
 			Register::get('db')->query($sql);
@@ -157,7 +157,7 @@
 		public function setSourcesById($sources, $disease_id)
 		{
 			$sql = 'UPDATE ' . $this->table_name . '
-                    SET sources = "' . mysql_real_escape_string($sources) . '"
+                    SET sources = "' . $this->db->escape($sources) . '"
                     WHERE id = ' . $disease_id;
 
 			Register::get('db')->query($sql);
@@ -235,7 +235,7 @@
         public function setDateUpdateById($dt_edit, $disease_id)
         {
             $sql = 'UPDATE ' . $this->table_name . '
-                    SET date_update = "' . mysql_real_escape_string($dt_edit) . '"
+                    SET date_update = "' . $this->db->escape($dt_edit) . '"
                     WHERE id = ' . $disease_id;
 
             Register::get('db')->query($sql);

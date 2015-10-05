@@ -431,11 +431,11 @@
 			$sql = 'UPDATE visit
                     SET schedule_id = ' . (int)$visit->schedule_id . ',
 	                    account_id = ' . (int)$visit->account_id . ',
-	                    full_name = "' . mysql_real_escape_string($visit->full_name) . '",
-	                    phone = "' . mysql_real_escape_string($visit->phone) . '",
+	                    full_name = "' . $this->db->escape($visit->full_name) . '",
+	                    phone = "' . $this->db->escape($visit->phone) . '",
 	                    purpose_of_visit_id = ' . (int)$visit->purpose_of_visit_id . ',
-	                    is_first_visit = "' . mysql_real_escape_string($visit->is_first_visit) . '",
-	                    price = "' . mysql_real_escape_string($visit->price) . '"
+	                    is_first_visit = "' . $this->db->escape($visit->is_first_visit) . '",
+	                    price = "' . $this->db->escape($visit->price) . '"
                     WHERE id = ' . (int)$visit_id;
 
 			$this->db->query($sql);

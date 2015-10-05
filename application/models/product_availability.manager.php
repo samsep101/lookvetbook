@@ -59,7 +59,7 @@
 		{
 			$sql = 'UPDATE product_availability
 					SET quantity = 0
-					WHERE dt_actual < "'.mysql_real_escape_string($dt_actual).'"';
+					WHERE dt_actual < "'.$this->db->escape($dt_actual).'"';
 
 			$this->db->query($sql);
 

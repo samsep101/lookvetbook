@@ -97,7 +97,7 @@
 			$sql = 'SELECT s2d.*, s.name as specialty_name
                     FROM specialty_to_doctor s2d
                     INNER JOIN specialty s ON s.id = s2d.specialty_id
-                    WHERE s.name LIKE "' . mysql_real_escape_string($specialty_name) . '"
+                    WHERE s.name LIKE "' . $this->db->escape($specialty_name) . '"
                     ORDER BY s2d.doctor_id';
 
 			$data = $this->db->query($sql);

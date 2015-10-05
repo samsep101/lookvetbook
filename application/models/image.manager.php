@@ -15,8 +15,8 @@
 			{
 				return '';
 			}
-
-			$resize_data = ResizedImageManager::getOneByImageIdAndWidthAndHeightAndAction($image_id, $width, $height, mysql_real_escape_string($action));
+			$db = Register::get('db');
+			$resize_data = ResizedImageManager::getOneByImageIdAndWidthAndHeightAndAction($image_id, $width, $height, $db->escape($action));
 
 			if($resize_data)
 			{
@@ -104,7 +104,7 @@
         {
             $sql = 'SELECT *
                     FROM image
-                    WHERE filename LIKE  "%' .mysql_real_escape_string($filename). '%"
+                    WHERE filename LIKE  "%' .$this->db->escape($filename). '%"
                     LIMIT 1';
 
             $data = $this->db->query($sql);

@@ -11,7 +11,7 @@
 		{
 			$sql = 'SELECT *
                 FROM disease_tag
-                WHERE tag LIKE  "%' . mysql_real_escape_string($disease_query) . '%"';
+                WHERE tag LIKE  "%' . $this->db->escape($disease_query) . '%"';
 
 			$data = $this->db->query($sql);
 
@@ -22,7 +22,7 @@
 		{
 			$sql = 'SELECT id
                     FROM ' . $this->table_name . '
-                    WHERE tag = "' . mysql_real_escape_string($tag) . '"';
+                    WHERE tag = "' . $this->db->escape($tag) . '"';
 
 			$data = $this->db->query($sql);
 

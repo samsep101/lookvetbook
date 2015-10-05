@@ -9,13 +9,11 @@
 		 */
 		public function getOneByHash($hash)
 		{
-			$db = Register::get('db');
-
 			$sql = 'SELECT *
                     FROM ' . $this->table_name . '
-                    WHERE `hash` = "' . mysql_real_escape_string($hash) . '"';
+                    WHERE `hash` = "' . $this->db->escape($hash) . '"';
 
-			$data = $db->query($sql);
+			$data = $this->db->query($sql);
 
 			return (isset($data[0])) ? $this->initOne($data[0]) : null;
 		}

@@ -37,7 +37,7 @@
 		{
 			$sql = 'SELECT *
 					FROM `'.$this->table_name.'`
-					WHERE name="'.mysql_real_escape_string($model).'"
+					WHERE name="'.$this->db->escape($model).'"
 						AND is_deleted IS NULL';
 
 			if($limit)

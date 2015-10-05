@@ -40,12 +40,11 @@
 		 */
 		public function getOneByEmailAndPasswordHash($email, $password_hash)
 		{
-			$db = Register::get('db');
 			$sql = 'SELECT ' . $this->selected_fields . '
                     FROM account
-                    WHERE email = "' . $db->escape($email) . '"
-                        AND password_hash = "' . $db->escape($password_hash) . '"';
-			$data = $db->query($sql);
+                    WHERE email = "' . $this->db->escape($email) . '"
+                        AND password_hash = "' . $this->db->escape($password_hash) . '"';
+			$data = $this->db->query($sql);
 			return (isset($data[0])) ? $this->initOne($data[0]) : null;
 		}
 
@@ -54,13 +53,11 @@
 		 */
 		public function getOneByEmail($email)
 		{
-			$db = Register::get('db');
-			
 			$sql = 'SELECT *
                     FROM account
-                    WHERE `email` = "' . $db->escape($email) . '"';
+                    WHERE `email` = "' . $this->db->escape($email) . '"';
 
-			$data = $db->query($sql);
+			$data = $this->db->query($sql);
 
 			return (isset($data[0])) ? $this->initOne($data[0]) : null;
 		}
@@ -70,13 +67,11 @@
 		 */
 		public function getOneByNick($nick)
 		{
-			$db = Register::get('db');
-
 			$sql = 'SELECT *
                     FROM account
-                    WHERE `nick` = "' . $db->escape($nick) . '"';
+                    WHERE `nick` = "' . $this->db->escape($nick) . '"';
 
-			$data = $db->query($sql);
+			$data = $this->db->query($sql);
 
 			return (isset($data[0])) ? $this->initOne($data[0]) : null;
 		}
@@ -87,14 +82,12 @@
 		 */
 		public function getOneByEmailAndEmailConfirmCode($email, $email_confirm_code)
 		{
-			$db = Register::get('db');
-
 			$sql = 'SELECT *
                     FROM account
-                    WHERE `email` = "' . $db->escape($email) . '"
-                        AND `email_confirm_code` = "' . $db->escape($email_confirm_code) . '";';
+                    WHERE `email` = "' . $this->db->escape($email) . '"
+                        AND `email_confirm_code` = "' . $this->db->escape($email_confirm_code) . '";';
 
-			$data = $db->query($sql);
+			$data = $this->db->query($sql);
 
 			return (isset($data[0])) ? $this->initOne($data[0]) : null;
 		}
@@ -105,9 +98,7 @@
                     SET is_confirm_email = 1
                     WHERE id = ' . (int)$account_id;
 
-			$db = Register::get('db');
-
-			$db->query($sql);
+			$this->db->query($sql);
 		}
 
 		public function deleteByEmail($email)
@@ -128,8 +119,7 @@
 
 		public function setNewPasswordHashByEmail($password_hash, $email)
 		{
-			$db = Register::get('db');
-			$this->orm_model->update(array('password_hash' => $password_hash), 'email = "' . $db->escape($email) . '"');
+			$this->orm_model->update(array('password_hash' => $password_hash), 'email = "' . $this->db->escape($email) . '"');
 		}
 
 		public function setEmailAndEmailConfirmCodeAndPasswordHashByAccountId($email, $email_confirm_code, $account_id, $password_hash)
@@ -152,13 +142,11 @@
 		 */
 		public function getOneByFullName($full_name)
 		{
-			$db = Register::get('db');
-
 			$sql = 'SELECT *
                     FROM account
-                    WHERE full_name = "' . $db->escape($full_name) . '"';
+                    WHERE full_name = "' . $this->db->escape($full_name) . '"';
 
-			$data = $db->query($sql);
+			$data = $this->db->query($sql);
 
 			return (isset($data[0])) ? $this->initOne($data[0]) : null;
 		}
@@ -168,16 +156,14 @@
 		 */
 		public function getOneByFirstNameAndLastNameAndMiddleNameAndEmail($first_name,$last_name,$middle_name,$email)
 		{
-			$db = Register::get('db');
-
 			$sql = 'SELECT *
                     FROM account
-                    WHERE first_name = "' . $db->escape($first_name) . '"
-						AND last_name = "' . $db->escape($last_name) . '"
-						AND middle_name = "' . $db->escape($middle_name) . '"
-						AND email = "' . $db->escape($email) . '"';
+                    WHERE first_name = "' . $this->db->escape($first_name) . '"
+						AND last_name = "' . $this->db->escape($last_name) . '"
+						AND middle_name = "' . $this->db->escape($middle_name) . '"
+						AND email = "' . $this->db->escape($email) . '"';
 
-			$data = $db->query($sql);
+			$data = $this->db->query($sql);
 
 			return (isset($data[0])) ? $this->initOne($data[0]) : null;
 		}
@@ -187,28 +173,24 @@
 		 */
 		public function getOneByFirstNameAndLastNameAndMiddleName($first_name,$last_name,$middle_name)
 		{
-			$db = Register::get('db');
-
 			$sql = 'SELECT *
                     FROM account
-                    WHERE first_name = "' . $db->escape($first_name) . '"
-                    AND last_name = "' . $db->escape($last_name) . '"
-                    AND middle_name = "' . $db->escape($middle_name) . '"';
+                    WHERE first_name = "' . $this->db->escape($first_name) . '"
+                    AND last_name = "' . $this->db->escape($last_name) . '"
+                    AND middle_name = "' . $this->db->escape($middle_name) . '"';
 
-			$data = $db->query($sql);
+			$data = $this->db->query($sql);
 
 			return (isset($data[0])) ? $this->initOne($data[0]) : null;
 		}
 
 		public function getInfoByAccountId($account_id)
 		{
-			$db = Register::get('db');
-
 			$sql = 'SELECT *
                     FROM account
                     WHERE id = ' . (int)($account_id) . '';
 
-			$data = $db->query($sql);
+			$data = $this->db->query($sql);
 
 			return (isset($data[0])) ? $data[0] : null;
 		}

@@ -67,7 +67,7 @@
 		{
 			$sql = 'DELETE
                     FROM ' . $this->table_name . '
-                    WHERE feature_name = "' . mysql_real_escape_string($feature_name) . '";';
+                    WHERE feature_name = "' . $this->db->escape($feature_name) . '";';
 			$data = $this->db->query($sql);
 		}
 
@@ -75,7 +75,7 @@
 		{
 			$sql = 'SELECT 	count(*) as result
                     FROM ' . $this->table_name . '
-                    WHERE feature_name = "' . mysql_real_escape_string($feature_name) . '";';
+                    WHERE feature_name = "' . $this->db->escape($feature_name) . '";';
 			$data = $this->db->query($sql);
 
 			$this->clearRegister();

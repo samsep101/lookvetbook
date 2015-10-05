@@ -8,7 +8,7 @@
 		{
 			$sql = 'SELECT revision_number
 					FROM `' . $this->table_name . '`
-					WHERE list_name = "'.mysql_real_escape_string($list_name).'"
+					WHERE list_name = "'.$this->db->escape($list_name).'"
 						AND '.$this->formParamsWhereCondition($params).'
 					ORDER BY revision_number DESC, id DESC
 					LIMIT 1';
@@ -30,7 +30,7 @@
 			$sql = 'SELECT *
 					FROM ' . $this->table_name . '
 					WHERE '.$this->formParamsWhereCondition($params).'
-						AND list_name = "' . mysql_real_escape_string($list_name) . '"
+						AND list_name = "' . $this->db->escape($list_name) . '"
 						AND moderate_status_id != ' . ModerateStatusModel::PUBLISHED . '
 					ORDER BY revision_number DESC
 					LIMIT 1';

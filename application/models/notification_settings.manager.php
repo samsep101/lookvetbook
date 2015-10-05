@@ -73,7 +73,7 @@
 		{
 			$sql = 'SELECT COUNT(*) as result
                     FROM notification_settings
-                    WHERE account_id = "' . mysql_real_escape_string($account_id) . '"';
+                    WHERE account_id = "' . $this->db->escape($account_id) . '"';
 
 			$data = $this->db->query($sql);
 

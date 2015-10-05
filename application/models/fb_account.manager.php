@@ -9,7 +9,7 @@
 		 */
 		public function getOneByUid($uid)
 		{
-			$data = $this->orm_model->select()->where('uid = ?', mysql_real_escape_string($uid))->fetchOne();
+			$data = $this->orm_model->select()->where('uid = ?', $this->db->escape($uid))->fetchOne();
 			return (isset($data)) ? $this->initOne($data) : null;
 		}
 

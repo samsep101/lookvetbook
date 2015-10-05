@@ -32,7 +32,7 @@
 		{
 			$sql = 'SELECT ' . $this->selected_fields . '
                     FROM ' . $this->table_name . '
-                    WHERE code = "' . mysql_real_escape_string($code) . '"';
+                    WHERE code = "' . $this->db->escape($code) . '"';
 			$db = Register::get('db');
 			$data = $db->query($sql);
 

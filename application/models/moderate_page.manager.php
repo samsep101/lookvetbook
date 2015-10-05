@@ -15,6 +15,8 @@
 
 		public function getTheUpdatedPagesByModeratePageSearchParams(ModeratePageSearchParams $params)
 		{
+			$db = Register::get('db');
+
 			$clinics_id_list = array();
 
 			if($params->registry_user_id)
@@ -57,7 +59,7 @@
 				$where = array();
 				if($params->clinic_name)
 				{
-					$where[] = 'c.name LIKE "%' . mysql_real_escape_string($params->clinic_name) . '%"';
+					$where[] = 'c.name LIKE "%' . $db->escape($params->clinic_name) . '%"';
 				}
 
 				if($clinics_id_list)
@@ -92,7 +94,7 @@
 				$where = array();
 				if($params->clinic_name)
 				{
-					$where[] = 'c.name LIKE "%' . mysql_real_escape_string($params->clinic_name) . '%"';
+					$where[] = 'c.name LIKE "%' . $db->escape($params->clinic_name) . '%"';
 				}
 
 				if($clinics_id_list)
@@ -123,7 +125,7 @@
 				$where = array();
 				if($params->clinic_name)
 				{
-					$where[] = 'c.name LIKE "%' . mysql_real_escape_string($params->clinic_name) . '%"';
+					$where[] = 'c.name LIKE "%' . $db->escape($params->clinic_name) . '%"';
 				}
 
 				if($clinics_id_list)
@@ -154,7 +156,7 @@
 				$where = array();
 				if($params->clinic_name)
 				{
-					$where[] = 'c.name LIKE "%' . mysql_real_escape_string($params->clinic_name) . '%"';
+					$where[] = 'c.name LIKE "%' . $db->escape($params->clinic_name) . '%"';
 				}
 
 				if($clinics_id_list)
@@ -185,7 +187,7 @@
 				$where = array();
 				if($params->clinic_name)
 				{
-					$where[] = 'c.name LIKE "%' . mysql_real_escape_string($params->clinic_name) . '%"';
+					$where[] = 'c.name LIKE "%' . $db->escape($params->clinic_name) . '%"';
 				}
 
 				if($clinics_id_list)
@@ -219,7 +221,7 @@
 				$where = array();
 				if($params->clinic_name)
 				{
-					$where[] = 'c.name LIKE "%' . mysql_real_escape_string($params->clinic_name) . '%"';
+					$where[] = 'c.name LIKE "%' . $db->escape($params->clinic_name) . '%"';
 				}
 
 				if($clinics_id_list)
@@ -253,7 +255,7 @@
 				$where = array();
 				if($params->clinic_name)
 				{
-					$where[] = 'c.name LIKE "%' . mysql_real_escape_string($params->clinic_name) . '%"';
+					$where[] = 'c.name LIKE "%' . $db->escape($params->clinic_name) . '%"';
 				}
 
 				if($clinics_id_list)
@@ -293,7 +295,7 @@
 				$where = array();
 				if($params->clinic_name)
 				{
-					$where[] = 'c.name LIKE "%' . mysql_real_escape_string($params->clinic_name) . '%"';
+					$where[] = 'c.name LIKE "%' . $db->escape($params->clinic_name) . '%"';
 				}
 
 				if($clinics_id_list)
@@ -329,7 +331,7 @@
 				$where = array();
 				if($params->clinic_name)
 				{
-					$where[] = 'c.name LIKE "%' . mysql_real_escape_string($params->clinic_name) . '%"';
+					$where[] = 'c.name LIKE "%' . $db->escape($params->clinic_name) . '%"';
 				}
 
 				if($clinics_id_list)
@@ -356,8 +358,7 @@
 				ORDER BY dt DESC
 				LIMIT ' . (int)$params->offset . ', ' . (int)$params->limit;
 
-
-			$data = Register::get('db')->query($sql);
+			$data = $db->query($sql);
 
 			return $data;
 		}

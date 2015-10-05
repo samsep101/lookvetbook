@@ -13,8 +13,8 @@
 
 			$sql = 'SELECT *
                 FROM ' . $this->table_name . '
-                WHERE long_ip1 <= "' . mysql_real_escape_string($long_ip) . '"
-                AND long_ip2 >= "' . mysql_real_escape_string($long_ip) . '"';
+                WHERE long_ip1 <= "' . $this->db->escape($long_ip) . '"
+                AND long_ip2 >= "' . $this->db->escape($long_ip) . '"';
 
 			$data = $db->query($sql);
 

@@ -61,8 +61,8 @@
 		{
 			$sql = 'SELECT *
                     FROM ' . $this->table_name . '
-                    WHERE name = "' . mysql_real_escape_string($name) . '"
-                    AND region = "' . mysql_real_escape_string($region) . '"';
+                    WHERE name = "' . $this->db->escape($name) . '"
+                    AND region = "' . $this->db->escape($region) . '"';
 			$db = Register::get('db');
 			$data = $db->query($sql);
 
@@ -78,7 +78,7 @@
 		{
 			$sql = 'SELECT *
                     FROM ' . $this->table_name . '
-                    WHERE name = "' . mysql_real_escape_string($name) . '"';
+                    WHERE name = "' . $this->db->escape($name) . '"';
 			$db = Register::get('db');
 			$data = $db->query($sql);
 
@@ -93,8 +93,8 @@
 		{
 			$sql = 'SELECT *
                     FROM ' . $this->table_name . '
-                    WHERE name = "' . mysql_real_escape_string($name) . '"
-                    AND region = "' . mysql_real_escape_string($region) . '"';
+                    WHERE name = "' . $this->db->escape($name) . '"
+                    AND region = "' . $this->db->escape($region) . '"';
 			$db = Register::get('db');
 			$data = $db->query($sql);
 
@@ -111,7 +111,7 @@
 			$offset = ($page - 1) * $by_page;
 			$sql = 'SELECT *
                     FROM ' . $this->table_name . '
-                    WHERE name LIKE  "%' . mysql_real_escape_string($query) . '%"
+                    WHERE name LIKE  "%' . $this->db->escape($query) . '%"
                     AND service_flag = ' . (int)$service_flag . '
                     LIMIT ' . $offset . ',' . $by_page;
 
@@ -128,7 +128,7 @@
 			$offset = ($page - 1) * $by_page;
 			$sql = 'SELECT *
 					FROM ' . $this->table_name . '
-					WHERE name LIKE  "%' . mysql_real_escape_string($query) . '%"
+					WHERE name LIKE  "%' . $this->db->escape($query) . '%"
 					LIMIT ' . $offset . ',' . $by_page;
 
 			$data = $this->db->query($sql);
@@ -306,7 +306,7 @@
             $offset = ($page - 1) * $by_page;
             $sql = 'SELECT *
 					FROM ' . $this->table_name . ' c
-					WHERE name LIKE  "%' . mysql_real_escape_string($query) . '%"
+					WHERE name LIKE  "%' . $this->db->escape($query) . '%"
 					    AND (
 								SELECT COUNT(*) AS lab
 								FROM laboratory

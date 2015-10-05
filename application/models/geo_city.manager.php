@@ -21,7 +21,7 @@
 			$offset = ($page - 1) * $by_page;
 			$sql = 'SELECT *
                 FROM geo_city
-                WHERE city LIKE  "%' . mysql_real_escape_string($query) . '%"
+                WHERE city LIKE  "%' . $this->db->escape($query) . '%"
                 LIMIT ' . $offset . ',' . $by_page;
 
 			$data = $this->db->query($sql);

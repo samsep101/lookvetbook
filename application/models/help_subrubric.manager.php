@@ -10,7 +10,7 @@
 
 			$sql = 'SELECT *
                     FROM help_subrubric
-                    WHERE `help_rubric_id` = "' . mysql_real_escape_string($help_rubric_id) . '"
+                    WHERE `help_rubric_id` = "' . $this->db->escape($help_rubric_id) . '"
                     AND `is_active` = 1';
 
 			$data = $db->query($sql);

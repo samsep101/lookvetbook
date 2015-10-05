@@ -65,13 +65,13 @@
 
 			foreach($dosage_form_list as $v)
 			{
-				$str .= '"'.mysql_real_escape_string($v).'",';
+				$str .= '"'.$this->db->escape($v).'",';
 			}
 			$str = trim($str,',');
 
 			$sql = 'SELECT *
 					FROM '.$this->table_name.'
-					WHERE rus_name_clean = "'.mysql_real_escape_string($rus_name).'"
+					WHERE rus_name_clean = "'.$this->db->escape($rus_name).'"
 						AND dosage_form IN ('.$str.')';
 
 			$data = $this->db->query($sql);
@@ -92,15 +92,15 @@
 
 			foreach($dosage_form_list as $v)
 			{
-				$str .= '"'.mysql_real_escape_string($v).'",';
+				$str .= '"'.$this->db->escape($v).'",';
 			}
 			$str = trim($str,',');
 
 			$sql = 'SELECT *
 					FROM '.$this->table_name.'
-					WHERE rus_name_clean = "'.mysql_real_escape_string($rus_name).'"
+					WHERE rus_name_clean = "'.$this->db->escape($rus_name).'"
 						AND dosage_form IN ('.$str.')
-						AND dosage_form_size="'.mysql_real_escape_string($dosage_form_size).'"';
+						AND dosage_form_size="'.$this->db->escape($dosage_form_size).'"';
 
 			$data = $this->db->query($sql);
 
@@ -118,8 +118,8 @@
 		{
 			$sql = 'SELECT *
 					FROM '.$this->table_name.'
-					WHERE rus_name_clean = "'.mysql_real_escape_string($rus_name).'"
-						AND unit_size="'.mysql_real_escape_string($unit_size).'"';
+					WHERE rus_name_clean = "'.$this->db->escape($rus_name).'"
+						AND unit_size="'.$this->db->escape($unit_size).'"';
 
 			$data = $this->db->query($sql);
 

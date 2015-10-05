@@ -9,13 +9,11 @@
 		 */
 		public function getOneByCode($controllerCode)
 		{
-			$db = $this->db;
-
 			$sql = 'SELECT *
                     FROM controller
-                    WHERE `code` = "' . mysql_real_escape_string($controllerCode) . '"';
+                    WHERE `code` = "' . $this->db->escape($controllerCode) . '"';
 
-			$data = $db->query($sql);
+			$data = $this->db->query($sql);
 			return (isset($data[0])) ? $this->initOne($data[0]) : null;
 		}
 

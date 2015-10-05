@@ -8,7 +8,7 @@
 		{
 			$sql = 'SELECT MAX(balls) as result
                     FROM `' . $this->table_name . '`
-                    WHERE hash = "' . mysql_real_escape_string($hash) . '"';
+                    WHERE hash = "' . $this->db->escape($hash) . '"';
 
 			$data = $this->db->query($sql);
 
@@ -18,7 +18,7 @@
 		public function deleteByHash($hash)
 		{
 			$sql = 'DELETE FROM ' . $this->table_name . '
-                    WHERE hash = "' . mysql_real_escape_string($hash) . '"';
+                    WHERE hash = "' . $this->db->escape($hash) . '"';
 
 			$this->db->query($sql);
 		}
@@ -42,7 +42,7 @@
 		{
 			$sql = 'SELECT *
                     FROM `' . $this->table_name . '`
-                    WHERE hash = "' . mysql_real_escape_string($hash) . '"
+                    WHERE hash = "' . $this->db->escape($hash) . '"
                     ORDER BY balls ASC
                     LIMIT ' . (int)$limit;
 

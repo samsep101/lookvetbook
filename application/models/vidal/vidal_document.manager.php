@@ -52,13 +52,13 @@
 
 			foreach($dosage_form_list as $v)
 			{
-				$str .= '"'.mysql_real_escape_string($v).'",';
+				$str .= '"'.$this->db->escape($v).'",';
 			}
 			$str = trim($str,',');
 
 			$sql = 'SELECT *
 					FROM '.$this->table_name.'
-					WHERE rus_name_clean = "'.mysql_real_escape_string($rus_name).'"
+					WHERE rus_name_clean = "'.$this->db->escape($rus_name).'"
 						AND dosage_form IN ('.$str.')';
 
 			$data = $this->db->query($sql);

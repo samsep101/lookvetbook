@@ -8,8 +8,8 @@
 		{
 			$sql = 'SELECT COUNT(*) as `result`
                 FROM ' . $this->table_name . '
-                WHERE `clinic_id` = "' . mysql_real_escape_string($clinic_id) . '"
-                    AND `account_id` = "' . mysql_real_escape_string($account_id) . '"';
+                WHERE `clinic_id` = "' . $this->db->escape($clinic_id) . '"
+                    AND `account_id` = "' . $this->db->escape($account_id) . '"';
 
 			$data = $this->db->query($sql);
 

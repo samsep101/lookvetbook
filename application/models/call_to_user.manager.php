@@ -25,10 +25,9 @@ class CallToUserManager extends ModelManager {
     {
         $sql = 'SELECT *
                     FROM call_to_user
-                    WHERE phone = "' . mysql_real_escape_string($phone) . '"
-                    AND name = "' . mysql_real_escape_string($name) . '"';
-        $db = Register::get('db');
-        $data = $db->query($sql);
+                    WHERE phone = "' . $this->db->escape($phone) . '"
+                    AND name = "' . $this->db->escape($name) . '"';
+        $data = $this->db->query($sql);
 
         return (isset($data[0])) ? $this->initOne($data[0]) : null;
     }

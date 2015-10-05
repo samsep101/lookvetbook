@@ -108,10 +108,7 @@
                 '/disease/besplodie-zhenskoe',
             );
 
-		        function url_concat($line) {
-			        return SITE_URL.$line;
-		        }
-	          $redirectList = array_map('url_concat', $redirectList);
+	          $redirectList = array_map(function($line) { return SITE_URL.$line; }, $redirectList);
 
             if(in_array($_SERVER['REQUEST_URI'], $keepTrackLinks)) {
                 $link = '';

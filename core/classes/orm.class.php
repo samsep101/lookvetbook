@@ -79,6 +79,7 @@
         {
             $sql = $this->condition->selectSql();
             $db = $this->getDb();
+	          //echo '!<!--'.$sql.'-->!';
             $rows = $db->query($sql);
             return $rows;
         }

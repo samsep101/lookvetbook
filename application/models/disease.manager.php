@@ -6,7 +6,7 @@
 
 		protected $transliterated_field = 'title';
 
-        public function beforeSave(DynamicModel $disease)
+		public function beforeSave(DynamicModel $disease)
 		{
 			$word_decline = WordDeclination::getInstance();
 
@@ -19,8 +19,8 @@
 				$disease->prepositional_name = $word_decline->toPrepositional($disease->title);
 			}
 
-            if (!$disease->description)
-                $disease->description = DiseaseDescriptionGenerator::generate($disease);
+			if (!$disease->description)
+				$disease->description = DiseaseDescriptionGenerator::generate($disease);
 
 			parent::beforeSave($disease);
 		}
@@ -36,7 +36,7 @@
 			return $this->getListByModelSearchCriteria($criteria);
 		}
 
-        /**
+		/**
 		 * return DiseaseModel[]
 		 */
 		public function getListByDiseaseTagId($disease_tags, $by_page, $page, $get_extra_entry = 0)
@@ -60,16 +60,16 @@
 			}
 
 			$sql = 'SELECT *
-                FROM disease
-                WHERE (
-                    SELECT COUNT(*)
-                    FROM disease_to_disease_tag
-                    WHERE disease_id = disease.id
-                    AND disease_tag_id IN (' . $tags_string . ')
-                )>0
-                AND is_active = 1
-                GROUP BY disease.id
-                LIMIT ' . $offset . ',' . $by_page;
+				FROM disease
+				WHERE (
+					SELECT COUNT(*)
+					FROM disease_to_disease_tag
+					WHERE disease_id = disease.id
+					AND disease_tag_id IN (' . $tags_string . ')
+				)>0
+				AND is_active = 1
+				GROUP BY disease.id
+				LIMIT ' . $offset . ',' . $by_page;
 
 			$data = $db->query($sql);
 
@@ -79,10 +79,10 @@
 		public function getSelectedListByAccountId($account_id)
 		{
 			$sql = 'SELECT d.*
-                    FROM disease d
-                    INNER JOIN my_disease m ON m.disease_id = d.id
-                    WHERE m.account_id = ' . (int)$account_id . '
-                    ORDER BY m.dt DESC';
+					FROM disease d
+					INNER JOIN my_disease m ON m.disease_id = d.id
+					WHERE m.account_id = ' . (int)$account_id . '
+					ORDER BY m.dt DESC';
 			$data = $this->db->query($sql);
 
 			return $this->initList($data);
@@ -114,22 +114,22 @@
 		public function getIdByTitle($title)
 		{
 			$sql = 'SELECT id
-                    FROM ' . $this->table_name . '
-                    WHERE title = "' . $this->db->escape($title) . '"';
+					FROM ' . $this->table_name . '
+					WHERE title = "' . $this->db->escape($title) . '"';
 
 			$data = $this->db->query($sql);
 
 			return (isset($data[0]['id'])) ? $data[0]['id'] : false;
 		}
 
-        /**
+		/**
 		 * return DiseaseModel
 		 */
 		public function getOneByTitle($title)
 		{
 			$sql = 'SELECT *
-                    FROM ' . $this->table_name . '
-                    WHERE title = "' . $this->db->escape($title) . '"';
+					FROM ' . $this->table_name . '
+					WHERE title = "' . $this->db->escape($title) . '"';
 			$db = Register::get('db');
 			$data = $db->query($sql);
 
@@ -139,8 +139,8 @@
 		public function setContentById($content, $disease_id)
 		{
 			$sql = 'UPDATE ' . $this->table_name . '
-                    SET content = "' . $this->db->escape($content) . '"
-                    WHERE id = ' . $disease_id;
+					SET content = "' . $this->db->escape($content) . '"
+					WHERE id = ' . $disease_id;
 
 			Register::get('db')->query($sql);
 		}
@@ -148,8 +148,8 @@
 		public function setExtendedContentById($extended_content, $disease_id)
 		{
 			$sql = 'UPDATE ' . $this->table_name . '
-                    SET extended_content = "' . $this->db->escape($extended_content) . '"
-                    WHERE id = ' . $disease_id;
+					SET extended_content = "' . $this->db->escape($extended_content) . '"
+					WHERE id = ' . $disease_id;
 
 			Register::get('db')->query($sql);
 		}
@@ -157,8 +157,8 @@
 		public function setSourcesById($sources, $disease_id)
 		{
 			$sql = 'UPDATE ' . $this->table_name . '
-                    SET sources = "' . $this->db->escape($sources) . '"
-                    WHERE id = ' . $disease_id;
+					SET sources = "' . $this->db->escape($sources) . '"
+					WHERE id = ' . $disease_id;
 
 			Register::get('db')->query($sql);
 		}
@@ -166,8 +166,8 @@
 		public function setIsActiveById($is_active, $disease_id)
 		{
 			$sql = 'UPDATE ' . $this->table_name . '
-                    SET is_active = ' . (int)$is_active . '
-                    WHERE id = ' . $disease_id;
+					SET is_active = ' . (int)$is_active . '
+					WHERE id = ' . $disease_id;
 
 			Register::get('db')->query($sql);
 		}
@@ -175,7 +175,7 @@
 		public function setIsActive($is_active)
 		{
 			$sql = 'UPDATE ' . $this->table_name . '
-                    SET is_active = ' . (int)$is_active;
+					SET is_active = ' . (int)$is_active;
 
 			Register::get('db')->query($sql);
 		}
@@ -183,119 +183,119 @@
 		public function getActiveOneById($disease_id)
 		{
 			$sql = 'SELECT *
-                    FROM ' . $this->table_name . '
-                    WHERE is_active = 1
-                    AND id = ' . $disease_id;
+					FROM ' . $this->table_name . '
+					WHERE is_active = 1
+					AND id = ' . $disease_id;
 			$db = Register::get('db');
 			$data = $db->query($sql);
 
 			return (isset($data[0])) ? $this->initOne($data[0]) : null;
 		}
 
-        public function getDiseasesWithoutDescription()
-        {
-            $db = Register::get('db');
+		public function getDiseasesWithoutDescription()
+		{
+			$db = Register::get('db');
 
-            $sql = 'SELECT *
-                    FROM '.$this->table_name.'
-                    WHERE description IS NULL';
+			$sql = 'SELECT *
+					FROM '.$this->table_name.'
+					WHERE description IS NULL';
 
-            $data = $db->query($sql);
+			$data = $db->query($sql);
 
-            return (isset($data)) ? $this->initList($data) : array();
-        }
+			return (isset($data)) ? $this->initList($data) : array();
+		}
 
-        public function getOneByContentProjectId($content_project_id)
-        {
-            $sql = 'SELECT *
-                    FROM '.$this->table_name.'
-                    WHERE content_project_id = '.(int)$content_project_id;
-            $db = Register::get('db');
-            $data = $db->query($sql);
+		public function getOneByContentProjectId($content_project_id)
+		{
+			$sql = 'SELECT *
+					FROM '.$this->table_name.'
+					WHERE content_project_id = '.(int)$content_project_id;
+			$db = Register::get('db');
+			$data = $db->query($sql);
 
-            return (isset($data[0])) ? $this->initOne($data[0]) : null;
-        }
+			return (isset($data[0])) ? $this->initOne($data[0]) : null;
+		}
 
-        public function getActiveListWithLimitForYandex($limit)
-        {
-            $db = Register::get('db');
+		public function getActiveListWithLimitForYandex($limit)
+		{
+			$db = Register::get('db');
 
-            $sql = 'SELECT *
-                    FROM '.$this->table_name.' d
-                    WHERE is_active = 1
-                    AND (date_yandex_send is null OR date_yandex_send <= date_update)
-                    ORDER BY date_yandex_send ASC
-                    LIMIT 0,' . $limit;
+			$sql = 'SELECT *
+					FROM '.$this->table_name.' d
+					WHERE is_active = 1
+					AND (date_yandex_send is null OR date_yandex_send <= date_update)
+					ORDER BY date_yandex_send ASC
+					LIMIT 0,' . $limit;
 
-            $data = $db->query($sql);
+			$data = $db->query($sql);
 
-            return (isset($data)) ? $this->initList($data) : array();
-        }
+			return (isset($data)) ? $this->initList($data) : array();
+		}
 
-        public function setDateUpdateById($dt_edit, $disease_id)
-        {
-            $sql = 'UPDATE ' . $this->table_name . '
-                    SET date_update = "' . $this->db->escape($dt_edit) . '"
-                    WHERE id = ' . $disease_id;
+		public function setDateUpdateById($dt_edit, $disease_id)
+		{
+			$sql = 'UPDATE ' . $this->table_name . '
+					SET date_update = "' . $this->db->escape($dt_edit) . '"
+					WHERE id = ' . $disease_id;
 
-            Register::get('db')->query($sql);
-        }
+			Register::get('db')->query($sql);
+		}
 
-        public function getCountActiveList()
-        {
-            $db = Register::get('db');
+		public function getCountActiveList()
+		{
+			$db = Register::get('db');
 
-            $sql = 'SELECT count(*) as result
-                    FROM '.$this->table_name.'
-                    WHERE is_active = 1';
+			$sql = 'SELECT count(*) as result
+					FROM '.$this->table_name.'
+					WHERE is_active = 1';
 
-            $data = $db->query($sql);
+			$data = $db->query($sql);
 
-            return $data[0]['result'];
-        }
+			return $data[0]['result'];
+		}
 
-        public function getCountNotInYandex()
-        {
-            $db = Register::get('db');
+		public function getCountNotInYandex()
+		{
+			$db = Register::get('db');
 
-            $sql = 'SELECT count(*) as result
-                    FROM '.$this->table_name.'
-                    WHERE date_yandex_send is null
-                    AND is_active = 1';
+			$sql = 'SELECT count(*) as result
+					FROM '.$this->table_name.'
+					WHERE date_yandex_send is null
+					AND is_active = 1';
 
-            $data = $db->query($sql);
+			$data = $db->query($sql);
 
-            return $data[0]['result'];
-        }
+			return $data[0]['result'];
+		}
 
-        public function getCountInYandex()
-        {
-            $db = Register::get('db');
+		public function getCountInYandex()
+		{
+			$db = Register::get('db');
 
-            $sql = 'SELECT count(*) as result
-                    FROM '.$this->table_name.'
-                    WHERE date_yandex_send is not null
-                    AND is_active = 1';
+			$sql = 'SELECT count(*) as result
+					FROM '.$this->table_name.'
+					WHERE date_yandex_send is not null
+					AND is_active = 1';
 
-            $data = $db->query($sql);
+			$data = $db->query($sql);
 
-            return $data[0]['result'];
-        }
+			return $data[0]['result'];
+		}
 
-        public function getCountInYandexToUpdate()
-        {
-            $db = Register::get('db');
+		public function getCountInYandexToUpdate()
+		{
+			$db = Register::get('db');
 
-            $sql = 'SELECT count(*) as result
-                    FROM '.$this->table_name.'
-                    WHERE date_yandex_send is not null
-                    AND date_update > date_yandex_send
-                    AND is_active = 1';
+			$sql = 'SELECT count(*) as result
+					FROM '.$this->table_name.'
+					WHERE date_yandex_send is not null
+					AND date_update > date_yandex_send
+					AND is_active = 1';
 
-            $data = $db->query($sql);
+			$data = $db->query($sql);
 
-            return $data[0]['result'];
-        }
+			return $data[0]['result'];
+		}
 
 		/**
 		 * @param ModelSearchCriteria $criteria
@@ -310,44 +310,44 @@
 			return $this->getListByIds($ids);
 		}
 
-        public function getSimilarDisease($disease_id)
-        {
-            $db = Register::get('db');
-            $similarDisease = array();
+		public function getSimilarDisease($disease_id)
+		{
+			$db = Register::get('db');
+			$similarDisease = array();
 
-            $sql = 'SELECT *
-                        FROM disease
-                        WHERE `id` IN (
-                            SELECT DISTINCT std.disease_id
-                                FROM `specialty_to_disease` AS std RIGHT JOIN (
-                                    SELECT DISTINCT std.specialty_id AS specialty_id
-                                        FROM `disease` AS d
-                                            INNER JOIN `specialty_to_disease` AS std ON std.disease_id = d.id
-                                            INNER JOIN `specialty` AS s ON s.id = std.specialty_id
-                                        WHERE d.%s
-                                            AND d.`is_active` = 1
-                                            AND std.main_flag = 1
-                                            AND s.parent_id IS NULL
-                                            OR s.parent_id = 0
-                                        ORDER BY std.main_flag DESC ) AS mt ON std.specialty_id = mt.specialty_id
-                                    ORDER BY std.main_flag DESC
-                        )
-                        ORDER BY RAND() LIMIT 6';
-
-
-            if(gettype($disease_id) == 'string') $sql = sprintf($sql, '`alias` = \'' . $disease_id . '\'');
-            elseif(gettype($disease_id) == 'integer') $sql = sprintf($sql, '`id` = \'' . $disease_id . '\'');
-            else return $similarDisease;
-
-            $similarDisease = $db->query($sql);
-
-            if(count($similarDisease))
-            {
-                foreach($similarDisease AS $sdKey => $sdValue)
-                    $similarDisease[$sdKey]['link'] = 'http://' . $_SERVER['HTTP_HOST'] . '/disease/' .$sdValue['alias'];
-            } else $similarDisease = array();
+			$sql = 'SELECT *
+						FROM disease
+						WHERE `id` IN (
+							SELECT DISTINCT std.disease_id
+								FROM `specialty_to_disease` AS std RIGHT JOIN (
+									SELECT DISTINCT std.specialty_id AS specialty_id
+										FROM `disease` AS d
+											INNER JOIN `specialty_to_disease` AS std ON std.disease_id = d.id
+											INNER JOIN `specialty` AS s ON s.id = std.specialty_id
+										WHERE d.%s
+											AND d.`is_active` = 1
+											AND std.main_flag = 1
+											AND s.parent_id IS NULL
+											OR s.parent_id = 0
+										ORDER BY std.main_flag DESC ) AS mt ON std.specialty_id = mt.specialty_id
+									ORDER BY std.main_flag DESC
+						)
+						ORDER BY RAND() LIMIT 6';
 
 
-            return $similarDisease;
-        }
+			if(gettype($disease_id) == 'string') $sql = sprintf($sql, '`alias` = \'' . $disease_id . '\'');
+			elseif(gettype($disease_id) == 'integer') $sql = sprintf($sql, '`id` = \'' . $disease_id . '\'');
+			else return $similarDisease;
+
+			$similarDisease = $db->query($sql);
+
+			if(count($similarDisease))
+			{
+				foreach($similarDisease AS $sdKey => $sdValue)
+					$similarDisease[$sdKey]['link'] = 'http://' . $_SERVER['HTTP_HOST'] . '/disease/' .$sdValue['alias'];
+			} else $similarDisease = array();
+
+
+			return $similarDisease;
+		}
 	}

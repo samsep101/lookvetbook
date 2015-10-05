@@ -10,7 +10,7 @@
 
             if (!$result) {
                 echo "DB Error, could not list tables\n";
-                echo 'MySQL Error: ' . mysql_error();
+                echo 'MySQL Error: ' . $db->error();
                 exit;
             }
 
@@ -31,7 +31,7 @@
                         $controller->is_active = 1;
 
                         if($controller_manager->save($controller)){
-                            $controller_id = mysql_insert_id();
+                            $controller_id = $db->lastInsertId();
                             $grant = new GrantModel();
                             $grant->role_id = '1';
                             $grant->controller_id = $controller_id;
@@ -56,7 +56,7 @@
 
             if (!$result) {
                 echo "DB Error, could not list tables\n";
-                echo 'MySQL Error: ' . mysql_error();
+                echo 'MySQL Error: ' . $db->error();
                 exit;
             }
 
@@ -162,7 +162,7 @@
 
             if (!$result) {
                 echo "DB Error, could not list tables\n";
-                echo 'MySQL Error: ' . mysql_error();
+                echo 'MySQL Error: ' . $db->error();
                 exit;
             }
 

@@ -1545,10 +1545,22 @@ if (!Acc::isAuthed())
 				}
 			}
 
+			//временная порнография - вывод особых докторов вместо любых
+			if($specialty_id==96) {
+				$doctor_search_params->clinic_id = 3580;
+				$doctors2 = ModelManagerFactory::getByName('doctor')->getListByDoctorSearchParams($doctor_search_params);
+				unset($doctor_search_params->clinic_id);
+			}
+
 			$doctors = ModelManagerFactory::getByName('doctor')->getListByDoctorSearchParams($doctor_search_params);
 
-			if($doctors)
-			{
+			if($doctors) {
+				//временная порнография
+				if($specialty_id==96 and count($doctors2)) {
+					for($i=0;$i<count($doctors2); $i++){
+						$doctors[$i] = $doctors2[$i];
+					}
+				}
 				$any_search = true;
 			}
 			else

@@ -64,7 +64,7 @@
 			$this->__template = Application::getTemplatesDir(TRUE) . '/'. $templateName . $this->__extension;
 			include($this->__template);
 			$html = ob_get_contents();
-			ob_clean();
+			ob_end_clean();
 
 			return $this->filter($html);
 		}

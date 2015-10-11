@@ -146,7 +146,7 @@
 				$report_generator->generate($file_path);
 
 				PhpHeaderHelper::word2007($filename, filesize($file_path));
-				ob_clean();
+				ob_end_clean();
 				flush();
 				readfile($file_path);
 

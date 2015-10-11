@@ -52,7 +52,7 @@
             $this->view->render($templatePath);
 
             $content = ob_get_contents();
-            ob_clean();
+	          ob_end_clean();
 
             return $content;
         }

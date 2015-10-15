@@ -136,7 +136,7 @@
             </div>
         </div>
         
-        <?php if ($clinic->alias == 'dobromed-m-bratislavskaya') { ?>
+        <?php if ($clinic->alias == 'dobromed-m-bratislavskaya' and 0) { ?>
         	<div class="dobromed-banner">
         		<table>
         			<tr>

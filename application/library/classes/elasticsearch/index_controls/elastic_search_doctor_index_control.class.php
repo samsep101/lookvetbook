@@ -195,6 +195,13 @@
 				$filter_and->addFilter($match);
 			}
 
+			if($criteria->_id)
+			{
+				$match = new \Elastica\Filter\Term();
+				$match->setTerm('_id', $criteria->_id);
+				$filter_and->addFilter($match);
+			}
+
             if($criteria->street_id && !$criteria->region_id) {
                 $region_manager = ModelManagerFactory::getByName('street');
                 $street = $region_manager->getOneById($criteria->street_id);

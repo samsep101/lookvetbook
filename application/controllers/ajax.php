@@ -1548,8 +1548,10 @@ if (!Acc::isAuthed())
 			//временная порнография - вывод особых докторов вместо любых
 			if($specialty_id==96) {
 				$doctor_search_params->clinic_id = 3580;
+				$doctor_search_params->_id = 124842;
 				$doctors2 = ModelManagerFactory::getByName('doctor')->getListByDoctorSearchParams($doctor_search_params);
 				unset($doctor_search_params->clinic_id);
+				unset($doctor_search_params->_id);
 			}
 
 			$doctors = ModelManagerFactory::getByName('doctor')->getListByDoctorSearchParams($doctor_search_params);

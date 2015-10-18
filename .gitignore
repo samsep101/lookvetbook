@@ -5,6 +5,13 @@
 /media/widget
 /media/cookies
 /media/zi9UatQo
+error_log
+media/map/
+media/pie/
+media/vidal/
+
+application/templates/_bak.tar.gz
+
 
 /cache
 /booking

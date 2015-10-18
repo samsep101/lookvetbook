@@ -341,6 +341,8 @@
 
 				<div id="ban2"></div>
 
+				<div id="priority_banner"></div>
+
 				<?php /* secondopinions */ ?>
 				<div class="info-box disease-banner" style="padding:8px; background: none; box-shadow: none;">
 				<!--script src="http://secondopinions.ru/lp7/js/banner_lite.js" type="text/javascript"></script-->

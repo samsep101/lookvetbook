@@ -19,7 +19,7 @@
 
 <div class="clear"></div>
 
-<?php if(Acl::userId()){?>
+<?php if(Acl::userId()){ ?>
     <img src="/media/images/eyes_owl_line_tr.png" id="logo">
     <p align="right"><a href="/admin/security/logout"><b>Выйти</b></a></p>
 
@@ -34,8 +34,10 @@
 
         <td valign="top" id="rightContent">
 <?php }?>
-            <?php echo $this->content(); ?>
-<?php if(Acl::userId()){?>
+
+<?php echo $this->content(); ?>
+
+<?php if(Acl::userId()){ ?>
         </td>
     </tr>
 </table>

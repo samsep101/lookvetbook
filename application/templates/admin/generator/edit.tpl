@@ -18,7 +18,7 @@ $(function() {
 	});
 });
 </script>
-<?php ini_set("memory_limit", "128M");?>
+<?php ini_set("memory_limit", "256M");?>
 <p class="actionBar">
 		<span class="button">
 			<a href="javascript:void(0)" onclick="ajax('/<?php echo $this->dataModel->getModelName(); ?>/?ajax=1','generatorData')"><img class="cursorPointer" src="/media/admin/icons/clipboard-audit-24-ns.png" align="absmiddle" border="0" /></a>

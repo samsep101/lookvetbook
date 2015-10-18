@@ -46,10 +46,11 @@
             ob_start();
             extract($this->__values);
             $this->__template = $templateName . $this->__extension;
-            if (is_file($this->__layout))
-                include($this->__layout);
-            else
-                include($this->__template);
+            if (is_file($this->__layout)) {
+	            include($this->__layout);
+            } else {
+	            include($this->__template);
+            }
             $html = ob_get_contents();
             //ob_clean();
 	          ob_end_clean();

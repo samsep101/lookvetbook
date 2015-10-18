@@ -5,67 +5,69 @@
 
         public function getFormValue($val = '', $model = false)
         {
-            $valid = $val;
+          $valid = $val;
 
-            $manager = ModelManagerFactory::getByName($this->fieldInfo['cross_table']);
+          $search_params = new SearchParams();
 
-            $search_params = new SearchParams();
+          if (isset($this->fieldInfo['sort_by']))
+              $search_params->addSortParam($this->fieldInfo['sort_by'], 'ASC');
+          if (isset($this->fieldInfo['where']))
+              $search_params->addParam($this->fieldInfo['where']['param'], $this->fieldInfo['where']['value']);
 
-            if (isset($this->fieldInfo['sort_by']))
-                $search_params->addSortParam($this->fieldInfo['sort_by'], 'ASC');
-            if (isset($this->fieldInfo['where']))
-                $search_params->addParam($this->fieldInfo['where']['param'], $this->fieldInfo['where']['value']);
+          $style = isset($this->fieldInfo['style']) ? $this->fieldInfo['style'] : 'width: 50%';
 
-			$style = isset($this->fieldInfo['style']) ? $this->fieldInfo['style'] : 'width: 50%';
+          if (isset($this->fieldInfo['search_params']) && $model)
+          {
+              foreach ($this->fieldInfo['search_params'] as $param => $field_name){
+                  if ($param == 'join'){
+                      $search_params->addJoin($field_name);
+                  } else {
+                      if($field_name) {
+                          if(is_array($field_name)) {
+                              $search_params->addParam($field_name['field_name'], $field_name['value']);
+                          } else {
+                              $search_params->addParam($param,$model->{$field_name});
+                          }
+                      } else {
+                          $search_params->addParam($param,$model->{$field_name});
+                      }
+                  }
+              }
+          }
 
-            if (isset($this->fieldInfo['search_params']) && $model)
-            {
-                foreach ($this->fieldInfo['search_params'] as $param => $field_name){
-                    if ($param == 'join'){
-                        $search_params->addJoin($field_name);
-                    } else {
-                        if($field_name) {
-                            if(is_array($field_name)) {
-                                $search_params->addParam($field_name['field_name'], $field_name['value']);
-                            } else {
-                                $search_params->addParam($param,$model->{$field_name});
-                            }
-                        } else {
-                            $search_params->addParam($param,$model->{$field_name});
-                        }
-                    }
-                }
-            }
+	        $manager = ModelManagerFactory::getByName($this->fieldInfo['cross_table']);
+	        $aData = $manager->getListBySearchParams($search_params);
+	        unset($manager);
 
-            $aData = $manager->getListBySearchParams($search_params);
+          $result = '<select name="form[' . $this->getFieldName() . ']" style="'.$style.'">';
 
-            $result = '<select name="form[' . $this->getFieldName() . ']" style="'.$style.'">';
-
-            if (!empty($this->fieldInfo['first'])) {
-                foreach ($this->fieldInfo['first'] as $key=> $value) {
-                    if ($value == $this->value)
-                        $selected = 'selected';
-                    elseif ($value == $valid)
-                        $selected = 'selected'; else
-                        $selected = '';
-                    $result .= '<option value="' . $key . '" ' . $selected . '>' . htmlspecialchars($value) . '</option>';
-                }
-            }
-            foreach ($aData as $value) {
-
-                if ($value->getId() == $val)
-                    $selected = 'selected';
-                else
-                    $selected = '';
-
-                $result .= '<option value="' . $value->getId() . '" ' . $selected . '>' . htmlspecialchars(str_replace('<br />', '', $value->{$this->fieldInfo['cross_name']})) . '</option>';
-            }
-            $result .= "</select>";
-            if (isset($this->fieldInfo['script']))
-            {
-                $result .= '<script>'.$this->fieldInfo['script'].'</script>';
-            }
-            return $result;
+          if (!empty($this->fieldInfo['first'])) {
+              foreach ($this->fieldInfo['first'] as $key=> $value) {
+                  if ($value == $this->value)
+                      $selected = 'selected';
+                  elseif ($value == $valid)
+                      $selected = 'selected'; else
+                      $selected = '';
+                  $result .= '<option value="' . $key . '" ' . $selected . '>' . htmlspecialchars($value) . '</option>';
+              }
+          }
+		      foreach ($aData as $value) {
+			        $value_id = $value->getId();
+			        if ($val !== null) {
+				        if ($value_id == $val)
+					        $selected = 'selected';
+				        else
+					        $selected = '';
+			        }
+			        $result .= '<option value="' . $value_id . '" ' . $selected . '>' . htmlspecialchars(str_replace('<br />', '', $value->{$this->fieldInfo['cross_name']})) . '</option>';
+		      }
+          unset($aData);
+          $result .= "</select>";
+          if (isset($this->fieldInfo['script']))
+          {
+              $result .= '<script>'.$this->fieldInfo['script'].'</script>';
+          }
+          return $result;
         }
 
 

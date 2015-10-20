@@ -16,7 +16,8 @@
 </p>
 <div style="clear:both"></div>
 
-<?php ini_set("memory_limit", "256M");?>
+<?php //ini_set("memory_limit", "256M");?>
+<script language="JavaScript" src="/media/js/admin/form_edit.js"></script>
 
 <form action="<?php echo ADMIN_FOLDER; ?>/<?php echo $this->dataModel->getModelName(); ?>/add/?destination=<?php echo $destination; ?>" method="POST"
       enctype="multipart/form-data">

@@ -18,7 +18,9 @@ $(function() {
 	});
 });
 </script>
-<?php ini_set("memory_limit", "256M");?>
+<?php //ini_set("memory_limit", "256M");?>
+<script language="JavaScript" src="/media/js/admin/form_edit.js"></script>
+
 <p class="actionBar">
 		<span class="button">
 			<a href="javascript:void(0)" onclick="ajax('/<?php echo $this->dataModel->getModelName(); ?>/?ajax=1','generatorData')"><img class="cursorPointer" src="/media/admin/icons/clipboard-audit-24-ns.png" align="absmiddle" border="0" /></a>
@@ -34,18 +36,18 @@ $(function() {
 <div style="clear:both"></div>
 
 <form action="<?php echo ADMIN_FOLDER; ?>/<?php echo $this->dataModel->getModelName();?>/edit/?id=<?php echo $indexValue; ?>&destination=<?php echo $destination; ?>" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="csrf" value=<?php echo isset($csrf) ? '\''.$csrf.'\'' : 'null'; ?>>
+	<input type="hidden" name="csrf" value=<?php echo isset($csrf) ? '\''.$csrf.'\'' : 'null'; ?>>
 
 	<?php echo $this->dataModel->getEditTooltip()?>
-    <?php $this->block('admin/blocks/validation-errors'); ?>
+	<?php $this->block('admin/blocks/validation-errors'); ?>
 	<?php $tab_num = 1; ?>
-    <?php foreach ($tabs as $tabId=>$tabName): ?>
+	<?php foreach ($tabs as $tabId=>$tabName): ?>
 
-    <div id="tab-<?php echo $tabId; ?>" class="generatorEditDiv">
+	<div id="tab-<?php echo $tabId; ?>" class="generatorEditDiv">
 			<h4><?php echo $tabName?></h4>
 			<div <?php echo ($tab_num != 1) ? 'style="display:none;"' : ''; ?>>
-	    <br />
-	    <table class="generatorTable" cellpadding="3" cellspacing="3">
+		<br />
+		<table class="generatorTable" cellpadding="3" cellspacing="3">
 			<?php foreach ($tabFields[$tabName] as $fieldName=>$field): ?>
 				<?php if ($field->hasLayout): ?>
 				<tr>
@@ -53,19 +55,19 @@ $(function() {
 							<input name="form[<?php echo $fieldName; ?>]" type="
 							hidden" value="<?php echo Acl::userId(); ?>" />
 						<?php else: ?>
-                        <?php
-                            $form_value = $model;
-                            $path = explode('.', $fieldName);
+						<?php
+							$form_value = $model;
+							$path = explode('.', $fieldName);
 
-                            foreach($path as $v)
-                            {
+							foreach($path as $v)
+							{
 								if($form_value)
-                                	$form_value = $form_value->{$v};
+									$form_value = $form_value->{$v};
 								else
 									break;
 
 								}
-                        ?>
+						?>
 							<td class="label"><b><?php echo $this->dataModel->getFieldLabel($fieldName);?></b>:</td>
 							<td><?php echo $field->getFormValue($form_value, $model);?></td>
 						<?php endif; ?>
@@ -76,95 +78,95 @@ $(function() {
 		</div>
 	</div>
 		<?php $tab_num++; ?>
-    <?php endforeach; ?>
+	<?php endforeach; ?>
 </div>
 
 <input type="hidden" name="form[<?php echo $indexField; ?>]" value="<?php echo $indexValue; ?>" />
 <p>
-    <input type="button" onclick="$($($(this).parent()).parent()).submit()" value="Сохранить" id="submit_action">
-    <input type="button" onclick="window.location.reload()" value="Отменить" id="cancel_action">
+	<input type="button" onclick="$($($(this).parent()).parent()).submit()" value="Сохранить" id="submit_action">
+	<input type="button" onclick="window.location.reload()" value="Отменить" id="cancel_action">
 </p>
 
 <?php if($extra = $this->dataModel->getExtra()): ?>
 
-    <?php $extra_id = 0; ?>
-    <?php foreach($extra as $v): ?>
-        <?php if(!Acl::userGrant($v['table'].'_list')): ?>
-        <?php continue; ?>
-        <?php endif; ?>
-        <div id="extra-<?php echo $extra_id; ?>" class="generatorEditDiv">
-            <h4><?php echo $v['title']; ?></h4>
-            <div id="extra-<?php echo $extra_id; ?>-container">
+	<?php $extra_id = 0; ?>
+	<?php foreach($extra as $v): ?>
+		<?php if(!Acl::userGrant($v['table'].'_list')): ?>
+		<?php continue; ?>
+		<?php endif; ?>
+		<div id="extra-<?php echo $extra_id; ?>" class="generatorEditDiv">
+			<h4><?php echo $v['title']; ?></h4>
+			<div id="extra-<?php echo $extra_id; ?>-container">
 
-            </div>
-        </div>
-        <script type="text/javascript">
-            <?php
-                $where = '';
-                $hide_fields = array();
-                $params = array();
-                if (isset($v['field'])){
-                    $where = '&where['.$v['field'].']='.$model->getId();
-                    $hide_fields[] = 'hide_fields[]='.$v['field'];
-                    $params[] = 'params['.$v['field'].']='.$model->getId();
-                    $sort_by = array();
-                    if(isset($v['sort_by']) && $v['sort_by'] && is_array($v['sort_by']))
-                    {
-                        $sort_counter = 0;
-                        foreach($v['sort_by'] as $sort_item)
-                        {
-                            $sort_by[] = 'sort_by['.$sort_counter.'][field]='.$sort_item['field'].'&sort_by['.$sort_counter.'][desc]='.$sort_item['desc'];
-                        }
+			</div>
+		</div>
+		<script type="text/javascript">
+			<?php
+				$where = '';
+				$hide_fields = array();
+				$params = array();
+				if (isset($v['field'])){
+					$where = '&where['.$v['field'].']='.$model->getId();
+					$hide_fields[] = 'hide_fields[]='.$v['field'];
+					$params[] = 'params['.$v['field'].']='.$model->getId();
+					$sort_by = array();
+					if(isset($v['sort_by']) && $v['sort_by'] && is_array($v['sort_by']))
+					{
+						$sort_counter = 0;
+						foreach($v['sort_by'] as $sort_item)
+						{
+							$sort_by[] = 'sort_by['.$sort_counter.'][field]='.$sort_item['field'].'&sort_by['.$sort_counter.'][desc]='.$sort_item['desc'];
+						}
 
-                        $sort_by = '&'.join('&',$sort_by);
-                    }
-                }
+						$sort_by = '&'.join('&',$sort_by);
+					}
+				}
 
-                $arr = array();
-                if (isset($v['fields'])){
-                    foreach($v['fields'] as $field_name1 => $field_name2)
-                    {
-                        $arr[] = 'where['.$field_name1.']='.$model->{$field_name2};
-                        $hide_fields[] = 'hide_fields[]='.$field_name2;
-                        $params[] = 'params['.$field_name1.']='.$model->{$field_name2};
-                    }
-                    $where = '&'.join('&',$arr);
+				$arr = array();
+				if (isset($v['fields'])){
+					foreach($v['fields'] as $field_name1 => $field_name2)
+					{
+						$arr[] = 'where['.$field_name1.']='.$model->{$field_name2};
+						$hide_fields[] = 'hide_fields[]='.$field_name2;
+						$params[] = 'params['.$field_name1.']='.$model->{$field_name2};
+					}
+					$where = '&'.join('&',$arr);
 
-                }
+				}
 
-                $params = '&'.join('&', $params);
-                $hide_fields = '&'.join('&', $hide_fields);
+				$params = '&'.join('&', $params);
+				$hide_fields = '&'.join('&', $hide_fields);
 
-                $ajax_destination = 'destination=/admin/'.$this->dataModel->getModelName().'/edit?id='.$model->getId();
+				$ajax_destination = 'destination=/admin/'.$this->dataModel->getModelName().'/edit?id='.$model->getId();
 
-                /*if ($destination)
-                    $ajax_destination .= urlencode('&').'destination='.$destination;*/
+				/*if ($destination)
+					$ajax_destination .= urlencode('&').'destination='.$destination;*/
 
-                $ajax_destination = '&'.$ajax_destination;
-            ?>
+				$ajax_destination = '&'.$ajax_destination;
+			?>
 
-            ajax('/admin/<?php echo $v['table']; ?>?ajax=1<?php echo $ajax_destination; ?><?php echo $where; ?><?php echo $params; ?><?php echo $hide_fields ?><?php echo (isset($sort_by) && $sort_by) ? $sort_by : ''; ?>', 'extra-<?php echo $extra_id; ?>-container');
-            function loadExtra<?php echo $extra_id; ?>Page(page)
-            {
-                if (page == undefined) page = 1;
+			ajax('/admin/<?php echo $v['table']; ?>?ajax=1<?php echo $ajax_destination; ?><?php echo $where; ?><?php echo $params; ?><?php echo $hide_fields ?><?php echo (isset($sort_by) && $sort_by) ? $sort_by : ''; ?>', 'extra-<?php echo $extra_id; ?>-container');
+			function loadExtra<?php echo $extra_id; ?>Page(page)
+			{
+				if (page == undefined) page = 1;
 
-                $(document).on('click', '#extra-<?php echo $extra_id; ?>-container .pager a', function(){
-                    if (!$(this).data('page'))
-                        return;
+				$(document).on('click', '#extra-<?php echo $extra_id; ?>-container .pager a', function(){
+					if (!$(this).data('page'))
+						return;
 
-                    ajax('/admin/<?php echo $v['table']; ?>?ajax=1<?php echo $where; ?><?php echo $ajax_destination; ?><?php echo $params; ?><?php echo $hide_fields; ?>&page='+$(this).data('page')<?php echo (isset($sort_by) && $sort_by) ? $sort_by : ''; ?>, 'extra-<?php echo $extra_id; ?>-container');
+					ajax('/admin/<?php echo $v['table']; ?>?ajax=1<?php echo $where; ?><?php echo $ajax_destination; ?><?php echo $params; ?><?php echo $hide_fields; ?>&page='+$(this).data('page')<?php echo (isset($sort_by) && $sort_by) ? $sort_by : ''; ?>, 'extra-<?php echo $extra_id; ?>-container');
 
-                    $(document).scrollTo($('#extra-<?php echo $extra_id; ?>'));
-                    return false;
-                });
-            }
+					$(document).scrollTo($('#extra-<?php echo $extra_id; ?>'));
+					return false;
+				});
+			}
 
-            loadExtra<?php echo $extra_id; ?>Page();
+			loadExtra<?php echo $extra_id; ?>Page();
 
-        </script>
+		</script>
 
-        <?php $extra_id++; ?>
-    <?php endforeach; ?>
+		<?php $extra_id++; ?>
+	<?php endforeach; ?>
 <?php endif; ?>
 
 

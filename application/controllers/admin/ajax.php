@@ -1,40 +1,40 @@
 <?php
-    class AjaxAdminController extends Controller
-    {
-        public function __construct()
-        {
-            $this->layout = 'ajax';
-        }
+	class AjaxAdminController extends Controller
+	{
+		public function __construct()
+		{
+			$this->layout = 'ajax';
+		}
 
-        public function setCheckbox()
-        {
-            $table = $this->request->post('table');
-            $id = $this->request->post('id');
-            $field_name = $this->request->post('field_name');
-            $value = $this->request->post('value');
+		public function setCheckbox()
+		{
+			$table = $this->request->post('table');
+			$id = $this->request->post('id');
+			$field_name = $this->request->post('field_name');
+			$value = $this->request->post('value');
 
 			if(!Acl::userGrant($table.'_edit'))
 			{
 				JsonResponse::error(ValidationErrorCodes::ACCESS_DENIED);
 			}
 
-            $manager = ModelManagerFactory::getByName($table);
+			$manager = ModelManagerFactory::getByName($table);
 
-            if ($manager)
-            {
-                $model = $manager->getOneById($id);
+			if ($manager)
+			{
+				$model = $manager->getOneById($id);
 
-                if ($model){
-                    $model->{$field_name} = $value;
+				if ($model){
+					$model->{$field_name} = $value;
 					$model->checkbox_set = 1;
-                    if ($model->save()){
-                        JsonResponse::result($model->{$field_name});
-                    }
-                }
-            }
+					if ($model->save()){
+						JsonResponse::result($model->{$field_name});
+					}
+				}
+			}
 
-            JsonResponse::result(true);
-        }
+			JsonResponse::result(true);
+		}
 
 		public function setCheckboxes()
 		{
@@ -125,20 +125,20 @@
 			}
 		}
 
-        public function getYandexContentStatistic()
-        {
-            if (!Acl::isAuthed())
-                JsonResponse::result(ValidationErrorCodes::NOT_AUTHED);
+		public function getYandexContentStatistic()
+		{
+			if (!Acl::isAuthed())
+				JsonResponse::result(ValidationErrorCodes::NOT_AUTHED);
 
-                $disease_manager = new DiseaseManager();
-                $yandex_counters = new YandexContentCounters();
-                $yandex_counters->content_active = $disease_manager->getCountActiveList();
-                $yandex_counters->content_not_in_yandex = $disease_manager->getCountNotInYandex();
-                $yandex_counters->content_in_yandex = $disease_manager->getCountInYandex();
-                $yandex_counters->content_to_update = $disease_manager->getCountInYandexToUpdate();
+				$disease_manager = new DiseaseManager();
+				$yandex_counters = new YandexContentCounters();
+				$yandex_counters->content_active = $disease_manager->getCountActiveList();
+				$yandex_counters->content_not_in_yandex = $disease_manager->getCountNotInYandex();
+				$yandex_counters->content_in_yandex = $disease_manager->getCountInYandex();
+				$yandex_counters->content_to_update = $disease_manager->getCountInYandexToUpdate();
 
-                $this->view->yandex_counters = $yandex_counters;
-                $html = $this->renderInString('/admin/blocks/yandex_content_counters');
-                JsonResponse::result(array('html' => $html));
-        }
-    }
+				$this->view->yandex_counters = $yandex_counters;
+				$html = $this->renderInString('/admin/blocks/yandex_content_counters');
+				JsonResponse::result(array('html' => $html));
+		}
+	}

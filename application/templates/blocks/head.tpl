@@ -19,7 +19,7 @@
     <?php elseif(($city) && $city->name):  ?>
         <link rel="canonical" href="<?php echo SITE_URL.$_SERVER['REQUEST_URI']; ?>" />
     <?php endif; ?>
-<link rel="stylesheet" href="/media/css/styles.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
+<link rel="stylesheet" href="/media/css/styles.css?<?php echo filemtime(__DIR__.'/../../..//media/css/styles.css')?>" type="text/css"/>
 <link rel="stylesheet" href="/media/css/fonts.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
 <link rel="stylesheet" href="/media/css/chosen.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
 <link rel="stylesheet" href="/media/css/jquery.fancybox.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>

@@ -296,6 +296,9 @@
 					</div>
 				</div>
 
+
+				<div id="priority_banner2" onclick="window.location='http://www.comnews-conferences.ru/it2015';return false;"></div>
+
 				<?php /* Яндекс.Директ */ ?>
 				<div class="info-box disease-banner" style="padding:8px; background: none; box-shadow: none;">
 					<div id="yandex_ad"></div>
@@ -341,15 +344,13 @@
 
 				<div id="ban2"></div>
 
-				<div id="priority_banner"></div>
-
 				<?php /* secondopinions */ ?>
 				<div class="info-box disease-banner" style="padding:8px; background: none; box-shadow: none;">
 				<!--script src="http://secondopinions.ru/lp7/js/banner_lite.js" type="text/javascript"></script-->
 				<div id="ban2"></div>
 
 				<script>
-					get_banner_lite("ban2");
+					if(get_banner_lite) { get_banner_lite("ban2"); }
 				</script>
 
 				<script>(function() {

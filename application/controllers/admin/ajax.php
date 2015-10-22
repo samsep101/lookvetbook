@@ -144,12 +144,17 @@
 
 
 		public function getSelectList() {
-			ini_set("memory_limit", "128M");
+			ini_set("memory_limit", "156M");
 
 			$cross_table = $this->request->post('cross_table');
 			$cross_name = $this->request->post('cross_name');
-			$sort_by = $this->request->post('sort_by');
-			$params = $this->request->post('params');
+			$sort_by = $this->request->post('sort_param');
+			$params = $this->request->post('search_param');
+
+//			$cross_table = 'doctor';
+//			$cross_name = 'full_name';
+//			$sort_by = 'full_lower_name';
+//			$params = '';
 
 			if(!$cross_table or !$cross_name) {
 				return JsonResponse::result([]);
@@ -159,6 +164,10 @@
 
 			if ($sort_by) {
 				$search_params->addSortParam($sort_by, 'ASC');
+				$search_params->addParam($sort_by.'!=', '');
+				$search_params->addParam($sort_by.'!=', ' ');
+				$search_params->addParam($sort_by.'!=', '  ');
+				$search_params->addParam($sort_by.'!=', '   ');
 			}
 			foreach($params as $param) {
 				list($par1,$par2) = $param;
@@ -169,14 +178,20 @@
 				}
 			}
 
+
+			$i=1;
 			$result = [];
-			$manager = ModelManagerFactory::getByName($cross_table);
-			$aData = $manager->getListBySearchParams($search_params);
-			foreach ($aData as $value) {
-				$value_id = $value->getId();
-				$value_title = htmlspecialchars(str_replace('<br />', '', $value->{$cross_name}));
-				if($value_title) { $result[$value_id] = $value_title; }
-			}
+			do{
+				$search_params->setPagingParams($i++, 2000);
+
+				$manager = ModelManagerFactory::getByName($cross_table);
+				$aData = $manager->getListBySearchParams($search_params);
+				foreach ($aData as $value) {
+					$value_id = $value->getId();
+					$value_title = trim(htmlspecialchars(str_replace('<br />', '', $value->{$cross_name})));
+					if($value_title) { $result[$value_id] = $value_title; }
+				}
+			}while(count($aData) and $i<=5);
 			unset($aData);
 
 			return JsonResponse::result($result);

@@ -9593,7 +9593,11 @@ a.d-pink-btn {
 }
 
 
-#priority_banner{
-	background: url(../images/banners/prioritets.jpg) center center no-repeat;
-	height: 120px;
+#priority_banner2{
+	background: url(../images/banners/prioritets2.jpg) left center no-repeat;
+	height: 49px;
+	cursor: pointer;
+}
+#priority_banner2:hover {
+	opacity: 0.9;
 }

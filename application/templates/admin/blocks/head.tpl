@@ -22,3 +22,7 @@
 <script type="text/javascript" src="/media/js/popup_message.js?<?php echo RELEASE_NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/library/expanded_block.js?<?php echo RELEASE_NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/image_preview.js?<?php echo RELEASE_NUMBER?>"></script>
+
+<script type="text/javascript" src="/media/js/jq/jquery.auto-complete.min.js?<?php echo RELEASE_NUMBER?>"></script>
+<link rel="stylesheet" href="/media/css/admin/jquery.auto-complete.css?<?php echo RELEASE_NUMBER?>" />
+

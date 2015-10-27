@@ -150,6 +150,8 @@
 			$cross_name = $this->request->post('cross_name');
 			$sort_by = $this->request->post('sort_param');
 			$params = $this->request->post('search_param');
+			$value = $this->request->post('value');
+			$title = $this->request->post('title');
 
 //			$cross_table = 'doctor';
 //			$cross_name = 'full_name';
@@ -177,7 +179,12 @@
 					$search_params->addParam($par1, $par2);
 				}
 			}
-
+			if($value) {
+				$search_params->addParam('id', (int)$value);
+			}
+			if($title) {
+				$search_params->addParam($sort_by.' LIKE ', '%'.$title.'%');
+			}
 
 			$i=1;
 			$result = [];

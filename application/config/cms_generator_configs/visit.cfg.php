@@ -41,6 +41,7 @@
                     '0' => '-',
                 ),
                 'sort_by' => 'id',
+                'short' => '1',
             ),
             'clinic_filter' => 'input',
             'clinic_id' => array(
@@ -53,6 +54,7 @@
                 ),
                 'filter' => 'true',
                 'sort_by' => 'id',
+                'sort_by' => 'name',
                 'script' => '
                     $(document).ready(function(){
                         $(\'input[name="form[clinic_filter]"]\').change(function(){

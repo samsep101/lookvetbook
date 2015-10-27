@@ -40,19 +40,27 @@
 			$result .= '<div class="sort_param '.$tag_class.'" style="display: none;">'.json_encode($sort_param).'</div>';
 			$result .= '<div class="search_param '.$tag_class.'" style="display: none;">'.json_encode($param).'</div>';
 			$result .= '<div class="value '.$tag_class.'" style="display: none;">'.str_replace('<','%$%',$val).'</div>';
-		  $result .= '<select class="filling_select '.$tag_class.'" name="form[' . $this->getFieldName() . ']" style="'.$style.'" >';
 
-		  if (!empty($this->fieldInfo['first'])) {
-			  foreach ($this->fieldInfo['first'] as $key=> $value) {
-				  if ($value == $this->value)
-					  $selected = 'selected';
-				  elseif ($value == $valid)
-					  $selected = 'selected'; else
-					  $selected = '';
-				  $result .= '<option value="' . $key . '" ' . $selected . '>' . htmlspecialchars($value) . '</option>';
+
+			if (isset($this->fieldInfo['short'])) {
+			  $result .= '<select class="filling_select '.$tag_class.'" name="form[' . $this->getFieldName() . ']" style="'.$style.'" >';
+
+			  if (!empty($this->fieldInfo['first'])) {
+				  foreach ($this->fieldInfo['first'] as $key=> $value) {
+					  if ($value == $this->value)
+						  $selected = 'selected';
+					  elseif ($value == $valid)
+						  $selected = 'selected'; else
+						  $selected = '';
+					  $result .= '<option value="' . $key . '" ' . $selected . ' class="first">' . htmlspecialchars($value) . '</option>';
+				  }
 			  }
-		  }
-		  $result .= "</select>";
+			  $result .= "</select>";
+			}else {
+				$result .= '<input class="filling_input ' . $tag_class . '" style="' . $style . '" />';
+				$result .= '<div class="filling_select ' . $tag_class . '" style="' . $style . '; display: none;" ></div>';
+				$result .= '<input class="filling_value ' . $tag_class . '" name="form[' . $this->getFieldName() . ']" style="display: none;" value="' . htmlspecialchars($val) . '" />';
+			}
 
 		  if (isset($this->fieldInfo['script']))
 		  {

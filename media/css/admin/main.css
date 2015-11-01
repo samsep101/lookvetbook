@@ -1506,3 +1506,7 @@ td.label {
     padding-right: 4px;
 }
 
+.filling_input {
+	background: url("../../images/dropdown_select_field.gif") right center no-repeat;
+}
+

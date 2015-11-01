@@ -142,7 +142,7 @@ $(document).ready(function(){
 				page_inputs[input_id].data.title = term;
 				var senddata = {data:page_inputs[input_id].data, suggest:suggest, input_id:input_id};
 
-				timers[input_id] = setTimeout(function(){ fill_input_ajax_search(senddata, 'fill_avail_values(answ, senddata.suggest)'); }, 3000);
+				timers[input_id] = setTimeout(function(){ fill_input_ajax_search(senddata, 'fill_avail_values(answ, senddata.suggest)'); }, 1500);
 			},
 			renderItem: function (item, search){
 				return '<div class="autocomplete-suggestion" data-val="'+item[1]+'" data-key="'+item[0]+'" data-input-id="'+input_id+'">'+item[1]+'</div>';

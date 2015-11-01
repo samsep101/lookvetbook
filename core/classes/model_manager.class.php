@@ -269,11 +269,16 @@
         public function deleteById($id)
         {
             $object = $this->getOneById($id);
-            $this->orm_model->delete($this->id_field_name . ' = "' . $id . '"');
+            if($object) {
+              $this->orm_model->delete($this->id_field_name . ' = "' . $id . '"');
+            }
 
-            if (isset($this->models_register[$id]))
-                unset($this->models_register[$id]);
-            $this->afterDelete($object);
+            if (isset($this->models_register[$id])) {
+	            unset($this->models_register[$id]);
+            }
+            if($object) {
+                $this->afterDelete($object);
+            }
         }
 
         protected function update(DynamicModel $model)

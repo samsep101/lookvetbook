@@ -17,7 +17,7 @@
 
 
             $manager_class_name = $manager_name . 'Manager';
-            if (class_exists($manager_class_name, FALSE) || Application::tryToLoadClass($manager_class_name)) {
+            if ($manager_name!= 'Model' and (class_exists($manager_class_name, FALSE) || Application::tryToLoadClass($manager_class_name))) {
                 $manager_class_name = $manager_name . 'Manager';
 
                 $manager = new $manager_class_name();

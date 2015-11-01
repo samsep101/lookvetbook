@@ -107,7 +107,11 @@
                     if (class_exists($param_name.'Manager', FALSE) || Application::tryToLoadClass($param_name.'Manager'))
                     {
                         $model_manager = ModelManagerFactory::getByName($param_name);
-                        $this->{$param_name} = $model_manager->getOneById($this->{$param_name.'_id'});
+                        if($model_manager) {
+                          $this->{$param_name} = $model_manager->getOneById($this->{$param_name . '_id'});
+                        }else{
+                          $this->{$param_name} = FALSE;
+                        }
                     } else {
                         $this->{$param_name} = FALSE;
                     }

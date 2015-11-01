@@ -300,6 +300,7 @@
 				<div id="priority_banner2" onclick="window.location='http://www.comnews-conferences.ru/it2015';return false;"></div>
 
 				<?php /* Яндекс.Директ */ ?>
+				<?php if(0) { ?>
 				<div class="info-box disease-banner" style="padding:8px; background: none; box-shadow: none;">
 					<div id="yandex_ad"></div>
 					<script type="text/javascript">
@@ -332,10 +333,11 @@
 						})(window, document, "yandex_context_callbacks");
 					</script>
 				</div>
+	      <?php } ?>
 
 				<script language="JavaScript">
 					if( window.location.pathname == '/disease/varikoznaya-bolezn' || window.location.pathname == '/disease/hronicheskaya-venoznaya-nedostatochnost' ) {
-						$('#yandex_ad').hide();
+						//$('#yandex_ad').hide();
 						$('#ban_wikimed').show();
 						$('#ban_wikimed').click(function(){ window.location = '/clinic/klinika-WikiMed'; return false; });
 					}

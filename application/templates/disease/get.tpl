@@ -300,7 +300,7 @@
 				<div id="priority_banner2" onclick="window.location='http://www.comnews-conferences.ru/it2015';return false;"></div>
 
 				<?php /* Яндекс.Директ */ ?>
-				<?php if(0) { ?>
+				<?php if(1) { ?>
 				<div class="info-box disease-banner" style="padding:8px; background: none; box-shadow: none;">
 					<div id="yandex_ad"></div>
 					<script type="text/javascript">

@@ -221,11 +221,11 @@
                         $this->beforeSave($model);
                     }
 
-                    if (!$model->getId())
-                        self::create($model);
-                    else
-                        self::update($model);
-
+                    if (!$model->getId()) {
+	                    self::create($model);
+                    } else {
+	                    self::update($model);
+                    }
 					$this->afterSave($model);
                 } else {
                     throw new Exception('Передана неверная модель!');

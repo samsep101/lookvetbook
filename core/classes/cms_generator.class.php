@@ -361,8 +361,9 @@
         protected function save($data, DynamicModel $model)
         {
             foreach ($data as $field_name => $field_value) {
-                if ($field_name != $this->dataModel->getIndexField())
-                    $model->{$field_name} = $this->dataModel->fields[$field_name]->getSaveValue($field_value, $model);
+                if ($field_name != $this->dataModel->getIndexField()) {
+	                $model->{$field_name} = $this->dataModel->fields[$field_name]->getSaveValue($field_value, $model);
+                }
             }
 
             if (ModelManagerFactory::getManagerByModel($model)->save($model)) {

@@ -243,32 +243,23 @@
             $metro_station_to_clinic_manager = ModelManagerFactory::getByName('metro_station_to_clinic');
             $metro_station_to_clinic = $metro_station_to_clinic_manager->getOneByClinicId($this->getId());
 
-            if($metro_station_to_clinic)
-            {
-                if($this->metro_station_id == $metro_station_to_clinic->metro_station_id)
-                {
-                    $metro_station = $metro_station_manager->getOneById($this->metro_station_id);
-                    $this->metro_station = $metro_station;
-                }
-                else
-                {
-                    $this->metro_station_id = $metro_station_to_clinic->metro_station_id;
-                    $this->metro_station = $metro_station_manager->getOneById($this->metro_station_id);
-                }
-            }
-            else
-            {
-                if($this->metro_station_id)
-                {
-                    $metro_station = $metro_station_manager->getOneById($this->metro_station_id);
-                    $this->metro_station = $metro_station;
-                }
-                else
-                {
-                    $this->metro_station = NULL;
-                }
+            //логика правлено мной - CyberUnit. Было, зачем-то, вместо сохранения в форме, сброс на изначальное значение. Бреддд.....
+            //неплохо было бы еще зашить стирание значения, но пока стремно, хрен его знает, что было в голове программера
+            if($metro_station_to_clinic) {
+              if ($this->metro_station_id > 0 and $this->metro_station_id != $metro_station_to_clinic->metro_station_id) {
+                $metro_station_to_clinic_manager->setClinicMetroId($this->getId(), $this->metro_station_id);
+              }
+              if(!$this->metro_station_id) {
+                $this->metro_station_id = $metro_station_to_clinic->metro_station_id;
+              }
             }
 
+            if($this->metro_station_id) {
+              $metro_station = $metro_station_manager->getOneById($this->metro_station_id);
+              $this->metro_station = $metro_station;
+            }else{
+              $this->metro_station = NULL;
+            }
             return $this->metro_station;
         }
 

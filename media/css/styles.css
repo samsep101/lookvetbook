@@ -9601,3 +9601,14 @@ a.d-pink-btn {
 #priority_banner2:hover {
 	opacity: 0.9;
 }
+
+#zatashi_roditelej{
+	background: url(../images/banners/zatashi_roditelej.gif) left center no-repeat;
+	height: 400px;
+	cursor: pointer;
+	margin-top: 20px;
+
+}
+#zatashi_roditelej:hover {
+	opacity: 0.9;
+}

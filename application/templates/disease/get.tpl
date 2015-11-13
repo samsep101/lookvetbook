@@ -299,6 +299,9 @@
 
 				<div id="priority_banner2" onclick="window.location='http://www.comnews-conferences.ru/it2015';return false;"></div>
 
+				<div id="zatashi_roditelej" onclick="window.open('http://intndes.ru/lmb/','reclama');return false;"></div>
+
+
 				<?php /* Яндекс.Директ */ ?>
 				<?php if(1) { ?>
 				<div class="info-box disease-banner" style="padding:8px; background: none; box-shadow: none;">

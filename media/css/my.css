@@ -1039,6 +1039,7 @@ header {
     font-size       : 14px;
     text-decoration : none;
     border-bottom   : 1px #1D96A6 dotted;
+	display: none;
 }
 
 .city-block .show_all:before {

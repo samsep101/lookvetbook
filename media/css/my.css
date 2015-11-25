@@ -897,6 +897,10 @@ header {
     padding : 30px 30px 13px
 }
 
+.city-block .search-block, .city-block .or {
+	display: none;
+}
+
 .city-block .not-empty-cities {
     margin    : 0 21px 25px;
     font-size : 0;

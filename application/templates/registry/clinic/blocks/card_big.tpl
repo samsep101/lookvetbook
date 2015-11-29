@@ -2,7 +2,7 @@
 
 <div class="info-card clinic-card flo">
     <div class="rating">
-        <?php echo RateViewHelper::view($clinic->rate); ?>
+        <?php echo RateViewHelper::view($clinic->rate, 0, $clinic->is_best); ?>
         <?php if ($clinic->reviews):?>
             <div class="comments-count"><a><?php echo StringHelper::getCorrectSuffixForReview(count($clinic->reviews));?></a></div>
         <?php endif?>

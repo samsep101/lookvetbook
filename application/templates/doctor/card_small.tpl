@@ -33,7 +33,7 @@
                 <?php echo $doctor_clinic->name; ?>
             </a>
         <?php else: ?>
-        <?php echo RateViewHelper::viewSmall($doctor->rate); ?>
+        <?php echo RateViewHelper::viewSmall($doctor->rate, 0, $doctor->is_best); ?>
         <?php endif; ?>
         <div class="info-area">
             <?php if ($clinic_id): ?>

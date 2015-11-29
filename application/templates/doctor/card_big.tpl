@@ -104,7 +104,10 @@ if ($current_account && $current_account->is_call_centre_operator) {
 
                         <div class="rating">
 
-                            <?php echo RateViewHelper::view($doctor->rate, 1); ?>
+                            <?php echo RateViewHelper::view($doctor->rate, 1, $doctor->is_best); ?>
+                            <?php if($doctor->is_best) { ?>
+                              <div class="is_best_recomm">Рекомендуем</div>
+                            <?php } ?>
 
                             <div class="comments-count">
                                 <?php if (!Acc::isAuthed()): ?>

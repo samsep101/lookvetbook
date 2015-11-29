@@ -191,6 +191,7 @@
                     'name' => ($doctor_type) ? $doctor_type->name : '',
                 ),
                 'rate' => (int)$doctor->rate,
+                'is_best' => $doctor->is_best? 1 : 0,
                 'review_count' => (int)$review_count,
                 'advice_rate' => ($doctor->advice_rate) ? $doctor->advice_rate * 100 : 0,
                 'cabinet_rate' => ($doctor->cabinet_rate) ? $doctor->cabinet_rate : 0,
@@ -318,6 +319,7 @@
                 $clinic_name = '';
                 $clinic_address = '';
                 $clinic_rate = 5;
+                $clinic_is_best =0;
                 $clinic_geopoint = array(
                     'latitude' => 1,
                     'longitude' => 1,
@@ -338,6 +340,7 @@
                         $clinic_metro['id'] = $clinic->metro_station_id;
                         $clinic_metro['name'] = $clinic->metro_station ? $clinic->metro_station->name : '';
                         $clinic_rate = $clinic->rate;
+                        $clinic_is_best = $clinic->is_best?1:0;
                     }
                 }
 
@@ -371,6 +374,7 @@
                     'first_name' => $doctor->first_name ? $doctor->first_name : '',
                     'last_name' => $doctor->last_name ? $doctor->last_name : '',
                     'rate' => $doctor->rate,
+                    'is_best' => $doctor->is_best? 1 : 0,
                     'sex' => array(
                         'id' => $doctor->sex_id,
                         'name' => (($doctor->sex_id) ? true : false) ? (($doctor->sex_id == 1) ? 'Мужской' : 'Женский') : '',
@@ -386,6 +390,7 @@
                         'name' => $clinic_name,
                         'address' => $clinic_address,
                         'rate' => $clinic_rate,
+                        'is_best' => $clinic_is_best,
                         'geopoint' => $clinic_geopoint,
                         'metro' => $clinic_metro,
                     ),
@@ -627,6 +632,7 @@
                     'first_name' => $doctor->first_name ? $doctor->first_name : '',
                     'last_name' => $doctor->last_name ? $doctor->last_name : '',
                     'rate' => $doctor->rate,
+                    'is_best' => $doctor->is_best? 1 : 0,
                     'sex' => array(
                         'id' => $doctor->sex_id,
                         'name' => (($doctor->sex_id) ? true : false) ? (($doctor->sex_id == 1) ? 'Мужской' : 'Женский') : '',

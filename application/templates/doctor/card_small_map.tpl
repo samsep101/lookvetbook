@@ -54,7 +54,11 @@
 </div>
 
 <div class="rating-block">
-    <?php echo RateViewHelper::viewSmall($doctor->rate); ?>
+    <?php echo RateViewHelper::viewSmall($doctor->rate, 0, $doctor->is_best); ?>
+
+		<?php if($doctor->is_best) { ?>
+			<div class="is_best_recomm">Рекомендуем</div>
+		<?php } ?>
 
     <?php $reviews = $doctor->reviews; ?>
     <?php if($reviews): ?>

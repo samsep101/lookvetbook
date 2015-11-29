@@ -12,7 +12,12 @@
 
 
 <div class="rating">
-    <?php echo RateViewHelper::view($clinic->rate, 1); ?>
+    <?php echo RateViewHelper::view($clinic->rate, 1, $clinic->is_best); ?>
+
+		<?php if($clinic->is_best) { ?>
+			<div class="is_best_recomm">Рекомендуем</div>
+		<?php } ?>
+
     <?php if (count($clinic->reviews)): ?>
     <div class="comments-count">
         <a href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>#reviews">
@@ -20,6 +25,7 @@
         </a>
     </div>
     <?php endif; ?>
+
 </div>
 
 

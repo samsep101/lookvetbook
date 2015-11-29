@@ -47,7 +47,12 @@
                     <div class="rating" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
                         <meta itemprop="itemreviewed" content="<?php echo $clinic->name; ?>"/>
 
-                        <?php echo RateViewHelper::view($clinic->rate); ?>
+                        <?php echo RateViewHelper::view($clinic->rate, 0, $clinic->is_best); ?>
+
+		                    <?php if($clinic->is_best) { ?>
+			                    <div class="is_best_recomm">Рекомендуем</div>
+		                    <?php } ?>
+
                         <?php if (count($clinic->reviews)): ?>
                             <div class="comments-count">
                                 <a href="#reviews">
@@ -57,6 +62,7 @@
                                 </a>
                             </div>
                         <?php endif; ?>
+
                     </div>
                     <h1 itemprop="name"><?php echo $clinic->name; ?></h1>
                     <p>

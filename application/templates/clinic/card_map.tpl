@@ -9,7 +9,7 @@
             <?php echo ClinicAvatarViewHelper::viewOnCard($clinic, 74, 31); ?>
         </div>
 
-        <?php echo RateViewHelper::viewSmall($clinic->rate); ?>
+        <?php echo RateViewHelper::viewSmall($clinic->rate, 0, $clinic->is_best); ?>
     </div>
     <div class="descr">
         <p class="name"><a href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>"><span class="post"><?php echo $clinic->name; ?></span></a></p>

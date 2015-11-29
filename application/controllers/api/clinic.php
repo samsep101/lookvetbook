@@ -260,6 +260,7 @@
                     'metro' => $clinic_metro,
                     'geopoint' => $clinic_geopoint,
                     'rate' => $clinic->rate,
+                    'is_best' => $clinic->is_best? 1 : 0,
                     'is_children' => $clinic->is_children,
                     'is_pregnant' => $clinic->is_pregnant,
                     'is_handicapped' => $clinic->is_handicapped,

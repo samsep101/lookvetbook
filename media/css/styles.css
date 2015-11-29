@@ -2196,6 +2196,26 @@ h2 {
     background : url(/media/images/inner_shadow_stars.png);
 }
 
+.rating-line.is_best, .rating-line-sm.is_best {
+	width      : 102px;
+	margin-left: -15px;
+}
+
+.doctor-landing .rating-line.is_best, .doctor-landing .rating-line-sm.is_best {
+	margin-left: 0;
+}
+
+.rating .is_best_recomm, .rating .is_best_recomm {
+	margin: 0;
+	font-size: 10px;
+	color: red;
+	text-transform: uppercase;
+}
+.doctor-landing .is_best_recomm {
+	margin: -13px 0 0;
+}
+
+
 .rating-line span, .rating-line-sm span {
     display    : block;
     height     : 15px;

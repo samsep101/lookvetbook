@@ -437,11 +437,21 @@
     <?php $this->block('blocks/counters'); ?>
 </noindex>
 <!--[if IE]><script type="text/javascript" src="http://www.xiper.net/examples/js-plugins/html5-and-css3/explorer-canvas/excanvas.js"></script><![endif]-->
+
 <!-- BEGIN JIVOSITE CODE {literal} -->
 <script type='text/javascript'>
-(function(){ var widget_id = 'YFouAcBzED';
-var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
+	(function(){
+		//var widget_id = 'YFouAcBzED';
+		var widget_id = 'iiJvHkBseA';
+		var s = document.createElement('script');
+		s.type = 'text/javascript';
+		s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id;
+		var ss = document.getElementsByTagName('script')[0];
+		ss.parentNode.insertBefore(s, ss);
+	})();
+</script>
 <!-- {/literal} END JIVOSITE CODE -->
+
 </body>
 </html>
 

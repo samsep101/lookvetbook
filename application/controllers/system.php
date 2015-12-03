@@ -64,12 +64,13 @@
 			$this->layout = 'ajax';
 
 			$months = array(1 => 'январь', 2 => 'февраль', 3 => 'март', 4 => 'апрель', 5 => 'май', 6 => 'июнь', 7 => 'июль', 8 => 'август', 9 => 'сентябрь', 10 => 'октябрь', 11 => 'ноябрь', 12 => 'декабрь');
-            $month = array_search($this->request('month'), $months);
+			$month = array_search($this->request('month'), $months);
+			$year = (int)$this->request('year');
 
 			$city_value = $this->request('city_value');
 
 			$site_statistic_manager = new SiteStatisticManager();
-			$visits = $site_statistic_manager->getVisitsByCityIdAndMonth($city_value, $month);
+			$visits = $site_statistic_manager->getVisitsByCityIdAndMonth($city_value, $month, $year);
 			$visits_without_clinic = $site_statistic_manager->getVisitsWithNullClinicId();
 
 			if($city_value == 'all')
@@ -81,14 +82,14 @@
 			$clinic = array();
 			$result = array();
 
-            $appeals = $site_statistic_manager->getAppealsByMonth($month);
-            $result[] = count($appeals);
+			$appeals = $site_statistic_manager->getAppealsByMonth($month);
+			$result[] = count($appeals);
 
 			foreach($visits as $visit)
 			{
-                if ($visit['visit_time'] && date('n', strtotime($visit['visit_time'])) != $month){
-                    continue;
-                }
+				if ($visit['visit_time'] && date('n', strtotime($visit['visit_time'])) != $month){
+					continue;
+				}
 
 				if($visit['clinic_id'] == $clinic_id)
 				{
@@ -159,114 +160,114 @@
 			}
 		}
 
-        public function generateVisitStatisticXls()
-        {
-            $visit_month_from = $this->request('month_from');
-            $visit_year_from = $this->request('year_from');
-            $visit_month_to = $this->request('month_to');
-            $visit_year_to = $this->request('year_to');
+		public function generateVisitStatisticXls()
+		{
+			$visit_month_from = $this->request('month_from');
+			$visit_year_from = $this->request('year_from');
+			$visit_month_to = $this->request('month_to');
+			$visit_year_to = $this->request('year_to');
 
-            if ($visit_month_from && $visit_year_from && $visit_month_to && $visit_year_to) {
-                $months = array('1' => 'Январь', '2' => 'Февраль', '3' => 'Март', '4' => 'Апрель', '5' => 'Май', '6' => 'Июнь', '7' => 'Июль', '8' => 'Август', '9' => 'Сентябрь', '10' => 'Октябрь', '11' => 'Ноябрь', '12' => 'Декабрь');
-                $rows = array('all_visits' => '9', 'yandex_visits' => '7', 'mobile_visits' => '6', 'appeal_visits' => '4', 'site_visits' => '5', 'cancelled_visits' => '10', 'not_visited_visits' => '11', 'visited_visits' => '12', 'other_visits' => '13', 'widget_visits' => '8');
+			if ($visit_month_from && $visit_year_from && $visit_month_to && $visit_year_to) {
+				$months = array('1' => 'Январь', '2' => 'Февраль', '3' => 'Март', '4' => 'Апрель', '5' => 'Май', '6' => 'Июнь', '7' => 'Июль', '8' => 'Август', '9' => 'Сентябрь', '10' => 'Октябрь', '11' => 'Ноябрь', '12' => 'Декабрь');
+				$rows = array('all_visits' => '9', 'yandex_visits' => '7', 'mobile_visits' => '6', 'appeal_visits' => '4', 'site_visits' => '5', 'cancelled_visits' => '10', 'not_visited_visits' => '11', 'visited_visits' => '12', 'other_visits' => '13', 'widget_visits' => '8');
 
-                if (date('Y-m', strtotime('01.'.$visit_month_to.'.'.$visit_year_to)) > date('Y-m')) {
-                    $visit_month_to = (int)date('m');
-                    $visit_year_to = (int)date('Y');
-                }
-                if (date('Y-m', strtotime('01.'.$visit_month_from.'.'.$visit_year_from)) > date('Y-m')) {
-                    $visit_month = $visit_month_from = (int)date('m');
-                    $visit_year = $visit_year_from = (int)date('Y');
-                } else {
-                    $visit_month = (int)$visit_month_from;
-                    $visit_year = (int)$visit_year_from;
-                }
+				if (date('Y-m', strtotime('01.'.$visit_month_to.'.'.$visit_year_to)) > date('Y-m')) {
+					$visit_month_to = (int)date('m');
+					$visit_year_to = (int)date('Y');
+				}
+				if (date('Y-m', strtotime('01.'.$visit_month_from.'.'.$visit_year_from)) > date('Y-m')) {
+					$visit_month = $visit_month_from = (int)date('m');
+					$visit_year = $visit_year_from = (int)date('Y');
+				} else {
+					$visit_month = (int)$visit_month_from;
+					$visit_year = (int)$visit_year_from;
+				}
 
-                $print_year = true;
-                $counter = 0;
+				$print_year = true;
+				$counter = 0;
 
-                /**
-                 * @var AppealManager $appeal_manager
-                 */
+				/**
+				 * @var AppealManager $appeal_manager
+				 */
 
-                $site_statistic_manager = new SiteStatisticManager();
-                $appeal_manager = ModelManagerFactory::getByName('appeal');
+				$site_statistic_manager = new SiteStatisticManager();
+				$appeal_manager = ModelManagerFactory::getByName('appeal');
 
-                $result = array();
-                $result[1] = array(' ');
-                $result[2] = array(' ');
-                $result[3] = array('Обращений');
-                $result[4] = array('Заявок по телефону');
-                $result[5] = array('Заявок через сайт');
-                $result[6] = array('Заявок через моб.');
-                $result[7] = array('Заявок через Яндекс');
-                $result[8] = array('Заявок через виджет');
-                $result[9] = array('Всего заявок');
-                $result[10] = array('Отмены');
-                $result[11] = array('Не были у врача');
-                $result[12] = array('Были у врача');
-                $result[13] = array('Заявки в обработке');
+				$result = array();
+				$result[1] = array(' ');
+				$result[2] = array(' ');
+				$result[3] = array('Обращений');
+				$result[4] = array('Заявок по телефону');
+				$result[5] = array('Заявок через сайт');
+				$result[6] = array('Заявок через моб.');
+				$result[7] = array('Заявок через Яндекс');
+				$result[8] = array('Заявок через виджет');
+				$result[9] = array('Всего заявок');
+				$result[10] = array('Отмены');
+				$result[11] = array('Не были у врача');
+				$result[12] = array('Были у врача');
+				$result[13] = array('Заявки в обработке');
 
-                while ($visit_month <= $visit_month_to || $visit_year <= $visit_year_to) {
-                    $month_half = 1;
-                    while ($month_half <= 2) {
-                        if ($print_year) {
-                            $result[1][] = $visit_year;
-                        } else {
-                            $result[1][] = ' ';
-                        }
+				while ($visit_month <= $visit_month_to || $visit_year <= $visit_year_to) {
+					$month_half = 1;
+					while ($month_half <= 2) {
+						if ($print_year) {
+							$result[1][] = $visit_year;
+						} else {
+							$result[1][] = ' ';
+						}
 
-                        if ($month_half == 1) {
-                            $date_from = '01.'.$visit_month.'.'.$visit_year;
-                            $date_to = '15.'.$visit_month.'.'.$visit_year;
-                        } else {
-                            $last_day = (int)date('t', strtotime($visit_year.'-'.$visit_month));
-                            $date_from = '16.'.$visit_month.'.'.$visit_year;
-                            $date_to = $last_day.'.'.$visit_month. '.'.$visit_year;
-                        }
+						if ($month_half == 1) {
+							$date_from = '01.'.$visit_month.'.'.$visit_year;
+							$date_to = '15.'.$visit_month.'.'.$visit_year;
+						} else {
+							$last_day = (int)date('t', strtotime($visit_year.'-'.$visit_month));
+							$date_from = '16.'.$visit_month.'.'.$visit_year;
+							$date_to = $last_day.'.'.$visit_month. '.'.$visit_year;
+						}
 
-                        $result[2][] = ' '.$months[$visit_month].' '.$month_half;
+						$result[2][] = ' '.$months[$visit_month].' '.$month_half;
 
-                        $visit_counters = $site_statistic_manager->getVisitsStatisticByDate($date_from, $date_to);
+						$visit_counters = $site_statistic_manager->getVisitsStatisticByDate($date_from, $date_to);
 
-                        $appeal_search_params = new AppealSearchParams();
-                        $appeal_search_params->dt_create_from = $date_from;
-                        $appeal_search_params->dt_create_to = $date_to;
-                        $appeal_counter = $appeal_manager->getListByModelSearchCriteria($appeal_search_params);
+						$appeal_search_params = new AppealSearchParams();
+						$appeal_search_params->dt_create_from = $date_from;
+						$appeal_search_params->dt_create_to = $date_to;
+						$appeal_counter = $appeal_manager->getListByModelSearchCriteria($appeal_search_params);
 
-                        $result[3][] = count($appeal_counter);
-                        foreach ($visit_counters as $visit_counter) {
-                            $result[$rows[$visit_counter['name']]][] = $visit_counter['count'];
-                        }
-                        $result[8][] = 0;
+						$result[3][] = count($appeal_counter);
+						foreach ($visit_counters as $visit_counter) {
+							$result[$rows[$visit_counter['name']]][] = $visit_counter['count'];
+						}
+						$result[8][] = 0;
 
-                        $print_year = false;
-                        if ($month_half == 2) {
-                            if ($visit_month == 12) {
-                                $visit_month = 1;
-                                $visit_year++;
-                                $print_year = true;
-                            } else {
-                                $visit_month++;
-                            }
-                        }
-                        $month_half++;
-                        $counter++;
-                    }
-                    if (($visit_month > $visit_month_to && $visit_year == $visit_year_to) || ($visit_year > $visit_year_to)) break;
-                }
+						$print_year = false;
+						if ($month_half == 2) {
+							if ($visit_month == 12) {
+								$visit_month = 1;
+								$visit_year++;
+								$print_year = true;
+							} else {
+								$visit_month++;
+							}
+						}
+						$month_half++;
+						$counter++;
+					}
+					if (($visit_month > $visit_month_to && $visit_year == $visit_year_to) || ($visit_year > $visit_year_to)) break;
+				}
 
-                if ($counter > 2) {
-                    $filename = $visit_month_from.'_'.$visit_year_from.'-'.$visit_month_to.'_'.$visit_year_to.'.csv';
-                } else {
-                    $filename = $visit_month_from.'_'.$visit_year_from.'.csv';
-                }
-                PhpHeaderHelper::csv($filename);
-                $csv_generator = new CsvGenerator();
-                echo $csv_generator->generateFromArray($result);
-                exit();
-            } else {
-                $this->redirectUrl('/');
-            }
-        }
+				if ($counter > 2) {
+					$filename = $visit_month_from.'_'.$visit_year_from.'-'.$visit_month_to.'_'.$visit_year_to.'.csv';
+				} else {
+					$filename = $visit_month_from.'_'.$visit_year_from.'.csv';
+				}
+				PhpHeaderHelper::csv($filename);
+				$csv_generator = new CsvGenerator();
+				echo $csv_generator->generateFromArray($result);
+				exit();
+			} else {
+				$this->redirectUrl('/');
+			}
+		}
 	}

@@ -9,7 +9,7 @@ class SiteStatisticAccessHelper {
 
         $user_ip = $_SERVER['REMOTE_ADDR'];
 
-        if ($user_ip){
+        if ($user_ip and $user_ip!='127.0.0.1'){
 
             $system_access_ip_manager = new SystemAccessIpManager();
             $system_access_ips = $system_access_ip_manager->getActiveList();

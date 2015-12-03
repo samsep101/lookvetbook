@@ -81,7 +81,8 @@ body table tr:nth-child(2n){
 .calendar .ui-datepicker-prev, .calendar .ui-datepicker-next {display:block; width:8px; height:20px; background:url(/media/images/slider_controls.png) no-repeat; text-indent:-9999px; float:left;}
 .calendar .ui-datepicker-next {background-position:100% 0; float:right;}
 .calendar .ui-datepicker-header {text-align:center; margin-bottom:7px; padding:0 45px;}
-.ui-datepicker-calendar, .ui-datepicker-year {display: none;}
+.ui-datepicker-calendar {display: none;}
+.ui-datepicker-year {display: block;}
 
 .docx-error {
     background: none repeat scroll 0 0 #E14C88;

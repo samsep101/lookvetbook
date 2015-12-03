@@ -77,7 +77,7 @@ var SiteStatisticController = function(docx_error) {
     }
 
     this.getVisitInformation = function(){
-        Ajax.Get('/system/ajaxGetVisitInformationByMonth', {city_value: self.city_value, month: $('.ui-datepicker-month').html().toLowerCase()}, function(data){
+        Ajax.Get('/system/ajaxGetVisitInformationByMonth', {city_value: self.city_value, month: $('.ui-datepicker-month').html().toLowerCase(), year: $('.ui-datepicker-year').html() }, function(data){
             if (data.status == 0){
                 $('#clinic-visits').html(data.result.html);
 

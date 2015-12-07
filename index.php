@@ -16,18 +16,21 @@ try {
 	}
 	require('application/config/init.php');
 
-	$excluded_subdomens = ['sankt-peterburg', 'novosibirsk', 'chelyabinsk', 'omsk', 'samara', 'kazan', 'nizhniy-novgorod', 'ekaterinburg'];
-	$m=[];
 	$redirect_domen = $redirect_uri = '';
-	if(preg_match('|^((\w+)\.)?\w+\.\w+$|', $_SERVER['SERVER_NAME'], $m)) {
-		if(!empty($m[1]) and !in_array($m[2], $excluded_subdomens)) {
-			$redirect_domen = str_replace($m[1],'', $_SERVER['SERVER_NAME']);
+	if(isset($_SERVER['SERVER_NAME'])) {
+		$excluded_subdomens = ['sankt-peterburg', 'novosibirsk', 'chelyabinsk', 'omsk', 'samara', 'kazan', 'nizhniy-novgorod', 'ekaterinburg'];
+		$m = [];
+		if (preg_match('|^((\w+)\.)?\w+\.\w+$|', $_SERVER['SERVER_NAME'], $m)) {
+			if (!empty($m[1]) and !in_array($m[2], $excluded_subdomens)) {
+				$redirect_domen = str_replace($m[1], '', $_SERVER['SERVER_NAME']);
+			}
 		}
 	}
 	// редирект со страницы со слешем на конце на страницу без слеша на конце
 	if(isset($_SERVER['REQUEST_URI']) and preg_match('/^(.+)\/$/ims', $_SERVER['REQUEST_URI'], $matches)) {
 		$redirect_uri = $matches[1];
 	}
+
 	if($redirect_domen or $redirect_uri) {
 		if(!$redirect_domen) { $redirect_domen = $_SERVER['SERVER_NAME']; }
 		if(!$redirect_uri) { $redirect_uri = $_SERVER['REQUEST_URI']; }
@@ -37,7 +40,9 @@ try {
 	$controller = new Dispatcher();
 	$controller->process($uri);
 } catch(Exception $exception) {
-	error404($exception);
+	if (!debug && (!in_array(php_sapi_name(), array('cgi-fcgi', 'cli')))) {
+		error404($exception);
+	}
 }
 
 function error404($exception = null) 	{

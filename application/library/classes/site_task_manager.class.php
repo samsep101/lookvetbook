@@ -1935,22 +1935,28 @@ $disease_manager->resetAutoIncrement();*/
 			 */
 			$clinic_manager = ModelManagerFactory::getByName('clinic');
 
+			$clinics = [];
 			$number = 1;
-			foreach($clinic_manager->getIterator() as $clinic)
-			{
+			foreach($clinic_manager->getIterator() as $clinic) {
+				$clinics[$number] = $clinic->getId();
+				$number++;
+			}
+
+			foreach($clinics as $number=>$clinic_id) {
 				/**
 				 * @var ClinicModel $clinic
 				 */
-				self::createClinicVirtualDoctors($clinic->getId());
-				echo $number . ' Done! clinic_id = ' . $clinic->getId() . "\r\n";
+				self::createClinicVirtualDoctors($clinic_id);
+				echo $number . ' Done! clinic_id = ' . $clinic_id . "\r\n";
 				flush();
-
-				$number++;
 			}
+
 		}
 
 		public static function createClinicVirtualDoctors($clinic_id)
 		{
+			//ini_set('memory_limit', '512M');
+
 			/**
 			 * @var SpecializationManager $specialization_manager
 			 * @var SpecialtyManager $specialty_manager
@@ -1962,9 +1968,12 @@ $disease_manager->resetAutoIncrement();*/
 			$clinic_manager = ModelManagerFactory::getByName('clinic');
 			$specialization_manager = ModelManagerFactory::getByName('specialization');
 
+			//есть подозрение, что этот id - одно и то же, что на входе в функцию
 			$clinic = $clinic_manager->getOneById($clinic_id);
+			$clinic_id = $clinic->getId();
+			unset($clinic);
 
-			$empty_specializations = $specialization_manager->getListWithoutDoctorsByClinicId($clinic->getId());
+			$empty_specializations = $specialization_manager->getListWithoutDoctorsByClinicId($clinic_id);
 			$empty_specialties = array();
 
 			if($empty_specializations)
@@ -1976,6 +1985,7 @@ $disease_manager->resetAutoIncrement();*/
 			}
 
 			$purpose_of_visit_to_doctor_manager = ModelManagerFactory::getByName('purpose_of_visit_to_doctor');
+
 			if($empty_specialties)
 			{
 				foreach($empty_specialties as $empty_specialty)
@@ -1989,19 +1999,20 @@ $disease_manager->resetAutoIncrement();*/
 
 					$doctor_to_clinic = new DoctorToClinicModel();
 					$doctor_to_clinic->doctor_id = $doctor->getId();
-					$doctor_to_clinic->clinic_id = $clinic->getId();
+					$doctor_to_clinic->clinic_id = $clinic_id;
 					$doctor_to_clinic->disableValidation();
 					$doctor_to_clinic->save();
 
+
 					$doctor_specialty_to_clinic = new DoctorSpecialtyToClinicModel();
 					$doctor_specialty_to_clinic->doctor_id = $doctor->getId();
-					$doctor_specialty_to_clinic->clinic_id = $clinic->getId();
+					$doctor_specialty_to_clinic->clinic_id = $clinic_id;
 					$doctor_specialty_to_clinic->specialty_id = $empty_specialty->id;
 					$doctor_specialty_to_clinic->disableValidation();
 					$doctor_specialty_to_clinic->save();
 
 					$purpose_of_visit_manager = ModelManagerFactory::getByName('purpose_of_visit');
-					$purposes = $purpose_of_visit_manager->getListBySpecialtyIdAndClinicId($empty_specialty->getId(), $clinic->getId());
+					$purposes = $purpose_of_visit_manager->getListBySpecialtyIdAndClinicId($empty_specialty->getId(), $clinic_id);
 
 					/**
 					 * @var PurposeOfVisitModel[] $purposes
@@ -2010,7 +2021,7 @@ $disease_manager->resetAutoIncrement();*/
 					foreach($purposes as $purpose)
 					{
 						$purpose_of_visit_to_doctor_data[] = array(
-							'clinic_id' => $clinic->getId(),
+							'clinic_id' => $clinic_id,
 							'doctor_id' => $doctor->getId(),
 							'specialty_id' => $empty_specialty->getId(),
 							'purpose_of_visit_id' => $purpose->getId(),

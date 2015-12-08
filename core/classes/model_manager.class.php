@@ -390,6 +390,7 @@
 					LIMIT '.(int)$offset.', '.(int)$limit;
 
 			$data = $this->db->query($sql);
+
 			return $this->initList($data);
 		}
 

@@ -43,6 +43,10 @@ try {
 	if (!debug && (!in_array(php_sapi_name(), array('cgi-fcgi', 'cli')))) {
 		error404($exception);
 	}
+	if (in_array(php_sapi_name(), array('cli'))) {
+		display_cli_error($exception);
+	}
+
 }
 
 function error404($exception = null) 	{
@@ -80,3 +84,16 @@ function error404($exception = null) 	{
 		exit();
 	}
 }
+
+function display_cli_error($exception=null) {
+	if(!$exception){
+		return;
+	}
+	echo 'Error! '.$exception->getMessage()."\n\n";
+	echo 'File: '.$exception->getFile()."\n\n";
+	echo 'Line: '.$exception->getLine()."\n\n";
+	//echo 'Trace: '.print_r($exception->getTrace())."\n\n\n";
+	//echo 'Exception: '.print_r($exception, true)."\n\n\n";
+
+}
+

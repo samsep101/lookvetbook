@@ -9595,6 +9595,12 @@ a.d-pink-btn {
 }
 #ban_wikimed>div {
 	margin: 10px 0 20px;
+	overflow: hidden;
+}
+#ban_wikimed .wiki_logo {
+	background: url(../images/banners/wikimed.png) left bottom no-repeat;
+	height: 28px;
+	margin: 0 0 -15px -15px;
 }
 #ban_wikimed .titled {
 	font-weight: bold;
@@ -9611,7 +9617,17 @@ a.d-pink-btn {
 	color: red;
 	text-decoration: line-through;
 }
-
+#ban_wikimed .action{
+	background: red none repeat scroll 0% 0%;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	width: 40%;
+	text-align: center;
+	float: right;
+	margin: -15px -22px 0px 0px;
+	padding: 4px 0 2px;
+}
 
 #priority_banner2{
 	background: url(../images/banners/prioritets2.jpg) left center no-repeat;
@@ -9623,7 +9639,7 @@ a.d-pink-btn {
 }
 
 #zatashi_roditelej{
-	background: url(../images/banners/zatashi_roditelej.gif) left center no-repeat;
+	background: url(../images/banners/zatashi_roditelej.gif) center center no-repeat;
 	height: 400px;
 	cursor: pointer;
 	margin-top: 20px;
@@ -9631,4 +9647,10 @@ a.d-pink-btn {
 }
 #zatashi_roditelej:hover {
 	opacity: 0.9;
+}
+
+.gizn_lysym{
+	background: url('../images/banners/hair.png') center center no-repeat;
+	height: 400px;
+	margin: 20px 0;
 }

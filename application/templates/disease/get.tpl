@@ -60,6 +60,12 @@
 					<div class="like_p"><?php echo html_entity_decode($disease->content,ENT_COMPAT,'UTF-8'); ?></div>
 				</div>
 
+				<?php if(!empty($disease->alias) and in_array($disease->alias, ['mezhpozvonochnaya-gryzha', 'osteohondroz-pozvonochnika'])) { ?>
+					<div class="desease-banner-line">
+						<div class="ortospy-banner"></div>
+					</div>
+				<?php } ?>
+
 				<?php if ($disease_blocks) :?>
 					<div id="tabs">
 						<div class="illness-nav-wrap">

@@ -9654,3 +9654,14 @@ a.d-pink-btn {
 	height: 400px;
 	margin: 20px 0;
 }
+
+
+.desease-banner-line{
+	margin: 20px 0;
+}
+
+.ortospy-banner {
+	background: url(../images/banners/ortospy.jpg) center center no-repeat;
+	height: 304px;
+}
+

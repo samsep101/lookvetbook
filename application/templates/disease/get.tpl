@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	/**
 	 * @var int $counter_number
 	 */
@@ -305,73 +305,34 @@
 				</div>
 
 
-				<!--div id="priority_banner2" onclick="window.location='http://www.comnews-conferences.ru/it2015';return false;"></div-->
+		<!--Лаборатория "MaxLab"-->
+		<script type="text/javascript">
+		<!--
+		if (typeof(pr) == 'undefined') { var pr = Math.floor(Math.random() * 4294967295) + 1; }
+		if (typeof(document.referrer) != 'undefined') {
+		  if (typeof(afReferrer) == 'undefined') {
+		    afReferrer = encodeURIComponent(document.referrer);
+		  }
+		} else {
+		  afReferrer = '';
+		}
+		var addate = new Date();
+		document.write('<scr' + 'ipt type="text/javascript" src="//ads.maxlab.ru/233/prepareCode?p1=btwcz&amp;p2=vd&amp;'+
+			'pct=a&amp;pfc=a&amp;pfb=a&amp;plp=a&amp;pli=a&amp;pop=a&amp;pr=' + pr +'&amp;pt=b&amp;pd=' + addate.getDate() +
+			'&amp;pw=' + addate.getDay() + '&amp;pv=' + addate.getHours() + '&amp;prr=' + afReferrer + '"><\/scr' + 'ipt>');
+		// -->
+		</script>
+		<!--MaxLab END-->
 
-				<?php
-					$zatashi_roditelej = <<<END
-						<div id="zatashi_roditelej" onclick="window.open('http://intndes.ru/lmb/','reclama');return false;"></div>
-END;
-
-					$byt_molodoj_babkoj = <<<END
     <script type="text/javascript" src="https://www.gstatic.com/swiffy/v7.4/runtime.js"></script>
 		<script language="javascript" src="/media/banners/byt_molodoj_babkoj.js"></script>
 
-    <div id="swiffycontainer" style="width: 240px; height: 400px; margin-top: 20px; margin-left: 7px;">
-    </div>
-    <script>
-      var stage = new swiffy.Stage(document.getElementById('swiffycontainer'), swiffyobject, {});
-      stage.start();
-    </script>
-END;
-
-
-$byt_molodoj_babkoj_flash = <<<END
-				<div style="margin: 20px 0;"></div>
-				<script language="javascript">AC_FL_RunContent = 0;</script>
-				<script src="/media/banners/AC_RunActiveContent.js" language="javascript"></script>
-				<script language="javascript">
-					if (AC_FL_RunContent == 0) {
-						alert("This page requires AC_RunActiveContent.js.");
-					} else {
-						AC_FL_RunContent(
-							'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
-							'width', '240',
-							'height', '400',
-							'src', '/media/banners/45_240_400_3',
-							'quality', 'high',
-							'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
-							'align', 'middle',
-							'play', 'true',
-							'loop', 'true',
-							'scale', 'showall',
-							'wmode', 'window',
-							'devicefont', 'false',
-							'id', '45_240_400_3',
-							'bgcolor', '#ffffff',
-							'name', '45_240_400_3',
-							'menu', 'true',
-							'allowFullScreen', 'false',
-							'allowScriptAccess','sameDomain',
-							'movie', '/media/banners/45_240_400_3',
-							'salign', ''
-						); //end AC code
-					}
-				</script>
-				<noscript>
-					<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="240" height="400" id="45_240_400_3" align="middle">
-						<param name="allowScriptAccess" value="sameDomain" />
-						<param name="allowFullScreen" value="false" />
-						<param name="movie" value="/media/banners/45_240_400_3.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" />	<embed src="/media/banners/45_240_400_3.swf" quality="high" bgcolor="#ffffff" width="240" height="400" name="45_240_400_3" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
-					</object>
-				</noscript>
-END;
-
-				echo (rand(1,3)%3==1) ? '<div class="gizn_lysym"></div>' : '';
-
-				echo rand(0,1) ? $zatashi_roditelej.$byt_molodoj_babkoj : $byt_molodoj_babkoj.$zatashi_roditelej;
-?>
-
-
+		<div id="swiffycontainer" style="width: 240px; height: 400px; margin-top: 20px; margin-left: 7px;"></div>
+		<script>
+		  var stage = new swiffy.Stage(document.getElementById('swiffycontainer'), swiffyobject, {});
+		  stage.start();
+		</script>
+				
 				<?php /* Яндекс.Директ */ ?>
 				<?php if(1) { ?>
 				<div class="info-box disease-banner" style="padding:8px; background: none; box-shadow: none;">
@@ -415,7 +376,6 @@ END;
 						$('#ban_wikimed').click(function(){ window.location = '/clinic/klinika-WikiMed'; return false; });
 					}
 				</script>
-
 
 				<div id="ban2"></div>
 

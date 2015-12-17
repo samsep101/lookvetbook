@@ -9661,7 +9661,15 @@ a.d-pink-btn {
 }
 
 .ortospy-banner {
-	background: url(../images/banners/ortospy.jpg) center center no-repeat;
-	height: 304px;
+	background: url(../images/banners/ortospy.jpg?1) center center no-repeat;
+	height: 249px;
+}
+.ortospy-banner2 {
+	background: url(../images/banners/ortospy_small.jpg?1) center center no-repeat;
+	height: 76px;
+	cursor: pointer;
 }
 
+.right_banner_container {
+	width: 240px; height: 400px; margin-top: 20px; margin-left: 7px;
+}

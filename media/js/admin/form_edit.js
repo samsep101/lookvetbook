@@ -79,19 +79,23 @@ $(document).ready(function(){
 		});
 	}
 
-	function fill_first_value(answ, input_id) {
+	function fill_first_value(answ, input_id, val) {
 		if(!answ.result){
-			return;
+			return false;
 		}
 		for(var key in answ.result) {
-			fill_value(input_id, key, answ.result[key]);
+			if(val == key) {
+				var title = answ.result[key];
+				fill_value(input_id, key, title);
+				return false;
+				break;
+			}
 		}
 	}
 
 	var timers = [];
 
 	function fill_avail_values(answ, suggest) {
-		console.log('timer away');
 		var suggestions = []
 		if(answ.result) {
 			for (var key in answ.result) {
@@ -128,8 +132,8 @@ $(document).ready(function(){
 		page_inputs[input_id].data = data;
 
 		if(data.value && data.value != '0') {
-			var senddata = {data:data, input_id:input_id};
-			fill_input_ajax_search(senddata, 'fill_first_value(answ, senddata.input_id)');
+			var senddata = {data:data, input_id:input_id, inp_val:data.value};
+			fill_input_ajax_search(senddata, 'fill_first_value(answ, senddata.input_id, senddata.inp_val)');
 		}
 		page_inputs[input_id].data.value = '';
 
@@ -150,14 +154,12 @@ $(document).ready(function(){
 			},
 			onSelect: function(e, term, item){
 				page_inputs[input_id].hiddn.val(item.data('key'));
-				console.log('hid_inp', page_inputs[input_id].hiddn.val(), page_inputs[input_id].hiddn);
 			}
 		});
 		fill_input_prepare();
 	}
 
 	fill_input_prepare();
-
 
 });
 

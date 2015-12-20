@@ -74,9 +74,13 @@ class SeoSpecialtyBlockViewHelper
 			$html .= '<h2>' . StringHelper::startProposalWord($specialty->plural_name) . ' в городах:</h2>';
 			$html .= '<div class="text">';
 
+			$needed_cities = [2, 770, 693, 902, 671, 489, 768, 714, 957];//TODO: эти города у нас разрешены. Надо вынести в конфиг!
+
 			foreach ($cities as $city) {
-				if ($current_id && $current_id == $city->getId())
+				$city_id = $city->getId();
+				if (($current_id and $current_id == $city_id) or !in_array($city_id, $needed_cities)) {
 					continue;
+				}
 				$html .= '<a href="' . SeoLinkViewHelper::getSpecialtyPageLink($specialty, $city) . '">' . $city->name . '</a>';
 			}
 

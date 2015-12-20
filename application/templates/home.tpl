@@ -278,7 +278,7 @@
 
             <div class="sp-links right-links">
                 <a class="a-dashed popup_city" href="javascript:void(0);"><?php echo $city->name; ?></a>
-                <span class="phone"><small>(495)</small> 215-09-07 <span class="flo"></span><span class="calltime">с 09 до 21</span></span>
+                <span class="phone"><small>(<?php echo SITE_PHONE_CODE; ?>)</small> <?php echo SITE_PHONE; ?> <span class="flo"></span><span class="calltime">с 09 до 21</span></span>
                 <a class="a-dashed" href="javascript:void(0);"><small class="order-call">Заказать звонок</small>
                     <div class="form-call form-call-step-1">
                         <p class="h-txt">Заказать звонок</p>

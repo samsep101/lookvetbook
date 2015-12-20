@@ -9673,3 +9673,10 @@ a.d-pink-btn {
 .right_banner_container {
 	width: 240px; height: 400px; margin-top: 20px; margin-left: 7px;
 }
+
+.desease-phone {
+	float: right;
+	font-size: 22px;
+	font-weight: bold;
+}
+

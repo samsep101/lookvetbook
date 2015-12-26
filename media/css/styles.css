@@ -544,7 +544,8 @@ h2 {
     height          : 47px;
     line-height     : 48px;
     display         : block;
-    background      : url(/media/images/appoint_btn.png) no-repeat;
+    /*background      : url(/media/images/appoint_btn.png) no-repeat;*/
+	background      : green;
     font-family     : 'pf_agora_slab_probold';
     font-size       : 16px;
     color           : #FFFFFF !important;
@@ -553,6 +554,11 @@ h2 {
     text-shadow     : 1px -1px 1px #23629A;
     border-radius   : 7px;
     border          : 1px solid #CDD1FF;
+}
+
+.btn-appoint:hover {
+	background: #069B06;
+
 }
 
 .btn-appoint.refactor-btn-appoint-styles {
@@ -613,6 +619,14 @@ h2 {
     font-size   : 16px;
     font-style  : normal;
     font-weight : 700;
+	background  : green;
+	padding: 0 25px;
+	border-radius: 5px 5px 5px 5px;
+	height: 39px;
+}
+
+.btn-appoint.refactor-btn-appoint-styles .button-name:hover {
+	background: #069B06;
 }
 
 .content.red .btn-appoint {

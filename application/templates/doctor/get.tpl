@@ -393,6 +393,7 @@
         </div>
 
         <?php if(!empty($doctor_to_slider) && !empty($doctor_to_slider['doctors'])) { ?>
+          <?php // /api/doctor/getDoctorSliders?token=ba858827a1e7f5e54c01fc5b979c6041&doctor_id=2113  ?>
             <div class="doctors-slider">
                 <div class="dsTitle">
                     <?php echo $doctor_to_slider['title']; ?>
@@ -403,6 +404,7 @@
                 <?php $this->block('/doctor/blocks/slider_cards_doctors'); ?>
             </div>
         <?php } ?>
+
         <div class="back-to-search-area">
             <?php
                 $data_return = SiteUriHelper::returnToSearchForm();

@@ -115,7 +115,7 @@
 		{
 			$sql = 'SELECT vr.*
                     FROM visit_rating vr
-                    WHERE vr.visit_id = ' . (int)$visit_id;
+                    WHERE vr.visit_id = ' . (int)$visit_id. ' LIMIT 0,1 ';
 
 			$data = $this->db->query($sql);
 

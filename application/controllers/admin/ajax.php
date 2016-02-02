@@ -171,7 +171,7 @@
 				$search_params->addParam($sort_by.'!=', '  ');
 				$search_params->addParam($sort_by.'!=', '   ');
 			}
-			foreach($params as $param) {
+			if($params) foreach($params as $param) {
 				list($par1,$par2) = $param;
 				if($par1=='join') {
 					$search_params->addJoin($par2);

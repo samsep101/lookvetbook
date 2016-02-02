@@ -11,7 +11,7 @@ media/pie/
 media/vidal/
 
 application/templates/_bak.tar.gz
-
+application/config/site.cfg.php
 
 /cache
 /booking
@@ -21,6 +21,8 @@ nbproject
 _bak
 
 sitemaps
+sitemap.xml
+robots
 
 
 

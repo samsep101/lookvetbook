@@ -290,7 +290,10 @@ class YandexServicesCompaniesFeedGenerator
 
         $reviewer_node = $dom->createElement('reviewer');
         $vcard_node = $reviewer_node->appendChild($dom->createElement('vcard'));
-        $vcard_node->appendChild($dom->createElement('fn', $review->account->nick));
+        if(!empty($review->account)) {
+          $chld = $dom->createElement('fn', $review->account->nick);
+          $vcard_node->appendChild($chld);
+        }
         $reviewer_node->appendChild($vcard_node);
         $review_node->appendChild($reviewer_node);
 
@@ -373,9 +376,9 @@ class YandexServicesCompaniesFeedGenerator
           $resource_node->setAttribute('id', $doctor->getId());
           $resource_node->appendChild($dom->createElement('name', $doctor->full_name));
           $resource_node->appendChild($dom->createElement('description', $doctor->specialties_names));
-          if ($doctor->card_image_id)
+          if ($doctor->card_image_id and !empty($doctor->card_image)) {
             $resource_node->appendChild($dom->createElement('photo', SITE_URL . $doctor->card_image->crop(100, 100)->path));
-
+          }
           if ($doctor->last_review) {
             $reviews_node = $dom->createElement('reviews');
 
@@ -582,7 +585,9 @@ class YandexServicesCompaniesFeedGenerator
 
         $reviewer_node = $dom->createElement('reviewer');
         $vcard_node = $reviewer_node->appendChild($dom->createElement('vcard'));
-        $vcard_node->appendChild($dom->createElement('fn', $review->account->nick));
+        if(!empty($review->account)) {
+          $vcard_node->appendChild($dom->createElement('fn', $review->account->nick));
+        }
         $reviewer_node->appendChild($vcard_node);
         $review_node->appendChild($reviewer_node);
 
@@ -664,9 +669,9 @@ class YandexServicesCompaniesFeedGenerator
           $resource_node->setAttribute('id', $doctor->getId());
           $resource_node->appendChild($dom->createElement('name', $doctor->full_name));
           $resource_node->appendChild($dom->createElement('description', $doctor->specialties_names));
-          if ($doctor->card_image_id)
+          if ($doctor->card_image_id and !empty($doctor->card_image)) {
             $resource_node->appendChild($dom->createElement('photo', SITE_URL . $doctor->card_image->crop(100, 100)->path));
-
+          }
           if ($doctor->last_review) {
             $reviews_node = $dom->createElement('reviews');
 

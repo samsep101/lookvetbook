@@ -258,7 +258,7 @@ $filter_and->addFilter($match);
       ));
     }
 
-    if ($criteria->geo_point) {
+    if ($criteria->geo_point and 0) {//TODO: починить запрос дальности от гео-точки. сейчас выдает ошибку у эластика
       $result_query->addSort(array(
         '_script' => array(
           'script' => '((doc[\'clinics.geo_point\'].arcDistanceInKm(' . $criteria->geo_point->getLatitude() . ', ' . $criteria->geo_point->getLongitude() . ') < ' . ($criteria->distance / 1000) . ') ? 1 : 0)',

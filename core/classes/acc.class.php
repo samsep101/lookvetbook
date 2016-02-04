@@ -46,8 +46,9 @@
 
         public static function isSystemAccess()
         {
-            if (!empty($_SESSION['__acc']['account']['is_system_access']))
+            if (!empty($_SESSION['__acc']['account']['is_system_access'])) {
                 return TRUE;
+            }
             return FALSE;
         }
 

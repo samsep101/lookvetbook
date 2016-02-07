@@ -1375,24 +1375,29 @@ if (!Acc::isAuthed())
       }
     }
 
-    //временная порнография - вывод особых докторов вместо любых
+    //TODO: надо перенести в конфиг эти условия на особых врачей в особых клиниках
+    $doctors =  [];
     if ($specialty_id == 96) {
       $doctor_search_params->clinic_id = 3580;
-      $doctor_search_params->_id = 124842;
-      $doctors2 = ModelManagerFactory::getByName('doctor')->getListByDoctorSearchParams($doctor_search_params);
+      //$doctor_search_params->_id = 124842;
+      $primary_doctors_ids = [124842, 125560];
+      $doctor_search_params->ids = $primary_doctors_ids;
+      $doctors = ModelManagerFactory::getByName('doctor')->getListByDoctorSearchParams($doctor_search_params);
       unset($doctor_search_params->clinic_id);
-      unset($doctor_search_params->_id);
+//      unset($doctor_search_params->_id);
+      unset($doctor_search_params->ids);
+      $doctor_search_params->ids_no = $primary_doctors_ids;
     }
 
-    $doctors = ModelManagerFactory::getByName('doctor')->getListByDoctorSearchParams($doctor_search_params);
-
-    if ($doctors) {
-      //временная порнография
-      if ($specialty_id == 96 and count($doctors2)) {
-        for ($i = 0; $i < count($doctors2); $i++) {
-          $doctors[$i] = $doctors2[$i];
-        }
+    if(count($doctors)<2) {
+      $doctors_bonus = ModelManagerFactory::getByName('doctor')->getListByDoctorSearchParams($doctor_search_params);
+      for($i=0; $i<(2 - count($doctors)); $i++) {
+        $doctors[] = $doctors[$i];
       }
+    }
+    $doctor_search_params->ids_no = [];
+
+    if (count($doctors)) {
       $any_search = true;
     } else {
       $any_search = false;

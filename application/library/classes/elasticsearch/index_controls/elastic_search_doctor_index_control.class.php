@@ -151,7 +151,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
       $filter_and->addFilter($match);
     }
 
-    if ($criteria->clinic_id) {
+    if (!empty($criteria->clinic_id)) {
       $match = new \Elastica\Filter\Term();
       $match->setTerm('clinics.id', $criteria->clinic_id);
       $filter_and->addFilter($match);
@@ -174,6 +174,31 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
       $match->setTerm('_id', $criteria->_id);
       $filter_and->addFilter($match);
     }
+
+    if (!empty($criteria->ids) and count($criteria->ids)) {
+      $filter_or = new Elastica\Filter\BoolOr();
+      foreach($criteria->ids as $_id) {
+        $match = new \Elastica\Filter\Term();
+        $match->setTerm('_id', $_id);
+        $filter_or->addFilter($match);
+      }
+      $filter_and->addFilter($filter_or);
+    }
+
+
+    if (!empty($criteria->ids_no) and count($criteria->ids_no)) {
+      $filter_or = new Elastica\Filter\BoolOr();
+      foreach($criteria->ids_no as $_id) {
+        $match = new \Elastica\Filter\Term();
+        $match->setTerm('_id', $_id);
+        $filter_no = new \Elastica\Filter\BoolNot($match);
+        $filter_or->addFilter($filter_no);
+      }
+      $filter_and->addFilter($filter_or);
+    }
+
+
+
 
     if ($criteria->street_id && !$criteria->region_id) {
       $region_manager = ModelManagerFactory::getByName('street');

@@ -134,10 +134,9 @@ EOD;
 
   public function sendVisitCreatedMessage($info=[])
   {
-//    $to = 'cyberunit@gmail.com';
-    $to = 'cyberunit@gmail.com,cyber.unit@gmail.com';
-    $subject = 'Создано обращение '.$info['id']['value'].' на '.$info['fio']['value'].''."\n";
-    $message = 'Создано обращение: '."\r\n\r\n";
+    $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,cyberunit@gmail.com,glyapustina@lookmedbook.ru';
+    $subject = 'Заявка с сайта No:'.$info['id']['value'].', пациент '.$info['fio']['value'].''."\n";
+    $message = 'Заявка с сайта No:'.$info['id']['value'].': '."\r\n\r\n";
     foreach($info as $value) {
       $message .= $value['title'].': '.$value['value']."\r\n\r\n";
     }

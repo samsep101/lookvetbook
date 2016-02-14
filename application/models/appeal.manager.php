@@ -95,6 +95,31 @@ class AppealManager extends ModelManager
       $visit_recorder->record($visit_information);
       $visit_recorder->getVisit();
     }
+
+    $mail_sender = new EmailSenderHelper();
+
+
+//    From: LookMedBook [mailto:no-reply@lookmedbook.ru]
+//Sent: Wednesday, January 27, 2016 12:07 PM
+//To: carelmb@yandex.ru
+//Subject: Решетова Вера Ивановна, клиника, гинеколог-эндокринолог,, -, заявка 20274
+//
+//
+//
+//Клиника.Тел: Пациент: Решетова Вера Ивановна.Врач: гинеколог-эндокринолог.Запись:, -.Заявка 20274.Адрес клиники: Телефон клиента: 79168122080Емейл клиента: 79168122080@user.ru
+
+    $mail_data = [
+      'id' => ['title' => 'Обращение', 'value' => $model->getId(),],
+      'fio' => ['title' => 'Пациент', 'value' => $model->first_name . ' ' . $model->middle_name . ' ' . $model->last_name . ' ',],
+      'phone' => ['title' => 'Телефон пациента', 'value' => $model->phone_number,],
+      //'email'=>['title'=>'Email пациента', 'value'=>$account->email, ],
+      //'clinic'=>['title'=>'Клиника', 'value'=>, ],
+      'doctor' => ['title' => 'Врач', 'value' => $model->specialty->name,],
+      'comment' => ['title' => 'Коментарий', 'value' => $model->title,],
+    ];
+    $mail_sender->sendVisitCreatedMessage($account->email, $account->password_hash);
+
+
   }
 
   /**

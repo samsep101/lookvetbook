@@ -1732,6 +1732,15 @@ if (!Acc::isAuthed())
 
       if ($call_to_user->save()) {
         $_SESSION['sentDiscountRequest'] = true;
+
+        $mail_sender = new EmailSenderHelper();
+        $mail_data = [
+          'id' => ['title' => 'Просьба перезвонить', 'value' => $call_to_user->getId(),],
+          'phone' => ['title' => 'Телефон пациента', 'value' => $phone, ],
+        ];
+        $mail_sender->sendVisitCreatedMessage($mail_data);
+
+
         JsonResponse::result(true);
       }
     } else {

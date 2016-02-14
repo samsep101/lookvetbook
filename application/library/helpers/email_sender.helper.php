@@ -135,8 +135,13 @@ EOD;
   public function sendVisitCreatedMessage($info=[])
   {
     $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,cyberunit@gmail.com,glyapustina@lookmedbook.ru';
-    $subject = 'Заявка с сайта No:'.$info['id']['value'].', пациент '.$info['fio']['value'].''."\n";
-    $message = 'Заявка с сайта No:'.$info['id']['value'].': '."\r\n\r\n";
+    $subject = $info['id']['title'].' No:'.$info['id']['value'];
+    if(isset($info['fio'])) {
+      $subject .= ', пациент '.$info['fio']['value'].'';
+    }
+    $subject .= "\n";
+
+    $message = $info['id']['title'].':'."\r\n\r\n";
     foreach($info as $value) {
       $message .= $value['title'].': '.$value['value']."\r\n\r\n";
     }

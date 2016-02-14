@@ -1735,7 +1735,7 @@ if (!Acc::isAuthed())
 
         $mail_sender = new EmailSenderHelper();
         $mail_data = [
-          'id' => ['title' => 'Просьба перезвонить', 'value' => $call_to_user->getId(),],
+          'id' => ['title' => 'Заявка на скидку', 'value' => $call_to_user->getId(),],
           'phone' => ['title' => 'Телефон пациента', 'value' => $phone, ],
         ];
         $mail_sender->sendVisitCreatedMessage($mail_data);

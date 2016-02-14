@@ -134,14 +134,14 @@ EOD;
 
   public function sendVisitCreatedMessage($info=[])
   {
-    $to = 'cyberunit@gmail.com';
-//    $to = 'cyberunit@gmail.com,cyber.unit@gmail.com';
+//    $to = 'cyberunit@gmail.com';
+    $to = 'cyberunit@gmail.com,cyber.unit@gmail.com';
     $subject = 'Создано обращение '.$info['id']['value'].' на '.$info['fio']['value'].''."\n";
-    $message = 'Создано обращение: '."\n";
+    $message = 'Создано обращение: '."\r\n\r\n";
     foreach($info as $value) {
-      $message .= $value['title'].': '.$value['value']."\n";
+      $message .= $value['title'].': '.$value['value']."\r\n\r\n";
     }
-    $message .= "\n";
+    $message .= "\n\n";
 
     $headers = "Content-type: text/html; charset=utf-8 \r\n";
     $headers .= "From: lookmedbook.ru <no-reply@lookmedbook.ru>\r\n";

@@ -117,7 +117,7 @@ class AppealManager extends ModelManager
       'doctor' => ['title' => 'Врач', 'value' => $model->specialty->name,],
       'comment' => ['title' => 'Коментарий', 'value' => $model->title,],
     ];
-    $mail_sender->sendVisitCreatedMessage($account->email, $account->password_hash);
+    $mail_sender->sendVisitCreatedMessage($mail_data);
 
 
   }

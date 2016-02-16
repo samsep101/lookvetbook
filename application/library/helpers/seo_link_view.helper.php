@@ -55,36 +55,42 @@ class SeoLinkViewHelper
   }
 
   /*
-   * Заменяем внешние ссылки на преобразованные
+    * Модфицирует внешнюю ссылку добавляя rel="nofollow" class="jsLinkHidingIndexing" и перемещая href -> data-link
    */
-  public static function convertLinks($html)
-  {
-    include_once dirname(dirname(__FILE__)) . '/classes/simple_html_dom.php';
+  function catchOuterLinks($matches){
+    $linkOuter = $matches[0];
+    $site_url = 'lookmedbook.ru';
+    $innerUrlPattern='/href=.*'.$site_url.'[^.]*/is';
 
-    $domen = preg_replace('|^http://([^.]+)\.\w+$|', '$1', SITE_URL);
-    $regPermissibleLinks = '/http(.){0,1}:\/\/(?!(.)*' . $domen . ')/';
-    $linksProcessed = array();
-    $externalReference = array();
+    if (!preg_match($innerUrlPattern, $linkOuter) && strpos($linkOuter,'//')) {
+      if (strpos($linkOuter, 'rel') === false) {
+        $linkOuter = preg_replace("%(href=\S(?!$site_url))%i", 'rel="nofollow" $1', $linkOuter);
+      } elseif (preg_match("%href=\S(?!$site_url)%i", $linkOuter)) {
+        $linkOuter = preg_replace('/rel=S(?!nofollow)\S*/i', 'rel="nofollow"', $linkOuter);
+      }
+      if (strpos($linkOuter, 'class') === false) {
 
-    $strHtml = str_get_html($html);
+        $linkOuter = preg_replace("%(href=\S(?!$site_url))%i", 'class="jsLinkHidingIndexing" $1', $linkOuter);
+      } elseif (preg_match("%href=\S(?!$site_url)%i", $linkOuter)) {
+        $linkOuter = preg_replace('/class="(.*?)"/i', 'class="$1 jsLinkHidingIndexing"', $linkOuter);
+      }
 
-    if (is_object($strHtml) and !empty($strHtml->innertext) and count($strHtml->find('a'))) {
-      foreach ($strHtml->find('a') as $a) {
-        if (preg_match($regPermissibleLinks, $a->href)) {
-          $externalReference[] = $a->outertext;
-          $a->class = $a->class . ' jsLinkHidingIndexing';
-          $a->{'data-link'} = $a->href;
-
-          unset($a->href);
-
-          $linksProcessed[] = $a->outertext;
-        }
+      if (preg_match("%href=\S(?!$site_url)%i", $linkOuter)) {
+        $regV = '#(<a[a-z\-_\s\"\#\=]*)(href=")((https?|ftp)://)#i';
+        $replace = '$1$2" data-link="$3';
+        $linkOuter = preg_replace($regV, $replace, $linkOuter);
       }
     }
 
-    $html = str_replace($externalReference, $linksProcessed, $html);
+    return $linkOuter;
+  }
 
+  /*
+     * Заменяем внешние ссылки на преобразованные
+  */
+  public static function convertLinks($html)
+  {
+    $html = preg_replace_callback('/<a[^>]+/', 'self::catchOuterLinks', $html);
     return $html;
-
   }
 }

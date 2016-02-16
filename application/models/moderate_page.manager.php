@@ -73,7 +73,7 @@
 						}
 			}
 
-            $sql .=  ' LIMIT 5 ';
+            //$sql .=  ' LIMIT 5 ';
 
 
 			// лицензии клиники
@@ -105,7 +105,7 @@
 				if($where)
 					$sql .= ' WHERE ' . join(' AND ', $where) . ' ';
 			}
-            $sql .=  ' LIMIT 5 ';
+            //$sql .=  ' LIMIT 5 ';
 
 			// реквизиты клиники
 			$sql .= '
@@ -137,7 +137,7 @@
 					$sql .= ' WHERE ' . join(' AND ', $where) . ' ';
 			}
 
-            $sql .=  ' LIMIT 5 ';
+            //$sql .=  ' LIMIT 5 ';
 
 			// описание клиники
 			$sql .= '
@@ -168,7 +168,7 @@
 					$sql .= ' WHERE ' . join(' AND ', $where) . ' ';
 			}
 
-            $sql .=  ' LIMIT 5 ';
+            //$sql .=  ' LIMIT 5 ';
 
 			// фотографии клиники
 			$sql .= '
@@ -199,7 +199,7 @@
 					$sql .= ' WHERE ' . join(' AND ', $where) . ' ';
 			}
 
-            $sql .=  ' LIMIT 5 ';
+            //$sql .=  ' LIMIT 5 ';
 
 			// страница о докторе
 			$sql .= '
@@ -233,7 +233,7 @@
 					$sql .= ' WHERE ' . join(' AND ', $where) . ' ';
 			}
 
-            $sql .=  ' LIMIT 5 ';
+            //$sql .=  ' LIMIT 5 ';
 
 			// фотографии доктора
 			$sql .= '
@@ -267,7 +267,7 @@
 					$sql .= ' WHERE ' . join(' AND ', $where) . ' ';
 			}
 
-            $sql .=  ' LIMIT 5 ';
+            //$sql .=  ' LIMIT 5 ';
 
 			// списки для клиники
 			$sql .= '
@@ -307,7 +307,7 @@
 					$sql .= ' AND ' . join(' AND ', $where) . ' ';
 			}
 
-            $sql .=  ' LIMIT 5 ';
+            //$sql .=  ' LIMIT 5 ';
 
 			// списки врачей
 			$sql .= '

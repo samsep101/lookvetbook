@@ -28,6 +28,9 @@
 
 		public function start($cache_id, $groups = array())
 		{
+			if (HTML_CACHE_ENABLE == 0)
+				return false;
+
 			if(!$this->enabled)
 				return false;
 
@@ -56,6 +59,9 @@
 
 		public function end()
 		{
+			if (HTML_CACHE_ENABLE == 0)
+				return false;
+
 			$content = ob_get_contents();
 			if($this->enabled)
 			{

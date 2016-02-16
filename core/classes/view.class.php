@@ -72,6 +72,9 @@
 
         public function block($templateName, $params = null)
         {
+            if (debug == 1)
+                echo "<!--".$templateName."-->";
+
             extract($this->__values);
             if ($params)
                 extract($params);

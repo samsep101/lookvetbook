@@ -1,9 +1,17 @@
-<?php
+﻿<?php
 header("Content-Type: text/html; charset=UTF-8");
-define('debug', 0);
+define('debug', 1);
 
 if(!debug) {
 	ini_set('display_errors', 'Off');
+}else{
+//    ini_set('display_errors', 'Off');
+//    ini_set('html_errors', 'Off');
+//    ini_set('track_errors', 'Off');
+//    ini_set('display_startup_errors', 'Off');
+
+//xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
+
 }
 
 try {
@@ -43,13 +51,25 @@ try {
 	$controller = new Dispatcher();
 	$controller->process($uri);
 } catch(Exception $exception) {
+	if (debug){
+		echo $exception->getFile().":".$exception->getLine()." ".$exception->getMessage();
+		echo "<pre>";
+			print_r($exception->getTraceAsString());
+		echo "</pre>";
+	}
 	if (!debug && (!in_array(php_sapi_name(), array('cgi-fcgi', 'cli')))) {
 		error404($exception);
 	}
 	if (in_array(php_sapi_name(), array('cli'))) {
 		display_cli_error($exception);
 	}
+}
 
+if (debug)
+{
+	echo "<br><br><br><hr>
+			Peak memory usage: ".number_format(memory_get_peak_usage())."
+			";
 }
 
 function error404($exception = null) 	{
@@ -100,3 +120,12 @@ function display_cli_error($exception=null) {
 
 }
 
+if (debug)
+{
+
+//$xhprof_data = xhprof_disable();
+//include_once $_SERVER['DOCUMENT_ROOT']."/third_party/xhprof/xhprof_lib/utils/xhprof_lib.php";
+//include_once $_SERVER['DOCUMENT_ROOT']."/third_party/xhprof/xhprof_lib/utils/xhprof_runs.php";
+//$xhprof_runs = new XHProfRuns_Default();
+//$run_id = $xhprof_runs->save_run($xhprof_data, "test");
+}

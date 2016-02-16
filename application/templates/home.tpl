@@ -263,7 +263,7 @@
                     <?php if($city->is_has_clinics) { ?>
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'clinic') ? 'active' : ''; ?> clinic-link" href="/clinic">Клиники</a>
                     <?php } ?>
-                    
+
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?>http://lookmedbook.ru/disease<?php } ?>">Заболевания</a>
                         <a class="" href="http://swiss.lookmedbook.ru/">Лечение в Швейцарии</a>
 
@@ -430,7 +430,7 @@
     <?php if ($this->show_horizontal_banner) { ?>
         <?php $this->block('blocks/horizontal-banner'); ?>
     <?php } ?>
-    
+
     <?php $this->block('blocks/footer'); ?>
 <?php } ?>
 <noindex>

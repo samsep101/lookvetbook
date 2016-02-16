@@ -1,4 +1,5 @@
 <div class="horizontal-banner-yd">
+    <?php if (debug == 0) : ?>
     <!-- Яндекс.Директ -->
     <script type="text/javascript">
         yandex_partner_id = 147148;
@@ -21,4 +22,5 @@
         yandex_no_sitelinks = true;
         document.write('<scr'+'ipt type="text/javascript" src="//an.yandex.ru/system/context.js"></scr'+'ipt>');
     </script>
+    <?php endif; ?>
 </div>

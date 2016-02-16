@@ -68,6 +68,24 @@ class AppealManager extends ModelManager
 
       }
     }
+
+
+  }
+
+  public function sendMailAboutSave(DynamicModel $model)
+  {
+    $mail_sender = new EmailSenderHelper();
+    $mail_data = [
+      'id' => ['title' => 'Обращение', 'value' => $model->getId(),],
+      'fio' => ['title' => 'Пациент', 'value' => $model->first_name . ' ' . $model->middle_name . ' ' . $model->last_name . ' ',],
+      'phone' => ['title' => 'Телефон пациента', 'value' => $model->phone_number,],
+      //'email'=>['title'=>'Email пациента', 'value'=>$account->email, ],
+      //'clinic'=>['title'=>'Клиника', 'value'=>, ],
+      'doctor' => ['title' => 'Врач', 'value' => $model->specialty->name,],
+      'comment' => ['title' => 'Коментарий', 'value' => $model->title,],
+//      'test' => ['title' => 'test', 'value' => $appelTest->mailed,],
+    ];
+    $mail_sender->sendVisitCreatedMessage($mail_data);
   }
 
   public function afterSave(DynamicModel $model)
@@ -96,17 +114,19 @@ class AppealManager extends ModelManager
       $visit_recorder->getVisit();
     }
 
-    $mail_sender = new EmailSenderHelper();
-    $mail_data = [
-      'id' => ['title' => 'Обращение', 'value' => $model->getId(),],
-      'fio' => ['title' => 'Пациент', 'value' => $model->first_name . ' ' . $model->middle_name . ' ' . $model->last_name . ' ',],
-      'phone' => ['title' => 'Телефон пациента', 'value' => $model->phone_number,],
-      //'email'=>['title'=>'Email пациента', 'value'=>$account->email, ],
-      //'clinic'=>['title'=>'Клиника', 'value'=>, ],
-      'doctor' => ['title' => 'Врач', 'value' => $model->specialty->name,],
-      'comment' => ['title' => 'Коментарий', 'value' => $model->title,],
-    ];
-    $mail_sender->sendVisitCreatedMessage($mail_data);
+    //ALTER TABLE `appeal`  ADD `mailed` tinyint unsigned NULL DEFAULT '0';
+    //по какой-то причине шлется сразу несколько писем. приходится извращаться
+    $appelTest = array_shift($this->getListByIds([$model->getId()]));
+//    print_r([$appelTest->mailed, 'qqq']);
+//    print_r([$appelTest->mailed]);
+    if($appelTest->mailed != 1) {
+      $this->sendMailAboutSave($model);
+      $model->mailed = 1;
+
+      //дабы не перезапускать заново afterSave
+      $appeal = new Orm(DB_PREFIX . 'appeal');
+      $appeal->update(['mailed'=>$model->mailed], $this->id_field_name . ' = "' . $model->getId() . '"');
+    }
 
 
   }

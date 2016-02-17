@@ -11,7 +11,7 @@
 	<?php if(!isset($cache) or !$cache->start($cache_id, 'counters_city')): ?>
 <!--LiveInternet counter-->
 <script type="text/javascript">
-document.write("<a href='http://www.liveinternet.ru/click' target=_blank><img style='display: none' src='//counter.yadro.ru/hit?t44.6;r" + escape(top.document.referrer) + ((typeof(screen) == "undefined") ? "" : ";s" + screen.width + "*" + screen.height + "*" + (screen.colorDepth ? screen.colorDepth : screen.pixelDepth)) + ";u" + escape(document.URL) + ";h" + escape(document.title.substring(0, 80)) + ";" + Math.random() + "' border=0 width=31 height=31 alt='' title='LiveInternet'><\/a>")</script><!--/LiveInternet-->
+    document.write('<a href="http://www.liveinternet.ru/click" target=_blank><img style="display: none" src="//counter.yadro.ru/hit?t44.6;r' + escape(top.document.referrer) + ((typeof(screen) == "undefined") ? "" : ";s" + screen.width + "*" + screen.height + "*" + (screen.colorDepth ? screen.colorDepth : screen.pixelDepth)) + ";u" + escape(document.URL) + ";h" + escape(document.title.substring(0, 80)) + ";" + Math.random() + '" border=0 width=31 height=31 alt="" title="LiveInternet"><\/a>')</script><!--/LiveInternet-->
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">

@@ -581,6 +581,7 @@
 		 */
 		public function getListByClinicSearchParams(ClinicSearchParams $clinic_search_params, $get_total_hits = false)
 		{
+
 			$clinic_index_manager = new ElasticSearchClinicIndexControl();
 			$result = $clinic_index_manager->search($clinic_search_params, $get_total_hits);
 			$this->total_hits = $clinic_index_manager->getTotalHits();

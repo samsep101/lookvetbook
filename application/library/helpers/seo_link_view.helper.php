@@ -54,9 +54,9 @@ class SeoLinkViewHelper
     }
   }
 
-  /*
-    * Модфицирует внешнюю ссылку добавляя rel="nofollow" class="jsLinkHidingIndexing" и перемещая href -> data-link
-   */
+    /*
+      * Модфицирует внешнюю ссылку добавляя rel="nofollow" class="jsLinkHidingIndexing" и перемещая href -> data-link
+     */
   function catchOuterLinks($matches){
     $linkOuter = $matches[0];
     $site_url = 'lookmedbook.ru';

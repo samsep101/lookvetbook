@@ -35,7 +35,7 @@
         }
 
 
-        public function afterSave(DynamicModel $model)
+        public function afterSave(DoctorModel $model)
         {
             /**
              * @var DoctorInfoManager $doctor_info_manager

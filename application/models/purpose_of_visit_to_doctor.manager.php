@@ -4,7 +4,7 @@
 		protected $table_name = 'purpose_of_visit_to_doctor';
 		protected $model_name = 'PurposeOfVisitToDoctorModel';
 
-        public function afterSave(DynamicModel $model)
+        public function afterSave(PurposeOfVisitToDoctorModel $model)
         {
             /*
             if ($model->doctor_id && $model->clinic_id && $model->specialty_id && $model->purpose_of_visit_id) {

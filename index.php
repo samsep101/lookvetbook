@@ -5,10 +5,10 @@ define('debug', 1);
 if(!debug) {
 	ini_set('display_errors', 'Off');
 }else{
-//    ini_set('display_errors', 'Off');
-//    ini_set('html_errors', 'Off');
-//    ini_set('track_errors', 'Off');
-//    ini_set('display_startup_errors', 'Off');
+    ini_set('display_errors', 'Off');
+    ini_set('html_errors', 'Off');
+    ini_set('track_errors', 'Off');
+    ini_set('display_startup_errors', 'Off');
 
 //xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
 

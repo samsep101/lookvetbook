@@ -4,7 +4,7 @@
         protected $table_name = 'doctor_to_clinic';
         protected $model_name = 'DoctorToClinicModel';
 
-        public function afterSave(DynamicModel $model)
+        public function afterSave(DoctorToClinicModel $model)
         {
             /*
             if ($model->doctor_id) {

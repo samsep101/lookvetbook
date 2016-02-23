@@ -1,90 +1,57 @@
 <?php
 
-    class DoctorManager extends AliasManager
-    {
-        protected $table_name = 'doctor';
-        protected $model_name = 'DoctorModel';
+class DoctorManager extends AliasManager
+{
+  protected $table_name = 'doctor';
+  protected $model_name = 'DoctorModel';
 
-        protected $transliterated_field = 'short_fio';
+  protected $transliterated_field = 'short_fio';
 
-        private $doctor_info;
+  private $doctor_info;
 
-        protected function beforeSave(DynamicModel $doctor)
-        {
-            /**
-             * @var DoctorModel $doctor ;
-             */
-            $doctor->full_lower_name = mb_strtolower($doctor->first_name . ' ' . $doctor->second_name . ' ' . $doctor->last_name, 'utf-8');
+  public function afterSave(DoctorModel $model)
+  {
+    /**
+     * @var DoctorInfoManager $doctor_info_manager
+     * @var DoctorInfoModel $doctor_info
+     */
+    $fields = array(
+      'education',
+      'course',
+      'certificate',
+      'academic_title'
+    );
 
-            if(!$doctor->is_virtual)
-            {
-                SiteTaskManager::setDoctorVisitTime($doctor);
-            }
+    foreach ($fields as $item) {
+      if (!$this->doctor_info) {
+        $doctor_info_manager = ModelManagerFactory::getByName('doctor_info');
+        $doctor_info = $doctor_info_manager->getOneByDoctorId($model->getId());
 
-            if(!$doctor->sex_id)
-            {
-                $doctor->sex_id = 0;
-            }
-
-            if(!$doctor->is_has_weekend_time)
-            {
-                $doctor->is_has_weekend_time = 0;
-            }
-
-            parent::beforeSave($doctor);
+        if ($doctor_info) {
+          $this->doctor_info = $doctor_info;
+        } else {
+          $this->doctor_info = new DoctorInfoModel();
+          $this->doctor_info->doctor_id = $model->getId();
         }
+      }
 
+      $this->doctor_info->{$item} = $model->{$item};
+    }
 
-        public function afterSave(DoctorModel $model)
-        {
-            /**
-             * @var DoctorInfoManager $doctor_info_manager
-             * @var DoctorInfoModel   $doctor_info
-             */
-            $fields = array(
-                'education',
-                'course',
-                'certificate',
-                'academic_title'
-            );
+    if ($this->doctor_info) {
+      $this->doctor_info->save();
+    }
 
-            foreach($fields as $item)
-            {
-                if(!$this->doctor_info)
-                {
-                    $doctor_info_manager = ModelManagerFactory::getByName('doctor_info');
-                    $doctor_info         = $doctor_info_manager->getOneByDoctorId($model->getId());
+    if ($model->isNew()) {
+      ElasticaTask::indexDoctor($model->getId());
+    }
+  }
 
-                    if($doctor_info)
-                    {
-                        $this->doctor_info = $doctor_info;
-                    }
-                    else
-                    {
-                        $this->doctor_info            = new DoctorInfoModel();
-                        $this->doctor_info->doctor_id = $model->getId();
-                    }
-                }
+  public function getActiveListByClinicId($clinic_id)
+  {
+    $db = Register::get('db');
 
-                $this->doctor_info->{$item} = $model->{$item};
-            }
-
-            if($this->doctor_info)
-            {
-                $this->doctor_info->save();
-            }
-
-            if($model->isNew())
-            {
-                ElasticaTask::indexDoctor($model->getId());
-            }
-        }
-
-        public function getActiveListByClinicId($clinic_id)
-        {
-            $db = Register::get('db');
-
-            $sql = 'SELECT *
+    $sql = 'SELECT *
                     FROM doctor
                     WHERE (
                         SELECT COUNT(*)
@@ -94,35 +61,34 @@
                     ) > 0
                     AND doctor.is_active = 1';
 
-            $data = $db->query($sql);
+    $data = $db->query($sql);
 
-            return (count($data)) ? $this->initList($data) : array();
-        }
+    return (count($data)) ? $this->initList($data) : array();
+  }
 
-        /**
-         * return DoctorModel[]
-         */
-        public function getListByClinicId($clinic_id)
-        {
-            $sql = 'SELECT SQL_NO_CACHE d.*, d2c.clinic_id, d2c.specialty_id, d2c.first_visit_price, d2c.second_visit_price
+  /**
+   * return DoctorModel[]
+   */
+  public function getListByClinicId($clinic_id)
+  {
+    $sql = 'SELECT SQL_NO_CACHE d.*, d2c.clinic_id, d2c.specialty_id, d2c.first_visit_price, d2c.second_visit_price
                     FROM doctor d
                     INNER JOIN doctor_to_clinic d2c ON d2c.doctor_id = d.id
                     WHERE d2c.clinic_id = ' . (int)$clinic_id . '
                     ORDER BY d.last_name ASC';
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (count($data)) ? $this->initList($data) : array();
-        }
+    return (count($data)) ? $this->initList($data) : array();
+  }
 
-        public function getListByCityId($city_id)
-        {
-            $data    = array();
-            $city_id = intval($city_id);
+  public function getListByCityId($city_id)
+  {
+    $data = array();
+    $city_id = intval($city_id);
 
-            if($city_id)
-            {
-                $sql  = 'SELECT DISTINCT d.*
+    if ($city_id) {
+      $sql = 'SELECT DISTINCT d.*
                 FROM `doctor` AS d
                 LEFT JOIN `specialty_to_doctor` AS std ON d.id = std.doctor_id
                 INNER JOIN `specialty` AS s ON s.id = std.specialty_id
@@ -132,238 +98,224 @@
                 WHERE d.is_active = 1
                     AND clnc.is_active = 1
                     AND ct.id = ' . $city_id;
-                $data = $this->db->query($sql);
-            }
+      $data = $this->db->query($sql);
+    }
 
-            return (count($data)) ? $this->initList($data) : array();
-        }
+    return (count($data)) ? $this->initList($data) : array();
+  }
 
-        public function getActiveList()
-        {
-            $data = $this->orm_model->select()->where('is_active = 1 AND first_name != "" AND second_name != "" AND last_name != "" ')->fetchAll();
+  public function getActiveList()
+  {
+    $data = $this->orm_model->select()->where('is_active = 1 AND first_name != "" AND second_name != "" AND last_name != "" ')->fetchAll();
 
-            return $this->initList($data);
-        }
+    return $this->initList($data);
+  }
 
-        public function getDoctorsTheListOfIdentifiers($ids = array())
-        {
-            $data = array();
+  public function getDoctorsTheListOfIdentifiers($ids = array())
+  {
+    $data = array();
 
-            if(count($ids) > 0)
-            {
-                $data = $this->orm_model->select()->where('is_active = 1 AND id IN(' . implode(', ', $ids) . ') ')->fetchAll();
+    if (count($ids) > 0) {
+      $data = $this->orm_model->select()->where('is_active = 1 AND id IN(' . implode(', ', $ids) . ') ')->fetchAll();
 
-                return $this->initList($data);
-            }
+      return $this->initList($data);
+    }
 
-            return count($data) ? $data : array();
-        }
+    return count($data) ? $data : array();
+  }
 
-        public function setRateAndAdviceRateById($doctor_id, $rate, $advice_rate)
-        {
-            if(($rate < 1) || ($rate > 5))
-            {
-                $rate = NULL;
-            }
+  public function setRateAndAdviceRateById($doctor_id, $rate, $advice_rate)
+  {
+    if (($rate < 1) || ($rate > 5)) {
+      $rate = NULL;
+    }
 
-            $doctor              = $this->getOneById($doctor_id);
-            $doctor->rate        = $rate;
-            $doctor->advice_rate = $advice_rate;
+    $doctor = $this->getOneById($doctor_id);
+    $doctor->rate = $rate;
+    $doctor->advice_rate = $advice_rate;
 
-            $doctor->save();
-        }
+    $doctor->save();
+  }
 
-        public function getPrimaryListByHashWithLimit($hash, $limit)
-        {
-            $show_manager = new DoctorSearchShowManager();
+  public function getPrimaryListByHashWithLimit($hash, $limit)
+  {
+    $show_manager = new DoctorSearchShowManager();
 
-            $doctors_id_list = $show_manager->getPrimaryIdListByHashWithLimit($hash, $limit);
+    $doctors_id_list = $show_manager->getPrimaryIdListByHashWithLimit($hash, $limit);
 
-            $result = array();
+    $result = array();
 
-            if($doctors_id_list)
-            {
-                foreach($doctors_id_list as $id)
-                {
-                    $result[] = $this->getOneById($id);
-                }
-            }
+    if ($doctors_id_list) {
+      foreach ($doctors_id_list as $id) {
+        $result[] = $this->getOneById($id);
+      }
+    }
 
-            return $result;
-        }
+    return $result;
+  }
 
-        public function getFavoriteListByAccountId($account_id)
-        {
-            $sql = 'SELECT d.*
+  public function getFavoriteListByAccountId($account_id)
+  {
+    $sql = 'SELECT d.*
                     FROM doctor d
                     INNER JOIN my_doctor m ON m.doctor_id = d.id
                     WHERE m.account_id = ' . (int)$account_id . '
                     ORDER BY dt DESC';
 
-            $doctors = $this->db->query($sql);
+    $doctors = $this->db->query($sql);
 
-            return $this->initList($doctors);
-        }
+    return $this->initList($doctors);
+  }
 
-        public function getFavoriteListBySearchParams(MyDoctorsSearchParams $params)
-        {
-            $sql = 'SELECT DISTINCT d.*
+  public function getFavoriteListBySearchParams(MyDoctorsSearchParams $params)
+  {
+    $sql = 'SELECT DISTINCT d.*
                     FROM doctor d
                     INNER JOIN my_doctor m ON m.doctor_id = d.id
                     INNER JOIN doctor_to_clinic d2c ON d2c.doctor_id = m.doctor_id';
 
-            if($params->purpose_of_visit_id)
-            {
-                $sql .= ' INNER JOIN purpose_of_visit_to_doctor pv2d ON pv2d.doctor_id = m.doctor_id';
-            }
+    if ($params->purpose_of_visit_id) {
+      $sql .= ' INNER JOIN purpose_of_visit_to_doctor pv2d ON pv2d.doctor_id = m.doctor_id';
+    }
 
-            $sql .= ' WHERE m.account_id = ' . (int)$params->account_id;
+    $sql .= ' WHERE m.account_id = ' . (int)$params->account_id;
 
-            if($params->specialty_id)
-            {
-                $sql .= ' AND d2c.specialty_id = ' . (int)$params->specialty_id;
-            }
+    if ($params->specialty_id) {
+      $sql .= ' AND d2c.specialty_id = ' . (int)$params->specialty_id;
+    }
 
-            if($params->purpose_of_visit_id)
-            {
-                $sql .= ' AND pv2d.purpose_of_visit_id = ' . (int)$params->purpose_of_visit_id;
-            }
+    if ($params->purpose_of_visit_id) {
+      $sql .= ' AND pv2d.purpose_of_visit_id = ' . (int)$params->purpose_of_visit_id;
+    }
 
-            if($params->clinic_id)
-            {
-                $sql .= ' AND d2c.clinic_id = ' . (int)$params->clinic_id;
-            }
+    if ($params->clinic_id) {
+      $sql .= ' AND d2c.clinic_id = ' . (int)$params->clinic_id;
+    }
 
-            $sql .= ' ORDER BY dt DESC';
+    $sql .= ' ORDER BY dt DESC';
 
-            if($params->limit)
-            {
-                $sql .= ' LIMIT ' . (int)$params->offset . ', ' . $params->limit;
-            }
+    if ($params->limit) {
+      $sql .= ' LIMIT ' . (int)$params->offset . ', ' . $params->limit;
+    }
 
-            $doctors = $this->db->query($sql);
+    $doctors = $this->db->query($sql);
 
-            return $this->initList($doctors);
-        }
+    return $this->initList($doctors);
+  }
 
-
-        public function fillRandomSortField()
-        {
-            $sql = 'UPDATE doctor
+  public function fillRandomSortField()
+  {
+    $sql = 'UPDATE doctor
                     SET `sort` = RAND()
                     WHERE is_virtual IS NULL
                         AND card_image_id IS NOT  NULL';
 
-            $this->db->query($sql);
-        }
+    $this->db->query($sql);
+  }
 
-        public function deleteByFirstName($first_name)
-        {
-            $sql = 'DELETE FROM ' . $this->table_name . '
+  public function deleteByFirstName($first_name)
+  {
+    $sql = 'DELETE FROM ' . $this->table_name . '
                     WHERE  first_name = "' . $this->db->escape($first_name) . '"';
-            $this->db->query($sql);
-        }
+    $this->db->query($sql);
+  }
 
-        /**
-         * return DoctorModel
-         */
-        public function getOneByFirstName($first_name)
-        {
-            $db = Register::get('db');
+  /**
+   * return DoctorModel
+   */
+  public function getOneByFirstName($first_name)
+  {
+    $db = Register::get('db');
 
-            $sql = 'SELECT *
+    $sql = 'SELECT *
                     FROM ' . $this->table_name . '
                     WHERE `first_name` = "' . $this->db->escape($first_name) . '"';
 
-            $data = $db->query($sql);
+    $data = $db->query($sql);
 
-            return (isset($data[0])) ? $this->initOne($data[0]) : NULL;
-        }
+    return (isset($data[0])) ? $this->initOne($data[0]) : NULL;
+  }
 
-        /**
-         * return DoctorModel[]
-         */
-        public function getListByDoctorSearchParams(DoctorSearchParams $doctor_search_params)
-        {
-            $search = new ElasticSearchDoctorIndexControl();
-            $ids    = $search->search($doctor_search_params);
+  /**
+   * @param ModelSearchCriteria $criteria
+   *
+   * @return int
+   */
+  public function getCountByModelSearchCriteria(ModelSearchCriteria $criteria)
+  {
+    /**
+     * @var DoctorSearchParams $criteria
+     */
+    $result_query = $this->getResultsForRequestCriteria($criteria);
 
-            $this->total_hits = $search->getTotalHits();
+    return count($result_query) + count($criteria->primary_doctors_ids);
+  }
 
-            return $this->getListByIds($ids);
-        }
+  public function getResultsForRequestCriteria(ModelSearchCriteria $criteria)
+  {
+    $criteria = clone $criteria;
+    $criteria->by_page = NULL;
+    $criteria->page = NULL;
 
-        /**
-         * @param ModelSearchCriteria $criteria
-         *
-         * @return int
-         */
-        public function getCountByModelSearchCriteria(ModelSearchCriteria $criteria)
-        {
-            /**
-             * @var DoctorSearchParams $criteria
-             */
-            $result_query = $this->getResultsForRequestCriteria($criteria);
+    $search = new ElasticSearchDoctorIndexControl();
 
-            return count($result_query) + count($criteria->primary_doctors_ids);
-        }
+    return $search->search($criteria);
+  }
 
-        public function getResultsForRequestCriteria(ModelSearchCriteria $criteria)
-        {
-            $criteria          = clone $criteria;
-            $criteria->by_page = NULL;
-            $criteria->page    = NULL;
+  /**
+   * return DoctorModel[]
+   */
+  public function getListWithPagingByRegistryUserId($registry_user_id, $page = 1, $by_page = 5)
+  {
+    $doctor_search_params = new DoctorSearchParams();
+    $doctor_search_params->registry_user_id = $registry_user_id;
+    $doctor_search_params->page = $page;
+    $doctor_search_params->by_page = $by_page;
+    $doctor_search_params->not_virtual = 1;
 
-            $search = new ElasticSearchDoctorIndexControl();
+    return $this->getListByDoctorSearchParams($doctor_search_params);
+  }
 
-            return $search->search($criteria);
-        }
+  /**
+   * return DoctorModel[]
+   */
+  public function getListByDoctorSearchParams(DoctorSearchParams $doctor_search_params)
+  {
+    $search = new ElasticSearchDoctorIndexControl();
+    $ids = $search->search($doctor_search_params);
 
+    $this->total_hits = $search->getTotalHits();
 
-        /**
-         * return DoctorModel[]
-         */
-        public function getListWithPagingByRegistryUserId($registry_user_id, $page = 1, $by_page = 5)
-        {
-            $doctor_search_params                   = new DoctorSearchParams();
-            $doctor_search_params->registry_user_id = $registry_user_id;
-            $doctor_search_params->page             = $page;
-            $doctor_search_params->by_page          = $by_page;
-            $doctor_search_params->not_virtual      = 1;
+    return $this->getListByIds($ids);
+  }
 
-            return $this->getListByDoctorSearchParams($doctor_search_params);
-        }
+  /**
+   * return DoctorModel[]
+   */
+  public function getUnboundedListWithPagingByRegistryUserId($registry_user_id, $city_id = NULL, $page = 1, $by_page = 5)
+  {
+    $doctor_search_params = new DoctorSearchParams();
 
-        /**
-         * return DoctorModel[]
-         */
-        public function getUnboundedListWithPagingByRegistryUserId($registry_user_id, $city_id = NULL, $page = 1, $by_page = 5)
-        {
-            $doctor_search_params = new DoctorSearchParams();
+    $doctor_search_params->registry_user_id = $registry_user_id;
+    $doctor_search_params->page = $page;
+    $doctor_search_params->by_page = $by_page;
+    $doctor_search_params->not_virtual = 1;
+    $doctor_search_params->is_has_active_clinic = FALSE;
+    if ($city_id && $city_id != 100000) {
+      $doctor_search_params->city_id = $city_id;
+    } else if ($city_id && $city_id == 100000) {
+      $doctor_search_params->is_has_clinic = FALSE;
+    }
 
-            $doctor_search_params->registry_user_id     = $registry_user_id;
-            $doctor_search_params->page                 = $page;
-            $doctor_search_params->by_page              = $by_page;
-            $doctor_search_params->not_virtual          = 1;
-            $doctor_search_params->is_has_active_clinic = FALSE;
-            if($city_id && $city_id != 100000)
-            {
-                $doctor_search_params->city_id = $city_id;
-            }
-            else if($city_id && $city_id == 100000)
-            {
-                $doctor_search_params->is_has_clinic = FALSE;
-            }
+    return $this->getListByDoctorSearchParams($doctor_search_params);
+  }
 
-            return $this->getListByDoctorSearchParams($doctor_search_params);
-        }
-
-        /**
-         * return DoctorModel[]
-         */
-        public function getListByFullLowerNameAndClinicId($disease_query, $clinic_id)
-        {
-            $sql = 'SELECT *
+  /**
+   * return DoctorModel[]
+   */
+  public function getListByFullLowerNameAndClinicId($disease_query, $clinic_id)
+  {
+    $sql = 'SELECT *
                     FROM doctor
                     WHERE (
                         SELECT COUNT(*)
@@ -373,108 +325,105 @@
                     )>0
                     AND doctor.full_lower_name LIKE  "%' . $this->db->escape($disease_query) . '%"';
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (isset($data)) ? $this->initList($data) : array();
-        }
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-        /**
-         * return DoctorModel[]
-         */
-        public function getListByFullLowerNameWithLimit($full_lower_name, $by_page)
-        {
-            $sql = 'SELECT *
+  /**
+   * return DoctorModel[]
+   */
+  public function getListByFullLowerNameWithLimit($full_lower_name, $by_page)
+  {
+    $sql = 'SELECT *
                 FROM ' . $this->table_name . '
                 WHERE full_lower_name LIKE  "%' . $this->db->escape($full_lower_name) . '%"
                 LIMIT 0,' . $by_page;
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (isset($data)) ? $this->initList($data) : array();
-        }
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-        /**
-         * return DoctorModel[]
-         */
-        public function getListByFullLowerNameWithPaging($query, $by_page, $page, $get_extra_entry = 0)
-        {
-            $offset = ($page - 1) * $by_page;
-            if($get_extra_entry)
-            {
-                $by_page++;
-            }
-            $sql = 'SELECT SQL_CALC_FOUND_ROWS *
+  /**
+   * return DoctorModel[]
+   */
+  public function getListByFullLowerNameWithPaging($query, $by_page, $page, $get_extra_entry = 0)
+  {
+    $offset = ($page - 1) * $by_page;
+    if ($get_extra_entry) {
+      $by_page++;
+    }
+    $sql = 'SELECT SQL_CALC_FOUND_ROWS *
                     FROM ' . $this->table_name . '
                     WHERE full_lower_name LIKE  "%' . $this->db->escape($query) . '%"
                     LIMIT ' . $offset . ',' . $by_page;
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (isset($data)) ? $this->initList($data) : array();
-        }
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-        public function setBallsById($id, $balls)
-        {
-            $sql = 'UPDATE ' . $this->table_name . '
+  public function setBallsById($id, $balls)
+  {
+    $sql = 'UPDATE ' . $this->table_name . '
                     SET balls = ' . (int)$balls . '
                     WHERE id = ' . $id;
 
-            $this->db->query($sql);
-        }
+    $this->db->query($sql);
+  }
 
-        public function getCountDoctorsInDoctorsListByMetroStationId($metro_station_id, $doctors)
-        {
-            $sql = 'SELECT *
+  public function getCountDoctorsInDoctorsListByMetroStationId($metro_station_id, $doctors)
+  {
+    $sql = 'SELECT *
                     FROM ' . $this->table_name . ' d
                     INNER JOIN doctor_to_clinic d2c ON d2c.doctor_id = d.id
                     INNER JOIN clinic c ON c.id = d2c.clinic_id
                     WHERE c.metro_station_id = ' . (int)$metro_station_id . '
                     AND d.id in (';
-            foreach($doctors as $doctor)
-            {
-                $sql .= ' ' . $doctor->getId() . ',';
-            }
-            $sql .= ')';
-            $sql = str_replace(',)', ')', $sql);
+    foreach ($doctors as $doctor) {
+      $sql .= ' ' . $doctor->getId() . ',';
+    }
+    $sql .= ')';
+    $sql = str_replace(',)', ')', $sql);
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (count($data)) ? count($data) : NULL;
-        }
+    return (count($data)) ? count($data) : NULL;
+  }
 
-        public function checkExistsBySpecialtyIdAddressObject($specialty_id, DynamicModel $address_object)
-        {
-            switch(get_class($address_object))
-            {
-                case 'CityModel':
-                    return $this->checkExistsBySpecialtyIdAndCityId($specialty_id, $address_object->getId());
-                    break;
-                case 'DistrictModel':
-                    return $this->checkExistsBySpecialtyIdAndDistrictId($specialty_id, $address_object->getId());
-                    break;
-                case 'RegionModel':
-                    return $this->checkExistsBySpecialtyIdAndRegionId($specialty_id, $address_object->getId());
-                    break;
-                case 'MetroStationModel':
-                    return $this->checkExistsBySpecialtyIdAndMetroStationId($specialty_id, $address_object->getId());
-                    break;
-                case 'StreetModel':
-                    return $this->checkExistsBySpecialtyIdAndStreetId($specialty_id, $address_object->getId());
-                    break;
-            }
+  public function checkExistsBySpecialtyIdAddressObject($specialty_id, DynamicModel $address_object)
+  {
+    switch (get_class($address_object)) {
+      case 'CityModel':
+        return $this->checkExistsBySpecialtyIdAndCityId($specialty_id, $address_object->getId());
+        break;
+      case 'DistrictModel':
+        return $this->checkExistsBySpecialtyIdAndDistrictId($specialty_id, $address_object->getId());
+        break;
+      case 'RegionModel':
+        return $this->checkExistsBySpecialtyIdAndRegionId($specialty_id, $address_object->getId());
+        break;
+      case 'MetroStationModel':
+        return $this->checkExistsBySpecialtyIdAndMetroStationId($specialty_id, $address_object->getId());
+        break;
+      case 'StreetModel':
+        return $this->checkExistsBySpecialtyIdAndStreetId($specialty_id, $address_object->getId());
+        break;
+    }
 
-            return FALSE;
-        }
+    return FALSE;
+  }
 
-        public function checkExistsBySpecialtyIdAndCityId($specialty_id, $city_id)
-        {
-            /**
-             * @var CityManager $city_manager
-             */
-            $city_manager = ModelManagerFactory::getByName('city');
-            $city         = $city_manager->getOneById($city_id);
+  public function checkExistsBySpecialtyIdAndCityId($specialty_id, $city_id)
+  {
+    /**
+     * @var CityManager $city_manager
+     */
+    $city_manager = ModelManagerFactory::getByName('city');
+    $city = $city_manager->getOneById($city_id);
 
-            $sql = 'SELECT COUNT(*) as `count`
+    $sql = 'SELECT COUNT(*) as `count`
                     FROM doctor d
                     INNER JOIN doctor_specialty_to_clinic ds2c ON ds2c.doctor_id = d.id
                     INNER JOIN clinic c ON ds2c.clinic_id = c.id
@@ -483,39 +432,23 @@
                         sp.id = ' . (int)$specialty_id . '
                         AND (c.city_id = ' . (int)$city_id . '
                                     ';
-            if($city && $city->region == 'Московская область')
-            {
-                $sql .= ' OR c.city_id = ' . (int)CityModel::MOSCOW_ID;
-            }
-            $sql .= ' )
+    if ($city && $city->region == 'Московская область') {
+      $sql .= ' OR c.city_id = ' . (int)CityModel::MOSCOW_ID;
+    }
+    $sql .= ' )
 
             ';
-            $sql .= '
+    $sql .= '
                     LIMIT 1';
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (bool)$data[0]['count'];
-        }
+    return (bool)$data[0]['count'];
+  }
 
-        public function checkExistsByCityId($city_id)
-        {
-            $sql = 'SELECT COUNT(*) as `count`
-                    FROM doctor d
-                    INNER JOIN doctor_specialty_to_clinic ds2c ON ds2c.doctor_id = d.id
-                    INNER JOIN clinic c ON ds2c.clinic_id = c.id
-                    INNER JOIN specialty sp ON ds2c.specialty_id = sp.id
-                    WHERE c.city_id = ' . (int)$city_id;
-            $sql .= ' LIMIT 1';
-
-            $data = $this->db->query($sql);
-
-            return (bool)$data[0]['count'];
-        }
-
-        public function checkExistsBySpecialtyIdAndDistrictId($specialty_id, $district_id)
-        {
-            $sql = 'SELECT COUNT(*) as `count`
+  public function checkExistsBySpecialtyIdAndDistrictId($specialty_id, $district_id)
+  {
+    $sql = 'SELECT COUNT(*) as `count`
                     FROM doctor dc
                     INNER JOIN doctor_to_clinic d2c ON d2c.doctor_id = dc.id
                     INNER JOIN doctor_specialty_to_clinic ds2c ON ds2c.doctor_id = dc.id
@@ -533,14 +466,14 @@
                     LIMIT 1
             ';
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (bool)$data[0]['count'];
-        }
+    return (bool)$data[0]['count'];
+  }
 
-        public function checkExistsBySpecialtyIdAndRegionId($specialty_id, $region_id)
-        {
-            $sql = 'SELECT COUNT(*) as `count`
+  public function checkExistsBySpecialtyIdAndRegionId($specialty_id, $region_id)
+  {
+    $sql = 'SELECT COUNT(*) as `count`
                     FROM doctor dc
                     INNER JOIN doctor_to_clinic d2c ON d2c.doctor_id = dc.id
                     INNER JOIN doctor_specialty_to_clinic ds2c ON ds2c.doctor_id = dc.id
@@ -552,31 +485,14 @@
                         AND dc.is_active = 1
                     LIMIT 1';
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (bool)$data[0]['count'];
-        }
+    return (bool)$data[0]['count'];
+  }
 
-        public function checkExistsBySpecialtyIdAndStreetId($specialty_id, $street_id)
-        {
-            $sql = 'SELECT COUNT(*) as `count`
-                    FROM doctor dc
-                    INNER JOIN doctor_specialty_to_clinic ds2c ON ds2c.doctor_id = dc.id
-                    INNER JOIN clinic c ON c.id = ds2c.clinic_id
-                    WHERE
-                        c.street_id = ' . (int)$street_id . '
-                        AND ds2c.clinic_id = c.id
-                        AND ds2c.specialty_id = ' . (int)$specialty_id . '
-                        AND dc.is_active = 1';
-
-            $data = $this->db->query($sql);
-
-            return (bool)$data[0]['count'];
-        }
-
-        public function checkExistsBySpecialtyIdAndMetroStationId($specialty_id, $metro_station_id)
-        {
-            $sql = 'SELECT COUNT(*) as `count`
+  public function checkExistsBySpecialtyIdAndMetroStationId($specialty_id, $metro_station_id)
+  {
+    $sql = 'SELECT COUNT(*) as `count`
                     FROM doctor dc
                     INNER JOIN doctor_to_clinic d2c ON d2c.doctor_id = dc.id
                     INNER JOIN doctor_specialty_to_clinic ds2c ON ds2c.doctor_id = dc.id
@@ -587,34 +503,64 @@
                         AND dc.is_active = 1
                         AND ds2c.specialty_id = ' . (int)$specialty_id;
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (bool)$data[0]['count'];
-        }
+    return (bool)$data[0]['count'];
+  }
 
-        public function setAdultFlagToDoctor()
-        {
-            $sql = 'UPDATE doctor d
+  public function checkExistsBySpecialtyIdAndStreetId($specialty_id, $street_id)
+  {
+    $sql = 'SELECT COUNT(*) as `count`
+                    FROM doctor dc
+                    INNER JOIN doctor_specialty_to_clinic ds2c ON ds2c.doctor_id = dc.id
+                    INNER JOIN clinic c ON c.id = ds2c.clinic_id
+                    WHERE
+                        c.street_id = ' . (int)$street_id . '
+                        AND ds2c.clinic_id = c.id
+                        AND ds2c.specialty_id = ' . (int)$specialty_id . '
+                        AND dc.is_active = 1';
+
+    $data = $this->db->query($sql);
+
+    return (bool)$data[0]['count'];
+  }
+
+  public function checkExistsByCityId($city_id)
+  {
+    $sql = 'SELECT COUNT(*) as `count`
+                    FROM doctor d
+                    INNER JOIN doctor_specialty_to_clinic ds2c ON ds2c.doctor_id = d.id
+                    INNER JOIN clinic c ON ds2c.clinic_id = c.id
+                    INNER JOIN specialty sp ON ds2c.specialty_id = sp.id
+                    WHERE c.city_id = ' . (int)$city_id;
+    $sql .= ' LIMIT 1';
+
+    $data = $this->db->query($sql);
+
+    return (bool)$data[0]['count'];
+  }
+
+  public function setAdultFlagToDoctor()
+  {
+    $sql = 'UPDATE doctor d
                     SET d.is_adult = 1
                     WHERE d.is_children != 1';
-            $this->db->query($sql);
-        }
+    $this->db->query($sql);
+  }
 
-        public function getListByClinicIdAndClinicSpecialtiesIds($clinic_id, $clinic_specialties)
-        {
-            $counter     = 1;
-            $specialties = '';
-            foreach($clinic_specialties as $clinic_specialty)
-            {
-                if($counter != 1)
-                {
-                    $specialties .= ',';
-                }
-                $specialties .= $clinic_specialty->getId();
-                $counter++;
-            }
+  public function getListByClinicIdAndClinicSpecialtiesIds($clinic_id, $clinic_specialties)
+  {
+    $counter = 1;
+    $specialties = '';
+    foreach ($clinic_specialties as $clinic_specialty) {
+      if ($counter != 1) {
+        $specialties .= ',';
+      }
+      $specialties .= $clinic_specialty->getId();
+      $counter++;
+    }
 
-            $sql = 'SELECT DISTINCT *
+    $sql = 'SELECT DISTINCT *
                     FROM doctor d
                     WHERE (
                         SELECT COUNT(*)
@@ -626,57 +572,57 @@
                     AND d.is_active = 1
                     AND d.is_virtual is null';
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return $this->initList($data);
-        }
+    return $this->initList($data);
+  }
 
-        public function getVirtualDoctorsForClinic($clinic_id)
-        {
-            $sql = 'SELECT d.*
+  public function getVirtualDoctorsForClinic($clinic_id)
+  {
+    $sql = 'SELECT d.*
                     FROM doctor d
                     INNER JOIN doctor_specialty_to_clinic ds2c ON ds2c.doctor_id = d.id
                     WHERE ds2c.clinic_id = ' . (int)$clinic_id . '
                     AND d.is_virtual = 1';
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return $this->initList($data);
-        }
+    return $this->initList($data);
+  }
 
-        public function deleteVirtualDoctorAfterAddDoctor($specialty_id, $clinic_id)
-        {
-            $sql = 'DELETE
+  public function deleteVirtualDoctorAfterAddDoctor($specialty_id, $clinic_id)
+  {
+    $sql = 'DELETE
                     FROM doctor d
                     INNER JOIN doctor_specialty_to_clinic ds2c ON ds2c.doctor_id = d.id
                     INNER JOIN specialty_to_specialization s2s ON s2s.specialty_id = ds2c.specialty_id
                     WHERE s2s.specialty_id = ' . (int)$specialty_id . '
                     AND ds2c.clinic_id = ' . (int)$clinic_id;
 
-            return $this->db->query($sql);
-        }
+    return $this->db->query($sql);
+  }
 
-        public function getListByNameAndIsVirtualWithLimit($name, $page, $by_page)
-        {
-            $sql = 'SELECT *
+  public function getListByNameAndIsVirtualWithLimit($name, $page, $by_page)
+  {
+    $sql = 'SELECT *
                     FROM doctor
                     WHERE full_lower_name LIKE "%' . $this->db->escape($name) . '%"
                     AND is_virtual is null
                     LIMIT ' . (int)$page . ', ' . (int)$by_page;
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (isset($data)) ? $this->initList($data) : array();
-        }
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-        /**
-         * return DoctorModel[]
-         */
-        public function getNotVirtualListByClinicId($clinic_id)
-        {
-            $db = Register::get('db');
+  /**
+   * return DoctorModel[]
+   */
+  public function getNotVirtualListByClinicId($clinic_id)
+  {
+    $db = Register::get('db');
 
-            $sql = 'SELECT *
+    $sql = 'SELECT *
                     FROM doctor
                     WHERE (
                         SELECT COUNT(*)
@@ -687,161 +633,146 @@
                     AND doctor.is_active = 1
                     AND doctor.is_virtual is null';
 
-            $data = $db->query($sql);
+    $data = $db->query($sql);
 
-            return (count($data)) ? $this->initList($data) : array();
+    return (count($data)) ? $this->initList($data) : array();
+  }
+
+  public function getTotalDoctorsForAllRelatedSpecialties($specialty, $doctor_params)
+  {
+    $data = array(
+      'doctors_total_count' => 0,
+      'total_doctors' => array()
+    );
+    $specialties = $this->getRelatedSpecialties($specialty);
+
+    if (!empty($specialties)) {
+      $type = $this->getSpecialtiesType($specialties);
+
+      switch ($type) {
+        case 1: {
+          $specialties = array_merge(array($specialty), $specialties);
+          foreach ($specialties AS $sValue) {
+            $doctors = $this->doctorsForRelatedSpecialty($doctor_params, $sValue->getId(), 1);
+            $data['total_doctors'] = array_merge($data['total_doctors'], $doctors);
+          }
+
+          break;
         }
+        case 2: {
+          $specialties = array($specialty, $specialties);
 
-        public function getTotalDoctorsForAllRelatedSpecialties($specialty, $doctor_params)
-        {
-            $data = array(
-                'doctors_total_count' => 0,
-                'total_doctors'       => array()
-            );
-            $specialties = $this->getRelatedSpecialties($specialty);
+          foreach ($specialties AS $sValue) {
+            $doctors = $this->doctorsForRelatedSpecialty($doctor_params, $sValue->getId());
+            $data['total_doctors'] = array_merge($data['total_doctors'], $doctors);
+          }
 
-            if(!empty($specialties))
-            {
-                $type = $this->getSpecialtiesType($specialties);
-
-                switch($type)
-                {
-                    case 1:
-                    {
-                        $specialties = array_merge(array($specialty), $specialties);
-                        foreach($specialties AS $sValue)
-                        {
-                            $doctors               = $this->doctorsForRelatedSpecialty($doctor_params, $sValue->getId(), 1);
-                            $data['total_doctors'] = array_merge($data['total_doctors'], $doctors);
-                        }
-
-                        break;
-                    }
-                    case 2:
-                    {
-                        $specialties = array($specialty, $specialties);
-
-                        foreach($specialties AS $sValue)
-                        {
-                            $doctors               = $this->doctorsForRelatedSpecialty($doctor_params, $sValue->getId());
-                            $data['total_doctors'] = array_merge($data['total_doctors'], $doctors);
-                        }
-
-                        break;
-                    }
-                }
-            }
+          break;
+        }
+      }
+    }
 //            exit;
 
-            $result_doctors = $ids = array();
+    $result_doctors = $ids = array();
 
-            foreach($data['total_doctors'] AS $tdValue)
-            {
-                if(!in_array($tdValue->getId(), $ids))
-                {
-                    $ids[] = $tdValue->getId();
-                    $result_doctors[] = $tdValue;
-                }
-            }
+    foreach ($data['total_doctors'] AS $tdValue) {
+      if (!in_array($tdValue->getId(), $ids)) {
+        $ids[] = $tdValue->getId();
+        $result_doctors[] = $tdValue;
+      }
+    }
 
 
-            $data['total_doctors']       = $result_doctors;
-            $data['doctors_total_count'] = count($result_doctors);
+    $data['total_doctors'] = $result_doctors;
+    $data['doctors_total_count'] = count($result_doctors);
 
-            return $data;
+    return $data;
+  }
+
+  public function getRelatedSpecialties($specialty)
+  {
+    $specialtiesForMainSpecialty = $this->getSpecialtiesRelatedToCurrentSpecialty($specialty);
+
+    if (empty($specialtiesForMainSpecialty)) {
+      $mainSpecialtyForCurrentSpecialty = $this->getMainSpecialtyForOneSpecializationCurrentSpecialty($specialty);
+    }
+
+    return count($specialtiesForMainSpecialty) > 0 ? $specialtiesForMainSpecialty : (!empty($mainSpecialtyForCurrentSpecialty) ? $mainSpecialtyForCurrentSpecialty : array());
+  }
+
+  public function getSpecialtiesRelatedToCurrentSpecialty($specialty)
+  {
+    $specialty_manager = ModelManagerFactory::getByName('specialty');
+    $specialization = $specialty_manager->getOneSpecializationByMainSpecialtyId($specialty->getId());
+    $specialtiesForMainSpecialization = array();
+    $specialtiesForMainSpecializationProcessed = array();
+
+    if (!empty($specialization)) {
+      $specialtiesForMainSpecialization = $specialty_manager->getListBySpecializationId($specialization->getId());
+    }
+
+    if (!empty($specialtiesForMainSpecialization) && count($specialtiesForMainSpecialization) > 0) {
+      foreach ($specialtiesForMainSpecialization AS $sfmsValue) {
+        if ($sfmsValue->getId() != $specialty->getId()) {
+          $specialtiesForMainSpecializationProcessed[] = $sfmsValue;
         }
+      }
+    }
 
-        public function getRelatedSpecialties($specialty)
-        {
-            $specialtiesForMainSpecialty = $this->getSpecialtiesRelatedToCurrentSpecialty($specialty);
+    return $specialtiesForMainSpecializationProcessed;
+  }
 
-            if(empty($specialtiesForMainSpecialty))
-            {
-                $mainSpecialtyForCurrentSpecialty = $this->getMainSpecialtyForOneSpecializationCurrentSpecialty($specialty);
-            }
+  public function getMainSpecialtyForOneSpecializationCurrentSpecialty($specialty)
+  {
+    $specialization = $specialty->specializations;
+    $main_specialty = array();
 
-            return count($specialtiesForMainSpecialty) > 0 ? $specialtiesForMainSpecialty : (!empty($mainSpecialtyForCurrentSpecialty) ? $mainSpecialtyForCurrentSpecialty : array());
-        }
+    if (count($specialization) == 1) {
+      $specialization = $specialization[0];
+      $specialty_manager = ModelManagerFactory::getByName('specialty');
+      $main_specialty = $specialty_manager->getMainOneBySpecializationId($specialization->getId(), $specialty->getId());
+    }
 
-        public function getSpecialtiesRelatedToCurrentSpecialty($specialty)
-        {
-            $specialty_manager                         = ModelManagerFactory::getByName('specialty');
-            $specialization                            = $specialty_manager->getOneSpecializationByMainSpecialtyId($specialty->getId());
-            $specialtiesForMainSpecialization          = array();
-            $specialtiesForMainSpecializationProcessed = array();
+    return $main_specialty;
+  }
 
-            if(!empty($specialization))
-            {
-                $specialtiesForMainSpecialization = $specialty_manager->getListBySpecializationId($specialization->getId());
-            }
+  public function getSpecialtiesType($specialties)
+  {
+    if (is_array($specialties)) return 1;
+    else if (is_object($specialties)) return 2;
+    else return 0;
+  }
 
-            if(!empty($specialtiesForMainSpecialization) && count($specialtiesForMainSpecialization) > 0)
-            {
-                foreach($specialtiesForMainSpecialization AS $sfmsValue)
-                {
-                    if($sfmsValue->getId() != $specialty->getId())
-                    {
-                        $specialtiesForMainSpecializationProcessed[] = $sfmsValue;
-                    }
-                }
-            }
+  public function doctorsForRelatedSpecialty($params, $specialty_id, $setPrimary = 0)
+  {
+    $params = clone $params;
 
-            return $specialtiesForMainSpecializationProcessed;
-        }
-
-        public function getMainSpecialtyForOneSpecializationCurrentSpecialty($specialty)
-        {
-            $specialization = $specialty->specializations;
-            $main_specialty = array();
-
-            if(count($specialization) == 1)
-            {
-                $specialization    = $specialization[0];
-                $specialty_manager = ModelManagerFactory::getByName('specialty');
-                $main_specialty    = $specialty_manager->getMainOneBySpecializationId($specialization->getId(), $specialty->getId());
-            }
-
-            return $main_specialty;
-        }
-
-        public function getSpecialtiesType($specialties)
-        {
-            if(is_array($specialties)) return 1;
-            else if(is_object($specialties)) return 2;
-            else return 0;
-        }
-
-        public function doctorsForRelatedSpecialty($params, $specialty_id, $setPrimary = 0)
-        {
-            $params = clone $params;
-
-            $doctor_search_algorithm = new DoctorSearchAlgorithm();
+    $doctor_search_algorithm = new DoctorSearchAlgorithm();
 
 //            if($params->page != 1 || $setPrimary)
 //            {
 //                $primary_doctors_algorithm   = new PrimaryDoctors();
 //                $params->primary_doctors_ids = $primary_doctors_algorithm->getIdsByDoctorSearchParams($params);
 //            }
-            $params->primary_doctors_ids = NULL;
-            $params->page         = NULL;
-            $params->by_page      = NULL;
-            $params->specialty_id = $specialty_id;
+    $params->primary_doctors_ids = NULL;
+    $params->page = NULL;
+    $params->by_page = NULL;
+    $params->specialty_id = $specialty_id;
 
-            $search_result = $doctor_search_algorithm->search($params);
+    $search_result = $doctor_search_algorithm->search($params);
 
-            if(count($search_result))
-            {
-                foreach($search_result AS $rsKey => $rsValue)
-                {
-                    $search_result[$rsKey]->specialtyIDForDoctorCard = $specialty_id;
-                }
-            }
+    if (count($search_result)) {
+      foreach ($search_result AS $rsKey => $rsValue) {
+        $search_result[$rsKey]->specialtyIDForDoctorCard = $specialty_id;
+      }
+    }
 
-            return $search_result;
-        }
+    return $search_result;
+  }
 
-        public function getDoctorsByClinicId($clinic_id) {
-            $sql = 'SELECT *
+  public function getDoctorsByClinicId($clinic_id)
+  {
+    $sql = 'SELECT *
                     FROM doctor
                     WHERE (
                         SELECT COUNT(*)
@@ -850,10 +781,32 @@
                         AND clinic_id = ' . (int)$clinic_id . '
                     ) > 0';
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (count($data)) ? $this->initList($data) : array();
+    return (count($data)) ? $this->initList($data) : array();
 
-        }
+  }
 
-        }
+  protected function beforeSave(DynamicModel $doctor)
+  {
+    /**
+     * @var DoctorModel $doctor ;
+     */
+    $doctor->full_lower_name = mb_strtolower($doctor->first_name . ' ' . $doctor->second_name . ' ' . $doctor->last_name, 'utf-8');
+
+    if (!$doctor->is_virtual) {
+      SiteTaskManager::setDoctorVisitTime($doctor);
+    }
+
+    if (!$doctor->sex_id) {
+      $doctor->sex_id = 0;
+    }
+
+    if (!$doctor->is_has_weekend_time) {
+      $doctor->is_has_weekend_time = 0;
+    }
+
+    parent::beforeSave($doctor);
+  }
+
+}

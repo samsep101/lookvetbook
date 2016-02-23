@@ -1,3 +1,6 @@
+.idea
+nbproject
+
 /media/logs
 /media/maps
 /media/upload
@@ -16,8 +19,6 @@ application/config/site.cfg.php
 /cache
 /booking
 /data
-.idea
-nbproject
 _bak
 
 sitemaps

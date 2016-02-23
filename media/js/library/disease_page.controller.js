@@ -68,7 +68,7 @@ var DiseasePageController = function (id, is_login, already_registred_account, f
 
             $('.sub-nav li').removeClass('active');
             $('.sub-nav-' + data.disease_card).show();
-            url_param = (self.disease_green_btn)?'?dis=new3':'';
+            var url_param = (self.disease_green_btn)?'?dis=new3':'';
             Ajax.Get('/disease/ajaxGetDiseaseCardContent'+url_param, data, function (data) {
                 pushHistory(url);
                 $('.read').html(data);

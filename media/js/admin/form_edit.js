@@ -96,7 +96,7 @@ $(document).ready(function(){
 	var timers = [];
 
 	function fill_avail_values(answ, suggest) {
-		var suggestions = []
+		var suggestions = [];
 		if(answ.result) {
 			for (var key in answ.result) {
 				var label = answ.result[key];

@@ -38,7 +38,7 @@
     <p>По вашему запросу врачей не найдено</p>
 <?php endif; ?>
     <div class="paging">
-        <?php if ($page != 1): ?>
+        <?php if (!empty($page) and $page != 1): ?>
             <a class="paging-previous">Предыдущая</a>
         <?php endif; ?>
         <?php if ($doctors_count==11): ?>

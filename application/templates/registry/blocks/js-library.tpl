@@ -4,6 +4,7 @@
 <script type="text/javascript" src="/media/js/library/registry/requisites.controller.js?<?php echo RELEASE_NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/library/registry/clinic_information_form.controller.js?<?php echo RELEASE_NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/library/registry/clinic_service.controller.js?<?php echo RELEASE_NUMBER?>"></script>
+<!--script type="text/javascript" src="/media/js/library/registry/clinic_price_actual.controller.js?<?php echo RELEASE_NUMBER?>"></script-->
 <script type="text/javascript" src="/media/js/library/registry/clinic_license_form.controller.js?<?php echo RELEASE_NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/library/registry/clinic_services_form.controller.js?<?php echo RELEASE_NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/library/registry/clinic_photos.controller.js?<?php echo RELEASE_NUMBER?>"></script>

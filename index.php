@@ -5,8 +5,9 @@ define('debug', 0);
 if (!debug) {
   ini_set('display_errors', 'Off');
 } else {
-//xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
-
+  ini_set('display_errors', 'On');
+  ini_set('display_startup_errors', 'On');
+  //xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
 }
 
 try {

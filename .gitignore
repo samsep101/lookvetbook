@@ -19,6 +19,7 @@ application/templates/_bak.tar.gz
 application/config/site.cfg.php
 application/config/db.cfg.php
 application/config/memcache.cfg.php
+application/config/elasticsearch.cfg.php
 
 /cache
 /booking

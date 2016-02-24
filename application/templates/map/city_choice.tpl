@@ -61,10 +61,11 @@
                 <?php endforeach; ?>
             </ul>
         <?php endif; ?>
-
+        <?php /*
         <div class="info_icons">
             В городе есть: <span class="icon_clinic"></span> - клиники <span class="icon_analyzes"></span> - лаборатории (анализы)
         </div>
+        */ ?>
         <a class="show_all" href="javascript:void(0)">Все города</a>
         <div class="all_city">
             <ul class="other-cities">

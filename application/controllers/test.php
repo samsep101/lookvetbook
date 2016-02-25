@@ -627,7 +627,7 @@
 
         public function formVisitsSlots()
         {
-            ini_set("memory_limit", "256M");
+            ini_set("memory_limit", "1024M");
             set_time_limit(0);
             $doctor_visits_builder = new DoctorVisitsSlotsBuilder();
             $doctor_visits_builder->cleanDoctorSchedules();

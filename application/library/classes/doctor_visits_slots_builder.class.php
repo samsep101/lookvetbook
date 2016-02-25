@@ -103,8 +103,8 @@
                     case 'clinic':
                         $week_day = DateHelper::getDayOfWeekNameByDate($current_time);
 
-                        $time_from = $graphic->clinic->{'start_time_'.$week_day};
-                        $time_to = $graphic->clinic->{'end_time_'.$week_day};
+                        $time_from = empty($graphic->clinic->{'start_time_'.$week_day})?0:$graphic->clinic->{'start_time_'.$week_day};
+                        $time_to = empty($graphic->clinic->{'end_time_'.$week_day})?0:$graphic->clinic->{'end_time_'.$week_day};
                         break;
                 }
 

@@ -74,7 +74,7 @@
             <option value="5">5 звезд</option>
         </select><br><br>
         <span style="display: block">
-            <input type="button" value="Пожаловаться LookMedBook" id="complaint" style="display: none">
+            <input type="button" value="Пожаловаться <?php echo SITE_NAME; ?>" id="complaint" style="display: none">
             <input type="button" value="Далее" id="step1-submit" style="margin-left: 300px">
         </span>
 
@@ -132,7 +132,7 @@
 
     <div id="add-review-step5" class="add-review" style="display: none">
         <label class="blue">Оцените врача:</label><br><br>
-        <label>Хотите что-то сказать персонально LookMedBook ?</label><br>
+        <label>Хотите что-то сказать персонально <?php echo SITE_NAME; ?> ?</label><br>
         <textarea id="private_review"></textarea><br>
 
         <span style="margin-left: 300px; display: block">

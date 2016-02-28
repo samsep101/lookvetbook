@@ -136,7 +136,7 @@
 
             <div class="buttons flo">
                 <input class="btn-appoint long_but" type="submit" name="save" value="Сохранить" onclick="return false;">
-                <input class="btn-1" type="submit" value="Опубликовать на Lookmedbook" onclick="return false;">
+                <input class="btn-1" type="submit" value="Опубликовать на <?php echo SITE_NAME; ?>" onclick="return false;">
             </div>
 
             <!-- ******************************************** -->

@@ -17,8 +17,8 @@ class IndexController extends BaseController
      * @var SpecialtyManager $specialty_manager
      */
 
-    $this->view->page_title = 'Портал медицинских услуг в ' . $this->city->prepositional_name . ' – Lookmedbook';
-    $this->view->page_description = 'Lookmedbook.ru — это сервис для поиска врача и записи на прием. Также на сайте есть медицинский справочник: пользователь может найти достоверную информацию обо всех известных заболеваниях, изложенную простым и понятным языком.';
+    $this->view->page_title = 'Портал медицинских услуг в ' . $this->city->prepositional_name . ' – '.SITE_NAME.'';
+    $this->view->page_description = ''.SITE_DOMAIN.' — это сервис для поиска врача и записи на прием. Также на сайте есть медицинский справочник: пользователь может найти достоверную информацию обо всех известных заболеваниях, изложенную простым и понятным языком.';
 
     $district_manager = ModelManagerFactory::getByName('district');
     $city_manager = ModelManagerFactory::getByName('city');

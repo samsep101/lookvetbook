@@ -55,7 +55,7 @@
             ),
             'is_active'     => array(
                 'type'  => 'styled_checkbox',
-                'label' => 'Врач опубликован на LookMedBook'
+                'label' => 'Врач опубликован на '.SITE_NAME,
             ),
             'about'              => 'htmlarea',
             'education'          => 'htmlarea',

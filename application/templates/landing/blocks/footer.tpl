@@ -6,7 +6,7 @@
                 <img src="/media/images/eyes_owl_line_tr.png">
             </div>
             <div class="ax_paragraph">
-                <span>LookMedBook - удобный сервис записи </span>
+                <span><?php echo SITE_NAME; ?> - удобный сервис записи </span>
                 <span>к врачу и в клинику </span>
             </div>
             <div class="ax_paragraph">

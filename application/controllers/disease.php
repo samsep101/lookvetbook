@@ -185,7 +185,7 @@
                 <название болезни> - $diseaseName
                 <перечисление по типу> - $diseaseTypes
 
-                Старый шаблон: $this->view->page_title = $disease->title.' - «LookMedBook»'
+                Старый шаблон: $this->view->page_title = $disease->title.' - «'.SITE_NAME.''.SITE_NAME.'»'
             */
 
             $pageTitleTemplate = '%s симптомы, причины, диагностика, лечение. %s у %s ';
@@ -314,8 +314,8 @@
             $this->view->diseases = $diseases;
             $this->view->menu_active = 'disease';
 
-            $this->view->page_title = 'Найти заболевание - «LookMedBook»';
-            $this->view->page_description = 'Найти заболевание - вся информация обо всех известных заболеваниях на сервисе lookmedbook';
+            $this->view->page_title = 'Найти заболевание - «'.SITE_NAME.'»';
+            $this->view->page_description = 'Найти заболевание - вся информация обо всех известных заболеваниях на сервисе '.SITE_NAME.'';
 
             $this->view->label_for_counters = 'disease-search';
         }

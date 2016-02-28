@@ -8,13 +8,13 @@
             switch($moderate_status_id)
             {
                 case ModerateStatusModel::EDIT:
-                    $result = 'Статус: Редактируется, не отправлено в LookMedBook';
+                    $result = 'Статус: Редактируется, не отправлено в '.SITE_NAME;
                     break;
                 case ModerateStatusModel::MODERATE:
-                    $result = 'Статус: Отправлено в LookMedBook';
+                    $result = 'Статус: Отправлено в '.SITE_NAME;
                     break;
                 case ModerateStatusModel::PUBLISHED:
-                    $result = 'Статус: Опубликован на LookMedBook';
+                    $result = 'Статус: Опубликован на '.SITE_NAME;
                     break;
                 case ModerateStatusModel::SENT_BACK:
                     $result = 'Статус: Нужна доработка';

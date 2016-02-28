@@ -373,7 +373,7 @@
                 'visit_number' => 'Номер заявки',
                 'visit_range' => 'Желаемое время',
                 'comment' => 'Комментарий пользователя',
-                'admin_comment' => 'Комментарий LookMedBook',
+                'admin_comment' => 'Комментарий '.SITE_NAME,
                 'yandex_id' => 'ID яндекса',
                 'create_time' => 'Дата и время создания',
                 'clinic_filter' => 'Фильтр клиник',

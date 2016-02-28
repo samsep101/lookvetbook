@@ -63,7 +63,7 @@
                 <?php if ($show_buttons): ?>
                     <div class="buttons flo">
                         <input class="btn-appoint long_but" type="submit" name="save" value="Сохранить" onclick="return false;">
-                        <input class="btn-1" type="submit" value="Опубликовать на Lookmedbook" name="publish" onclick="return false;">
+                        <input class="btn-1" type="submit" value="Опубликовать на <?php echo SITE_NAME; ?>" name="publish" onclick="return false;">
                     </div>
                 <?php endif;?>
 

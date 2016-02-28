@@ -281,8 +281,12 @@ class DoctorManager extends AliasManager
    */
   public function getListByDoctorSearchParams(DoctorSearchParams $doctor_search_params)
   {
-    $search = new ElasticSearchDoctorIndexControl();
-    $ids = $search->search($doctor_search_params);
+    try{
+      $search = new ElasticSearchDoctorIndexControl();
+      $ids = $search->search($doctor_search_params);
+    }catch(Exception $e){
+      $ids = [];
+    }
 
     $this->total_hits = $search->getTotalHits();
 

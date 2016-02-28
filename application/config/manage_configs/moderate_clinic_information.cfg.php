@@ -15,7 +15,7 @@
             ),
             'is_active'               => array(
                 'type'  => 'styled_checkbox',
-                'label' => 'Клиника опубликована на LookMedBook'
+                'label' => 'Клиника опубликована на '.SITE_NAME,
             ),
             'not_work'                => array(
                 'type'  => 'styled_checkbox',

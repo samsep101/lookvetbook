@@ -4,7 +4,7 @@ class SeoLinkViewHelper
 {
   public static function getCityPageLink($specialty, CityModel $city, $location = 'doctor')
   {
-    $href = LinkHelper::getSiteUrlByCity($city) . '/' . $location . '/' . $specialty->alias;
+    $href = LinkHelper::getSiteUrlByCity($city) . '/' . $location . '/' . (empty($specialty->alias)?'':$specialty->alias);
     return $href;
   }
 

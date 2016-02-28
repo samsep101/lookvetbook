@@ -202,7 +202,7 @@
 
 			if($free_disk_space < 20)
 			{
-				mail('d.karviga@gmail.com', 'Заканчивается место на хостинге lookmedbook', 'Заканчивается место на хостинге');
+				mail('d.karviga@gmail.com', 'Заканчивается место на хостинге '.SITE_NAME.'', 'Заканчивается место на хостинге');
 			}
 			exit();
 		}

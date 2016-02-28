@@ -186,8 +186,8 @@
     </script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title><?php echo (isset($page_title)) ? $page_title : 'LookMedBook'; ?></title>
-    <meta name="description" content="<?php echo (isset($page_description)) ? $page_description : 'Lookmedbook - поиск врача и запись на прием, информация обо всех известных заболеваниях.'; ?>">
+    <title><?php echo (isset($page_title)) ? $page_title : SITE_NAME; ?></title>
+    <meta name="description" content="<?php echo (isset($page_description)) ? $page_description : ''.SITE_NAME.' - поиск врача и запись на прием, информация обо всех известных заболеваниях.'; ?>">
     <link rel="icon" href="/media/images/favicon.ico" type="image/x-icon">
     <?php $this->block('blocks/head'); ?>
     <?php if (isset($home_page)):?>
@@ -252,8 +252,8 @@
 <?php else: ?>
     <div id="wrapper" class="wrap">
         <div id="header">
-            <a class="logo" href="<?php if($city->alias) { echo '/';} else echo SITE_URL.'/'; ?>" title="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – Lookmedbook">
-            	<img src="/media/images/home_page/header.png" alt="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – Lookmedbook" class="main-logo-big"/>
+            <a class="logo" href="<?php if($city->alias) { echo '/';} else echo SITE_URL.'/'; ?>" title="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>">
+            	<img src="/media/images/home_page/header.png" alt="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>" class="main-logo-big"/>
             </a>
             <div class="sp-links left-links">
                 <nav>
@@ -324,7 +324,7 @@
 			</div>
 
             <div class="thisiscenter">
-                <h1>LookMedBook - это online сервис записи к врачу и в клинику</h1>
+                <h1><?php echo SITE_NAME; ?> - это online сервис записи к врачу и в клинику</h1>
                 <ul class="list-about">
                     <li>
                         <img src="/media/images/home_page/thisis-li1.png"/>
@@ -352,7 +352,7 @@
                 </ul>
                 <div class="h-txt h-txt-blue">
                 <span>
-                Пользуясь LookMedBook,<br/>
+                Пользуясь <?php echo SITE_NAME; ?>,<br/>
                 Вы получаете настоящий сервис!</span>
                     <a class="btn-1 btn-doctor" href="/doctor">Найти врача</a>
                 </div>

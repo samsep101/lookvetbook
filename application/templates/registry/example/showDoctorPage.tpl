@@ -14,7 +14,7 @@
         });
         $('.btn-bookmark').click(function(){
             doctor_controller.block_title = 'для добавления в закладки';
-            doctor_controller.block_over_textbox = 'Получите доступ ко всем возможностям Lookmedbook!';
+            doctor_controller.block_over_textbox = 'Получите доступ ко всем возможностям <?php echo SITE_NAME; ?>!';
         });
         doctor_controller.init();
     });

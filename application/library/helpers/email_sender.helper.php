@@ -7,7 +7,7 @@ class EmailSenderHelper
     $message = html_entity_decode($message, ENT_COMPAT, 'UTF-8');
 
     $headers = "Content-type: text/html; charset=utf-8 \r\n";
-    $headers .= "From: LookMedBook <no-reply@lookmedbook.ru>\r\n";
+    $headers .= "From: ".SITE_NAME." <no-reply@lookmedbook.ru>\r\n";
     $headers .= 'Reply-To: no-reply@lookmedbook.ru' . "\r\n";
     $headers .= 'X-Mailer: PHP/' . phpversion();
 
@@ -31,8 +31,8 @@ EOD;
     $to = $mail;
 
     $ml->From = 'no-reply';
-    $ml->FromName = "LookMedBook";
-    $ml->Subject = "Регистрация на LookMedBook.ru";
+    $ml->FromName = SITE_NAME;
+    $ml->Subject = "Регистрация на ".SITE_DOMAIN;
     $ml->MsgHTML($msgContent);
     $ml->AddAddress($to);
     $ml->Send();
@@ -57,8 +57,8 @@ EOD;
     //$srvmail = 'info@lookmedbook.com';
     $to = $mail;
     $ml->From = 'no-reply';
-    $ml->FromName = "LookMedBook";
-    $ml->Subject = "Регистрация на LookMedBook.ru";
+    $ml->FromName = SITE_NAME;
+    $ml->Subject = "Регистрация на ".SITE_DOMAIN;
     $ml->MsgHTML($msgContent);
     $ml->AddAddress($to);
     $ml->Send();
@@ -80,7 +80,7 @@ EOD;
 
 EOD;
     $ml->From = 'no-reply';
-    $ml->FromName = "LookMedBook";
+    $ml->FromName = SITE_NAME;
     $ml->Subject = "Изменение почтового адреса";
     $ml->MsgHTML($msgContent);
     $ml->AddAddress($mail);
@@ -102,8 +102,8 @@ EOD;
 
 EOD;
     $ml->From = 'no-reply';
-    $ml->FromName = "LookMedBook";
-    $ml->Subject = "Восстановление пароля на LookMedBook.ru";
+    $ml->FromName = SITE_NAME;
+    $ml->Subject = "Восстановление пароля на ".SITE_DOMAIN;
     $ml->MsgHTML($msgContent);
     $ml->AddAddress($mail);
     $ml->Send();

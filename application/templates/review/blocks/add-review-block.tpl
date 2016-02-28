@@ -192,7 +192,7 @@
 </div>
 
 <div id="rev-popup5" class="rev-popup">
-    <h4>Хотите что-то сказать персонально LookMedBook ?</h4>
+    <h4>Хотите что-то сказать персонально <?php echo SITE_NAME; ?> ?</h4>
     <textarea cols="1" rows="1" class="review-textarea" id="private_review" placeholder="Оставляя отзыв, Вы помогаете другим людям сделать правильный выбор"></textarea>
     <div class="btns">
         <span class="btn-4">

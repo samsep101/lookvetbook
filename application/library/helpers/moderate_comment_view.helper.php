@@ -9,7 +9,7 @@
 			if ($moderate_comment)
 			{
 				return '<div style="clear:both; padding-top: 5px;">
-							<div class="moderate_comment"><b>Комментарий LookMedBook:</b> '.$moderate_comment->comment.'
+							<div class="moderate_comment"><b>Комментарий '.SITE_NAME.':</b> '.$moderate_comment->comment.'
 							</div>
 							<input type="hidden" value="'.$moderate_comment->comment.'" />
 						</div>';

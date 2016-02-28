@@ -923,7 +923,7 @@
             $ok_account_manager = new OkAccountManager();
             $this->view->ok_account = $ok_account_manager->getOneByAccountId(Acc::accountId());
 
-            $this->view->page_title = 'Профиль - личные данные - «LookMedBook»';
+            $this->view->page_title = 'Профиль - личные данные - «'.SITE_NAME.'»';
         }
 
         public function ajaxSaveAbout()
@@ -1125,7 +1125,7 @@
             $visits = $visit_manager->getAllComingListByAccountId(Acc::accountId());
             $this->view->visits = $visits;
 
-            $this->view->page_title = 'Профиль - предстоящие визиты к врачу - «LookMedBook»';
+            $this->view->page_title = 'Профиль - предстоящие визиты к врачу - «'.SITE_NAME.'»';
         }
 
         public function doctorsVisitsPast()
@@ -1136,7 +1136,7 @@
             $visits = $visit_manager->getPastListByAccountId(Acc::accountId());
             $this->view->visits = $visits;
 
-            $this->view->page_title = 'Профиль - прошедшие визиты к врачу - «LookMedBook»';
+            $this->view->page_title = 'Профиль - прошедшие визиты к врачу - «'.SITE_NAME.'»';
         }
 
         public function ajaxCancelVisitToDoctor()
@@ -1201,7 +1201,7 @@
             $relations = ModelManagerFactory::getByName('family_relation_status')->getList();
             $this->view->relations = $relations;
 
-            $this->view->page_title = 'Профиль - Семья - «LookMedBook»';
+            $this->view->page_title = 'Профиль - Семья - «'.SITE_NAME.'»';
         }
 
         public function ajaxSaveFamilyRelation()
@@ -1545,7 +1545,7 @@
             $ok_account_manager = new OkAccountManager();
             $this->view->ok_account = $ok_account_manager->getOneByAccountId(Acc::accountId());
 
-            $this->view->page_title = 'Профиль - Доверие - «LookMedBook»';
+            $this->view->page_title = 'Профиль - Доверие - «'.SITE_NAME.'»';
         }
 
         public function options()
@@ -1556,7 +1556,7 @@
             $account_info = ModelManagerFactory::getByName('account')->getOneById(Acc::accountId());
             $this->view->account = $account_info;
 
-            $this->view->page_title = 'Профиль - Настройки - «LookMedBook»';
+            $this->view->page_title = 'Профиль - Настройки - «'.SITE_NAME.'»';
         }
 
         public function ajaxEditPersonalNotificationSettings()
@@ -1593,7 +1593,7 @@
             $this->view->page = $page;
             $this->view->pages_num = (int)(($count - 1) / $per_page) + 1;
 
-            $this->view->page_title = 'Профиль - Сообщения - «LookMedBook»';
+            $this->view->page_title = 'Профиль - Сообщения - «'.SITE_NAME.'»';
 
         }
 
@@ -1627,7 +1627,7 @@
             $clinic_manager = new ClinicManager();
             $this->view->clinics = $clinic_manager->getListByPastVisitAndMyDoctorsByAccountId(Acc::accountId());
 
-            $this->view->page_title = 'Профиль - Мои врачи - «LookMedBook»';
+            $this->view->page_title = 'Профиль - Мои врачи - «'.SITE_NAME.'»';
         }
 
         public function ajaxGetDoctorsListByPastVisit()
@@ -1759,7 +1759,7 @@
             $this->view->page = $page;
             $this->view->pages_num = (int)(($count - 1) / $per_page) + 1;
 
-            $this->view->page_title = 'Профиль - Мои заболевания - «LookMedBook»';
+            $this->view->page_title = 'Профиль - Мои заболевания - «'.SITE_NAME.'»';
         }
 
         public function my_disease_archive()
@@ -1783,7 +1783,7 @@
             $this->view->page = $page;
             $this->view->pages_num = (int)(($count - 1) / $per_page) + 1;
 
-            $this->view->page_title = 'Профиль - Заболевания - Архив - «LookMedBook»';
+            $this->view->page_title = 'Профиль - Заболевания - Архив - «'.SITE_NAME.'»';
         }
 
         public function my_clinic()
@@ -1815,7 +1815,7 @@
             $purpose_of_visit_names = $purpose_of_visit_manager->getListByAccountIdAndPastVisit(Acc::accountId());
             $this->view->purpose_of_visit_names = $purpose_of_visit_names;
 
-            $this->view->page_title = 'Профиль - Мои клиники - «LookMedBook»';
+            $this->view->page_title = 'Профиль - Мои клиники - «'.SITE_NAME.'»';
         }
 
         public function ajaxGetClinicsListByPastVisit()
@@ -1931,7 +1931,7 @@
             $doctor_review = $doctor_review_manager->getListByAccountId(Acc::accountId());
             $this->view->review_tabs = (bool)($clinic_review && $doctor_review);
 
-            $this->view->page_title = 'Профиль - Отзывы - «LookMedBook»';
+            $this->view->page_title = 'Профиль - Отзывы - «'.SITE_NAME.'»';
         }
 
         public function ajaxGetDoctorsReviews()
@@ -2064,7 +2064,7 @@
         {
             AuthHelper::checkAuth();
 
-            $this->view->page_title = 'Профиль - Заказы лекарств - "LookMedBook"';
+            $this->view->page_title = 'Профиль - Заказы лекарств - "'.SITE_NAME.'"';
             $this->render('shop/orders/orders');
         }
 

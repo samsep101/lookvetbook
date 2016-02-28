@@ -59,7 +59,7 @@
             <h3>Настройки</h3>
             <h2>Запись на прием</h2>
             <div class="row-record">
-                <label>Записываться на прием на Lookmedbook на</label>
+                <label>Записываться на прием на <?php echo SITE_NAME; ?> на</label>
                 <select class="specialty-pick">
                     <option value="">2 недели</option>
                 </select>

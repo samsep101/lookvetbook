@@ -57,7 +57,7 @@
                     $('.header #authorization-block-on-disease-page').html('<div class=\'header-user\' style=\'margin: 2px 44px 0 24px;\'><a href=\'/account/message\' class=\'header-usernotification\'> <span style=\'display: none;\' class=\'notification\' id=\'usernotification\'></span> </a><div class=\'header-userinfo\'><a href=\'/account/about\' class=\'header-userprofile\'>'+ SessionInfo.email +'</a><ul class=\'header-usermenu\'><li><a href=\'/account/about\'>Профиль</a></li><li><a href=\'/help\'>Помощь</a></li><li><a href=\'/account/logout\'>Выйти</a></li></ul></div></div>');
                 };
                 block.block_title = 'для добавления в закладки';
-                block.block_over_textbox = 'Получите доступ ко всем возможностям Lookmedbook!';
+                block.block_over_textbox = 'Получите доступ ко всем возможностям <?php echo SITE_NAME; ?>!';
                 block.init();
             }
             " class="btn-bookmark btn-bookmark-sm clinic-bookmark-<?php echo $clinic->getId(); ?>">

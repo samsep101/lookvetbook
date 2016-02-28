@@ -16,7 +16,7 @@ class HelpController extends BaseController
         $materials = ModelManagerFactory::getByName('help_material')->getActiveList();
         $this->view->materials = $materials;
 
-	    $this->view->page_title = 'Помощь - «LookMedBook»';
+	    $this->view->page_title = 'Помощь - «'.SITE_NAME.'»';
 
         $this->view->label_for_counters = 'help';
     }

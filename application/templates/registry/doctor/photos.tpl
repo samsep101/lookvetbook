@@ -31,7 +31,7 @@
             </div>
         </div>
         <div id="doctor_card_image" class="doctor-card-preview">
-            <h2>Как это выглядит на LookMedBook</h2>
+            <h2>Как это выглядит на <?php echo SITE_NAME; ?></h2>
             <?php $this->block('registry/doctor/blocks/card_big'); ?>
         </div>
         <?php echo ModerateCommentViewHelper::getView($entry_id, ModerateCommentTypeModel::DOCTOR_PHOTOS_CARD, $model->revision_number); ?>

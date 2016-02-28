@@ -1,5 +1,4 @@
 <?php
-define('SITE_NAME','');
 define('CONTACT_EMAIL','');
 define('OUTPUT_LANGUAGE','RUSSIAN');
 define('USE_SET_NAMES',1);

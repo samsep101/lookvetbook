@@ -11,6 +11,7 @@ define('ADMIN_FOLDER', '/admin');
 define('MANAGE_FOLDER', '/registry/manage');
 define('REGISTRY_FOLDER', '/registry');
 define('SITE_URL', "http://lookmedbook.cyb");
+define('SITE_DOMAIN', "LookMedBook.cyb");
 define('SHOP_ENABLE', 1);
 define('RELEASE_NUMBER', 43);
 define('SITE_PHONE_CODE', '495');

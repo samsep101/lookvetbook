@@ -34,7 +34,7 @@
                 	<a class="<?php echo (isset($menu_active) && $menu_active == 'clinic') ? 'active' : ''; ?> clinic-link" href="<?php if($city && $city->isUsed()) { echo '/clinic';} else echo SITE_URL.'/clinic'; ?>">Клиники</a>
 				<?php } ?>
 
-                    <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?>http://lookmedbook.ru/disease<?php } ?>">Заболевания</a>
+                    <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?><?php echo SITE_URL; ?>/disease<?php } ?>">Заболевания</a>
 
 
                 <?php /* if($city->getId() == 2) { ?>

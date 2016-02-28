@@ -59,7 +59,7 @@ class SeoLinkViewHelper
      */
   function catchOuterLinks($matches){
     $linkOuter = $matches[0];
-    $site_url = 'lookmedbook.ru';
+    $site_url = strtolower(SITE_DOMAIN);
     $innerUrlPattern='/href=.*'.$site_url.'[^.]*/is';
 
     if (!preg_match($innerUrlPattern, $linkOuter) && strpos($linkOuter,'//')) {

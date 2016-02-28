@@ -180,7 +180,7 @@
     m.parentNode.insertBefore(a, m)
     })
     (window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    ga('create', '<?php echo AnalyticCounterHelper::getCounterIdByCityIdAndCounterTypeId($city->getId(), AnalyticCounterTypeModel::GOOGLE_COUNTER); ?>', 'lookmedbook.ru');
+    ga('create', '<?php echo AnalyticCounterHelper::getCounterIdByCityIdAndCounterTypeId($city->getId(), AnalyticCounterTypeModel::GOOGLE_COUNTER); ?>', '<?php echo strtolower(SITE_DOMAIN);?>');
 
     ga('send', 'pageview');
     </script>
@@ -264,7 +264,7 @@
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'clinic') ? 'active' : ''; ?> clinic-link" href="/clinic">Клиники</a>
                     <?php } ?>
 
-                        <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?>http://lookmedbook.ru/disease<?php } ?>">Заболевания</a>
+                        <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?><?php echo strtolower(SITE_URL);?>/disease<?php } ?>">Заболевания</a>
                         <a class="" href="http://swiss.lookmedbook.ru/">Лечение в Швейцарии</a>
 
                     <?php /*if($city->is_has_laboratories) { ?>

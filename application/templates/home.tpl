@@ -180,7 +180,7 @@
     m.parentNode.insertBefore(a, m)
     })
     (window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    ga('create', '<?php echo AnalyticCounterHelper::getCounterIdByCityIdAndCounterTypeId($city->getId(), AnalyticCounterTypeModel::GOOGLE_COUNTER); ?>', '<?php echo strtolower(SITE_DOMAIN);?>');
+    ga('create', '<?php echo AnalyticCounterHelper::getCounterIdByCityIdAndCounterTypeId(empty($city)?'':$city->getId(), AnalyticCounterTypeModel::GOOGLE_COUNTER); ?>', '<?php echo strtolower(SITE_DOMAIN);?>');
 
     ga('send', 'pageview');
     </script>

@@ -258,8 +258,12 @@ class DoctorManager extends AliasManager
     $criteria->page = NULL;
 
     $search = new ElasticSearchDoctorIndexControl();
-
-    return $search->search($criteria);
+    try {
+      $res = $search->search($criteria);
+    }catch(Exception $e){
+      $res = [];
+    }
+    return $res;
   }
 
   /**
@@ -281,8 +285,8 @@ class DoctorManager extends AliasManager
    */
   public function getListByDoctorSearchParams(DoctorSearchParams $doctor_search_params)
   {
+    $search = new ElasticSearchDoctorIndexControl();
     try{
-      $search = new ElasticSearchDoctorIndexControl();
       $ids = $search->search($doctor_search_params);
     }catch(Exception $e){
       $ids = [];

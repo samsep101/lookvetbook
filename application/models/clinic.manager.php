@@ -1,256 +1,230 @@
 <?php
 
-	class ClinicManager extends AliasManager
-	{
-		protected $table_name = 'clinic';
-		protected $model_name = 'ClinicModel';
+class ClinicManager extends AliasManager
+{
+  protected $table_name = 'clinic';
+  protected $model_name = 'ClinicModel';
 
-		protected $transliterated_field = 'name';
+  protected $transliterated_field = 'name';
 
-        protected function beforeSave(DynamicModel $clinic)
-		{
-			/**
-			 * @var ClinicModel $clinic
-			 */
+  protected function beforeSave(DynamicModel $clinic)
+  {
+    /**
+     * @var ClinicModel $clinic
+     */
 
-			if($clinic->city_id)
-			{
-                /**
-				 * @var CityManager $manager ;
-                 */
-                $manager = ModelManagerFactory::getByName('city');
-				$manager->setServiceFlagById($clinic->city_id, 1);
-			}
+    if ($clinic->city_id) {
+      /**
+       * @var CityManager $manager ;
+       */
+      $manager = ModelManagerFactory::getByName('city');
+      $manager->setServiceFlagById($clinic->city_id, 1);
+    }
 
-			if(($clinic->week_from) && ($clinic->week_to))
-			{
-				$clinic->start_time_monday = $clinic->week_from;
-				$clinic->start_time_tuesday = $clinic->week_from;
-				$clinic->start_time_wednesday = $clinic->week_from;
-				$clinic->start_time_thursday = $clinic->week_from;
-				$clinic->start_time_friday = $clinic->week_from;
-				$clinic->start_time_saturday = $clinic->week_from;
-				$clinic->start_time_sunday = $clinic->week_from;
+    if (($clinic->week_from) && ($clinic->week_to)) {
+      $clinic->start_time_monday = $clinic->week_from;
+      $clinic->start_time_tuesday = $clinic->week_from;
+      $clinic->start_time_wednesday = $clinic->week_from;
+      $clinic->start_time_thursday = $clinic->week_from;
+      $clinic->start_time_friday = $clinic->week_from;
+      $clinic->start_time_saturday = $clinic->week_from;
+      $clinic->start_time_sunday = $clinic->week_from;
 
-				$clinic->end_time_monday = $clinic->week_to;
-				$clinic->end_time_tuesday = $clinic->week_to;
-				$clinic->end_time_wednesday = $clinic->week_to;
-				$clinic->end_time_thursday = $clinic->week_to;
-				$clinic->end_time_friday = $clinic->week_to;
-				$clinic->end_time_saturday = $clinic->week_to;
-				$clinic->end_time_sunday = $clinic->week_to;
-			}
+      $clinic->end_time_monday = $clinic->week_to;
+      $clinic->end_time_tuesday = $clinic->week_to;
+      $clinic->end_time_wednesday = $clinic->week_to;
+      $clinic->end_time_thursday = $clinic->week_to;
+      $clinic->end_time_friday = $clinic->week_to;
+      $clinic->end_time_saturday = $clinic->week_to;
+      $clinic->end_time_sunday = $clinic->week_to;
+    }
 
-			if($clinic->getId())
-			{
-				if(!$clinic->is_active)
-				{
-					if($clinic->clinic_status_id == null || $clinic->clinic_status_id == ClinicStatusModel::RAW)
-					{
-					    $clinic->clinic_status_id = ClinicStatusModel::RAW;
-					}
-                    else
-					{
-                        $clinic->clinic_status_id = ClinicStatusModel::PROBLEM;
-					}
-				}
-				else
-				{
-					$clinic->clinic_status_id = ClinicStatusModel::PUBLISHED;
-				}
+    if ($clinic->getId()) {
+      if (!$clinic->is_active) {
+        if ($clinic->clinic_status_id == null || $clinic->clinic_status_id == ClinicStatusModel::RAW) {
+          $clinic->clinic_status_id = ClinicStatusModel::RAW;
+        } else {
+          $clinic->clinic_status_id = ClinicStatusModel::PROBLEM;
+        }
+      } else {
+        $clinic->clinic_status_id = ClinicStatusModel::PUBLISHED;
+      }
 
-				if($clinic->isChangeStatus())
-				{
-					$clinic->dt_publish = date('Y-m-d H:i:s');
-					$clinic->date_publish = date('Y-m-d');
-				}
-			}
+      if ($clinic->isChangeStatus()) {
+        $clinic->dt_publish = date('Y-m-d H:i:s');
+        $clinic->date_publish = date('Y-m-d');
+      }
+    }
 
-			if($clinic->license_validity_date == '1970-01-01')
-			{
-                $clinic->license_validity_date = null;
-			}
+    if ($clinic->license_validity_date == '1970-01-01') {
+      $clinic->license_validity_date = null;
+    }
 
-			if($clinic->license_issue_date == '1970-01-01')
-			{
-                $clinic->license_issue_date = null;
-			}
+    if ($clinic->license_issue_date == '1970-01-01') {
+      $clinic->license_issue_date = null;
+    }
 
 
-			// определение региона, в котором находится клиника
-			/**
-			 * @var RegionManager $region_manager
-			 */
-			$region_manager = ModelManagerFactory::getByName('region');
-			if(!$clinic->region_id && ($clinic->longitude && $clinic->latitude))
-			{
-				$geocoder = new YandexGeocoder();
-				$region_name = $geocoder->getDistrictInfoByGeoPoint(new GeoPoint($clinic->latitude, $clinic->longitude));
+    // определение региона, в котором находится клиника
+    /**
+     * @var RegionManager $region_manager
+     */
+    $region_manager = ModelManagerFactory::getByName('region');
+    if (!$clinic->region_id && ($clinic->longitude && $clinic->latitude)) {
+      $geocoder = new YandexGeocoder();
+      $region_name = $geocoder->getDistrictInfoByGeoPoint(new GeoPoint($clinic->latitude, $clinic->longitude));
 
-				$region = $region_manager->getOneByName($region_name);
+      $region = $region_manager->getOneByName($region_name);
 
-				if($region)
-				{
-					$clinic->region_id = $region->getId();
-				}
-			}
+      if ($region) {
+        $clinic->region_id = $region->getId();
+      }
+    }
 
-			parent::beforeSave($clinic);
-		}
+    parent::beforeSave($clinic);
+  }
 
-		public function afterSave(DynamicModel $model)
-		{
-			if($model->isNew())
-			{
-				ElasticaTask::indexClinic($model->getId());
-				}
+  public function afterSave(DynamicModel $model)
+  {
+    if ($model->isNew()) {
+      ElasticaTask::indexClinic($model->getId());
+    }
 
-			return;
-			}
+    return;
+  }
 
 
-        /**
-		 * return ClinicModel[]
-		 */
-		public function getActiveListByDoctorId($doctor_id)
-		{
-			$sql = 'SELECT DISTINCT c.*
+  /**
+   * return ClinicModel[]
+   */
+  public function getActiveListByDoctorId($doctor_id)
+  {
+    $sql = 'SELECT DISTINCT c.*
                     FROM `' . $this->table_name . '` c
                     INNER JOIN doctor_to_clinic dtc  ON dtc.clinic_id = c.id
                     WHERE dtc.doctor_id = ' . (int)$doctor_id . '
                     	AND c.is_active = 1';
 
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return (isset($data)) ? $this->initList($data) : array();
-		}
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-        /**
-         * @param $doctor_id
-		 *
-         * @return ClinicModel[]
-         */
-        public function getListByDoctorId($doctor_id)
-        {
-            $sql = 'SELECT DISTINCT c.*
+  /**
+   * @param $doctor_id
+   *
+   * @return ClinicModel[]
+   */
+  public function getListByDoctorId($doctor_id)
+  {
+    $sql = 'SELECT DISTINCT c.*
                     FROM `' . $this->table_name . '` c
                     INNER JOIN doctor_to_clinic dtc  ON dtc.clinic_id = c.id
                     WHERE dtc.doctor_id = ' . (int)$doctor_id;
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (isset($data)) ? $this->initList($data) : array();
-        }
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-		public function getIdAndNameByUserId($user_id)
-		{
-			$sql = 'SELECT c.id, c.name
+  public function getIdAndNameByUserId($user_id)
+  {
+    $sql = 'SELECT c.id, c.name
 					FROM clinic c
 					';
 
-			/**
-			 * @var UserManager $user_manager
-			 * @var UserModel $user
-			 */
-			$user_manager = ModelManagerFactory::getByName('user');
-			$user = $user_manager->getOneById($user_id);
+    /**
+     * @var UserManager $user_manager
+     * @var UserModel $user
+     */
+    $user_manager = ModelManagerFactory::getByName('user');
+    $user = $user_manager->getOneById($user_id);
 
-			if($user)
-			{
-				if($user->role_id != RoleModel::ACCOUNT_SUPER_MANAGER)
-				{
+    if ($user) {
+      if ($user->role_id != RoleModel::ACCOUNT_SUPER_MANAGER) {
 
-					$sql .= 'INNER JOIN clinic_to_user c2u ON c.id = c2u.clinic_id AND c2u.user_id = ' . (int)$user_id;
+        $sql .= 'INNER JOIN clinic_to_user c2u ON c.id = c2u.clinic_id AND c2u.user_id = ' . (int)$user_id;
 
-				}
-			}
-			$data = $this->db->query($sql);
+      }
+    }
+    $data = $this->db->query($sql);
 
-			return $data;
-		}
+    return $data;
+  }
 
-        public function getListByUserId($user_id)
-        {
-            $clinic_params = new ClinicSearchParams();
-            $clinic_params->registry_user_id = $user_id;
+  public function getListByUserId($user_id)
+  {
+    $clinic_params = new ClinicSearchParams();
+    $clinic_params->registry_user_id = $user_id;
 
-            return $this->getListByClinicSearchParams($clinic_params);
-        }
+    return $this->getListByClinicSearchParams($clinic_params);
+  }
 
-		public function setRateAndAdviceRateById($clinic_id, $rate, $advice_rate)
-		{
-			$clinic = $this->getOneById($clinic_id);
-			$clinic->rate = $rate;
-			$clinic->advice_rate = $advice_rate;
-			$clinic->save();
-		}
+  public function setRateAndAdviceRateById($clinic_id, $rate, $advice_rate)
+  {
+    $clinic = $this->getOneById($clinic_id);
+    $clinic->rate = $rate;
+    $clinic->advice_rate = $advice_rate;
+    $clinic->save();
+  }
 
-		public function getFavoriteListByAccountId($account_id)
-		{
-			$sql = 'SELECT c.*
+  public function getFavoriteListByAccountId($account_id)
+  {
+    $sql = 'SELECT c.*
                     FROM clinic c
                     INNER JOIN my_clinic m ON c.id = m.clinic_id
                     WHERE m.account_id = ' . (int)$account_id . '
                     AND c.is_active = 1
                     ORDER BY m.dt DESC';
 
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return (isset($data)) ? $this->initList($data) : array();
-		}
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-		public function getMyClinicListBySearchParams(MyClinicSearchParams $params)
-		{
-			$sql = 'SELECT DISTINCT c.*
+  public function getMyClinicListBySearchParams(MyClinicSearchParams $params)
+  {
+    $sql = 'SELECT DISTINCT c.*
                     FROM clinic c
                     INNER JOIN my_clinic m ON c.id = m.clinic_id ';
 
-			if($params->purpoise_of_visit)
-			{
-				$sql .= ' INNER JOIN doctor_to_clinic d2c ON d2c.clinic_id = m.clinic_id
+    if ($params->purpoise_of_visit) {
+      $sql .= ' INNER JOIN doctor_to_clinic d2c ON d2c.clinic_id = m.clinic_id
                           INNER JOIN purpose_of_visit_to_doctor pv2d ON pv2d.doctor_id = d2c.doctor_id';
-			}
+    }
 
-			$sql .= ' WHERE m.account_id = ' . (int)$params->account_id;
+    $sql .= ' WHERE m.account_id = ' . (int)$params->account_id;
 
-			if($params->purpoise_of_visit)
-			{
-				$sql .= ' AND pv2d.purpose_of_visit_id = ' . (int)$params->purpoise_of_visit;
-			}
+    if ($params->purpoise_of_visit) {
+      $sql .= ' AND pv2d.purpose_of_visit_id = ' . (int)$params->purpoise_of_visit;
+    }
 
-			if($params->type_of_clinic == 'children')
-			{
-				$sql .= '   AND c.is_children = 1';
-			}
-			elseif($params->type_of_clinic == 'handicapped')
-			{
-				$sql .= '   AND c.is_handicapped = 1';
-			}
-			elseif($params->type_of_clinic == 'pregnant')
-			{
-				$sql .= '   AND c.is_pregnant = 1';
-			}
-			elseif($params->type_of_clinic == 'day_night')
-			{
-				$sql .= '   AND c.is_day_and_night = 1';
-			}
+    if ($params->type_of_clinic == 'children') {
+      $sql .= '   AND c.is_children = 1';
+    } elseif ($params->type_of_clinic == 'handicapped') {
+      $sql .= '   AND c.is_handicapped = 1';
+    } elseif ($params->type_of_clinic == 'pregnant') {
+      $sql .= '   AND c.is_pregnant = 1';
+    } elseif ($params->type_of_clinic == 'day_night') {
+      $sql .= '   AND c.is_day_and_night = 1';
+    }
 
-			$sql .= ' AND c.is_active = 1 ';
+    $sql .= ' AND c.is_active = 1 ';
 
-			$sql .= ' ORDER BY m.dt DESC
+    $sql .= ' ORDER BY m.dt DESC
                       LIMIT ' . (int)$params->offset . ', ' . (int)$params->limit;
 
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return (isset($data)) ? $this->initList($data) : array();
-		}
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-		/**
-		 * Получение списка id клиник, которые находятся в указанном радиусе
-		 */
-		public function getIdListByCoordinatesAndDistance(GeoPoint $coordinates, $distance)
-		{
-			$sql = 'SELECT id
+  /**
+   * Получение списка id клиник, которые находятся в указанном радиусе
+   */
+  public function getIdListByCoordinatesAndDistance(GeoPoint $coordinates, $distance)
+  {
+    $sql = 'SELECT id
                     FROM clinic
                     WHERE (6372795 * 2 * asin(
                         sqrt(
@@ -261,27 +235,25 @@
                         )
                     )  <= ' . (int)$distance;
 
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
 
-			$result = array();
-			if($data)
-			{
-				foreach($data as $v)
-				{
-					$result[$v['id']] = $v['id'];
-				}
-			}
+    $result = array();
+    if ($data) {
+      foreach ($data as $v) {
+        $result[$v['id']] = $v['id'];
+      }
+    }
 
-			return $result;
-		}
+    return $result;
+  }
 
-	    /**
-		 * return ClinicModel[]
-		 */
-		public function getListByCoordinatesAndRadiusDistance(GeoPoint $coordinates, $radius_distance)
-		{
-			$sql = 'SELECT *
+  /**
+   * return ClinicModel[]
+   */
+  public function getListByCoordinatesAndRadiusDistance(GeoPoint $coordinates, $radius_distance)
+  {
+    $sql = 'SELECT *
                     FROM clinic
                     WHERE (6372795 * 2 * asin(
                         sqrt(
@@ -292,85 +264,74 @@
                         )
                     )  <= ' . (int)$radius_distance;
 
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return $this->initList($data);
-		}
+    return $this->initList($data);
+  }
 
-		public function getIdListBySearchParams(SearchParams $search_params)
-		{
-			$clinics = $this->getListBySearchParams($search_params);
+  public function getIdListBySearchParams(SearchParams $search_params)
+  {
+    $clinics = $this->getListBySearchParams($search_params);
 
-			$result = array();
+    $result = array();
 
-			if($clinics)
-			{
-				foreach($clinics as $clinic)
-				{
-					$result[$clinic->getId()] = $clinic->getId();
-				}
-			}
+    if ($clinics) {
+      foreach ($clinics as $clinic) {
+        $result[$clinic->getId()] = $clinic->getId();
+      }
+    }
 
-			return $result;
-		}
+    return $result;
+  }
 
-        /**
-		 * return ClinicModel[]
-		 */
-		public function getListByPastVisitSearchParams(PastClinicVisitSearchParams $params)
-		{
-			$sql = 'SELECT DISTINCT c.*
+  /**
+   * return ClinicModel[]
+   */
+  public function getListByPastVisitSearchParams(PastClinicVisitSearchParams $params)
+  {
+    $sql = 'SELECT DISTINCT c.*
                     FROM clinic c
                     INNER JOIN visit v ON v.clinic_id = c.id
                     INNER JOIN schedule s ON v.schedule_id = s.id
                     ';
 
-			$sql .= ' WHERE v.account_id = ' . (int)$params->account_id;
+    $sql .= ' WHERE v.account_id = ' . (int)$params->account_id;
 
-			if($params->type_of_clinic == 'children')
-			{
-				$sql .= '   AND c.is_children = 1';
-			}
-			elseif($params->type_of_clinic == 'handicapped')
-			{
-				$sql .= '   AND c.is_handicapped = 1';
-			}
-			elseif($params->type_of_clinic == 'pregnant')
-			{
-				$sql .= '   AND c.is_pregnant = 1';
-			}
-			elseif($params->type_of_clinic == 'day_night')
-			{
-				$sql .= '   AND c.is_day_and_night = 1';
-			}
+    if ($params->type_of_clinic == 'children') {
+      $sql .= '   AND c.is_children = 1';
+    } elseif ($params->type_of_clinic == 'handicapped') {
+      $sql .= '   AND c.is_handicapped = 1';
+    } elseif ($params->type_of_clinic == 'pregnant') {
+      $sql .= '   AND c.is_pregnant = 1';
+    } elseif ($params->type_of_clinic == 'day_night') {
+      $sql .= '   AND c.is_day_and_night = 1';
+    }
 
-			$sql .= ' AND c.is_active = 1 ';
+    $sql .= ' AND c.is_active = 1 ';
 
-			if($params->purpoise_of_visit)
-			{
-				$sql .= ' AND v.purpose_of_visit_id = ' . (int)$params->purpoise_of_visit;
-			}
+    if ($params->purpoise_of_visit) {
+      $sql .= ' AND v.purpose_of_visit_id = ' . (int)$params->purpoise_of_visit;
+    }
 
-			$sql .= ' AND v.status_id = ' . VisitModel::CONFIRMED;
-			$sql .= ' AND v.visit_start_time < NOW() ';
-			$sql .= ' ORDER BY v.visit_start_time DESC ';
+    $sql .= ' AND v.status_id = ' . VisitModel::CONFIRMED;
+    $sql .= ' AND v.visit_start_time < NOW() ';
+    $sql .= ' ORDER BY v.visit_start_time DESC ';
 
-			if($params->limit)
-			{
-				$sql .= ' LIMIT ' . (int)$params->offset . ', ' . $params->limit;
-			}
+    if ($params->limit) {
+      $sql .= ' LIMIT ' . (int)$params->offset . ', ' . $params->limit;
+    }
 
-			$data = Register::get('db')->query($sql);
+    $data = Register::get('db')->query($sql);
 
-			return $this->initList($data);
-		}
+    return $this->initList($data);
+  }
 
-        /**
-		 * return ClinicModel[]
-		 */
-		public function getListByPastVisitAndMyDoctorsByAccountId($account_id)
-		{
-			$sql = 'SELECT * FROM (
+  /**
+   * return ClinicModel[]
+   */
+  public function getListByPastVisitAndMyDoctorsByAccountId($account_id)
+  {
+    $sql = 'SELECT * FROM (
 							SELECT DISTINCT c.*
 							FROM clinic c
 							INNER JOIN schedule s ON s.clinic_id = c.id
@@ -388,107 +349,106 @@
 							AND c.is_active = 1
                         ) a ORDER BY name';
 
-			$data = Register::get('db')->query($sql);
+    $data = Register::get('db')->query($sql);
 
-			return (count($data)) ? $this->initList($data) : array();
-		}
+    return (count($data)) ? $this->initList($data) : array();
+  }
 
-        /**
-		 * return ClinicModel
-		 */
-		public function getOneByCityId($city_id)
-		{
-			$sql = 'SELECT *
+  /**
+   * return ClinicModel
+   */
+  public function getOneByCityId($city_id)
+  {
+    $sql = 'SELECT *
                     FROM ' . $this->table_name . '
                     WHERE city_id = ' . (int)$city_id;
 
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return (isset($data[0])) ? $this->initOne($data[0]) : null;
-		}
+    return (isset($data[0])) ? $this->initOne($data[0]) : null;
+  }
 
 
-        /**
-		 * @return ClinicModel[]
-		 */
-		public function getListByCityId($city_id)
-		{
-			$sql = 'SELECT *
+  /**
+   * @return ClinicModel[]
+   */
+  public function getListByCityId($city_id)
+  {
+    $sql = 'SELECT *
                     FROM ' . $this->table_name . '
                     WHERE city_id = ' . (int)$city_id . ' AND is_active = 1';
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return (isset($data)) ? $this->initList($data) : array();
-		}
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-		public function checkExistsByCityId($city_id)
-		{
-			$sql = 'SELECT COUNT(*) as `count`
+  public function checkExistsByCityId($city_id)
+  {
+    $sql = 'SELECT COUNT(*) as `count`
 					FROM clinic cl
 					WHERE cl.is_active = 1
 						AND cl.city_id = ' . (int)$city_id;
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (bool)$data[0]['count'];
-		}
+    return (bool)$data[0]['count'];
+  }
 
-        public function getActiveList()
-        {
-            $data = $this->orm_model->select()->where('is_active = 1')->fetchAll();
+  public function getActiveList()
+  {
+    $data = $this->orm_model->select()->where('is_active = 1')->fetchAll();
 
-            return $this->initList($data);
-        }
+    return $this->initList($data);
+  }
 
-        /**
-		 * return ClinicModel[]
-		 */
-		public function getListByNameWithLimit($name, $by_page)
-		{
-			$sql = 'SELECT *
+  /**
+   * return ClinicModel[]
+   */
+  public function getListByNameWithLimit($name, $by_page)
+  {
+    $sql = 'SELECT *
                 FROM ' . $this->table_name . '
                 WHERE name LIKE  "%' . $this->db->escape($name) . '%"
                 LIMIT 0,' . $by_page;
 
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return (isset($data)) ? $this->initList($data) : array();
-		}
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-        /**
-		 * return ClinicModel[]
-		 */
-		public function getListByNameWithPaging($query, $by_page, $page, $get_extra_entry = 0)
-		{
-			$offset = ($page - 1) * $by_page;
-			if($get_extra_entry)
-			{
-				$by_page++;
-			}
-			$sql = 'SELECT SQL_CALC_FOUND_ROWS *
+  /**
+   * return ClinicModel[]
+   */
+  public function getListByNameWithPaging($query, $by_page, $page, $get_extra_entry = 0)
+  {
+    $offset = ($page - 1) * $by_page;
+    if ($get_extra_entry) {
+      $by_page++;
+    }
+    $sql = 'SELECT SQL_CALC_FOUND_ROWS *
                     FROM ' . $this->table_name . '
                     WHERE name LIKE  "%' . $this->db->escape($query) . '%"
                     LIMIT ' . $offset . ',' . $by_page;
 
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return (isset($data)) ? $this->initList($data) : array();
-		}
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-		public function setBallsById($id, $balls)
-		{
-			$sql = 'UPDATE ' . $this->table_name . '
+  public function setBallsById($id, $balls)
+  {
+    $sql = 'UPDATE ' . $this->table_name . '
                     SET balls = ' . (int)$balls . '
                     WHERE id = ' . $id;
 
-			$this->db->query($sql);
-		}
+    $this->db->query($sql);
+  }
 
-		/**
-		 * return ClinicModel
-		 */
-		public function getOneByRegistryUserId($registry_user_id)
-		{
-			$sql = 'SELECT c.*
+  /**
+   * return ClinicModel
+   */
+  public function getOneByRegistryUserId($registry_user_id)
+  {
+    $sql = 'SELECT c.*
 					FROM clinic c
 					INNER JOIN clinic_to_user c2u ON c2u.clinic_id = c.id
 					INNER JOIN user u ON c2u.user_id = u.id
@@ -496,48 +456,46 @@
 						AND u.role_id = ' . RoleModel::ACCOUNT_REGISTRY . '
 					LIMIT 1';
 
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return ($data) ? $this->initOne($data[0]) : null;
-		}
+    return ($data) ? $this->initOne($data[0]) : null;
+  }
 
-		/**
-		 * return ClinicModel[]
-		 */
-		public function getListByManagerUserId($manager_user_id, $clinics_access = false)
-		{
-			$user_manager = new UserManager();
-			$user = $user_manager->getOneById($manager_user_id);
+  /**
+   * return ClinicModel[]
+   */
+  public function getListByManagerUserId($manager_user_id, $clinics_access = false)
+  {
+    $user_manager = new UserManager();
+    $user = $user_manager->getOneById($manager_user_id);
 
-			if($user->role_id == RoleModel::ACCOUNT_SUPER_MANAGER)
-			{
-				return $this->getList();
-			}
-			if($clinics_access)
-            {
-                $clinic_search_params = new ClinicSearchParams();
-                $clinic_search_params->is_region = null;
+    if ($user->role_id == RoleModel::ACCOUNT_SUPER_MANAGER) {
+      return $this->getList();
+    }
+    if ($clinics_access) {
+      $clinic_search_params = new ClinicSearchParams();
+      $clinic_search_params->is_region = null;
 
-                return $this->getListByClinicSearchParams($clinic_search_params);
-            }
+      return $this->getListByClinicSearchParams($clinic_search_params);
+    }
 
-			$sql = 'SELECT c.*
+    $sql = 'SELECT c.*
 					FROM clinic c
 					INNER JOIN clinic_to_user c2u ON c2u.clinic_id = c.id
 					INNER JOIN user u ON c2u.user_id = u.id
 					WHERE c2u.user_id = ' . (int)$manager_user_id . '
 						AND u.role_id IN (' . join(', ', RoleHelper::getManagerRolesIdList()) . ')';
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return $this->initList($data);
-		}
+    return $this->initList($data);
+  }
 
-		/**
-		 * return ClinicModel
-		 */
-		public function getOneFirstByUserIdAndDoctorId($user_id, $doctor_id)
-		{
-			$sql = 'SELECT c.*
+  /**
+   * return ClinicModel
+   */
+  public function getOneFirstByUserIdAndDoctorId($user_id, $doctor_id)
+  {
+    $sql = 'SELECT c.*
 					FROM clinic c
 					INNER JOIN clinic_to_user c2u ON c2u.clinic_id = c.id
 					INNER JOIN doctor_to_clinic d2c ON d2c.clinic_id = c.id
@@ -546,571 +504,522 @@
 						AND c2u.user_id = ' . (int)$user_id . '
 					LIMIT 1';
 
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return ($data) ? $this->initOne($data[0]) : null;
-		}
+    return ($data) ? $this->initOne($data[0]) : null;
+  }
 
-		/**
-		 * return ClinicModel[]
-		 */
-		public function getListWithPagingByRegistryUserId($registry_user_id, $page = 1, $by_page = 5)
-		{
-			$clinic_search_params = new ClinicSearchParams();
-			$clinic_search_params->registry_user_id = $registry_user_id;
-			$clinic_search_params->page = $page;
-			$clinic_search_params->by_page = $by_page;
+  /**
+   * return ClinicModel[]
+   */
+  public function getListWithPagingByRegistryUserId($registry_user_id, $page = 1, $by_page = 5)
+  {
+    $clinic_search_params = new ClinicSearchParams();
+    $clinic_search_params->registry_user_id = $registry_user_id;
+    $clinic_search_params->page = $page;
+    $clinic_search_params->by_page = $by_page;
 
-			return $this->getListByClinicSearchParams($clinic_search_params);
-		}
+    return $this->getListByClinicSearchParams($clinic_search_params);
+  }
 
-		/**
-		 * @param ModelSearchCriteria $criteria
-		 *
-		 * @return int
-		 */
-		public function getCountByModelSearchCriteria(ModelSearchCriteria $criteria)
-		{
-			$search = new ElasticSearchClinicIndexControl();
+  /**
+   * @param ModelSearchCriteria $criteria
+   *
+   * @return int
+   */
+  public function getCountByModelSearchCriteria(ModelSearchCriteria $criteria)
+  {
+    $search = new ElasticSearchClinicIndexControl();
 
-			return $search->getTotalCount($criteria);
-		}
+    return $search->getTotalCount($criteria);
+  }
 
-		/**
-		 * return ClinicModel[]
-		 */
-		public function getListByClinicSearchParams(ClinicSearchParams $clinic_search_params, $get_total_hits = false)
-		{
+  /**
+   * return ClinicModel[]
+   */
+  public function getListByClinicSearchParams(ClinicSearchParams $clinic_search_params, $get_total_hits = false)
+  {
 
-			$clinic_index_manager = new ElasticSearchClinicIndexControl();
-			$result = $clinic_index_manager->search($clinic_search_params, $get_total_hits);
-			$this->total_hits = $clinic_index_manager->getTotalHits();
+    $clinic_index_manager = new ElasticSearchClinicIndexControl();
+    try {
+      $result = $clinic_index_manager->search($clinic_search_params, $get_total_hits);
+    }catch(Exception $e) {
+      $result = [];
+    }
+    $this->total_hits = $clinic_index_manager->getTotalHits();
 
-			return $this->getListByIds($result);
+    return $this->getListByIds($result);
 
-			$search_params = new SearchParams();
+    $search_params = new SearchParams();
 
-			if($clinic_search_params->registry_user_id)
-			{
-				$user_manager = new UserManager();
-                /**
-                 * @var UserModel $user
-                 */
-                $user = $user_manager->getOneById($clinic_search_params->registry_user_id);
+    if ($clinic_search_params->registry_user_id) {
+      $user_manager = new UserManager();
+      /**
+       * @var UserModel $user
+       */
+      $user = $user_manager->getOneById($clinic_search_params->registry_user_id);
 
-				if($user)
-				{
-					if($user->role_id != RoleModel::ACCOUNT_SUPER_MANAGER)
-					{
-						$search_params->addJoin('clinic_to_user', 'clinic_to_user.clinic_id', 'clinic.id');
-						$search_params->addParam('clinic_to_user.user_id', $clinic_search_params->registry_user_id);
-					}
-                }
+      if ($user) {
+        if ($user->role_id != RoleModel::ACCOUNT_SUPER_MANAGER) {
+          $search_params->addJoin('clinic_to_user', 'clinic_to_user.clinic_id', 'clinic.id');
+          $search_params->addParam('clinic_to_user.user_id', $clinic_search_params->registry_user_id);
+        }
+      }
+    }
+
+    if ($clinic_search_params->freelancer_id) {
+      /**
+       * @var UserModel $user
+       */
+      if ($clinic_search_params->registry_user_id && $user->role_id != RoleModel::ACCOUNT_SUPER_MANAGER) {
+
+        $search_params->addJoin('clinic_to_user c2u2', 'c2u2.clinic_id', 'clinic_to_user.clinic_id');
+        $search_params->addParam('c2u2.user_id', $clinic_search_params->freelancer_id);
+      } else {
+        $search_params->addJoin('clinic_to_user c2u2', 'c2u2.clinic_id', 'clinic.id');
+        $search_params->addParam('c2u2.user_id', $clinic_search_params->freelancer_id);
+      }
+    }
+
+    if ($clinic_search_params->doctor_id) {
+      $search_params->addJoin('doctor_to_clinic', 'doctor_to_clinic.clinic_id', 'clinic.id');
+      $search_params->addParam('doctor_to_clinic.doctor_id', $clinic_search_params->doctor_id);
+    }
+
+
+    $offset = ($clinic_search_params->page - 1) * $clinic_search_params->by_page;
+    $limit = $clinic_search_params->by_page;
+    $search_params->setOffsetAndLimit($offset, $limit);
+
+    if (isset($clinic_search_params->is_active)) {
+      $search_params->addParam('is_active', $clinic_search_params->is_active);
+    }
+
+    if (isset($clinic_search_params->is_region) && $clinic_search_params->is_region) {
+      $search_params->addParam('is_region', $clinic_search_params->is_region);
+    }
+
+    if ($clinic_search_params->status) {
+      $search_params->addParam('clinic_status_id', $clinic_search_params->status);
+    }
+
+    if ($clinic_search_params->clinic_name) {
+      $search_params->addParam('name LIKE', '%' . str_replace('%', '\%', $clinic_search_params->clinic_name) . '%', 'name');
+    }
+
+    if ($clinic_search_params->address) {
+      $search_params->addParam('address LIKE', '%' . str_replace('%', '\%', $clinic_search_params->address) . '%', 'address');
+    }
+
+    if ($clinic_search_params->regions) {
+      $search_params->addParam('city_id !=', CityModel::MOSCOW_ID);
+    }
+
+    if ($clinic_search_params->city_id) {
+      $search_params->addParam('city_id =', $clinic_search_params->city_id);
+    }
+
+    if ($clinic_search_params->publish_date_from) {
+      $search_params->addParam('date_publish >=', $clinic_search_params->publish_date_from);
+    }
+
+    if ($clinic_search_params->publish_date_to) {
+      $search_params->addParam('date_publish <=', $clinic_search_params->publish_date_to);
+    }
+
+    $specialty_id_list = array();
+
+    if ($clinic_search_params->specialty_id) {
+      $specialty_manager = new SpecialtyManager();
+      /**
+       * @var SpecialtyModel $specialty
+       */
+      $specialty = $specialty_manager->getOneById($clinic_search_params->specialty_id);
+
+      $specialty_id_list[] = $specialty->getId();
+
+      $search_params->addJoin('specialty_to_clinic');
+      if ($specialty->childs) {
+        $search_params->addSortParam('specialty_to_clinic.specialty_id', array($specialty->getId()), 'DESC');
+        foreach ($specialty->childs as $child_specialty) {
+          $specialty_id_list[] = $child_specialty->getId();
+        }
+      }
+
+      $search_params->addParam('specialty_to_clinic.specialty_id IN', $specialty_id_list);
+    }
+
+    if ($clinic_search_params->purpose_of_visit_id) {
+      $search_params->addJoin('purpose_of_visit_to_clinic');
+      $search_params->addParam('purpose_of_visit_to_clinic.purpose_of_visit_id', $clinic_search_params->purpose_of_visit_id);
+
+      if ($clinic_search_params->specialty_id) {
+        $search_params->addParam('purpose_of_visit_to_clinic.specialty_id IN', $specialty_id_list);
+      }
+    }
+
+    if ($clinic_search_params->children || $clinic_search_params->handicapped || $clinic_search_params->pregnant || $clinic_search_params->day_and_night) {
+      $search_params->startBracket();
+      if ($clinic_search_params->children) {
+        $search_params->addParam('is_children OR', 1);
+      }
+
+      if ($clinic_search_params->handicapped) {
+        $search_params->addParam('is_handicapped OR', 1);
+      }
+
+      if ($clinic_search_params->pregnant) {
+        $search_params->addParam('is_pregnant OR', 1);
+      }
+
+      if ($clinic_search_params->day_and_night) {
+        $search_params->addParam('is_day_and_night OR', 1);
+      }
+      $search_params->endBracket();
+    }
+
+    if ($clinic_search_params->not_show_example) {
+      $search_params->addParam('id !=', 80);
+    }
+
+    if ($clinic_search_params->geo_point) {
+      $search_params->setDistance($clinic_search_params->distance);
+
+      if ($clinic_search_params->is_metro) {
+        $metro_branch_manager = new MetroBranchManager();
+        $branch = $metro_branch_manager->getOneByName($clinic_search_params->metro_branch_name);
+
+        if ($branch) {
+          $metro_station_manager = new MetroStationManager();
+          $station = $metro_station_manager->getOneByNameAndMetroBranchId($clinic_search_params->metro_station_name, $branch->getId());
+
+          if ($station) {
+            $number_from = ($station->number - 3 > 0) ? $station->number - 3 : 1;
+            $number_to = $station->number + 3;
+
+            $metro_stations = $metro_station_manager->getListByMetroBranchIdAndNumberRange($branch->getId(), $number_from, $number_to);
+
+            foreach ($metro_stations as $metro_station) {
+              $search_params->addDistanceParam(new GeoPoint($metro_station->latitude, $metro_station->longitude), 'clinic.latitude', 'clinic.longitude', $clinic_search_params->distance);
             }
+          }
+        }
+      }
 
-            if($clinic_search_params->freelancer_id)
-            {
-                /**
-                 * @var UserModel $user
-                 */
-				if($clinic_search_params->registry_user_id && $user->role_id != RoleModel::ACCOUNT_SUPER_MANAGER)
-				{
-
-                    $search_params->addJoin('clinic_to_user c2u2', 'c2u2.clinic_id', 'clinic_to_user.clinic_id');
-                    $search_params->addParam('c2u2.user_id', $clinic_search_params->freelancer_id);
-				}
-				else
-				{
-                    $search_params->addJoin('clinic_to_user c2u2', 'c2u2.clinic_id', 'clinic.id');
-                    $search_params->addParam('c2u2.user_id', $clinic_search_params->freelancer_id);
-                }
-            }
-
-			if($clinic_search_params->doctor_id)
-            {
-                $search_params->addJoin('doctor_to_clinic', 'doctor_to_clinic.clinic_id', 'clinic.id');
-                $search_params->addParam('doctor_to_clinic.doctor_id', $clinic_search_params->doctor_id);
-            }
+      $search_params->addDistanceParam($clinic_search_params->geo_point, 'clinic.latitude', 'clinic.longitude', $clinic_search_params->distance);
+    }
 
 
-			$offset = ($clinic_search_params->page - 1) * $clinic_search_params->by_page;
-			$limit = $clinic_search_params->by_page;
-			$search_params->setOffsetAndLimit($offset, $limit);
+    if ($clinic_search_params->sort_by) {
+      switch ($clinic_search_params->sort_by) {
+        case 'dt_edit':
+          $search_params->addSortParam('dt_edit', 'DESC');
+          break;
+        case 'date_publish':
+          $search_params->addSortParam('date_publish', 'DESC');
+          break;
+        case 'dt_publish':
+          $search_params->addSortParam('dt_publish', 'DESC');
+          break;
+        case 'raw_clinics_in_start':
+          $search_params->addSortParam('clinic_status_id', array(ClinicStatusModel::RAW), 'DESC');
+          break;
+        case 'recomend':
+          $search_params->addSortParam('balls', 'DESC');
+          break;
+        case 'rate':
+          $search_params->addSortParam('rate', 'DESC');
+          break;
+      }
+    }
 
-			if(isset($clinic_search_params->is_active))
-            {
-                $search_params->addParam('is_active', $clinic_search_params->is_active);
-            }
+    $search_params->setGetExtraEntry();
 
-			if(isset($clinic_search_params->is_region) && $clinic_search_params->is_region)
-            {
-                $search_params->addParam('is_region', $clinic_search_params->is_region);
-            }
+    if ($clinic_search_params->calc_found_rows) {
+      $search_params->calcFoundRows();
+    }
 
-			if($clinic_search_params->status)
-            {
-                $search_params->addParam('clinic_status_id', $clinic_search_params->status);
-            }
+    return $this->getListBySearchParams($search_params);
+  }
 
-			if($clinic_search_params->clinic_name)
-			{
-                $search_params->addParam('name LIKE', '%' . str_replace('%', '\%', $clinic_search_params->clinic_name) . '%', 'name');
-            }
-
-			if($clinic_search_params->address)
-			{
-                $search_params->addParam('address LIKE', '%' . str_replace('%', '\%', $clinic_search_params->address) . '%', 'address');
-            }
-
-			if($clinic_search_params->regions)
-			{
-                $search_params->addParam('city_id !=', CityModel::MOSCOW_ID);
-            }
-
-			if($clinic_search_params->city_id)
-			{
-                $search_params->addParam('city_id =', $clinic_search_params->city_id);
-            }
-
-			if($clinic_search_params->publish_date_from)
-            {
-                $search_params->addParam('date_publish >=', $clinic_search_params->publish_date_from);
-            }
-
-			if($clinic_search_params->publish_date_to)
-            {
-                $search_params->addParam('date_publish <=', $clinic_search_params->publish_date_to);
-            }
-
-            $specialty_id_list = array();
-
-			if($clinic_search_params->specialty_id)
-			{
-                $specialty_manager = new SpecialtyManager();
-                /**
-                 * @var SpecialtyModel $specialty
-                 */
-                $specialty = $specialty_manager->getOneById($clinic_search_params->specialty_id);
-
-                $specialty_id_list[] = $specialty->getId();
-
-                $search_params->addJoin('specialty_to_clinic');
-				if($specialty->childs)
-				{
-                    $search_params->addSortParam('specialty_to_clinic.specialty_id', array($specialty->getId()), 'DESC');
-					foreach($specialty->childs as $child_specialty)
-					{
-                        $specialty_id_list[] = $child_specialty->getId();
-                    }
-                }
-
-                $search_params->addParam('specialty_to_clinic.specialty_id IN', $specialty_id_list);
-            }
-
-            if($clinic_search_params->purpose_of_visit_id)
-            {
-                $search_params->addJoin('purpose_of_visit_to_clinic');
-                $search_params->addParam('purpose_of_visit_to_clinic.purpose_of_visit_id', $clinic_search_params->purpose_of_visit_id);
-
-				if($clinic_search_params->specialty_id)
-                {
-                    $search_params->addParam('purpose_of_visit_to_clinic.specialty_id IN', $specialty_id_list);
-                }
-            }
-
-			if($clinic_search_params->children || $clinic_search_params->handicapped || $clinic_search_params->pregnant || $clinic_search_params->day_and_night)
-			{
-                $search_params->startBracket();
-				if($clinic_search_params->children)
-				{
-                    $search_params->addParam('is_children OR', 1);
-                }
-
-				if($clinic_search_params->handicapped)
-				{
-                    $search_params->addParam('is_handicapped OR', 1);
-                }
-
-				if($clinic_search_params->pregnant)
-				{
-                    $search_params->addParam('is_pregnant OR', 1);
-                }
-
-				if($clinic_search_params->day_and_night)
-				{
-                    $search_params->addParam('is_day_and_night OR', 1);
-                }
-                $search_params->endBracket();
-            }
-
-            if($clinic_search_params->not_show_example)
-            {
-                $search_params->addParam('id !=', 80);
-            }
-
-            if($clinic_search_params->geo_point)
-            {
-                $search_params->setDistance($clinic_search_params->distance);
-
-                if($clinic_search_params->is_metro)
-                {
-                    $metro_branch_manager = new MetroBranchManager();
-                    $branch = $metro_branch_manager->getOneByName($clinic_search_params->metro_branch_name);
-
-                    if($branch)
-                    {
-                        $metro_station_manager = new MetroStationManager();
-                        $station = $metro_station_manager->getOneByNameAndMetroBranchId($clinic_search_params->metro_station_name, $branch->getId());
-
-                        if($station)
-                        {
-                            $number_from = ($station->number - 3 > 0) ? $station->number - 3 : 1;
-                            $number_to = $station->number + 3;
-
-                            $metro_stations = $metro_station_manager->getListByMetroBranchIdAndNumberRange($branch->getId(), $number_from, $number_to);
-
-                            foreach($metro_stations as $metro_station)
-                            {
-                                $search_params->addDistanceParam(new GeoPoint($metro_station->latitude, $metro_station->longitude), 'clinic.latitude', 'clinic.longitude', $clinic_search_params->distance);
-                            }
-                        }
-                    }
-                }
-
-                $search_params->addDistanceParam($clinic_search_params->geo_point, 'clinic.latitude', 'clinic.longitude', $clinic_search_params->distance);
-            }
-
-
-			if($clinic_search_params->sort_by)
-			{
-				switch($clinic_search_params->sort_by)
-				{
-                    case 'dt_edit':
-                        $search_params->addSortParam('dt_edit', 'DESC');
-                        break;
-                    case 'date_publish':
-                        $search_params->addSortParam('date_publish', 'DESC');
-                        break;
-                    case 'dt_publish':
-                        $search_params->addSortParam('dt_publish', 'DESC');
-                        break;
-                    case 'raw_clinics_in_start':
-                        $search_params->addSortParam('clinic_status_id', array(ClinicStatusModel::RAW), 'DESC');
-                        break;
-                    case 'recomend':
-                        $search_params->addSortParam('balls', 'DESC');
-                        break;
-                    case 'rate':
-                        $search_params->addSortParam('rate', 'DESC');
-                        break;
-                }
-            }
-
-            $search_params->setGetExtraEntry();
-
-			if($clinic_search_params->calc_found_rows)
-            {
-                $search_params->calcFoundRows();
-            }
-
-			return $this->getListBySearchParams($search_params);
-		}
-
-		public function setAdultFlagToClinic()
-		{
-			$sql = 'UPDATE clinic c
+  public function setAdultFlagToClinic()
+  {
+    $sql = 'UPDATE clinic c
                     SET c.is_adult = 1
                     WHERE c.is_children != 1';
-			$this->db->query($sql);
-		}
+    $this->db->query($sql);
+  }
 
 
-		/**
-		 * return ClinicModel[]
-		 */
-		public function getListByDoctorIdAndSpecialtyId($doctor_id, $specialty_id)
-		{
-			$sql = 'SELECT DISTINCT c.*
+  /**
+   * return ClinicModel[]
+   */
+  public function getListByDoctorIdAndSpecialtyId($doctor_id, $specialty_id)
+  {
+    $sql = 'SELECT DISTINCT c.*
                     FROM `' . $this->table_name . '` c
                     INNER JOIN doctor_specialty_to_clinic dtc  ON dtc.clinic_id = c.id
                     WHERE dtc.doctor_id = ' . (int)$doctor_id . '
                         AND dtc.specialty_id = ' . (int)$specialty_id . '
                     	AND c.is_active = 1';
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return (isset($data)) ? $this->initList($data) : array();
-		}
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-        /**
-         * @param $doctor_id
-         * @param $user_id
-		 *
-         * @return ClinicModel[]
-         */
-        public function getListByDoctorIdAndUserId($doctor_id, $user_id)
-        {
-            $clinic_search_params = new ClinicSearchParams();
-            $clinic_search_params->doctor_id = $doctor_id;
-            $clinic_search_params->registry_user_id = $user_id;
+  /**
+   * @param $doctor_id
+   * @param $user_id
+   *
+   * @return ClinicModel[]
+   */
+  public function getListByDoctorIdAndUserId($doctor_id, $user_id)
+  {
+    $clinic_search_params = new ClinicSearchParams();
+    $clinic_search_params->doctor_id = $doctor_id;
+    $clinic_search_params->registry_user_id = $user_id;
 
-            return $this->getListByClinicSearchParams($clinic_search_params);
-        }
+    return $this->getListByClinicSearchParams($clinic_search_params);
+  }
 
 
-		/**
-		 * return ClinicModel[]
-		 */
-		public function getListByDoctorIdAndSpecialtyIdList($doctor_id, $specialties_ids)
-		{
-			$counter = 1;
-			$specialties = '';
-			foreach($specialties_ids as $specialty_id)
-			{
-				if($counter != 1)
-				{
-					$specialties .= ',';
-				}
-				$specialties .= $specialty_id;
-				$counter++;
-			}
+  /**
+   * return ClinicModel[]
+   */
+  public function getListByDoctorIdAndSpecialtyIdList($doctor_id, $specialties_ids)
+  {
+    $counter = 1;
+    $specialties = '';
+    foreach ($specialties_ids as $specialty_id) {
+      if ($counter != 1) {
+        $specialties .= ',';
+      }
+      $specialties .= $specialty_id;
+      $counter++;
+    }
 
-			$sql = 'SELECT DISTINCT c.*
+    $sql = 'SELECT DISTINCT c.*
                     FROM `' . $this->table_name . '` c
                     INNER JOIN doctor_specialty_to_clinic dtc  ON dtc.clinic_id = c.id
                     WHERE dtc.doctor_id = ' . (int)$doctor_id . '
                         AND dtc.specialty_id IN (' . $specialties . ')
                     	AND c.is_active = 1';
-			$data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (isset($data)) ? $this->initList($data) : array();
-        }
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-        /**
-         * return ClinicModel[]
-         */
-        public function getRegionsListByNameWithLimit($name, $by_page)
-        {
-            $sql = 'SELECT *
+  /**
+   * return ClinicModel[]
+   */
+  public function getRegionsListByNameWithLimit($name, $by_page)
+  {
+    $sql = 'SELECT *
                 FROM ' . $this->table_name . '
                 WHERE name LIKE  "%' . $this->db->escape($name) . '%"
                 AND city_id != ' . (int)CityModel::MOSCOW_ID . '
                 LIMIT 0,' . $by_page;
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-			return (isset($data)) ? $this->initList($data) : array();
-		}
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-        public function getDistinctPublishDatesByCityId($city_id)
-        {
-            $sql = 'SELECT DISTINCT(date_publish) as date_publish
+  public function getDistinctPublishDatesByCityId($city_id)
+  {
+    $sql = 'SELECT DISTINCT(date_publish) as date_publish
                     FROM clinic c
                     WHERE c.is_region = 1';
 
-			if($city_id)
-			{
-				$sql .= ' AND c.city_id = ' . $city_id;
-			}
+    if ($city_id) {
+      $sql .= ' AND c.city_id = ' . $city_id;
+    }
 
-			$sql .= ' AND c.date_publish IS NOT NULL
+    $sql .= ' AND c.date_publish IS NOT NULL
                     ORDER BY date_publish DESC';
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            $result = array();
+    $result = array();
 
-			if($data)
-			{
-                foreach($data as $row)
-                {
-					if($row['date_publish'])
-					{
-                        $result[] = $row['date_publish'];
-                }
-				}
-			}
-
-            return $result;
+    if ($data) {
+      foreach ($data as $row) {
+        if ($row['date_publish']) {
+          $result[] = $row['date_publish'];
         }
+      }
+    }
 
-        public function getDistinctPublishDatesByUserIdAndCityId($user_id, $city_id)
-        {
-            $sql = 'SELECT DISTINCT(date_publish) as date_publish
+    return $result;
+  }
+
+  public function getDistinctPublishDatesByUserIdAndCityId($user_id, $city_id)
+  {
+    $sql = 'SELECT DISTINCT(date_publish) as date_publish
                     FROM clinic c
                     INNER JOIN clinic_to_user c2u ON c2u.clinic_id = c.id
                     WHERE c2u.user_id = ' . (int)$user_id . '
                     AND c.is_region = 1';
 
-			if($city_id)
-			{
-				$sql .= ' AND c.city_id = ' . $city_id;
-			}
+    if ($city_id) {
+      $sql .= ' AND c.city_id = ' . $city_id;
+    }
 
-			$sql .= ' AND c.date_publish IS NOT NULL
+    $sql .= ' AND c.date_publish IS NOT NULL
                     ORDER BY date_publish DESC';
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            $result = array();
+    $result = array();
 
-			if($data)
-			{
-                foreach($data as $row)
-                {
-					if($row['date_publish'])
-					{
-                        $result[] = $row['date_publish'];
-                }
-				}
-			}
-
-            return $result;
+    if ($data) {
+      foreach ($data as $row) {
+        if ($row['date_publish']) {
+          $result[] = $row['date_publish'];
         }
+      }
+    }
 
-		/**
-		 * @param $yandex_url
-		 *
-		 * @return ClinicModel
-		 */
-		public function getOneByYandexUrl($yandex_url)
-		{
-			$data = $this->orm_model->select()->where('yandex_url = ?', $yandex_url)->fetchOne();
+    return $result;
+  }
 
-			return $this->initOne($data);
-		}
+  /**
+   * @param $yandex_url
+   *
+   * @return ClinicModel
+   */
+  public function getOneByYandexUrl($yandex_url)
+  {
+    $data = $this->orm_model->select()->where('yandex_url = ?', $yandex_url)->fetchOne();
 
-        public function getListByNameOrAddress($query)
-        {
-			$query = '%' . $query . '%';
+    return $this->initOne($data);
+  }
 
-            $sql = 'SELECT clinic.*
+  public function getListByNameOrAddress($query)
+  {
+    $query = '%' . $query . '%';
+
+    $sql = 'SELECT clinic.*
                     FROM clinic
                     INNER JOIN city ON clinic.city_id = city.id
                     WHERE clinic.name LIKE "' . $query . '"
                         OR address LIKE "' . $query . '"
                         OR city.name LIKE "' . $query . '"';
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (isset($data)) ? $this->initList($data) : array();
-        }
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-        // Для добавления в регистратуре специализаций всем врачам, не только активным
-        public function getAllByDoctorId($doctor_id)
-        {
-            $sql = 'SELECT DISTINCT c.*
+  // Для добавления в регистратуре специализаций всем врачам, не только активным
+  public function getAllByDoctorId($doctor_id)
+  {
+    $sql = 'SELECT DISTINCT c.*
                     FROM `' . $this->table_name . '` c
                     LEFT JOIN doctor_to_clinic dtc  ON dtc.clinic_id = c.id
                     WHERE dtc.doctor_id = ' . (int)$doctor_id;
 
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return (isset($data)) ? $this->initList($data) : array();
-	    }
+    return (isset($data)) ? $this->initList($data) : array();
+  }
 
-        /**
-         * Метод необходим для получения географических границ, в которых расположены объекты
-         *
-         * @param Address
-         */
-        public function getBoundsByAddress(Address $address)
-        {
-            $sql = 'SELECT  MIN(c.latitude) as min_latitude,
+  /**
+   * Метод необходим для получения географических границ, в которых расположены объекты
+   *
+   * @param Address
+   */
+  public function getBoundsByAddress(Address $address)
+  {
+    $sql = 'SELECT  MIN(c.latitude) as min_latitude,
                             MAX(c.latitude) as max_latitude,
                             MIN(c.longitude) as min_longitude,
                             MAX(c.longitude) as max_longitude
                     FROM clinic c';
-			
-        	if($address->metro_station_id) {
-                $sql .= ' WHERE c.metro_station_id = '.(int)$address->metro_station_id;
-            }
-            elseif($address->street_id)
-            {
-                $sql .= ' WHERE c.street_id = '.(int)$address->street_id;
-            } elseif($address->region_id) {
-                $sql .= ' WHERE c.region_id = '.(int)$address->region_id;
-            } elseif($address->district_id) {
-                $sql .= ' INNER JOIN region r ON c.region_id = r.id
-                          WHERE r.district_id = '.(int)$address->district_id;
-	        }
 
-            $sql .= ' AND c.is_active = 1';
+    if ($address->metro_station_id) {
+      $sql .= ' WHERE c.metro_station_id = ' . (int)$address->metro_station_id;
+    } elseif ($address->street_id) {
+      $sql .= ' WHERE c.street_id = ' . (int)$address->street_id;
+    } elseif ($address->region_id) {
+      $sql .= ' WHERE c.region_id = ' . (int)$address->region_id;
+    } elseif ($address->district_id) {
+      $sql .= ' INNER JOIN region r ON c.region_id = r.id
+                          WHERE r.district_id = ' . (int)$address->district_id;
+    }
 
-            $data = $this->db->query($sql);
+    $sql .= ' AND c.is_active = 1';
 
-            return $data[0];
-        }
+    $data = $this->db->query($sql);
 
-        /**
-         * Метод необходим для получения координатного окна, в котором располжены объекты
-         *
-         * @param GeoPoint $geo_point
-         * @param float $distance
-		 *
-		 * @return array
-         */
-        public function getBoundsByGeoPointAndDistance(GeoPoint $geo_point, $distance)
-        {
-            $search = new ElasticSearchClinicIndexControl();
+    return $data[0];
+  }
 
-            $clinics = $search->getListByGeoPointAndDistance($geo_point, $distance);
+  /**
+   * Метод необходим для получения координатного окна, в котором располжены объекты
+   *
+   * @param GeoPoint $geo_point
+   * @param float $distance
+   *
+   * @return array
+   */
+  public function getBoundsByGeoPointAndDistance(GeoPoint $geo_point, $distance)
+  {
+    $search = new ElasticSearchClinicIndexControl();
 
-            $i = 0;
-            while(!$clinics && ($i < 4))
-            {
-                $distance *= 4;
-                $clinics = $search->getListByGeoPointAndDistance($geo_point, $distance);
-                $i++;
-            }
+    $clinics = $search->getListByGeoPointAndDistance($geo_point, $distance);
 
-            $bounds = array();
-            $bounds['min_latitude'] = 10000;
-            $bounds['max_latitude'] = 0;
-            $bounds['min_longitude'] = 1000;
-            $bounds['max_longitude'] = 0;
+    $i = 0;
+    while (!$clinics && ($i < 4)) {
+      $distance *= 4;
+      $clinics = $search->getListByGeoPointAndDistance($geo_point, $distance);
+      $i++;
+    }
 
-            foreach($clinics as $clinic)
-            {
-                if($clinic['geo_point']['lat'] < $bounds['min_latitude'])
-                {
-                     $bounds['min_latitude'] = $clinic['geo_point']['lat'];
-                }
+    $bounds = array();
+    $bounds['min_latitude'] = 10000;
+    $bounds['max_latitude'] = 0;
+    $bounds['min_longitude'] = 1000;
+    $bounds['max_longitude'] = 0;
 
-                if($clinic['geo_point']['lon'] < $bounds['min_longitude'])
-                {
-                    $bounds['min_longitude'] = $clinic['geo_point']['lon'];
-                }
+    foreach ($clinics as $clinic) {
+      if ($clinic['geo_point']['lat'] < $bounds['min_latitude']) {
+        $bounds['min_latitude'] = $clinic['geo_point']['lat'];
+      }
 
-                if($clinic['geo_point']['lat'] > $bounds['max_latitude'])
-                {
-                    $bounds['max_latitude'] = $clinic['geo_point']['lat'];
-                }
+      if ($clinic['geo_point']['lon'] < $bounds['min_longitude']) {
+        $bounds['min_longitude'] = $clinic['geo_point']['lon'];
+      }
 
-                if($clinic['geo_point']['lon'] > $bounds['max_longitude'])
-                {
-                    $bounds['max_longitude'] = $clinic['geo_point']['lon'];
-                }
-            }
+      if ($clinic['geo_point']['lat'] > $bounds['max_latitude']) {
+        $bounds['max_latitude'] = $clinic['geo_point']['lat'];
+      }
 
-            return $bounds;
-        }
+      if ($clinic['geo_point']['lon'] > $bounds['max_longitude']) {
+        $bounds['max_longitude'] = $clinic['geo_point']['lon'];
+      }
+    }
 
-        public function getListByCityIdWithoutMetroStationId($city_id)
-        {
-            $sql = 'SELECT *
+    return $bounds;
+  }
+
+  public function getListByCityIdWithoutMetroStationId($city_id)
+  {
+    $sql = 'SELECT *
                     FROM clinic
-                    WHERE city_id = ' .(int)$city_id .'
+                    WHERE city_id = ' . (int)$city_id . '
                     AND is_active = 1
                     AND (metro_station_id = 0
                     OR metro_station_id IS NULL)';
-            $data = $this->db->query($sql);
+    $data = $this->db->query($sql);
 
-            return $this->initList($data);
-        }
+    return $this->initList($data);
+  }
 
-        public function getClinicRedirectList() {
-            $data = $this->orm_model->select()->where('redirect_list = 1')->fetchAll();
+  public function getClinicRedirectList()
+  {
+    $data = $this->orm_model->select()->where('redirect_list = 1')->fetchAll();
 
-            return $this->initList($data);
-        }
-	}
+    return $this->initList($data);
+  }
+}

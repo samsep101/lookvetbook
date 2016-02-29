@@ -21,7 +21,7 @@
 		var clinic_controller = new ClinicPageController('<?php echo $clinic->id?>', '<?php echo $clinic->latitude; ?>', '<?php echo $clinic->longitude; ?>', <?php echo (isset($landing_page) && !Acc::isAuthed()) ? false : true; ?>, <?php echo $already_registred_account; ?>,"<?php echo $_SERVER['REQUEST_URI']; ?>");
 		$('.btn-bookmark').click(function(){
 			clinic_controller.block_title = 'для добавления в закладки';
-			clinic_controller.block_over_textbox = 'Получите доступ ко всем возможностям Lookmedbook!';
+			clinic_controller.block_over_textbox = 'Получите доступ ко всем возможностям <?php echo SITE_NAME; ?>!';
 		});
 		clinic_controller.city_id = <?php echo $clinic->city_id; ?>;
 

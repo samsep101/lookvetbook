@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="doctor-card-preview">
-                <h2>Как это выглядит на LookMedBook</h2>
+                <h2>Как это выглядит на <?php echo SITE_NAME; ?></h2>
                 <?php $this->block('registry/clinic/blocks/card_big'); ?>
             </div>
             <?php echo ModerateCommentViewHelper::getView($entry_id, ModerateCommentTypeModel::CLINIC_AVATAR, $model->revision_number); ?>

@@ -1,5 +1,4 @@
 <?php
-define('SITE_NAME','');
 define('CONTACT_EMAIL','');
 define('OUTPUT_LANGUAGE','RUSSIAN');
 define('USE_SET_NAMES',1);
@@ -11,6 +10,8 @@ define('ADMIN_FOLDER', '/admin');
 define('MANAGE_FOLDER', '/registry/manage');
 define('REGISTRY_FOLDER', '/registry');
 define('SITE_URL', "http://lookmedbook.cyb");
+define('SITE_DOMAIN', "LookMedBook.cyb");
+define('SITE_NAME', "LookMedBook");
 define('SHOP_ENABLE', 1);
 define('RELEASE_NUMBER', 43);
 define('SITE_PHONE_CODE', '495');

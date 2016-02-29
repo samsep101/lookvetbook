@@ -353,8 +353,11 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
     $result_query->setFilter($filter_and);
     $result_query->setSize(1000);
 
-    $data = $this->getType()->search($result_query);
-
+    try {
+      $data = $this->getType()->search($result_query);
+    }catch(Exception $e) {
+      $data = [];
+    }
     $result = array();
     foreach ($data as $v) {
       /**

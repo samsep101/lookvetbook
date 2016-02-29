@@ -288,8 +288,7 @@ class Db
     return $data;
   }
 
-  public function escape($string)
-  {
+	public function escape($string) {
     return $this->connection->real_escape_string($string);
   }
 }

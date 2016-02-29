@@ -1,97 +1,96 @@
 <?php
-	class MemcacheHtmlCache implements IHtmlCache
-	{
-		/**
-		 * @var MemcacheFacade|MemcacheProfiler
-		 */
-		protected $memcache_api = null;
 
-		private $cache_id;
-		private $tags = array();
+class MemcacheHtmlCache implements IHtmlCache
+{
+  /**
+   * @var MemcacheFacade|MemcacheProfiler
+   */
+  protected $memcache_api = null;
 
-		private $enabled = 1;
+  private $cache_id;
+  private $tags = array();
 
-		public function __construct()
-		{
-			$this->memcache_api = MemcacheFacadeFactory::getService();
-		}
+  private $enabled = 1;
 
-		public function enable()
-		{
-			$this->enabled = 1;
-		}
+  public function __construct()
+  {
+    $this->memcache_api = MemcacheFacadeFactory::getService();
+  }
 
-		public function disable()
-		{
-			$this->enabled = 0;
-		}
+  public function enable()
+  {
+    $this->enabled = 1;
+  }
 
-		public function start($cache_id, $groups = array())
-		{
-			if (HTML_CACHE_ENABLE == 0)
-				return false;
+  public function disable()
+  {
+    $this->enabled = 0;
+  }
 
-			if(!$this->enabled)
-				return false;
+  public function start($cache_id, $groups = array())
+  {
+    if (HTML_CACHE_ENABLE == 0)
+      return false;
 
-			$tags = array();
+    if (!$this->enabled)
+      return false;
 
-			if(is_string($groups)){
-				$tags[] =  $groups;
-			} else {
-				$tags = $groups;
-			}
+    $tags = array();
 
-			$tags[] = 'site_cache';
+    if (is_string($groups)) {
+      $tags[] = $groups;
+    } else {
+      $tags = $groups;
+    }
 
-			$this->cache_id = $cache_id;
-			$this->tags = $tags;
+    $tags[] = 'site_cache';
 
-			if($data = $this->memcache_api->get($cache_id))
-			{
-				echo $data;
-				return true;
-			} else {
-				ob_start();
-				return false;
-			}
-		}
+    $this->cache_id = $cache_id;
+    $this->tags = $tags;
 
-		public function end()
-		{
-			if (HTML_CACHE_ENABLE == 0)
-				return false;
+    if ($data = $this->memcache_api->get($cache_id)) {
+      echo $data;
+      return true;
+    } else {
+      ob_start();
+      return false;
+    }
+  }
 
-			$content = ob_get_contents();
-			if($this->enabled)
-			{
-				$this->memcache_api->set($this->cache_id, $content, $this->tags);
-			}
-			ob_end_flush();
-		}
+  public function end()
+  {
+    if (HTML_CACHE_ENABLE == 0)
+      return false;
 
-		/**
-		 * @param $cache_id
-		 *
-		 * @return bool
-		 */
-		public function delete($cache_id)
-		{
-			$this->memcache_api->delete($cache_id);
-		}
+    $content = ob_get_contents();
+    if ($this->enabled) {
+      $this->memcache_api->set($this->cache_id, $content, $this->tags);
+    }
+    ob_end_flush();
+  }
 
-		/**
-		 * @param $tag
-		 *
-		 * @return bool
-		 */
-		public function deleteGroup($tag)
-		{
-			$this->memcache_api->deleteGroup($tag);
-		}
+  /**
+   * @param $cache_id
+   *
+   * @return bool
+   */
+  public function delete($cache_id)
+  {
+    $this->memcache_api->delete($cache_id);
+  }
 
-		public function clearAll()
-		{
-			$this->memcache_api->deleteGroup('site_cache');
-		}
-	}
+  /**
+   * @param $tag
+   *
+   * @return bool
+   */
+  public function deleteGroup($tag)
+  {
+    $this->memcache_api->deleteGroup($tag);
+  }
+
+  public function clearAll()
+  {
+    $this->memcache_api->deleteGroup('site_cache');
+  }
+}

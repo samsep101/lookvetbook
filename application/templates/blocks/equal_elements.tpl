@@ -38,7 +38,7 @@
         <div class="heading-line">
             <p>
                 <span>
-                    Сервис LookMedBook поможет записаться на прием в клинику online.
+                    Сервис <?php echo SITE_NAME; ?> поможет записаться на прием в клинику online.
                 </span>
             </p>
         </div>

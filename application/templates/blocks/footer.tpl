@@ -22,7 +22,7 @@
                 </ul>
             </div>
             <div class="footer-inner-bottom">
-                <section class="inner-bottom-copyright">&copy; &laquo;LookMedBook.ru&raquo;, 2014</section>
+                <section class="inner-bottom-copyright">&copy; &laquo;<?php echo SITE_DOMAIN; ?>&raquo;, <?php echo date('Y'); ?></section>
                 <a class="reg-link show_license" style="margin-left: 10px; font-size: 14px; color: #55BCC8; font-weight: 500;" href="javascript:void(0);">Пользовательское соглашение</a>
                 <ul class="inner-bottom-navigation">
                     <li><a class="help-link jsLinkHidingIndexing" data-link="/help">Помощь</a></li>

@@ -1,3 +1,8 @@
+.idea
+nbproject
+
+.htaccess
+
 /media/logs
 /media/maps
 /media/upload
@@ -12,17 +17,19 @@ media/vidal/
 
 application/templates/_bak.tar.gz
 application/config/site.cfg.php
+application/config/db.cfg.php
+application/config/memcache.cfg.php
+application/config/elasticsearch.cfg.php
 
 /cache
 /booking
 /data
-.idea
-nbproject
 _bak
 
 sitemaps
 sitemap.xml
 robots
 
+robots.txt
 
 

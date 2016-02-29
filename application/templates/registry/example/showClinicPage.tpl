@@ -3,7 +3,7 @@
         var clinic_controller = new ClinicPageController('<?php echo $clinic->id?>', '<?php echo $clinic->latitude; ?>', '<?php echo $clinic->longitude; ?>',null, null,"<?php echo $_SERVER['REQUEST_URI']; ?>");
         $('.btn-bookmark').click(function(){
             clinic_controller.block_title = 'для добавления в закладки';
-            clinic_controller.block_over_textbox = 'Получите доступ ко всем возможностям Lookmedbook!';
+            clinic_controller.block_over_textbox = 'Получите доступ ко всем возможностям <?php echo SITE_NAME; ?>!';
         });
         clinic_controller.init();
     });

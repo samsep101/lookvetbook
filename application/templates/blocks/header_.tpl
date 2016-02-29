@@ -22,8 +22,8 @@
 
 <header class="header">
     <div class="inner flo">
-        <a class="logo" href="<?php if($city->alias) { echo '/';} else echo SITE_URL.'/'; ?>" title="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – Lookmedbook">
-            <img class="main-logo" src="/media/images/main_logo.png" alt="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – Lookmedbook"/></a>
+        <a class="logo" href="<?php if($city->alias) { echo '/';} else echo SITE_URL.'/'; ?>" title="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>">
+            <img class="main-logo" src="/media/images/main_logo.png" alt="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>"/></a>
         <?php if (!isset($example_page)): ?>
             <nav>
 				<?php if (!$city || $city->hasDoctors() && $city) { ?>
@@ -34,7 +34,7 @@
                 	<a class="<?php echo (isset($menu_active) && $menu_active == 'clinic') ? 'active' : ''; ?> clinic-link" href="<?php if($city && $city->isUsed()) { echo '/clinic';} else echo SITE_URL.'/clinic'; ?>">Клиники</a>
 				<?php } ?>
 
-                    <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?>http://lookmedbook.ru/disease<?php } ?>">Заболевания</a>
+                    <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?><?php echo SITE_URL; ?>/disease<?php } ?>">Заболевания</a>
 
 
                 <?php /* if($city->getId() == 2) { ?>

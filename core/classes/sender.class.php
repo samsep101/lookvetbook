@@ -5,7 +5,7 @@
     {
 
         private $sourceEncoding = 'utf-8';
-        private $fromName = 'LookMedBook';
+        private $fromName = SITE_NAME;
 
 
         public function  __construct()

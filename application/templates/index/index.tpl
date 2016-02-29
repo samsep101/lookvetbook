@@ -55,7 +55,7 @@
             <p class="h-text">Online сервис записи к врачу и в клинику</p>
             <span class="abs abs1"><small>
                 Или используйте мобильное<br/>
-                приложение LookMedBook<br/>
+                приложение <?php echo SITE_NAME; ?><br/>
                 это удобно! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </small>
             </span>
             <a target="_blank" href="https://itunes.apple.com/ru/app/lookmedbook/id726213572">
@@ -112,7 +112,7 @@
             Вы представитель<span class="flo"></span> клиники или доктор?
         </p>
         <p class="l_txt">
-            LookMedBook — это лучший способ для того,<br/>
+            <?php echo SITE_NAME; ?> — это лучший способ для того,<br/>
             чтобы найти лучших пациентов и рассказать
             <span class="flo"></span>о себе.
             <br/><br/>

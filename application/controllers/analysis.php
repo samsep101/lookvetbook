@@ -12,8 +12,8 @@
 
             $this->view->load_map = TRUE;
 
-            $this->view->page_title = 'Найти лабораторию - «LookMedBook»';
-            $this->view->page_description = 'Найти лабораторию - вся информация обо всех известных заболеваниях на сервисе lookmedbook';
+            $this->view->page_title = 'Найти лабораторию - «'.SITE_NAME.'»';
+            $this->view->page_description = 'Найти лабораторию - вся информация обо всех известных заболеваниях на сервисе '.SITE_NAME.'';
 
             $this->view->canonical_link = '/analysis';
         }

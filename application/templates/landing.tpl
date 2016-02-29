@@ -72,8 +72,8 @@
     <?php endif; ?>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title><?php echo (isset($page_title)) ? $page_title : 'LookMedBook'; ?></title>
-    <meta name="description" content="<?php echo (isset($page_description)) ? $page_description : 'Lookmedbook - поиск врача и запись на прием, информация обо всех известных заболеваниях.'; ?>">
+    <title><?php echo (isset($page_title)) ? $page_title : SITE_NAME; ?></title>
+    <meta name="description" content="<?php echo (isset($page_description)) ? $page_description : SITE_NAME.' - поиск врача и запись на прием, информация обо всех известных заболеваниях.'; ?>">
     <link rel="icon" href="/media/images/favicon.ico" type="image/x-icon">
     <?php $this->block('blocks/head'); ?>
     <?php if (isset($home_page)):?>

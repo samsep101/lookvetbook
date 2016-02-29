@@ -106,7 +106,7 @@ class DoctorController extends BaseController
       $this->view->relations = $relations;
       unset($relations);
 
-      $this->view->page_title = 'Врач ' . mb_strtolower($doctor->specialties_names, 'utf-8') . ', ' . $doctor->full_name . ' - «LookMedBook»';
+      $this->view->page_title = 'Врач ' . mb_strtolower($doctor->specialties_names, 'utf-8') . ', ' . $doctor->full_name . ' - «'.SITE_NAME.'»';
 
       foreach ($doctor->clinics as $clinic) {
         foreach ($doctor->specialties as $specialty) {
@@ -424,8 +424,8 @@ class DoctorController extends BaseController
 
     $this->view->landing_page = $landing;
 
-    $this->view->page_title = 'Найти врача - «LookMedBook»';
-    $this->view->page_description = 'Найти врача - вся информация обо всех известных заболеваниях на сервисе lookmedbook';
+    $this->view->page_title = 'Найти врача - «'.SITE_NAME.'»';
+    $this->view->page_description = 'Найти врача - вся информация обо всех известных заболеваниях на сервисе '.SITE_NAME.'';
 
     $this->view->menu_active = 'doctor';
 

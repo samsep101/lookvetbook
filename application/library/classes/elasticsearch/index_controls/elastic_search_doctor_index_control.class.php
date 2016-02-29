@@ -177,7 +177,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
 
     if (!empty($criteria->ids) and count($criteria->ids)) {
       $filter_or = new Elastica\Filter\BoolOr();
-      foreach($criteria->ids as $_id) {
+      foreach ($criteria->ids as $_id) {
         $match = new \Elastica\Filter\Term();
         $match->setTerm('_id', $_id);
         $filter_or->addFilter($match);
@@ -188,7 +188,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
 
     if (!empty($criteria->ids_no) and count($criteria->ids_no)) {
       $filter_or = new Elastica\Filter\BoolOr();
-      foreach($criteria->ids_no as $_id) {
+      foreach ($criteria->ids_no as $_id) {
         $match = new \Elastica\Filter\Term();
         $match->setTerm('_id', $_id);
         $filter_no = new \Elastica\Filter\BoolNot($match);
@@ -196,8 +196,6 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
       }
       $filter_and->addFilter($filter_or);
     }
-
-
 
 
     if ($criteria->street_id && !$criteria->region_id) {

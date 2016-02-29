@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title><?php echo (isset($page_title)) ? $page_title : 'LookMedBook'; ?></title>
+        <title><?php echo (isset($page_title)) ? $page_title : SITE_NAME; ?></title>
 
         <script type="text/javascript" src="/media/js/jquery-1.8.3.min.js"></script>
         <script type="text/javascript" src="/media/js/jquery.jcarousel.min.js"></script>

@@ -6,7 +6,7 @@ class ServiceNotificationHelper
 	public static function emailNotification($text, $subject, $purpose = false)
 	{
         $headers = "Content-type: text/html; charset=utf-8 \r\n";
-        $headers .= "From: LookMedBook <no-reply@lookmedbook.ru>\r\n";
+        $headers .= 'From: '.SITE_NAME.' <no-reply@lookmedbook.ru>'."\r\n";
         $headers .= 'Reply-To: no-reply@lookmedbook.ru' . "\r\n" ;
         $headers .= 'X-Mailer: PHP/' . phpversion();
 

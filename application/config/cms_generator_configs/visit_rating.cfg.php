@@ -116,7 +116,7 @@
                 'is_clinic_advice' => 'Посоветует клинику друзьям?',
                 'doctor_review_text' => 'Отзыв о враче',
                 'clinic_review_text' => 'Отзыв о клинике',
-                'private_review_text' => 'Приватный отзыв для LookMedBook',
+                'private_review_text' => 'Приватный отзыв для '.SITE_NAME,
                 'is_confirmed' => 'Подтвержден',
 
             ),

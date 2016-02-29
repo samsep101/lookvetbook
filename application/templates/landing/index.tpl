@@ -18,7 +18,7 @@
 <div class="checkbox-header">
     <div class="landing-center">
         <div class="landing-h-text header-about">
-            LookMedBook - удобный сервис записи к врачу и в клинику
+            <?php echo SITE_NAME; ?> - удобный сервис записи к врачу и в клинику
         </div>
         <div class="landing-checkboxes">
             <div class="landing-checkbox">
@@ -156,7 +156,7 @@
 </div>
 <div class="white-review-block">
     <div class="landing-center">
-        <a class="landing-h-text" id="reviews"> Отзывы о  LookMedBook </a>
+        <a class="landing-h-text" id="reviews"> Отзывы о  <?php echo SITE_NAME; ?> </a>
         <div class="reviews-block">
             <div class="single-review">
                 <div class="author">
@@ -166,7 +166,7 @@
                 <div class="review-text">
                     <img class="review-triangle" alt="" src="/media/images/landing/review-triangle.png">
                     Оптимальный сервис для делового человека. Все очень быстро и просто. Сотрудники колл-центра чуткие и внимательные, а главное – терпеливые. И врача они ищут не просто хорошего, а именно для тебя.<br><br>
-                    Раньше приходилось обзванивать множество центров, чтобы просто попасть на прием к специалисту в удобное время. С LookMedBook это дело пяти минут. Теперь, когда надо к врачу, просто захожу на LookMedBook – и вопрос решен. Всем советую!
+                    Раньше приходилось обзванивать множество центров, чтобы просто попасть на прием к специалисту в удобное время. С <?php echo SITE_NAME; ?> это дело пяти минут. Теперь, когда надо к врачу, просто захожу на <?php echo SITE_NAME; ?> – и вопрос решен. Всем советую!
                 </div>
             </div>
             <div class="single-review">
@@ -176,7 +176,7 @@
                 </div>
                 <div class="review-text">
                     <img class="review-triangle" alt="" src="/media/images/landing/review-triangle.png">
-                    Мои друзья и я теперь знаем: если надо к врачу, то только через LookMedBook. Не раз пробовали и убедились, что это, во-первых, экономия времени, во-вторых - нервов. А, в-третьих, гарантия, что попадешь к тому специалисту, к которому хотел попасть.<br><br>
+                    Мои друзья и я теперь знаем: если надо к врачу, то только через <?php echo SITE_NAME; ?>. Не раз пробовали и убедились, что это, во-первых, экономия времени, во-вторых - нервов. А, в-третьих, гарантия, что попадешь к тому специалисту, к которому хотел попасть.<br><br>
                     Записаться проще простого, и специалисты колл-центра всегда выслушают, помогут с выбором врача. Здорово, что наконец-то появился такой нужный проект ДЛЯ ЛЮДЕЙ!
                 </div>
             </div>

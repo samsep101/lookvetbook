@@ -85,7 +85,7 @@ class ClinicController extends BaseController
       $this->view->purposes = $purposes;
 
       $clinic_metro = ($clinic->metro_station_name) ? ', метро ' . $clinic->metro_station_name : '';
-      $this->view->page_title = $clinic->name . ', ' . $clinic->city->name . $clinic_metro . ', ' . $clinic->address . ', отзывы, телефон, запись на прием - «LookMedBook»';
+      $this->view->page_title = $clinic->name . ', ' . $clinic->city->name . $clinic_metro . ', ' . $clinic->address . ', отзывы, телефон, запись на прием - «'.SITE_NAME.'»';
     }
 
     $spzn_id = $this->request('spzn_id', 0);
@@ -198,7 +198,7 @@ class ClinicController extends BaseController
     $this->view->load_map = TRUE;
 
     $this->view->page_title = $this->getClinicPageTitle($specialization);
-    $this->view->page_description = 'Найти клинику - вся информация обо всех известных заболеваниях на сервисе lookmedbook';
+    $this->view->page_description = 'Найти клинику - вся информация обо всех известных заболеваниях на сервисе '.SITE_NAME.'';
 
     $this->view->canonical_link = '/clinic';
     $this->view->page_type = 'clinic';
@@ -617,11 +617,11 @@ class ClinicController extends BaseController
     if (!is_integer($specialty)) {
       if (get_class($specialty) == 'ClinicServicesModel') {
         if ($specialty->plural_name) {
-          return 'Найти клинику оказывающую услугу "' . StringHelper::startProposalWord($specialty->plural_name) . '". Адреса и телефоны медицинских центров Москвы и других городов России - «LookMedBook»';
+          return 'Найти клинику оказывающую услугу "' . StringHelper::startProposalWord($specialty->plural_name) . '". Адреса и телефоны медицинских центров Москвы и других городов России - «'.SITE_NAME.'»';
         }
       } else if (get_class($specialty) == 'ClinicTypeModel') {
         if ($specialty->genitive_name) {
-          return 'Найти ' . $specialty->genitive_name . '. Адреса и телефоны медицинских центров Москвы и других городов России - «LookMedBook»';
+          return 'Найти ' . $specialty->genitive_name . '. Адреса и телефоны медицинских центров Москвы и других городов России - «'.SITE_NAME.'»';
         }
       }
     }
@@ -636,17 +636,17 @@ class ClinicController extends BaseController
       $adj = $specialization_manager->getAdjectiveNameBySpecialtyId($specialty_id);
 
       if ($adj) {
-        return StringHelper::startProposalWord($adj) . ' центры и клиники в Москве. Запись на прием онлайн, фото, цены, отзывы – Lookmedbook';
+        return StringHelper::startProposalWord($adj) . ' центры и клиники в Москве. Запись на прием онлайн, фото, цены, отзывы – '.SITE_NAME.'';
       }
     }
 
     if (is_object($specialty) && get_class($specialty) == 'SpecializationModel' && $specialty->id) {
       if ($specialty->adjective_name) {
-        return StringHelper::startProposalWord($specialty->adjective_name) . ' центры и клиники в Москве. Запись на прием онлайн, фото, цены, отзывы – Lookmedbook';
+        return StringHelper::startProposalWord($specialty->adjective_name) . ' центры и клиники в Москве. Запись на прием онлайн, фото, цены, отзывы – '.SITE_NAME.'';
       }
     }
 
-    return $this->view->page_title = 'Найти клинику. Адреса и телефоны медицинских центров Москвы и других городов России - «LookMedBook»';
+    return $this->view->page_title = 'Найти клинику. Адреса и телефоны медицинских центров Москвы и других городов России - «'.SITE_NAME.'»';
   }
 
   private function getLandingPageItem($landing_page_alias)

@@ -1,265 +1,259 @@
 <?php
 
-	abstract class ElasticSearchModelIndexControl implements IElasticSearchModelIndexControl
-	{
-		/**
-		 * @var IElasticSearchObjectFactory
-		 */
-		protected $object_factory;
+abstract class ElasticSearchModelIndexControl implements IElasticSearchModelIndexControl
+{
+  /**
+   * @var IElasticSearchObjectFactory
+   */
+  protected $object_factory;
 
-		protected $elastica_api;
-
-
-		protected $total_hits;
-
-		protected static $need_to_get_total_hits = false;
-
-		public static function setNeedToGetTotalHits($value)
-		{
-			self::$need_to_get_total_hits = (bool)$value;
-		}
-
-		/**
-		 * @var IElasticSearchIndexControl
-		 */
-		protected $index_manager;
-
-		/**
-		 * @return \Elastica\Index
-		 */
-		protected function getIndex()
-		{
-			return $this->getIndexManager()->getIndex(Register::get('ELASTIC_SEARCH_INDEX'));
-		}
-
-		protected function getIndexManager()
-		{
-			if(!$this->index_manager)
-			{
-				$this->index_manager = new ElasticSearchIndexControl();
-			}
-
-			return $this->index_manager;
-		}
-
-		/**
-		 * Получение типа, с которым работает данный менеджер
-		 *
-		 * @return \Elastica\Type
-		 */
-		abstract protected function getType();
-
-		/**
-		 * @return IElasticSearchObjectFactory
-		 */
-		public function getObjectFactory()
-		{
-			return $this->object_factory;
-		}
-
-		/**
-		 * @return mixed
-		 */
-		public function getTotalHits()
-		{
-			return $this->total_hits;
-		}
-
-		/**
-		 * @return \Elastica\Client
-		 */
-		public function getElasticaApi()
-		{
-			if(!$this->elastica_api)
-			{
-				$this->elastica_api = ElasticaFactory::getApi();
-			}
-
-			return $this->elastica_api;
-		}
-
-		/**
-		 * Добавляет либо обновляет документы, которые необходимо проиндексировать
-		 *
-		 * @param array $documents
-		 *
-		 * @return mixed
-		 */
-		public function addDocuments(array $documents)
-		{
-			$result = array();
-			$formatter = $this->getObjectFactory()->getFormatter();
-
-			foreach($documents as $document)
-			{
-				$result[] = $formatter->toElasticSearchView($document);
-			}
-
-			$this->getType()->addDocuments($result);
-
-			$this->getIndex()->refresh();
-
-			return true;
-		}
-
-		/**
-		 * Добавляет в индекс один документ
-		 *
-		 * @param DynamicModel $document
-		 *
-		 * @return mixed
-		 */
-		public function addDocument(DynamicModel $document)
-		{
-			$result = $this->getObjectFactory()->getFormatter()->toElasticSearchView($document);
-
-			$this->getType()->addDocument($result);
-		}
-
-		/**
-		 * Очищает индекс документов
-		 *
-		 * @return bool
-		 */
-		public function clearIndex()
-		{
-			$this->getType()->delete();
-		}
+  protected $elastica_api;
 
 
-		public function getTotalCount(ModelSearchCriteria $criteria)
-		{
-			$result_query = $this->buildQueryObject($criteria);
-			return $this->getType()->count($result_query);
-		}
+  protected $total_hits;
 
-		/**
-		 * Поиск данных согласно критериям поиска
-		 *
-		 * @param ModelSearchCriteria $criteria
-		 *
-		 * @return mixed
-		 */
-		public function search(ModelSearchCriteria $criteria)
-		{
-			$result_query = $this->buildQueryObject($criteria);
+  protected static $need_to_get_total_hits = false;
 
-			$data = $this->getType()->search($result_query);
+  public static function setNeedToGetTotalHits($value)
+  {
+    self::$need_to_get_total_hits = (bool)$value;
+  }
 
-			if(Environment::get('get_total_count'))
-			{
-				$this->total_hits = $this->getType()->count($result_query);
-			}
+  /**
+   * @var IElasticSearchIndexControl
+   */
+  protected $index_manager;
 
-			$result = array();
-			foreach($data as $v)
-			{
-				/**
-				 * @var \Elastica\Result $v
-				 */
-				$result[] = $v->getId();
-			}
+  /**
+   * @return \Elastica\Index
+   */
+  protected function getIndex()
+  {
+    return $this->getIndexManager()->getIndex(Register::get('ELASTIC_SEARCH_INDEX'));
+  }
 
-			return $result;
-		}
+  protected function getIndexManager()
+  {
+    if (!$this->index_manager) {
+      $this->index_manager = new ElasticSearchIndexControl();
+    }
 
-		/**
-		 * Построение объекта запроса по критериям поиска
-		 *
-		 * @param ModelSearchCriteria $criteria
-		 *
-		 * @return mixed
-		 */
-		abstract protected function buildQueryObject(ModelSearchCriteria $criteria);
+    return $this->index_manager;
+  }
 
-		protected function addPaging(ModelSearchCriteria $criteria, \Elastica\Query $query)
-		{
-			if($criteria->page && $criteria->by_page)
-			{
-				$size = $criteria->by_page;
+  /**
+   * Получение типа, с которым работает данный менеджер
+   *
+   * @return \Elastica\Type
+   */
+  abstract protected function getType();
 
-				if($criteria->get_extra_item)
-				{
-					$query->setSize($size + 1);
-				}
-				else
-				{
-					$query->setSize($size);
-				}
+  /**
+   * @return IElasticSearchObjectFactory
+   */
+  public function getObjectFactory()
+  {
+    return $this->object_factory;
+  }
 
-				$query->setFrom(($criteria->page - 1) * $criteria->by_page);
-			}
-			else
-			{
-				$query->setSize(10000);
-				$query->setFrom(0);
-			}
-		}
+  /**
+   * @return mixed
+   */
+  public function getTotalHits()
+  {
+    return $this->total_hits;
+  }
 
-		/**
-		 * Добавление мэппинга
-		 *
-		 * @return mixed
-		 */
-		public function applyMapping()
-		{
-			$type = $this->getType();
+  /**
+   * @return \Elastica\Client
+   */
+  public function getElasticaApi()
+  {
+    if (!$this->elastica_api) {
+      $this->elastica_api = ElasticaFactory::getApi();
+    }
 
-			$mapping = new \Elastica\Type\Mapping();
-			$mapping->setType($type);
-			$mapping->setParam('index_analyzer', 'indexAnalyzer');
-			$mapping->setParam('search_analyzer', 'searchAnalyzer');
+    return $this->elastica_api;
+  }
 
-			$mapping->setParam('_boost', array('name' => '_boost', 'nullvalue' => '1.0'));
+  /**
+   * Добавляет либо обновляет документы, которые необходимо проиндексировать
+   *
+   * @param array $documents
+   *
+   * @return mixed
+   */
+  public function addDocuments(array $documents)
+  {
+    $result = array();
+    $formatter = $this->getObjectFactory()->getFormatter();
 
-			$mapper = $this->getObjectFactory()->getMapper();
-			$mapping->setProperties($mapper->getFieldsMapping());
+    foreach ($documents as $document) {
+      $result[] = $formatter->toElasticSearchView($document);
+    }
 
-			$mapping->send();
-		}
+    $this->getType()->addDocuments($result);
+
+    $this->getIndex()->refresh();
+
+    return true;
+  }
+
+  /**
+   * Добавляет в индекс один документ
+   *
+   * @param DynamicModel $document
+   *
+   * @return mixed
+   */
+  public function addDocument(DynamicModel $document)
+  {
+    $result = $this->getObjectFactory()->getFormatter()->toElasticSearchView($document);
+
+    $this->getType()->addDocument($result);
+  }
+
+  /**
+   * Очищает индекс документов
+   *
+   * @return bool
+   */
+  public function clearIndex()
+  {
+    $this->getType()->delete();
+  }
 
 
-		/**
-		 * Удаление документа по идентификатору
-		 *
-		 * @param $id
-		 *
-		 * @return bool
-		 */
-		public function deleteById($id)
-		{
-			$this->getType()->deleteById($id);
+  public function getTotalCount(ModelSearchCriteria $criteria)
+  {
+    $result_query = $this->buildQueryObject($criteria);
 
-			return true;
-		}
+    try {
+      $cnt = $this->getType()->count($result_query);
+    } catch (Exception $e) {
+      $cnt = 0;
+    }
+    return $cnt;
+  }
 
-		/**
-		 * Удаление списка документов
-		 *
-		 * @param array $ids
-		 *
-		 * @return mixed
-		 */
-		public function deleteByIds(array $ids)
-		{
-			$this->getType()->deleteIds($ids);
-		}
+  /**
+   * Поиск данных согласно критериям поиска
+   *
+   * @param ModelSearchCriteria $criteria
+   *
+   * @return mixed
+   */
+  public function search(ModelSearchCriteria $criteria)
+  {
+    $result_query = $this->buildQueryObject($criteria);
 
-		public function getDocumentsIds()
-		{
-			$result_query = new \Elastica\Query();
-			$result_query->setSize(500000);
-			$result_query->setFields(array('id'));
+    $data = $this->getType()->search($result_query);
 
-			$data =  $this->getType()->search($result_query);
+    if (Environment::get('get_total_count')) {
+      $this->total_hits = $this->getType()->count($result_query);
+    }
 
-			$result = array();
-			foreach($data as $v)
-			{
-				$result[] = $v->getId();
-			}
+    $result = array();
+    foreach ($data as $v) {
+      /**
+       * @var \Elastica\Result $v
+       */
+      $result[] = $v->getId();
+    }
 
-			return $result;
-		}
+    return $result;
+  }
 
-	}
+  /**
+   * Построение объекта запроса по критериям поиска
+   *
+   * @param ModelSearchCriteria $criteria
+   *
+   * @return mixed
+   */
+  abstract protected function buildQueryObject(ModelSearchCriteria $criteria);
+
+  protected function addPaging(ModelSearchCriteria $criteria, \Elastica\Query $query)
+  {
+    if ($criteria->page && $criteria->by_page) {
+      $size = $criteria->by_page;
+
+      if ($criteria->get_extra_item) {
+        $query->setSize($size + 1);
+      } else {
+        $query->setSize($size);
+      }
+
+      $query->setFrom(($criteria->page - 1) * $criteria->by_page);
+    } else {
+      $query->setSize(10000);
+      $query->setFrom(0);
+    }
+  }
+
+  /**
+   * Добавление мэппинга
+   *
+   * @return mixed
+   */
+  public function applyMapping()
+  {
+    $type = $this->getType();
+
+    $mapping = new \Elastica\Type\Mapping();
+    $mapping->setType($type);
+    $mapping->setParam('index_analyzer', 'indexAnalyzer');
+    $mapping->setParam('search_analyzer', 'searchAnalyzer');
+
+    $mapping->setParam('_boost', array('name' => '_boost', 'nullvalue' => '1.0'));
+
+    $mapper = $this->getObjectFactory()->getMapper();
+    $mapping->setProperties($mapper->getFieldsMapping());
+
+    $mapping->send();
+  }
+
+
+  /**
+   * Удаление документа по идентификатору
+   *
+   * @param $id
+   *
+   * @return bool
+   */
+  public function deleteById($id)
+  {
+    $this->getType()->deleteById($id);
+
+    return true;
+  }
+
+  /**
+   * Удаление списка документов
+   *
+   * @param array $ids
+   *
+   * @return mixed
+   */
+  public function deleteByIds(array $ids)
+  {
+    $this->getType()->deleteIds($ids);
+  }
+
+  public function getDocumentsIds()
+  {
+    $result_query = new \Elastica\Query();
+    $result_query->setSize(500000);
+    $result_query->setFields(array('id'));
+
+    $data = $this->getType()->search($result_query);
+
+    $result = array();
+    foreach ($data as $v) {
+      $result[] = $v->getId();
+    }
+
+    return $result;
+  }
+
+}

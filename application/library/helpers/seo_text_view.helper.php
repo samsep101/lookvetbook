@@ -163,12 +163,12 @@
 		{
             $html = '';
             if($specialty && !$defaultTitle) {
-                if($hideAddress) $html = 'Лучшие ' . $specialty->plural_name . ' ' . SeoTextViewHelper::getAddressObjectNamePagesForTop($address_object) . '. Найти хорошего ' . $specialty->genitive_name . ' ' . SeoTextViewHelper::getAddressObjectOnlyName($address_object) . ', запись на прием онлайн, рейтинг, отзывы – Lookmedbook';
-                else $html = self::getH1($specialty, $address_object).' | Выбор хорошего '.$specialty->genitive_name.' '.SeoTextViewHelper::getAddressObjectName($address_object).', отзывы, рейтинг и запись на прием на Lookmedbook.';
+                if($hideAddress) $html = 'Лучшие ' . $specialty->plural_name . ' ' . SeoTextViewHelper::getAddressObjectNamePagesForTop($address_object) . '. Найти хорошего ' . $specialty->genitive_name . ' ' . SeoTextViewHelper::getAddressObjectOnlyName($address_object) . ', запись на прием онлайн, рейтинг, отзывы – '.SITE_NAME;
+                else $html = self::getH1($specialty, $address_object).' | Выбор хорошего '.$specialty->genitive_name.' '.SeoTextViewHelper::getAddressObjectName($address_object).', отзывы, рейтинг и запись на прием на '.SITE_NAME.'.';
             } elseif($address_object) {
-                $html = 'Найти хорошего врача '.SeoTextViewHelper::getAddressObjectName($address_object) . ' онлайн. Поиск врачей по всем специальностям, отзывы, рейтинг, запись на прием – Lookmedbook';
+                $html = 'Найти хорошего врача '.SeoTextViewHelper::getAddressObjectName($address_object) . ' онлайн. Поиск врачей по всем специальностям, отзывы, рейтинг, запись на прием – '.SITE_NAME;
             } else {
-                $html = 'Найти хорошего врача в Москве онлайн. Поиск врачей по всем специальностям, отзывы, рейтинг, запись на прием – Lookmedbook';
+                $html = 'Найти хорошего врача в Москве онлайн. Поиск врачей по всем специальностям, отзывы, рейтинг, запись на прием – '.SITE_NAME;
             }
 
 			return $html;
@@ -178,10 +178,10 @@
 		public static function getDescription($specialty, $address_object)
 		{
             if($specialty) {
-                $html = 'Сервис Lookmedbook поможет выбрать хорошего '.$specialty->genitive_name.' '.SeoTextViewHelper::getAddressObjectName($address_object).'
+                $html = 'Сервис '.SITE_NAME.' поможет выбрать хорошего '.$specialty->genitive_name.' '.SeoTextViewHelper::getAddressObjectName($address_object).'
 			по отзывам клиентов, узнать стоимость приема врачей и посмотреть их фото.';
             } else {
-                $html = 'Сервис Lookmedbook поможет выбрать хорошего врача '.SeoTextViewHelper::getAddressObjectName($address_object).'
+                $html = 'Сервис '.SITE_NAME.' поможет выбрать хорошего врача '.SeoTextViewHelper::getAddressObjectName($address_object).'
 			по отзывам клиентов, узнать стоимость приема врачей и посмотреть их фото.';
             }
 

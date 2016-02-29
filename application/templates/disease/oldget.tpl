@@ -236,7 +236,7 @@ else
             <?php if (!Acc::isAuthed()): ?>
             <div class="info-box we-good">
                 <img src="/media/images/owl-face-pic.png">
-                <h3>О LookMedBook</h3>
+                <h3>О <?php echo SITE_NAME; ?></h3>
                 <ul class="list">
                     <li><p>Находи врачей и записывайся на прием online</p></li>
                     <li><p>Читай о заболеваниях на твоем языке</p></li>

@@ -180,14 +180,14 @@
     m.parentNode.insertBefore(a, m)
     })
     (window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    ga('create', '<?php echo AnalyticCounterHelper::getCounterIdByCityIdAndCounterTypeId($city->getId(), AnalyticCounterTypeModel::GOOGLE_COUNTER); ?>', 'lookmedbook.ru');
+    ga('create', '<?php echo AnalyticCounterHelper::getCounterIdByCityIdAndCounterTypeId(empty($city)?'':$city->getId(), AnalyticCounterTypeModel::GOOGLE_COUNTER); ?>', '<?php echo strtolower(SITE_DOMAIN);?>');
 
     ga('send', 'pageview');
     </script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title><?php echo (isset($page_title)) ? $page_title : 'LookMedBook'; ?></title>
-    <meta name="description" content="<?php echo (isset($page_description)) ? $page_description : 'Lookmedbook - поиск врача и запись на прием, информация обо всех известных заболеваниях.'; ?>">
+    <title><?php echo (isset($page_title)) ? $page_title : SITE_NAME; ?></title>
+    <meta name="description" content="<?php echo (isset($page_description)) ? $page_description : ''.SITE_NAME.' - поиск врача и запись на прием, информация обо всех известных заболеваниях.'; ?>">
     <link rel="icon" href="/media/images/favicon.ico" type="image/x-icon">
     <?php $this->block('blocks/head'); ?>
     <?php if (isset($home_page)):?>
@@ -252,8 +252,8 @@
 <?php else: ?>
     <div id="wrapper" class="wrap">
         <div id="header">
-            <a class="logo" href="<?php if($city->alias) { echo '/';} else echo SITE_URL.'/'; ?>" title="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – Lookmedbook">
-            	<img src="/media/images/home_page/header.png" alt="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – Lookmedbook" class="main-logo-big"/>
+            <a class="logo" href="<?php if($city->alias) { echo '/';} else echo SITE_URL.'/'; ?>" title="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>">
+            	<img src="/media/images/home_page/header.png" alt="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>" class="main-logo-big"/>
             </a>
             <div class="sp-links left-links">
                 <nav>
@@ -264,7 +264,7 @@
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'clinic') ? 'active' : ''; ?> clinic-link" href="/clinic">Клиники</a>
                     <?php } ?>
 
-                        <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?>http://lookmedbook.ru/disease<?php } ?>">Заболевания</a>
+                        <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?><?php echo strtolower(SITE_URL);?>/disease<?php } ?>">Заболевания</a>
                         <a class="" href="http://swiss.lookmedbook.ru/">Лечение в Швейцарии</a>
 
                     <?php /*if($city->is_has_laboratories) { ?>
@@ -324,7 +324,7 @@
 			</div>
 
             <div class="thisiscenter">
-                <h1>LookMedBook - это online сервис записи к врачу и в клинику</h1>
+                <h1><?php echo SITE_NAME; ?> - это online сервис записи к врачу и в клинику</h1>
                 <ul class="list-about">
                     <li>
                         <img src="/media/images/home_page/thisis-li1.png"/>
@@ -352,7 +352,7 @@
                 </ul>
                 <div class="h-txt h-txt-blue">
                 <span>
-                Пользуясь LookMedBook,<br/>
+                Пользуясь <?php echo SITE_NAME; ?>,<br/>
                 Вы получаете настоящий сервис!</span>
                     <a class="btn-1 btn-doctor" href="/doctor">Найти врача</a>
                 </div>

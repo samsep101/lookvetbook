@@ -15,7 +15,7 @@
 
 <div class="inner-3 about_us flo">
     <h1>О проекте</h1>
-    <h2>LookMedBook – это бесплатный интернет-сервис, помогающий людям организовать свое здоровье.</h2>
+    <h2><?php echo SITE_NAME; ?> – это бесплатный интернет-сервис, помогающий людям организовать свое здоровье.</h2>
 </div>
 
 <div class="about_us">
@@ -36,7 +36,7 @@
 
     <div class="owl">
         <p>Органайзер здоровья</p>
-        <p class="bottom">LookMedBook</p>
+        <p class="bottom"><?php echo SITE_NAME; ?></p>
     </div>
 
     <div class="white_bl white_bl-r">

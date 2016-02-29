@@ -68,6 +68,7 @@
                     WHERE vr.clinic_id = ' . $clinic_id . '
                         AND vr.is_confirmed = 1
                         AND vr.clinic_review_text IS NOT NULL
+					order by `dt` desc
                     LIMIT ' . $page . ', ' . $by_page . '; ';
 
 			$data = $db->query($sql);

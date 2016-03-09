@@ -77,7 +77,7 @@
     <link rel="icon" href="/media/images/favicon.ico" type="image/x-icon">
     <?php $this->block('blocks/head'); ?>
     <?php if (isset($home_page)):?>
-    <link rel="stylesheet" href="/media/css/home_page/style.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/home_style.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />
     <!--[if lt IE 8]>
     <link rel="stylesheet" href="/media/css/home_page/ie/ie-7.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />
     <![endif]-->

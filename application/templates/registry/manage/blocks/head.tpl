@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/media/css/styles.css?<?php echo RELEASE_NUMBER?>"/>
-<link rel="stylesheet" href="/media/css/my.css?<?php echo RELEASE_NUMBER?>"/>
+<link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/styles.css?<?php echo RELEASE_NUMBER?>"/>
+<link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/my.css?<?php echo RELEASE_NUMBER?>"/>
 <link rel="stylesheet" href="/media/css/admin/tree.css?<?php echo RELEASE_NUMBER?>"/>
 <link rel="stylesheet" href="/media/css/lookmedregistry/new_styles.css?<?php echo RELEASE_NUMBER?>"/>
 

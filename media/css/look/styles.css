@@ -2708,7 +2708,7 @@ ul.list-2 {
 
 ul.list-2 li {
     padding-left  : 28px;
-    background    : url(../images/bullit-type-3.png) no-repeat 0 7px;
+    background    : url(/media/images/bullit-type-3.png) no-repeat 0 7px;
     margin-bottom : 6px;
 }
 
@@ -9612,7 +9612,7 @@ a.d-pink-btn {
 	overflow: hidden;
 }
 #ban_wikimed .wiki_logo {
-	background: url(../images/banners/wikimed.png) left bottom no-repeat;
+	background: url(/media/images/banners/wikimed.png) left bottom no-repeat;
 	height: 28px;
 	margin: 0 0 -15px -15px;
 }
@@ -9644,7 +9644,7 @@ a.d-pink-btn {
 }
 
 #priority_banner2{
-	background: url(../images/banners/prioritets2.jpg) left center no-repeat;
+	background: url(/media/images/banners/prioritets2.jpg) left center no-repeat;
 	height: 49px;
 	cursor: pointer;
 }
@@ -9653,7 +9653,7 @@ a.d-pink-btn {
 }
 
 #zatashi_roditelej{
-	background: url(../images/banners/zatashi_roditelej.gif) center center no-repeat;
+	background: url(/media/images/banners/zatashi_roditelej.gif) center center no-repeat;
 	height: 400px;
 	cursor: pointer;
 	margin-top: 20px;
@@ -9664,7 +9664,7 @@ a.d-pink-btn {
 }
 
 .gizn_lysym{
-	background: url('../images/banners/hair.png') center center no-repeat;
+	background: url('/media/images/banners/hair.png') center center no-repeat;
 	height: 400px;
 	margin: 20px 0;
 }
@@ -9675,11 +9675,11 @@ a.d-pink-btn {
 }
 
 .ortospy-banner {
-	background: url(../images/banners/ortospy.jpg?1) center center no-repeat;
+	background: url(/media/images/banners/ortospy.jpg?1) center center no-repeat;
 	height: 249px;
 }
 .ortospy-banner2 {
-	background: url(../images/banners/ortospy_small.jpg?1) center center no-repeat;
+	background: url(/media/images/banners/ortospy_small.jpg?1) center center no-repeat;
 	height: 76px;
 	cursor: pointer;
 }

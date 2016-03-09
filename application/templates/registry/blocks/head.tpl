@@ -1,9 +1,9 @@
 <script src="/media/js/jquery-1.8.3.min.js?<?php echo RELEASE_NUMBER?>"></script>
 <script type="text/javascript" src="/js/validation"></script>
 <link rel="stylesheet" href="/media/css/fonts.css?<?php echo RELEASE_NUMBER?>" type="text/css"/>
-<link rel="stylesheet" type="text/css" href="/media/css/styles.css?<?php echo RELEASE_NUMBER?>" />
+<link rel="stylesheet" type="text/css" href="/media/css/<?php echo CSS_DIR; ?>/styles.css?<?php echo RELEASE_NUMBER?>" />
 <link rel="stylesheet" type="text/css" href="/media/css/jquery.fancybox.css?<?php echo RELEASE_NUMBER?>"/>
-<link rel="stylesheet" type="text/css" href="/media/css/my.css?<?php echo RELEASE_NUMBER?>" />
+<link rel="stylesheet" type="text/css" href="/media/css/<?php echo CSS_DIR; ?>/my.css?<?php echo RELEASE_NUMBER?>" />
 <link rel="stylesheet" type="text/css" href="/media/css/chosen.min.css?<?php echo RELEASE_NUMBER?>" />
 
 <script type="text/javascript" src="/media/js/datepicker/js/datepicker.js?<?php echo RELEASE_NUMBER?>"></script>

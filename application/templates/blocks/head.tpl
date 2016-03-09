@@ -19,7 +19,7 @@
     <?php elseif(($city) && $city->name):  ?>
         <link rel="canonical" href="<?php echo SITE_URL.$_SERVER['REQUEST_URI']; ?>" />
     <?php endif; ?>
-<link rel="stylesheet" href="/media/css/styles.css?<?php echo filemtime(__DIR__.'/../../..//media/css/styles.css')?>" type="text/css"/>
+<link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/styles.css?<?php echo filemtime(__DIR__.'/../../../media/css/'.CSS_DIR.'/styles.css')?>" type="text/css"/>
 <link rel="stylesheet" href="/media/css/fonts.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
 <link rel="stylesheet" href="/media/css/chosen.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
 <link rel="stylesheet" href="/media/css/jquery.fancybox.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
@@ -80,7 +80,7 @@
 <?php $this->block('blocks/js-library'); ?>
 
 <!-- dev -->
-<link rel="stylesheet" href="/media/css/my.css?<?php echo RELEASE__NUMBER?>"/>
+<link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/my.css?<?php echo RELEASE__NUMBER?>"/>
 
 <script type="text/javascript" src="/media/js/inputmask/jquery.inputmask.js?<?php echo RELEASE__NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/inputmask/jquery.inputmask.numeric.extensions.js?<?php echo RELEASE__NUMBER?>"></script>
@@ -118,4 +118,4 @@
 <script type="text/javascript" src="/media/js/magazine_total_price.js?<?php echo RELEASE__NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/image_preview.js?<?php echo RELEASE__NUMBER?>"></script>
 
-<link rel="stylesheet" href="/media/css/styles-widget.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
+<link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/styles-widget.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>

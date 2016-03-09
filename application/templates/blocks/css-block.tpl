@@ -5,6 +5,6 @@
 -->
 <!-- stylesheets -->
 <link rel="stylesheet" type="text/css" href="/media/css/style.min.css" />
-<link rel="stylesheet" type="text/css" media="all" href="/media/css/my.css">
+<link rel="stylesheet" type="text/css" media="all" href="/media/css/<?php echo CSS_DIR; ?>/my.css">
 <link rel="stylesheet" type="text/css" media="all" href="/media/css/ymap.min.css">
 <!-- javascripts -->

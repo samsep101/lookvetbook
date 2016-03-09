@@ -434,7 +434,7 @@ citymaps-balloon-content-selected td {
 }
 
 ul.list-description li {
-    background    : url("../images/list_bull.gif") no-repeat scroll 0 10px transparent;
+    background    : url("/media/images/list_bull.gif") no-repeat scroll 0 10px transparent;
     margin-bottom : 6px;
     padding-left  : 28px;
 }
@@ -444,7 +444,7 @@ ul.list-description-2 {
 }
 
 ul.list-description-2 li {
-    background    : url("../images/bullit-type-3.png") no-repeat scroll 0 10px transparent;
+    background    : url("/media/images/bullit-type-3.png") no-repeat scroll 0 10px transparent;
     margin-bottom : 6px;
     padding-left  : 28px;
 }
@@ -1355,7 +1355,7 @@ span.error_span label {
     display     : block;
     padding     : 0 15px 0 10px;
     cursor      : pointer !important;
-    color       : #3992BE;
+    color       : #f48221;
     font-family : 'PF Agora Slab Pro Regular', 'PF Agora Slab Pro';
     font-size   : 14px;
     font-style  : normal;
@@ -6516,7 +6516,7 @@ a.btn-double-floor {
 }
 
 .in-middle-with-list ul.list-description li {
-    background    : url("../images/list_bull.gif") no-repeat scroll 0 6px rgba(0, 0, 0, 0);
+    background    : url("/media/images/list_bull.gif") no-repeat scroll 0 6px rgba(0, 0, 0, 0);
     margin-bottom : 6px;
     margin-left   : 20px;
     padding-left  : 15px;

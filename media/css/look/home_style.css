@@ -77,7 +77,7 @@ p {
 
 .clear {
   clear: both;
-  background: url("../../images/home_page/bg-whitebtm.jpg") repeat scroll left bottom transparent;  }
+  background: url("/media/images/home_page/bg-whitebtm.jpg") repeat scroll left bottom transparent;  }
 
 .clear-fix:after, #content:after {
   content: '.';
@@ -99,7 +99,7 @@ html {
 body {
   width: 100%;
   height: 100%;
-  background: url(../../images/home_page/back.jpg) left top; }
+  background: url(/media/images/home_page/back.jpg) left top; }
 
 a {
   color: blue;
@@ -133,7 +133,7 @@ input {
     min-width: 1000px;
     position: relative;
     z-index: 1;
-    background: url(../../images/home_page/back-top.png) left top repeat-x;
+    background: url(/media/images/home_page/back-top.png) left top repeat-x;
 }
 
 /* Middle
@@ -168,7 +168,7 @@ p.h-text {
 
 
 .email-container {
-  background: url(../../images/home_page/email.png) left top no-repeat;
+  background: url(/media/images/home_page/email.png) left top no-repeat;
   height: 58px;
   margin: 0 0 8px 0; }
   .email-container input {
@@ -185,7 +185,7 @@ p.h-text {
   height: 43px;
   border: none;
   padding-bottom: 5px;
-  background: url(../../images/home_page/reg-button.png) center center no-repeat transparent;
+  background: url(/media/images/home_page/reg-button.png) center center no-repeat transparent;
   cursor: pointer;
   font-family: 'pf_agora_slab_probold';
   text-decoration: none;
@@ -199,7 +199,7 @@ p.h-text {
   height: 43px;
   border: none;
   padding-bottom: 5px;
-  background: url(../../images/home_page/exit-button.png) center center no-repeat transparent;
+  background: url(/media/images/home_page/exit-button.png) center center no-repeat transparent;
   cursor: pointer;
   font-family: 'pf_agora_slab_probold';
   text-decoration: none;
@@ -258,7 +258,7 @@ p.h-text {
     height: 8px;
 }
 .footer-top-line {
-    background: url(../../images/home_page/footer.png) left top repeat-x;
+    background: url(/media/images/home_page/footer.png) left top repeat-x;
 }
 
 .inner-home {
@@ -291,48 +291,48 @@ p.h-text {
 
 /* quality learn-more socials-blocks team */
 .about_dis {
-    background: url("../../images/cloth_alike.png");
+    background: url("/media/images/cloth_alike.png");
     color: #3b3b3b;
     padding-bottom: 41px;
 }
 .about_dis .center {
     width: 1250px;
     margin: auto;
-    background: url(../../images/home_page/doctor.png) 145px 50% no-repeat;
+    background: url(/media/images/home_page/doctor.png) 145px 50% no-repeat;
 }
 
 .learn-more {
     min-height: 332px;
-    background: url(../../images/home_page/bg-top-learn.png) left top repeat-x, url(../../images/home_page/bg-learn.png) top left repeat;
-    *background: url(../../images/home_page/bg-learn.png) 0 0 repeat;
-    background: url(../../images/home_page/bg-learn.png) 0 0 repeat\0/;
+    background: url(/media/images/home_page/bg-top-learn.png) left top repeat-x, url(/media/images/home_page/bg-learn.png) top left repeat;
+    *background: url(/media/images/home_page/bg-learn.png) 0 0 repeat;
+    background: url(/media/images/home_page/bg-learn.png) 0 0 repeat\0/;
 }
 
 .learn-more.not-disease-about {
     min-height: 332px;
-    background: url(../../images/home_page/bg-learn.png) top left repeat;
-    *background: url(../../images/home_page/bg-learn.png) 0 0 repeat;
-    background: url(../../images/home_page/bg-learn.png) 0 0 repeat\0/;
+    background: url(/media/images/home_page/bg-learn.png) top left repeat;
+    *background: url(/media/images/home_page/bg-learn.png) 0 0 repeat;
+    background: url(/media/images/home_page/bg-learn.png) 0 0 repeat\0/;
 }
 .not-disease-about .wave-separator {
     position: absolute;
     width: 100%;
     height: 7px;
     margin: -7px 0 0;
-    background: url(../../images/home_page/bg-top-learn-no-top-bg.png) left top repeat-x;
+    background: url(/media/images/home_page/bg-top-learn-no-top-bg.png) left top repeat-x;
 }
 
 .line-shadow {
     height: 12px;
     position: relative;
     z-index: 0;
-    background: url(../../images/home_page/shadow-line.png) 50% 100% no-repeat;
+    background: url(/media/images/home_page/shadow-line.png) 50% 100% no-repeat;
 }
 
 .socials-blocks {
     width: 1000px;
     margin: 0 auto;
-    background: url("../../images/home_page/shadow-line-2.png") 50% 100% no-repeat;
+    background: url("/media/images/home_page/shadow-line-2.png") 50% 100% no-repeat;
     overflow: hidden;
 }
 .socials-blocks .fb, .socials-blocks .vk {
@@ -342,14 +342,14 @@ p.h-text {
     min-height: 300px;
 }
 .socials-blocks .fb {
-    background: url('../../images/home_page/social_fb.png') 0 50% no-repeat;
+    background: url('/media/images/home_page/social_fb.png') 0 50% no-repeat;
 }
 .socials-blocks .vk {
-    background: url('../../images/home_page/social_vk.png') 0 50% no-repeat;
+    background: url('/media/images/home_page/social_vk.png') 0 50% no-repeat;
 }
 
 .thisis {
-    background: url("../../images/home_page/bg-team.png");
+    background: url("/media/images/home_page/bg-team.png");
     margin: 0 0 -25px;
     padding-bottom: 40px;
     position: relative;
@@ -492,7 +492,7 @@ p.h-text {
 .about_dis .center {
     width: 1000px;
     margin: auto;
-    background: url(../../images/home_page/doctor.png) 13% 100% no-repeat;
+    background: url(/media/images/home_page/doctor.png) 13% 100% no-repeat;
 }
 
 .about_dis .h-txt {
@@ -519,7 +519,7 @@ p.h-text {
     min-height: 332px;
     margin: 0 auto;
     padding: 44px 0 15px 0;
-    background: url('../../images/home_page/learn-more.png') 95% 60% no-repeat;
+    background: url('/media/images/home_page/learn-more.png') 95% 60% no-repeat;
 }
 .learn-txt .h-txt {
     font: normal 30px/1 'pf_agora_slab_proregular';
@@ -536,7 +536,7 @@ p.h-text {
 }
 .learn-txt a {
     display: block;
-    background: url(../../images/home_page/learn-button.png) 0 0 no-repeat;
+    background: url(/media/images/home_page/learn-button.png) 0 0 no-repeat;
     width: 268px;
     height: 63px;
     line-height: 63px;
@@ -552,13 +552,13 @@ p.h-text {
     height: 40px;
     position: relative;
     z-index: 0;
-    background: url(../../images/home_page/bg-bottom-learn.png) left top repeat-x;
+    background: url(/media/images/home_page/bg-bottom-learn.png) left top repeat-x;
 }
 .line-shadow {
     height: 12px;
     position: relative;
     z-index: 0;
-    background: url(../../images/home_page/shadow-line.png) 50% 100% no-repeat;
+    background: url(/media/images/home_page/shadow-line.png) 50% 100% no-repeat;
 }
 
 .thisiscenter .h-txt,.thisiscenter h1 {
@@ -597,7 +597,7 @@ p.h-text {
 .thisiscenter .list-about li:first-child p {padding: 37px 25px 30px 47px;}
 
 .thisis .up_page, .specialties-groups-wrapper .up_page {
-    background: url('../../images/arrow_up.png') 0 0 no-repeat;
+    background: url('/media/images/arrow_up.png') 0 0 no-repeat;
     min-height: 16px;
     padding: 58px 0 0 48px;
     position: absolute;
@@ -617,7 +617,7 @@ p.h-text {
     background: #BFF08E;
     position: relative;
     overflow: hidden;
-    background: url(../../images/home_page/bg-blue-lines.png) top left repeat;
+    background: url(/media/images/home_page/bg-blue-lines.png) top left repeat;
 }
 
 
@@ -854,7 +854,7 @@ p.h-text {
 
 .specialties-groups-wrapper {
     position: relative;
-    background: url("../../images/cloth_alike.png") repeat scroll 0 0 transparent;
+    background: url("/media/images/cloth_alike.png") repeat scroll 0 0 transparent;
     margin: 0 0 -20px;
     padding: 0 0 20px;
 }

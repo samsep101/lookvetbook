@@ -70,10 +70,10 @@ class View extends Dynamic
     return $this->filter($html);
   }
 
-  public function block($templateName, $params = null)
-  {
-    if (debug == 1)
-      echo "<!--" . $templateName . "-->";
+        public function block($templateName, $params = null)
+        {
+            if (0 && debug == 1)
+                echo "<!--".$templateName."-->";
 
     extract($this->__values);
     if ($params)

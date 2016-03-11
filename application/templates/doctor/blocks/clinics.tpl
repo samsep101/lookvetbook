@@ -92,7 +92,7 @@
                 <?php $specialty_counter = 0;?>
                 <?php foreach ($doctor_clinic_specialties as $specialty):?>
 	                <?php if ($specialty_counter == 0) {?>
-<!--	                <p class="post"><?php echo $specialty->name; ?></p>-->
+	                <!--<p class="post"><?php echo $specialty->name; ?></p>-->
 	                <div class="scroll-pane flo">
 	                    <?php for($i = 1; $i <= 30; $i++): ?>
 	                    <ul class="time clinic-<?php echo $section_number-1; ?> specialty-<?php echo $specialty_counter; ?> dday-var active day-<?php echo date('Y-m-d', $time+($i-1)*86400); ?>">

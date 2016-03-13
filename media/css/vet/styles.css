@@ -681,7 +681,7 @@ h2 {
 .chekBox span, .chekBox-allTime span {
     width          : 23px;
     height         : 20px;
-    background     : url(/media/images/checkbox.png) no-repeat;
+    background     : url(/media/images/home_page/vet/checkbox.png) no-repeat;
     display        : inline-block;
     vertical-align : middle;
     margin         : -2px 9px 0 0;
@@ -694,7 +694,7 @@ h2 {
 .radioBox span {
     width          : 19px;
     height         : 19px;
-    background     : url(/media/images/radio.png) no-repeat;
+    background     : url(/media/images/home_page/vet/radio.png) no-repeat;
     display        : inline-block;
     vertical-align : middle;
     margin         : -2px 9px 0 0;
@@ -721,8 +721,9 @@ h2 {
 
 /* ___________header____________*/
 .header {
-    background : url(/media/images/header_background.png) repeat-x;
+    background : url(/media/images/header_background.png) left -7px repeat-x;
     position   : relative;
+    border-top: solid 5px #FE9A66;
 }
 
 .header .inner {
@@ -730,7 +731,7 @@ h2 {
     margin      : 0 auto;
     position    : relative;
     height      : 52px;
-    padding-top : 18px;
+    padding-top : 11px;
     z-index     : 30;
 }
 
@@ -999,6 +1000,13 @@ h2 {
 }
 #header .sp-links nav a {
     margin : 8px 15px 8px 0;
+}
+
+#header .logo img {
+    display: block;
+    background: url(/media/images/home_page/vet/header.png) center center no-repeat;
+    width: 140px;
+    height: 235px;
 }
 
 .popup-handling {
@@ -9694,3 +9702,17 @@ a.d-pink-btn {
 	font-weight: bold;
 }
 
+.footer .reg-link.show_license {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.footer a{
+    color: #f48221;
+}
+
+
+header .nav-table td.treatment-in-switz, header .nav-table td.lekarstva, .banner-treatment-in-switz  {
+    display: none;
+}

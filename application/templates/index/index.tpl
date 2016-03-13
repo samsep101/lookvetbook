@@ -124,7 +124,42 @@
     <div class="line-rgba"></div>
 </div>
 <div class="thisis">
-    <div class="line-shadow"></div>
+    <div class="line-shadow">
+    </div>
+    <div class="thisiscenter">
+        <h1><?php echo SITE_NAME; ?> - это online сервис записи к врачу и в клинику</h1>
+        <ul class="list-about">
+            <li>
+                <img class="thisis-li1" src="/media/images/blank.png"/>
+                <p>Наш сервис - это возможность
+                    для человека получить всю
+                    медицинскую информацию
+                    в одном месте
+                </p>
+            </li>
+            <li>
+                <img class="thisis-li2" src="/media/images/blank.png"/>
+                <p>Вы можете хранить историю своих визитов в личном кабинете, а также добавлять в избранное интересные Вам клиники и врачей
+                </p>
+            </li>
+            <li>
+                <img class="thisis-li3" src="/media/images/blank.png"/>
+                <p>Вы можете получать информацию о заболеваниях на доступном  языке, понятном для обычных людей
+                </p>
+            </li>
+            <li>
+                <img class="thisis-li4" src="/media/images/blank.png"/>
+                <p>Мы прилагаем все усилия, чтобы наши пациенты были здоровы и довольны. Нам всегда можно позвонить и задать любой вопрос, который волнует Вас
+                </p>
+            </li>
+        </ul>
+        <div class="h-txt h-txt-blue">
+                <span>
+                Пользуясь <?php echo SITE_NAME; ?>,<br/>
+                Вы получаете настоящий сервис!</span>
+            <a class="btn-1 btn-doctor" href="/doctor">Найти врача</a>
+        </div>
+    </div>
 </div>
 
 <?php echo $this->block('index/specialties_groups');?>

@@ -8,7 +8,7 @@
 <header class="header">
     <div class="inner flo">
         <a class="logo" href="<?php if($city->alias) { echo '/';} else echo SITE_URL.'/'; ?>">
-            <img class="main-logo" src="/media/images/main_logo.png" alt=""/></a>
+            <img class="main-logo" src="/media/images/blank.png" alt=""/></a>
 
         <div class="landing-header-links">
             <a href="#how-to-doctor">Запись в клинику</a>

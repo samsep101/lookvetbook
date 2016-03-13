@@ -753,6 +753,9 @@ header {
 .main-logo {
     position : absolute;
     z-index  : 2;
+    background: url(/media/images/home_page/look/main_logo.png) center center no-repeat;
+    width:90px;
+    height: 146px;
 }
 
 .beta-logo-big {
@@ -4776,7 +4779,7 @@ a.search-doctor-button {
     vertical-align : middle;
     width          : 19px;
     height         : 19px;
-    background     : url(/media/images/radio.png) 0 0 no-repeat;
+    background     : url(/media/images/home_page/look/radio.png) 0 0 no-repeat;
     cursor         : pointer;
     margin         : 7px 0 0;
 }

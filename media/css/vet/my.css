@@ -333,10 +333,10 @@ citymaps-balloon-content-selected td {
 
 .like_service_ul {
     text-shadow     : 1px 1px 1px #FFFFFF;
-    color           : #1F8EBE !important;
+    color           : #f48221 !important;
     line-height     : 18px;
     text-decoration : none !important;
-    border-bottom   : 1px #1F8EBE dashed;
+    border-bottom   : 1px #f48221 dashed;
 }
 
 .like_service_ul:hover {
@@ -2250,7 +2250,7 @@ div.moderate_comment_input_block {
 
 .column .blue-txt {
     font  : italic 17px/1 'pf_agora_slab_prolight';
-    color : #1F8EBE;
+    color : #f48221;
 }
 
 .show-page .column img {
@@ -2259,7 +2259,7 @@ div.moderate_comment_input_block {
 
 .show-page .column a {
     font  : normal 20px 'pf_agora_slab_pro_medium';
-    color : #1F8EBE;
+    color : #f48221;
 }
 
 .online_patient {
@@ -2281,7 +2281,7 @@ div.moderate_comment_input_block {
 .work_with_us .blue-txt {
     font-family  : 'pf_agora_slab_probold';
     font-size    : 24px;
-    color        : #1F8EBE;
+    color        : #f48221;
     padding-left : 25px;
 }
 
@@ -2599,7 +2599,7 @@ body.hidden .doctor-special-links {
 }
 
 .breadcrumbs, .breadcrumbs a {
-    color       : #1F8EBE;
+    color       : #f48221;
     font-family : 'pf_agora_sans_proregular', Arial;
     font-size   : 12px;
 }
@@ -2774,11 +2774,11 @@ input:focus, a:focus {
 }
 
 .breadcrumbs {
-    color : #1F8EBE;
+    color : #f48221;
 }
 
 .breadcrumbs a {
-    color : #1F8EBE;
+    color : #f48221;
 }
 
 .content .breadcrumbs {
@@ -3403,7 +3403,7 @@ a.search-doctor-button {
 }
 
 .about_us h1 {
-    color   : #1F8EBE;
+    color   : #f48221;
     padding : 14px 0;
 }
 
@@ -3814,7 +3814,7 @@ a.search-doctor-button {
 .catalog_list li.img4 {background: url('/media/images/magazine/cat_4.png') 0 8px no-repeat;}
 .catalog_list li.img5 {background: url('/media/images/magazine/cat_5.png') 0 8px no-repeat;}*/
 .catalog_list li a {
-    color           : #1F8EBE;
+    color           : #f48221;
     text-decoration : none;
     font            : 15px 'pf_agora_slab_pro_medium';
     text-shadow     : 1px 1px 1px #FFFFFF;
@@ -3893,7 +3893,7 @@ a.search-doctor-button {
 }
 
 .goods_blocks > li .good_name a {
-    color           : #1F8EBE;
+    color           : #f48221;
     text-decoration : none;
     font-family     : 'pf_agora_sans_probold';
     max-height      : 31px;
@@ -4094,7 +4094,7 @@ a.search-doctor-button {
 .magazine .way_line li, .magazine .way_line a {
     display   : inline-block;
     font-size : 12px;
-    color     : #1F8EBE;
+    color     : #f48221;
 }
 
 .magazine .way_line a {
@@ -4539,7 +4539,7 @@ a.search-doctor-button {
 }
 
 .basket_good .about .goodname a {
-    color           : #1F8EBE;
+    color           : #f48221;
     text-decoration : none;
 }
 
@@ -5480,13 +5480,13 @@ a.search-doctor-button {
 }
 
 .content #doctor-search-form.refactor .search-form .choose-section .like-head-label {
-    color       : #1F8EBE;
+    color       : #f48221;
     font-family : 'pf_agora_slab_pro_medium';
     font-size   : 13px;
 }
 
 .content .search-form .choose-section .choose-list.main-form-refactor-checkbox.like-head-label {
-    color       : #1F8EBE;
+    color       : #f48221;
     font-family : 'pf_agora_slab_pro_medium';
     font-size   : 13px;
     margin-top  : 2px;
@@ -5539,7 +5539,7 @@ a.search-doctor-button {
     width         : 187px;
     margin-bottom : 0;
     margin-left   : 0;
-    color         : #1F8EBE;
+    color         : #f48221;
     font-family   : 'pf_agora_slab_pro_medium';
     font-size     : 13px;
     padding-left  : 5px;
@@ -5658,7 +5658,7 @@ a.search-doctor-button {
 
 a.back-to-search {
     background   : url("/media/images/magazine/back.png") no-repeat scroll 0 2px rgba(0, 0, 0, 0);
-    color        : #1F8EBE;
+    color        : #f48221;
     display      : inline-block;
     font         : 16px 'pf_agora_slab_prolight';
     padding-left : 30px;

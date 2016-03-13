@@ -133,7 +133,7 @@ label {
 }
 
 .nav--sub-tab > li > a {
-    color       : #3392C2;
+    color       : #f48221;
     font-family : pfagorasanspro-bold, Arial;
     font-size   : 12px;
     text-align  : center;
@@ -1191,7 +1191,7 @@ header {
 }
 
 .doing-box .todo-list a {
-    color  : #3392C2;
+    color  : #f48221;
     cursor : pointer;
 }
 
@@ -2471,7 +2471,7 @@ body.hidden .doctor-special-links {
 .specialties-groups .specialty-group ul li, .specializationDiseasesArea ul li {
     display : block;
     padding : 0 10px 0 0;
-    color   : #2E88BC;
+    color   : #f48221;
 }
 
 .cllSTBlocks ul li {
@@ -2479,13 +2479,13 @@ body.hidden .doctor-special-links {
     padding : 0 10px 5px 0;
     width   : 32%;
     float   : left;
-    color   : #2E88BC;
+    color   : #f48221;
 }
 
 .specializationDiseasesArea ul li {
     display : block;
     padding : 0 10px 3px 0;
-    color   : #2E88BC;
+    color   : #f48221;
 }
 
 .specialties-groups ul li.specialty-group-separator {
@@ -2494,12 +2494,12 @@ body.hidden .doctor-special-links {
 
 .specialties-groups .specialty-group ul li a, .specializationDiseasesArea ul li a, .cllSTBlocks ul li a {
     display         : inline-block;
-    color           : #2E88BC;
+    color           : #f48221;
     text-decoration : underline;
 }
 
 .specialties-groups ul li a span.specialty-name-firs-letter, .specializationDiseasesArea ul li a span {
-    color       : #2E88BC;
+    color       : #f48221;
     font-family : 'PF Agora Sans Pro Bold', 'PF Agora Sans Pro';
     font-size   : 16px;
     font-style  : normal;
@@ -2566,7 +2566,7 @@ body.hidden .doctor-special-links {
 }
 
 .districtsBlock .specialties-block .text a {
-    color          : #2E88BC;
+    color          : #f48221;
     font-family    : 'PF Agora Sans Pro Regular', 'PF Agora Sans Pro';
     font-size      : 16px;
     font-style     : normal;
@@ -2580,7 +2580,7 @@ body.hidden .doctor-special-links {
 }
 
 .otherAddressData .specialties-block .text a {
-    color       : #2E88BC;
+    color       : #f48221;
     font-family : 'PF Agora Sans Pro Regular', 'PF Agora Sans Pro';
     font-style  : normal;
     font-weight : 400;
@@ -3595,7 +3595,7 @@ a.search-doctor-button {
 }
 
 .about_us a {
-    color : #3392C2;
+    color : #f48221;
 }
 
 .about_us a:hover {
@@ -3853,9 +3853,9 @@ a.search-doctor-button {
 }
 
 .goods_blocks > li:hover {
-    -webkit-box-shadow : 0 0 10px #3392C2;
-    -moz-box-shadow    : 0 0 10px #3392C2;
-    box-shadow         : 0 0 10px #3392C2;
+    -webkit-box-shadow : 0 0 10px #f48221;
+    -moz-box-shadow    : 0 0 10px #f48221;
+    box-shadow         : 0 0 10px #f48221;
 }
 
 .goods_blocks > li:nth-child(4n) {
@@ -3999,7 +3999,7 @@ a.search-doctor-button {
 }
 
 .magazine .block_right .h-txt a {
-    color      : #3392C2;
+    color      : #f48221;
     display    : block;
     height     : 100%;
     text-align : left;
@@ -6496,7 +6496,7 @@ a.btn-double-floor:hover {
 }
 
 .about-ilness-content .main-cont .content .section .in-middle p a {
-    color : #3392C2;
+    color : #f48221;
 }
 
 .in-middle a .just-text {

@@ -2588,7 +2588,7 @@ h2 {
 .about-ilness-content .illness-nav .sub-nav li a {
     display         : table-cell;
     vertical-align  : middle;
-    color           : #3392C2;
+    color           : #f48221;
     text-decoration : none;
     max-width       : 97px;
     text-align      : center;
@@ -2827,7 +2827,7 @@ ul.list-2 li {
     font-weight   : normal;
     font-family   : 'pf_agora_slab_probold';
     margin-bottom : 11px;
-    color         : #3392C2;
+    color         : #f48221;
 }
 
 .about-ilness-content .side-column .info-box .todo-list li {

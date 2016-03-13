@@ -75,6 +75,22 @@
         }
 
         /**
+         * Get request param by key sent any method by REQUEST array
+         *
+         * @param string $key
+         * @param mixed  $defaultValue
+         *
+         * @return mixed
+         */
+        public function request($key, $defaultValue = NULL)
+        {
+            if (!empty($this->request[$key])) {
+                return $this->request[$key];
+            }
+            return $defaultValue;
+        }
+
+        /**
          * Is POST-Request?
          * @return bool
          */

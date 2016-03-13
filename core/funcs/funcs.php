@@ -1,5 +1,29 @@
 <?php
+    /*
+     * print_r argument var in pre tag
+     */
 
+    function pr($var, $die = false, $console = false, $showHtml = false, $showFrom = false)
+    {
+        if ($showFrom) {
+            if(is_array($showFrom))
+                $calledFrom = $showFrom;
+            else
+                $calledFrom = debug_backtrace();
+            echo '<strong>' . $calledFrom[0]['file'] . '</strong>';
+            echo ' (line <strong>' . $calledFrom[0]['line'] . '</strong>)';
+        }
+        echo "\n<pre class=\"debug\">\n";
+
+        $var = print_r($var, true);
+        if ($showHtml) {
+            $var = str_replace('<', '&lt;', str_replace('>', '&gt;', $var));
+        }
+        echo $var . "\n</pre>\n\n";
+        flush();
+        if ($die)
+            die;
+    }
     function declension($digit, $expr, $onlyword = FALSE)
     {
         if (!is_array($expr)) $expr = array_filter(explode(' ', $expr));

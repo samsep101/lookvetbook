@@ -493,6 +493,8 @@
 			$date_from = date('Y-m-d 00:00:00', strtotime($date_from) - 86400);
 			$date_to = date('Y-m-d 00:00:00', strtotime($date_to) + 86400);
 
+
+
 			$sql = 'SELECT *
                     FROM schedule
                     WHERE doctor_id = ' . (int)$doctor_id . '

@@ -490,19 +490,31 @@ class AjaxController extends BaseController
           $schedule_specialties = array();
 
           foreach ($doctor_clinic_specialties as $specialty) {
-            $schedules = $schedule_manager->getListByDoctorIdAndClinicIdAndSpecialtyIdAndDateRangeAndStartWithTodayDate($doctor->getId(), $clinic->getId(), $specialty->getId(), $date_from, $date_to);
+//            $schedules = $schedule_manager->getListByDoctorIdAndClinicIdAndSpecialtyIdAndDateRangeAndStartWithTodayDate($doctor->getId(), $clinic->getId(), $specialty->getId(), $date_from, $date_to);
 
-            $schedule_data = array();
+            $unix_datefrom = strtotime($date_from) - 86400;
+            $unix_dateto = strtotime($date_to) + 86400;
 
-            if ($schedules) {
-              foreach ($schedules as $v) {
-                $schedule_data[] = array(
-                  'schedule_id' => $v->getId(),
-                  'dt_start' => $v->dt_start,
-                  'dt_end' => $v->dt_end
-                );
-              }
+            $schedule_data = array();//start_time_monday
+
+            for($i = $unix_datefrom; $i<=$unix_dateto; $i+= 24*3600){
+              $i;
+              $schedule_data[] = array(
+                  'schedule_id' => $i.'-'.$clinic->getId().'-'.$specialty->getId(),
+                  'dt_start' => date('Y-m-d ', $i).$clinic->{'start_time_'.strtolower(date("l", $i))}.':00',
+                  'dt_end' => date('Y-m-d ', $i).$clinic->{'end_time_'.strtolower(date("l", $i))}.':00'
+              );
             }
+
+//            if ($schedules) {
+//              foreach ($schedules as $v) {
+//                $schedule_data[] = array(
+//                  'schedule_id' => $v->getId(),
+//                  'dt_start' => $v->dt_start,
+//                  'dt_end' => $v->dt_end
+//                );
+//              }
+//            }
             $schedule_specialties[] = array(
               'specialty' => $specialty->getId(),
               'specialty_name' => $specialty->name,
@@ -748,36 +760,43 @@ class AjaxController extends BaseController
 
   public function recordToTheVisit()
   {
+    $schedule_id = $this->request->request('schedule_id');
+    $doctor_id = $this->request->request('doctor_id');
+    $full_name = trim(strip_tags($this->request->request('full_name')));
+    $phone = $this->request->request('phone');
+    $family_relation_status_id = $this->request->request('family_relation_status_id');
+    $purpose_of_visit_id = $this->request->request('purpose_of_visit_id');
+    $visit_id = $this->request->request('visit_id');
+    $comment = $this->request->request('comment');
 
-    $schedule_id = $this->request->post('schedule_id');
-    $doctor_id = $this->request->post('doctor_id');
-    $full_name = trim(strip_tags($this->request->post('full_name')));
-    $phone = $this->request->post('phone');
-    $family_relation_status_id = $this->request->post('family_relation_status_id');
-    $purpose_of_visit_id = $this->request->post('purpose_of_visit_id');
-    $visit_id = $this->request->post('visit_id');
-    $comment = $this->request->post('comment');
+    $schedule_pat = '/([0-9]+)\-([0-9]+)\-([0-9]+)/is';
+    if (preg_match($schedule_pat, $schedule_id, $a)){
+      list($a, $schedule_date, $clinic_id, $specialty_id) = $a;
+    }
 
 
-    $schedule = ModelManagerFactory::getByName('schedule')->getOneById($schedule_id);
+    //$schedule = ModelManagerFactory::getByName('schedule')->getOneById($schedule_id);
 
     $visit_information = new VisitInformation();
-    $visit_information->schedule_id = $schedule_id;
+    /*TODO
+    remove schedule_id from VisitInformation model
+    */
+    $visit_information->schedule_id = 13;
     $visit_information->doctor_id = $doctor_id;
     $visit_information->full_name = $full_name;
     $visit_information->phone = $phone;
     $visit_information->purpose_of_visit_id = $purpose_of_visit_id;
     $visit_information->account_id = Acc::accountId();
-    $visit_information->clinic_id = $schedule->clinic_id;
-    $visit_information->specialty_id = $schedule->specialty_id;
+    $visit_information->clinic_id = $clinic_id;
+    $visit_information->specialty_id = $specialty_id;
     $visit_information->comment = $comment;
     $visit_information->create_time = date('Y-m-d H:i:s', time());
 
-    $dinner_hour = date('Y-m-d 12:00:00', strtotime($schedule->dt_start));
-    if (strtotime($schedule->dt_start) > strtotime($dinner_hour)) {
-      $visit_information->notification_dt = date('Y-m-d H:i:00', (strtotime($schedule->dt_start) - 60 * 60 * SettingsManager::get('notification_visit_evening_h')));
+    $dinner_hour = date('Y-m-d 12:00:00', $specialty_id);
+    if ($specialty_id > strtotime($dinner_hour)) {
+      $visit_information->notification_dt = date('Y-m-d H:i:00', ($specialty_id - 60 * 60 * SettingsManager::get('notification_visit_evening_h')));
     } else {
-      $visit_information->notification_dt = date('Y-m-d H:i:00', (strtotime($schedule->dt_start) - 60 * 60 * SettingsManager::get('notification_visit_morning_h')));
+      $visit_information->notification_dt = date('Y-m-d H:i:00', ($specialty_id - 60 * 60 * SettingsManager::get('notification_visit_morning_h')));
     }
 
     $visit_recorder = new VisitRecorder();

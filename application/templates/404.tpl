@@ -7,7 +7,7 @@
 <div class="oops">
     <h1 class="text-bold">Видимо что-то случилось...</h1>
 </div>
-    <img src="/media/images/owl-404.png" alt="404" id="logo-404"/>
+    <img src="/media/images/blank.png" alt="404" id="logo-404"/>
     <div class="register">
         <h1 class="text-bold"><p>Мы не нашли страницу, которую Вы искали...</p>
             Но мы можем помочь:</h1>

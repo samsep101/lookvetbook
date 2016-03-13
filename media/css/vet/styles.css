@@ -998,8 +998,14 @@ h2 {
 .sp-links nav a {
     margin : 8px 28px 8px 0;
 }
+
+
 #header .sp-links nav a {
     margin : 8px 15px 8px 0;
+}
+
+#header .sp-links nav a.jsLinkHidingIndexing, #header .sp-links nav a.shop-link {
+    display: none;
 }
 
 #header .logo img {
@@ -9715,4 +9721,11 @@ a.d-pink-btn {
 
 header .nav-table td.treatment-in-switz, header .nav-table td.lekarstva, .banner-treatment-in-switz  {
     display: none;
+}
+
+
+#logo-404 {
+    background: url(/media/images/home_page/vet/owl-404.png) center center no-repeat;
+    width: 398px;
+    height: 403px;
 }

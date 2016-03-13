@@ -9711,3 +9711,10 @@ a.d-pink-btn {
 .footer a{
     color: #55BCC8;
 }
+
+#logo-404 {
+    background: url(/media/images/home_page/look/owl-404.png) center center no-repeat;
+    width: 398px;
+    height: 403px;
+}
+

@@ -74,7 +74,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title><?php echo (isset($page_title)) ? $page_title : SITE_NAME; ?></title>
     <meta name="description" content="<?php echo (isset($page_description)) ? $page_description : SITE_NAME.' - поиск врача и запись на прием, информация обо всех известных заболеваниях.'; ?>">
-    <link rel="icon" href="/media/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/media/images/home_page/<?php echo CSS_DIR; ?>/favicon.png" type="image/png">
     <?php $this->block('blocks/head'); ?>
     <?php if (isset($home_page)):?>
     <link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/home_style.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />

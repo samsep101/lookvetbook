@@ -1430,6 +1430,7 @@ span.error_span label {
 .search-form-main-page-container .for-whom-clinic {
     float  : right;
     margin : 0 34px 0 0;
+    display: none;
 }
 
 .search-form-main-page-container .other-clinic-search-params .search-param-icon,

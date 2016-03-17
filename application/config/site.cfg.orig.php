@@ -18,6 +18,8 @@ define('SITE_PHONE_CODE', '495');
 define('SITE_PHONE', '215-09-07');
 define('CSS_DIR', 'vet');
 define('PAGE_TITLE', 'Портал медицинских услуг в ');
+define('JUR_ADDRESS', 'Гамсоновский переулок, 2');
+define('JUR_ADDRESS_FULL', '115191, г.Москва, Гамсоновский переулок, д.2');
 
 
 

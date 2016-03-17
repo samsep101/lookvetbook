@@ -13,7 +13,7 @@ var AboutPageController = function(city_id) {
         self.map_controller.init();
 
         if (self.map_controller != undefined) {
-            Ajax.Get('/ajax/getAboutMapData', {}, function (data) {
+            Ajax.Get('/ajax/getAboutMapAddressData', {}, function (data) {
                 //self.map_controller.setData(data.result);
                 var map = self.map_controller.getMap();
                 var placemark = new ymaps.Placemark([48, 40], {
@@ -27,9 +27,9 @@ var AboutPageController = function(city_id) {
                     hideIconOnBalloonOpen: false
                 });
 
-
+                //не нашел, где этот скрипт выполняется, не смог проверить, так ли сюда приходит data
                 var myBalloonLayout = ymaps.templateLayoutFactory.createClass(
-                    '<div class="flag_address">127015 г. Москва, ул. Вятская, дом 27, строение 13-14</div>'
+                    '<div class="flag_address">'+data[1]+'</div>'
                 );
                 ymaps.layout.storage.add('my#theaterlayout', myBalloonLayout);
                 var balloon = new ymaps.Balloon(map, null, {
@@ -38,7 +38,7 @@ var AboutPageController = function(city_id) {
                     offset : [140, 50]
                 });
                 balloon.options.setParent(map.options);
-                balloon.open([55.796607,37.580032]);
+                balloon.open([data[3],data[4]]);
 
                 //$(".ymaps-b-balloon.ymaps-i-custom-scroll").text(123);
             });

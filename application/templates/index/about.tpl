@@ -76,6 +76,6 @@
     </div>
     <div class="address">
         <span class="index">Мы находимся по<br/> адресу:</span>
-        <span class="txt">г. Москва, ул. Вятская, дом 27, строение 13-14</span>
+        <span class="txt"><?php echo JUR_ADDRESS_FULL; ?></span>
     </div>
 </div>

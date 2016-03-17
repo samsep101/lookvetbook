@@ -37,7 +37,7 @@
                 <span>ООО "М-Софт Медикал Имаджинг" </span>
                 <span>ИНН: 7728632135 </span>
                 <span>КПП: 771701001 </span>
-                <span>Юр. адрес: г. Москва,  ул. Вятская дом 27 </span>
+                <span>Юр. адрес: <?php echo JUR_ADDRESS_FULL; ?></span>
             </div>
         </section>
     </div>

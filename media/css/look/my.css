@@ -3567,7 +3567,7 @@ a.search-doctor-button {
 .about_us .address .index {
     display        : inline-block;
     vertical-align : bottom;
-    background     : url(/media/images/post_index.jpg) 100% 0 no-repeat;
+    /*background     : url(/media/images/post_index.jpg) 100% 0 no-repeat;*/
     min-height     : 33px;
     padding        : 9px 130px 0 0;
     padding-right  : 130px;

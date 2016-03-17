@@ -262,8 +262,14 @@ class AjaxController extends BaseController
 
   public function getAboutMapData()
   {
-    $file = file_get_contents('./media/about/bullet_info.js');
+    $file = str_replace('%JUR_ADDRESS_FULL%', JUR_ADDRESS_FULL, file_get_contents('./media/about/bullet_info.js'));
     JsonResponse::result($file);
+  }
+
+  public function getAboutMapAddressData()
+  {
+    $data = explode(':', str_replace('%JUR_ADDRESS_FULL%', JUR_ADDRESS_FULL, file_get_contents('./media/about/bullet_info.js')));
+    JsonResponse::result($data);
   }
 
   public function getDiseases()

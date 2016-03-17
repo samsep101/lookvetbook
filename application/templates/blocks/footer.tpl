@@ -12,7 +12,7 @@
                     <span class="help-phone"><?php echo SettingsManager::get('help_phone'); ?></span> или
                     <a data-link="mailto:<?php echo SettingsManager::get('help_email');?>" class="info-mail jsLinkHidingIndexing"><?php echo SettingsManager::get('help_email');?></a>
                     <?php if ($_SERVER['REQUEST_URI'] == '/'): ?>
-                        Адрес <span style="color: white">ул. Вятская, 27 </span>
+                        Адрес <span style="color: white"><?php echo JUR_ADDRESS; ?></span>
                     <?php endif; ?>
                 </section>
                 <ul class="inner-top-socials">

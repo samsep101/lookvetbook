@@ -17,6 +17,8 @@ define('RELEASE_NUMBER', 43);
 define('SITE_PHONE_CODE', '495');
 define('SITE_PHONE', '215-09-07');
 define('CSS_DIR', 'vet');
+define('PAGE_TITLE', 'Портал медицинских услуг в ');
+
 
 
 

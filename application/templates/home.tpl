@@ -252,8 +252,8 @@
 <?php else: ?>
     <div id="wrapper" class="wrap">
         <div id="header">
-            <a class="logo" href="<?php if($city->alias) { echo '/';} else echo SITE_URL.'/'; ?>" title="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>">
-            	<img src="/media/images/blank.png" alt="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>" class="main-logo-big"/>
+            <a class="logo" href="<?php if($city->alias) { echo '/';} else echo SITE_URL.'/'; ?>" title="<?php echo PAGE_TITLE . $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>">
+            	<img src="/media/images/blank.png" alt="<?php echo PAGE_TITLE . $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>" class="main-logo-big"/>
             </a>
             <div class="sp-links left-links">
                 <nav>

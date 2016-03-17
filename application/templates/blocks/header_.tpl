@@ -22,8 +22,8 @@
 
 <header class="header">
     <div class="inner flo">
-        <a class="logo" href="<?php if($city->alias) { echo '/';} else echo SITE_URL.'/'; ?>" title="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>">
-            <img class="main-logo" src="/media/images/blank.png" alt="Портал медицинских услуг в <?php echo $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>"/></a>
+        <a class="logo" href="<?php if($city->alias) { echo '/';} else echo SITE_URL.'/'; ?>" title="<?php echo PAGE_TITLE . $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>">
+            <img class="main-logo" src="/media/images/blank.png" alt="<?php echo PAGE_TITLE . $city->prepositional_name; ?> – <?php echo SITE_NAME; ?>"/></a>
         <?php if (!isset($example_page)): ?>
             <nav>
 				<?php if (!$city || $city->hasDoctors() && $city) { ?>

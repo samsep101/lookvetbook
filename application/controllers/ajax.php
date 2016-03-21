@@ -1764,8 +1764,10 @@ if (!Acc::isAuthed())
           'phone' => ['title' => 'Телефон пациента', 'value' => $phone, ],
         ];
 
-        if($name){
-          $mail_data['fio'] = ['title' => 'Имя пациента', 'value' => $name,];
+        if($name && $name != 'Запрос на скидку'){
+            $mail_data['fio'] = ['title' => 'Имя пациента', 'value' => $name,];
+        }elseif ($name == 'Запрос на скидку'){
+            $mail_data['fio'] = ['title' => '', 'value' => $name,];
         }
         $mail_sender->sendVisitCreatedMessage($mail_data);
 

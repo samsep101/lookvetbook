@@ -106,7 +106,6 @@
 				}
 			}
 			$sql = "UPDATE `{$this->table}` SET " . join(', ', $items) . " WHERE " . $cond;
-
 			$db->post($sql);
 		}
 

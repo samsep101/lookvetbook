@@ -8,7 +8,9 @@
 			$doctor_search_params->page = 1;
 			$doctor_search_params->by_page = 1000;
 
-			if(file_exists('./media/map/' . $doctor_search_params->getParamsHash() . '.js'))
+            $hasFilename = './media/map/' . $doctor_search_params->getParamsHash() . '.js';
+
+			if(file_exists($hasFilename) && filesize($hasFilename) > 0)
 				return $doctor_search_params->getParamsHash();
 
             /**

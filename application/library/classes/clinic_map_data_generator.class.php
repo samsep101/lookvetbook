@@ -9,8 +9,8 @@ class ClinicMapDataGenerator
     $clinic_search_params->by_page = null;
 
     $hash = $clinic_search_params->getParamsHash();
-
-    if (!file_exists('./media/map/' . $hash . '.js')) {
+    $hashFilename = './media/map/' . $hash . '.js';
+    if (!file_exists($hashFilename) || !(filesize($hashFilename) > 0)) {
       /**
        * @var ClinicManager $clinic_manager
        */

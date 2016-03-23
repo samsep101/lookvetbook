@@ -1763,8 +1763,11 @@ if (!Acc::isAuthed())
           'id' => ['title' => 'Заказ звонка', 'value' => $call_to_user->getId(),],
           'phone' => ['title' => 'Телефон пациента', 'value' => $phone, ],
         ];
-        if($name){
-          $mail_data['fio'] = ['title' => 'Имя пациента', 'value' => $name,];
+
+        if($name && $name != 'Запрос на скидку'){
+            $mail_data['fio'] = ['title' => 'Имя пациента', 'value' => $name,];
+        }elseif ($name == 'Запрос на скидку'){
+            $mail_data['fio'] = ['title' => '', 'value' => $name,];
         }
         $mail_sender->sendVisitCreatedMessage($mail_data);
 

@@ -4,6 +4,13 @@
 		protected $table_name = 'visit';
 		protected $model_name = 'VisitModel';
 
+        static function setOverdueStatus(){
+            $visit_manager = new VisitManager();
+            $visit_manager->orm_model->update(['status_id' => VisitModel::FEDDBACK],' visit_start_time <= now() and status_id = '.VisitModel::CHECKING.' ');
+
+            return true;
+        }
+
 		public function beforeSave(DynamicModel $model)
 		{
             /**

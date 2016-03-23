@@ -812,7 +812,8 @@ $disease_manager->resetAutoIncrement();*/
 
 		public static function replaceVisits()
 		{
-			$visit_manager = new VisitManager();
+            VisitManager::setOverdueStatus();
+			/*$visit_manager = new VisitManager();
 			$visits = $visit_manager->getListByCurrentDate();
 
 			if($visits)
@@ -821,7 +822,7 @@ $disease_manager->resetAutoIncrement();*/
 				{
 					$visit_manager->setStatusIdById(VisitModel::FEDDBACK, $visit->id);
 				}
-			}
+			}*/
 		}
 
 		public static function sendEmailForLate()

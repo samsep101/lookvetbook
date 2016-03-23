@@ -75,7 +75,7 @@
 		{
 			$sql = 'SELECT  '.$this->selected_field_joins.'
                     FROM visit_rating vr
-                    INNER JOIN visit v ON v.id = vr.visit_id
+                    left JOIN visit v ON v.id = vr.visit_id
                     WHERE vr.doctor_id = ' . (int)$doctor_id . '
                         AND vr.is_confirmed = 1
                         AND vr.doctor_review_text IS NOT NULL

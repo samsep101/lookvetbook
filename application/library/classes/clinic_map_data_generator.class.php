@@ -9,7 +9,7 @@ class ClinicMapDataGenerator
     $clinic_search_params->by_page = null;
 
     $hash = $clinic_search_params->getParamsHash();
-    $hashFilename = './media/map/' . $hash . '.js';
+    $hashFilename = './media/map/' . $hash . '.js';	
     if (!file_exists($hashFilename) || !(filesize($hashFilename) > 0)) {
       /**
        * @var ClinicManager $clinic_manager
@@ -32,7 +32,10 @@ class ClinicMapDataGenerator
 
       $str = trim($str, '|');
 
-      file_put_contents('./media/map/' . $hash . '.js', $str);
+	  if (file_exists($hashFilename))
+		  unlink($hashFilename);
+	  
+      file_put_contents($hashFilename, $str);
     }
 
     return $hash;

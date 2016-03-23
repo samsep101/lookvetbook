@@ -83,7 +83,8 @@
 
         private function renderMapDataFile(array $laboratories, $hash)
         {
-            if (!file_exists('/media/map/' . $hash . '.js')) {
+            $hasFilename = '/media/map/' . $hash . '.js';
+            if (!file_exists($hasFilename) || !(filesize($hasFilename) > 0)) {
 
                 $str = '';
 

@@ -327,9 +327,9 @@ $filter_and->addFilter($match);
     if ($criteria->page && $criteria->by_page) {
       $size = $criteria->by_page;
 
-      if ($criteria->primary_doctors_ids && ($criteria->page == 1)) {
-        $size -= count($criteria->primary_doctors_ids);
-      }
+//      if (count($criteria->primary_doctors_ids) and ($criteria->page == 1)) {
+//        $size -= count($criteria->primary_doctors_ids);
+//      }
 
       if ($criteria->get_extra_item) {
         $result_query->setSize($size + 1);

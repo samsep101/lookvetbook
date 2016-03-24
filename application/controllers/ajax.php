@@ -1416,7 +1416,7 @@ if (!Acc::isAuthed())
 
     if(count($doctors)<2) {
       $doctors_bonus = ModelManagerFactory::getByName('doctor')->getListByDoctorSearchParams($doctor_search_params);
-      for($i=0; $i<=(2 - count($doctors)); $i++) {
+      for($i=0; $i<=(2 - count($doctors)) and $i<count($doctors_bonus); $i++) {
         $doctors[] = $doctors_bonus[$i];
       }
     }

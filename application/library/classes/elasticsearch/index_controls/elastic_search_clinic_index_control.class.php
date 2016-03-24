@@ -145,7 +145,7 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
       $filter_and->addFilter($match);
     }
     
-     if($criteria->geo_point)
+     if(0 and $criteria->geo_point)
      {
          $location = array(
              'lat' => $criteria->geo_point->getLatitude(),
@@ -233,7 +233,7 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
 
     $result_query = new \Elastica\Query();
 
-    if ($criteria->geo_point) {//TODO: починить запрос дальности от гео-точки. сейчас выдает ошибку у эластика
+    if (0 and $criteria->geo_point) {//TODO: починить запрос дальности от гео-точки. сейчас выдает ошибку у эластика
       $result_query->addSort(array(
         '_script' => array(
 //          'script' => '((doc[\'geo_point\'].arcDistanceInKm(' . $criteria->geo_point->getLatitude() . ', ' . $criteria->geo_point->getLongitude() . ') < ' . ($criteria->distance / 10000) . ') ? 1 : 0)',

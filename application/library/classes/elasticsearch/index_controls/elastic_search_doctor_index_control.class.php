@@ -325,8 +325,9 @@ $filter_and->addFilter($match);
     }
 
     if ($criteria->page && $criteria->by_page) {
-      $size = $criteria->by_page;
+      $size = $criteria->by_page+2;//TODO: какая-то хрень с количеством. Говоришь вывести два, выводит одного. Сделал четыре, неплохо было бы понять, какого хрена так...
 
+//TODO:  эти врачи могут быть и не найдены, поэтому закоментил. Пушшай себе пока впустую ищет, чуть по-позже разберемся
 //      if (count($criteria->primary_doctors_ids) and ($criteria->page == 1)) {
 //        $size -= count($criteria->primary_doctors_ids);
 //      }
@@ -336,7 +337,7 @@ $filter_and->addFilter($match);
       } else {
         $result_query->setSize($size);
       }
-
+//echo '!'.$criteria->page.'!'.$criteria->by_page.'!'.$size.'!!!!';
       $result_query->setFrom(($criteria->page - 1) * $criteria->by_page);
     } else {
       $result_query->setSize(10000);

@@ -145,14 +145,14 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
       $filter_and->addFilter($match);
     }
     
-     if(0 and $criteria->geo_point)
+     if($criteria->geo_point)
      {
          $location = array(
              'lat' => $criteria->geo_point->getLatitude(),
              'lon' => $criteria->geo_point->getLongitude()
          );
          $distance = (($criteria->distance)/10000).'km';
-         $distance = '10km';
+         $distance = '1km';
          $match = new \Elastica\Filter\GeoDistance('geo_point', $location, $distance);
          $filter_and->addFilter($match);
      }
@@ -230,14 +230,13 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
       $filter_and->addFilter($match);
     }
 
-
     $result_query = new \Elastica\Query();
 
     if (0 and $criteria->geo_point) {//TODO: починить запрос дальности от гео-точки. сейчас выдает ошибку у эластика
       $result_query->addSort(array(
         '_script' => array(
 //          'script' => '((doc[\'geo_point\'].arcDistanceInKm(' . $criteria->geo_point->getLatitude() . ', ' . $criteria->geo_point->getLongitude() . ') < ' . ($criteria->distance / 10000) . ') ? 1 : 0)',
-          'script' => '((doc[\'geo_point\'].arcDistanceInKm(' . $criteria->geo_point->getLatitude() . ', ' . $criteria->geo_point->getLongitude() . ') < 10) ? 1 : 0)',
+          'script' => '((doc[\'geo_point\'].arcDistanceInKm(' . $criteria->geo_point->getLatitude() . ', ' . $criteria->geo_point->getLongitude() . ') < 1) ? 1 : 0)',
           "type" => "number",
           "order" => "desc"
         )

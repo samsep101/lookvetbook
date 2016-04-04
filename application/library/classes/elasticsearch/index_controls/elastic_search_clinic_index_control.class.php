@@ -152,7 +152,7 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
              'lon' => $criteria->geo_point->getLongitude()
          );
          $distance = (($criteria->distance)/10000).'km';
-         $distance = '1km';
+         $distance = '3km';
          $match = new \Elastica\Filter\GeoDistance('geo_point', $location, $distance);
          $filter_and->addFilter($match);
      }

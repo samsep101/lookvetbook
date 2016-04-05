@@ -422,3 +422,4 @@
             <?php $this->block('blocks/equal_elements'); ?>
         <?php endif; ?>
     </div>
+    <?php $this->block('blocks/adv/content_page'); ?>

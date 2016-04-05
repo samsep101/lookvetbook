@@ -90,3 +90,4 @@
 <div class="doctor-special-links">
     <?php $this->block('doctor/blocks/seo_block'); ?>
 </div>
+<?php $this->block('blocks/adv/content_page'); ?>

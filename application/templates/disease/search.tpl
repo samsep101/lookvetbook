@@ -41,3 +41,4 @@
             <?php endfor; ?>
         </div>
     </div>
+    <?php $this->block('blocks/adv/content_page'); ?>

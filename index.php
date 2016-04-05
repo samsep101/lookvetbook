@@ -22,6 +22,8 @@ try {
   }
   require('application/config/init.php');
 
+  define('CURRENT_HOST', $_SERVER['HTTP_HOST']);
+
   $redirect_domen = $redirect_uri = '';
   if (isset($_SERVER['SERVER_NAME'])) {
     $excluded_subdomens = ['account', 'sankt-peterburg', 'novosibirsk', 'chelyabinsk', 'omsk', 'samara', 'kazan', 'nizhniy-novgorod', 'ekaterinburg'];

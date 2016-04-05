@@ -39,4 +39,5 @@ if (isset($_COOKIE['already_registred_account'])) {
 </script>
 
 <?php if ($disease) { 	include('get_desease.tpl'); } ?>
+<?php $this->block('blocks/adv/content_page'); ?>
 

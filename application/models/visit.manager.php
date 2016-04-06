@@ -6,7 +6,7 @@
 
         static function setOverdueStatus(){
             $visit_manager = new VisitManager();
-            $visit_manager->orm_model->update(['status_id' => VisitModel::FEDDBACK],' visit_start_time <= now() and status_id = '.VisitModel::CHECKING.' ');
+            $visit_manager->orm_model->update(['status_id' => VisitModel::FEDDBACK],' visit_start_time <= now() and status_id = '.VisitModel::CONFIRMED.' ');
 
             return true;
         }

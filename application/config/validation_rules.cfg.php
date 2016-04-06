@@ -806,7 +806,7 @@
         )
     );
 
-    $validation_rules->add(
+    /*$validation_rules->add(
         'two_coordinates',
         array(
             'double_field' => array(
@@ -815,7 +815,7 @@
                 'code'        => ValidationErrorCodes::ALREADY_REGISTERED,
             ),
         )
-    );
+    );*/
 
     $validation_rules->add(
         'clinic_address_required_and_unique',

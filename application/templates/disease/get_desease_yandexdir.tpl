@@ -1,38 +1,24 @@
 <?php /* Яндекс.Директ */ ?>
 <div class="info-box disease-banner" style="padding:8px; background: none; box-shadow: none;">
-	<div id="yandex_ad"></div>
     <!-- Яндекс.Директ -->
-    <div id="yandex_ad"></div>
     <script type="text/javascript">
-        (function(w, d, n, s, t) {
-            w[n] = w[n] || [];
-            w[n].push(function() {
-                Ya.Direct.insertInto(147148, "yandex_ad", {
-                    ad_format: "direct",
-                    font_size: 1,
-                    type: "grid",
-                    border_type: "ad",
-                    limit: 2,
-                    title_font_size: 2,
-                    border_radius: true,
-                    links_underline: false,
-                    site_bg_color: "FFFFFF",
-                    header_bg_color: "FEEAC7",
-                    border_color: "FFFFFF",
-                    title_color: "006699",
-                    url_color: "000000",
-                    text_color: "000000",
-                    hover_color: "6699CC",
-                    no_sitelinks: true
-                });
-            });
-            t = d.getElementsByTagName("script")[0];
-            s = d.createElement("script");
-            s.src = "//an.yandex.ru/system/context.js";
-            s.type = "text/javascript";
-            s.async = true;
-            t.parentNode.insertBefore(s, t);
-        })(window, document, "yandex_context_callbacks");
+        yandex_partner_id = 147148;
+        yandex_site_bg_color = 'FFFFFF';
+        yandex_ad_format = 'direct';
+        yandex_direct_type = '300x250';
+        yandex_direct_border_type = 'block';
+        yandex_direct_border_radius = true;
+        yandex_direct_links_underline = true;
+        yandex_direct_header_bg_color = 'FEEAC7';
+        yandex_direct_border_color = 'FBE5C0';
+        yandex_direct_title_color = '0000CC';
+        yandex_direct_url_color = '006600';
+        yandex_direct_text_color = '000000';
+        yandex_direct_hover_color = '0066FF';
+        yandex_direct_sitelinks_color = '0000CC';
+        yandex_direct_favicon = true;
+        yandex_no_sitelinks = false;
+        document.write('<scr'+'ipt type="text/javascript" src="//an.yandex.ru/system/context.js"></scr'+'ipt>');
     </script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 

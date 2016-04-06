@@ -138,7 +138,10 @@ EOD;
     //$to = 'cyberunit@gmail.com,glyapustina@lookmedbook.ru';
     $subject = $info['id']['title'].' No:'.$info['id']['value'];
     if(isset($info['fio'])) {
-      $subject .= ', пациент '.$info['fio']['value'].'';
+      if ($info['fio'] == 'Запрос на скидку')
+        $subject .= ' '.$info['fio']['value'].'';
+      else
+        $subject .= ', пациент '.$info['fio']['value'].'';
     }
     $subject .= "\n";
 

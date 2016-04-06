@@ -33,8 +33,15 @@
 			$db = Register::get('db');
 
 			$data = $db->query($sql);
+            $data = ($data) ? $this->initOne($data[0]) : null;
 
-			return ($data) ? $this->initOne($data[0]) : null;
+            if (!is_null($data) && !file_exists(('.' . MEDIA_UPLOAD_PATH . $data->folder . $data->filename)))
+            {
+                $this->delete($data);
+                return null;
+            }
+
+			return $data;
 		}
 
         public function getListByImageId($image_id)

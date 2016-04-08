@@ -1,1 +1,15 @@
-<script>(function(e){var t="DIV_DA_"+e+"_"+parseInt(Math.random()*1e3); document.write('<div id="'+t+'" class="directadvert-block directadvert-block-'+e+'"></div>'); if("undefined"===typeof loaded_blocks_directadvert){loaded_blocks_directadvert=[]; function n(){var e=loaded_blocks_directadvert.shift(); var t=e.adp_id; var r=e.div; var i=document.createElement("script"); i.type="text/javascript"; i.async=true; i.charset="windows-1251"; i.src="//code.directadvert.ru/data/"+t+".js?async=1&div="+r+"&t="+Math.random(); var s=document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]; s.appendChild(i); var o=setInterval(function(){if(document.getElementById(r).innerHTML&&loaded_blocks_directadvert.length){n(); clearInterval(o)}},50)} setTimeout(n)}loaded_blocks_directadvert.push({adp_id:e,div:t})})(888468)</script>
+<script type='text/javascript'>(function() {
+        /* Optional settings (these lines can be removed): */
+        subID = "";  // - local banner key;
+        injectTo = "";  // - #id of html element (ex., "top-banner").
+        /* End settings block */
+
+        if(injectTo=="")injectTo="admitad_shuffle"+subID+Math.round(Math.random()*100000000);
+        if(subID=='')subid_block=''; else subid_block='subid/'+subID+'/';
+        document.write('<div id="'+injectTo+'"></div>');
+        var s = document.createElement('script');
+        s.type = 'text/javascript'; s.async = true;
+        s.src = 'https://ad.admitad.com/shuffle/39d0e42f0e/'+subid_block+'?inject_to='+injectTo;
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+    })();</script>

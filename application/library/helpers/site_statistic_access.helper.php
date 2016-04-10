@@ -15,13 +15,19 @@ class SiteStatisticAccessHelper {
             $system_access_ips = $system_access_ip_manager->getActiveList();
             if (count($system_access_ips))
             {
-                $access_ip_lists = array();
-                foreach ($system_access_ips as $system_access_ip)
-                {
-                    $access_ip_lists[] = $system_access_ip->ip;
+                $access = 0;
+                foreach ($system_access_ips as $system_access_ip) {
+                    if($user_ip==$system_access_ip->ip) {
+                        $access = 1;
+                        break;
+                    }
+                    if(strpos($system_access_ip->ip,'*') and
+                      preg_match('/^'.str_replace(['.', '*'], ['\\.', '.*'], $system_access_ip->ip).'$/', $user_ip)) {
+                        $access = 1;
+                        break;
+                    }
                 }
-
-                if (!in_array($user_ip, $access_ip_lists)) {
+                if (!$access) {
                     RedirectManager::redirect('/');
                 }
             }

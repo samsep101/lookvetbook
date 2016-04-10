@@ -61,7 +61,7 @@ var AccountEditController = function()
 
     this.sendData = function()
     {
-        Ajax.Post('/manage/account/ajaxEditAccount', self.data, function(data){
+        Ajax.Post('/manage/user/ajaxEditAccount', self.data, function(data){
             if (data.status == 0)
             {
                 var popup = new PopupMessage();

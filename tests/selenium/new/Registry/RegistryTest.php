@@ -546,7 +546,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_77_users_filtering ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->type("name=login", "one");
         $this->select("name=role_id", "label=Аккаунт-менеджер");
         $this->select("name=clinic_id", "label=«120 на 80»");
@@ -559,7 +559,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_78_users_login_filtering ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->type("name=login", "one");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("12000");
@@ -569,11 +569,11 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_79_USERS_ROLE_FILTERING ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->select("name=role_id", "label=Аккаунт-менеджер");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad();
-        $this->open("/manage/account?login=&role_id=4&clinic_id=0");
+        $this->open("/manage/user?login=&role_id=4&clinic_id=0");
         for ($second = 0; ; $second++) {
             if ($second >= 60) $this->fail("timeout");
             try {
@@ -586,7 +586,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_80_USERS_CLINIC_FILTERING ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->waitForPageToLoad();
         $this->select("name=clinic_id", "label=«120 на 80»");
         $this->click("css=input[type=\"submit\"]");
@@ -596,7 +596,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_81_NO_PARAMETERS_FILTERING ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad();
         $this->waitForTextPresent("Представитель клиники");
@@ -607,7 +607,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_82_NEW_USER_ADDING ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->click("css=input.btn-appoint.block-button");
         $this->waitForPageToLoad();
         $this->type("name=login", "Test Login");
@@ -622,7 +622,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_83_FIELDS_VALIDATING_ALERT ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account/create");
+        $this->open("/manage/user/create");
         $this->waitForPageToLoad();
         $this->click("name=save");
         sleep(1);
@@ -632,7 +632,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_84_FIELDS_VALIDATING_ALERT_2 ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account/create");
+        $this->open("/manage/user/create");
 
         $this->type("id=password", "1234");
         $this->click("name=save");
@@ -648,7 +648,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_85_FIELDS_VALIDATING_ALERT_3 ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account/create");
+        $this->open("/manage/user/create");
         $this->type("id=password", "123456");
         $this->click("name=save");
         for ($second = 0; ; $second++) {
@@ -663,7 +663,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_86 ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account/create");
+        $this->open("/manage/user/create");
         $this->type("id=password", "123456");
         $this->type("name=password2", "1234567");
         $this->click("name=save");
@@ -679,7 +679,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_87_ADD_EXISTING_USER ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account/create");
+        $this->open("/manage/user/create");
         $this->waitForPageToLoad();
         $this->type("name=login", "test");
         $this->type("id=password", "testtest");
@@ -693,7 +693,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_86_FIELDS_VALIDATING_ALERT_4 ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account/create");
+        $this->open("/manage/user/create");
         $this->type("id=password", "123456");
         $this->type("name=password2", "1234567");
         $this->click("name=save");
@@ -709,7 +709,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_88_USER_EDITING ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->click("xpath=(//a[contains(text(),'редактировать')])[2]");
         $this->waitForPageToLoad();
         $this->type("name=login", "example@example.com");
@@ -724,7 +724,7 @@ class RegistryTest extends BaseSeleniumTest
                 } catch (Exception $e) {}
                 sleep(1);
             }
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->type("css=input[name=\"login\"]", "example@example.com");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad();
@@ -735,7 +735,7 @@ class RegistryTest extends BaseSeleniumTest
     public function test_REGISTRY_89_CLINIC_DELETE ()
     {
         $this->mainManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->click("xpath=(//a[contains(text(),'редактировать')])[31]");
         $this->waitForPageToLoad();
             if ($this->isTextPresent("Клиника \"120 на 80\"")){

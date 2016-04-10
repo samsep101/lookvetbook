@@ -25,7 +25,7 @@
                         || Acl::isAuthed(RoleModel::FREELANCE_MANAGER)): ?>
                         <li><a href="/registry/manage">Главная</a></li>
                     <?php if (!Acl::isAuthed(RoleModel::FREELANCE_MANAGER)): ?>
-                        <li><a href="/manage/account">Пользователи</a></li>
+                        <li><a href="/manage/user">Пользователи</a></li>
                     <?php endif; ?>
                     <?php if (Acl::isAuthed(RoleModel::ACCOUNT_MANAGER) || Acl::isAuthed(RoleModel::ACCOUNT_SUPER_MANAGER)): ?>
                         <li><a href="/registry/manage/statuses">Статусы</a></li>

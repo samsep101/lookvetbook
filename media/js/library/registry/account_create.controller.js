@@ -42,13 +42,13 @@ var AccountCreateController = function()
 
     this.sendData = function()
     {
-        Ajax.Post('/manage/account/ajaxCreateAccount', self.data, function(data){
+        Ajax.Post('/manage/user/ajaxCreateAccount', self.data, function(data){
             if (data.status == 0)
             {
                 var popup = new PopupMessage();
                 popup.close_callback = function()
                 {
-                    window.location = '/manage/account';
+                    window.location = '/manage/user';
                 };
 
                 popup.show('Пользователь успешно добавлен');

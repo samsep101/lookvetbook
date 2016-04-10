@@ -64,7 +64,7 @@
     <input type="submit" value="Добавить новую клинику" />
 </div>
 
-<form method="GET" action="/manage/account/edit">
+<form method="GET" action="/manage/user/edit">
     <?php echo $this->block('registry/manage/blocks/simple_city_filter');?>
     <input type="hidden" name="user_id" value="<?php if (isset($user) && $user) echo $user->getId();?>">
     <input type="submit" value="Применить">

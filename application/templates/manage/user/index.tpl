@@ -11,7 +11,7 @@
 ?>
 <div class="users-filter">
     <div>
-        <form action="/manage/account" method="GET">
+        <form action="/manage/user" method="GET">
             Логин: <input type="text" name="login" value="<?php echo $login; ?>" />
 
             Тип:
@@ -53,7 +53,7 @@
     </div>
 </div>
 
-<input class="btn-appoint block-button" type="submit" value="Добавить" onclick="window.location='/manage/account/create';" />
+<input class="btn-appoint block-button" type="submit" value="Добавить" onclick="window.location='/manage/user/create';" />
 
 <?php if ($users): ?>
 <?php $counter = 1;?>
@@ -78,7 +78,7 @@
                     <?php endif; ?>
                 </td>
                 <td>
-                    <a href="/manage/account/edit?user_id=<?php echo $user->getId(); ?>">редактировать</a>
+                    <a href="/manage/user/edit?user_id=<?php echo $user->getId(); ?>">редактировать</a>
                 </td>
                 <?php if (Acl::isAuthed(RoleModel::ACCOUNT_MANAGER) && $counter == 1):?>
                     <td>

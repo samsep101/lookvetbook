@@ -86,9 +86,8 @@ class ClinicManager extends AliasManager
 
   public function afterSave(DynamicModel $model)
   {
-    if ($model->isNew()) {
+
       ElasticaTask::indexClinic($model->getId());
-    }
 
     return;
   }

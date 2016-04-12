@@ -42,9 +42,7 @@ class DoctorManager extends AliasManager
       $this->doctor_info->save();
     }
 
-    if ($model->isNew()) {
       ElasticaTask::indexDoctor($model->getId());
-    }
   }
 
   public function getActiveListByClinicId($clinic_id)

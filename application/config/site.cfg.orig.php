@@ -20,6 +20,7 @@ define('CSS_DIR', 'vet');
 define('PAGE_TITLE', 'Портал медицинских услуг в ');
 define('JUR_ADDRESS', 'Гамсоновский переулок, 2');
 define('JUR_ADDRESS_FULL', '115191, г.Москва, Гамсоновский переулок, д.2');
+define('CONTENT_DISEASE_URL', 'http://admin:21506@content.lookvbook.ru/media/xml/Test.xml');
 
 
 

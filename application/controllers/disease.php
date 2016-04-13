@@ -443,7 +443,7 @@
             set_time_limit(0);
 
             ini_set("memory_limit", "128M");
-            $xml_data = simplexml_load_file('http://admin:21506@content.lookmedbook.ru/media/xml/Test.xml');
+            $xml_data = simplexml_load_file(CONTENT_DISEASE_URL);
 
             if ($xml_data)
             {

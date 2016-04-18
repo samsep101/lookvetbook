@@ -10,6 +10,11 @@ class AjaxController extends BaseController
 
   public function checkUnique()
   {
+	// todo: нормальную проверку делать прийдется
+	JsonResponse::result(true);
+	return '';
+	
+	
     $value = $this->request('value');
     $fields = $this->request('fields');
 

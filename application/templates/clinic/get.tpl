@@ -318,7 +318,7 @@
 				<?php $this->equal_elements_type = 'clinic'; ?>
 				<?php $this->clinic = $clinic; ?>
 				<?php $this->equal_clinics = $equal_clinics; ?>
-				<?php $this->block('blocks/equal_elements'); ?>
+				<?php /* $this->block('blocks/equal_elements');*/ ?>
 			<?php endif; ?>
 		</div>
 	</div>

@@ -3,7 +3,7 @@
     class ScheduleViewHelper
     {
 
-        public function view($clinic)
+        static function view($clinic)
         {
             $days = self::get_days($clinic);
 

@@ -2,6 +2,7 @@
 <div class="inner">
 	<div class="about-ilness-content flo">
 		<div class="main-column">
+            <?php $this->block('disease/blocks/adv_left_side'); ?>
 			<div class="main-cont flo">
 				<div class="illness-header flo">
 					<div class="desease-phone"><small>(<?php echo SITE_PHONE_CODE; ?>)</small> <?php echo SITE_PHONE; ?></div>

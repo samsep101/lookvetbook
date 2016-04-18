@@ -2375,6 +2375,16 @@ h2 {
 .about-ilness-content .main-column {
     width : 705px;
     float : left;
+    position: relative;
+}
+
+.width_appeare_left_side_banner{
+    width: 120px;
+    height: 603px;
+    position: absolute;
+    left: -121px;
+    top: 51px;
+    display: none;
 }
 
 .about-ilness-content .main-cont {

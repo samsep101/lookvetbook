@@ -97,4 +97,3 @@
         <a class="view-more"><i class="icon-loader"></i></a>
     </div>
 </div>
-<?php $this->block('blocks/adv/content_page'); ?>

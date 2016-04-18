@@ -344,4 +344,3 @@
 	<?php endif; ?>
 
 </script>
-<?php $this->block('blocks/adv/content_page'); ?>

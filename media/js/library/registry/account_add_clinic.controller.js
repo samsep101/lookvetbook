@@ -15,7 +15,7 @@ var AccountAddClinicController  = function(){
                     user_id : self.user_id
                 };
 
-                Ajax.Post('/manage/account/ajaxAddClinic', data, function(data){
+                Ajax.Post('/manage/user/ajaxAddClinic', data, function(data){
                     if (data.status == 0)
                     {
                         window.location.reload();

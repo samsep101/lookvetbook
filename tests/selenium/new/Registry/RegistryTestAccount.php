@@ -648,7 +648,7 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_77_users_filtering ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->type("name=login", "one");
         $this->select("name=role_id", "label=Аккаунт-менеджер");
         $this->select("name=clinic_id", "label=«120 на 80»");
@@ -661,7 +661,7 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_78_users_login_filtering ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->type("name=login", "one");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad("3000");
@@ -671,11 +671,11 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_79_USERS_ROLE_FILTERING ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->select("name=role_id", "label=Аккаунт-менеджер");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad();
-        $this->open("/manage/account?login=&role_id=4&clinic_id=0");
+        $this->open("/manage/user?login=&role_id=4&clinic_id=0");
         for ($second = 0; ; $second++) {
             if ($second >= 60) $this->fail("timeout");
             try {
@@ -688,7 +688,7 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_80_USERS_CLINIC_FILTERING ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->waitForPageToLoad();
         $this->select("name=clinic_id", "label=«120 на 80»");
         $this->click("css=input[type=\"submit\"]");
@@ -698,7 +698,7 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_81_NO_PARAMETERS_FILTERING ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad();
         $this->waitForTextPresent("Представитель клиники");
@@ -709,7 +709,7 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_82_NEW_USER_ADDING ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->click("css=input.btn-appoint.block-button");
         $this->waitForPageToLoad();
         $this->type("name=login", "Test Login");
@@ -724,7 +724,7 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_83_FIELDS_VALIDATING_ALERT ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account/create");
+        $this->open("/manage/user/create");
         $this->click("css=input[name=\"save\"]");
         $this->click("name=save");
         if ($this->getXpathCount("/html/body/span[4]/label") == 3) return;
@@ -733,7 +733,7 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_84_FIELDS_VALIDATING_ALERT_2 ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account/create");
+        $this->open("/manage/user/create");
 
         $this->type("id=password", "1234");
         $this->click("name=save");
@@ -749,7 +749,7 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_85_FIELDS_VALIDATING_ALERT_3 ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account/create");
+        $this->open("/manage/user/create");
         $this->type("id=password", "123456");
         $this->click("name=save");
         for ($second = 0; ; $second++) {
@@ -764,7 +764,7 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_86_FIELDS_VALIDATING_ALERT_4 ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account/create");
+        $this->open("/manage/user/create");
         $this->type("id=password", "123456");
         $this->type("name=password2", "1234567");
         $this->click("name=save");
@@ -780,7 +780,7 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_87_ADD_EXISTING_USER ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account/create");
+        $this->open("/manage/user/create");
         $this->waitForPageToLoad();
         $this->type("name=login", "deni@denis.ru");
         $this->type("id=password", "testtest");
@@ -794,7 +794,7 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_88_USER_EDITING ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->click("xpath=(//a[contains(text(),'редактировать')])[2]");
         $this->waitForPageToLoad();
         $this->type("name=login", "example@example.com");
@@ -809,7 +809,7 @@ class RegistryTestAccount extends BaseSeleniumTest
             } catch (Exception $e) {}
             sleep(1);
         }
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->type("css=input[name=\"login\"]", "example@example.com");
         $this->click("css=input[type=\"submit\"]");
         $this->waitForPageToLoad();
@@ -820,7 +820,7 @@ class RegistryTestAccount extends BaseSeleniumTest
     public function test_REGISTRY_89_CLINIC_DELETE ()
     {
         $this->accountManagerLogin();
-        $this->open("/manage/account");
+        $this->open("/manage/user");
         $this->click("xpath=(//a[contains(text(),'редактировать')])[2]");
         $this->waitForPageToLoad();
         if ($this->isTextPresent("Клиника \"120 на 80\"")){

@@ -21,7 +21,7 @@ var AccountEditPageController = function(){
 
             var modal_window = new ModalWindow();
             modal_window.setYesAction(function(){
-                Ajax.Post('/manage/account/ajaxDeleteClinic', {clinic_id : clinic_id, user_id : self.user_id}, function(data){
+                Ajax.Post('/manage/user/ajaxDeleteClinic', {clinic_id : clinic_id, user_id : self.user_id}, function(data){
                     if (data.status == 0)
                     {
                         $('.clinic-row-'+clinic_id).remove();

@@ -19,6 +19,7 @@ class SearchParams
   private $distance = 2000;
 
   private $joined_tables = array();
+  private $joined_field_tables = array();
 
   private $table;
   private $id_field_name = 'id';
@@ -33,7 +34,15 @@ class SearchParams
 
   public function addCriteria($criteria, $operator, $value)
   {
+  }
 
+  public function joined_field_models()
+  {
+    return array_map(function($a){
+      $list = array_map(function($b){ return ucfirst($b); }, explode('_',$a));
+
+      return implode('', $list).'Model';
+    }, $this->joined_field_tables);
   }
 
   public function addParam($param, $value, $index_name = '')
@@ -165,6 +174,13 @@ class SearchParams
     );
   }
 
+  public function addJoinTableFields($table)
+  {
+    if(isset($this->joined_tables[$table]) and !in_array($table, $this->joined_field_tables)) {
+      $this->joined_field_tables[] = $table;
+    }
+  }
+
   public function addJoin($table, $join_field = NULL, $joined_field = NULL, $join_type = 'INNER JOIN')
   {
     if (preg_match('/^([A-Za-z0-9_]+) +([A-Za-z0-9_]+)$/ims', $table, $matches)) {
@@ -262,6 +278,12 @@ class SearchParams
       $this->sql .= ' SQL_CALC_FOUND_ROWS ';
 
     $this->sql .= ' `' . $this->table . '`.*';
+
+    if(count($this->joined_field_tables)) {
+      foreach($this->joined_field_tables as $table) {
+        $this->sql .= ', `' . $table . '`.*';
+      }
+    }
 
     if (count($this->distance_params) == 1) {
       $this->sql .= ', ';

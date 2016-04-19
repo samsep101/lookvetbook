@@ -181,6 +181,26 @@ class AccountManager extends ModelManager
     return (isset($data[0])) ? $this->initOne($data[0]) : null;
   }
 
+  /**
+   * @return AccountModel
+   */
+  public function getOneById($account_id, $w_phone='')
+  {
+    $sql = 'SELECT `a`.* ';
+    if($w_phone){
+      $sql .= ', GROUP_CONCAT(DISTINCT `p`.`phone` SEPARATOR \', \') AS phones ';
+    }
+    $sql .= ' FROM `account` `a` ';
+    if($w_phone) $sql .= ' LEFT JOIN `account_phone` `p` ON (`a`.`id`=`p`.`account_id`)';
+    $sql .= ' WHERE `a`.`id` = "' . (int)$account_id . '"';
+    if($w_phone) $sql .= ' GROUP BY `a`.`id`';
+//print_r($sql);
+    $data = $this->db->query($sql);
+
+    return (isset($data[0])) ? $this->initOne($data[0]) : null;
+  }
+
+
   public function getInfoByAccountId($account_id)
   {
     $sql = 'SELECT *
@@ -269,13 +289,17 @@ class AccountManager extends ModelManager
       $search_params->addParam('email', $criteria->email);
     }
 
+    $search_params->addJoin('account_phone', 'account.id', 'account_phone.account_id');
+    $search_params->addJoinTableFields('account_phone');
     if ($criteria->phone_number) {
       $phone_number = preg_replace('/[^0-9]/ims', '', $criteria->phone_number);
-      $search_params->addJoin('account_phone', 'account.id', 'account_phone.account_id');
-      $search_params->addParam('account_phone.phone', $phone_number);
+      if($phone_number>0) {
+        $search_params->addParam('account_phone.phone', $phone_number);
+      }
     }
 
-    return $this->getListBySearchParams($search_params);
+    $res = $this->getListBySearchParams($search_params);
+    return $res;
   }
 
 }

@@ -41,7 +41,7 @@ if ($accounts) {
         <td><?php echo $account->first_name.' '.$account->middle_name.' '.$account->last_name; ?></td>
         <td><?php echo $account->nick; ?></td>
         <td><?php echo $account->email; ?></td>
-        <td><?php echo $account->email; ?></td>
+        <td><?php echo $account->phone; ?></td>
         <td>
           <a href="/manage/account/edit?id=<?php echo $account->getId(); ?>">редактировать</a>
         </td>
@@ -49,6 +49,25 @@ if ($accounts) {
         <?php $counter++;?>
         <?php }; ?>
     </table>
+
+  <div class="pager"><?php
+    $i = 1;
+    $pager = [];
+    while(($i-1)*$page_size<$records_count) {
+      if($i==$page_nm){
+        $pager[] = '<span>'.$i.'</span>';
+      }else {
+        $pager[] = '<a href="/manage/account?' . $search_line . '&page=' . $i . '">' . $i . '</a>';
+      }
+      $i++;
+    }
+    if(count($pager)>1) {
+      echo implode(' ', $pager);
+    }
+  ?></div>
+
+
+
 <?php } else { ?>
     по данным параметрам ничего не найдено
 <?php } ?>

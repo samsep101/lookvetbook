@@ -14,23 +14,30 @@ class AccountManageController extends BaseController
       RedirectManager::redirect(ADMIN_FOLDER);
 
     $account_search_params = new AccountSearchParams();
+    $search_line = '';
     foreach(['first_name', 'middle_name', 'last_name', 'phone_number', 'email', 'id'] as $fName) {
       //$fValue = $this->request($fName);
       $fValue = $this->request->get($fName);
       $account_search_params->$fName = $fValue;
+      $search_line .= ($search_line?'&':'').$fName.'='.urlencode($fValue);
       $this->view->$fName = $fValue;
+    }
+    $page = (int)$this->request->get('page');
+    if($page) {
+      $account_search_params->page=$page;
     }
 
 //    $account_search_params->registry_user_id = Acl::userId();
 
     $account_manager = new AccountManager();
     $accounts = $account_manager->getListByModelSearchCriteria($account_search_params);
-
-
-
+    $count = $account_manager->getTotalHits();
 
     $this->view->accounts = $accounts;
-
+    $this->view->records_count = $count;
+    $this->view->page_nm = $page?$page:1;
+    $this->view->page_size = $account_search_params->by_page;
+    $this->view->search_line = $search_line;
   }
 
   public function create()
@@ -38,10 +45,8 @@ class AccountManageController extends BaseController
     if (!Acl::isAuthed(RoleModel::ACCOUNT_SUPER_MANAGER) && !Acl::isAuthed(RoleModel::ACCOUNT_MANAGER))
       RedirectManager::redirect(ADMIN_FOLDER);
 
-    $clinic_manager = new ClinicManager();
-    $clinics = $clinic_manager->getListByManagerAccountId(Acl::userId());
 
-    $this->view->clinics = $clinics;
+//    $this->view->account = $account;
   }
 
   public function ajaxCreateAccount()
@@ -86,46 +91,13 @@ class AccountManageController extends BaseController
 
 
     $account_manager = new AccountManager();
-    $account = $account_manager->getOneById($acc_id);
+    $account = $account_manager->getOneById($acc_id, 'w_phone');
 
-    $this->view->account = $account;
-
-    $clinic_manager = new ClinicManager();
-    $this->view->clinics = $clinic_manager->getListByManagerAccountId(Acl::userId(), $additional_access);
-
-    $by_page = 15;
-    $page = $this->request('page', 1);
-
-    $this->view->page = $page;
-
-    $this->view->current_page = $page;
-    $this->view->page_url = '/manage/account/edit';
-
-    $city_id = $this->request->get('city_id', null);
-    $this->view->city_id = $city_id;
-
-    Environment::set('get_total_count', true);
-
-    $clinic_search_params = new ClinicSearchParams();
-    $clinic_search_params->page = $page;
-    $clinic_search_params->by_page = $by_page;
-    $clinic_search_params->registry_account_id = $account->getId();
-    $clinic_search_params->city_id = $city_id;
-
-    $account_clinics = $clinic_manager->getListByClinicSearchParams($clinic_search_params);
-    $this->view->account_clinics = $account_clinics;
-    $total_count = $clinic_manager->getTotalHits();
-
-    $this->view->pages_total = ($total_count % $by_page) ? (int)($total_count / $by_page) + 1 : $total_count / $by_page;
-
-    /**
-     * @var CityManager $city_manager
-     * @var CityModel[] $cities
-     */
-    $city_manager = ModelManagerFactory::getByName('city');
-
-    $cities = $city_manager->getListToEditByAccountId($acc_id);
-    $this->view->cities = $cities;
+    $fields = ['id', 'first_name', 'middle_name', 'last_name', 'nick', 'email', 'phones', ];
+    foreach($fields as $field) {
+      $fld_val = $account->$field;
+      $this->view->$field = empty($fld_val)?'':$fld_val;
+    }
   }
 
   public function ajaxEditAccount()

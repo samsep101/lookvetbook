@@ -170,28 +170,31 @@ class ModelManager implements ICachedModelManager
   public function getListBySearchParams(SearchParams $search_params)
   {
     $search_params->setIdFieldName($this->id_field_name);
+    $search_params->calcFoundRows();
     $sql = $search_params->buildQuery($this->table_name);
     $data = $this->db->query($sql);
-    return $this->initList($data);
+    return $this->initList($data,$search_params->joined_field_models());
   }
 
 
-  protected function initList($entries_list)
+  protected function initList($entries_list, $joined_models=[])
   {
     $result = array();
-
     if (count($entries_list)) {
       foreach ($entries_list as $entry) {
-        $result[] = $this->initOne($entry);
+        $res = $this->initOne($entry);
+        $result[] = $res;
       }
     }
     return $result;
   }
 
+
   protected function initOne($info)
   {
-    if (!$info)
+    if (!$info) {
       return NULL;
+    }
     $id = $info[$this->id_field_name];
 
 //            if (isset($this->models_register[$id]) && $this->model_register_enable && static::$model_register_enable_global)

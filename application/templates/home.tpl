@@ -192,6 +192,7 @@
     <?php $this->block('blocks/head'); ?>
     <?php if (isset($home_page)):?>
         <link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/home_style.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/media.css?<?php echo RELEASE_NUMBER?>" type="text/css"/>
         <!--[if lt IE 8]>
         <link rel="stylesheet" href="/media/css/home_page/ie/ie-7.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />
         <![endif]-->
@@ -201,7 +202,7 @@
     <?php endif?>
 
     <meta name='yandex-verification' content='76535cc7dd5d586f' />
-
+    <meta name=viewport content="width=device-width, initial-scale=1">
 </head>
 <body>
 <script type="text/javascript">

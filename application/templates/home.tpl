@@ -216,7 +216,6 @@
     <div class="citymaps-balloon-wrapper">
         <div class="citymaps-balloon-container">
             <div class="citymaps-balloon-body">
-
                 $[result]
             </div>
         </div>

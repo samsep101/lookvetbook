@@ -771,22 +771,21 @@ class AjaxController extends BaseController
 
   public function recordToTheVisit()
   {
+    $mail_data = [];
     $schedule_id = $this->request->request('schedule_id');
     $doctor_id = $this->request->request('doctor_id');
-    $full_name = trim(strip_tags($this->request->request('full_name')));
-    $phone = $this->request->request('phone');
+    $mail_data['full_name'] = $full_name = trim(strip_tags($this->request->request('full_name')));
+    $mail_data['phone'] = $phone = $this->request->request('phone');
     $family_relation_status_id = $this->request->request('family_relation_status_id');
     $purpose_of_visit_id = $this->request->request('purpose_of_visit_id');
     $visit_id = $this->request->request('visit_id');
-    $comment = $this->request->request('comment');
+    $mail_data['comment'] = $comment = $this->request->request('comment');
 
     $schedule_pat = '/([0-9]+)\-([0-9]+)\-([0-9]+)/is';
     if (preg_match($schedule_pat, $schedule_id, $a)){
       list($a, $schedule_date, $clinic_id, $specialty_id) = $a;
     }
 
-
-    //$schedule = ModelManagerFactory::getByName('schedule')->getOneById($schedule_id);
 
     $visit_information = new VisitInformation();
     /*TODO
@@ -812,6 +811,10 @@ class AjaxController extends BaseController
 
     $visit_recorder = new VisitRecorder();
     $status = $visit_recorder->record($visit_information, $visit_id);
+    $mail_data['visit_id'] = $visit_recorder->getVisit()->getId();
+
+      $mail_sender = new EmailSenderHelper();
+      $mail_sender->sendRecordInformation($mail_data);
 
     if ($status == 0) {
       $account_manager = new AccountManager();

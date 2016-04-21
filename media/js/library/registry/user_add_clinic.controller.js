@@ -1,4 +1,4 @@
-var AccountAddClinicController  = function(){
+var UserAddClinicController  = function(){
     var self = this;
 
     this.container = null;

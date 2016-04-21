@@ -1,16 +1,16 @@
-var AccountEditPageController = function(){
+var UserEditPageController = function(){
 
     var self = this;
 
     this.user_id = null;
 
     this.init = function(){
-        var edit_controller = new AccountEditController();
+        var edit_controller = new UserEditController();
         edit_controller.container = '.edit-form';
         edit_controller.user_id = self.user_id;
         edit_controller.init();
 
-        var add_clinic_controller = new AccountAddClinicController();
+        var add_clinic_controller = new UserAddClinicController();
         add_clinic_controller.container = '.new_clinic_block';
         add_clinic_controller.user_id = self.user_id;
         add_clinic_controller.init();

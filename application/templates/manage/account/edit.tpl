@@ -1,3 +1,9 @@
+<script>
+    $(document).ready(function(){
+        var controller = new AccountEditController();
+        controller.init();
+    });
+</script>
 <div class="edit-form block">
     <table class="styled-table">
         <input type="hidden" name="id" value="<?php echo $id; ?>" />
@@ -23,7 +29,7 @@
         </tr>
         <tr>
             <td>Телефоны (через запятую)</td>
-            <td><input type="text" name="phones" value="<?php echo $phones; ?>" /></td>
+            <td><input type="text" name="phone" value="<?php echo $phone; ?>" /></td>
         </tr>
         <tr>
             <td colspan="2"> <input type="submit" name="save" value="Сохранить" /></td>

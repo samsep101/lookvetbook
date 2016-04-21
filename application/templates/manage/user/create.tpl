@@ -1,6 +1,6 @@
 <script>
     $(document).ready(function(){
-        var controller = new AccountCreateController();
+        var controller = new UserCreateController();
         controller.init();
     });
 </script>

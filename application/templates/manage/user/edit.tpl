@@ -6,7 +6,7 @@
 ?>
 <script>
     $(document).ready(function(){
-        var controller = new AccountEditPageController();
+        var controller = new UserEditPageController();
         controller.user_id = <?php echo $user->getId(); ?>;
         controller.init();
     });

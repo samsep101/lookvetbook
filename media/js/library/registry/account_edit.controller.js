@@ -1,11 +1,14 @@
 var AccountEditController = function()
 {
-    this.user_id = null;
+    this.account_id = null;
 
     this.data = {
-        user_id : null,
-        login : null,
-        password : null
+        account_id : null,
+        first_name : null,
+        middle_name : null,
+        last_name : null,
+        phone_number : null,
+        email : null
     };
 
     this.container = null;
@@ -15,18 +18,20 @@ var AccountEditController = function()
 
     this.init = function()
     {
-        $(self.container + ' input[name=login]').change(function (){
+        this.account_id = $(self.container + ' input[name=id]').val();
+
+        $(self.container + ' input[name=first_name], '+ self.container + ' input[name=middle_name], '+ self.container + ' input[name=last_name], '+ self.container + ' input[name=phone_number], '+ self.container + ' input[name=email]').change(function (){
             self.change_flag = true;
             $(self.container + ' input[name="save"]').validation({
                 validate : [
-                    $(self.container + ' input[name="login"]').validate(validation_rules['user_login']),
-                    $(self.container + ' input[name="password"]').validate(validation_rules['edit_password']),
-                    $(self.container + ' input[name="password2"]').validate(validation_rules['password2']),
-                    $(self.container + ' select[name="role_id"] :selected').validate(validation_rules['required'])
+                    $(self.container + ' input[name="first_name"]').validate(validation_rules['required']),
+                    $(self.container + ' input[name="last_name"]').validate(validation_rules['required']),
+                    $(self.container + ' input[name="phone_number"]').validate(validation_rules['required']),
+                    $(self.container + ' input[name="email"]').validate(validation_rules['required']),
                 ],
                 callback: function(){
-                    self.readData();
-                    self.sendData();
+                    //self.readData();
+                    //self.sendData();
                 }
             });
         });
@@ -34,40 +39,47 @@ var AccountEditController = function()
         if (!self.change_flag){
             $(self.container + ' input[name="save"]').validation({
                 validate : [
-                    $(self.container + ' input[name="password"]').validate(validation_rules['edit_password']),
-                    $(self.container + ' input[name="password2"]').validate(validation_rules['password2']),
-                    $(self.container + ' select[name="role_id"] :selected').validate(validation_rules['required'])
+                    $(self.container + ' input[name="first_name"]').validate(validation_rules['required']),
+                    $(self.container + ' input[name="last_name"]').validate(validation_rules['required']),
+                    $(self.container + ' input[name="phone_number"]').validate(validation_rules['required']),
+                    $(self.container + ' input[name="email"]').validate(validation_rules['email']),
                 ],
                 callback: function(){
-                    self.readData();
-                    self.sendData();
+                    //self.readData();
+                    //self.sendData();
                 }
             });
         }
-        /*
-         $('input[name="save"]').click(function(){
-         self.readData();
-         self.sendData();
-         });*/
+
+        $('input[name="save"]').click(function(){
+            //self.readData();
+            //self.sendData();
+        });
     };
 
     this.readData = function()
     {
-        self.data.login = $('input[name="login"]').val();
-        self.data.password = $('input[name="password"]').val();
-        self.data.role_id = $('select[name="role_id"] :selected').val();
-        self.data.user_id  = self.user_id;
+        self.data.id = $('input[name="id"]').val();
+        self.data.first_name = $('input[name="first_name"]').val();
+        self.data.middle_name = $('input[name="middle_name"]').val();
+        self.data.last_name = $('input[name="last_name"]').val();
+        self.data.phone_number = $('input[name="phone_number"]').val();
+        self.data.email = $('input[name="email"]').val();
     };
 
     this.sendData = function()
     {
-        Ajax.Post('/manage/user/ajaxEditAccount', self.data, function(data){
+        Ajax.Post('/manage/account/ajaxEditAccount', self.data, function(data){
             if (data.status == 0)
             {
                 var popup = new PopupMessage();
                 popup.close_callback = function()
                 {
-                    window.location.reload();
+                    if(this.account_id) {
+                        window.location.reload();
+                    }else {
+                        window.location = '/manage/account/' + data.account_id;
+                    }
                 };
 
                 popup.show('Данные успешно сохранены');

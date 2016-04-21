@@ -15,7 +15,7 @@
             Фамилия: <input type="text" name="last_name" value="<?php echo $last_name; ?>" />
             Имя: <input type="text" name="first_name" value="<?php echo $first_name; ?>" />
             Отчество: <input type="text" name="middle_name" value="<?php echo $middle_name; ?>" />
-            Телефон: <input type="text" name="phone_number" value="<?php echo $phone_number; ?>" />
+            Телефон: <input type="text" name="phone" value="<?php echo $phone_number; ?>" />
             Email: <input type="text" name="email" value="<?php echo $email; ?>" />
 
             <input type="submit" value="Применить" />

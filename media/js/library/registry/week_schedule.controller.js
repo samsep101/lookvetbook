@@ -63,7 +63,7 @@ var WeekScheduleController = function(){
     this.setDayData = function(day_name, data)
     {
         var today = new Date();
-        var week_number =  today.getWeekNumber() - 1;
+        var week_number =  today.getWeekNumber();
         var date = DateHelper.getDateByDayNameAndWeekNumberAndYear(day_name, week_number, 1900 + today.getYear());
         date = date.toDateString();
 

@@ -3,9 +3,9 @@
 	<div class="about-ilness-content flo">
 		<div class="main-column">
             <?php $this->block('disease/blocks/adv_left_side'); ?>
+            <div class="desease-phone"><a href="tel:+7(<?=SITE_PHONE_CODE?>)<?=SITE_PHONE?>">Мы найдём Вам врача +7 (<?php echo SITE_PHONE_CODE; ?>) <?php echo SITE_PHONE; ?></a></div>
 			<div class="main-cont flo">
 				<div class="illness-header flo">
-					<div class="desease-phone"><small>(<?php echo SITE_PHONE_CODE; ?>)</small> <?php echo SITE_PHONE; ?></div>
 					<h1 id="disease-title" data-id="<?php echo $disease->id; ?>" data-title="<?php echo $disease->title; ?>"><?php echo $disease->title; ?></h1>
 					<?php if (Acc::isAuthed()) { ?>
 						<a class="btn-bookmark btn-bookmark-illness"></a>

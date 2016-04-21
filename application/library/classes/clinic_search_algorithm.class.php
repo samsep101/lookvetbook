@@ -61,7 +61,9 @@
             {
                 $this->next_page_flag = true;
                 unset($clinics[$params->by_page]);
-            } else {
+            } elseif (count($clinics) == ($params->by_page)){
+				$this->next_page_flag = true;
+			}else{
                 $this->next_page_flag = false;
             }
 

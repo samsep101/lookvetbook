@@ -1,0 +1,6 @@
+php index.php - консольный запуск
+elastica/reIndexAll - переиндексировать все документы в эластике
+test/clearMemcache - очистка всего memcache
+test/createCompiledJSLibrary - обновление списка js файлов
+
+У нас теперь есть composer!!!

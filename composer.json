@@ -1,0 +1,15 @@
+{
+  "name": "anharchenko/lookmedbook",
+  "description": "lookmedbook master",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "splashx",
+      "email": "hghsasha@gmail.com"
+    }
+  ],
+  "require": {
+    "neeckeloo/closure-compiler-php": "dev-master"
+  }
+}

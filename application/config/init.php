@@ -17,6 +17,8 @@
 
 	spl_autoload_register('__autoload_application');
 
+    require_once __DIR__ . '/../../vendor/autoload.php';
+
     if (debug == 1)
     {
         ini_set('display_errors', 1);

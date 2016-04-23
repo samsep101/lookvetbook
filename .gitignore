@@ -2,7 +2,7 @@
 nbproject
 
 .htaccess
-
+/vendor
 /media/logs
 /media/maps
 /media/upload

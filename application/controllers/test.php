@@ -200,6 +200,52 @@
             }
         }
 
+        public function createCompiledJSLibrary(){
+            //getting list of js files from /media/js/library/ catalog
+            $js_library_folder = __DIR__.'/../../media/js/library';
+            $all_js = glob($js_library_folder.'/*');
+            $exclude_js = [];
+            $js_file_list = [];
+            $pat = '/([a-zA-Z0-9\.]+)\.js/is';
+            foreach ($all_js as $e)
+            {
+                $file_name = str_replace($js_library_folder.'/', '', $e);
+
+                if (array_search($file_name, $exclude_js))
+                    break;
+
+                if (preg_match($pat, $file_name))
+                    $js_file_list[] = $file_name;
+            }
+
+            $compiler = new Closure\RemoteCompiler();
+            foreach ($js_file_list as $fname){
+                $compiler->addLocalFile($js_library_folder.'/'.$fname);
+            }
+
+            $compiled = $compiler->compile();
+            $compiled_code = $compiled->getCompiledCode();
+
+            $compiled_js_fname = $js_library_folder.'/../js_library.js';
+
+            try{
+                file_put_contents($compiled_js_fname, $compiled_code);
+            }catch (Exception $exp){
+                die("error writing file $compiled_js_fname ".$exp->getMessage());
+            }
+
+            echo "file ".realpath($compiled_js_fname)." writed successfuly!";
+            exit(0);
+        }
+
+        public function testComposer(){
+            $compiler = new Closure\RemoteCompiler();
+            $compiler->addScript('var a = "hello"; alert(a);');
+
+            $response = $compiler->compile();
+            $compiledCode = $response->getCompiledCode();
+            die($compiledCode);
+        }
 
         public function testYandex()
         {

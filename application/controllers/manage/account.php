@@ -91,12 +91,12 @@ class AccountManageController extends BaseController
       $account->$fName = $this->request->post($fName);
     }
 
-    if ($account->save() and $account->id) {
-      $errors = $account->save_phones($account->id, $account->phone);
+    if ($account->save() and $acc_id=$account->getId()) {
+      $errors = $account->save_phones($acc_id, $account->phone);
       if($errors) {
         JsonResponse::error(ValidationErrorCodes::WRONG_DATA, $errors);
       }else {
-        JsonResponse::result(['account_id' => $account->id]);
+        JsonResponse::result(['account_id' => $acc_id]);
       }
     } else {
       JsonResponse::error(ValidationErrorCodes::WRONG_DATA, $account->getValidator()->getErrorMessages());

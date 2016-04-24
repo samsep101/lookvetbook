@@ -204,23 +204,25 @@
             //getting list of js files from /media/js/library/ catalog
             $js_library_folder = __DIR__.'/../../media/js/library';
             $all_js = glob($js_library_folder.'/*');
-            $exclude_js = [];
+            $exclude_js = ['jquery.radio.min.js', 'basket_info.controller.js', 'elements.controller.js', 'file_uploader.controller.js', 'sex_select_form.controller.js', 'site_statistic.controller.js'];
             $js_file_list = [];
             $pat = '/([a-zA-Z0-9\.]+)\.js/is';
             foreach ($all_js as $e)
             {
                 $file_name = str_replace($js_library_folder.'/', '', $e);
 
-                if (array_search($file_name, $exclude_js))
-                    break;
-
-                if (preg_match($pat, $file_name))
-                    $js_file_list[] = $file_name;
+                if (array_search($file_name, $exclude_js) === false){
+                    if (preg_match($pat, $file_name))
+                        $js_file_list[] = $file_name;
+                }
             }
 
+            //$s = '';
             $compiler = new Closure\RemoteCompiler();
             foreach ($js_file_list as $fname){
+                //$s .= file_get_contents($js_library_folder.'/'.$fname).PHP_EOL;
                 $compiler->addLocalFile($js_library_folder.'/'.$fname);
+                echo "add file $fname<br>".PHP_EOL;
             }
 
             $compiled = $compiler->compile();
@@ -229,6 +231,7 @@
             $compiled_js_fname = $js_library_folder.'/../js_library.js';
 
             try{
+                //file_put_contents($compiled_js_fname, $s);
                 file_put_contents($compiled_js_fname, $compiled_code);
             }catch (Exception $exp){
                 die("error writing file $compiled_js_fname ".$exp->getMessage());
@@ -239,12 +242,183 @@
         }
 
         public function testComposer(){
-            $compiler = new Closure\RemoteCompiler();
-            $compiler->addScript('var a = "hello"; alert(a);');
+            $arr1 = []; 
+            $arr1['about_page.controller.js'] = 1;
+            $arr1['account_main_page.controller.js'] = 1;
+            $arr1['add_review_block.controller.js'] = 1;
+            $arr1['analysis_page.controller.js'] = 1;
+            $arr1['basket_block.controller.js'] = 1;
+            $arr1['basket_item.controller.js'] = 1;
+            $arr1['basket_page_controller.js'] = 1;
+            $arr1['call_centre_appeal_form.controller.js'] = 1;
+            $arr1['call_centre_operator_doctor_hints.controller.js'] = 1;
+            $arr1['carousel.controller.js'] = 1;
+            $arr1['city.controller.js'] = 1;
+            $arr1['city_choice.controller.js'] = 1;
+            $arr1['clinic_doctor_search_form.controller.js'] = 1;
+            $arr1['clinic_page.controller.js'] = 1;
+            $arr1['clinic_search_form.controller.js'] = 1;
+            $arr1['clinic_search_page.controller.js'] = 1;
+            $arr1['confirm_email.controller.js'] = 1;
+            $arr1['confirm_phone_form.controller.js'] = 1;
+            $arr1['disease_links_block.controller.js'] = 1;
+            $arr1['disease_page.controller.js'] = 1;
+            $arr1['disease_quick_search_form.controller.js'] = 1;
+            $arr1['disease_search_page.controller.js'] = 1;
+            $arr1['disease_search_results_page.controller.js'] = 1;
+            $arr1['doctor_big_card.controller.js'] = 1;
+            $arr1['doctor_big_card_buttons.controller.js'] = 1;
+            $arr1['doctor_page.controller.js'] = 1;
+            $arr1['doctor_search_form.controller.js'] = 1;
+            $arr1['doctor_search_page.controller.js'] = 1;
+            $arr1['doctor_small_card.controller.js'] = 1;
+            $arr1['doctors_visits_coming.controller.js'] = 1;
+            $arr1['equal_elements_block.controller.js'] = 1;
+            $arr1['example_show_cards_form.controller.js'] = 1;
+            $arr1['expanded_block.js'] = 1;
+            $arr1['favorite_clinics_form.controller.js'] = 1;
+            $arr1['favorite_doctors_form.controller.js'] = 1;
+            $arr1['footer_block.controller.js'] = 1;
+            $arr1['header.controller.js'] = 1;
+            $arr1['help_page.controller.js'] = 1;
+            $arr1['help_quick_search_form.controller.js'] = 1;
+            $arr1['help_search_results_page.controller.js'] = 1;
+            $arr1['index_page.controller.js'] = 1;
+            $arr1['jquery.radio.min.js'] = 1;
+            $arr1['landing_license_page.controller.js'] = 1;
+            $arr1['landing_login_page.controller.js'] = 1;
+            $arr1['landing_page.controller.js'] = 1;
+            $arr1['landing_registration_page.controller.js'] = 1;
+            $arr1['login_form.controller.js'] = 1;
+            $arr1['map_controller.js'] = 1;
+            $arr1['new_email.controller.js'] = 1;
+            $arr1['notification.controller.js'] = 1;
+            $arr1['order_form.controller.js'] = 1;
+            $arr1['order_page.controller.js'] = 1;
+            $arr1['orders_page.controller.js'] = 1;
+            $arr1['password_recovery.controller.js'] = 1;
+            $arr1['personal_room_about.controller.js'] = 1;
+            $arr1['personal_room_about_fb_account.controller.js'] = 1;
+            $arr1['personal_room_about_mailru_account.controller.js'] = 1;
+            $arr1['personal_room_about_ok_account.controller.js'] = 1;
+            $arr1['personal_room_about_vk_account.controller.js'] = 1;
+            $arr1['personal_room_doctors_visits_past.controller.js'] = 1;
+            $arr1['personal_room_family.controller.js'] = 1;
+            $arr1['personal_room_my_clinic_search_form.controller.js'] = 1;
+            $arr1['personal_room_my_disease.controller.js'] = 1;
+            $arr1['personal_room_my_doctor_search_form.controller.js'] = 1;
+            $arr1['personal_room_options.controller.js'] = 1;
+            $arr1['personal_room_reviews.controller.js'] = 1;
+            $arr1['personal_room_trust.controller.js'] = 1;
+            $arr1['product_basket.js'] = 1;
+            $arr1['product_card.controller.js'] = 1;
+            $arr1['product_count_block.controller.js'] = 1;
+            $arr1['product_live_search.controller.js'] = 1;
+            $arr1['product_search.controller.js'] = 1;
+            $arr1['product_view_card.controller.js'] = 1;
+            $arr1['record_phones_block.controller.js'] = 1;
+            $arr1['record_to_the_doctor_block.controller.js'] = 1;
+            $arr1['registration_form.controller.js'] = 1;
+            $arr1['schedule_and_clinics_block.controller.js'] = 1;
+            $arr1['set_new_password.controller.js'] = 1;
+            $arr1['set_password_landing_registration.controller.js'] = 1;
+            $arr1['shipping_cost_algorithm.js'] = 1;
+            $arr1['spin_controller.js'] = 1;
+            $arr1['visit_remind_block.controller.js'] = 1;
+            $arr1['yandex_map.controller.js'] = 1;
 
-            $response = $compiler->compile();
-            $compiledCode = $response->getCompiledCode();
-            die($compiledCode);
+
+
+
+            $arr2 = [];
+            $arr2['registration_form.controller.js'] = 1;
+            $arr2['city.controller.js'] = 1;
+            $arr2['login_form.controller.js'] = 1;
+            $arr2['confirm_email.controller.js'] = 1;
+            $arr2['password_recovery.controller.js'] = 1;
+            $arr2['set_new_password.controller.js'] = 1;
+            $arr2['new_email.controller.js'] = 1;
+            $arr2['personal_room_about.controller.js'] = 1;
+            $arr2['personal_room_about_vk_account.controller.js'] = 1;
+            $arr2['personal_room_about_fb_account.controller.js'] = 1;
+            $arr2['personal_room_about_mailru_account.controller.js'] = 1;
+            $arr2['personal_room_about_ok_account.controller.js'] = 1;
+            $arr2['personal_room_family.controller.js'] = 1;
+            $arr2['personal_room_options.controller.js'] = 1;
+            $arr2['personal_room_trust.controller.js'] = 1;
+            $arr2['doctor_page.controller.js'] = 1;
+            $arr2['clinic_page.controller.js'] = 1;
+            $arr2['disease_page.controller.js'] = 1;
+            $arr2['disease_search_results_page.controller.js'] = 1;
+            $arr2['disease_search_page.controller.js'] = 1;
+            $arr2['doctor_search_form.controller.js'] = 1;
+            $arr2['doctor_search_page.controller.js'] = 1;
+            $arr2['clinic_search_form.controller.js'] = 1;
+            $arr2['clinic_search_page.controller.js'] = 1;
+            $arr2['yandex_map.controller.js'] = 1;
+            $arr2['add_review_block.controller.js'] = 1;
+            $arr2['doctors_visits_coming.controller.js'] = 1;
+            $arr2['notification.controller.js'] = 1;
+            $arr2['account_main_page.controller.js'] = 1;
+            $arr2['disease_quick_search_form.controller.js'] = 1;
+            $arr2['clinic_doctor_search_form.controller.js'] = 1;
+            $arr2['map_controller.js'] = 1;
+            $arr2['confirm_phone_form.controller.js'] = 1;
+            $arr2['help_page.controller.js'] = 1;
+            $arr2['help_search_results_page.controller.js'] = 1;
+            $arr2['help_quick_search_form.controller.js'] = 1;
+            $arr2['personal_room_my_doctor_search_form.controller.js'] = 1;
+            $arr2['favorite_doctors_form.controller.js'] = 1;
+            $arr2['schedule_and_clinics_block.controller.js'] = 1;
+            $arr2['doctor_big_card.controller.js'] = 1;
+            $arr2['personal_room_my_disease.controller.js'] = 1;
+            $arr2['personal_room_my_clinic_search_form.controller.js'] = 1;
+            $arr2['favorite_clinics_form.controller.js'] = 1;
+            $arr2['record_to_the_doctor_block.controller.js'] = 1;
+            $arr2['record_phones_block.controller.js'] = 1;
+            $arr2['personal_room_reviews.controller.js'] = 1;
+            $arr2['visit_remind_block.controller.js'] = 1;
+            $arr2['doctor_small_card.controller.js'] = 1;
+            $arr2['set_password_landing_registration.controller.js'] = 1;
+            $arr2['landing_registration_page.controller.js'] = 1;
+            $arr2['landing_login_page.controller.js'] = 1;
+            $arr2['city_choice.controller.js'] = 1;
+            $arr2['landing_license_page.controller.js'] = 1;
+            $arr2['index_page.controller.js'] = 1;
+            $arr2['doctor_big_card_buttons.controller.js'] = 1;
+            $arr2['personal_room_doctors_visits_past.controller.js'] = 1;
+            $arr2['example_show_cards_form.controller.js'] = 1;
+            $arr2['footer_block.controller.js'] = 1;
+            $arr2['header.controller.js'] = 1;
+            $arr2['analysis_page.controller.js'] = 1;
+            $arr2['call_centre_appeal_form.controller.js'] = 1;
+            $arr2['call_centre_operator_doctor_hints.controller.js'] = 1;
+            $arr2['product_search.controller.js'] = 1;
+            $arr2['about_page.controller.js'] = 1;
+            $arr2['product_live_search.controller.js'] = 1;
+            $arr2['expanded_block.js'] = 1;
+            $arr2['orders_page.controller.js'] = 1;
+            $arr2['product_card.controller.js'] = 1;
+            $arr2['product_basket.js'] = 1;
+            $arr2['spin_controller.js'] = 1;
+            $arr2['product_view_card.controller.js'] = 1;
+            $arr2['basket_block.controller.js'] = 1;
+            $arr2['basket_item.controller.js'] = 1;
+            $arr2['basket_page_controller.js'] = 1;
+            $arr2['order_page.controller.js'] = 1;
+            $arr2['order_form.controller.js'] = 1;
+            $arr2['shipping_cost_algorithm.js'] = 1;
+            $arr2['product_count_block.controller.js'] = 1;
+            $arr2['jquery.radio.min.js'] = 1;
+            $arr2['equal_elements_block.controller.js'] = 1;
+            $arr2['carousel.controller.js'] = 1;
+            $arr2['landing_page.controller.js'] = 1;
+            $arr2['disease_links_block.controller.js'] = 1;
+
+
+            pr(array_diff_key($arr1, $arr2));
+
+            die('fin');
         }
 
         public function testYandex()

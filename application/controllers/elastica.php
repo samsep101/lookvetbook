@@ -200,21 +200,6 @@ class ElasticaController extends BaseController
     $laboratory_index_command->reIndexAll();
   }
 
-  public function AntonTestiruet()
-  {
-    header('Content-type: Application/json');
-
-    $arr = array(
-
-      'author' => 'Автор',
-      'text' => 'text',
-
-    );
-
-    echo json_encode($arr);
-    exit();
-  }
-
   public function beforeRender()
   {
     exit();

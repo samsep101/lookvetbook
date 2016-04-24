@@ -1530,8 +1530,7 @@
             exit();
         }
 
-        public function
-        setCityForLaboratories()
+        public function setCityForLaboratories()
         {
 
             set_time_limit(0);

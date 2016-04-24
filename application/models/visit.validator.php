@@ -12,10 +12,10 @@
                     $doctor_specialty_to_clinic_manager = ModelManagerFactory::getByName('doctor_specialty_to_clinic');
                     $doctor_specialty_to_clinic = $doctor_specialty_to_clinic_manager->getOneByDoctorIdAndClinicIdAndSpecialtyId($visit->doctor_id, $visit->clinic_id, $visit->specialty_id);
 
-                    if (!$doctor_specialty_to_clinic) {
+                    /*if (!$doctor_specialty_to_clinic) {
 						$this->error_messages[] = 'Выбранная специальность не соответствует специальности врача в данной клинике';
 						return false;
-					}
+					}*/
 				}
 
 				// Если поставили статус "Подтвержден", то должно быть указано время

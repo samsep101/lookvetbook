@@ -59,12 +59,16 @@
         <?php $number = 1; ?>
         <?php if($equal_elements_type == 'clinic'): ?>
             <?php $total_count = count($equal_clinics); ?>
-            <?php foreach($equal_clinics as $equal_clinic): ?>
+            <?php foreach($equal_clinics as $equal_clinic):
+                  if (!is_object($equal_clinic->clinic))
+                    continue;
+            ?>
                 <?php if($number % 2 == 1): ?>
                     <ul>
                 <?php endif; ?>
                 <li>
-                    <a href="<?php echo ClinicPageLinkViewHelper::getLink($equal_clinic->clinic); ?>">
+                    <a href="<?php echo ClinicPageLinkViewHelper::getLink($equal_clinic->clinic);
+                    ?>">
                         <?php echo $equal_clinic->clinic->name; ?>
                     </a>
                 </li>

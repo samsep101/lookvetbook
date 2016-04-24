@@ -9708,10 +9708,16 @@ a.d-pink-btn {
 }
 
 .desease-phone {
-	float: right;
 	font-size: 22px;
 	font-weight: bold;
+    width: 100%;
+    text-align: right;
 }
+.desease-phone a{
+    color: black;
+    text-decoration: none
+}
+
 .footer .reg-link.show_license {
     margin-left: 10px;
     font-size: 14px;

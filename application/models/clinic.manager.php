@@ -774,11 +774,15 @@ class ClinicManager extends AliasManager
    */
   public function getListByDoctorIdAndUserId($doctor_id, $user_id)
   {
-    $clinic_search_params = new ClinicSearchParams();
-    $clinic_search_params->doctor_id = $doctor_id;
-    $clinic_search_params->registry_user_id = $user_id;
+      $sql = <<<SQL
+        SELECT c.*
+        from doctor_to_clinic as dtc
+        left join clinic as c on (c.id = dtc.clinic_id)
+        where dtc.doctor_id = '$doctor_id'
+SQL;
 
-    return $this->getListByClinicSearchParams($clinic_search_params);
+      $data = $this->db->query($sql);
+      return (isset($data)) ? $this->initList($data) : [];
   }
 
 

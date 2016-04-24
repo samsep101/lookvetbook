@@ -85,17 +85,19 @@ class AccountModel extends DynamicModel
       if(isset($or_phone_list[$ph_number])) {
         unset($or_phone_list[$ph_number]);
       }else{
-        $account_phone = new AccountPhoneManager();
+        $account_phone = new AccountPhoneModel();
         $account_phone->account_id = $acc_id;
         $account_phone->phone = $ph_number;
         $account_phone->dt = date('Y-m-d H:i');
-        $account_phone->save();
+        if(!$account_phone->save()) {
+          return $account_phone->getValidator()->getErrorMessages();
+        }
       }
     }
     //старые убиваем
     $account_phone_manager->deleteByPhones(array_keys($or_phone_list));
 
-    return true;
+    return 0;
   }
 
 

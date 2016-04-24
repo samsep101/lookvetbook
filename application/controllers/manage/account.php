@@ -2,7 +2,7 @@
 
 class AccountManageController extends BaseController
 {
-  private $requestFieldList = ['first_name', 'middle_name', 'last_name', 'phone', 'email', 'id', 'nick'];
+  private $requestFieldList = ['first_name', 'middle_name', 'last_name', 'phone', 'email', 'id', 'nick', 'password'];
 
   public function __construct()
   {
@@ -74,18 +74,30 @@ class AccountManageController extends BaseController
     if($acc_id>0) {
       $account_manager = new AccountManager();
       $account = $account_manager->getOneById($acc_id);
+
+      foreach($this->requestFieldList as $fName) {
+        if($fName=='id') continue;
+        $fld_val = @$account->$fName;
+        $account->$fName = $this->request->post($fName);
+      }
+
     }
 
     if(empty($account)) {
       $account = new AccountModel();
     }
     foreach($this->requestFieldList as $fName) {
+      if($fName=='id') continue;
       $account->$fName = $this->request->post($fName);
     }
 
     if ($account->save() and $account->id) {
-      $account->save_phones($account->id, $account->phone);
-      JsonResponse::result(['account_id'=>$account->id]);
+      $errors = $account->save_phones($account->id, $account->phone);
+      if($errors) {
+        JsonResponse::error(ValidationErrorCodes::WRONG_DATA, $errors);
+      }else {
+        JsonResponse::result(['account_id' => $account->id]);
+      }
     } else {
       JsonResponse::error(ValidationErrorCodes::WRONG_DATA, $account->getValidator()->getErrorMessages());
     }

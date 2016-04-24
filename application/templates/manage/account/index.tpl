@@ -15,7 +15,7 @@
             Фамилия: <input type="text" name="last_name" value="<?php echo $last_name; ?>" />
             Имя: <input type="text" name="first_name" value="<?php echo $first_name; ?>" />
             Отчество: <input type="text" name="middle_name" value="<?php echo $middle_name; ?>" />
-            Телефон: <input type="text" name="phone" value="<?php echo $phone_number; ?>" />
+            Телефон: <input type="text" name="phone" value="<?php echo $phone; ?>" />
             Email: <input type="text" name="email" value="<?php echo $email; ?>" />
 
             <input type="submit" value="Применить" />
@@ -34,16 +34,18 @@ if ($accounts) {
       <th>Имя на сайте</th>
       <th>Телефон</th>
       <th>Email</th>
+      <th>Дата регистрации</th>
       <th></th>
     </thead>
     <?php foreach($accounts as $account) { ?>
       <tr>
         <td><?php echo $account->first_name.' '.$account->middle_name.' '.$account->last_name; ?></td>
         <td><?php echo $account->nick; ?></td>
-        <td><?php echo $account->email; ?></td>
         <td><?php echo $account->phone; ?></td>
+        <td><?php echo $account->email; ?></td>
+        <td><?php echo $account->dt; ?></td>
         <td>
-          <a href="/manage/account/edit?id=<?php echo $account->getId(); ?>">редактировать</a>
+          <a href="/manage/account/edit?id=<?php echo $account->account_id; ?>">редактировать</a>
         </td>
       </tr>
         <?php $counter++;?>

@@ -1,88 +1,116 @@
 var AccountEditController = function()
 {
-    this.account_id = null;
+    //в теории эта штука должна работать так: на сервере идет валидация формы
+    //при ошибке валидации вместо текста возвращается только код ошибки
+    //а на стороне javascript есть массив validation_rules, в котором прописаны все сообщения обо всех ошибках
+    //здесь эта штука работать не будет, ибо я считаю ее сложной и сделал всё проще
 
-    this.data = {
+    var self = this;
+
+    self.account_id = null;
+
+    self.data = {
         account_id : null,
         first_name : null,
         middle_name : null,
         last_name : null,
-        phone_number : null,
+        nick: null,
+        password : null,
+        password2 : null,
+        phone : null,
         email : null
     };
 
-    this.container = null;
-    this.change_flag = false;
+    self.container = null;
+    self.change_flag = false;
 
-    var self = this;
 
-    this.init = function()
+    self.password_ok = function() {
+        $('input[name="password"], input[name="password2"]').css({background:"white"});
+        var pass = $('input[name="password"]').val();
+        var pass2 = $('input[name="password2"]').val();
+
+        if(!pass.length) {
+            return 1;
+        }
+        if(pass.length<6) {
+            $('input[name="password"]').css({background:"red"});
+            return 0;
+        }
+        if(pass!=pass2) {
+            $('input[name="password"], input[name="password2"]').css({background:"red"});
+            return 0;
+        }
+        return 1;
+    };
+
+    self.init = function()
     {
-        this.account_id = $(self.container + ' input[name=id]').val();
+        self.account_id = $(self.container + ' input[name=account_id]').val();
 
-        $(self.container + ' input[name=first_name], '+ self.container + ' input[name=middle_name], '+ self.container + ' input[name=last_name], '+ self.container + ' input[name=phone_number], '+ self.container + ' input[name=email]').change(function (){
-            self.change_flag = true;
-            $(self.container + ' input[name="save"]').validation({
-                validate : [
-                    $(self.container + ' input[name="first_name"]').validate(validation_rules['required']),
-                    $(self.container + ' input[name="last_name"]').validate(validation_rules['required']),
-                    $(self.container + ' input[name="phone_number"]').validate(validation_rules['required']),
-                    $(self.container + ' input[name="email"]').validate(validation_rules['required']),
-                ],
-                callback: function(){
-                    //self.readData();
-                    //self.sendData();
-                }
-            });
-        });
-
-        if (!self.change_flag){
-            $(self.container + ' input[name="save"]').validation({
-                validate : [
-                    $(self.container + ' input[name="first_name"]').validate(validation_rules['required']),
-                    $(self.container + ' input[name="last_name"]').validate(validation_rules['required']),
-                    $(self.container + ' input[name="phone_number"]').validate(validation_rules['required']),
-                    $(self.container + ' input[name="email"]').validate(validation_rules['email']),
-                ],
-                callback: function(){
-                    //self.readData();
-                    //self.sendData();
-                }
-            });
+        var check_line = '';
+        for(var fld_name in self.data) {
+            check_line += (check_line?', ':'')+self.container + ' input[name='+fld_name+']';
         }
 
+        $(check_line).change(function (){
+            self.change_flag = true;
+            if(!self.password_ok()) {
+                self.change_flag = false;
+            }
+        });
+
         $('input[name="save"]').click(function(){
-            //self.readData();
-            //self.sendData();
+            console.log('save')
+            if(self.change_flag) {
+                self.readData();
+                self.sendData();
+            }else{
+                alert('Нет изменений для применения');
+            }
         });
     };
 
-    this.readData = function()
+    self.readData = function()
     {
-        self.data.id = $('input[name="id"]').val();
-        self.data.first_name = $('input[name="first_name"]').val();
-        self.data.middle_name = $('input[name="middle_name"]').val();
-        self.data.last_name = $('input[name="last_name"]').val();
-        self.data.phone_number = $('input[name="phone_number"]').val();
-        self.data.email = $('input[name="email"]').val();
+        for(var fld_name in self.data) {
+            self.data[fld_name] = $('input[name="' + fld_name + '"]').val();
+        }
+        console.log('data', self.data)
     };
 
-    this.sendData = function()
+    self.sendData = function()
     {
-        Ajax.Post('/manage/account/ajaxEditAccount', self.data, function(data){
-            if (data.status == 0)
-            {
-                var popup = new PopupMessage();
-                popup.close_callback = function()
-                {
-                    if(this.account_id) {
-                        window.location.reload();
-                    }else {
-                        window.location = '/manage/account/' + data.account_id;
-                    }
-                };
+        console.log('post', self.data);
+        $.ajax({
+            url: '/manage/account/ajaxEditAccount',
+            data: self.data,
+            type: 'POST',
+            dataType: 'json',
+            success: function (data, textStatus, jqXHR) {
+                console.log('status data', data);
 
-                popup.show('Данные успешно сохранены');
+                var popup = new PopupMessage();
+                if (data && data.status == 0) {
+                    popup.close_callback = function () {
+                        if (self.account_id) {
+                            window.location.reload();
+                        } else {
+                            window.location = '/manage/account/edit?id=' + data.account_id;
+                        }
+                    };
+
+                    popup.show('Данные успешно сохранены');
+                } else {
+                    var msg = 'Проблема при сохранении данных';
+                    if(data.data && data.data.length){
+                        msg = '';
+                        for(var i in data.data) {
+                            msg += data.data[i]+"\n";
+                        }
+                    }
+                    popup.show(msg);
+                }
             }
         });
     };

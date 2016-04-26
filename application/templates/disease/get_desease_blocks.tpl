@@ -5,7 +5,9 @@
 					<ul>
 						<?php foreach ($disease_tabs_flags as $key=>$value) { ?>
 							<?php if ($value) { ?>
-								<li data-tab-name="<?php echo $key; ?>" class="tab-people tab-<?php echo $key; ?> <?php echo $key == $card ? 'ui-state-active' : ''; ?>"><a href="<?php echo DiseasePageLinkViewHelper::getLink($disease); ?>/<?php echo $key; ?><?php if ($disease_green_btn) echo "?dis=new3"; ?>" onclick="return false;" id="<?php echo $key; ?>"><?php echo DiseaseTabNameViewHelper::getNameByTabFlag($key); ?></a></li>
+								<li data-tab-name="<?php echo $key; ?>" class="tab-people tab-<?php echo $key; ?> <?php echo $key == $card ? 'ui-state-active' : ''; ?>">
+                                    <a href="<?php echo DiseasePageLinkViewHelper::getLink($disease); ?>/<?php echo $key; ?><?php if ($disease_green_btn) echo "?dis=new3"; ?>" id="<?php echo $key; ?>"><?php echo DiseaseTabNameViewHelper::getNameByTabFlag($key); ?></a>
+                                </li>
 							<?php } ?>
 						<?php } ?>
 					</ul>

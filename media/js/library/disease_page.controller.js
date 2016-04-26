@@ -49,7 +49,7 @@ var DiseasePageController = function (id, is_login, already_registred_account, f
 
         setInterval(self.checkActiveTab, 100);
 
-        $('.nav .tab-people a').click(function (event) {
+        /*$('.nav .tab-people a').click(function (event) {
 
             var current_section = $('a.section-name.active').data('section-name');
             var section_id = $('a.section-name.active').data('section-id');
@@ -143,7 +143,7 @@ var DiseasePageController = function (id, is_login, already_registred_account, f
 
             current_top = $(window).scrollTop() + $('.illness-nav').height();
             return false;
-        });
+        });*/
 
         $('.section ul').addClass('list');
 

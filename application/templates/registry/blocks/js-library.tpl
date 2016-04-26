@@ -34,10 +34,11 @@
 <script type="text/javascript" src="/media/js/library/registry/set_day_range.controller.js?<?php echo RELEASE_NUMBER?>"></script>
 
 <script type="text/javascript" src="/media/js/library/registry/clinic_schedule.controller.js?<?php echo RELEASE_NUMBER?>"></script>
-<script type="text/javascript" src="/media/js/library/registry/account_create.controller.js?<?php echo RELEASE_NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/library/registry/account_edit.controller.js?<?php echo RELEASE_NUMBER?>"></script>
-<script type="text/javascript" src="/media/js/library/registry/account_edit_page.controller.js?<?php echo RELEASE_NUMBER?>"></script>
-<script type="text/javascript" src="/media/js/library/registry/account_add_clinic.controller.js?<?php echo RELEASE_NUMBER?>"></script>
+<script type="text/javascript" src="/media/js/library/registry/user_create.controller.js?<?php echo RELEASE_NUMBER?>"></script>
+<script type="text/javascript" src="/media/js/library/registry/user_edit.controller.js?<?php echo RELEASE_NUMBER?>"></script>
+<script type="text/javascript" src="/media/js/library/registry/user_edit_page.controller.js?<?php echo RELEASE_NUMBER?>"></script>
+<script type="text/javascript" src="/media/js/library/registry/user_add_clinic.controller.js?<?php echo RELEASE_NUMBER?>"></script>
 
 <script type="text/javascript" src="/media/js/library/registry/regions.controller.js?<?php echo RELEASE_NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/library/registry/regions_menu.controller.js?<?php echo RELEASE_NUMBER?>"></script>

@@ -188,7 +188,7 @@ class AccountManager extends ModelManager
   {
     $sql = 'SELECT `a`.* ';
     if($w_phone){
-      $sql .= ', GROUP_CONCAT(DISTINCT `p`.`phone` SEPARATOR \', \') AS phones ';
+      $sql .= ', GROUP_CONCAT(DISTINCT `p`.`phone` SEPARATOR \', \') AS phone ';
     }
     $sql .= ' FROM `account` `a` ';
     if($w_phone) $sql .= ' LEFT JOIN `account_phone` `p` ON (`a`.`id`=`p`.`account_id`)';
@@ -291,8 +291,8 @@ class AccountManager extends ModelManager
 
     $search_params->addJoin('account_phone', 'account.id', 'account_phone.account_id');
     $search_params->addJoinTableFields('account_phone');
-    if ($criteria->phone_number) {
-      $phone_number = preg_replace('/[^0-9]/ims', '', $criteria->phone_number);
+    if ($criteria->phone) {
+      $phone_number = preg_replace('/[^0-9]/ims', '', $criteria->phone);
       if($phone_number>0) {
         $search_params->addParam('account_phone.phone', $phone_number);
       }

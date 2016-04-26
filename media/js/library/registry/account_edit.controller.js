@@ -1,76 +1,116 @@
 var AccountEditController = function()
 {
-    this.user_id = null;
-
-    this.data = {
-        user_id : null,
-        login : null,
-        password : null
-    };
-
-    this.container = null;
-    this.change_flag = false;
+    //в теории эта штука должна работать так: на сервере идет валидация формы
+    //при ошибке валидации вместо текста возвращается только код ошибки
+    //а на стороне javascript есть массив validation_rules, в котором прописаны все сообщения обо всех ошибках
+    //здесь эта штука работать не будет, ибо я считаю ее сложной и сделал всё проще
 
     var self = this;
 
-    this.init = function()
+    self.account_id = null;
+
+    self.data = {
+        account_id : null,
+        first_name : null,
+        middle_name : null,
+        last_name : null,
+        nick: null,
+        password : null,
+        password2 : null,
+        phone : null,
+        email : null
+    };
+
+    self.container = null;
+    self.change_flag = false;
+
+
+    self.password_ok = function() {
+        $('input[name="password"], input[name="password2"]').css({background:"white"});
+        var pass = $('input[name="password"]').val();
+        var pass2 = $('input[name="password2"]').val();
+
+        if(!pass.length) {
+            return 1;
+        }
+        if(pass.length<6) {
+            $('input[name="password"]').css({background:"red"});
+            return 0;
+        }
+        if(pass!=pass2) {
+            $('input[name="password"], input[name="password2"]').css({background:"red"});
+            return 0;
+        }
+        return 1;
+    };
+
+    self.init = function()
     {
-        $(self.container + ' input[name=login]').change(function (){
+        self.account_id = $(self.container + ' input[name=account_id]').val();
+
+        var check_line = '';
+        for(var fld_name in self.data) {
+            check_line += (check_line?', ':'')+self.container + ' input[name='+fld_name+']';
+        }
+
+        $(check_line).change(function (){
             self.change_flag = true;
-            $(self.container + ' input[name="save"]').validation({
-                validate : [
-                    $(self.container + ' input[name="login"]').validate(validation_rules['user_login']),
-                    $(self.container + ' input[name="password"]').validate(validation_rules['edit_password']),
-                    $(self.container + ' input[name="password2"]').validate(validation_rules['password2']),
-                    $(self.container + ' select[name="role_id"] :selected').validate(validation_rules['required'])
-                ],
-                callback: function(){
-                    self.readData();
-                    self.sendData();
-                }
-            });
+            if(!self.password_ok()) {
+                self.change_flag = false;
+            }
         });
 
-        if (!self.change_flag){
-            $(self.container + ' input[name="save"]').validation({
-                validate : [
-                    $(self.container + ' input[name="password"]').validate(validation_rules['edit_password']),
-                    $(self.container + ' input[name="password2"]').validate(validation_rules['password2']),
-                    $(self.container + ' select[name="role_id"] :selected').validate(validation_rules['required'])
-                ],
-                callback: function(){
-                    self.readData();
-                    self.sendData();
-                }
-            });
+        $('input[name="save"]').click(function(){
+            console.log('save')
+            if(self.change_flag) {
+                self.readData();
+                self.sendData();
+            }else{
+                alert('Нет изменений для применения');
+            }
+        });
+    };
+
+    self.readData = function()
+    {
+        for(var fld_name in self.data) {
+            self.data[fld_name] = $('input[name="' + fld_name + '"]').val();
         }
-        /*
-         $('input[name="save"]').click(function(){
-         self.readData();
-         self.sendData();
-         });*/
+        console.log('data', self.data)
     };
 
-    this.readData = function()
+    self.sendData = function()
     {
-        self.data.login = $('input[name="login"]').val();
-        self.data.password = $('input[name="password"]').val();
-        self.data.role_id = $('select[name="role_id"] :selected').val();
-        self.data.user_id  = self.user_id;
-    };
+        console.log('post', self.data);
+        $.ajax({
+            url: '/manage/account/ajaxEditAccount',
+            data: self.data,
+            type: 'POST',
+            dataType: 'json',
+            success: function (data, textStatus, jqXHR) {
+                console.log('status data', data);
 
-    this.sendData = function()
-    {
-        Ajax.Post('/manage/user/ajaxEditAccount', self.data, function(data){
-            if (data.status == 0)
-            {
                 var popup = new PopupMessage();
-                popup.close_callback = function()
-                {
-                    window.location.reload();
-                };
+                if (data && data.status == 0) {
+                    popup.close_callback = function () {
+                        if (self.account_id) {
+                            window.location.reload();
+                        } else {
+                            window.location = '/manage/account/edit?id=' + data.account_id;
+                        }
+                    };
 
-                popup.show('Данные успешно сохранены');
+                    popup.show('Данные успешно сохранены');
+                } else {
+                    var msg = 'Проблема при сохранении данных';
+                    if(data.data && data.data.length){
+                        msg = '';
+                        for(var i in data.data) {
+                            msg += data.data[i]+"\n";
+                        }
+                    }
+                    popup.show(msg);
+                }
             }
         });
     };

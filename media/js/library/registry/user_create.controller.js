@@ -1,4 +1,4 @@
-var AccountCreateController = function()
+var UserCreateController = function()
 {
     this.data = {
         login : null,

@@ -1,3 +1,3 @@
 <div align="center">
-	<script type="text/javascript">(function(){ var id = Math.floor(Math.random() * 999); document.write('<div id="x'+id+'"></div>'); var wsc=document.createElement('script'); wsc.type='text/javascript'; wsc.src='http://cityads.com/zrxNDQ5Njk0ODU1/async/1/dv/' + id; wsc.async=true; var ssc = document.getElementsByTagName('script')[0]; ssc.parentNode.insertBefore(wsc, ssc); })();</script>
+	<!--lookmedbook.ru468x60 1--><script type="text/javascript" src="http://go.youlamedia.com/sjs.php?z=629496"></script>
 </div>	

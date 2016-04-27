@@ -2,7 +2,7 @@
 if (php_sapi_name()!='cli') {
   header("Content-Type: text/html; charset=UTF-8");
 }
-define('debug', 0);
+define('debug', 1);
 
 if (!debug) {
   ini_set('display_errors', 'Off');

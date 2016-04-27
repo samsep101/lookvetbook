@@ -3,10 +3,6 @@
 	<!--script src="http://secondopinions.ru/lp7/js/banner_lite.js" type="text/javascript"></script-->
 	<div id="ban2"></div>
 
-	<script>
-		if(get_banner_lite) { get_banner_lite("ban2"); }
-	</script>
-
 	<script>(function() {
 			var _fbq = window._fbq || (window._fbq = []);
 			if (!_fbq.loaded) {

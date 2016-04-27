@@ -24,26 +24,56 @@
 </div>
 
 <input class="btn-appoint block-button" type="submit" value="Добавить" onclick="window.location='/manage/account/create';" />
+<script language="JavaScript">
+  $( document ).ready(function(){
+    var ths = $('table.account-list th');
+    ths.css({cursor:"pointer"});
+    ths.click(function(){
+      var tag = $(this);
+      var field = tag.attr('class');
+      var loc = ''+window.location.search;
+      var asc = 1;
+      if(!loc){
+        loc = '?';
+      }else if(loc.indexOf("sort=")<=0){
+        loc += '&';
+      }else{
+        var reg = /^(.*)(&|\?)sort=([^&]*)&asc=([^&]*)(&.*)?$/;
+        var mch = loc.match(reg);
+        if(mch && mch.length){
+          if(mch[3]==field) {
+            asc = -1;
+          }
+          loc = mch[1]+(typeof mch[5]== 'undefined'?'':mch[5]);
+        }
+        loc += '&';
+      }
+      loc += "sort="+field+'&asc='+asc;
+      window.location = "/manage/account"+loc;
+      return false;
+    });
+  });
 
+</script>
 <?php
 if ($accounts) {
   $counter = 1;?>
-  <table class="styled-table block users-list">
+  <table class="styled-table block account-list">
     <thead>
-      <th>ФИО</th>
-      <th>Имя на сайте</th>
-      <th>Телефон</th>
-      <th>Email</th>
-      <th>Дата регистрации</th>
+      <th class="first_name">Имя</th>
+      <th class="middle_name">Отчество</th>
+      <th class="last_name">Фамилия</th>
+      <th class="nick">Имя на сайте</th>
+      <th class="phone">Телефон</th>
+      <th class="email">Email</th>
+      <th class="regdate">Дата регистрации</th>
       <th></th>
     </thead>
     <?php foreach($accounts as $account) { ?>
       <tr>
-        <td><?php echo $account->first_name.' '.$account->middle_name.' '.$account->last_name; ?></td>
-        <td><?php echo $account->nick; ?></td>
-        <td><?php echo $account->phone; ?></td>
-        <td><?php echo $account->email; ?></td>
-        <td><?php echo $account->dt; ?></td>
+        <?php foreach(['first_name', 'middle_name', 'last_name', 'nick', 'phone', 'email', 'dt', ] as $fname) { ?>
+          <td><?php echo $account->$fname; ?></td>
+        <?php } ?>
         <td>
           <a href="/manage/account/edit?id=<?php echo $account->account_id; ?>">редактировать</a>
         </td>

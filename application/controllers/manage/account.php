@@ -15,18 +15,35 @@ class AccountManageController extends BaseController
     if (!Acl::isAuthed(RoleModel::ACCOUNT_SUPER_MANAGER) && !Acl::isAuthed(RoleModel::ACCOUNT_MANAGER))
       RedirectManager::redirect(ADMIN_FOLDER);
 
+    $sortBy = $this->request->get('sort');
+    $sortAsc = $this->request->get('asc');
+
     $account_search_params = new AccountSearchParams();
     $search_line = '';
     foreach($this->requestFieldList as $fName) {
       //$fValue = $this->request($fName);
       $fValue = $this->request->get($fName);
       $account_search_params->$fName = $fValue;
-      $search_line .= ($search_line?'&':'').$fName.'='.urlencode($fValue);
+      if($fValue) $search_line .= ($search_line?'&':'').$fName.'='.urlencode($fValue);
       $this->view->$fName = $fValue;
     }
     $page = (int)$this->request->get('page');
     if($page) {
       $account_search_params->page=$page;
+    }
+
+    if(in_array($sortBy, ['first_name', 'middle_name', 'last_name', 'nick', 'phone', 'email'])) {
+      $account_search_params->sort_by = $sortBy;
+    }elseif($sortBy=='regdate'){
+      $account_search_params->sort_by = 'dt';
+    }
+    if($account_search_params->sort_by){
+      $asc = 1;
+      if($sortAsc==-1) {
+        $asc = -1;
+        $account_search_params->sort_asc = -1;
+      }
+      $search_line .= ($search_line?'&':'').'sort='.$sortBy.'&asc='.$asc;
     }
 
     $account_manager = new AccountManager();

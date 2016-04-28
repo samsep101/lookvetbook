@@ -9,7 +9,6 @@ test/generateTopClinics - обновляет список клиник пока�
 test/clearDoctorsCache - очищает кеш карточек врачей
 test/generateClinicCsvFile - создает CVS файл с клиниками
 test/generateDoctorsSpecialtyCsvFile - создает CVS файл с специальностями
-test/generateDoctorsSpecialtyCsvFile - создает CVS файл с специальностями
 
 cron/updateDoctorsRate - обновляет рейтинг врачей
 cron/updateClinicsRate - обновляет рейтинг больниц
@@ -20,8 +19,8 @@ cron/replaceVisits - меняет статут у записей у которы
 cron/sendEmailForLate - рассылает письмо со списком заявок по которым надо получить обратную связь
 cron/generateSitemap - создает sitemap файлы
 elastica/reindexDoctors - обновить данные elastica о докторах
-elastica/reindexDiseases - обновить данные elastica о докторах
-elastica/reindexClinics - обновить данные elastica о докторах
+elastica/reindexDiseases - обновить данные elastica о болезнях
+elastica/reindexClinics - обновить данные elastica о клиниках
 
 
 У нас теперь есть composer!!! Все библиотеки инсталить через него

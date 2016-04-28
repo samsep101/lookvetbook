@@ -298,6 +298,17 @@ class AccountManager extends ModelManager
       }
     }
 
+    if($criteria->sort_by) {
+      if($criteria->sort_by=='phone'){
+        $criteria->sort_by = 'account_phone.phone';
+      }
+      $asc = 'ASC';
+      if(!empty($criteria->sort_asc) and $criteria->sort_asc==-1){
+        $asc = 'DESC';
+      }
+      $search_params->addSortParam($criteria->sort_by, $asc);
+    }
+
     $res = $this->getListBySearchParams($search_params);
     return $res;
   }

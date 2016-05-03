@@ -1,4 +1,6 @@
 <?php
+define('debug', 0);
+
 define('CONTACT_EMAIL','');
 define('OUTPUT_LANGUAGE','RUSSIAN');
 define('USE_SET_NAMES',1);

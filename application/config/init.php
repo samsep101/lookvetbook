@@ -30,7 +30,7 @@
     Application::loadConfig('db_profiler');
     Application::loadConfig('db_vidal');
     Application::loadConfig('map');
-    Application::loadConfig('site');
+//    Application::loadConfig('site');
     Application::loadConfig('controller_folders');
     Application::loadConfig('validation_rules');
     Application::loadConfig('cache');

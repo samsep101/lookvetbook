@@ -2,7 +2,8 @@
 if (php_sapi_name()!='cli') {
   header("Content-Type: text/html; charset=UTF-8");
 }
-define('debug', 0);
+
+require('application/config/site.cfg.php');
 
 if (!debug) {
   ini_set('display_errors', 'Off');

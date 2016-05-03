@@ -192,7 +192,8 @@
          * */
         private static function checkClinicLink($model, $params)
         {
-            if($model->city->getId() != $params['city']->getId())
+            //какая-то злая проверка города, отключил на фиг (CyberUnit)
+            if(0 and $model->city->getId() != $params['city']->getId())
             {
                 self::doesSuchClinicInAnotherCity($model);
             }

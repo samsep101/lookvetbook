@@ -111,7 +111,11 @@ class AccountManageController extends BaseController
     if ($account->save() and $acc_id=$account->getId()) {
       $errors = $account->save_phones($acc_id, $account->phone);
       if($errors) {
-        JsonResponse::error(ValidationErrorCodes::WRONG_DATA, $errors);
+        $ans = ['account_id' => $acc_id];
+        foreach($errors as $i=>$err) {
+          $ans['err'.$i] = $err;
+        }
+        JsonResponse::error(ValidationErrorCodes::WRONG_DATA, $ans);
       }else {
         JsonResponse::result(['account_id' => $acc_id]);
       }

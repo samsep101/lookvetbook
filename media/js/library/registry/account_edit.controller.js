@@ -3,7 +3,7 @@ var AccountEditController = function()
     //в теории эта штука должна работать так: на сервере идет валидация формы
     //при ошибке валидации вместо текста возвращается только код ошибки
     //а на стороне javascript есть массив validation_rules, в котором прописаны все сообщения обо всех ошибках
-    //здесь эта штука работать не будет, ибо я считаю ее сложной и сделал всё проще
+    //здесь эта штука работать не будет, ибо я считаю ее сложной и сделал всё проще: сообщения передаются в теле ошибки
 
     var self = this;
 
@@ -103,10 +103,24 @@ var AccountEditController = function()
                     popup.show('Данные успешно сохранены');
                 } else {
                     var msg = 'Проблема при сохранении данных';
-                    if(data.data && data.data.length){
-                        msg = '';
+                    console.log('truble', data.data, data.data.length)
+                    if(data && data.data){
+                        console.log('length', data.data)
+                        if(data.data.account_id>0) {
+                            var locat = '/manage/account/edit?id=' + data.data.account_id;
+                            console.log('acc', data.data.account_id, locat);
+                            popup.close_callback = function () {
+                                window.location = locat;
+                            };
+                            delete data.data.account_id;
+                        }
+                        console.log('data data', data.data)
+                        msg_alt = '';
                         for(var i in data.data) {
-                            msg += data.data[i]+"\n";
+                            msg_alt += data.data[i]+"\n";
+                        }
+                        if(msg_alt){
+                            msg = msg_alt;
                         }
                     }
                     popup.show(msg);

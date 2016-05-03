@@ -274,19 +274,19 @@ class AccountManager extends ModelManager
     }
 
     if ($criteria->first_name) {
-      $search_params->addParam('first_name', $criteria->first_name);
+      $search_params->addParam('first_name', $criteria->first_name, '', ['w_mask'=>'both']);
     }
 
     if ($criteria->middle_name) {
-      $search_params->addParam('middle_name', $criteria->middle_name);
+      $search_params->addParam('middle_name', $criteria->middle_name, '', ['w_mask'=>'both']);
     }
 
     if ($criteria->last_name) {
-      $search_params->addParam('last_name', $criteria->last_name);
+      $search_params->addParam('last_name', $criteria->last_name, '', ['w_mask'=>'both']);
     }
 
     if ($criteria->email) {
-      $search_params->addParam('email', $criteria->email);
+      $search_params->addParam('email', $criteria->email, '', ['w_mask'=>'both']);
     }
 
     $search_params->addJoin('account_phone', 'account.id', 'account_phone.account_id');
@@ -294,7 +294,7 @@ class AccountManager extends ModelManager
     if ($criteria->phone) {
       $phone_number = preg_replace('/[^0-9]/ims', '', $criteria->phone);
       if($phone_number>0) {
-        $search_params->addParam('account_phone.phone', $phone_number);
+        $search_params->addParam('account_phone.phone', $phone_number, '', ['w_mask'=>'both']);
       }
     }
 

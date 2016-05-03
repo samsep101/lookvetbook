@@ -45,7 +45,7 @@ class SearchParams
     }, $this->joined_field_tables);
   }
 
-  public function addParam($param, $value, $index_name = '')
+  public function addParam($param, $value, $index_name = '', $bonus_params=[])
   {
     if (preg_match('/^([^\.]+)\.[^.]+$/', $param, $matches)) {
       if (!in_array($matches[1], $this->tables) && !isset($this->joined_tables[$matches[1]])) {
@@ -94,6 +94,17 @@ class SearchParams
     $param = trim($param, 'OR');
     $param = trim($param, 'AND');
     $param = trim($param, 'IN');
+
+    if(!empty($bonus_params['w_mask'])){
+      switch($bonus_params['w_mask']) {
+        case 'both':
+          $value = '%'.$value.'%';
+          break;
+        default:
+          $value = $value.'%';
+      }
+      $operator = 'LIKE';
+    }
 
     if ($index_name) {
       $this->query_params[$index_name] = array(

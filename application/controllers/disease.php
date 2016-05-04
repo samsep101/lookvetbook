@@ -202,7 +202,11 @@
             $this->view->page_title = sprintf($pageTitleTemplate, $diseaseName, $diseaseName, implode(', ', $diseaseTypes));
             $this->view->label_for_counters = 'disease-page';
 
-            $this->view->page_description = $disease->description;
+            $pervoe_predlozhenie = '';
+            if (preg_match('$\s*?([A-ZА-ЯЁ].*?\.)$', strip_tags($disease->content), $a))
+                $pervoe_predlozhenie = $a[1];
+
+            $this->view->page_description = $pervoe_predlozhenie ? $pervoe_predlozhenie : $disease->description;
             $this->view->canonical_link = DiseasePageLinkViewHelper::getLink($disease);
             $this->view->site_url_not_using = 1;
 

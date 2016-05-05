@@ -67,6 +67,12 @@ class ClinicController extends BaseController
       $this->view->clinic = $clinic;
       $this->view->clinic_id = $clinic_id;
 
+      $pervoe_predlozhenie = '';
+        if (preg_match('$\s*?([A-ZА-ЯЁ].*?\.)$', strip_tags($clinic->about), $a))
+            $pervoe_predlozhenie = $a[1];
+
+      $this->view->page_description = $pervoe_predlozhenie;
+
       $specialty_manager = new SpecialtyManager();
 
       $this->view->specialties = $specialty_manager->getSpecialtyListForClinic($clinic->getId());

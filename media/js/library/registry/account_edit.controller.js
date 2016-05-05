@@ -18,7 +18,11 @@ var AccountEditController = function()
         password : null,
         password2 : null,
         phone : null,
-        email : null
+        email : null,
+        is_confirmed : null,
+        is_system_access : null,
+        is_call_centre_operator : null,
+        is_product_admin : null
     };
 
     self.container = null;
@@ -51,6 +55,7 @@ var AccountEditController = function()
         var check_line = '';
         for(var fld_name in self.data) {
             check_line += (check_line?', ':'')+self.container + ' input[name='+fld_name+']';
+            check_line += ', '+self.container + ' input[id='+fld_name+'_checkbox]';
         }
 
         $(check_line).change(function (){

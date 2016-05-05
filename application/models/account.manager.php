@@ -266,39 +266,39 @@ class AccountManager extends ModelManager
       $search_params = new SearchParams();
     }
 
-    if ($criteria->by_page) {
+    if (!empty($criteria->by_page)) {
       $limit = $criteria->by_page + 1;
       $offset = ($criteria->page - 1) * $criteria->by_page;
 
       $search_params->setOffsetAndLimit($offset, $limit);
     }
 
-    if ($criteria->first_name) {
+    if (!empty($criteria->first_name)) {
       $search_params->addParam('first_name', $criteria->first_name, '', ['w_mask'=>'both']);
     }
 
-    if ($criteria->middle_name) {
+    if (!empty($criteria->middle_name)) {
       $search_params->addParam('middle_name', $criteria->middle_name, '', ['w_mask'=>'both']);
     }
 
-    if ($criteria->last_name) {
+    if (!empty($criteria->last_name)) {
       $search_params->addParam('last_name', $criteria->last_name, '', ['w_mask'=>'both']);
     }
 
-    if ($criteria->email) {
+    if (!empty($criteria->email)) {
       $search_params->addParam('email', $criteria->email, '', ['w_mask'=>'both']);
     }
 
     $search_params->addJoin('account_phone', 'account.id', 'account_phone.account_id');
     $search_params->addJoinTableFields('account_phone');
-    if ($criteria->phone) {
+    if (!empty($criteria->phone)) {
       $phone_number = preg_replace('/[^0-9]/ims', '', $criteria->phone);
       if($phone_number>0) {
         $search_params->addParam('account_phone.phone', $phone_number, '', ['w_mask'=>'both']);
       }
     }
 
-    if($criteria->sort_by) {
+    if(!empty($criteria->sort_by)) {
       if($criteria->sort_by=='phone'){
         $criteria->sort_by = 'account_phone.phone';
       }

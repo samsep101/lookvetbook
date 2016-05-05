@@ -2,7 +2,8 @@
 
 class AccountManageController extends BaseController
 {
-  private $requestFieldList = ['first_name', 'middle_name', 'last_name', 'phone', 'email', 'id', 'nick', 'password'];
+  private $requestFieldList = ['first_name', 'middle_name', 'last_name', 'phone', 'email', 'id',
+    'nick', 'password', 'is_confirmed', 'is_system_access', 'is_call_centre_operator', 'is_product_admin'];
 
   public function __construct()
   {

@@ -264,9 +264,9 @@ class SearchParams
 
     if ($this->distance_params) {
       $this->sql = '  SELECT *
-								FROM (' . $this->sql . ') a
-								WHERE a.distance <= ' . (int)$this->distance . '
-								ORDER BY a.distance ASC';
+                FROM (' . $this->sql . ') a
+                WHERE a.distance <= ' . (int)$this->distance . '
+                ORDER BY a.distance ASC';
     }
 
     $this->buildLimitSection();
@@ -288,36 +288,36 @@ class SearchParams
     if ($this->calc_found_rows)
       $this->sql .= ' SQL_CALC_FOUND_ROWS ';
 
-    $this->sql .= ' `' . $this->table . '`.*';
 
     if(count($this->joined_field_tables)) {
       foreach($this->joined_field_tables as $table) {
-        $this->sql .= ', `' . $table . '`.*';
+        $this->sql .= '`' . $table . '`.*,';
       }
     }
+    $this->sql .= ' `' . $this->table . '`.*';
 
     if (count($this->distance_params) == 1) {
       $this->sql .= ', ';
       foreach ($this->distance_params as $distance_param) {
         $this->sql .= '(6372795 * 2 * asin(
-							sqrt(
-								pow(sin((' . $distance_param->latitude_field . ' - ' . $distance_param->geo_point->getLatitude() . ')*' . PI() . '/360),2) +
-									cos(' . $distance_param->latitude_field . '*' . PI() . '/180)*cos(' . $distance_param->geo_point->getLatitude() . '*' . PI() . '/180)*
-										pow(sin((' . $distance_param->longitude_field . ' - ' . $distance_param->geo_point->getLongitude() . ')*' . PI() . '/360),2)
-							)
-						)';
+              sqrt(
+                pow(sin((' . $distance_param->latitude_field . ' - ' . $distance_param->geo_point->getLatitude() . ')*' . PI() . '/360),2) +
+                  cos(' . $distance_param->latitude_field . '*' . PI() . '/180)*cos(' . $distance_param->geo_point->getLatitude() . '*' . PI() . '/180)*
+                    pow(sin((' . $distance_param->longitude_field . ' - ' . $distance_param->geo_point->getLongitude() . ')*' . PI() . '/360),2)
+              )
+            )';
       }
       $this->sql .= ') distance ';
     } elseif (count($this->distance_params) > 1) {
       $this->sql .= ', LEAST(';
       foreach ($this->distance_params as $distance_param) {
         $this->sql .= '6372795 * 2 * asin(
-							sqrt(
-								pow(sin((' . $distance_param->latitude_field . ' - ' . $distance_param->geo_point->getLatitude() . ')*' . PI() . '/360),2) +
-									cos(' . $distance_param->latitude_field . '*' . PI() . '/180)*cos(' . $distance_param->geo_point->getLatitude() . '*' . PI() . '/180)*
-										pow(sin((' . $distance_param->longitude_field . ' - ' . $distance_param->geo_point->getLongitude() . ')*' . PI() . '/360),2)
-							)
-						),';
+              sqrt(
+                pow(sin((' . $distance_param->latitude_field . ' - ' . $distance_param->geo_point->getLatitude() . ')*' . PI() . '/360),2) +
+                  cos(' . $distance_param->latitude_field . '*' . PI() . '/180)*cos(' . $distance_param->geo_point->getLatitude() . '*' . PI() . '/180)*
+                    pow(sin((' . $distance_param->longitude_field . ' - ' . $distance_param->geo_point->getLongitude() . ')*' . PI() . '/360),2)
+              )
+            ),';
       }
       $this->sql = trim($this->sql, ',');
       $this->sql .= ') distance ';

@@ -291,6 +291,10 @@ class AccountManager extends ModelManager
 
     $search_params->addJoin('account_phone', 'account.id', 'account_phone.account_id');
     $search_params->addJoinTableFields('account_phone');
+
+    if(!empty($criteria->phone_number)) {
+      $criteria->phone = $criteria->phone_number;
+    }
     if (!empty($criteria->phone)) {
       $phone_number = preg_replace('/[^0-9]/ims', '', $criteria->phone);
       if($phone_number>0) {

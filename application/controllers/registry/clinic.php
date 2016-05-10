@@ -245,6 +245,27 @@ class ClinicRegistryController extends BaseController
 
   }
 
+    public function action(){
+        $clinic_id = RegistryAccessHelper::checkAccessAndDetermineClinicId();
+
+        $clinic = (new ClinicManager())->getOneById($clinic_id);
+        $this->view->clinic = $clinic;
+
+        $this->view->entry_id = $clinic_id;
+        $this->view->model_name = 'moderate_clinic_user';
+        $this->view->model = $clinic;
+        $this->view->menu_type = 'clinic';
+        $this->view->menu_active = 'action';
+        $this->view->clinic_id = $clinic_id;
+
+        $view_processor = new FormViewProcessor('moderate_clinic_license', $clinic);
+        $this->view->view_processor = $view_processor;
+
+        $this->view->specializations = (new SpecializationToClinicManager())->getListByClinicId($clinic->getId());
+    }
+
+
+
   /**
    * Метода для страницы управления списком врачей клиники
    */

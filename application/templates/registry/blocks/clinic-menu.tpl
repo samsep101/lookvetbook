@@ -33,6 +33,9 @@
             <li class="<?php echo (isset($menu_active) && $menu_active == 'brif_information') ? 'ui-state-active' : ''; ?>">
                 <a href="/registry/clinic/brif_information<?php echo $param;?>">Информация по брифу</a>
             </li>
+            <li class="<?php echo (isset($menu_active) && $menu_active == 'action') ? 'ui-state-active' : ''; ?>">
+                <a href="/registry/clinic/action<?php echo $param;?>">Акции</a>
+            </li>
 
             <?php if (isset($clinic) && !$clinic->is_region): ?>
                 <li class="<?php echo (isset($menu_active) && $menu_active == 'doctors') ? 'ui-state-active' : ''; ?>">

@@ -4026,6 +4026,17 @@ ul.list-2 li {
     min-height    : 200px;
 }
 
+.deseaseRow .list-item{
+    float: left;
+    width: 230px;
+}
+
+.deseaseRow{
+    clear: both;
+    height: 220px;
+}
+
+
 .ilness-list .list-item h2 {
     color         : #1F8EBE;
     font          : normal 28px 'pf_agora_slab_pro_medium';

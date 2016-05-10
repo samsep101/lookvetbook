@@ -4,6 +4,7 @@ nbproject
 .htaccess
 
 /media/logs
+/media/_upload/
 /media/maps
 /media/upload
 /media/reports

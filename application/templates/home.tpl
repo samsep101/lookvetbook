@@ -191,8 +191,7 @@
     <link rel="icon" href="/media/images/home_page/<?php echo CSS_DIR; ?>/favicon.png" type="image/png">
     <?php $this->block('blocks/head'); ?>
     <?php if (isset($home_page)):?>
-        <link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/home_style.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />
-    <link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/media.css?<?php echo RELEASE_NUMBER?>" type="text/css"/>
+        <link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/home_style.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />    
         <!--[if lt IE 8]>
         <link rel="stylesheet" href="/media/css/home_page/ie/ie-7.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />
         <![endif]-->
@@ -203,6 +202,7 @@
 
     <meta name='yandex-verification' content='76535cc7dd5d586f' />
     <meta name=viewport content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/media.css?<?php echo RELEASE_NUMBER?>" type="text/css"/>
 </head>
 <body>
 <script type="text/javascript">
@@ -404,6 +404,7 @@
 </noindex>
 <!--[if IE]><script type="text/javascript" src="http://www.xiper.net/examples/js-plugins/html5-and-css3/explorer-canvas/excanvas.js"></script><![endif]-->
 
+<?php /*
 <!-- BEGIN JIVOSITE CODE {literal} -->
 <script type='text/javascript'>
 	(function(){
@@ -417,7 +418,7 @@
 	})();
 </script>
 <!-- {/literal} END JIVOSITE CODE -->
-
+*/?>
 </body>
 </html>
 

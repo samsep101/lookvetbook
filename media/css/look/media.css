@@ -2,13 +2,16 @@
     html, body{
         width: 100vw;
         min-width: 100vw;
-        overflow-x: hidden;
+        /*overflow-x: hidden;*/
         height: auto;
     }
     #wrapper{
         width: 100vw;
         height: auto;
         margin: 0;
+    }
+    .wrap{
+        overflow: hidden;
     }
     *{
         box-sizing: border-box;
@@ -32,7 +35,7 @@
         /* padding: 0; */
     }
     .slider-cards .ul_cards > li{
-        /* float: none; */
+         float: none; 
         /* margin: 0 auto; */
         /* width: 470px; */
     }
@@ -110,6 +113,8 @@
 
     .content .left_search .search-form .tabs li span {
         height: 40px;
+        position: relative;
+        z-index: 0;
     }
 
     .learn-txt {
@@ -192,7 +197,7 @@
         min-width: 100%;
         margin-left: 0;
         color: #373737;
-        padding-top: 45px;
+        padding-top: 15px;
         display: inline-block;
         float: left;
         height: 60px;
@@ -235,13 +240,15 @@
         margin: 0;
         display: inline-block;
         width: 33%;
+        height: 26px!important;
+        line-height: 26px!important;
     }
 
     span.phone {
         padding: 0;
         margin: 0;
         display: inline-block;
-        width: 33%;
+        width: 50%;
         float: left;
         padding-top: 0!important;
         /* font-size: 18px!important; */
@@ -252,9 +259,13 @@
         padding: 0;
         margin: 0;
         display: inline-block;
-        width: 33%;
+        width: 50%;
         float: left;
         font-size: 20px;
+    }
+    a.a-dashed.popup_city{
+        height: 26px;
+        line-height: 26px;
     }
 
     .sp-links .phone small, .sp-links .phone .calltime {
@@ -303,6 +314,7 @@
 
     .specialties-groups, .specializationDiseasesArea {
         width: 100%!important;
+        padding: 0 10px;
     }
 
     .content .inner-2 {
@@ -357,12 +369,14 @@
     }
 
     .info-card .schedule-extended .schedule {
-        position: relative;
+        /*position: relative;*/
         margin: 10px 0;
+        width: 100%;
     }
 
     .item-row.flo {
         display: inline-block;
+        width: 100%;
     }
 
     .info-card .descr .tooltip {
@@ -505,13 +519,14 @@
     }
 
     .search-block {
-        margin: 0;
+        margin: 0!important;
         width: 100%;
         padding: 0 10px;
+        text-align: center!important;
     }
 
     .search-block input.txt {
-        width: 100%;
+        width: 100%!important;
         padding: 0 10px;
     }
 
@@ -640,7 +655,19 @@
         margin-top: 80px;
     }
 
-    .btns.flo {display: inline-block;float: left;/* width: 40%; */margin: 0;width: 100%;}
+    .btns.flo {
+        display: inline-block;
+        float: right;
+        width: 50%; 
+        margin: 0;
+        position: relative;
+        z-index: 2;
+        /*width: 100%;*/
+    }
+    .booking.record-to-the-doctor-popup .btns.flo{
+        width: 100%;
+        float: none;
+    }
 
     .avatar {
         float: left;
@@ -656,6 +683,8 @@
         float: left;
         clear: both;
         position: relative;
+        height: 22px;
+        padding-top: 6px;
     }
 
     .fixed_title .name a {
@@ -666,7 +695,7 @@
     }
 
     .info-card .descr .rating .comments-count {
-        display: inline-block;
+        display: none;
         margin: 0;
     }
 
@@ -674,14 +703,35 @@
         position: absolute;
         top: 0;
         left: 97px;
+        display: none;
+    }
+    .slider-cards .doctor-big-card .schedule-extended{
+        width: 100vw;
+        height: 67px;
+    }
+    .inner-2 .doctor-big-card .schedule-extended{
+        width: 100vw;
+        height: 73px;
     }
 
     .info-card .descr .tooltip .corn {
         display: none;
     }
+    .doctorname_clear{
+        width: 100%;
+    }
 
     .doctor-big-card .descr .name > a {
-        margin-top: 20px;
+        margin-top: 5px;
+    }
+    .doctor-big-card .descr .name{
+        width: 65%;
+        position: absolute;
+        right: 5px;
+        top: 40px;
+    }
+    .doctor-big-card .descr .name .post{
+        height: auto!important;
     }
 
     .doctor-landing .connected-carousels .carousel-navigation {
@@ -689,7 +739,7 @@
         height: 45px;
     }
 
-    .rating {width: 100vw;}
+    .rating {width: 100%;}
 
     .slider-cards ul.ul_cards {
         width: 100vw!important;
@@ -738,8 +788,9 @@
         width: 100%;
     }
 
-    .caroufredsel_wrapper {
+    .slider-cards .div_nav .caroufredsel_wrapper {
         width: 100%!important;
+        height: 390px!important;
     }
 
 
@@ -750,6 +801,12 @@
     .doctor-landing .connected-carousels .stage {
         margin: 0 auto;
     }
+    .doctor-landing .caroufredsel_wrapper{
+        height: 90px!important;
+    }
+    .doctor-landing .schedule .day a{
+        height: 45px;
+    }
 
     .doctor-landing .connected-carousels .navigation {
         margin: 0 auto;
@@ -758,6 +815,400 @@
 
     .heading-line.doctor-page .button-container {
         width: 100%;
+    }
+    .reg-popup .logo{
+        display: none;
+    }
+    .fancybox-wrap.fancybox-desktop.fancybox-type-inline.fancybox-opened{
+        width: 95%!important;
+        margin: 0 auto;
+        display: block;
+        left: 2.5%!important;
+    }
+    .fancybox-wrap.fancybox-desktop.fancybox-type-inline.fancybox-opened .fancybox-inner{
+        width: 100%!important;
+    }
+    .city-block .not-empty-cities li{
+        width: 100%!important;
+    }
+    .sp-links span.phone+a{
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .form-call{
+        width: 90%!important;
+        right: 5%!important;
+    }
+    .form-call label{
+        clear: both;
+    }
+    .form-call .btn-call{
+        float: none!important;
+        margin-right: auto!important;
+        margin-left: auto!important;
+        clear: both;
+    }
+    .reg-popup{
+        width: 95vw;
+        padding: 2.5vw;
+        margin: 0;
+    }
+    .reg-popup .form .txt input{
+        width: 100%;
+    }
+    .reg-popup .btns .chekBox{
+        width: 100%;
+    }
+    .reg-popup .auth-form .btn-1{
+        width: 204px;
+        margin: 10px auto;
+        float: none;
+    }
+    .reg-popup .center-align{
+        padding-bottom: 20px;
+    }
+    .reg-popup .socials ul li{
+        float: left;
+        margin-left: 0;
+        width: 50%;
+        text-align: center;
+    }
+    .reg-popup .socials ul li a{
+        display: inline-block;
+    }
+    .reg-popup .form .txt{
+        width: 100%;
+    }
+    .city-block{
+        width: 100vw;
+    }
+
+    .content .left_search .search-form .choose-section-2 .fields{
+        width: 100%;
+    }
+    .content .left_search .search-form .search-by-name{
+        margin-top: 0;
+        width: 100%;
+        height: 38px;
+    }
+    .content .left_search .search-form .search-by-name .txt{
+        width: 100%;
+    }
+    .content .left_search .search-form .btn-box{
+        width: 100%;
+    }
+    .content .left_search .search-form .btn-box .btn-1{
+        margin: 0 auto;
+        display: block;
+        float: none;
+    }
+    .left_search .search-form .choose-section.choose-section-free{
+        margin: 29px 15px 0px;
+    }
+    .info-card .descr{
+        float: none;
+    }
+    .caroufredsel_wrapper .avatar_buttons{
+        text-align: center;
+    }
+    .caroufredsel_wrapper .avatar_buttons .avatar{
+        /*float: none;*/
+    }
+    .caroufredsel_wrapper ul.ul_cards>li:not(:first-child){
+        display: none;
+    }
+    .search-form-main-page-container .lmb .pad_tb, .account-search-form-clinic .lmb .pad_tb{
+        float: none;
+    }
+    .booking .step-block-1, .booking .step-block-2{
+        width: 100%;
+    }
+    .booking .progress-bar .steps{
+        width: 100%!important;
+        float: none;
+        text-align: center;
+    }
+    .booking.record-to-the-doctor-popup .step-block-1 .after_current_bar, .booking.record-to-the-doctor-popup .step-block-2 .after_current_bar{
+        margin-left: 0px;
+        width: 100%;
+    }
+    .booking.record-to-the-doctor-popup .step-block-1 .current_bar, .booking.record-to-the-doctor-popup .step-block-2 .current_bar{
+        width: 100%;
+         margin-left: auto; 
+    }
+    .booking.record-to-the-doctor-popup .step-block-2 .family_relation_inline li{
+	    display: inline-block;
+	    margin-left: 0;
+	    width: 100%;
+	    margin-top: 10px;
+    }
+    .booking.record-to-the-doctor-popup .step-block-2 .popup-textarea{
+    	word-wrap: break-word;
+	    resize: none;
+	     background: #fff; 
+	    height: 100px;
+	    overflow: auto;
+	    text-overflow: ellipsis;
+	    width: 87vw;
+	    border: none;
+	    color: #666666;
+	    font: 18px/27px 'pf_agora_slab_proregular';
+	    margin-right: -9px;
+	    padding: 7px 0 18px 13px;
+	    outline: none;
+    }
+    .booking.record-to-the-doctor-popup .step-block-2 .form-block .txt input{
+	    font: 18px 'pf_agora_slab_proregular';
+    }
+    .booking .info-box{
+        width: 90vw;
+        margin: 0;
+        margin-left: -4vw;
+    }
+    .booking .schedule-extended{
+        width: 100%;
+        margin: 0 auto;
+    }
+    .booking .all{
+        padding: 20px;
+    }
+    .booking.record-to-the-doctor-popup .visit-target .name{
+        width: 100%;
+    }
+    .booking .location-box .section .price-inf{
+        width: 100%;
+    }
+    .booking .btns .btn-1{
+        float: none;
+    }
+    .about-ilness-content{
+        width: 100%;
+    }
+    .about-ilness-content .main-column{
+        width: 100%;
+    }
+    .about-ilness-content .main-cont .illness-header{
+        padding: 20px 10px;
+    }
+    .illness-nav-wrap .nav{
+        display: inline-block;
+        width: 100%;
+        height: 150px;
+    }
+    .illness-nav-wrap .nav li.tab-people{
+        float: none;
+        margin-bottom: 5px;
+        padding: 5px;
+        line-height: 10px;
+        border-radius: 10px;
+    }
+    .about-ilness-content .illness-nav .sub-nav{
+        width: 100%;
+    }
+    .about-ilness-content .illness-nav.affix{
+        width: 100%;
+        display: none!important;
+    }
+    .about-ilness-content .main-cont .content .section{
+        padding: 25px;
+    }
+    .desease-phone{
+        font-size: 17px;
+        text-align: center!important;
+    }
+    .info-card .schedule-extended .day{
+        height: 60px;
+        padding: 5px 0 0 5px;
+        width: 11%;
+        margin: 0 1%;
+        text-align: center;
+    }
+    .info-card .schedule-extended .day i{
+        margin-bottom: 9px;
+    }
+    .reg-popup .form .btns{
+        width: 100%;
+        text-align: center;
+    }
+    .reg-popup .reg-form .btn-1{
+        float: none;
+        margin: 10px 0;
+    }
+    .lmb .a_dashed{
+        height: auto;
+    }
+    .search-form-main-page-container #clinic-search-form .lmb .search_txt{
+        width: 100%;
+    }
+    .doctor-landing .btns.flo{
+        width: 100%;
+    }
+    #our-doctors .btns.flo{
+        width: 100%;
+    }
+    #our-doctors .info-card .schedule-extended .day{
+        margin: 5px 0 0 2%;
+    }
+    #our-doctors .doctor-big-card .descr .name{
+        top: 0;
+    }
+    .top_number .number_right span.number_set{
+        background: none;
+    }
+    .clinic-landing, .clinic-landing .main-box, .clinic-landing .side-box{
+        display: block;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    .clinic-landing .connected-carousels .clinic-carousel.carousel-stage li{
+        max-width: 100%;
+    }
+    .clinic-landing .connected-carousels .clinic-carousel.carousel-stage{
+        width: 100%;
+    }
+    .clinic-landing .connected-carousels .stage{
+        width: 100%;
+    }
+    .full-width .inner .info-col.col-about{
+        width: 100%;
+        margin: 0;
+    }
+    .clinic-landing .btn-find-doctor-2, .clinic-landing  .btn-bookmark-big{
+        width: 211px;
+        display: inline-block;
+        padding-top: 2px;
+    }
+    #our-doctors .select-area.flo{
+        margin-bottom: 27px;
+        text-align: center;
+    }
+    #our-doctors .select-area .sel-box{
+        float: none;
+        margin-left: 0;
+        text-align: left;
+        display: inline-block;
+    }
+    #landing-popup-registration .btns.flo{
+        float: none;
+    }
+    #clinic-description+.inner.flo{
+        width: 100%;
+        padding: 0 8px;
+
+    }
+    .full-width .inner .info-col{
+        font-size: inherit;
+        margin-right: 60px;
+    }
+    #doctor-container .location-box .tabs_schedule{
+        position: static;
+        height: 60px;
+    }
+    #doctor-container .doctor-big-card .info-box{
+        width: 100%;
+    }
+    #doctor-container .doctor-big-card .schedule-extended{
+        width: 100%;
+    }
+    #doctor-container .info-box > .location-box > .box .box{
+        position: static;
+    }
+    #doctor-container .avatar_buttons .btn-appoint{
+        margin-bottom: 15px;
+    }
+    #doctor-container .info-card.doctor-big-card.flo{
+        padding: 12px;
+    }
+
+    .record-to-the-doctor-popup .jspPane, .record-to-the-doctor-popup .jspContainer, .record-to-the-doctor-popup .scroll-pane.flo{
+        width: 100%!important;
+    }
+    .record-to-the-doctor-popup .caroufredsel_wrapper{
+        width: 100%!important;
+    }
+    .booking.record-to-the-doctor-popup .schedule-extended + .time-scroll{
+        margin-left: 0;
+    }
+    .booking.record-to-the-doctor-popup .time{
+        width: 14%;
+        /*text-align: center;*/
+        margin: 0px;
+    }
+    .jspContainer .caroufredsel_wrapper, .booking .jspContainer{
+        height: 45px!important;
+    }
+    .booking.record-to-the-doctor-popup .time li{
+        display: inline-block;
+        height: auto;
+        padding: 8px 0;
+        vertical-align: middle;
+    }
+    .booking .time li{
+        width: 90%;
+    }
+    .booking .shedule-var li .day div.selected, .booking .shedule-var li .day div.clicked, .booking .shedule-var li .day div{
+        width: 100%;
+        padding: 10px 0;
+    }
+    .record-to-the-doctor-popup .caroufredsel_wrapper .shedule-var.flo{
+        width: 100%!important;
+    }
+    .booking .shedule-var li{
+        width: 13%;
+        font-size: .8em;
+    }
+    #reviews .review-box{
+        width: 100%;
+    }
+    #reviews .review-box .aside{
+        width: 100%;
+        background: #fff;
+    }
+    #reviews .review-box .review-cont{
+        width: 100%;
+        padding: 12px 14px 25px 22px;
+        background: #fff;
+    }
+    .equal-elements .equal-elements-container ul{
+        width: 100%;
+    }
+    .full-map {
+        position: fixed;
+        width: 100%;
+        display: none;
+        height: 100vh!important;
+        z-index: 9999;
+        padding: 0px!important;
+    }
+    .full-map .bott-panel .shell {
+        width: 100%;
+        margin: 0 auto;
+        padding-top: 28px;
+    }
+    .full-map .bott-panel .shell {
+        text-align: center;
+    }
+    .full-map .bott-panel .shell a{
+        display: inline-block;
+    }
+    .clinic-landing .time_clinic .our_time{
+        padding: 0;
+        text-align: center;
+    }
+    .about-ilness-content .illness-nav{
+        display: none!important;
+    }
+    .about-ilness-content .illness-nav-wrap{
+        display: none;
+    }
+    .about-ilness-content .side-column{
+        width: 100%;
+    }
+    .clinic-carousel .next{
+        margin-left: auto;
+        right: 10px;
     }
 
 }

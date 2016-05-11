@@ -257,6 +257,10 @@ class ClinicRegistryController extends BaseController
         $this->view->menu_type = 'clinic';
         $this->view->menu_active = 'action';
         $this->view->clinic_id = $clinic_id;
+        
+        $action_manager = new ActionManager();
+        $clinic_actions = $action_manager->getList();
+        
 
         $view_processor = new FormViewProcessor('moderate_clinic_license', $clinic);
         $this->view->view_processor = $view_processor;

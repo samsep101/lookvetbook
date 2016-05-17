@@ -24,7 +24,7 @@ DirectoryIndex index.php index.html
   RewriteRule ^(.*)$ http://account.lookmedbook.ru/$1 [R=301,L]
 
   # no, so we redirect to our front web controller
-  RewriteCond %{REQUEST_FILENAME} !-d
+  # RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>

@@ -29,7 +29,7 @@ DirectoryIndex index.php index.html
   RewriteRule ^yandex_([a-zA-Z0-9]+)\.html$ yandex_files/yandex_$1.html [L]
 
   # no, so we redirect to our front web controller
-  RewriteCond %{REQUEST_FILENAME} !-d
+  # RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>

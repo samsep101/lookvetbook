@@ -21,23 +21,36 @@
             <?php if (isset($_GET['disease_query'])):?>
             <div class="illness-catalog-error">По запросу мы не нашли заболевания. Уточни название в каталоге.</div>
             <?php endif?>
-            <?php for($j = 0; $j <= 3; $j++): ?>
-                <div class="list-col">
-                    <?php for ($i=0; $i < count($divided_diseases); $i += 4): ?>
-                        <?php if(!isset($divided_diseases[$i+$j])) break;?>
-                        <div class="list-item">
-                            <h2><?php echo $divided_diseases[$i+$j]['letter']; ?></h2>
-                            <ul>
-                                <?php foreach($divided_diseases[$i+$j]['result'] as $disease): ?>
-                                    <li><a href="<?php echo DiseasePageLinkViewHelper::getLink($disease); ?>"><?php echo $disease->title; ?></a></li>
-                                <?php endforeach; ?>
-                            </ul>
-                            <?php if (count($divided_diseases[$i+$j]['result']) > 5): ?>
-                                <a class="adjust" href="javascript:void(0);">Еще заболевания</a>
-                            <?php endif; ?>
-                        </div>
-                    <?php endfor; ?>
-                </div>
-            <?php endfor; ?>
+            <?php
+                $start = 0;
+                $end = count($divided_diseases);
+                $line_num = 0;
+
+            while($start < $end)
+            {
+                $line_end = ( ($start+3) < $end ) ? ($start+3) : $end;
+            ?>
+            <div class="row deseaseRow">
+            <?php
+                for($j = $start; $j <= $line_end; $j++): ?>
+                            <?php if(!isset($divided_diseases[$j])) break;?>
+                            <div class="list-item">
+                                <h2><?php echo $divided_diseases[$j]['letter']; ?></h2>
+                                <ul>
+                                    <?php foreach($divided_diseases[$j]['result'] as $disease): ?>
+                                        <li><a href="<?php echo DiseasePageLinkViewHelper::getLink($disease); ?>"><?php echo $disease->title; ?></a></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                                <?php if (count($divided_diseases[$j]['result']) > 5): ?>
+                                    <a class="adjust" href="javascript:void(0);">Еще заболевания</a>
+                                <?php endif; ?>
+                            </div>
+                <?php endfor; ?>
+            </div>
+            <?php $this->block('disease/blocks/adv_search_line',['line_num' => $line_num]); ?>
+            <?php
+            $start = $j;
+            $line_num++;
+            } ?>
         </div>
     </div>

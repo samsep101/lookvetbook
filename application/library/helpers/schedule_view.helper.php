@@ -37,17 +37,16 @@
                                 }
                                 else
                                     $combo = 1;
+
                                 $counter++;
-                            }
-                            else
-                            {
+                            }else{
                                 if(($previous_day != '') && ($combo == 1))
                                 {
                                     if(($reserv != '') && ($reserv != 'free')) $result .= ', ' . $reserv;
                                     $result .= ' - ' . $previous_day;
                                     $previous_day = '';
-                                }
-                                else if(($previous_day != '') && ($combo == 0))
+
+                                }elseif(($previous_day != '') && ($combo == 0))
                                 {
                                     $result .= ', ' . $previous_day;
                                     $previous_day = '';
@@ -56,6 +55,8 @@
                                 $counter   = 1;
                                 $reserv    = 'free';
                             }
+                        }else{
+                            $counter = 1;
                         }
                     }
                     if(($previous_day != '') && ($combo == 1))
@@ -64,12 +65,25 @@
                         $result .= ' - ' . $previous_day;
                         $previous_day = '';
                     }
-                    else if(($previous_day != '') && ($combo == 0))
+                    elseif(($previous_day != '') && ($combo == 0))
                     {
                         $result .= ', ' . $previous_day;
                     }
-                    if((($checking_day['start'] != '') && ($checking_day['start'] != '00:00') && ($checking_day['end'] != '00:00')) || (($checking_day['start'] != '') && ($checking_day['start'] == '00:00') && ($checking_day['end'] != '00:00')) || (($checking_day['start'] != '') && ($checking_day['start'] != '00:00') && ($checking_day['end'] == '00:00'))) $result .= ':</span> ' . $checking_day['start'] . '-' . $checking_day['end'] . '</p>';
-                    else if(($checking_day['start'] == '00:00') && ($checking_day['end'] == '00:00')) $result .= ':</span> <span>Круглосуточно</span>' . '</p>';
+                    if(    (($checking_day['start'] != '') &&
+                            ($checking_day['start'] != '00:00') &&
+                            ($checking_day['end'] != '00:00')) ||
+
+                           (($checking_day['start'] != '') &&
+                            ($checking_day['start'] == '00:00') &&
+                            ($checking_day['end'] != '00:00')) ||
+
+                          (($checking_day['start'] != '') &&
+                           ($checking_day['start'] != '00:00') &&
+                           ($checking_day['end'] == '00:00')))
+
+                        $result .= ':</span> ' . $checking_day['start'] . '-' . $checking_day['end'] . '</p>';
+
+                    elseif(($checking_day['start'] == '00:00') && ($checking_day['end'] == '00:00')) $result .= ':</span> <span>Круглосуточно</span>' . '</p>';
                     else
                         $result .= ':</span> <span class="free">Выходной</span>' . '</p>';
                 }

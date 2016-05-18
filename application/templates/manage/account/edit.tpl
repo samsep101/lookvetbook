@@ -5,6 +5,63 @@
         controller.init();
     });
 </script>
+
+<div class="edit_right_list">
+    <div class="table_title">Посещения</div>
+    <table class="item_list">
+        <thead>
+            <tr class="item">
+                <?php foreach($visit_fields as $fld_nm=>$fld_title) { ?>
+                    <th class="fld">
+                        <?php echo $fld_title; ?>
+                    </th>
+                <?php } ?>
+            </tr>
+        </thead>
+        <tbody>
+        <?php //print_r($visits); ?>
+        <?php foreach($visits as $item) { ?>
+            <?php //print_r($item); ?>
+            <tr class="item">
+            <?php foreach($visit_fields as $fld_nm=>$fld_title) { ?>
+                <td class="fld">
+                    <?php echo $item->$fld_nm; ?>
+                </td>
+            <?php } ?>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+
+    <div class="table_title">Обращения</div>
+    <table class="item_list">
+          <?php //print_r($appeals); ?>
+        <thead>
+        <tr class="item">
+            <?php foreach($appeal_fields as $fld_nm=>$fld_title) { ?>
+                <th class="fld">
+                    <?php echo $fld_title; ?>
+                </th>
+            <?php } ?>
+        </tr>
+        </thead>
+        <tbody>
+
+        <?php foreach($appeals as $item) { ?>
+            <?php //print_r($item); ?>
+            <tr class="item">
+                <?php foreach($appeal_fields as $fld_nm=>$fld_title) { ?>
+                    <td class="fld">
+                        <?php echo $item->$fld_nm; ?>
+                    </td>
+                <?php } ?>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+
+</div>
+
 <div class="edit-form block">
     <table class="styled-table">
         <input type="hidden" name="account_id" value="<?php echo $id; ?>" />

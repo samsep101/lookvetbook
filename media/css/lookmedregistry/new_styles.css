@@ -1278,3 +1278,23 @@ div.connected-carousels.iframe div.stage div.carousel ul li {
 .is_active {
 
 }
+
+.edit_right_list {
+    float:right;
+    width: 53%;
+}
+
+.edit_right_list .item_list{
+}
+
+.edit_right_list .item_list .item{
+    overflow: hidden;
+}
+.edit_right_list .item_list .fld{
+    width: 106px;
+    border: solid 1px gray;
+    height: 36px;
+    padding: 1px 3px;
+}
+
+

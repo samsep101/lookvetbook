@@ -38,14 +38,16 @@ class SearchParams
 
   public function joined_field_models()
   {
-    return array_map(function($a){
-      $list = array_map(function($b){ return ucfirst($b); }, explode('_',$a));
+    return array_map(function ($a) {
+      $list = array_map(function ($b) {
+        return ucfirst($b);
+      }, explode('_', $a));
 
-      return implode('', $list).'Model';
+      return implode('', $list) . 'Model';
     }, $this->joined_field_tables);
   }
 
-  public function addParam($param, $value, $index_name = '', $bonus_params=[])
+  public function addParam($param, $value, $index_name = '', $bonus_params = [])
   {
     if (preg_match('/^([^\.]+)\.[^.]+$/', $param, $matches)) {
       if (!in_array($matches[1], $this->tables) && !isset($this->joined_tables[$matches[1]])) {
@@ -95,13 +97,13 @@ class SearchParams
     $param = trim($param, 'AND');
     $param = trim($param, 'IN');
 
-    if(!empty($bonus_params['w_mask'])){
-      switch($bonus_params['w_mask']) {
+    if (!empty($bonus_params['w_mask'])) {
+      switch ($bonus_params['w_mask']) {
         case 'both':
-          $value = '%'.$value.'%';
+          $value = '%' . $value . '%';
           break;
         default:
-          $value = $value.'%';
+          $value = $value . '%';
       }
       $operator = 'LIKE';
     }
@@ -187,7 +189,7 @@ class SearchParams
 
   public function addJoinTableFields($table)
   {
-    if(isset($this->joined_tables[$table]) and !in_array($table, $this->joined_field_tables)) {
+    if (isset($this->joined_tables[$table]) and !in_array($table, $this->joined_field_tables)) {
       $this->joined_field_tables[] = $table;
     }
   }
@@ -289,8 +291,8 @@ class SearchParams
       $this->sql .= ' SQL_CALC_FOUND_ROWS ';
 
 
-    if(count($this->joined_field_tables)) {
-      foreach($this->joined_field_tables as $table) {
+    if (count($this->joined_field_tables)) {
+      foreach ($this->joined_field_tables as $table) {
         $this->sql .= '`' . $table . '`.*,';
       }
     }

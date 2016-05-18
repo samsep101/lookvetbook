@@ -119,13 +119,13 @@ class AppealManager extends ModelManager
     $appelTest = array_shift($this->getListByIds([$model->getId()]));
 //    print_r([$appelTest->mailed, 'qqq']);
 //    print_r([$appelTest->mailed]);
-    if($appelTest->mailed != 1) {
+    if ($appelTest->mailed != 1) {
       $this->sendMailAboutSave($model);
       $model->mailed = 1;
 
       //дабы не перезапускать заново afterSave
       $appeal = new Orm(DB_PREFIX . 'appeal');
-      $appeal->update(['mailed'=>$model->mailed], $this->id_field_name . ' = "' . $model->getId() . '"');
+      $appeal->update(['mailed' => $model->mailed], $this->id_field_name . ' = "' . $model->getId() . '"');
     }
 
 
@@ -164,4 +164,18 @@ class AppealManager extends ModelManager
 
     return $this->getListBySearchParams($search_params);
   }
+
+  /**
+   * @param $specialty_id
+   * @return AppealModel[]
+   */
+  public function getListByAccountId($account_id)
+  {
+    $data = $this->orm_model->select()->where('account_id = ?', $account_id)->fetchAll();
+    return $this->initList($data);
+  }
+
 }
+
+
+

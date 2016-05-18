@@ -81,6 +81,54 @@ class AccountManageController extends BaseController
       $fld_val = @$account->$field;
       $this->view->$field = empty($fld_val)?'':$fld_val;
     }
+
+//    $by_page = 15;
+//    $page = $this->request('page', 1);
+
+    $visitManager = new VisitManager();
+    $visits = $visitManager->getListByAccountId($acc_id);
+    $visit_list_fld = [
+      'visit_number'=>'ID',
+      'full_name'=>'ФИО',
+      'processed_user'=>'Регистратор',
+      'status_id'=>'Статус',
+      'visit_start_time'=>'Начало посещения',
+      'create_time'=>'Время создания',
+      'city_id'=>'Город',
+    ];
+    foreach($visits as $i=>$visit) {
+      $visits[$i]->item_id = $visit->getId();
+      foreach($visit_list_fld as $fld_nm) {
+        $val = @$visit->$fld_nm;
+        $visits[$i]->$fld_nm = $val;
+      }
+    }
+    $this->view->visit_fields = $visit_list_fld;
+    $this->view->visits = $visits;
+
+    $appManager = new AppealManager();
+    $appeals = $appManager->getListByAccountId($acc_id);
+
+    $appeal_list_fld = [
+      'phone_number'=>'Телефон',
+      'full_name'=>'ФИО',
+      'appeal_type_id'=>'Тип',
+      'visit_source_id'=>'Источник',
+      'specialty_id'=>'Специальность',
+      'is_with_visit'=>'С посещением',
+      'dt_create'=>'Дата создания',];
+    foreach($appeals as $i=>$appeal) {
+      $appeals[$i]->item_id = $appeal->getId();
+      foreach($appeal_list_fld as $fld_nm) {
+        $val = @$appeal->$fld_nm;
+        $appeals[$i]->$fld_nm = $val;
+      }
+    }
+    $this->view->appeal_fields = $appeal_list_fld;
+    $this->view->appeals = $appeals;
+
+
+
   }
 
   public function ajaxEditAccount()

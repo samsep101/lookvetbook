@@ -6,6 +6,8 @@
     });
 </script>
 
+
+
 <div class="edit_right_list">
     <div class="table_title">Посещения</div>
     <table class="item_list">
@@ -19,13 +21,18 @@
             </tr>
         </thead>
         <tbody>
-        <?php //print_r($visits); ?>
         <?php foreach($visits as $item) { ?>
-            <?php //print_r($item); ?>
             <tr class="item">
             <?php foreach($visit_fields as $fld_nm=>$fld_title) { ?>
-                <td class="fld">
-                    <?php echo $item->$fld_nm; ?>
+                <td class="fld <?php echo $fld_nm; ?>">
+                  <?php
+                  if($fld_nm=='status_id') {
+                    echo empty($visit_conf[$fld_nm][$item->$fld_nm]) ?
+                        $item->$fld_nm :
+                        $visit_conf[$fld_nm][$item->$fld_nm];
+                  }else{
+                    echo $item->$fld_nm;
+                  }?>
                 </td>
             <?php } ?>
             </tr>
@@ -35,7 +42,6 @@
 
     <div class="table_title">Обращения</div>
     <table class="item_list">
-          <?php //print_r($appeals); ?>
         <thead>
         <tr class="item">
             <?php foreach($appeal_fields as $fld_nm=>$fld_title) { ?>
@@ -48,7 +54,6 @@
         <tbody>
 
         <?php foreach($appeals as $item) { ?>
-            <?php //print_r($item); ?>
             <tr class="item">
                 <?php foreach($appeal_fields as $fld_nm=>$fld_title) { ?>
                     <td class="fld">

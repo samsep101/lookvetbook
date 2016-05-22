@@ -85,6 +85,12 @@ class AccountManageController extends BaseController
 //    $by_page = 15;
 //    $page = $this->request('page', 1);
 
+    //visit conf
+    require($_SERVER['DOCUMENT_ROOT'].'/application/config/cms_generator_configs/visit.cfg.php');
+    $visit_conf = ['status_id'=>$visit['fields']['status_id']['values']];
+    $this->view->visit_conf = $visit_conf;
+
+
     $visitManager = new VisitManager();
     $visits = $visitManager->getListByAccountId($acc_id);
     $visit_list_fld = [
@@ -96,6 +102,8 @@ class AccountManageController extends BaseController
       'create_time'=>'Время создания',
       'city_id'=>'Город',
     ];
+
+
     foreach($visits as $i=>$visit) {
       $visits[$i]->item_id = $visit->getId();
       foreach($visit_list_fld as $fld_nm) {
@@ -103,8 +111,22 @@ class AccountManageController extends BaseController
         $visits[$i]->$fld_nm = $val;
       }
     }
+
+    $acc_manager = new AccountManager();
+    $city_manager = new CityManager();
+    foreach($visits as $i=>$visit) {
+      $account = $acc_manager->getOneById($visit->processed_user);
+      $visit->processed_user =  $account->email;
+      $city = $city_manager->getOneById($visit->city_id);
+      $visit->city_id =  $city->name;
+    }
+
+
     $this->view->visit_fields = $visit_list_fld;
     $this->view->visits = $visits;
+
+    //appeal conf
+    //require($_SERVER['DOCUMENT_ROOT'].'/application/config/cms_generator_configs/appeal.cfg.php');
 
     $appManager = new AppealManager();
     $appeals = $appManager->getListByAccountId($acc_id);
@@ -117,6 +139,7 @@ class AccountManageController extends BaseController
       'specialty_id'=>'Специальность',
       'is_with_visit'=>'С посещением',
       'dt_create'=>'Дата создания',];
+
     foreach($appeals as $i=>$appeal) {
       $appeals[$i]->item_id = $appeal->getId();
       foreach($appeal_list_fld as $fld_nm) {
@@ -124,6 +147,21 @@ class AccountManageController extends BaseController
         $appeals[$i]->$fld_nm = $val;
       }
     }
+
+    $appeal_type_manager = ModelManagerFactory::getByName('appeal_type');
+    $visit_source_manager = ModelManagerFactory::getByName('visit_source');
+    $specialty_manager = ModelManagerFactory::getByName('specialty');
+    foreach($appeals as $i=>$appeal) {
+      $type = $appeal_type_manager->getOneById($appeal->appeal_type_id);
+      $appeal->appeal_type_id = $type->name;
+      $visit_source = $visit_source_manager->getOneById($appeal->visit_source_id);
+      $appeal->visit_source_id = $visit_source->name;
+      $specialty = $specialty_manager->getOneById($appeal->specialty_id);
+      $appeal->specialty_id = $specialty->name;
+      $appeal->is_with_visit = $appeal->is_with_visit?'Да':'Нет';
+
+    }
+
     $this->view->appeal_fields = $appeal_list_fld;
     $this->view->appeals = $appeals;
 

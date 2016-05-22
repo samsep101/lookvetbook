@@ -1292,7 +1292,7 @@ div.connected-carousels.iframe div.stage div.carousel ul li {
 }
 .edit_right_list .item_list .fld{
     width: 106px;
-    border: solid 1px gray;
+    border: solid 1px #bbb;
     height: 36px;
     padding: 1px 3px;
 }

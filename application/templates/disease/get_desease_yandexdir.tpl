@@ -1,5 +1,6 @@
 <?php /* Яндекс.Директ */ ?>
 <div class="info-box disease-banner" style="padding:8px; background: none; box-shadow: none;">
+	<a href="/disease/izbytochnyy-ves"><img src="/media/banners/grandclinic2.jpg"></a>
     <!-- Яндекс.Директ -->
     <script type="text/javascript">
         yandex_partner_id = 147148;

@@ -40,11 +40,12 @@
       }else{
         var reg = /^(.*)(&|\?)sort=([^&]*)&asc=([^&]*)(&.*)?$/;
         var mch = loc.match(reg);
-        if(mch && mch.length){
+        if(mch && mch.length) {
+          loc = mch[1]?mch[1]:'?';
           if(mch[3]==field) {
             asc = -1;
           }
-          loc = mch[1]+(typeof mch[5]== 'undefined'?'':mch[5]);
+          loc += (typeof mch[5]== 'undefined'?'':mch[5]);
         }
         loc += '&';
       }

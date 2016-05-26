@@ -4,6 +4,7 @@ nbproject
 .htaccess
 /vendor
 /media/logs
+/media/_upload/
 /media/maps
 /media/upload
 /media/reports
@@ -14,6 +15,7 @@ error_log
 media/map/
 media/pie/
 media/vidal/
+/vendor
 
 application/templates/_bak.tar.gz
 application/config/site.cfg.php

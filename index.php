@@ -27,7 +27,7 @@ try {
 
   $redirect_domen = $redirect_uri = '';
   if (isset($_SERVER['SERVER_NAME'])) {
-    $excluded_subdomens = ['account', 'sankt-peterburg', 'novosibirsk', 'chelyabinsk', 'omsk', 'samara', 'kazan', 'nizhniy-novgorod', 'ekaterinburg'];
+    $excluded_subdomens = ['account', 'test', 'sankt-peterburg', 'novosibirsk', 'chelyabinsk', 'omsk', 'samara', 'kazan', 'nizhniy-novgorod', 'ekaterinburg'];
     $m = [];
     if (preg_match('|^(www\.)?(([a-z0-9-]+)\.)?\w+\.\w+$|', $_SERVER['SERVER_NAME'], $m)) {
       if (!empty($m[1])) {

@@ -218,6 +218,8 @@
         margin: 8px 5px;
     }
 
+    .banner-treatment-in-switz{display: none;}
+
     div#authorization-block-on-disease-page {
         width: 100%;
         text-align: center;
@@ -824,6 +826,7 @@
         margin: 0 auto;
         display: block;
         left: 2.5%!important;
+        overflow: hidden!important;
     }
     .fancybox-wrap.fancybox-desktop.fancybox-type-inline.fancybox-opened .fancybox-inner{
         width: 100%!important;
@@ -960,6 +963,7 @@
     }
     .booking.record-to-the-doctor-popup .step-block-2 .form-block .txt input{
 	    font: 18px 'pf_agora_slab_proregular';
+        width: 87vw;
     }
     .booking .info-box{
         width: 90vw;

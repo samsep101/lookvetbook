@@ -65,7 +65,7 @@ class DiseaseController extends BaseController
     }
 
     $disease_id_orig = $disease_id;
-    $disease_id = preg_replace('/\d+/', '', $disease_id);
+    $disease_id = preg_replace('/\d+$/', '', $disease_id);
     if($disease_id != $disease_id_orig and !in_array($disease_id_orig, $this->redirectList)) {
       RedirectManager::redirect301(SITE_URL . '/disease/' .$disease_id);
     }

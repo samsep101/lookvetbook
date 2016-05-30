@@ -1633,8 +1633,8 @@ h2 {
     height     : 38px;
 }
 
-.content .left_search .search-form .search-by-name .show_input {
-    display : inline;
+.search-form .search-by-name .show_input, .search-form .search-by-name .show_inp {
+    display : none;
 }
 
 .content .left_search .search-form .choose-section .choose-list {

@@ -919,3 +919,7 @@ p.h-text {
 .search-form .search-by-name .show_input, .search-form .search-by-name .show_inp {
     display : none;
 }
+
+.content .left_search .search-form .search-by-name .txt {
+    display: inline-block !important;
+}

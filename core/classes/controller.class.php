@@ -24,6 +24,8 @@ class Controller
     $this->folder = $folder;
   }
 
+
+
   /**
    * Render template
    *
@@ -168,6 +170,7 @@ class Controller
 
   public function beforeRender()
   {
+
   }
 
   /**

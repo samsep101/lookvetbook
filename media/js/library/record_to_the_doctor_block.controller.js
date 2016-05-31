@@ -146,13 +146,13 @@ var RecordToTheDoctorBlockController = function (doctor_id, button, visit_id ) {
                     if (self.is_authed)
                     {
                         validate_rules = [
-                            $(self.container + ' input[name="surname"]').validate(validation_rules['full_name']),
+                            $(self.container + ' input[name="surname"]').validate(validation_rules['required']),
                             $(self.container + ' input[name="phone"]').validate(validation_rules['visit_phone'])
                             //$(self.container + ' select[name="purpose_of_visit_id"]').validate(validation_rules['required'])
                         ];
                     } else {
                         validate_rules = [
-                            $(self.container + ' input[name="surname"]').validate(validation_rules['full_name']),
+                            $(self.container + ' input[name="surname"]').validate(validation_rules['required']),
                             $(self.container + ' input[name="phone"]').validate(validation_rules['visit_phone']),
                             //$(self.container + ' input[name="email"]').validate(validation_rules['required_email'])
                             //$(self.container + ' select[name="purpose_of_visit_id"]').validate(validation_rules['visit_purpose'])

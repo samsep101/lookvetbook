@@ -916,3 +916,6 @@ p.h-text {
                 font-size: 16px;
                 font-style: normal;
             }
+.search-form .search-by-name .show_input, .search-form .search-by-name .show_inp {
+    display : none;
+}

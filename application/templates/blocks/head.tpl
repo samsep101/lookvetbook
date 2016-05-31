@@ -96,7 +96,6 @@
 <link rel="stylesheet" type="text/css" href="/media/js/jquery-rating/styles/jquery.rating.css?<?php echo RELEASE__NUMBER?>"/>
 
 <script src="/media/js/jquery.event.move.js?<?php echo RELEASE__NUMBER?>"></script>
-<script src="/media/js/jquery.event.swipe.js?<?php echo RELEASE__NUMBER?>"></script>
 
 <script>
 	<?php if($city): ?>

@@ -716,6 +716,7 @@ p.h-text {
     .search-form-main-page-container #clinic-search-form .lmb .search_txt {
         width: 190px !important;
         font-size: 18px!important;
+        display: inline-block;
     }
 
     @-moz-document url-prefix()
@@ -800,6 +801,7 @@ p.h-text {
         font-size: 18px;
         width: 165px;
         padding-left: 12px;
+        display: inline-block;
     }
     .content .left_search .search-form .choose-section #after_select_options {margin-bottom: 15px!important;}
 

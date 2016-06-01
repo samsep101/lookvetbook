@@ -1638,8 +1638,8 @@ h2 {
     height     : 38px;
 }
 
-.content .left_search .search-form .search-by-name .show_input {
-    display : inline;
+.search-form .search-by-name .show_input, .search-form .search-by-name .show_inp {
+    display : none;
 }
 
 .content .left_search .search-form .choose-section .choose-list {
@@ -9728,4 +9728,9 @@ header .nav-table td.treatment-in-switz, header .nav-table td.lekarstva, .banner
     background: url(/media/images/home_page/vet/owl-404.png) center center no-repeat;
     width: 398px;
     height: 403px;
+}
+
+.adv_text_bf_search_result{
+    font-size: 20px;
+    margin-bottom: 13px;
 }

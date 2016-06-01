@@ -1,15 +1,18 @@
 <?php
-	class FbAccountTelevisionManager extends ModelManager
-	{
-		protected $table_name = 'fb_account_television';
-		protected $model_name = 'FbAccountTelevisionModel';
 
-        /**
-		 * return FbAccountTelevisionModel[]
-		 */
-		public function getListByFbAccountId($fb_account_id){
-			$data = $this->orm_model->select()->where('fb_account_id = ?', $fb_account_id)->fetchAll();
-			return $this->initList($data);
-		}
+class FbAccountTelevisionManager extends ModelWAccountidManager
+{
+  protected $table_name = 'fb_account_television';
+  protected $model_name = 'FbAccountTelevisionModel';
+  protected $account_id_field_name = 'fb_account_id';
 
-	}
+
+  /**
+   * return FbAccountTelevisionModel[]
+   */
+  public function getListByFbAccountId($fb_account_id)
+  {
+    return $this->getListByAccountId($fb_account_id);
+  }
+
+}

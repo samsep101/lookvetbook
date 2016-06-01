@@ -1,6 +1,6 @@
 <?php
 
-class AccountPhoneManager extends ModelManager
+class AccountPhoneManager extends ModelWAccountidManager
 {
   protected $table_name = 'account_phone';
   protected $model_name = 'AccountPhoneModel';
@@ -166,6 +166,8 @@ class AccountPhoneManager extends ModelManager
   }
 
 
+
+
   public function getAllByAccountId($account_id)
   {
     $sql = 'SELECT * FROM ' . $this->table_name . '
@@ -200,4 +202,17 @@ class AccountPhoneManager extends ModelManager
 
     $this->db->query($sql);
   }
+
+
+  public function delByAccountId($account_id)
+  {
+    $ids = parent::delByAccountId($account_id);
+
+    $accPhoneCheckManager = new AccountPhoneCheckManager();
+    $accPhoneCheckManager->deleteByIds($ids);
+
+    return $ids;
+  }
+
+
 }

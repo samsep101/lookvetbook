@@ -283,6 +283,23 @@ class ModelManager implements ICachedModelManager
     }
   }
 
+  public function deleteByIds($ids)
+  {
+    $objects = [];
+    foreach($ids as $id) {
+      $obj = $this->getOneById($id);
+      if($obj) $objects[$id] = $obj;
+    }
+    $this->orm_model->delete($this->id_field_name . ' = "' . implode('" or '.$this->id_field_name . ' = "', $ids).'"');
+
+    foreach($objects as $id=>$object) {
+      if (isset($this->models_register[$id])) {
+        unset($this->models_register[$id]);
+      }
+      $this->afterDelete($object[$id]);
+    }
+  }
+
   protected function update(DynamicModel $model)
   {
     if (!$this->id_field_name) {

@@ -1,6 +1,6 @@
 <?php
 
-class AppealManager extends ModelManager
+class AppealManager extends ModelWAccountidManager
 {
 
   protected $table_name = 'appeal';
@@ -165,15 +165,6 @@ class AppealManager extends ModelManager
     return $this->getListBySearchParams($search_params);
   }
 
-  /**
-   * @param $specialty_id
-   * @return AppealModel[]
-   */
-  public function getListByAccountId($account_id)
-  {
-    $data = $this->orm_model->select()->where('account_id = ?', $account_id)->fetchAll();
-    return $this->initList($data);
-  }
 
 }
 

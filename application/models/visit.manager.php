@@ -1,6 +1,6 @@
 <?php
 
-class VisitManager extends ModelManager
+class VisitManager extends ModelWAccountidManager
 {
   protected $table_name = 'visit';
   protected $model_name = 'VisitModel';
@@ -535,14 +535,6 @@ class VisitManager extends ModelManager
     //exit();
   }
 
-  /**
-   * return VisitModel[]
-   */
-  public function getListByAccountId($account_id)
-  {
-    $data = $this->orm_model->select()->where('account_id = ?', (int)$account_id)->fetchAll();
-    return count($data) ? $this->initList($data) : array();
-  }
 
   public function getListByClinicIdAndVisitStatusId($clinic_id, $visit_status_id)
   {
@@ -655,6 +647,19 @@ class VisitManager extends ModelManager
     $data = $this->db->query($sql);
 
     return count($data) ? $this->initOne($data[0]) : null;
+  }
+
+  public function delByAccountId($account_id)
+  {
+    $ids = parent::delByAccountId($account_id);
+
+    foreach(['visit_mail', 'visit_rating' ] as $tabName) {
+      $manager = ModelManagerFactory::getByName($tabName);
+      foreach($ids as $id) {
+        $manager->delByAccountId($id);
+      }
+    }
+    return $ids;
   }
 
 

@@ -53,6 +53,17 @@
       window.location = "/manage/account"+loc;
       return false;
     });
+    $('table.account-list a.delete-line').click(function(){
+      var tag = $(this);
+      if(!confirm("Операция ликвидации аккаунта необратима. Вы уверены?")) {
+        return;
+      }
+      var id = tag.attr('data-id');
+      window.location = '/manage/account?del_id='+id;
+      return false;
+    });
+
+
   });
 
 </script>
@@ -69,6 +80,7 @@ if ($accounts) {
       <th class="email">Email</th>
       <th class="regdate">Дата регистрации</th>
       <th></th>
+      <th></th>
     </thead>
     <?php foreach($accounts as $account) { ?>
       <tr>
@@ -77,6 +89,9 @@ if ($accounts) {
         <?php } ?>
         <td>
           <a href="/manage/account/edit?id=<?php echo $account->account_id; ?>">редактировать</a>
+        </td>
+        <td>
+          <a class="delete-line" data-id="<?php echo $account->account_id; ?>" href="#">удалить</a>
         </td>
       </tr>
         <?php $counter++;?>

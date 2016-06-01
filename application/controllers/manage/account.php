@@ -11,10 +11,24 @@ class AccountManageController extends BaseController
     parent::__construct();
   }
 
-  public function index()
-  {
+  private function delAcccount($del_id) {
+    foreach(['account_session', 'account_phone', 'appeal', 'my_clinic', 'my_doctor', 'my_disease', 'visit',
+              'fb_account', 'ok_account', 'vk_account'] as $tabName) {
+      $manager = ModelManagerFactory::getByName($tabName);
+      $manager->delByAccountId($del_id);
+    }
+    $manager = new AccountManager();
+    $manager->deleteById($del_id);
+  }
+
+  public function index() {
     if (!Acl::isAuthed(RoleModel::ACCOUNT_SUPER_MANAGER) && !Acl::isAuthed(RoleModel::ACCOUNT_MANAGER))
       RedirectManager::redirect(ADMIN_FOLDER);
+
+    $del_id = $this->request->get('del_id');
+    if($del_id>0) {
+      $this->delAcccount($del_id);
+    }
 
     $sortBy = $this->request->get('sort');
     $sortAsc = $this->request->get('asc');
@@ -116,9 +130,9 @@ class AccountManageController extends BaseController
     $city_manager = new CityManager();
     foreach($visits as $i=>$visit) {
       $account = $acc_manager->getOneById($visit->processed_user);
-      $visit->processed_user =  $account->email;
+      $visit->processed_user =  $account?$account->email:'';
       $city = $city_manager->getOneById($visit->city_id);
-      $visit->city_id =  $city->name;
+      $visit->city_id =  $city?$city->name:'';
     }
 
 
@@ -153,11 +167,11 @@ class AccountManageController extends BaseController
     $specialty_manager = ModelManagerFactory::getByName('specialty');
     foreach($appeals as $i=>$appeal) {
       $type = $appeal_type_manager->getOneById($appeal->appeal_type_id);
-      $appeal->appeal_type_id = $type->name;
+      $appeal->appeal_type_id = $type?$type->name:'';
       $visit_source = $visit_source_manager->getOneById($appeal->visit_source_id);
-      $appeal->visit_source_id = $visit_source->name;
+      $appeal->visit_source_id = $visit_source?$visit_source->name:'';
       $specialty = $specialty_manager->getOneById($appeal->specialty_id);
-      $appeal->specialty_id = $specialty->name;
+      $appeal->specialty_id = $specialty?$specialty->name:'';
       $appeal->is_with_visit = $appeal->is_with_visit?'Да':'Нет';
 
     }

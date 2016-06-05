@@ -248,39 +248,39 @@ class DoctorSpecialtyToClinicManager extends ModelManager
                     WHERE doc.is_active = 1
                     AND c.is_active = 1';
 
-    if ($doctor_search_params->specialty_id) {
+    if (!empty($doctor_search_params->specialty_id)) {
       $sql .= ' AND ds2c.specialty_id = ' . (int)$doctor_search_params->specialty_id;
     }
 
-    if ($doctor_search_params->specialty_ids and is_array($doctor_search_params->specialty_ids) and count($doctor_search_params->specialty_ids)) {
+    if (!empty($doctor_search_params->specialty_ids) and is_array($doctor_search_params->specialty_ids) and count($doctor_search_params->specialty_ids)) {
       $sql .= ' AND ds2c.specialty_id IN (' . implode(', ', array_map(function($a) { return (int)$a; }, $doctor_search_params->specialty_ids)) . ')';
     }
 
-    if ($doctor_search_params->district_id) {
+    if (!empty($doctor_search_params->district_id)) {
       $sql .= ' AND d.id = ' . $doctor_search_params->district_id;
     }
 
-    if ($doctor_search_params->region_id) {
+    if (!empty($doctor_search_params->region_id)) {
       $sql .= ' AND r.id = ' . $doctor_search_params->region_id;
     }
-    if ($doctor_search_params->regions_ids and is_array($doctor_search_params->regions_ids) and count($doctor_search_params->regions_ids)) {
+    if (!empty($doctor_search_params->regions_ids) and is_array($doctor_search_params->regions_ids) and count($doctor_search_params->regions_ids)) {
       $sql .= ' AND r.id IN (' . implode(', ', array_map(function($a) { return (int)$a; }, $doctor_search_params->regions_ids)) . ')';
     }
 
-    if ($doctor_search_params->metro_station_id) {
+    if (!empty($doctor_search_params->metro_station_id)) {
       $sql .= ' AND c.metro_station_id = ' . $doctor_search_params->metro_station_id;
     }
 
-    if ($doctor_search_params->street_id) {
+    if (!empty($doctor_search_params->street_id)) {
       $sql .= ' AND c.street_id = ' . $doctor_search_params->street_id;
     }
-    if ($doctor_search_params->doctor_id) {
+    if (!empty($doctor_search_params->doctor_id)) {
       $sql .= ' AND doc.id = ' . $doctor_search_params->doctor_id;
     }
-    if ($doctor_search_params->doctors_ids and is_array($doctor_search_params->doctors_ids) and count($doctor_search_params->doctors_ids)) {
+    if (!empty($doctor_search_params->doctors_ids) and is_array($doctor_search_params->doctors_ids) and count($doctor_search_params->doctors_ids)) {
       $sql .= ' AND doc.id IN (' . implode(', ', array_map(function($a) { return (int)$a; }, $doctor_search_params->doctors_ids)) . ')';
     }
-    if ($doctor_search_params->clinics_ids and is_array($doctor_search_params->clinics_ids) and count($doctor_search_params->clinics_ids)) {
+    if (!empty($doctor_search_params->clinics_ids) and is_array($doctor_search_params->clinics_ids) and count($doctor_search_params->clinics_ids)) {
       $sql .= ' AND ds2c.clinic_id IN (' . implode(', ', array_map(function($a) { return (int)$a; }, $doctor_search_params->clinics_ids)) . ')';
     }
 

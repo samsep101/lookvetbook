@@ -577,6 +577,7 @@ class ClinicController extends BaseController
     }
 
     $doctors = DoctorPriceHelper::getPricesForDoctor($doctors, $clinic_id, $specialty_id);
+    shuffle($doctors);
     $this->view->doctors = $doctors;
 
     $this->view->specialty_id = $specialty_id;

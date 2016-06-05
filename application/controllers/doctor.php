@@ -1072,7 +1072,7 @@ class DoctorController extends BaseController
     $key = 'search_params_return';
     $specialty_id = $doctor_search_params->specialty_id;
 
-    $url_parts = explode("/", $_SERVER['HTTP_REFERER']);
+    $url_parts = explode("/", empty($_SERVER['HTTP_REFERER'])?'':$_SERVER['HTTP_REFERER']);
     $last_part = $url_parts[count($url_parts) - 1];
     $url_params = explode("?", $last_part);
     $search_params_key = $url_params[0];
@@ -1102,76 +1102,71 @@ class DoctorController extends BaseController
     return $doctor_search_params;
   }
 
-  public function ajaxSearch()
-  {
-    $this->layout = 'ajax';
-    $this->view->page_type = 'doctor';
 
-    $landing = $this->request('landing');
-
-    if (!$landing && !Acc::isAuthed()) {
-      JsonResponse::error(4);
-    }
-
-    $this->view->landing_page = $landing;
-    $doctor_search_params = $this->getSearchParams();
-
-    $specialtyParams = $this->paramsFormFieldsSpecialty($doctor_search_params->specialty_id, $doctor_search_params);
-
-    if ($doctor_search_params->doctor_name) {
-      $doctor_search_params->without_filters = 1;
-    }
-
-    if (empty($doctor_search_params->specialty_id) || !$doctor_search_params->specialty_id) {
-      $doctor_search_params->specialty_id = 29;
-      $doctor_search_params->alias = 'terapevt';
-    }
-
-//			$search_params = clone $doctor_search_params;
-//			$search_params->page = $doctor_search_params->page;
-//			$search_params->by_page = $doctor_search_params->by_page;
-
-    $city = $this->city;
-    $city_id = $city->getId();
-
+  public function ajaxSearch__address_object__district($city_id) {
     $district_manager = new DistrictManager();
     $district = NULL;
     $district_id = $this->request('district_id');
 
     if ($district_id) {
       $district = $district_manager->getOneById($district_id);
-      if (!$district || $district->city_id != $city->getId()) ErrorPageViewHelper::page404('404');
+      if (!$district || $district->city_id != $city_id) ErrorPageViewHelper::page404('404');
     }
+    return $district;
+  }
 
+
+  public function ajaxSearch__address_object__region($district) {
     $region_manager = new RegionManager();
     $region = NULL;
     $region_id = $this->request('region_id');
 
-    if ($region_id) {
+    if ($region_id and $district) {
       $region = $region_manager->getOneById($region_id);
 
       if (!$region || $region->district_id != $district->getId()) ErrorPageViewHelper::page404();
     }
+    return $region;
+  }
 
+
+  public function ajaxSearch__address_object__street($district) {
     $street_manager = new StreetManager();
     $street = NULL;
     $street_id = $this->request('street_id');
 
-    if ($street_id) {
+    if ($street_id and $district) {
       $street = $street_manager->getOneById($street_id);
 
       if (!$street || !$street->isBelongToDistrict($district->getId())) ErrorPageViewHelper::page404();
     }
+    return $street;
+  }
 
+
+  public function ajaxSearch__address_object__metro($region) {
     $metro_station_manager = new MetroStationManager();
     $metro_station = NULL;
     $metro_id = $this->request('metro_station_id');
 
-    if ($metro_id) {
+    if ($metro_id and $region) {
       $metro_station = $metro_station_manager->getOneById($metro_id);
 
       if (!$metro_station || ($metro_station->region_id != $region->getId())) ErrorPageViewHelper::page404();
     }
+
+
+    return $metro_station;
+  }
+
+  public function ajaxSearch__address_object() {
+    $city = $this->city;
+    $city_id = $city->getId();
+
+    $district = $this->ajaxSearch__address_object__district($city_id);
+    $region = $this->ajaxSearch__address_object__region($district);
+    $street = $this->ajaxSearch__address_object__street($district);
+    $metro_station = $this->ajaxSearch__address_object__metro($region);
 
     $this->view->district = $district;
     $this->view->region = $region;
@@ -1179,74 +1174,73 @@ class DoctorController extends BaseController
     $this->view->metro_station = $metro_station;
 
     $address_object = NULL;
-
-    if ($city || $street_id || $region_id || $district_id) {
-
-      if ($metro_station) {
-        $address_object = $metro_station;
-      } elseif ($street) {
-        $address_object = $street;
-      } elseif ($region) {
-        $address_object = $region;
-      } elseif ($district) {
-        $address_object = $district;
-      } elseif ($city) {
-        $address_object = $city;
-      }
+    if ($metro_station) {
+      $address_object = $metro_station;
+    } elseif ($street) {
+      $address_object = $street;
+    } elseif ($region) {
+      $address_object = $region;
+    } elseif ($district) {
+      $address_object = $district;
+    } elseif ($city) {
+      $address_object = $city;
     }
 
-    $this->view->address_object = $address_object;
+    return $address_object;
+  }
 
+
+  public function ajaxSearch_specialty($doctor_search_params) {
     $specialty_manager = ModelManagerFactory::getByName('specialty');
     $specialty = $specialty_manager->getOneByIdOrAlias($doctor_search_params->specialty_id);
 
     $this->view->specialty = $specialty;
-    $this->view->specialties = $specialty_manager->getHavingDoctorsListByCityId($city_id);
+    $this->view->specialties = $specialty_manager->getHavingDoctorsListByCityId($this->city->getId());
     $this->view->specialties_groups = SpecialtyHelper::getSpecialtiesLetterGroups($this->view->specialties);
+    return $specialty;
+  }
 
-    $doctor_search_algorithm = new DoctorSearchAlgorithm();
-
-    $doctors = $doctor_search_algorithm->search($doctor_search_params);
-
-    $doctor_manager = ModelManagerFactory::getByName('doctor');
-    if (empty($doctor_search_params->doctor_name)) {
-
-      $total_doctors_data = $doctor_manager->getTotalDoctorsForAllRelatedSpecialties($specialty, $doctor_search_params);
-
-      $total_number_doctors = $total_doctors_data['doctors_total_count'];
-      $total_doctors = $total_doctors_data['total_doctors'];
-
-      if (!$total_number_doctors) {
-        $total_doctors = $doctor_manager->doctorsForRelatedSpecialty($doctor_search_params, $specialty->getId());
-        $total_number_doctors = count($total_doctors);
-      }
-
-      $doctor_word_form = SpecialtyHelper::getDoctorWordForm($total_number_doctors);
-
-      $interval = $doctor_search_params->page * $doctor_search_params->by_page;
-      $start = $interval - 10;
-      $part_doctors = array();
-
-      if ($start < $total_number_doctors) {
-        for ($start = $interval - 10, $end = $interval; $start < $end; $start++) {
-          if (!empty($total_doctors[$start])) {
-            $part_doctors[] = $total_doctors[$start];
-          }
-        }
-
-        $doctors = $part_doctors;
-      }
-
-      if (count($part_doctors) < 10 || $interval == $total_number_doctors || $interval >= $total_number_doctors) {
-        $getNextPageFlag = 0;
-      } else {
-        $getNextPageFlag = 1;
-      }
+  // уебанский способ - выбирает всех врачей из базы прямо сюда, а потом делает срез, выкидывая остатки.
+  // надо будет сделать нормальную выборку.
+  public function ajaxSearch__search_wo_doctname($doctor_search_params, $doctor_manager, $specialty, $doctors) {
+    if (!empty($doctor_search_params->doctor_name)) {
+      return [$doctors, 0, 0];
     }
 
+    $total_doctors_data = $doctor_manager->getTotalDoctorsForAllRelatedSpecialties($specialty, $doctor_search_params);
 
+    $total_number_doctors = $total_doctors_data['doctors_total_count'];
+    $total_doctors = $total_doctors_data['total_doctors'];
+
+    if (!$total_number_doctors) {
+      $total_doctors = $doctor_manager->doctorsForRelatedSpecialty($doctor_search_params, $specialty->getId());
+      $total_number_doctors = count($total_doctors);
+    }
+
+    $interval = $doctor_search_params->page * $doctor_search_params->by_page;
+    $start = $interval - 10;
+    $part_doctors = array();
+
+    if ($start < $total_number_doctors) {
+      for ($start = $interval - 10, $end = $interval; $start < $end; $start++) {
+        if (!empty($total_doctors[$start])) {
+          $part_doctors[] = $total_doctors[$start];
+        }
+      }
+      $doctors = $part_doctors;
+    }
+
+    if (count($part_doctors) < 10 || $interval == $total_number_doctors || $interval >= $total_number_doctors) {
+      $getNextPageFlag = 0;
+    } else {
+      $getNextPageFlag = 1;
+    }
+
+    return [$doctors, $total_number_doctors, $getNextPageFlag];
+  }
+
+  public function ajaxSearch__clinics_count($doctors, $doctor_search_params) {
     $clinics_count = 0;
-    $filter_active = 0;
     if ($doctors) {
       /**
        * @var DoctorSpecialtyToClinicManager $doctor_specialty_to_clinic_manager
@@ -1258,27 +1252,35 @@ class DoctorController extends BaseController
       $clinics_count = count($doctor_clinics);
     }
 
-    $doctors_total_count = !empty($total_number_doctors) ? $total_number_doctors : $doctor_manager->getCountByModelSearchCriteria($doctor_search_params);
-    $doctor_word_form = !empty($doctor_word_form) ? $doctor_word_form : SpecialtyHelper::getDoctorWordForm($doctors_total_count);
-    $specialty_name = SpecialtyHelper::getNameByCount($doctor_search_params->specialty_id, $doctors_total_count);
+    return $clinics_count;
+  }
 
-    $this->view->specialty_id = $doctor_search_params->specialty_id;
-    $this->view->specialtyIDForDoctorCard = $specialty->id;
+  public function ajaxSearch__view_params($search_specialty_id, $specialty_id, $doctors, $purpose_of_visit_id) {
+    $this->view->specialty_id = $search_specialty_id;
+    $this->view->specialtyIDForDoctorCard = $specialty_id;
 
     $this->view->doctors = $doctors;
-    $this->view->purpose_of_visit_id = $doctor_search_params->purpose_of_visit_id;
+    $this->view->purpose_of_visit_id = $purpose_of_visit_id;
     $this->view->search_page = TRUE;
 
     $this->view->counter_number = (int)AnalyticCounterHelper::getCounterIdByCityIdAndCounterTypeId($this->city->getId(), AnalyticCounterTypeModel::YANDEX_COUNTER);
     $this->view->is_seo_page = TRUE;
     $this->view->noWrap = TRUE;
-    $html = $this->renderInString('doctor/card_big_list');
 
+  }
+
+  public function ajaxSearch__map_file($doctor_search_params) {
     $map_file = '';
     if ($doctor_search_params->page == 1) {
       $map_file_generator = new DoctorMapDataGenerator();
       $map_file = $map_file_generator->generate($doctor_search_params);
     }
+    return $map_file;
+  }
+
+
+  public function ajaxSearch__bounds($doctor_search_params) {
+    $bounds = null;
 
     if ($doctor_search_params->district_id || $doctor_search_params->region_id || $doctor_search_params->street_id) {
       $address = new Address();
@@ -1299,26 +1301,94 @@ class DoctorController extends BaseController
       $bounds = $clinic_manager->getBoundsByGeoPointAndDistance($doctor_search_params->geo_point, $doctor_search_params->distance);
     }
 
-    $is_empty_city = 0;
-    $city_doctor = NULL;
-    if ($doctor_search_params->city_id) {
-      if (!$this->city->service_flag)
-        $is_empty_city = 1;
+    return $bounds;
+  }
 
-    }
-
+  public function ajaxSearch__search_page_description($address_object, $specialty)  {
     $search_page_description = '';
     if ((isset($this->view->address->district_id) ||
         isset($this->view->address->region_id) ||
-        isset($this->view->address->street_id)) &&
-      isset($address_object) && $address_object
+        isset($this->view->address->street_id))
+      && isset($address_object) && $address_object
     ) {
       $search_page_description = SeoTextViewHelper::getDoctorPageDescription($specialty, $address_object);
     }
 
+    return $search_page_description;
+  }
+
+
+  public function ajaxSearch() {
+    $this->layout = 'ajax';
+    $this->view->page_type = 'doctor';
+
+    $landing = $this->request('landing');
+
+    if (!$landing && !Acc::isAuthed()) {
+      JsonResponse::error(4);
+    }
+
+    $this->view->landing_page = $landing;
+    $doctor_search_params = $this->getSearchParams();
+
+    $specialtyParams = $this->paramsFormFieldsSpecialty($doctor_search_params->specialty_id, $doctor_search_params);
+
+    //поиск по имени - значит без остальной фильтрации
+    if ($doctor_search_params->doctor_name) {
+      $doctor_search_params->without_filters = 1;
+    }
+
+    //умолчальные настройки фильтра специальности
+    if (empty($doctor_search_params->specialty_id) || !$doctor_search_params->specialty_id) {
+      $doctor_search_params->specialty_id = 29;
+      $doctor_search_params->alias = 'terapevt';
+    }
+
+    $address_object = $this->ajaxSearch__address_object();
+    $this->view->address_object = $address_object;
+
+    $specialty = $this->ajaxSearch_specialty($doctor_search_params);
+
+    //for primary doctors
+    $doctor_search_algorithm = new DoctorSearchAlgorithm();
+    $doctors = $doctor_search_algorithm->search($doctor_search_params);
+
+    $doctor_manager = ModelManagerFactory::getByName('doctor');
+    list($doctors, $total_number_doctors, $getNextPageFlag) = $this->ajaxSearch__search_wo_doctname($doctor_search_params, $doctor_manager, $specialty, $doctors);
+    shuffle($doctors);
+
+    $filter_active = 0;
+    $clinics_count = $this->ajaxSearch__clinics_count($doctors, $doctor_search_params);
+
+    $doctors_total_count = !empty($total_number_doctors) ? $total_number_doctors : $doctor_manager->getCountByModelSearchCriteria($doctor_search_params);
+
+    if (empty($doctor_search_params->doctor_name)) {
+      $doctor_word_form = SpecialtyHelper::getDoctorWordForm($total_number_doctors);
+    }
+    $doctor_word_form = !empty($doctor_word_form) ? $doctor_word_form : SpecialtyHelper::getDoctorWordForm($doctors_total_count);
+
+
+    $specialty_name = SpecialtyHelper::getNameByCount($doctor_search_params->specialty_id, $doctors_total_count);
+
+    $this->ajaxSearch__view_params($doctor_search_params->specialty_id, $specialty->id, $doctors, $doctor_search_params->purpose_of_visit_id);
+
+    $html = $this->renderInString('doctor/card_big_list');
+
+    $map_file = $this->ajaxSearch__map_file($doctor_search_params);
+
+    $bounds = $this->ajaxSearch__bounds($doctor_search_params);
+
+    $is_empty_city = 0;
+    $city_doctor = NULL;
+    if ($doctor_search_params->city_id and !$this->city->service_flag) {
+      $is_empty_city = 1;
+    }
+
+    $search_page_description = $this->ajaxSearch__search_page_description($address_object, $specialty);
+
     $defaultSpecialty = 0;
     if (!empty($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'terapevt') === FALSE && $doctor_search_params->specialty_id == 29) {
-      $topNumberH1 = SeoTextViewHelper::getTopNumberH1('', $city);
+      $topNumberH1 = SeoTextViewHelper::getTopNumberH1('', $this->city);
       $defaultSpecialty = 1;
     } else {
       $topNumberH1 = SeoTextViewHelper::getTopNumberH1($specialty, $address_object);
@@ -1345,7 +1415,7 @@ class DoctorController extends BaseController
       'doctors_total_count' => $doctors_total_count,
       'specialty_name' => $specialty_name,
       'doctor_word_form' => $doctor_word_form,
-      'bounds' => isset($bounds) ? $bounds : NULL,
+      'bounds' => $bounds,
       'clinics_count' => $clinics_count,
       'filter_active' => $filter_active,
       'isset_region' => ($doctor_search_params->region_id && !$doctor_search_params->street_id && !$doctor_search_params->metro_station_id) ? 1 : 0,

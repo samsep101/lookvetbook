@@ -10,6 +10,7 @@
     }
   ],
   "require": {
-    "neeckeloo/closure-compiler-php": "dev-master"
+    "neeckeloo/closure-compiler-php": "dev-master",
+    "robmorgan/phinx": "v0.5.3"
   }
 }

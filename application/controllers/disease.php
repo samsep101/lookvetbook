@@ -10,6 +10,7 @@
             $card = $this->request('card');
 
             $diseaseManager = ModelManagerFactory::getByName('disease');
+            /** @var DiseaseModel $disease */
             $disease = $diseaseManager->getOneByIdOrAlias($disease_id);
 
             $keepTrackLinks = array(
@@ -215,6 +216,8 @@
             $this->view->show_pediatr_banner = ($v_param && $v_param == 'child')?1:0;
             $dis_param = $this->request('dis');
             $this->view->disease_green_btn = ($dis_param && $dis_param == 'new3')?1:0;
+            $this->view->actions = (new ActionManager())->getListForDisease($disease->getId());
+
             
             $this->render('disease/get');
         }

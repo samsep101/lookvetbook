@@ -1,6 +1,9 @@
 <?php foreach ($disease_blocks_content as $block):?>
     <?php $field_anchor = 'b'.$block->id;?>
-
+    <?php
+    if ($actions && $block->disease_block_type_id == 3): ?>
+        <?php $this->block('disease/blocks/actions'); ?>
+    <?php endif?>
     <?php if ($block->disease_block_type_id == 5): ?>
         <div class="section">
 

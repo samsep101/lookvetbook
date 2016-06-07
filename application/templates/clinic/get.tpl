@@ -321,6 +321,9 @@
 				<?php $this->block('blocks/equal_elements'); ?>
 			<?php endif; ?>
 		</div>
+        <?php if ($actions): ?>
+            <?php $this->block('clinic/blocks/actions'); ?>
+        <?php endif; ?>
 	</div>
 
 

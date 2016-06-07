@@ -371,6 +371,13 @@ class ModelManager implements ICachedModelManager
     $this->models_register = array();
   }
 
+    public function getListByQuery($sql)
+    {
+        $data = $this->db->query($sql);
+
+        return $this->initList($data);
+    }
+
   public function getListWithLimit($limit)
   {
     $sql = 'SELECT ' . $this->selected_fields . '

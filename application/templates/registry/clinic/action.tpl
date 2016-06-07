@@ -1,19 +1,25 @@
 <?php $this->container = '#action-form'; ?>
 
-<form action="/registry/clinic/actionSave" method="post" enctype="multipart/form-data">
+<form action="/registry/clinic/actionSave?clinic_id=<?=$clinic_id?>" method="post" enctype="multipart/form-data">
     <div class="fields-block flo">
-        <p>Добавление новой акции</p>
+        <p>Акции</p>
         <div class="row-record">
             <label>Название</label>
             <div class="row-record-data">
-                <input type="text" name="form[name]" value="" style=""><br>
+                <input type="text" name="form[name]" value="<?=$edit_action->name?>" style=""><br>
+            </div>
+        </div>
+        <div class="row-record">
+            <label>Изображение (600*120)</label>
+            <div class="row-record-data">
+                <input type="file" name="icon" value="" style=""><br>
             </div>
         </div>
         <div class="row-record">
             <label></label>
             <div class="education-parameter short-parameter">
                 <label>Дата начала</label>
-                <input type="text" name="form[date_from]" value="<?=date('d-m-Y')?>" id="form_date_from">
+                <input type="text" name="form[date_from]" value="<?=($edit_action->date_from ? DateHelper::changeFormat($edit_action->date_from,'-') : date('d-m-Y'))?>" id="form_date_from">
                 <input type="button" id="form_date_picker_date_from" value="Выбрать дату">
                 <script>
                     Calendar.setup(
@@ -40,7 +46,7 @@
             </div>
             <div class="education-parameter short-parameter">
                 <label>Дата окончания</label>
-                <input type="text" name="form[date_to]" value="<?=date('d-m-Y')?>" id="form_date_to">
+                <input type="text" name="form[date_to]" value="<?=($edit_action->date_to ? DateHelper::changeFormat($edit_action->date_to,'-') : date('d-m-Y'))?>" id="form_date_to">
                 <input type="button" id="form_date_picker_date_to" value="Выбрать дату">
                 <script>
                     Calendar.setup(
@@ -68,7 +74,7 @@
         <div class="row-record">
             <label>Описание</label>
             <div class="row-record-data">
-                <textarea class="htmlarea" id="form_info" name="form[info]" style="width: 100%; height:350px;"></textarea>
+                <textarea class="htmlarea" id="form_info" name="form[info]" style="width: 100%; height:350px;"><?=$edit_action->info?></textarea>
                 <script type="text/javascript">
                     $(document).ready(function() {
                         CKEDITOR.replace( 'form_info',
@@ -109,21 +115,12 @@
                 ?>
                 <div class="clinic_specialty">
                     <label>
-                        <?php
-                                        if ($specialization->is_selected){
-                        $class = 'act';
-                        $value = 1;
-                        } else {
-                        $class = '';
-                        $value = 0;
-                        }
-                        ?>
                         <div data-name="specialization_to_clinic" class="specialization_to_clinic">
-                            <input type="hidden" name="specialization_id[]" value="<?php echo $specialization->getId() ?>" />
-                            <div class="chekBox <?php echo $class; ?>">
-                                <span></span>
+                            <div>
+                                <span style="background-image: none">
+                                    <input type="checkbox" name="specialization_id[]" <?php if ($edit_action->hasSpecialization($specialization->getId())){?> checked="checked" <?php } ?>  value="<?php echo $specialization->getId() ?>" />
+                                </span>
                                 <?=$specialization->name; ?>
-                                <input type="hidden" name="is_selected" value="<?php echo $value; ?>" />
                             </div>
                         </div>
                     </label>
@@ -134,11 +131,20 @@
     <?php endif; ?>
         <div class="buttons flo">
             <!-- <input class="btn-appoint longest-button" type="submit" name="sent_back" value="Отправить на доработку" onclick="return false;">-->
-            <input class="btn-1" type="submit" name="publish" value="Сохранить" onclick="return false;">
-            <input class="btn-appoint" type="submit" name="cancel" value="Отменить" onclick="return false;">
-
+            <input class="btn-1" type="submit" name="publish" value="Сохранить">
+            <input class="btn-appoint" type="button" name="cancel" value="Отменить" onclick="window.location.reload()">
+            <input type="hidden" name="edit_action_id" value="<?=$edit_action->id?>" />
 
 
         </div>
     </div>
 </form>
+<div class="actionsList">
+    <?php foreach($clinic_actions as $e){ ?>
+    <div class="oneAction">
+        <div class="name"><?=$e->name?></div>
+        <div class="edit"><a href="/registry/clinic/action?clinic_id=<?=$clinic_id?>&edit_action_id=<?=$e->id?>">редактировать</a></div>
+        <div class="edit"><a href="/registry/clinic/actionDelete?clinic_id=<?=$clinic_id?>&delete_action_id=<?=$e->id?>">удалить</a></div>
+    </div>
+    <?php } ?>
+</div>

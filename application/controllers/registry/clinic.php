@@ -244,6 +244,41 @@ class ClinicRegistryController extends BaseController
     $this->view->clinic_id = $clinic_id;
 
   }
+    public function actionSave(){
+
+        if ($this->request('edit_action_id')){
+            $new_action = (new ActionManager())->getOneById(intval($this->request('edit_action_id')));
+        }else{
+            $new_action = new ActionModel();    
+        }
+
+
+        $data = $_REQUEST['form'];
+        $new_action->name = $data['name'];
+        $new_action->date_from = DateHelper::changeFormat($data['date_from'], '-') ;
+        $new_action->date_to = DateHelper::changeFormat($data['date_to'], '-');
+        $new_action->info = $data['info'];
+        $new_action->clinic_id = $this->request('clinic_id');
+        
+        $manager = new ActionManager();
+        $manager->save($new_action);
+
+
+
+        if (isset($_REQUEST['specialization_id']) && is_array($_REQUEST['specialization_id'])){
+            /**TODO
+             * переделать на ORM
+             */
+            $q = "delete from action_to_specialization where action_id = '".$new_action->getId()."' ";
+            Register::get('db')->query($q);
+            foreach ($_REQUEST['specialization_id'] as $spec_id){
+                $q = "insert into action_to_specialization set action_id='".$new_action->getId()."', specialization_id='".intval($spec_id)."' ";
+                Register::get('db')->query($q);
+            }
+        }
+
+        RedirectManager::redirect('/registry/clinic/action?clinic_id='.$new_action->clinic_id);
+    }
 
     public function action(){
         $clinic_id = RegistryAccessHelper::checkAccessAndDetermineClinicId();
@@ -266,6 +301,13 @@ class ClinicRegistryController extends BaseController
         $this->view->view_processor = $view_processor;
 
         $this->view->specializations = (new SpecializationToClinicManager())->getListByClinicId($clinic->getId());
+        $this->view->clinic_actions = $clinic_actions;
+
+        if ($edit_action_id = $this->request('edit_action_id')){
+            $this->view->edit_action = (new ActionManager())->getOneById($edit_action_id);
+        }else{
+            $this->view->edit_action = new ActionModel();
+        }
     }
 
 

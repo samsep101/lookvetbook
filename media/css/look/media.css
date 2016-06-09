@@ -666,6 +666,12 @@
         z-index: 2;
         /*width: 100%;*/
     }
+    .doc-popup-sm .appointment-button{
+        width: 100%;
+    }
+    .doc-popup-sm .appointment-button .btns.flo{
+        width: 100%;
+    }
     .booking.record-to-the-doctor-popup .btns.flo{
         width: 100%;
         float: none;

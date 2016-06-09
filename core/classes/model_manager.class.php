@@ -167,6 +167,27 @@ class ModelManager implements ICachedModelManager
     return $this->fields;
   }
 
+  public function getListBySearchParams_with_shuffle(SearchParams $search_params)
+  {
+    list($offset,$limit) = $search_params->setLimit(0);
+    $join_select_fields = $search_params->setJoinSelectFields([]);
+    $select_fields = $search_params->setSelectFields([$this->id_field_name]);
+
+    $search_params->setIdFieldName($this->id_field_name);
+    $sql = $search_params->buildQuery($this->table_name);
+    $data = $this->db->query($sql);
+    shuffle($data);
+    $found_ids = array_map(function($a){ return $a[$this->id_field_name]; }, array_slice($data, $offset, $limit+1));
+    $search_params->setSelectFields($select_fields);
+    $search_params->setJoinSelectFields($join_select_fields);
+
+    $search_params->addParam($this->id_field_name.' IN ', $found_ids);
+    $sql = $search_params->buildQuery($this->table_name);
+    $data = $this->db->query($sql);
+
+    return $this->initList($data,$search_params->joined_field_models());
+  }
+
   public function getListBySearchParams(SearchParams $search_params)
   {
     $search_params->setIdFieldName($this->id_field_name);
@@ -175,6 +196,7 @@ class ModelManager implements ICachedModelManager
     $data = $this->db->query($sql);
     return $this->initList($data,$search_params->joined_field_models());
   }
+
 
 
   protected function initList($entries_list, $joined_models=[])

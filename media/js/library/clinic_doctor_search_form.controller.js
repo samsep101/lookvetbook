@@ -67,13 +67,23 @@ var ClinicDoctorSearchFormController = function (clinic_id) {
         });
     };
 
+    this.getExistsDoctorIds = function () {
+        var doctor_cards = $('#doctor-container .info-card');
+        var exclude_ids = [];
+        doctor_cards.each(function(){
+            exclude_ids.push($(this).attr('id').replace('doctor-big-card-', ''));
+        });
+        return exclude_ids;
+    };
+
     this.sendRequest = function () {
         var data = {
             specialty_id: self.specialty_id,
             clinic_id: self.clinic_id,
             purpose_of_visit_id: self.purpose_of_visit_id,
             time_of_visit: self.time_of_visit,
-            page: self.page
+            page: self.page,
+            exclude_ids: self.getExistsDoctorIds()
         };
 
         Ajax.Get('/clinic/ajaxGetDoctorsList', data, function (data) {
@@ -118,7 +128,8 @@ var ClinicDoctorSearchFormController = function (clinic_id) {
             clinic_id: self.clinic_id,
             purpose_of_visit_id: self.purpose_of_visit_id,
             time_of_visit: self.time_of_visit,
-            page: self.page
+            page: self.page,
+            exclude_ids: self.getExistsDoctorIds()
         };
 
         Ajax.Get('/clinic/ajaxGetDoctorsList', data, function (data) {

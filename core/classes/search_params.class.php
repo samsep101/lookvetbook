@@ -23,6 +23,8 @@ class SearchParams
 
   private $table;
   private $id_field_name = 'id';
+  private $select_fields = ['*'];
+  private $join_select_fields = [];
   private $sql;
 
   private $calc_found_rows = FALSE;
@@ -191,6 +193,7 @@ class SearchParams
   {
     if (isset($this->joined_tables[$table]) and !in_array($table, $this->joined_field_tables)) {
       $this->joined_field_tables[] = $table;
+      $this->join_select_fields[$table] = ['*'];
     }
   }
 
@@ -220,6 +223,13 @@ class SearchParams
   {
     $this->offset = $offset;
     $this->limit = $limit;
+  }
+
+  public function setLimit($limit)
+  {
+    $limit_bak = $this->limit;
+    $this->limit = $limit;
+    return [$this->offset, $limit_bak];
   }
 
   public function removePaging()
@@ -293,10 +303,14 @@ class SearchParams
 
     if (count($this->joined_field_tables)) {
       foreach ($this->joined_field_tables as $table) {
-        $this->sql .= '`' . $table . '`.*,';
+        if(count($this->join_select_fields[$table])) {
+          $this->sql .= ' `' . $table . '`.'.implode(', `' . $table . '`.', $this->join_select_fields[$table]);
+        }
       }
     }
-    $this->sql .= ' `' . $this->table . '`.*';
+    if(count($this->select_fields)) {
+      $this->sql .= ' `' . $this->table . '`.'.implode(', `' . $this->table . '`.', $this->select_fields);
+    }
 
     if (count($this->distance_params) == 1) {
       $this->sql .= ', ';
@@ -499,4 +513,20 @@ class SearchParams
       $this->sql .= ' LIMIT ' . $this->offset . ', ' . $limit;
     }
   }
+
+  public function setSelectFields($select_fields)
+  {
+    $select_fields_bak = $this->select_fields;
+    $this->select_fields = $select_fields;
+    return $select_fields_bak;
+  }
+
+
+  public function setJoinSelectFields($select_fields)
+  {
+    $select_fields_bak = $this->join_select_fields;
+    $this->join_select_fields = $select_fields;
+    return $select_fields_bak;
+  }
+
 }

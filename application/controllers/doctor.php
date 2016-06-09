@@ -1202,7 +1202,7 @@ class DoctorController extends BaseController
 
   // уебанский способ - выбирает всех врачей из базы прямо сюда, а потом делает срез, выкидывая остатки.
   // надо будет сделать нормальную выборку.
-  public function ajaxSearch__search_wo_doctname($doctor_search_params, $doctor_manager, $specialty, $doctors) {
+  public function ajaxSearch__search_wo_doctname($doctor_search_params, $doctor_manager, $specialty, $doctors, $exclude_doctor_ids) {
     if (!empty($doctor_search_params->doctor_name)) {
       return [$doctors, 0, 0];
     }
@@ -1215,27 +1215,39 @@ class DoctorController extends BaseController
     if (!$total_number_doctors) {
       $total_doctors = $doctor_manager->doctorsForRelatedSpecialty($doctor_search_params, $specialty->getId());
       $total_number_doctors = count($total_doctors);
-    }
-
-    $interval = $doctor_search_params->page * $doctor_search_params->by_page;
-    $start = $interval - 10;
-    $part_doctors = array();
-
-    if ($start < $total_number_doctors) {
-      for ($start = $interval - 10, $end = $interval; $start < $end; $start++) {
-        if (!empty($total_doctors[$start])) {
-          $part_doctors[] = $total_doctors[$start];
+      if($exclude_doctor_ids) foreach($total_doctors as $i=>$doctor){
+        if(in_array($doctor->id, $exclude_doctor_ids)){
+          unset($total_doctors[$i]);
         }
       }
-      $doctors = $part_doctors;
+    } //new DoctorModel()
+    $rated_doctors = [];
+    $total_cnt = count($total_doctors);
+    for($i=0;$i<$total_cnt;$i++) {
+      $doctor = array_shift($total_doctors);
+      $rate = $doctor->rate;
+      $rated_doctors[$rate][] = $doctor;
     }
 
-    if (count($part_doctors) < 10 || $interval == $total_number_doctors || $interval >= $total_number_doctors) {
-      $getNextPageFlag = 0;
-    } else {
+    $doctors = [];
+    krsort($rated_doctors);
+    foreach($rated_doctors as $rate=>&$doc_list) {
+      shuffle($rated_doctors[$rate]);
+      $doc_list_cnt = count($doc_list);
+      for($i=0;$i<$doc_list_cnt;$i++) {
+        if(count($doctors)>=($doctor_search_params->by_page+1)) {
+          break;
+        }
+        $doctors[] = array_shift($rated_doctors[$rate]);
+      }
+    }
+
+    if(isset($doctors[$doctor_search_params->by_page])) {
       $getNextPageFlag = 1;
+      unset($doctors[$doctor_search_params->by_page]);
+    }else{
+      $getNextPageFlag = 0;
     }
-
     return [$doctors, $total_number_doctors, $getNextPageFlag];
   }
 
@@ -1323,6 +1335,7 @@ class DoctorController extends BaseController
     $this->view->page_type = 'doctor';
 
     $landing = $this->request('landing');
+    $exclude_doctor_ids = $this->request('exclude_doctor_ids', []);
 
     if (!$landing && !Acc::isAuthed()) {
       JsonResponse::error(4);
@@ -1354,8 +1367,7 @@ class DoctorController extends BaseController
     $doctors = $doctor_search_algorithm->search($doctor_search_params);
 
     $doctor_manager = ModelManagerFactory::getByName('doctor');
-    list($doctors, $total_number_doctors, $getNextPageFlag) = $this->ajaxSearch__search_wo_doctname($doctor_search_params, $doctor_manager, $specialty, $doctors);
-    shuffle($doctors);
+    list($doctors, $total_number_doctors, $getNextPageFlag) = $this->ajaxSearch__search_wo_doctname($doctor_search_params, $doctor_manager, $specialty, $doctors, $exclude_doctor_ids);
 
     $filter_active = 0;
     $clinics_count = $this->ajaxSearch__clinics_count($doctors, $doctor_search_params);

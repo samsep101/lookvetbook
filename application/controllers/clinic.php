@@ -486,6 +486,8 @@ class ClinicController extends BaseController
     $purpose_of_visit_id = $this->request('purpose_of_visit_id', 0);
     $time_of_visit = $this->request('time_of_visit', '');
 
+    $exclude_ids = $this->request('exclude_ids', []);
+
     $page = $this->request('page');
 
     $search_params = new SearchParams();
@@ -540,6 +542,9 @@ class ClinicController extends BaseController
       $search_params->addParam('is_leave_the_house', 1);
     }
 
+    if(count($exclude_ids)) {
+      $search_params->addParam('id NOT IN', $exclude_ids);
+    }
     $search_params->addParam('is_active', 1);
 
     $search_params->setGetExtraEntry();
@@ -559,7 +564,7 @@ class ClinicController extends BaseController
     $search_params->addSortParam('specialty.name', 'ASC');
 
     $doctor_manager = new DoctorManager();
-    $doctors = $doctor_manager->getListBySearchParams($search_params);
+    $doctors = $doctor_manager->getListBySearchParams_with_shuffle($search_params);
 
     /*$specialization_manager = new SpecializationManager();
     $specializations = $specialization_manager->getListByClinicId($clinic_id);
@@ -577,7 +582,7 @@ class ClinicController extends BaseController
     }
 
     $doctors = DoctorPriceHelper::getPricesForDoctor($doctors, $clinic_id, $specialty_id);
-    shuffle($doctors);
+
     $this->view->doctors = $doctors;
 
     $this->view->specialty_id = $specialty_id;

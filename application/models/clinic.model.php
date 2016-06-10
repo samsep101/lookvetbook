@@ -5,6 +5,8 @@
      * @property int                                                $region_id
      * @property RegionModel                                        $region
      * @property string                                             $name
+     * @property string                                             $original_alias
+     * @property int                                                $primary_clinic_id
      * @property string                                             $alias
      * @property string                                             $full_name
      * @property int                                                $clinic_type_id
@@ -137,6 +139,17 @@
         const REGION_PUBLISHED = 1;
         const REGION_RAW       = 3;
         const REGION_PROBLEM   = 2;
+
+        /**
+         * @return bool|ClinicModel
+         */
+        public function getPrimaryClinic()
+        {
+            if (!$this->primary_clinic_id)
+                return false;
+
+            return (new ClinicManager())->getOneById($this->primary_clinic_id);
+        }
 
         public function __construct()
         {

@@ -36,7 +36,7 @@
             return NULL;
         }
 
-        public function getUserControllers()
+        static function getUserControllers()
         {
             $grants = Acl::getUserGrants();
             $controllers = array();

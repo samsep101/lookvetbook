@@ -69,6 +69,17 @@
 				'filter'	  => 'true',
 				'sort_by'	 => 'name'
 			),
+            'primary_clinic_id'				 => array(
+                'type'		=> 'category',
+                'cross_name'  => 'name',
+                'cross_index' => 'id',
+                'cross_table' => DB_PREFIX . 'clinic',
+                'first'	   => array(
+                    '0' => '',
+                ),
+                'filter'	  => 'true',
+                'sort_by'	 => 'name'
+            ),
 			'availability'			=> 'input',
 			'is_children'			 => array(
 				'type'  => 'checkbox',
@@ -221,7 +232,9 @@
 			'fields' => array(
 				'id'					  => 'ID',
 				'name'					=> 'Название',
+                'primary_clinic_id' => 'Основная клиника',
 				'alias'				   => 'Алиас',
+				'original_alias'    => 'Оригинальный алиас',
 				'about'				   => 'Описание',
 				'address'				 => 'Адрес',
 				'postcode'				=> 'Почтовый индекс',
@@ -345,7 +358,9 @@ HTML
 				'fields'  => array(
 					'Информация'			=> array(
 						'name',
+						'primary_clinic_id',
 						'alias',
+						'original_alias',
 						'about',
 						'address',
 						'top_phone',
@@ -416,7 +431,9 @@ HTML
 				'fields'  => array(
 					'Информация'			=> array(
 						'name',
+						'primary_clinic_id',
 						'alias',
+						'original_alias',
 						'about',
 						'address',
 						'top_phone',

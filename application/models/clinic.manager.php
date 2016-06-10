@@ -9,6 +9,11 @@ class ClinicManager extends AliasManager
 
   protected function beforeSave(DynamicModel $clinic)
   {
+      /** @var ClinicModel $clinic */
+      if ($primary_clinic = $clinic->getPrimaryClinic()){
+          $clinic->original_alias = $clinic->original_alias ? $clinic->original_alias : $clinic->alias;
+          $clinic->alias = $primary_clinic->alias.'/'.$clinic->original_alias;
+      }
     /**
      * @var ClinicModel $clinic
      */

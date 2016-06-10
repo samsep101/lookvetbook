@@ -903,6 +903,12 @@ SQL;
     return $this->initOne($data);
   }
 
+    public function getOneByOriginalAlias($original_alias)
+    {
+        $data = $this->orm_model->select()->where('original_alias = ?', $original_alias)->fetchOne();
+        return $this->initOne($data);
+    }
+
   public function getListByNameOrAddress($query)
   {
     $query = '%' . $query . '%';

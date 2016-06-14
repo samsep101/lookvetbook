@@ -393,7 +393,16 @@ citymaps-balloon-content-selected td {
 }
 
 .info-card.flo {
-    clear : both;
+    /*clear : both;*/
+
+}
+
+.info-card.flo:first-child {
+    margin: 0px 5px 10px 0px;
+}
+
+.info-card.flo:last-child {
+    margin: 0px 0px 10px 5px;
 }
 
 .info-card.flo.fright {

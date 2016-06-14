@@ -1199,6 +1199,7 @@
     }
     .full-map .bott-panel .shell {
         text-align: center;
+        left: 0;
     }
     .full-map .bott-panel .shell a{
         display: inline-block;
@@ -1219,6 +1220,12 @@
     .clinic-carousel .next{
         margin-left: auto;
         right: 10px;
+    }
+    .doc-popup-sm.map-card-block>.btns.flo{
+        width: 100%;
+    }
+    .doc-popup-sm.map-card-block>.btns.flo>.btn-bookmark-sm{
+        width: 100%;
     }
 
 }

@@ -41,9 +41,14 @@ class View extends Dynamic
       return NULL;
   }
 
+    private function filterCanonical(){
+        $a = 1;
+    }
+
   public function render($templateName)
   {
     ob_start();
+      $this->filterCanonical();
     extract($this->__values);
     $this->__template = $templateName . $this->__extension;
     if (is_file($this->__layout)) {

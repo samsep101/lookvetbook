@@ -1106,7 +1106,7 @@ $disease_manager->resetAutoIncrement();*/
 				foreach($doctors as $doctor)
 				{
 					$link = new SitemapLink();
-					$link->url = SITE_URL . DoctorPageLinkViewHelper::getLink($doctor);
+					$link->url = DoctorPageLinkViewHelper::getLink($doctor);
 					$links[] = $link;
 				}
 			}
@@ -1119,7 +1119,7 @@ $disease_manager->resetAutoIncrement();*/
 				foreach($clinics as $clinic)
 				{
 					$link = new SitemapLink();
-					$link->url = SITE_URL . ClinicPageLinkViewHelper::getLink($clinic);
+					$link->url = ClinicPageLinkViewHelper::getLink($clinic);
 					$links[] = $link;
 				}
 			}
@@ -1139,7 +1139,7 @@ $disease_manager->resetAutoIncrement();*/
 						if($value)
 						{
 							$link = new SitemapLink();
-							$link->url = SITE_URL . DiseasePageLinkViewHelper::getLink($disease) . '/' . $key;
+							$link->url = DiseasePageLinkViewHelper::getLink($disease) . '/' . $key;
 							$links[] = $link;
 						}
 					}

@@ -10,7 +10,16 @@
 	 */
 	DEFINE('RELEASE__NUMBER', '0.1');
 ?>
-    <?php if (isset($canonical_link) && $canonical_link): ?>
+    <?php
+    if (!isset($canonical_link))
+        $canonical_link = SITE_URL.$_SERVER['REQUEST_URI'];
+
+
+    if (strpos($canonical_link, '?')){
+        $canonical_link = preg_replace('/^([^?]+)(\?.*?)?(#.*)?$/', '$1$3', $canonical_link);
+    }
+
+    if (isset($canonical_link) && $canonical_link): ?>
         <?php if ($canonical_link != 'none' && !isset($site_url_not_using)) { ?>
             <link rel="canonical" href="<?php echo SITE_URL.$canonical_link; ?>" />
         <?php } elseif(isset($site_url_not_using) && $site_url_not_using) { ?>

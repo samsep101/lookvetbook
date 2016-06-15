@@ -304,12 +304,15 @@ class SearchParams
     if (count($this->joined_field_tables)) {
       foreach ($this->joined_field_tables as $table) {
         if(count($this->join_select_fields[$table])) {
-          $this->sql .= ' `' . $table . '`.'.implode(', `' . $table . '`.', $this->join_select_fields[$table]);
+          $this->sql .= ' `' . $table . '`.'.implode(', `' . $table . '`.', $this->join_select_fields[$table]).', ';
         }
       }
+
     }
+
+
     if(count($this->select_fields)) {
-      $this->sql .= ' `' . $this->table . '`.'.implode(', `' . $this->table . '`.', $this->select_fields);
+      $this->sql .= ' `' . $this->table . '`.'.implode(', `' . $this->table . '`.', $this->select_fields).', ';
     }
 
     if (count($this->distance_params) == 1) {
@@ -323,7 +326,7 @@ class SearchParams
               )
             )';
       }
-      $this->sql .= ') distance ';
+      $this->sql .= ') distance,  ';
     } elseif (count($this->distance_params) > 1) {
       $this->sql .= ', LEAST(';
       foreach ($this->distance_params as $distance_param) {
@@ -336,8 +339,11 @@ class SearchParams
             ),';
       }
       $this->sql = trim($this->sql, ',');
-      $this->sql .= ') distance ';
+      $this->sql .= ') distance,  ';
     }
+
+      $this->sql = trim($this->sql);
+      $this->sql = rtrim($this->sql,',');
   }
 
   private function buildFromSection()

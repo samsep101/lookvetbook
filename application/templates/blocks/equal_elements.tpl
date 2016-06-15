@@ -80,18 +80,20 @@
         <?php else: ?>
             <?php $total_count = count($equal_doctors); ?>
             <?php foreach($equal_doctors as $equal_doctor): ?>
-                <?php if($number % 2 == 1): ?>
-                    <ul>
-                <?php endif; ?>
-                <li>
-                    <a href="<?php echo DoctorPageLinkViewHelper::getLink($equal_doctor->doctor); ?>">
-                        <?php echo $equal_doctor->doctor->full_name; ?>
-                    </a>
-                </li>
-                <?php if($number % 2 == 0 || $number == $total_count): ?>
-                    </ul>
-                <?php endif; ?>
-                <?php $number++; ?>
+				<?php if ($equal_doctor->doctor): ?>
+					<?php if($number % 2 == 1): ?>
+						<ul>
+					<?php endif; ?>
+					<li>
+						<a href="<?php echo DoctorPageLinkViewHelper::getLink($equal_doctor->doctor); ?>">
+							<?php echo $equal_doctor->doctor->full_name; ?>
+						</a>
+					</li>
+					<?php if($number % 2 == 0 || $number == $total_count): ?>
+						</ul>
+					<?php endif; ?>
+					<?php $number++; ?>
+				<?php endif; ?>
             <?php endforeach; ?>
         <?php endif; ?>
     </div>

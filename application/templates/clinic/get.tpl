@@ -40,12 +40,12 @@
 		<?php endif; ?>
 
 
-		<div class="clinic-landing" itemscope itemtype="http://data-vocabulary.org/Organization">
-			<meta itemprop="url" content="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>"/>
+		<div class="clinic-landing" itemscope itemtype="http://schema.org/Organization">
+			<meta itemprop="url" content="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>">
 			<div class="main-box">
 				<div class="head-info flo">
-					<div class="rating" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
-						<meta itemprop="itemreviewed" content="<?php echo $clinic->name; ?>"/>
+					<div class="rating" itemscope itemtype="http://schema.org/AggregateRating">
+						<meta itemprop="name" content="<?php echo $clinic->name; ?>"/>
 
 						<?php echo RateViewHelper::view($clinic->rate, 0, $clinic->is_best); ?>
 
@@ -56,7 +56,7 @@
 						<?php if (count($clinic->reviews)): ?>
 							<div class="comments-count">
 								<a href="#reviews">
-									<span itemprop="count">
+									<span itemprop="reviewCount">
 										<?php echo StringHelper::getCorrectSuffixForReview(count($clinic->reviews));?>
 									</span>
 								</a>
@@ -75,12 +75,12 @@
 							<?php } ?>
 						<?php endif; ?>
 
-						<span itemprop="geo" itemscope itemtype="http://data-vocabulary.org/Geo" style="display: block; position: absolute; width: 1px; height: 1px; overflow: hidden;">
+						<span itemscope itemprop="geo" itemtype="http://schema.org/GeoCoordinates" style="display: block; position: absolute; width: 1px; height: 1px; overflow: hidden;">
 							<meta itemprop="latitude" content="<?php echo $clinic->latitude ?>" />
 							<meta itemprop="longitude" content="<?php echo $clinic->longitude ?>" />
 						</span>
-						<span itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
-							<span itemprop="street-address"><?php echo $clinic->address; ?></span>
+						<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+							<span itemprop="streetAddress"><?php echo $clinic->address; ?></span>
 						</span>
 					</p>
 				</div>
@@ -129,7 +129,7 @@
 
 					<p class="our_time">
 						<span class="h-txt">Запись на прием:</span><br/>
-						<span class="info-phone">
+						<span class="info-phone" itemprop="telephone">
 							<?php
 								if($clinic->top_phone) {
 									$phone = $clinic->top_phone;

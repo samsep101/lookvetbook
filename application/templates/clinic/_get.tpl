@@ -44,8 +44,8 @@ else
     <meta itemprop="url" content="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>"/>
     <div class="main-box">
       <div class="head-info flo">
-        <div class="rating" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
-          <meta itemprop="itemreviewed" content="<?php echo $clinic->name; ?>"/>
+        <div class="rating" itemscope itemtype="http://schema.org/AggregateRating">
+          <meta itemprop="name" content="<?php echo $clinic->name; ?>"/>
 
           <?php echo RateViewHelper::view($clinic->rate, 0, $clinic->is_best); ?>
 
@@ -56,7 +56,7 @@ else
           <?php if (count($clinic->reviews)): ?>
             <div class="comments-count">
               <a href="#reviews">
-                                    <span itemprop="count">
+                                    <span itemprop="reviewCount">
                                         <?php echo StringHelper::getCorrectSuffixForReview(count($clinic->reviews)); ?>
                                     </span>
               </a>

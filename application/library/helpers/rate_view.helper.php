@@ -13,7 +13,7 @@ class RateViewHelper
 		} else {
 			return '<div class="rating-line '.$bonus_class.'">
 					<span class="rating-foreground" style="width:' . ($rate * 20) . '%">
-						<meta itemprop="rating" content="' . $rate . '" />
+						<meta itemprop="ratingCount" content="' . $rate . '" />
 					</span>
 				</div>';
 		}

@@ -64,7 +64,7 @@
                     if($first)
                     {
                         $first = 0;
-                        $html .= '<img src="'.$image->cropWithWatermark($width, $height)->path.'" alt="'.$doctor->specialties_names.' '.$doctor->full_name.'" itemprop="photo" />';
+                        $html .= '<img src="'.$image->cropWithWatermark($width, $height)->path.'" alt="'.$doctor->specialties_names.' '.$doctor->full_name.'" itemprop="image" />';
                     }
                     else
                     {

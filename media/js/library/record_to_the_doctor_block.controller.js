@@ -4,7 +4,7 @@ var RecordToTheDoctorBlockController = function (doctor_id, button, visit_id ) {
     this.button = button;
     this.doctor_id = doctor_id;
     this.visit_id = visit_id;
-    this.is_simple = ($('.content').hasClass('simple-popup-registration'))?1:0;
+    this.is_simple = ($('.content').hasClass('simple-popup-registration')) ? 1 : 0;
     this.container = null;
     this.type = null;
 

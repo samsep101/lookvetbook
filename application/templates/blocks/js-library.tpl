@@ -43,6 +43,7 @@
     <script type="text/javascript" src="/media/js/library/personal_room_my_clinic_search_form.controller.js?<?php echo RELEASE_NUMBER?>"></script>
     <script type="text/javascript" src="/media/js/library/favorite_clinics_form.controller.js?<?php echo RELEASE_NUMBER?>"></script>
     <script type="text/javascript" src="/media/js/library/record_to_the_doctor_block.controller.js?<?php echo RELEASE_NUMBER?>"></script>
+    <script type="text/javascript" src="/media/js/library/record_controller.js?<?php echo RELEASE_NUMBER?>"></script>
     <script type="text/javascript" src="/media/js/library/record_phones_block.controller.js?<?php echo RELEASE_NUMBER?>"></script>
     <script type="text/javascript" src="/media/js/library/personal_room_reviews.controller.js?<?php echo RELEASE_NUMBER?>"></script>
     <script type="text/javascript" src="/media/js/library/visit_remind_block.controller.js?<?php echo RELEASE_NUMBER?>"></script>

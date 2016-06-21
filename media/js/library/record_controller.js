@@ -13,3 +13,13 @@ var RecordController = function (specialty_id, doctor_id, clinic_id, show_okrug)
 
     }
 }
+
+function recordComplete(){
+    data = $.parseJSON(linkMapper_answer);
+
+    if (data['result']){
+        $('.recordFormSuccess').show();
+    }else{
+        $('.recordFormFail').show();
+    }
+}

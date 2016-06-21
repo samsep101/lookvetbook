@@ -13,4 +13,7 @@
         public $visit_status_id;
         public $appeal_id;
         public $processed_user;
+        public $after_work;
+        public $disease_id;
+        public $visit_start_time;
     }

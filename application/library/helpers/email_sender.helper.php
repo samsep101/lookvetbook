@@ -139,6 +139,7 @@ EOD;
 
 
         $message = 'Пациент '.$info['full_name'].': '.$info['phone']."\r\n\r\n";
+        $message = 'Пациент '.$info['full_name'].': '.$info['phone']."\r\n\r\n";
         $headers = "Content-type: text/html; charset=utf-8 \r\n";
         $headers .= "From: lookmedbook.ru <no-reply@lookmedbook.ru>\r\n";
 

@@ -132,12 +132,6 @@ function LinkMapper_go()
                     }
                     else
                         $(linkMapper_rel).html(msg);
-
-                    $('.order_popup').css('margin-top', - ($('.order_popup').height()/2));
-                    $('.order_popup').css('margin-left', - ($('.order_popup').width()/2));
-                    $('.order_popup .iconClose, .button_order_next, .order_popup_back').click(function(){
-                        $('.order_popup_block').fadeOut();
-                    });
                 }
             });
 

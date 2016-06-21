@@ -1,6 +1,6 @@
 <!-- record default form ------>
 <div id="record_form_container" style="display:none">
-    <form action="/ajax/recordToTheVisit" method="POST" class="recordPopupForm linkMapper" rel=".recordFormResult">
+    <form action="/ajax/recordToTheVisit" method="POST" class="recordPopupForm linkMapper" rel=".recordFormResult" onComplete="recordComplete()">
     <div class="booking record-to-the-doctor-popup" style="display:block">
         <div class="all">
             <h1>Запись на прием</h1>
@@ -8,17 +8,9 @@
                 <!-- place for info where user want to visit -->
             </div>
 
-
-                Где вам удобно посетить врача:
-                <select name="okrug_id">
-                    <option value=""></option>
-                    <option value="1">ЦАО</option>
-                    <option value="2">СВАО</option>
-                </select>
-
                 Когда нужно к врачу:
                 <input type="text" name="visit_start">
-                <input type="checkbox" name="after_work"> - после работы
+                <input type="checkbox" name="after_work" value="1"> - после работы
 
                 Ваше имя:
                 <input type="text" name="full_name">
@@ -46,7 +38,9 @@
         <input type="hidden" name="clinic_id">
         <input type="hidden" name="disease_id">
     </form>
-    <div class="recordFormResult"></div>
+    <div class="recordFormResult" style="display: none"></div>
+    <div class="recordFormSuccess" style="display: none">Вы успешно записаны!</div>
+    <div class="recordFormFail" style="display: none">Запись не удалась!</div>
 </div>
 
 <!-- record default form ------>

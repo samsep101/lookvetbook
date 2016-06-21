@@ -44,6 +44,16 @@
                 'short' => '1',
             ),
             'clinic_filter' => 'input',
+            'disease_id' => array(
+                'type'        => 'category',
+                'cross_name'  => 'title',
+                'cross_index' => 'id',
+                'cross_table' => DB_PREFIX . 'disease',
+                'first'       => array(
+                    '' => '',
+                ),
+                'sort_by'     => 'title',
+            ),
             'clinic_id' => array(
                 'type' => 'category',
                 'cross_name' => 'name_with_address',
@@ -310,6 +320,11 @@
                 'type' => 'date',
                 'show_time' => TRUE
             ),
+            'after_work' => array(
+                'type'  => 'checkbox',
+                'label' => 'Да/Нет',
+            ),
+
             'comment' => array(
                 'type' => 'text',
                 'style' => 'width: 400px;'
@@ -353,6 +368,7 @@
                 'id' => 'ID',
                 'doctor_name' => 'Врач',
                 'clinic_name' => 'Клиника',
+                'disease_id' => 'Заболевание',
                 'doctor_id' => 'Врач',
                 'specialty_id' => 'Специализация врача',
                 'clinic_id' => 'Клиника',
@@ -370,6 +386,7 @@
                 'price' => 'Цена визита',
                 'is_first_visit' => 'Флаг первого визита',
                 'visit_start_time' => 'Записан на',
+                'after_work' => 'После работы',
                 'visit_number' => 'Номер заявки',
                 'visit_range' => 'Желаемое время',
                 'comment' => 'Комментарий пользователя',
@@ -434,6 +451,7 @@
                         //'clinic_name',
                         //'doctor_name',
                         'clinic_filter',
+                        'disease_id',
                         'clinic_id',
                         'clinic_phone',
                         'doctor_id',
@@ -450,6 +468,7 @@
                         //'confirm_dt',
                         'visit_range',
                         'visit_start_time',
+                        'after_work',
                         'comment',
                         'admin_comment',
                     ),

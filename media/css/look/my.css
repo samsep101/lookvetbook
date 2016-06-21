@@ -6694,3 +6694,49 @@ a.btn-double-floor {
     width      : 100px;
 }
 
+.actionsList{
+    display: inline-block;
+    margin-top: 20px;
+}
+.oneAction {
+    position: relative;
+    display: block;
+    width: 230px;
+    height: 260px;
+    float: left;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.oneAction .actionName{
+    position: absolute;
+    width: 200px;
+    font-size: 16px;
+    line-height: 20px;
+    left: 0;
+    top: 0;
+    padding: 5px;
+    box-sizing: border-box;
+    background: rgba(245, 245, 220, 0.65);
+}
+.oneAction .actionEdit{
+    float: left;
+    font-size: 14px;
+}
+.oneAction .actionImage{
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+.oneAction .actionDelete{
+    float: right;
+    font-size: 14px;
+}
+.actionText{
+    font-size: 14px;
+    color: #6D6D6D;
+    padding-bottom: 15px;
+}

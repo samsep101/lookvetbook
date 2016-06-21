@@ -6,5 +6,10 @@ var RecordController = function (specialty_id, doctor_id, clinic_id, show_okrug)
     {
         self.popup = new Popup();
         self.popup.show(this.record_form_container.html(), '850px');
+        _form = $('.recordPopupForm');
+        _form.removeClass('lmmarked');
+        LinkMapper_remap();
+
+
     }
 }

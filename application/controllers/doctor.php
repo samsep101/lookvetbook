@@ -38,6 +38,12 @@ class DoctorController extends BaseController
       unset($specialty);
     } else {
       $doctor = $doctor_manager->getOneByIdOrAlias($doctor_id);
+
+        if (is_null($doctor)){
+            RedirectManager::redirect301('/doctor');
+        }
+
+
       $doc_id = $doctor->getId();
 
       if (is_numeric($doctor_id) && $doctor->alias) {

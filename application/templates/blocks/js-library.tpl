@@ -83,6 +83,7 @@
     <script type="text/javascript" src="/media/js/library/carousel.controller.js?<?php echo RELEASE_NUMBER?>"></script>
     <script type="text/javascript" src="/media/js/library/landing_page.controller.js?<?php echo RELEASE_NUMBER?>"></script>
     <script type="text/javascript" src="/media/js/library/disease_links_block.controller.js?<?php echo RELEASE_NUMBER?>"></script>
+    <script type="text/javascript" src="/media/js/library/link_mapper.js?<?php echo RELEASE_NUMBER?>"></script>
 <?php else: ?>
     <script type="text/javascript" src="/media/js/js_library.js?<?php echo RELEASE_NUMBER?>"></script>
 <?php endif; ?>

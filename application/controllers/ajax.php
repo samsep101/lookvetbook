@@ -771,6 +771,18 @@ class AjaxController extends BaseController
 
   public function recordToTheVisit()
   {
+      /**TODO
+       *add fields to DB and CMS config
+       * okrug_id
+       * after_work
+       * clinic_id
+       * disease_id
+       *
+       * change letter contents
+       */
+
+
+      
     $mail_data = [];
     $schedule_id = $this->request->request('schedule_id');
     $doctor_id = $this->request->request('doctor_id');

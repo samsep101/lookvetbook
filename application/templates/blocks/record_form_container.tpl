@@ -1,6 +1,6 @@
 <!-- record default form ------>
 <div id="record_form_container" style="display:none">
-    <form action="" method="POST" rel="" class="linkMapper">
+    <form action="/ajax/recordToTheVisit" method="POST" class="recordPopupForm linkMapper" rel=".recordFormResult">
     <div class="booking record-to-the-doctor-popup" style="display:block">
         <div class="all">
             <h1>Запись на прием</h1>
@@ -43,7 +43,10 @@
         </div>
 
     </div>
+        <input type="hidden" name="clinic_id">
+        <input type="hidden" name="disease_id">
     </form>
+    <div class="recordFormResult"></div>
 </div>
 
 <!-- record default form ------>

@@ -5,7 +5,7 @@ var RecordController = function (specialty_id, doctor_id, clinic_id, show_okrug)
     this.showForm = function ()
     {
         self.popup = new Popup();
-        self.popup.show(this.record_form_container.html(), '850px');
+        self.popup.show(this.record_form_container.html(), '560px');
         _form = $('.recordPopupForm');
         _form.removeClass('lmmarked');
         LinkMapper_remap();

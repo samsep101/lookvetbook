@@ -1,4 +1,10 @@
 <!-- record default form ------>
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $("#datepicker").datepicker();
+        $("#inputPhone").mask("+7 (999) 999-99-99");
+    });
+</script>
 <div id="record_form_container" style="display:none">
     <form action="/ajax/recordToTheVisit" method="POST" class="recordPopupForm linkMapper" rel=".recordFormResult" onComplete="recordComplete()">
     <div class="booking record-to-the-doctor-popup" style="display:block">
@@ -7,32 +13,56 @@
             <div class="step-block-1 flo" style="display: none">
                 <!-- place for info where user want to visit -->
             </div>
-
-                Когда нужно к врачу:
-                <input type="text" name="visit_start">
-                <input type="checkbox" name="after_work" value="1"> - после работы
-
-                Ваше имя:
-                <input type="text" name="full_name">
-
-                Ваш телефон:
-                <input type="text" name="phone">
-
-                Ваш email:
-                <input type="text" name="email">
-
-                <div class="btns flo">
-                    <input type="submit" class="btn-1 resume-btn" value="Записаться">
+            <div class="row flo m-b-10">
+                <div class="text-shadow-input">
+                    Когда нужно к врачу:
                 </div>
-
-
-            <div class="record_process_result"></div>
-
-            <div class="inner-top-info" style="text-align: center;">
-                Мы всегда рады вам помочь! <span class="info-phone">8 495 215 09 07</span>
+                <div class="shadow-input">
+                    <input id="datepicker" type="text" name="visit_start" placeholder="01.01.2016">
+                </div>
             </div>
-
-        </div>
+            <div class="row flo m-b-10">
+                <div style="width: 155px;float:left;">&nbsp;</div>
+                <div class="shadow-checkbox">
+                    <div class="chekBox act"><span></span> <em>после работы</em>
+                        <input type="hidden" name="after_work" value="1">
+                    </div>
+                    <!-- <input type="checkbox" name="after_work" value="1"> - после работы -->
+                </div>
+            </div>
+            <div class="row flo m-b-10">
+                <div class="text-shadow-input">
+                    Ваше имя:
+                </div>
+                <div class="shadow-input">
+                    <input type="text" name="full_name" placeholder="Иван">
+                </div>
+            </div>
+            <div class="row flo m-b-10">
+                <div class="text-shadow-input">
+                    Ваш телефон:
+                </div>
+                <div class="shadow-input">
+                    <input type="text" id="inputPhone" name="phone" placeholder="+7 (___) ___-__-__">
+                </div>
+            </div>
+            <div class="row flo m-b-10">
+                <div class="text-shadow-input">
+                    Ваш email:
+                </div>
+                <div class="shadow-input">
+                    <input type="text" name="email" placeholder="example@email.ru">
+                </div>
+            </div>
+            <div class="row flo m-b-20">
+                <div class="record_process_result"></div>
+                <div class="inner-top-info" style="text-align: center;font-size: 1.2em;">
+                    Мы всегда рады вам помочь! <span class="info-phone">8 495 215 09 07</span>
+                </div>
+            </div>
+            <div class="row flo m-b-10 a-c">
+                <input style="width:200px;" type="submit" class="btn-1 resume-btn" value="Записаться">
+            </div>
 
     </div>
         <input type="hidden" name="clinic_id">

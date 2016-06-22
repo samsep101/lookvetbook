@@ -1,9 +1,10 @@
 <div class="disease-doc-block">
     <div class="col-10 disease-doc-text avatar_buttons">
         <p>
-            Пневмонией может заболеть любой. Даже физически крепкий человек под влиянием стресса и перенесенной на ногах простуды может неожиданно стать жертвой данного недуга.
-            Если вы обнаружили у себя симптомы данного заболевания, не затягивайте с визитом к врачу, <a href="javascript:void(0);" onclick="$('.disease-doc-hide').slideToggle('slow');">запишитесь сейчас</a>.
-            Несвоевременное или неправильное лечение может привести к серьезным осложнениям, берегите свое здоровье и помните, вылечить пневомнию на начальной стадии в разы проще.<br>
+            Пневмонией может заболеть любой. Даже физически крепкий человек под влиянием стресса и перенесенной на ногах простуды рискует стать жертвой этого недуга.
+            Если вы обнаружили у себя симптомы пневмонии, не затягивайте с визитом к врачу, <a href="javascript:void(0);" onclick="$('.disease-doc-hide').slideToggle('slow');">запишитесь сейчас</a>.
+            Несвоевременное или неправильное лечение может привести к осложнениям. Берегите свое здоровье. Помните: вылечить пневмонию на начальной стадии гораздо проще.
+            <br>
             <a class="btn-appoint" href="#record-to-the-doctor-popup-1635" onclick="$('.disease-doc-hide').slideToggle('slow');" style="width: 250px">Записаться на прием</a>
         </p>
     </div>
@@ -20,11 +21,12 @@
 <div class="disease-doc-hide" style="display:none;padding-left: 50px">
     <script type="text/javascript">
         $( document ).ready(function() {
-            $("#datepicker").datepicker();
-            $("#inputPhone").mask("(999999) 999-9999");
+            $(".datepicker").datepicker();
+            $(".inputPhone").mask("(999999) 999-9999");
         });
     </script>
     <h1>Запись на прием</h1>
+    <form action="/ajax/recordToTheVisit" method="POST" class="recordPopupForm linkMapper" rel=".recordFormResult" onComplete="recordComplete()">
     <div class="step-block-1 flo" style="display: none">
         <!-- place for info where user want to visit -->
     </div>
@@ -78,5 +80,11 @@
     <div class="row flo m-b-10 a-c">
         <input style="width:200px;" type="submit" class="btn-1 resume-btn" value="Записаться">
     </div>
-
+        <input type="hidden" name="clinic_id">
+        <input type="hidden" name="doctor_id">
+        <input type="hidden" name="disease_id" value="181">
+    </form>
+    <div class="recordFormResult" style="display: none"></div>
+    <div class="recordFormSuccess" style="display: none">Вы успешно записаны!</div>
+    <div class="recordFormFail" style="display: none">Запись не удалась!</div>
 </div>

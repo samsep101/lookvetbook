@@ -82,8 +82,6 @@
                              <div class="ortospy-banner2" onclick="window.location='/clinic/ortospayn';return false;"></div>
                            </div>
                         <?php } ?>
-
-			<?php include('get_desease_yandexdir.tpl'); ?>
 			<div id="ban2"></div>
 			<?php include('get_desease_secondopinions.tpl');?>
 

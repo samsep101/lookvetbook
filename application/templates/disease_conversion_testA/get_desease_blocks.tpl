@@ -74,13 +74,4 @@
 		<div class="content read">
 			<?php $this->block('disease_conversion_testA/blocks/disease_blocks_content'); ?>
 		</div>
-		<!--<div class="content">
-			<div class="section section-help flo" style="background: url(/media/images/section_cont_shadow.png) no-repeat;"> <span class="info-title">Текст понятен?</span>
-				<div class="info-buttons"></div>
-				<div class="disease-only-info">
-					<p class="info-line">ИНФОРМАЦИЯ ДЛЯ ОЗНАКОМЛЕНИЯ</p>
-					<p class="info-line">Необходима консультация с врачом</p>
-				</div>
-			</div>
-		</div>-->
 	</div>

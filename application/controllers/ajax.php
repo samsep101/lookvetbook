@@ -782,6 +782,11 @@ class AjaxController extends BaseController
     $schedule_id = $this->request->request('schedule_id');
     $doctor_id = $this->request->request('doctor_id');
     $visit_start_time = $this->request->request('visit_start');
+
+      if (preg_match('/([0-9]{2}).([0-9]{2}).([0-9]{4})/is', $visit_start_time, $a)){
+          $visit_start_time = $a[3].'-'.$a[2].'-'.$a[1];
+      }
+
     $clinic_id = $this->request->request('clinic_id');
     $after_work = $this->request->request('after_work', 0);
     $disease_id = $this->request->request('disease_id');

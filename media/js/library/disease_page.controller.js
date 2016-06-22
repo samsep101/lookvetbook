@@ -171,14 +171,14 @@ var DiseasePageController = function (id, is_login, already_registred_account, f
             });
         });
 
-        $('.btn-find-doctor, .disease-doctor').mouseup(function(){
+        /*$('.btn-find-doctor, .disease-doctor').mouseup(function(){
             $('.btn-find-doctor, .disease-doctor').attr('href', '');
 
             self.specialty_id = $(this).data('id');
             var doctor_type = $('.tab-people.ui-state-active').data('tab-name');
 
             $('.btn-find-doctor, .disease-doctor').attr('href', '/doctor?specialty_id='+self.specialty_id+'&doctor_type='+doctor_type+'&time_of_visit=any&sort_by=recomend');
-        });
+        });*/
 
         $('.btn-find-doctor, .disease-doctor').click(function(){
             var action_for_counters = $(this).data('action-for-counters');

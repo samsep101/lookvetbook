@@ -9,6 +9,11 @@ class ClinicManager extends AliasManager
 
   protected function beforeSave(DynamicModel $clinic)
   {
+      /** @var ClinicModel $clinic */
+      if ($primary_clinic = $clinic->getPrimaryClinic()){
+          $clinic->original_alias = $clinic->original_alias ? $clinic->original_alias : $clinic->alias;
+          $clinic->alias = $primary_clinic->alias.'/'.$clinic->original_alias;
+      }
     /**
      * @var ClinicModel $clinic
      */
@@ -897,6 +902,12 @@ SQL;
 
     return $this->initOne($data);
   }
+
+    public function getOneByOriginalAlias($original_alias)
+    {
+        $data = $this->orm_model->select()->where('original_alias = ?', $original_alias)->fetchOne();
+        return $this->initOne($data);
+    }
 
   public function getListByNameOrAddress($query)
   {

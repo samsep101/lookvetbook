@@ -38,7 +38,6 @@
                                 </a>
                             <?php endforeach;?>
                             <?php endif; ?>
-                            <?php $this->block('disease/blocks/adv_after_reason_block'); ?>
                         </li>
                     </ol>
                 </div>
@@ -62,6 +61,10 @@
     </div>
     <?php if ($block->disease_block_type_id == 1){
         include 'motivation_1.tpl';
+    } ?>
+
+    <?php if ($block->disease_block_type_id == 5){
+        include 'motivation_2.tpl';
     } ?>
     <?php /***** pediatr banner *****/ ?>
     <?php $is_children = false; ?>

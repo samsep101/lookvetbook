@@ -72,6 +72,6 @@
 		</div>
 
 		<div class="content read">
-			<?php $this->block('disease_conversion_testA/blocks/disease_blocks_content'); ?>
+			<?php $this->block('disease_conversion_testB/blocks/disease_blocks_content'); ?>
 		</div>
 	</div>

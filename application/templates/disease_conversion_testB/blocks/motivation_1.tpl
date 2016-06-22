@@ -1,21 +1,21 @@
 <div class="disease-doc-block">
     <div class="col-10 disease-doc-text avatar_buttons">
         <p>
-            Пневмонией может заболеть любой. Даже физически крепкий человек под влиянием стресса и перенесенной на ногах простуды рискует стать жертвой этого недуга.
-            Если вы обнаружили у себя симптомы пневмонии, не затягивайте с визитом к врачу, <a href="javascript:void(0);" onclick="$('.disease-doc-hide').slideToggle('slow');">запишитесь сейчас</a>.
-            Несвоевременное или неправильное лечение может привести к осложнениям. Берегите свое здоровье. Помните: вылечить пневмонию на начальной стадии гораздо проще.
+            Клещевой энцефалит опасен для проживающих в эндемичных регионах или выезжающих туда людей.
+            Укус клеща, если не было прививки, может стать причиной развития вирусного энцефалита, последствия которого - тяжелая инвалидизация или смерть.
+            В эндемичных по клещевому энцефалиту регионах необходима вакцинация, чтобы не заразиться в случае укуса клеща.
             <br>
-            <a class="btn-appoint" href="#record-to-the-doctor-popup-1635" onclick="$('.disease-doc-hide').slideToggle('slow');" style="width: 250px">Записаться на прием</a>
+            <a class="btn-appoint" href="#record-to-the-doctor-popup-1635" onclick="$('.disease-doc-hide').slideToggle('slow');" style="width: 250px">Записаться на вакцинауию</a>
         </p>
     </div>
     <div class="col-2 disease-doc-image">
         <div class="avatar">
-            <img src="http://lookmedbook.ru//media/upload/clinic/license/74x111-crop-1411717977-D3RfYaeS5G.jpg">
+            <img src="http://lookmedbook.ru/media/upload/clinic/license/74x111-crop-1390897859-GNTQf82KG8.jpg">
         </div>
     </div>
     <br clear="all">
     <div align="right">
-        Солощенко  Владимир  Владимирович (Врач терапевт-пульмонолог)
+        Чекулаева  Наталья  Петровна (Врач инфекционист)
     </div>
 </div>
 <div class="disease-doc-hide" style="display:none;padding-left: 50px">
@@ -78,7 +78,7 @@
         </div>
     </div>
     <div class="row flo m-b-10 a-c">
-        <input style="width:200px;" type="submit" class="btn-1 resume-btn" value="Записаться">
+        <input style="width:200px;" type="submit" class="btn-1 resume-btn" value="Записаться" onclick="yaCounterLookmedbook.reachGoal('entsifolit_record');">
     </div>
         <input type="hidden" name="clinic_id">
         <input type="hidden" name="doctor_id">

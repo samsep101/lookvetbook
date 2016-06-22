@@ -18,7 +18,7 @@
                     Когда нужно к врачу:
                 </div>
                 <div class="shadow-input">
-                    <input id="datepicker" type="text" name="visit_start" placeholder="01.01.2016">
+                    <input class="datepicker" type="text" name="visit_start" placeholder="01.01.2016">
                 </div>
             </div>
             <div class="row flo m-b-10">
@@ -66,6 +66,7 @@
 
     </div>
         <input type="hidden" name="clinic_id">
+        <input type="hidden" name="doctor_id">
         <input type="hidden" name="disease_id">
     </form>
     <div class="recordFormResult" style="display: none"></div>

@@ -11,4 +11,14 @@
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Ещё один -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-9282446199553525"
+     data-ad-slot="6423353697"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 </div>

@@ -46,12 +46,12 @@ function click_on_doctor_record_button($this, doc_id) {
     <a href="javascript:void(0)" class="btn-appoint">Записаться</a>
     <a href="javascript:void(0)" class="btn-bookmarkt btn-bookmark doctor_bookmark doctor_bookmark<?php echo $doctor->getId(); ?>"><i class="icon-add"></i><span class="txt">Добавить в закладки</span></a>
   <?php } else if(!empty($single_doctor_page)) { ?>
-    <a onclick="click_on_doctor_record_button($(this), '<?php echo $doctor->getId(); ?>');" href="#record-to-the-doctor-popup-<?php echo $doctor->getId(); ?>" class="btn-appoint refactor-btn-appoint-styles <?php echo $is_small_card ? 'btn-appoint-sm' : '' ; ?>">
+    <a onclick="recordController.showForm(<?php echo $doctor->getId(); ?>,0,0)" href="#record-to-the-doctor-popup-<?php echo $doctor->getId(); ?>" class="btn-appoint refactor-btn-appoint-styles <?php echo $is_small_card ? 'btn-appoint-sm' : '' ; ?>">
             <span class="button-name">
                 Записаться на прием сейчас
             </span>
         </a>
     <?php } else { ?>
-        <a class="btn-appoint" href="#record-to-the-doctor-popup-<?php echo $doctor->getId(); ?>" onclick="click_on_doctor_record_button($(this), '<?php echo $doctor->getId(); ?>');">Записаться</a>
+        <a class="btn-appoint" href="#record-to-the-doctor-popup-<?php echo $doctor->getId(); ?>" onclick="recordController.showForm(<?php echo $doctor->getId(); ?>,0,0)">Записаться</a>
     <?php } ?>
 </div>

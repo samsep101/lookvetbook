@@ -905,6 +905,9 @@ SQL;
 
     public function getOneByOriginalAlias($original_alias)
     {
+        if (!$original_alias)
+            return false;
+
         $data = $this->orm_model->select()->where('original_alias = ?', $original_alias)->fetchOne();
         return $this->initOne($data);
     }

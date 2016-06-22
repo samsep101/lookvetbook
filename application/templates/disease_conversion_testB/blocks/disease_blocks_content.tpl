@@ -1,9 +1,6 @@
 <?php foreach ($disease_blocks_content as $block):?>
     <?php $field_anchor = 'b'.$block->id;?>
-    <?php
-    if ($actions && $block->disease_block_type_id == 3): ?>
-        <?php $this->block('disease/blocks/actions'); ?>
-    <?php endif?>
+
     <?php if ($block->disease_block_type_id == 5): ?>
         <div class="section">
 
@@ -19,7 +16,7 @@
                                 <?php foreach ($disease_specialties as $specialty):?>
                                     <a class="disease-doctor des-page <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Center" data-text="<?php echo $specialty->plural_name; ?>" data-url="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend" href="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend"><?php echo $specialty->name; ?></a>
                                 <?php endforeach;?>
-                                поможет при лечении заболевания                              
+                                поможет при лечении заболевания
                             </p>
                             <?php foreach ($disease_specialties as $specialty):?>
                                 <a class="btn-double-floor des-page disease-doctor <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-action-for-counters="find-doctor" data-category-counters="find-doctor" data-action="FindDocButton" data-position="Right" data-url="<?php echo $specialty->specialtyUrl ?>" data-id="<?php echo $specialty->specialty_id; ?>" href="<?php echo $specialty->specialtyUrl ?>">
@@ -63,8 +60,9 @@
             <?php echo html_entity_decode($block->content,ENT_COMPAT,'UTF-8'); ?>
         </div>
     </div>
-    
-    
+    <?php if ($block->disease_block_type_id == 1){
+        include 'motivation_1.tpl';
+    } ?>
     <?php /***** pediatr banner *****/ ?>
     <?php $is_children = false; ?>
     <?php foreach ($disease_specialties as $specialty):?>
@@ -113,7 +111,7 @@
                     <tr>
                         <td valign="top"><span>Получите консультацию от <b>лучших<br/>врачей педиатров</b> прямо сейчас</span></td>
                         <td class="td-arrow" valign="top"><img src="/media/images/pediatr_arrow.png" /></td>
-                        
+
                     </tr>
                 </table>
             </div>

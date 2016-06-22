@@ -104,7 +104,7 @@
 			</div>
 			<div class="side-box">
 				<div class="btns">
-					<a href="#divider-shadow" class="btn-find-doctor-2"><span class="txt appoint">Записаться на прием</span></a>
+					<a href="#divider-shadow" onclick="recordController.showForm(0,<?php echo $clinic->id?>,0)" class="btn-find-doctor-2"><span class="txt appoint">Записаться на прием</span></a>
 
 					<a class="btn-bookmark btn-bookmark-big click_btn_bookmark">
 						<script>
@@ -321,6 +321,9 @@
 				<?php $this->block('blocks/equal_elements'); ?>
 			<?php endif; ?>
 		</div>
+        <?php if ($actions): ?>
+            <?php $this->block('clinic/blocks/actions'); ?>
+        <?php endif; ?>
 	</div>
 
 

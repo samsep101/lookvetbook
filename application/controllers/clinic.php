@@ -239,9 +239,10 @@ class ClinicController extends BaseController
 
     $clinic_search_algorithm = new ClinicSearchAlgorithm();
     $clinics = $clinic_search_algorithm->search($params);
-
-    JsonResponse::result($clinics);
-    return;
+    $ids = [];
+    foreach ($clinics AS $clin) {
+      $ids[] = $clin->id;
+    }
 
     $clinic_count = [count($clinics)];
     $specialization_manager = ModelManagerFactory::getByName('specialization');
@@ -345,7 +346,7 @@ class ClinicController extends BaseController
       'debug_cnt1'=>(($params->page-1)*$params->by_page+count($clinics))<$clinic_total_count?'need! ':'NOT need ',
       'debug_cnt2'=>(($params->page-1)*$params->by_page+count($clinics)),
       'debug_cnt3'=>$clinic_count,
-      'debug_cnt4'=>$params,
+      'debug_cnt4'=>$ids,
     );
 
     JsonResponse::result($result);

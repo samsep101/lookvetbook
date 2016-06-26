@@ -63,7 +63,7 @@ class ClinicSearchAlgorithm
     }
 
     if (count($clinics) < ($params->by_page)) {
-      $this->next_page_flag = false;
+      $this->next_page_flag = count($clinics).'<->'.$params->by_page;
     }
 
     return $clinics;

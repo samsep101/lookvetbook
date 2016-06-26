@@ -240,7 +240,9 @@ class ClinicController extends BaseController
     $clinic_search_algorithm = new ClinicSearchAlgorithm();
     $clinics = $clinic_search_algorithm->search($params);
 
-    $clinic_count = [$clinics];
+    JsonResponse::result($clinics);
+    return;
+
     $clinic_count = [count($clinics)];
     $specialization_manager = ModelManagerFactory::getByName('specialization');
     $specialization = $specialization_manager->getOneById($params->specialization_id);

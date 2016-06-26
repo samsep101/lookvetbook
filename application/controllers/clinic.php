@@ -239,10 +239,6 @@ class ClinicController extends BaseController
 
     $clinic_search_algorithm = new ClinicSearchAlgorithm();
     $clinics = $clinic_search_algorithm->search($params);
-    $ids = [];
-    foreach ($clinics AS $clin) {
-      $ids[] = $clin->id;
-    }
 
     $clinic_count = [count($clinics)];
     $specialization_manager = ModelManagerFactory::getByName('specialization');
@@ -332,7 +328,8 @@ class ClinicController extends BaseController
 
     $result = array(
       'html' => $html,
-      'next_page' => $clinic_search_algorithm->getNextPageFlag(),
+      //'next_page' => $clinic_search_algorithm->getNextPageFlag(),
+      'next_page' => (($params->page-1)*$params->by_page+count($clinics))<$clinic_total_count?true:false,
       'full_search' => $clinic_search_algorithm->getGoodSearchFlag(),
       'primary_clinics_id_list' => $clinic_search_algorithm->getPrimaryClinicsIds(),
       'map' => $map_file,
@@ -343,10 +340,10 @@ class ClinicController extends BaseController
       'clinic_total_count' => $clinic_total_count,
       'specialty_name' => $specialty_name,
       'clinic_word_form' => $clinic_word_form,
-      'debug_cnt1'=>(($params->page-1)*$params->by_page+count($clinics))<$clinic_total_count?'need! ':'NOT need ',
-      'debug_cnt2'=>(($params->page-1)*$params->by_page+count($clinics)),
-      'debug_cnt3'=>$clinic_count,
-      'debug_cnt4'=>$ids,
+//      'debug_cnt1'=>(($params->page-1)*$params->by_page+count($clinics))<$clinic_total_count?'need! ':'NOT need ',
+//      'debug_cnt2'=>(($params->page-1)*$params->by_page+count($clinics)),
+//      'debug_cnt3'=>$clinic_count,
+//      'debug_cnt4'=>$ids,
     );
 
     JsonResponse::result($result);

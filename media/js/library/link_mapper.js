@@ -16,8 +16,8 @@ var linkMapper_answer = '';
 var linkMapper_loadIcon;
 var linkMapper_doNotPush = 0;
 
-try {
-  function linkMapper_setHandlers() {
+function linkMapper_setHandlers() {
+  try {
     $('.linkMapper').filter(function (index) {return (this.tagName=='A' && this.className.indexOf('lmmarked') == -1)}).click(LinkMapper_go);
     $('.linkMapper').filter(function (index) {return (this.tagName=='FORM' && this.className.indexOf('lmmarked') == -1)}).submit(LinkMapper_go);
 
@@ -25,10 +25,11 @@ try {
     $('.linkMapper').filter(function (index) {return this.tagName=='FORM'}).addClass('lmmarked');
 
     return true;
+  } catch (e) {
+    return false;
   }
-} catch (e) {
-
 }
+
 
 try {
   window.addEventListener('popstate', function(e){

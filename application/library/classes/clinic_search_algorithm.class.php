@@ -52,18 +52,18 @@ class ClinicSearchAlgorithm
     $clinic_manager = ModelManagerFactory::getByName('clinic');
     $params->get_extra_item = true;
     $clinics = $clinic_manager->getListByClinicSearchParams($params);
-    $this->next_page_flag = count($clinics).'!!';
+
     if (!$clinics) {
       $clinics = $this->removeCriteriaAlgorithm($params);
     }
 
-    //$this->next_page_flag = true;
+    $this->next_page_flag = true;
     if (count($clinics) == ($params->by_page + 1)) {
       unset($clinics[$params->by_page]);
     }
 
     if (count($clinics) < ($params->by_page)) {
-      //$this->next_page_flag = count($clinics).'<->'.$params->by_page;
+      $this->next_page_flag = false;
     }
 
     return $clinics;

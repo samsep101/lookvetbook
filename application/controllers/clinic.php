@@ -342,6 +342,7 @@ class ClinicController extends BaseController
       'debug_cnt1'=>(($params->page-1)*$params->by_page+count($clinics))<$clinic_total_count?'need! ':'NOT need ',
       'debug_cnt2'=>(($params->page-1)*$params->by_page+count($clinics)),
       'debug_cnt3'=>$clinic_count,
+      'debug_cnt4'=>$params,
     );
 
     JsonResponse::result($result);

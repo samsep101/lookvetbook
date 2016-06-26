@@ -552,6 +552,7 @@ class ClinicManager extends AliasManager
     }
     $this->total_hits = $clinic_index_manager->getTotalHits();
 
+    return $result;
     return $this->getListByIds($result);
     //устарело
 /*

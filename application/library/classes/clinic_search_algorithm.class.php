@@ -59,7 +59,7 @@ class ClinicSearchAlgorithm
 
     $this->next_page_flag = true;
     if (count($clinics) == ($params->by_page + 1)) {
-      unset($clinics[$params->by_page]);
+      //unset($clinics[$params->by_page]);
     }
 
     if (count($clinics) < ($params->by_page)) {

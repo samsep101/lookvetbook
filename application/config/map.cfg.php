@@ -231,6 +231,13 @@
             'controller' => 'clinic'
         ),
 
+        // роутинги для контроллера Action
+        array(
+            'url'        => '/action/:id',
+            'action'     => 'get',
+            'controller' => 'action'
+        ),
+
         // роутинги для контроллера Disease
         array(
             'url'        => '/disease',

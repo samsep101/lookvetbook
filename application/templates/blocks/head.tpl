@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="/media/css/chosen.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
 <link rel="stylesheet" href="/media/css/jquery.fancybox.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
 <link rel="stylesheet" href="/media/css/jquery.jscrollpane.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
+<link rel="stylesheet" href="/media/css/jquery-ui.min.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
 <!--[if lt IE 9]>
 <link rel="stylesheet" type="text/css" media="screen,projection" href="/media/css/for_ie.css?<?php echo RELEASE__NUMBER?>"/>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js?<?php echo RELEASE__NUMBER?>"></script>
@@ -49,6 +50,7 @@
 
 <script type="text/javascript" src="/media/js/jquery-1.8.3.min.js?<?php echo RELEASE__NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/jquery-ui-1.10.2.custom.min.js?<?php echo RELEASE__NUMBER?>"></script>
+<script type="text/javascript" src="/media/js/jquery.maskedinput.min.js?<?php echo RELEASE__NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/jquery.carouFredSel-6.2.0-packed.js?<?php echo RELEASE__NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/chosen.jquery.js?<?php echo RELEASE__NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/jquery.maskedinput-1.3.min.js?<?php echo RELEASE__NUMBER?>"></script>

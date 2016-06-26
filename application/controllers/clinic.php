@@ -16,6 +16,8 @@ class ClinicController extends BaseController
     $this->view->landing_page = $landing;
 
     $clinic_id = $this->request('id');
+    $canbe_original_alias = $this->request('district');
+
     $current_item = $this->getLandingPageItem($clinic_id);
 
     if ($current_item) {
@@ -26,6 +28,11 @@ class ClinicController extends BaseController
     $clinic_manager = ModelManagerFactory::getByName('clinic');
     $specialization_manager = ModelManagerFactory::getByName('specialization');
 
+      if ($clinic_manager->getOneByOriginalAlias($canbe_original_alias)){
+          $clinic_id = $clinic_id.'/'.$canbe_original_alias;
+      }
+          
+
     $clinic = $clinic_manager->getOneByIdOrAliasAndIsActive($clinic_id);
     $specialization = $specialization_manager->getOneByAlias($clinic_id);
 
@@ -35,6 +42,12 @@ class ClinicController extends BaseController
       if (is_numeric($clinic_id) && $clinic->alias) {
         RedirectManager::redirect301(ClinicPageLinkViewHelper::getLink($clinic));
       }
+        
+        if (!$clinic && strpos($clinic_id,'/') === false && $original_clinic = $clinic_manager->getOneByOriginalAlias($clinic_id)){
+            RedirectManager::redirect301(ClinicPageLinkViewHelper::getLink($original_clinic));
+        }
+        
+        
 
       LinkHelper::checkLinkIsCorrectIfThereIsNoAttemptRedirect($clinic, array('city' => $this->city, 'model' => 'clinic'));
 
@@ -76,6 +89,7 @@ class ClinicController extends BaseController
       $specialty_manager = new SpecialtyManager();
 
       $this->view->specialties = $specialty_manager->getSpecialtyListForClinic($clinic->getId());
+        $this->view->actions = (new ActionManager())->getListForClinic($clinic->getId());
 
       $clinic_review_manager = new ClinicReviewManager();
       $clinic_rewies = $clinic_review_manager->getConfirmedListByClinicIdWithPagging($clinic->getId(), 0, 4);

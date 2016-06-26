@@ -94,7 +94,10 @@
             $visit->comment = $visit_information->comment;
             $visit->status_id = $visit_information->visit_status_id;
             $visit->appeal_id = $visit_information->appeal_id;
+            $visit->after_work = $visit_information->after_work;
+            $visit->disease_id = $visit_information->disease_id;
             $visit->processed_user = $visit_information->processed_user;
+            $visit->visit_start_time = $visit_information->visit_start_time;
 
             if($visit->appeal_id)
             {

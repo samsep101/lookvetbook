@@ -6703,3 +6703,118 @@ a.btn-double-floor {
     width      : 100px;
 }
 
+.shadow-input{
+    float: left;
+    background: url(/media/images/popup_txt.png) no-repeat;
+    position: relative;
+}
+.shadow-input input{
+    position: relative;
+    width: 331px;
+    height: 58px;
+    background: url(/media/images/popup_txt.png) no-repeat 100% 100%;
+    border: none;
+    color: #666666;
+    font: 24px 'pf_agora_slab_proregular';
+    margin-right: -9px;
+    padding: 0 40px 0 13px;
+    outline: none;
+}
+.text-shadow-input{
+    display: inline-block;
+    float: left;
+    line-height: 58px;
+    margin-right: 10px;
+    width: 143px;
+}
+.recordFormSuccess{
+    text-align: center;
+    font-size: 2.5em;
+    color: green;
+    border-top: 1px dashed green;
+    padding: 20px 0;
+}
+.recordFormFail{
+    text-align: center;
+    font-size: 1.5em;
+    color: red;
+    border-top: 1px dashed red;
+    padding: 20px 0;
+}
+.disease-doc-block{
+    display: inline-block;
+    width: 100%;
+    border: 1px #E3E3E3 solid;
+    border-radius: 6px;
+    padding: 10px 5px;
+    box-sizing: border-box;
+}
+.disease-doc-text{
+    font-size: 14px;
+}
+.disease-doc-text .btn-appoint{
+    float: left;
+    width: 125px;
+    margin-top: 10px;
+}
+.disease-doc-image .avatar{
+    float: right;
+}
+.disease-doc-hide{
+    padding-top: 10px;
+}
+.col-10{
+    width: 80%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.col-2{
+    width: 20%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.col-8{
+    width: 66.66666667%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.col-4{
+    width: 33.33333333%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.m-b-5{margin-bottom: 5px;}
+.m-b-10{margin-bottom: 10px;}
+.m-b-15{margin-bottom: 15px;}
+.m-b-20{margin-bottom: 20px;}
+.m-b-25{margin-bottom: 25px;}
+.m-b-30{margin-bottom: 30px;}
+
+.a-c{text-align:center;}
+.a-l{text-align:left;}
+.a-r{text-align:right;}

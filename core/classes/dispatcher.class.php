@@ -42,7 +42,7 @@ class Dispatcher
 
     $decorators = Register::get('controller_decorators');
 
-    if ($decorators)
+    if ($decorators) {
       foreach ($decorators as $decorator) {
         if ($class instanceof $decorator['instanceof']) {
           /**
@@ -54,7 +54,7 @@ class Dispatcher
           $class = $decorator_controller;
         }
       }
-
+    }
     /**
      * @var Controller $class
      */

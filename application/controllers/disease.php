@@ -71,6 +71,7 @@ class DiseaseController extends BaseController
     }
 
     $diseaseManager = ModelManagerFactory::getByName('disease');
+      /* @var DiseaseModel $disease */
     $disease = $diseaseManager->getOneByIdOrAlias($disease_id);
 
     if (!$disease || !$disease->is_active) {
@@ -157,8 +158,18 @@ class DiseaseController extends BaseController
     $this->view->show_pediatr_banner = ($v_param && $v_param == 'child') ? 1 : 0;
     $dis_param = $this->request('dis');
     $this->view->disease_green_btn = ($dis_param && $dis_param == 'new3') ? 1 : 0;
+      $this->view->actions = (new ActionManager())->getListForDisease($disease->getId());
 
-    $this->render('disease/get');
+
+      if (in_array($disease->alias,['pnevmoniya'])){
+          $this->render('disease_conversion_testA/get');
+      }elseif (in_array($disease->alias,['encefalit'])){
+          $this->render('disease_conversion_testB/get');
+      }else{
+          $this->render('disease/get');
+      }
+
+
   }
 
   public function ajaxGetDiseaseCardContent()

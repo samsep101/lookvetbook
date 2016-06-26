@@ -419,6 +419,7 @@
 </script>
 <!-- {/literal} END JIVOSITE CODE -->
 */?>
+<?php $this->block('blocks/record_form_container'); ?>
 </body>
 </html>
 

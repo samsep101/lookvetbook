@@ -771,9 +771,26 @@ class AjaxController extends BaseController
 
   public function recordToTheVisit()
   {
+      /**TODO
+       *
+       * change letter contents
+       */
+
+
+      
     $mail_data = [];
     $schedule_id = $this->request->request('schedule_id');
     $doctor_id = $this->request->request('doctor_id');
+    $visit_start_time = $this->request->request('visit_start');
+
+      if (preg_match('/([0-9]{2}).([0-9]{2}).([0-9]{4})/is', $visit_start_time, $a)){
+          $visit_start_time = $a[3].'-'.$a[2].'-'.$a[1];
+      }
+
+    $clinic_id = $this->request->request('clinic_id');
+    $after_work = $this->request->request('after_work', 0);
+    $disease_id = $this->request->request('disease_id');
+
     $mail_data['full_name'] = $full_name = trim(strip_tags($this->request->request('full_name')));
     $mail_data['phone'] = $phone = $this->request->request('phone');
     $family_relation_status_id = $this->request->request('family_relation_status_id');
@@ -793,6 +810,9 @@ class AjaxController extends BaseController
     */
     $visit_information->schedule_id = 13;
     $visit_information->doctor_id = $doctor_id;
+    $visit_information->visit_start_time = $visit_start_time;
+    $visit_information->disease_id = $disease_id;
+    $visit_information->after_work = $after_work;
     $visit_information->full_name = $full_name;
     $visit_information->phone = $phone;
     $visit_information->purpose_of_visit_id = $purpose_of_visit_id;
@@ -801,6 +821,7 @@ class AjaxController extends BaseController
     $visit_information->specialty_id = $specialty_id;
     $visit_information->comment = $comment;
     $visit_information->create_time = date('Y-m-d H:i:s', time());
+
 
     $dinner_hour = date('Y-m-d 12:00:00', $specialty_id);
     if ($specialty_id > strtotime($dinner_hour)) {
@@ -812,6 +833,10 @@ class AjaxController extends BaseController
     $visit_recorder = new VisitRecorder();
     $status = $visit_recorder->record($visit_information, $visit_id);
     $mail_data['visit_id'] = $visit_recorder->getVisit()->getId();
+      $mail_data['after_work'] = $after_work;
+      $mail_data['disease'] = $disease_id ? (new DiseaseManager())->getOneById($disease_id) : false;
+      $mail_data['clinic'] = $clinic_id ? (new ClinicManager())->getOneById($clinic_id) : false;
+
 
       $mail_sender = new EmailSenderHelper();
       $mail_sender->sendRecordInformation($mail_data);

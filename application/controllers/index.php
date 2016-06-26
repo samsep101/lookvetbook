@@ -67,6 +67,7 @@ class IndexController extends BaseController
 //            $doctor_search_params->has_avatar = 1;
 
     $doctors = $doctor_manager->getListByDoctorSearchParams($doctor_search_params);
+    shuffle($doctors);
 
     $this->view->doctors = $doctors;
     $this->view->is_virtual = false;

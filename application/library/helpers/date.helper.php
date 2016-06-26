@@ -155,14 +155,14 @@
 			return $date;
 		}
 
-        public static function changeFormat($str)
+        public static function changeFormat($str, $separator = '.')
         {
             if(!$str)
             {
                 return null;
             }
 
-            $elements = explode('.', $str);
+            $elements = explode($separator, $str);
 
             if(count($elements) == 3)
             {

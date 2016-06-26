@@ -240,6 +240,7 @@ class ClinicController extends BaseController
     $clinic_search_algorithm = new ClinicSearchAlgorithm();
     $clinics = $clinic_search_algorithm->search($params);
 
+    $clinic_count = [count($clinics)];
     $specialization_manager = ModelManagerFactory::getByName('specialization');
     $specialization = $specialization_manager->getOneById($params->specialization_id);
 
@@ -269,6 +270,7 @@ class ClinicController extends BaseController
         $clinics = array_merge($tmpClinics, $clinics);
       }
     }
+    $clinic_count[] = count($clinics);
 
     // Получаем результаты для карты
     $map_file = '';
@@ -299,6 +301,7 @@ class ClinicController extends BaseController
     foreach ($clinics AS $cKey => $cValue) {
       $clinics[$cKey] = $this->processedClinicItem($cValue, $params, $specialization);
     }
+    $clinic_count[] = count($clinics);
 
     $this->view->clinics = $clinics;
     $this->view->specialization = $specialization;
@@ -336,8 +339,9 @@ class ClinicController extends BaseController
       'clinic_total_count' => $clinic_total_count,
       'specialty_name' => $specialty_name,
       'clinic_word_form' => $clinic_word_form,
-      'debug_cnt1'=>count($clinics),
-      'debug_cnt2'=>$params->by_page,
+      'debug_cnt1'=>(($params->page-1)*$params->by_page+count($clinics))<$clinic_total_count?'need! ':'NOT need ',
+      'debug_cnt2'=>(($params->page-1)*$params->by_page+count($clinics)),
+      'debug_cnt3'=>$clinic_count,
     );
 
     JsonResponse::result($result);

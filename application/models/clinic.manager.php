@@ -553,14 +553,13 @@ class ClinicManager extends AliasManager
     $this->total_hits = $clinic_index_manager->getTotalHits();
 
     return $this->getListByIds($result);
-
+    //устарело
+/*
     $search_params = new SearchParams();
 
     if ($clinic_search_params->registry_user_id) {
       $user_manager = new UserManager();
-      /**
-       * @var UserModel $user
-       */
+      // @var UserModel $user
       $user = $user_manager->getOneById($clinic_search_params->registry_user_id);
 
       if ($user) {
@@ -572,9 +571,7 @@ class ClinicManager extends AliasManager
     }
 
     if ($clinic_search_params->freelancer_id) {
-      /**
-       * @var UserModel $user
-       */
+      // @var UserModel $user
       if ($clinic_search_params->registry_user_id && $user->role_id != RoleModel::ACCOUNT_SUPER_MANAGER) {
 
         $search_params->addJoin('clinic_to_user c2u2', 'c2u2.clinic_id', 'clinic_to_user.clinic_id');
@@ -635,9 +632,7 @@ class ClinicManager extends AliasManager
 
     if ($clinic_search_params->specialty_id) {
       $specialty_manager = new SpecialtyManager();
-      /**
-       * @var SpecialtyModel $specialty
-       */
+      // @var SpecialtyModel $specialty
       $specialty = $specialty_manager->getOneById($clinic_search_params->specialty_id);
 
       $specialty_id_list[] = $specialty->getId();
@@ -744,6 +739,7 @@ class ClinicManager extends AliasManager
     }
 
     return $this->getListBySearchParams($search_params);
+    */
   }
 
   public function setAdultFlagToClinic()

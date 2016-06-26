@@ -335,7 +335,9 @@ class ClinicController extends BaseController
       'bounds' => (isset($bounds)) ? $bounds : NULL,
       'clinic_total_count' => $clinic_total_count,
       'specialty_name' => $specialty_name,
-      'clinic_word_form' => $clinic_word_form
+      'clinic_word_form' => $clinic_word_form,
+      'debug_cnt1'=>count($clinics),
+      'debug_cnt2'=>$params->by_page,
     );
 
     JsonResponse::result($result);

@@ -1,5 +1,11 @@
 <div class="actionsList">
     <?php foreach($actions as $e):?>
-    <a href="<?=$e->getLink()?>"><?=$e->name?></a>
+        <div class="oneAction">
+            <div class="actionImage">
+                <div class="actionName"><a href="<?=$e->getLink()?>"><?=$e->name?></a></div>
+                <img src="<?=$e->image->crop(200, 200)->path?>" width="200" height="200">
+            </div>
+            <!-- <div class="actionText"><?=$e->info?></div> -->
+        </div>
     <?php endforeach; ?>
 </div>

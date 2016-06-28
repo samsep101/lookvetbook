@@ -38,7 +38,7 @@
 <?php $this->doctor_page = 1; ?>
 <?php $this->block('blocks/top_number'); ?>
 
-<div class="inner flo refactor-content-styles <?php echo (isset($is_red) && $is_red == 1) ? 'red' : ''; ?>" itemscope itemtype="http://data-vocabulary.org/Person">
+<div class="inner flo refactor-content-styles <?php echo (isset($is_red) && $is_red == 1) ? 'red' : ''; ?>" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="url" content="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>">
         <div class="doctor-landing doctor-card-<?php echo $doctor->getId(); ?>">
             <div class="doc-info-col">
@@ -65,14 +65,14 @@
                             </span>
                         </p>
                         <div class="specialties">
-                            <span class="post" itemprop="role">
+                            <span class="post" itemprop="potentialAction">
                                 <?php echo $doctor->specialties_names_links; ?>
                             </span>
                         </div>
                     </h1>
 
-                    <div class="rating" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
-                        <meta itemprop="itemreviewed" content="<?php echo $doctor->full_name; ?>"/>
+                    <div class="rating" itemscope itemtype="http://schema.org/AggregateRating">
+                        <meta itemprop="name" content="<?php echo $doctor->full_name; ?>"/>
 
                         <?php echo RateViewHelper::view($doctor->rate, 0, $doctor->is_best); ?>
 		                    <?php if($doctor->is_best) { ?>
@@ -81,7 +81,7 @@
 
                         <?php if ($doctor->reviews_count!=0):?>
                             <a href="#reviews" class="comments-count refactor-comments-count-styles">
-                                читать отзывы (<span itemprop="count"><?php echo $doctor->reviews_count; ?></span>)
+                                читать отзывы (<span itemprop="reviewCount"><?php echo $doctor->reviews_count; ?></span>)
                             </a>
                         <?php endif?>
 
@@ -161,7 +161,7 @@
                                              <?php echo $section_number; ?>
                                          </div>-->
                                         <meta content="Клиника" itemprop="affiliation">
-                                        <p class="name-inf" itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+                                        <p class="name-inf" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
 
                                             <?php if ($clinic->metro_station): ?>
                                                 <?php if ($clinic->metro_station->metro_branch): ?>
@@ -169,7 +169,7 @@
                                                 <?php endif; ?>
                                                 <?php echo $clinic->metro_station->name; ?> <br  />
                                             <?php endif; ?>
-                                            <span itemprop="street-address">
+                                            <span itemprop="streetAddress">
                                                 <?php echo StringHelper::trim($clinic->address); ?>
                                             </span>
                                         </p>

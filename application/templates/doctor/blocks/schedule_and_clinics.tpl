@@ -238,7 +238,7 @@ if (!isset($search_page))
                     <div class="location">
 
                             <?php if($is_seo_page && $page_type != 'doctor') { ?>
-                                <p class="name-inf" itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+                                <p class="name-inf" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
                                     <meta content="Клиника" itemprop="affiliation">
 
                                     <?php if ($clinic->metro_station) { ?>

@@ -64,7 +64,7 @@
         <?php $cache_id.='_call_center_operator'; ?>
     <?php endif; ?>
     <?php if (!$cache->start($cache_id,  'doctor_card_block')): ?>
-        <div class="info-card doctor-card-<?php echo $doctor->getId(); ?> doctor-big-card flo" id="doctor-big-card-<?php echo $doctor->getUniqueId(); ?>" itemscope itemtype="http://data-vocabulary.org/Person">
+        <div class="info-card doctor-card-<?php echo $doctor->getId(); ?> doctor-big-card flo" id="doctor-big-card-<?php echo $doctor->getUniqueId(); ?>" itemscope itemtype="http://schema.org/Person">
 
             <?php echo (isset($is_closed_card) && $is_closed_card == 1) ? '<span class="close" data-id="'.$doctor->getId().'"></span>' : ''; ?>
             <?php if (isset($map_card)): ?>
@@ -101,8 +101,8 @@
                             </a>
                         <?php endif; ?>
 
-                        <div class="rating" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
-                            <meta itemprop="itemreviewed" content="<?php echo $doctor->full_name; ?>"/>
+                        <div class="rating" itemscope itemtype="http://schema.org/AggregateRating">
+                            <meta itemprop="name" content="<?php echo $doctor->full_name; ?>"/>
 
                             <?php echo RateViewHelper::view($doctor->rate, 0, $doctor->is_best); ?>
 		                        <?php if($doctor->is_best) { ?>
@@ -115,7 +115,7 @@
                                 <?php else: ?>
                                     <a class="showTip el" href="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>#reviews">
                                 <?php endif?>
-                                    <span itemprop="count">
+                                    <span itemprop="reviewCount">
                                         <?php echo ($doctor->reviews_count) ? StringHelper::getCorrectSuffixForReview($doctor->reviews_count) : ''; ?>
                                     </span>
                                 </a>

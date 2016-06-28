@@ -1,8 +1,8 @@
 <?php $counter = 1; ?>
 <?php foreach($reviews as $review): ?>
-	<div id="doctor-review-<?php echo (isset($review->visit) and isset($review->visit->rating)) ? $review->visit->rating->getId() : rand(1,10000); ?>" class="review-box flo <?php if ($counter % 2 == 0) echo 'fright';?>" itemscope itemtype="http://data-vocabulary.org/Review">
+	<div id="doctor-review-<?php echo (isset($review->visit) and isset($review->visit->rating)) ? $review->visit->rating->getId() : rand(1,10000); ?>" class="review-box flo <?php if ($counter % 2 == 0) echo 'fright';?>" itemscope itemtype="http://schema.org/Review">
 		<span class="chk-pic"></span>
-		<meta itemprop="itemreviewed" content="<?php echo $itemreviewedName; ?>">
+		<meta itemprop="itemReviewed" content="<?php echo $itemreviewedName; ?>">
 
 		<div class="aside">
 			<p class="name">Оценка пациента</p>
@@ -36,7 +36,7 @@
 					$review->diagnosis_is_clear) / 5;
 			?>
 
-			<meta itemprop="rating" content="<?php echo $accountRating; ?>">
+			<meta itemprop="reviewRating" content="<?php echo $accountRating; ?>">
 		</div>
 
 		<div class="review-cont">
@@ -48,8 +48,8 @@
 			<?php endif; ?>
 			<div class="comment-data">
 				<img src="/media/images/account_image.gif" alt=""/>
-				<p class="author-name"><span itemprop="reviewer"><?php echo $review->account->display_name; ?></span></p>
-				<span class="comment-date"><time itemprop="dtreviewed" datetime="<?php echo date('Y.m.d', strtotime($review->dt)); ?>"><?php echo DateViewHelper::date($review->dt, 'dd.mm.YYYY'); ?></time></span>
+				<p class="author-name"><span itemprop="author"><?php echo $review->account->display_name; ?></span></p>
+				<span class="comment-date"><time itemprop="datePublished" datetime="<?php echo date('Y-m-d', strtotime($review->dt)); ?>"><?php echo DateViewHelper::date($review->dt, 'dd.mm.YYYY'); ?></time></span>
 			</div>
 			<p class="comment-text"><span itemprop="description"><?php echo $review->text;?></span></p>
 		</div>

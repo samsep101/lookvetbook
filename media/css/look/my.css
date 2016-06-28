@@ -738,6 +738,17 @@ header {
 
 .full-map .bott-panel .shell {
     text-align : right;
+    width: auto;
+    margin: 0 auto;
+    padding-top: 10px;
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    margin-left: -223px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #4f4f4f;
 }
 
 .about-ilness-content .main-cont .content .section .like_p {

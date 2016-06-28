@@ -244,6 +244,15 @@ class ClinicRegistryController extends BaseController
     $this->view->clinic_id = $clinic_id;
 
   }
+  
+  public function actionDelete(){
+      $delete_action = (new ActionManager())->getOneById(intval($this->request('delete_action_id')));
+      $manager = new ActionManager();
+      $manager->delete($delete_action);
+
+      RedirectManager::redirect('/registry/clinic/action?clinic_id='.intval($this->request('clinic_id')));
+  }
+  
     public function actionSave(){
 
         if ($this->request('edit_action_id')){
@@ -272,19 +281,19 @@ class ClinicRegistryController extends BaseController
         );
 
         $file_data = array();
-
+		
         if (!empty($_FILES)) {
+			
           if (isset($_FILES['icon'])) {
             $file_data = $_FILES['icon'];
           }
-
-          if ($file_data['error'] != 0){
+		  
+          if ($file_data['error'] == 0){
             $new_action->image_id = $image_id = ImageUploader::upload($upload_data, $file_data, $alias);
             $manager = new ActionManager();
             $manager->save($new_action);
 
           }
-
         }
 
 

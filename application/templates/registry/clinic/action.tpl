@@ -140,7 +140,8 @@
     </div>
 </form>
 <div class="actionsList">
-    <?php foreach($clinic_actions as $e){ ?>
+    <?php foreach($clinic_actions as $e){ 
+	?>
     <div class="oneAction">
         <div class="name"><?=$e->name?></div>
         <div class="edit"><a href="/registry/clinic/action?clinic_id=<?=$clinic_id?>&edit_action_id=<?=$e->id?>">редактировать</a></div>

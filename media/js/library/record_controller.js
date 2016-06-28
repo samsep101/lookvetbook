@@ -60,3 +60,6 @@ function recordComplete(){
         $('.recordFormFail').show();
     }
 }
+$( document ).ready(function() {
+    recordController = new RecordController();
+});

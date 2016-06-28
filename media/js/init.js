@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-    recordController = new RecordController();
 
     $(document).click(function (event) {
         if ($(event.target).closest('.fancybox-wrap').length) return;

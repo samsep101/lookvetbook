@@ -89,7 +89,8 @@ class ClinicController extends BaseController
       $specialty_manager = new SpecialtyManager();
 
       $this->view->specialties = $specialty_manager->getSpecialtyListForClinic($clinic->getId());
-        $this->view->actions = (new ActionManager())->getListForClinic($clinic->getId());
+	  $this->view->actions = (new ActionManager())->getListForClinic($clinic->getId());
+
 
       $clinic_review_manager = new ClinicReviewManager();
       $clinic_rewies = $clinic_review_manager->getConfirmedListByClinicIdWithPagging($clinic->getId(), 0, 4);

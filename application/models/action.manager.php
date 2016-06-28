@@ -32,6 +32,7 @@ class ActionManager extends AliasManager
         $q = "select action.*
               from action
               where clinic_id='$clinic_id' ";
+			  
         $data = $db->query($q);
 
         return (count($data)) ? $this->initList($data) : array();

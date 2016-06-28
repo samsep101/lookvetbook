@@ -329,7 +329,7 @@ class ClinicRegistryController extends BaseController
         $this->view->clinic_id = $clinic_id;
         
         $action_manager = new ActionManager();
-        $clinic_actions = $action_manager->getListForClinic($clinic_id->id);
+        $clinic_actions = $action_manager->getListForClinic($clinic->id);
         
 
         $view_processor = new FormViewProcessor('moderate_clinic_license', $clinic);

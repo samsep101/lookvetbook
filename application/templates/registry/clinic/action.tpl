@@ -146,7 +146,7 @@
     <div class="oneAction">
         <div class="actionImage">
             <div class="actionName"><?=$e->name?></div>
-            <img src="<?=$e->image->resize(200, 200)->path?>" width="200" height="200">
+            <img src="<?=$e->image->crop(200, 200)->path?>" width="200" height="200">
         </div>
         <div class="actionEdit"><a class="link-edit" href="/registry/clinic/action?clinic_id=<?=$clinic_id?>&edit_action_id=<?=$e->id?>">редактировать</a></div>
         <div class="actionDelete"><a class="link-delete" href="/registry/clinic/actionDelete?clinic_id=<?=$clinic_id?>&delete_action_id=<?=$e->id?>">удалить</a></div>

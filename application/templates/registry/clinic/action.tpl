@@ -5,8 +5,8 @@
         <p>Акции</p>
         <div class="row-record">
             <label>Название</label>
-            <div class="row-record-data">
-                <input type="text" name="form[name]" value="<?=$edit_action->name?>" style=""><br>
+            <div class="row-record-data" style="width:100%; max-width:785px;">
+                <input type="text" name="form[name]" value="<?=$edit_action->name?>" style="width:100%;"><br>
             </div>
         </div>
         <div class="row-record">
@@ -143,9 +143,12 @@
     <?php foreach($clinic_actions as $e){ 
 	?>
     <div class="oneAction">
-        <div class="name"><?=$e->name?></div>
-        <div class="edit"><a href="/registry/clinic/action?clinic_id=<?=$clinic_id?>&edit_action_id=<?=$e->id?>">редактировать</a></div>
-        <div class="edit"><a href="/registry/clinic/actionDelete?clinic_id=<?=$clinic_id?>&delete_action_id=<?=$e->id?>">удалить</a></div>
+        <div class="actionImage">
+            <div class="actionName"><?=$e->name?></div>
+            <img src="http://imgn.omskpress.ru/news/b_1f15268647a952f98d860099904f6006.jpg" width="200" height="200">
+        </div>
+        <div class="actionEdit"><a class="link-edit" href="/registry/clinic/action?clinic_id=<?=$clinic_id?>&edit_action_id=<?=$e->id?>">редактировать</a></div>
+        <div class="actionDelete"><a class="link-delete" href="/registry/clinic/actionDelete?clinic_id=<?=$clinic_id?>&delete_action_id=<?=$e->id?>">удалить</a></div>
     </div>
     <?php } ?>
 </div>

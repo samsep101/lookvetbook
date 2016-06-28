@@ -1266,9 +1266,15 @@ div.connected-carousels.iframe div.stage div.carousel ul li {
     background: url(/media/images/bg_gradient.png) 0 0 repeat-x;
 }
 
-.bound-doctor {
+.bound-doctor, .link-delete{
     background: url(/media/images/cross.png) 0 0 no-repeat;
     padding-left: 20px;
+}
+.link-edit{
+    display: inline-block;
+    padding-left: 20px;
+    line-height: 16px;
+    background: url(/media/images/pen.png) 0 0 no-repeat;
 }
 .bound-doctor.pass_doc{background: none;}
 
@@ -1296,5 +1302,6 @@ div.connected-carousels.iframe div.stage div.carousel ul li {
     height: 36px;
     padding: 1px 3px;
 }
+
 
 

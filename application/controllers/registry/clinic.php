@@ -259,9 +259,35 @@ class ClinicRegistryController extends BaseController
         $new_action->date_to = DateHelper::changeFormat($data['date_to'], '-');
         $new_action->info = $data['info'];
         $new_action->clinic_id = $this->request('clinic_id');
-        
+
         $manager = new ActionManager();
         $manager->save($new_action);
+
+
+        $targetFolder = 'clinic/actions/';
+        $alias = 'icon_'.$new_action->id;
+  
+        $upload_data = array(
+            'upload_folder' => $targetFolder,
+        );
+
+        $file_data = array();
+
+        if (!empty($_FILES)) {
+          if (isset($_FILES['icon'])) {
+            $file_data = $_FILES['icon'];
+          }
+
+          if ($file_data['error'] != 0){
+            $new_action->image_id = $image_id = ImageUploader::upload($upload_data, $file_data, $alias);
+            $manager = new ActionManager();
+            $manager->save($new_action);
+
+          }
+
+        }
+
+
 
 
 

@@ -6,7 +6,7 @@
     });
 </script>
 <div id="record_form_container" style="display:none">
-    <form action="/ajax/recordToTheVisit" method="POST" class="recordPopupForm linkMapper" rel=".recordFormResult" onComplete="recordComplete()">
+    <form action="/ajax/recordToTheVisit" method="POST" class="recordPopupForm linkMapper" rel=".recordFormResult" onComplete="recordComplete()" onsubmit="if (!$(this).find('input[name=full_name]').val() || !$(this).find('input[name=phone]').val()){alert('Вы не заполнили поля имя или телефон'); $(this).find('.doSubmit').val('false');}else{$(this).find('.doSubmit').val('');}">
     <div class="booking record-to-the-doctor-popup" style="display:block">
         <div class="all">
             <h1>Запись на прием</h1>
@@ -68,6 +68,7 @@
         <input type="hidden" name="clinic_id">
         <input type="hidden" name="doctor_id">
         <input type="hidden" name="disease_id">
+        <input type="hidden" class="doSubmit">
     </form>
     <div class="recordFormResult" style="display: none"></div>
     <div class="recordFormSuccess" style="display: none">Вы успешно записаны!</div>

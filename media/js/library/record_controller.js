@@ -56,10 +56,39 @@ function recordComplete(){
 
     if (data['result']){
         $('.recordFormSuccess').show();
+        if ($.cookie('admitad_uid'))
+            admitad_submit(document, window, $.cookie('admitad_uid'));
     }else{
         $('.recordFormFail').show();
     }
 }
+
+function admitad_submit(d, w, uid) {
+    w._admitadPixel = {
+        response_type: 'img',
+        action_code: '1',
+        campaign_code: '0b5698ee5d'
+    };
+    w._admitadPositions = w._admitadPositions || [];
+    w._admitadPositions.push({
+        uid: uid,
+        order_id: '',
+        client_id: '',
+        tariff_code: '1',
+        currency_code: '',
+        payment_type: 'sale'
+    });
+    var id = '_admitad-pixel';
+    if (d.getElementById(id)) { return; }
+    var s = d.createElement('script');
+    s.id = id;
+    var r = (new Date).getTime();
+    var protocol = (d.location.protocol === 'https:' ? 'https:' : 'http:');
+    s.src = protocol + '//cdn.asbmit.com/static/js/pixel.min.js?r=' + r;
+    d.head.appendChild(s);
+};
+
+
 $( document ).ready(function() {
     recordController = new RecordController();
 });

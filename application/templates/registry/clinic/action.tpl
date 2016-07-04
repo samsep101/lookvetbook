@@ -10,7 +10,13 @@
             </div>
         </div>
         <div class="row-record">
-            <label>Изображение (600*120)</label>
+            <label>Изображение прямоугольник (600*120 или больше с соблюдением пропорций)</label>
+            <div class="row-record-data">
+                <input type="file" name="icon_full_width" value="" style=""><br>
+            </div>
+        </div>
+        <div class="row-record">
+            <label>Изображение квадрат (200*200 или больше с соблюдением пропорций)</label>
             <div class="row-record-data">
                 <input type="file" name="icon" value="" style=""><br>
             </div>

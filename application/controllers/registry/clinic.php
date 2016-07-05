@@ -275,7 +275,8 @@ class ClinicRegistryController extends BaseController
 
         $targetFolder = 'clinic/actions/';
         $alias = 'icon_'.$new_action->id;
-  
+        $alias_full_width = 'icon_'.$new_action->id;
+
         $upload_data = array(
             'upload_folder' => $targetFolder,
         );
@@ -292,8 +293,20 @@ class ClinicRegistryController extends BaseController
             $new_action->image_id = $image_id = ImageUploader::upload($upload_data, $file_data, $alias);
             $manager = new ActionManager();
             $manager->save($new_action);
-
           }
+
+          if (isset($_FILES['icon_full_width'])) {
+            $file_data = $_FILES['icon_full_width'];
+          }
+
+          if ($file_data['error'] == 0){
+            $new_action->image_full_width_id = $image_id = ImageUploader::upload($upload_data, $file_data, $alias_full_width);
+            $manager = new ActionManager();
+            $manager->save($new_action);
+          }
+
+
+
         }
 
 

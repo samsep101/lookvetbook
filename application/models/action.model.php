@@ -8,12 +8,22 @@
  * @property string $date_to
  * @property int $image_id
  * @property ImageModel $image
+ * @property int $image_full_width_id
+ * @property ImageModel $image_full_width
  * @property string $info
  * @property int $clinic_id
  *
  */
 class ActionModel extends DynamicModel {
     private $specializations = [];
+
+    public function get_image_full_width()
+    {
+        if (!$this->image_full_width_id)
+            return false;
+
+        return (new ImageManager())->getOneById();
+    }
 
     public function getLink()
     {

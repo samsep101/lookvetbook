@@ -50,6 +50,17 @@ if (isset($_SERVER['REQUEST_URI'])) {
   }
 }
 
+
+if (isset($_REQUEST['admitad_uid'])){
+  setcookie(
+      'admitad_uid',
+      $_REQUEST['admitad_uid'],
+      time() + 60 * 60 * 24 * 30, // 30 days
+      '/',
+      '.' . SITE_DOMAIN
+  );
+}
+
 Register::add('db', new Db());
 Register::add('utils', new Utils());
 

@@ -22,7 +22,7 @@ class ActionModel extends DynamicModel {
         if (!$this->image_full_width_id)
             return false;
 
-        return (new ImageManager())->getOneById();
+        return (new ImageManager())->getOneById($this->image_full_width_id);
     }
 
     public function getLink()

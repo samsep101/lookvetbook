@@ -1,3 +1,19 @@
+/* adaptive switch */
+
+.adaptive-switch-link{display: none;}
+@media (max-width: 1024px){
+    .adaptive-switch-link{
+        display: block;
+        width: 100%;
+        text-align: center;
+        color: #fff!important;
+        background: #59bac7;
+        font-weight: bold;
+        font-family: 'pf_agora_slab_pro_medium';
+        padding: 5px 0;
+    }
+}
+
 @media (max-width: 1000px){
     html, body{
         width: 100vw;

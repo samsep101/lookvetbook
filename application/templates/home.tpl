@@ -203,8 +203,14 @@
     <meta name='yandex-verification' content='76535cc7dd5d586f' />
     <meta name=viewport content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/media.css?<?php echo RELEASE_NUMBER?>" type="text/css"/>
+    <script type="text/javascript" src="/media/js/responsive-switch.js"></script>
 </head>
 <body>
+<a href="#"
+      class="rs-link adaptive-switch-link"
+      data-link-desktop="Перейти на полную версию"
+      data-link-responsive="Перейти на мобильную версию"
+      data-always-visible="false"></a>
 <script type="text/javascript">
 	$(document).ready(function(){
 		product_basket.setProducts(<?php echo json_encode($product_basket->getProductList()); ?>);

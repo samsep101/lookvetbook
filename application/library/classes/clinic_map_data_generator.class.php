@@ -16,6 +16,7 @@ class ClinicMapDataGenerator
        */
       $clinic_manager = ModelManagerFactory::getByName('clinic');
       $clinics = $clinic_manager->getListByClinicSearchParams($clinic_search_params);
+    //pr($clinics, 1);
 
       $str = '';
 

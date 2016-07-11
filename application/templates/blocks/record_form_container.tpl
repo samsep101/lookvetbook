@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="row flo m-b-10 a-c">
-                <input style="width:200px;" type="submit" class="btn-1 resume-btn" value="Записаться">
+                <input style="width:200px;" type="submit" class="btn-1 resume-btn js-hide-on-record-complete" value="Записаться">
             </div>
 
     </div>

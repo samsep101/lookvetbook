@@ -1,9 +1,5 @@
 <?php foreach ($disease_blocks_content as $block):?>
-    <?php $field_anchor = 'b'.$block->id;?>
-    <?php
-    if ($actions && $block->disease_block_type_id == 3): ?>
-        <?php $this->block('disease/blocks/actions'); ?>
-    <?php endif?>
+    <?php $field_anchor = 'b'.$block->id;?>    
     <?php if ($block->disease_block_type_id == 5): ?>
         <div class="section">
 
@@ -78,7 +74,10 @@
             <?php echo html_entity_decode($block->content,ENT_COMPAT,'UTF-8'); ?>
         </div>
     </div>
-    
+    <?php
+    if ($actions && $block->disease_block_type_id == 1): ?>
+        <?php $this->block('disease/blocks/actions'); ?>
+    <?php endif?>
     
     <?php /***** pediatr banner *****/ ?>
     <?php $is_children = false; ?>

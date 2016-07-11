@@ -91,6 +91,6 @@ function admitad_submit(d, w, uid) {
 
 $( document ).ready(function() {
     recordController = new RecordController();
-    if (window.location.search.indexOf('sf=1'))
+    if (window.location.search.indexOf('sf=1') > 0)
         recordController.showForm(0,0,0);
 });

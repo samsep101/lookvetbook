@@ -2570,6 +2570,18 @@ h2 {
     border-bottom : none;
 }
 
+.tab-people.tab-actions{
+    padding: 0px;
+    background: url(/media/images/btn-head_bg.png) repeat-x 0 -63px;
+    color: #fff;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+.tab-people.tab-actions a{
+    color: #fff;
+}
+
 .about-ilness-content .illness-nav .sub-nav {
     height        : 54px;
     border        : 1px #E3E3E3 solid;

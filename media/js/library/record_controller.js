@@ -76,7 +76,7 @@ function admitad_submit(d, w, uid) {
         client_id: '',
         tariff_code: '1',
         currency_code: '',
-        payment_type: 'sale'
+        payment_type: 'lead'
     });
     var id = '_admitad-pixel';
     if (d.getElementById(id)) { return; }

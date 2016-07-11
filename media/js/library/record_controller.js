@@ -34,6 +34,10 @@ var RecordController = function ()
     {
         self.popup = new Popup();
         self.popup.show(this.record_form_container.html(), '560px');
+
+        $('.js-hide-on-record-complete').show();
+        $('.recordFormSuccess').hide();
+
         _form = $('.recordPopupForm');
 
         _form.find('input[name=doctor_id]').val(doctor_id);
@@ -56,6 +60,8 @@ function recordComplete(){
 
     if (data['result']){
         $('.recordFormSuccess').show();
+        $('.js-hide-on-record-complete').hide();
+        
         if ($.cookie('admitad_uid'))
             admitad_submit(document, window, $.cookie('admitad_uid'));
     }else{

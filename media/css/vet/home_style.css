@@ -467,9 +467,19 @@ p.h-text {
     margin: 12px 0 0 8px;
 }
 
+.search-form span.label{
+    color: #f48221;
+    font: normal 14px/18px 'pf_agora_slab_pro_medium';
+}
 .abs {position: absolute;font:normal 17px/0.8 'pf_agora_sans_proregular';text-shadow:0 0 0 #000;color: #f48221;text-align: center;}
 .abs small {font-size: 12.5px;}
-.abs1 {top:104px; right:13px;}
+.abs1 small{
+    font-size: 18px !important;
+}
+.abs1 {
+    right: -178px;
+    top: 112px;
+}
 .abs2 {top:-21px; left:11px;width: 169px;height: 90px;background: url('/media/images/home_page/vet/abs2.png') 100% 100% no-repeat;}
 .abs3 {top:99px; left:343px;width: 160px;padding-left:0px;height: 65px;background: url('/media/images/home_page/vet/abs6.png') 50% 100% no-repeat;}
 .abs3 small {padding-left: 60px;}
@@ -753,11 +763,14 @@ p.h-text {
     .abs .flo {display: none;}
     .abs small {font-size: 12.6px;}
     .abs3 small {padding-left: 0;}
-    .abs1 {top: 111px;right: 79px;}
+    .abs1 {
+        top: 121px;
+        right: -120px;
+    }
     .abs2 {left: 40px;height: 100px;width:155px;top:-27px;}
     .abs3 {
         width: 200px;
-        left: 381px;
+        left: 464px;
         padding-left: 59px;
         background: url('/media/images/home_page/vet/abs3.png') 0 100% no-repeat;
     }
@@ -765,7 +778,7 @@ p.h-text {
         width: 120px;
         height: 190px;
         top: 270px;
-        left: 375px;
+        left: 463px;
         padding: 0 0 0 40px;
         background: url('/media/images/home_page/vet/abs4.png') 0 100% no-repeat;
     }
@@ -917,3 +930,11 @@ p.h-text {
                 font-size: 16px;
                 font-style: normal;
             }
+
+.search-form .search-by-name .show_input, .search-form .search-by-name .show_inp {
+    display : none;
+}
+
+.content .left_search .search-form .search-by-name .txt {
+    display: inline-block !important;
+}

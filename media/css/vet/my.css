@@ -844,7 +844,7 @@ header {
 }
 
 .sel-box.clinic-field-margin-bottom {
-    margin-bottom : 20px !important;
+    margin-bottom : 0px !important;
 }
 
 .info-card .corn-top {
@@ -1381,18 +1381,18 @@ span.error_span label {
 }
 
 .other-clinic-search-params .search-param-icon.icon-credit-card {
-    background   : url(/media/images/clinic_search_param_icon3.png) top left no-repeat;
+    /*background   : url(/media/images/clinic_search_param_icon3.png) top left no-repeat;
     width        : 25px;
     height       : 15px;
     margin-top   : 2px;
-    margin-right : 9px;
+    margin-right : 9px;*/
 }
 
 .other-clinic-search-params .search-param-icon.icon-time {
-    background   : url(/media/images/clinic_search_param_icon2.png) top left no-repeat;
+    /*background   : url(/media/images/clinic_search_param_icon2.png) top left no-repeat;
     width        : 20px;
     height       : 20px;
-    margin-right : 14px;
+    margin-right : 14px;*/
 }
 
 .other-clinic-search-params .search-param-icon.icon-pandus {
@@ -1412,7 +1412,7 @@ span.error_span label {
 }
 
 .other-clinic-search-params .dotted-area {
-    background : url(/media/images/dotted-line.png) repeat-x scroll 0 9px transparent;
+    /*background : url(/media/images/dotted-line.png) repeat-x scroll 0 9px transparent;*/
     display    : block !important;
     height     : 20px;
     overflow   : hidden;
@@ -2975,7 +2975,7 @@ input:focus, a:focus {
 }
 
 .sp-links.right-links {
-    margin-left : 70px;
+    margin-left : 86px;
     min-width   : 430px;
 }
 
@@ -5522,12 +5522,12 @@ a.search-doctor-button {
 }
 
 .map-box.refactor #map {
-    height : 352px;
+    height : 100%;
     width  : 649px;
 }
 
 .map-box.refactor {
-    height : 352px;
+    height : 369px;
     width  : 649px;
 }
 
@@ -5560,7 +5560,7 @@ a.search-doctor-button {
 }
 
 .inner-2 #doctor-search-form.refactor .search-form .in_colapse {
-    height : 292px;
+    height : auto;
 }
 
 .left_search .search-form .choose-section.choose-section-free {
@@ -5576,7 +5576,8 @@ a.search-doctor-button {
 }
 
 .left_search #doctor-search-form .search-form .box, .left_search #clinic-search-form .search-form .box {
-    /*height:196px;*/
+    height:255px;
+    background: #f2cc91;
 }
 
 .chzn-container-single .chzn-single span {
@@ -5869,7 +5870,7 @@ a.back-to-search.doctor-top-page {
 }
 
 .sp-links.right-links {
-    margin-left : 70px;
+    margin-left : 86px;
     min-width   : 430px;
 }
 
@@ -6701,3 +6702,164 @@ a.btn-double-floor {
     width      : 100px;
 }
 
+.shadow-input{
+    float: left;
+    background: url(/media/images/popup_txt.png) no-repeat;
+    position: relative;
+}
+.shadow-input input{
+    position: relative;
+    width: 331px;
+    height: 58px;
+    background: url(/media/images/popup_txt.png) no-repeat 100% 100%;
+    border: none;
+    color: #666666;
+    font: 24px 'pf_agora_slab_proregular';
+    margin-right: -9px;
+    padding: 0 40px 0 13px;
+    outline: none;
+}
+.text-shadow-input{
+    display: inline-block;
+    float: left;
+    line-height: 58px;
+    margin-right: 10px;
+    width: 143px;
+}
+.recordFormSuccess{
+    text-align: center;
+    font-size: 2.5em;
+    color: green;
+    border-top: 1px dashed green;
+    padding: 20px 0;
+}
+.recordFormFail{
+    text-align: center;
+    font-size: 1.5em;
+    color: red;
+    border-top: 1px dashed red;
+    padding: 20px 0;
+}
+.disease-doc-block{
+    display: inline-block;
+    width: 100%;
+    border: 1px #E3E3E3 solid;
+    border-radius: 6px;
+    padding: 10px 5px;
+    box-sizing: border-box;
+}
+.disease-doc-text{
+    font-size: 14px;
+}
+.disease-doc-text .btn-appoint{
+    float: left;
+    width: 125px;
+    margin-top: 10px;
+}
+.disease-doc-image .avatar{
+    float: right;
+}
+.disease-doc-hide{
+    padding-top: 10px;
+}
+.col-10{
+    width: 80%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.col-2{
+    width: 20%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.col-8{
+    width: 66.66666667%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.col-4{
+    width: 33.33333333%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.m-b-5{margin-bottom: 5px;}
+.m-b-10{margin-bottom: 10px;}
+.m-b-15{margin-bottom: 15px;}
+.m-b-20{margin-bottom: 20px;}
+.m-b-25{margin-bottom: 25px;}
+.m-b-30{margin-bottom: 30px;}
+
+.a-c{text-align:center;}
+.a-l{text-align:left;}
+.a-r{text-align:right;}
+.actionsList{
+    display: inline-block;
+    margin-top: 20px;
+}
+.oneAction {
+    position: relative;
+    display: block;
+    width: 230px;
+    height: 260px;
+    float: left;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.oneAction .actionName{
+    position: absolute;
+    width: 200px;
+    font-size: 16px;
+    line-height: 20px;
+    left: 0;
+    top: 0;
+    padding: 5px;
+    box-sizing: border-box;
+    background: rgba(245, 245, 220, 0.65);
+}
+.oneAction .actionEdit{
+    float: left;
+    font-size: 14px;
+}
+.oneAction .actionImage{
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+.oneAction .actionDelete{
+    float: right;
+    font-size: 14px;
+}
+.actionText{
+    font-size: 14px;
+    color: #6D6D6D;
+    padding-bottom: 15px;
+}

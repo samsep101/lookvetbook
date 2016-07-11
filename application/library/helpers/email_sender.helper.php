@@ -166,7 +166,7 @@ EOD;
     $message .= "\n\n";
 
     $headers = "Content-type: text/html; charset=utf-8 \r\n";
-    $headers .= "From: lookmedbook.ru <no-reply@lookmedbook.ru>\r\n";
+    $headers .= "From: ".SITE_DOMAIN." <no-reply@".SITE_DOMAIN.">\r\n";
 
 
     mail($to, $subject, $message, $headers);

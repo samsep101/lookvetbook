@@ -335,7 +335,6 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
       } else {
         $result_query->setSize($size);
       }
-//echo '!'.$criteria->page.'!'.$criteria->by_page.'!'.$size.'!!!!';
       $result_query->setFrom(($criteria->page - 1) * $criteria->by_page);
     } else {
       $result_query->setSize(10000);

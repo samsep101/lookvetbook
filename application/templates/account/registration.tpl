@@ -2,7 +2,7 @@
     window.validation_span = true;
 </script>
 <div id="registration-popup" class="reg-popup">
-    <img class="logo" src="/media/images/main_logo.png" alt="">
+    <img class="logo" src="/media/images/<?=CSS_DIR?>/main_logo.png" alt="">
 
     <p class="intro">Уже зарегистрированы? <a class="reg-link" id="login-popup-link" href="#authorization-popup">Войти</a></p>
 

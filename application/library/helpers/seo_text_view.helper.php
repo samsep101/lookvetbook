@@ -195,7 +195,7 @@
             }
             else
             {
-                $text = 'Найти врача ' . $specialty->genitive_name . ' ' . self::getAddressObjectNamePagesForTop($address_object) . ' онлайн';
+                $text = 'Найти '.DOCTORA.' ' . $specialty->genitive_name . ' ' . self::getAddressObjectNamePagesForTop($address_object) . ' онлайн';
             }
 
             return $text;

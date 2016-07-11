@@ -6,7 +6,7 @@
 
 			if(!$specialty_to_specialization->specialty || !$specialty_to_specialization->specialization)
 			{
-				$this->error_messages[] = 'Обязательно должны быть указаны как специализация, так и область медицины';
+				$this->error_messages[] = 'Обязательно должны быть указаны как специализация, так и область '.MEDICYNY;
 				return false;
 			}
 
@@ -20,7 +20,7 @@
 				// если пытаемся добавить вторую основную специализацию  к области медицины
 				if($main_specialty && ($main_specialty->getId() != $specialty_to_specialization->specialty_id))
 				{
-					$this->error_messages[] = 'У данной области медицины уже имеется основная специализация: ' . $main_specialty->name;
+					$this->error_messages[] = 'У данной области '.MEDICYNY.' уже имеется основная специализация: ' . $main_specialty->name;
 					return false;
 				}
 

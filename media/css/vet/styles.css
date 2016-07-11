@@ -1306,7 +1306,7 @@ h2 {
 
 .content .search-form .sel-box {
     margin-bottom : 5px;
-    height        : 34px;
+    height        : auto;
 }
 
 .content .search-form .section {
@@ -1534,7 +1534,6 @@ h2 {
 .content .left_search .search-form .choose-section-2 {
     padding-top : 0;
     display     : block !important;
-    float       : left;
     margin      : 0;
 }
 
@@ -1634,13 +1633,13 @@ h2 {
 
 .content .left_search .search-form .search-by-name {
     margin-top : 0;
-    width      : 185px;
+    width: 100% !important;
     height     : 38px;
 }
 
-.search-form .search-by-name .show_input, .search-form .search-by-name .show_inp {
+/*.search-form .search-by-name .show_input, .search-form .search-by-name .show_inp {
     display : none;
-}
+}*/
 
 .content .left_search .search-form .choose-section .choose-list {
     margin-bottom : 0;
@@ -1665,7 +1664,7 @@ h2 {
 }
 
 .content .left_search .search-form .tabs li.active {
-    background : #FFFFFF;
+    background : #f2cc91;
     color      : #f48221;
     width      : 50%;
     box-shadow : 0 -2px 3px rgba(0, 0, 0, 0.3);
@@ -1679,6 +1678,7 @@ h2 {
     padding : 10px 0 0 0;
     height  : 28px;
     z-index : 1;
+    font-size: 17px;
 }
 
 .content .soon-services {
@@ -9733,4 +9733,8 @@ header .nav-table td.treatment-in-switz, header .nav-table td.lekarstva, .banner
 .adv_text_bf_search_result{
     font-size: 20px;
     margin-bottom: 13px;
+}
+.deseaseRow .list-item {
+    float: left;
+    width: 230px;
 }

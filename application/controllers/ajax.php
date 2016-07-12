@@ -832,7 +832,7 @@ class AjaxController extends BaseController
 
     $visit_recorder = new VisitRecorder();
     $status = $visit_recorder->record($visit_information, $visit_id);
-    $mail_data['visit_id'] = $visit_recorder->getVisit()->getId();
+    $visit_id = $mail_data['visit_id'] = $visit_recorder->getVisit()->getId();
       $mail_data['after_work'] = $after_work;
       $mail_data['disease'] = $disease_id ? (new DiseaseManager())->getOneById($disease_id) : false;
       $mail_data['clinic'] = $clinic_id ? (new ClinicManager())->getOneById($clinic_id) : false;
@@ -887,7 +887,7 @@ class AjaxController extends BaseController
     }
 
     if ($status == 0) {
-      JsonResponse::result(true);
+      JsonResponse::result(true, $visit_id);
     } else {
       JsonResponse::error($status);
     }

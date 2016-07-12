@@ -112,6 +112,54 @@ class VisitManager extends ModelWAccountidManager
 
   public function afterSave(VisitModel $model)
   {
+
+    if ($model->status_id == VisitModel::VISITED){
+        $client = new GuzzleHttp\Client();
+
+        try {
+            $client->post('http://mixmarket.biz/uni/gate.php?cid=1294937485&hash1=f4ebda7792edc5ce0b536db1e0f13a16&pass_=sxfTWjBzuo&e=send', [
+                'multipart' => [
+                    [
+                        'msg' => 'field_name',
+                        'contents' => '<?xml version="1.0" encoding="windows-1251"?>
+	<uni version="1.0">
+		<condition id="1294937485">
+			<object><id>' . $model->id . '</id></object>			
+		</condition>
+	</uni>
+'
+                    ]
+                ]]);
+        }catch (Exception $exp){
+
+        }
+    }
+
+    if ($model->status_id == VisitModel::CANCELLED){
+        $client = new GuzzleHttp\Client();
+
+        try {
+            $client->post('http://mixmarket.biz/uni/gate.php?cid=1294937484&hash1=ac4455c2f1a26fe1adc40ed0ede4c6b2&pass_=sxfTWjBzuo&e=send', [
+                'multipart' => [
+                    [
+                        'msg' => 'field_name',
+                        'contents' => '<?xml version="1.0" encoding="windows-1251"?>
+	<uni version="1.0">
+		<condition id="1294937484">
+			<object><id>' . $model->id . '</id></object>			
+		</condition>
+	</uni>
+'
+                    ]
+                ]]);
+        }catch (Exception $exp){
+
+        }
+    }
+
+
+
+
     /*
     if ($model->doctor_id && $model->status_id == VisitModel::VISITED)
     {

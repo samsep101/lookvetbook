@@ -2,7 +2,7 @@
     <?php foreach($actions as $e):?>
     <?php if ($e->name){ ?>
 	<div align="center">
-        <div class="oneAction"  style="width: 600px; margin-left: 34px;height: 160px;">
+        <div class="oneAction"  style="width: 600px; margin-left: 193px;height: 160px;">
             <div class="actionImage">
                 <div class="actionName" style="width: 600px"><a href="<?=$e->getLink()?>"><?=$e->name?></a></div>
 				<?php if ($e->get_image_full_width()){?>

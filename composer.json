@@ -11,6 +11,7 @@
   ],
   "require": {
     "neeckeloo/closure-compiler-php": "dev-master",
+    "guzzlehttp/guzzle": "*",
     "robmorgan/phinx": "v0.5.3"
   }
 }

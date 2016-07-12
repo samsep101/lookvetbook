@@ -7,7 +7,7 @@
 				<div class="actionsList content">
                     <?php if ($action->get_image_full_width()){?>
 					<div style="text-align:center;">
-                        <img src="<?=$action->get_image_full_width()->crop(600, 200)->path?>" width="600" height="200">
+                        <img src="<?=$action->get_image_full_width()->crop(600, 120)->path?>" width="600" height="120">
 					</div>
                     <?php } ?>
 			        <div class="actionText section">

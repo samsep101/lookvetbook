@@ -5,7 +5,6 @@
             <?php $this->block('disease/blocks/adv_left_side'); ?>
             <a class="actionLink" href="/action">Акции и спецпредложения</a><div class="desease-phone"><a href="tel:+7(<?=SITE_PHONE_CODE?>)<?=SITE_PHONE?>">Мы найдём Вам врача +7 (<?php echo SITE_PHONE_CODE; ?>) <?php echo SITE_PHONE; ?></a></div>
 			<div class="main-cont flo">
-				
 				<div class="illness-header flo">
 					<h1 id="disease-title" data-id="<?php echo $disease->id; ?>" data-title="<?php echo $disease->title; ?>"><?php echo $disease->title; ?></h1>
 					<?php if (Acc::isAuthed()) { ?>
@@ -17,6 +16,28 @@
 						</p>
 					<?php } ?>
 				</div>
+
+				<ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+					<li itemprop="itemListElement" itemscope
+						itemtype="http://schema.org/ListItem">
+						<a itemprop="item" href="/">
+							<span itemprop="name">Главная</span></a> -&nbsp;
+						<meta itemprop="position" content="1" />
+					</li>
+					<li itemprop="itemListElement" itemscope
+						itemtype="http://schema.org/ListItem">
+						<a itemprop="item" href="/disease">
+							<span itemprop="name">Заболевания</span></a> -&nbsp;
+						<meta itemprop="position" content="2" />
+					</li>
+					<li itemprop="itemListElement" itemscope
+						itemtype="http://schema.org/ListItem">
+                    <span itemprop="item">
+                        <span itemprop="name"><?=$disease->title?></span></span>
+						<meta itemprop="position" content="3" />
+					</li>
+				</ol>
+
 				<div class="illness-description">
 					<?php $disease->content = preg_replace('/<br \/>/','',$disease->content);?>
 					<?php $disease->content = preg_replace('/<br\/>/','',$disease->content);?>

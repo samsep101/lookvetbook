@@ -18,6 +18,22 @@
             </form>
         </div>
         <div class="ilness-list flo">
+            <ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+                <li itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Главная</span></a> -&nbsp;
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="item">
+                        <span itemprop="name">Заболевания</span></span>
+                    <meta itemprop="position" content="2" />
+                </li>
+            </ol>
+
+
             <?php if (isset($_GET['disease_query'])):?>
             <div class="illness-catalog-error">По запросу мы не нашли заболевания. Уточни название в каталоге.</div>
             <?php endif?>

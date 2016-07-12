@@ -168,3 +168,12 @@
 .cab-cont .chzn-container-single .chzn-single div b {background:url(/media/images/select_bg-big.png) no-repeat 0 -58px;}
 .cab-cont .chzn-container-single .chzn-single div {width:33px;}
 .cab-cont .chzn-container .chzn-drop {top:55px !important;}
+
+.breadcrumb {
+  list-style: none;
+  overflow: hidden;
+  font: 18px Helvetica, Arial, Sans-Serif;
+}
+.breadcrumb li {
+  float: left;
+}

@@ -38,7 +38,28 @@
 		<?php if (SiteUriHelper::refererFromClinicPage()): ?>
 			<a class="back-to-search-link" href="<?php echo $_SERVER['HTTP_REFERER']; ?>">&larr; Назад к результатам поиска</a>
 		<?php endif; ?>
-
+		<ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+			<li itemprop="itemListElement" itemscope
+				itemtype="http://schema.org/ListItem">
+				&nbsp;
+				&nbsp;
+				<a itemprop="item" href="/">
+					<span itemprop="name">Главная</span></a> -&nbsp;
+				<meta itemprop="position" content="1" />
+			</li>
+			<li itemprop="itemListElement" itemscope
+				itemtype="http://schema.org/ListItem">
+				<a itemprop="item" href="/clinic">
+					<span itemprop="name">Клиники</span></a> -&nbsp;
+				<meta itemprop="position" content="2" />
+			</li>
+			<li itemprop="itemListElement" itemscope
+				itemtype="http://schema.org/ListItem">
+                    <span itemprop="item">
+                    <span itemprop="name"><?=$clinic->name?></span></span>
+				<meta itemprop="position" content="3" />
+			</li>
+		</ol>
 
 		<div class="clinic-landing" itemscope itemtype="http://schema.org/Organization">
 			<meta itemprop="url" content="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>">

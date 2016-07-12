@@ -426,6 +426,7 @@
 <!-- {/literal} END JIVOSITE CODE -->
 */?>
 <?php $this->block('blocks/record_form_container'); ?>
+<?php $this->block('blocks/learn_form_container'); ?>
 </body>
 </html>
 

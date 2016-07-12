@@ -1,5 +1,6 @@
 <div class="actionsList">
     <?php foreach($actions as $e):?>
+    <?php if ($e->name){ ?>
 	<div align="center">
         <div class="oneAction" style="width: 600px; margin-left: 34px;">
             <div class="actionImage">
@@ -11,5 +12,6 @@
             <!-- <div class="actionText"><?=$e->info?></div> -->
         </div>
 	</div>
+    <?php } ?>
     <?php endforeach; ?>
 </div>

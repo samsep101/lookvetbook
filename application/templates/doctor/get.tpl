@@ -37,10 +37,35 @@
 
 <?php $this->doctor_page = 1; ?>
 <?php $this->block('blocks/top_number'); ?>
-
 <div class="inner flo refactor-content-styles <?php echo (isset($is_red) && $is_red == 1) ? 'red' : ''; ?>" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="url" content="<?php echo DoctorPageLinkViewHelper::getLink($doctor); ?>">
         <div class="doctor-landing doctor-card-<?php echo $doctor->getId(); ?>">
+            <br>
+            <br>
+
+            <ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+                <li itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    &nbsp;
+                    &nbsp;
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Главная</span></a> -&nbsp;
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/doctor">
+                        <span itemprop="name">Врачи</span></a> -&nbsp;
+                    <meta itemprop="position" content="2" />
+                </li>
+                <li itemprop="itemListElement" itemscope
+                    itemtype="http://schema.org/ListItem">
+                    <span itemprop="item">
+                    <span itemprop="name"><?=$doctor->full_name?></span></span>
+                    <meta itemprop="position" content="3" />
+                </li>
+            </ol>
+
             <div class="doc-info-col">
                 <div class="connected-carousels">
                     <div class="stage">

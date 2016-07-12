@@ -1,9 +1,9 @@
 <?php
     class JsonResponse
     {
-        public static function result($data = true)
+        public static function result($data = true, $visit_id = 0)
         {
-            echo json_encode(array('status' => 0, 'result' => $data));
+            echo json_encode(array('status' => 0, 'result' => $data, 'visit_id' => $visit_id));
             $profiler = Profiler::getInstance();
             $profiler->stopTime('page');
             $profiler->logdata();

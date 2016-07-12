@@ -60,6 +60,19 @@ if (isset($_REQUEST['admitad_uid'])){
       '.' . SITE_DOMAIN
   );
 }
+if (isset($_REQUEST['utm_campaign']) && $_REQUEST['utm_campaign'] == 'mixuni'){
+  setcookie(
+      'utm_campaign',
+      $_REQUEST['utm_campaign'],
+      time() + 60 * 60 * 24 * 30, // 30 days
+      '/',
+      '.' . SITE_DOMAIN
+  );
+}
+
+
+
+
 
 Register::add('db', new Db());
 Register::add('utils', new Utils());

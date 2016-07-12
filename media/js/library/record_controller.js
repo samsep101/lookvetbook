@@ -65,6 +65,15 @@ function recordComplete(){
         
         if ($.cookie('admitad_uid'))
             admitad_submit(document, window, $.cookie('admitad_uid'));
+        
+        if ($.cookie('utm_campaign') == 'mixuni'){
+            alert(data['visit_id']);
+            mixmarket_submit(data['visit_id']);
+        }
+
+        
+        
+        
     }else{
         $('.recordFormFail').show();
     }
@@ -94,6 +103,11 @@ function admitad_submit(d, w, uid) {
     s.src = protocol + '//cdn.asbmit.com/static/js/pixel.min.js?r=' + r;
     d.head.appendChild(s);
 };
+
+function mixmarket_submit(visit_id)
+{
+    $('body').append('<img src="http://mixmarket.biz/uni/tev.php?id=1294937486&r='+escape(document.referrer)+'&t='+(new Date()).getTime()+'&a1='+visit_id+'&a2='+0+'" width="1" height="1"/>');
+}
 
 
 $( document ).ready(function() {

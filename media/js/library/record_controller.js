@@ -50,8 +50,9 @@ var RecordController = function ()
         _form.find('.datepicker').removeClass('hasDatepicker');
         _form.find('.datepicker').attr('id','');
         LinkMapper_remap();
-        $( ".datepicker" ).datepicker();
 
+        $( ".datepicker" ).datepicker();
+        $(".inputPhone").mask("+7 (999) 999-99-99");
     }
 }
 

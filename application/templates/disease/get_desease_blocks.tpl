@@ -10,6 +10,9 @@
                                 </li>
 							<?php } ?>
 						<?php } ?>
+						<li data-tab-name="actions" class="tab-people tab-actions">
+							<a href="/action" id="">Акции</a>
+						</li>
 					</ul>
 				</div>
 				<div id="MyBigAjaxElement"></div>

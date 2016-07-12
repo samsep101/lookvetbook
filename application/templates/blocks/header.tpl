@@ -46,6 +46,9 @@
                         <td class="treatment-in-switz">
                             <a class="" href="http://swiss.lookmedbook.ru/">Лечение в Швейцарии</a>
                         </td>
+						<td class="treatment-in-switz">
+                            <a class="" href="/action">Акции</a>
+                        </td>
                         <?php if(defined('SHOP_ENABLE') && SHOP_ENABLE) { ?>
                             <td class="lekarstva">
                                 <a class="<?php echo (isset($menu_active) && $menu_active == 'shop') ? 'active' : ''; ?> shop-link" href="<?php if($city && $city->isUsed()) { echo '/shop/catalog';} else echo SITE_URL.'/shop/catalog'; ?> ">Лекарства<span class="n_goods"></span></a><span class="n_goods"></span>

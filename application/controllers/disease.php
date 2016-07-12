@@ -159,6 +159,7 @@ class DiseaseController extends BaseController
     $dis_param = $this->request('dis');
     $this->view->disease_green_btn = ($dis_param && $dis_param == 'new3') ? 1 : 0;
     $this->view->actions = (new ActionManager())->getListForDisease($disease->getId());
+	$this->view->actions = array($this->view->actions[array_rand($this->view->actions)]);
 
 
       if (in_array($disease->alias,['pnevmoniya'])){

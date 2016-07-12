@@ -272,6 +272,7 @@
 
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?><?php echo strtolower(SITE_URL);?>/disease<?php } ?>">Заболевания</a>
                         <a class="" href="http://swiss.lookmedbook.ru/">Лечение в Швейцарии</a>
+						<a class="" href="/action">Акции</a>
 
                     <?php /*if($city->is_has_laboratories) { ?>
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'analysis') ? 'active' : ''; ?> analysis-link" href="/analysis">Анализы</a>
@@ -284,7 +285,7 @@
 
             <div class="sp-links right-links">
                 <a class="a-dashed popup_city" href="javascript:void(0);"><?php echo $city->name; ?></a>
-                <span class="phone"><small>(<?php echo SITE_PHONE_CODE; ?>)</small> <?php echo SITE_PHONE; ?> <span class="flo"></span><span class="calltime">с 09 до 21</span></span>
+                <span class="phone"><small>(<?php echo SITE_PHONE_CODE; ?>)</small> <a href="tel:+7(495)215-09-07"><?php echo SITE_PHONE; ?></a> <span class="flo"></span><span class="calltime">с 09 до 21</span></span>
                 <a class="a-dashed" href="javascript:void(0);"><small class="order-call">Заказать звонок</small>
                     <div class="form-call form-call-step-1">
                         <p class="h-txt">Заказать звонок</p>

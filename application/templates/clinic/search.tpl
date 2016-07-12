@@ -85,6 +85,22 @@
 -->
 
 <div class="search-count-block clinic-search <?php echo (isset($is_red) && $is_red) ? 'red' : ''; ?>">
+    <ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+        <li itemprop="itemListElement" itemscope
+            itemtype="http://schema.org/ListItem">
+            &nbsp;
+            &nbsp;
+            <a itemprop="item" href="/">
+                <span itemprop="name">Главная</span></a> -&nbsp;
+            <meta itemprop="position" content="1" />
+        </li>
+        <li itemprop="itemListElement" itemscope
+            itemtype="http://schema.org/ListItem">
+            <span itemprop="item" href="/doctor">
+                <span itemprop="name">Клиники</span></span>
+            <meta itemprop="position" content="2" />
+        </li>
+    </ol>
     <p class="count">
         Мы нашли для Вас <span class="count-digit"></span> <span class="count-doctor"></span> <span class="specialty-label">по специализации <span class="count-specialty"></span></span>
     </p>

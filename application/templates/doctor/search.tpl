@@ -52,9 +52,7 @@
     $this->doctors_page = 1;
     $this->is_seo_page = $is_seo_page;
 ?>
-<?php $this->block('blocks/top_number'); ?>
 <div class="inner-2 flo" style="position: relative;">
-
     <?php $this->block('doctor/blocks/search-form-refactor'); ?>
     <div class="map-box refactor <?php echo (isset($is_red) && $is_red) ? 'red' : ''; ?>">
         <div id="map"></div>
@@ -73,8 +71,23 @@
         </div>
     </div>
 </div>
-
 <div class="search-count-block <?php echo (isset($is_red) && $is_red) ? 'red' : ''; ?>">
+    <ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+        <li itemprop="itemListElement" itemscope
+            itemtype="http://schema.org/ListItem">
+            &nbsp;
+            &nbsp;
+            <a itemprop="item" href="/">
+                <span itemprop="name">Главная</span></a> -&nbsp;
+            <meta itemprop="position" content="1" />
+        </li>
+        <li itemprop="itemListElement" itemscope
+            itemtype="http://schema.org/ListItem">
+            <span itemprop="item" href="/doctor">
+                <span itemprop="name">Врачи</span></span>
+            <meta itemprop="position" content="2" />
+        </li>
+    </ol>
     <p class="count">
         Мы нашли для Вас <span class="count-digit"></span> <span class="count-doctor"></span> <span class="count-specialty"></span>
     </p>

@@ -51,6 +51,7 @@ function click_on_doctor_record_button($this, doc_id) {
                 Записаться на прием сейчас
             </span>
         </a>
+	<?php /* <a style="width: 193px" href="javascript:void(0)" class="btn-bookmarkt btn-bookmark doctor_bookmark doctor_bookmark<?php echo $doctor->getId(); ?>"><i class="icon-add"></i><span class="txt" style="    margin-top: 6px;    display: inline-block;}">Добавить в закладки</span></a> */ ?>
     <?php } else { ?>
         <a class="btn-appoint" href="#record-to-the-doctor-popup-<?php echo $doctor->getId(); ?>" onclick="recordController.showForm(<?php echo $doctor->getId(); ?>,0,0)">Записаться</a>
     <?php } ?>

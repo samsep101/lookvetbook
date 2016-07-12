@@ -14,6 +14,6 @@
             <!-- <div class="actionText"><?=$e->info?></div> -->
         </div>
 	</div>
-	<?php } ?>
+    <?php } ?>
     <?php endforeach; ?>
 </div>

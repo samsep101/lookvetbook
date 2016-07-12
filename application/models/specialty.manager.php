@@ -531,6 +531,14 @@
 
             $data = $this->db->query($sql);
 
+            if (count($data) == 0){
+                $sql = 'SELECT *, 1 as is_adult, 1 as is_male, 1 as is_female, 1 as is_children, 1 as is_newborn, 1 as is_pregnant
+                    FROM specialty s                    
+                    WHERE s.id = 29';
+
+                $data = $this->db->query($sql);
+            }
+
             return count($data) ? $this->initList($data) : array();
         }
 

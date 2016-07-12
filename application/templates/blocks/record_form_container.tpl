@@ -1,8 +1,8 @@
 <!-- record default form ------>
 <script type="text/javascript">
     $( document ).ready(function() {
-        $("#datepicker").datepicker();
-        $("#inputPhone").mask("+7 (999) 999-99-99");
+        $(".datepicker").datepicker();
+        $(".inputPhone").mask("+7 (999) 999-99-99");
     });
 </script>
 <div id="record_form_container" style="display:none">
@@ -43,7 +43,7 @@
                     Ваш телефон:
                 </div>
                 <div class="shadow-input">
-                    <input type="text" id="inputPhone" name="phone" placeholder="+7 (___) ___-__-__">
+                    <input type="text" id="inputPhone" class="inputPhone" name="phone" placeholder="+7 (___) ___-__-__">
                 </div>
             </div>
             <div class="row flo m-b-10">

@@ -13,10 +13,17 @@
 			        <div class="actionText section">
 			        	<?=$action->info?>
 						<div style="text-align:center;">
+		                    <div style="float: left; width: 250px">
+                                <a class="btn-double-floor" href="#" onclick="learnController.showForm(0,0,0)">
+                                    <span style="padding:10px 20px" class="just-text">Узнать подробности</span>
+                                </a>
+                            </div>
+                            <div style="float: left;  font-size: 20px;  width: 547px;  margin-top: 11px;">
+                                <a style="color: #000;" href="tel:+7(495)215-09-07">Или позвоните нам и мы все расскажем +7 (495) 215-09-07</a>
+                            </div>
 		                    <br>
-							<a class="btn-double-floor" href="#" onclick="learnController.showForm(0,0,0)">
-								<span style="padding:10px 20px" class="just-text">Узнать подробности</span>
-		                    </a>
+		                    <br>
+		                    <br>
 		                    <br>
 						</div>
 					</div>

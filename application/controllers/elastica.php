@@ -184,6 +184,12 @@ class ElasticaController extends BaseController
     $disease_index_command->reIndexAll();
   }
 
+  public function reindexProducts()
+  {
+    $product_index_command = new ProductIndexCommand();
+    $product_index_command->reIndexAll();
+  }
+
   public function reindexClinics()
   {
     ini_set('memory_limit', '512M');

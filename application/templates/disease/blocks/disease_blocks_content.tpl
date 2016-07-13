@@ -62,9 +62,9 @@
     <div class="section" id="<?php echo $field_anchor; ?>">
         <h2>
             <?php if ($block->disease_block_type_id == 1 || $block->disease_block_type_id == 6 || $block->disease_block_type_id == 8): ?>
-                <?php echo $block->disease_block_type->name . ' ' . $disease->genitive_name; ?><?= $block->disease_block_type_id ?>
+                <?php echo $block->disease_block_type->name . ' ' . $disease->genitive_name; ?>
             <?php else: ?>
-                <?php echo $block->disease_block_type->name; ?><?= $block->disease_block_type_id ?>
+                <?php echo $block->disease_block_type->name; ?>
             <?php endif; ?>
         </h2>
         <div class="like_p">
@@ -141,9 +141,9 @@
         <?php } ?>
 
     <?php */ ?>
-    <?php if ($block->disease_block_type_id == 3): ?>
+    <?php /* if ($block->disease_block_type_id == 3): ?>
         <div class="section">
             <?php $this->block('disease/blocks/adv_after_reason_block'); ?>
         </div>
-    <?php endif; ?>
+    <?php endif; */?>
 <?php endforeach?>

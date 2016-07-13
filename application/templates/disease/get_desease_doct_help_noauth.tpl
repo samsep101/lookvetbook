@@ -3,7 +3,7 @@
 	<?php } ?>
 	поможет при лечении заболевания
 </p>
-<video src="<?=$video_file_path?>" width="160" height="160" poster="<?=$video_thumb_path?>" controls="" autoplay="autoplay"></video>
+<video src="<?=$video_file_path?>" width="160" height="160" poster="<?=$video_thumb_path?>" controls=""></video>
 <?php foreach ($disease_specialties as $specialty) { ?>
 	<a class="btn-double-floor des-page disease-doctor
 	<?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?>

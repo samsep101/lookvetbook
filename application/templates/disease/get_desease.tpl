@@ -88,7 +88,7 @@
 
 		<div class="side-column" <?php /* ?>data-spy="affix" data-offset-top="100"<?php */ ?>>
 			<?php if ($disease_specialties) { ?>
-				<div class="info-box doing-box what-to-do">
+				<div class="info-box doing-box what-to-do" style="position: fixed; z-index: 10000;width: 272px;">
 					<h3>Что делать при <span><?php echo trim($disease->prepositional_name);?>?
 						</span></h3>
 					<ol class="todo-list">
@@ -101,6 +101,7 @@
 						</li>
 					</ol>
 				</div>
+                <div style="height: 306px">&nbsp;</div>
 			<?php } ?>
 
 			<?php if ($disease->medicine) { ?>

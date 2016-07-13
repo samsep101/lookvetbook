@@ -44,7 +44,7 @@
                             </td>
                         <?php } ?>
                         <td class="treatment-in-switz">
-                            <a class="" href="http://swiss.lookmedbook.ru/">Лечение в Швейцарии</a>
+                            <a class="" href="/shop/catalog">Лекарства</a>
                         </td>
 						<td class="treatment-in-switz">
                             <a class="" href="/action">Акции</a>

@@ -6847,7 +6847,7 @@ a.btn-double-floor {
     box-sizing: border-box;
 }
 .oneAction .actionName{
-    position: absolute;
+    position: static;
     width: 100%!important;
     font-size: 16px;
     line-height: 20px;
@@ -6880,7 +6880,13 @@ a.btn-double-floor {
 .actionLink{
     display: inline-block;
     line-height: 1em;
-    font-family: 'pf_agora_slab_prolight';
+    font-family: 'pf_agora_slab_probold';
     font-size: 14px;
-    padding-left: 80px;
+    padding: 9px 15px 11px 15px;
+    margin-right: 8px;
+    background: rgb(252, 110, 111);
+    color: #fff!important;
+    text-decoration: none!important;
+    text-align: right;
+    border-radius: 15px 15px 0 0;
 }

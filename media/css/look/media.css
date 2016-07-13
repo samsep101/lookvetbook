@@ -1043,6 +1043,21 @@
         font-size: 17px;
         text-align: center!important;
     }
+    .actionLink{
+        width: 100%;
+        border-raDius: 15px;
+        text-align:center;
+        margin: 10px 0;
+    }
+    .oneAction{
+        width: 100%!important;
+        height: auto!important;
+        margin: 0!important;
+    }
+    .oneAction .actionImage img{
+        width: 100%;
+        height: auto
+    }
     .info-card .schedule-extended .day{
         height: 60px;
         padding: 5px 0 0 5px;

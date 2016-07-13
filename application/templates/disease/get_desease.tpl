@@ -3,7 +3,10 @@
 	<div class="about-ilness-content flo">
 		<div class="main-column">
             <?php $this->block('disease/blocks/adv_left_side'); ?>
-            <a class="actionLink" href="/action">Акции и спецпредложения</a><div class="desease-phone"><a href="tel:+7(<?=SITE_PHONE_CODE?>)<?=SITE_PHONE?>">Мы найдём Вам врача +7 (<?php echo SITE_PHONE_CODE; ?>) <?php echo SITE_PHONE; ?></a></div>
+            <div class="desease-phone">
+	            <a class="actionLink" href="/action">Акции и спецпредложения</a>
+	            <a href="tel:+7(<?=SITE_PHONE_CODE?>)<?=SITE_PHONE?>">Мы найдём Вам врача +7 (<?php echo SITE_PHONE_CODE; ?>) <?php echo SITE_PHONE; ?></a>
+            </div>
 			<div class="main-cont flo">
 				<div class="illness-header flo">
 					<h1 id="disease-title" data-id="<?php echo $disease->id; ?>" data-title="<?php echo $disease->title; ?>"><?php echo $disease->title; ?></h1>

@@ -771,13 +771,6 @@ class AjaxController extends BaseController
 
   public function recordToTheVisit()
   {
-      /**TODO
-       *
-       * change letter contents
-       */
-
-
-      
     $mail_data = [];
     $schedule_id = $this->request->request('schedule_id');
     $doctor_id = $this->request->request('doctor_id');
@@ -833,10 +826,12 @@ class AjaxController extends BaseController
     $visit_recorder = new VisitRecorder();
     $status = $visit_recorder->record($visit_information, $visit_id);
     $visit_id = $mail_data['visit_id'] = $visit_recorder->getVisit()->getId();
+
       $mail_data['after_work'] = $after_work;
+      $mail_data['schedule_date'] = $visit_start_time;
       $mail_data['disease'] = $disease_id ? (new DiseaseManager())->getOneById($disease_id) : false;
       $mail_data['clinic'] = $clinic_id ? (new ClinicManager())->getOneById($clinic_id) : false;
-
+      $mail_data['doctor'] = $doctor_id ? (new DoctorManager())->getOneById($doctor_id) : false;
 
       $mail_sender = new EmailSenderHelper();
       $mail_sender->sendRecordInformation($mail_data);

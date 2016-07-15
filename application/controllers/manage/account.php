@@ -72,6 +72,21 @@ class AccountManageController extends BaseController
     $this->view->search_line = $search_line;
   }
 
+    public function callup()
+    {
+        $acc_id = $this->request('id');
+        $account_manager = new AccountManager();
+        if($acc_id && $account = $account_manager->getOneById($acc_id)){
+
+            $account->last_succes_callup = date('Y-m-d H:i:s');
+            $account->save();
+            die('Данные обновлены');
+
+        }else{
+            throw new Exception('no user found');
+        }
+    }
+
   public function create()
   {
     $this->edit();
@@ -91,6 +106,8 @@ class AccountManageController extends BaseController
       $account = new stdClass();
     }
 
+//    pr($account->last_succes_callup, 1);
+
     foreach($this->requestFieldList as $field) {
       $fld_val = @$account->$field;
       $this->view->$field = empty($fld_val)?'':$fld_val;
@@ -103,6 +120,7 @@ class AccountManageController extends BaseController
     require($_SERVER['DOCUMENT_ROOT'].'/application/config/cms_generator_configs/visit.cfg.php');
     $visit_conf = ['status_id'=>$visit['fields']['status_id']['values']];
     $this->view->visit_conf = $visit_conf;
+    $this->view->last_succes_callup = $account->last_succes_callup;
 
 
     $visitManager = new VisitManager();
@@ -178,9 +196,6 @@ class AccountManageController extends BaseController
 
     $this->view->appeal_fields = $appeal_list_fld;
     $this->view->appeals = $appeals;
-
-
-
   }
 
   public function ajaxEditAccount()

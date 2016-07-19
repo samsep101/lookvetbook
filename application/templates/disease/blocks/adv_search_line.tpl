@@ -31,6 +31,17 @@
 </div>
 <br clear="all">
 <?php }  ?>
+<?php if (isset($line_num) && $line_num == 0){ ?>
+<div align="center">
+	<a href="/action"><img src="/media/images/actions728x90.jpg"></a>
+</div>
+<?php }  ?>
+<?php if (isset($line_num) && $line_num == 2){ ?>
+<div align="center">
+	<a href="/action"><img src="/media/images/actions728x90.jpg"></a>
+</div>
+<?php }  ?>
+
 <?php if (isset($line_num) && $line_num == -1){ ?>
 <br clear="all">
 <div>

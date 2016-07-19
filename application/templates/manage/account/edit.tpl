@@ -138,6 +138,14 @@
                 &nbsp;
                 <label class="label-for-checkbox" for="is_product_admin_checkbox">Да/нет</label></td>
         </tr>
+        <tr>
+            <td >Прозвон:</td>
+            <td>
+                <?=$last_succes_callup?>
+                <a href="/manage/account/callup?id=<?=$id?>" class="linkMapper" rel="#callupresult">прозвон успешен</a>
+                <div id="callupresult"></div>
+            </td>
+        </tr>
 
         <tr>
             <td colspan="2"> <input type="submit" name="save" value="Сохранить" /></td>

@@ -139,7 +139,21 @@ EOD;
 
 
         $message = 'Пациент '.$info['full_name'].': '.$info['phone']."\r\n\r\n";
-        $message = 'Пациент '.$info['full_name'].': '.$info['phone']."\r\n\r\n";
+
+        if ($info['schedule_date'])
+            $message .= 'Запись на: '.$info['schedule_date'].' '.($info['after_work'] ? 'после работы' : '').PHP_EOL;
+
+        if ($info['doctor'])
+            $message .= 'Доктор: '.$info['doctor']->full_lower_name.PHP_EOL;
+
+        if ($info['clinic'])
+            $message .= 'Клиника: '.$info['clinic']->name.PHP_EOL;
+
+        if ($info['disease'])
+            $message .= 'Заболевание: '.$info['disease']->title.PHP_EOL;
+
+
+
         $headers = "Content-type: text/html; charset=utf-8 \r\n";
         $headers .= "From: lookmedbook.ru <no-reply@lookmedbook.ru>\r\n";
 

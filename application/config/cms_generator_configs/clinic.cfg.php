@@ -7,6 +7,7 @@
 		'fields'	=> array(
 			'id'					  => 'index',
 			'name'					=> 'input',
+			'direct_phone'					=> 'input',
 			'alias'				   => 'input',
 			'about'				   => array(
 				'type'  => 'text',
@@ -232,6 +233,7 @@
 			'fields' => array(
 				'id'					  => 'ID',
 				'name'					=> 'Название',
+				'direct_phone'					=> 'Прямой телефон',
                 'primary_clinic_id' => 'Основная клиника',
 				'alias'				   => 'Алиас',
 				'original_alias'    => 'Оригинальный алиас',
@@ -358,6 +360,7 @@ HTML
 				'fields'  => array(
 					'Информация'			=> array(
 						'name',
+						'direct_phone',
 						'primary_clinic_id',
 						'alias',
 						'original_alias',
@@ -431,6 +434,7 @@ HTML
 				'fields'  => array(
 					'Информация'			=> array(
 						'name',
+						'direct_phone',
 						'primary_clinic_id',
 						'alias',
 						'original_alias',

@@ -73,6 +73,7 @@
      * @property ImageModel                                         $image
      * @property string                                             $fio
      * @property string                                             $phone
+     * @property string                                             $direct_phone
      * @property string                                             $email
      * @property string                                             $site
      * @property int                                                $postcode

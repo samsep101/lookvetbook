@@ -314,6 +314,23 @@
 						'desc'  => 'ASC'
 					),
 				),
+                'filters' => array(
+                    'use_class_params' => 'ClinicSearchCriteria',
+                    'filters' => array(
+                        'Название' => array(
+                            'name' => array(
+                                'type' => 'input',
+                                'title' => ''
+                            ),
+                        ),
+                        'Алиас' => array(
+                            'alias' => array(
+                                'type' => 'input',
+                                'title' => ''
+                            ),
+                        )
+                    )
+                ),
 				'additionalHTML' => <<<HTML
 					<script type="application/javascript">
 						$(function() {

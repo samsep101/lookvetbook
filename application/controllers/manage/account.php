@@ -3,7 +3,8 @@
 class AccountManageController extends BaseController
 {
   private $requestFieldList = ['first_name', 'middle_name', 'last_name', 'phone', 'email', 'id',
-    'nick', 'password', 'is_confirmed', 'is_system_access', 'is_call_centre_operator', 'is_product_admin'];
+    'nick', 'password', 'is_confirmed', 'is_system_access', 'is_call_centre_operator', 'is_product_admin',
+    'last_succes_callup'];
 
   public function __construct()
   {
@@ -72,20 +73,20 @@ class AccountManageController extends BaseController
     $this->view->search_line = $search_line;
   }
 
-    public function callup()
-    {
-        $acc_id = $this->request('id');
-        $account_manager = new AccountManager();
-        if($acc_id && $account = $account_manager->getOneById($acc_id)){
+  public function callup()
+  {
+    $acc_id = $this->request('id');
+    $account_manager = new AccountManager();
+    if($acc_id && $account = $account_manager->getOneById($acc_id)){
 
-            $account->last_succes_callup = date('Y-m-d H:i:s');
-            $account->save();
-            die('Данные обновлены');
+      $account->last_succes_callup = date('Y-m-d H:i:s');
+      $account->save();
+      die('Данные обновлены');
 
-        }else{
-            throw new Exception('no user found');
-        }
+    }else{
+        throw new Exception('no user found');
     }
+  }
 
   public function create()
   {
@@ -120,8 +121,7 @@ class AccountManageController extends BaseController
     require($_SERVER['DOCUMENT_ROOT'].'/application/config/cms_generator_configs/visit.cfg.php');
     $visit_conf = ['status_id'=>$visit['fields']['status_id']['values']];
     $this->view->visit_conf = $visit_conf;
-    $this->view->last_succes_callup = $account->last_succes_callup;
-
+    //$this->view->last_access_callup = $account->last_succes_callup;
 
     $visitManager = new VisitManager();
     $visits = $visitManager->getListByAccountId($acc_id);
@@ -221,7 +221,8 @@ class AccountManageController extends BaseController
     }
     foreach($this->requestFieldList as $fName) {
       if($fName=='id') continue;
-      $account->$fName = $this->request->post($fName);
+      $fld_val = $this->request->post($fName);
+      $account->$fName = $fld_val?$fld_val:'';
     }
 
     if ($account->save() and $acc_id=$account->getId()) {

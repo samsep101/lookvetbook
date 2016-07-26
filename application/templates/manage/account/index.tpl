@@ -59,7 +59,15 @@
         return;
       }
       var id = tag.attr('data-id');
-      window.location = '/manage/account?del_id='+id;
+
+      var form_data = $('.users-filter form').serializeArray();
+      var locat = '/manage/account?del_id='+id;
+      for(var i in form_data) {
+        if(form_data[i].value) {
+          locat += '&'+form_data[i].name+'='+form_data[i].value;
+        }
+      }
+      window.location = locat;
       return false;
     });
 

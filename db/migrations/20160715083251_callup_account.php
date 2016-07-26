@@ -28,7 +28,7 @@ class CallupAccount extends AbstractMigration
     public function change()
     {
         $account_able = $this->table('account');
-        $account_able->addColumn('last_succes_callup', 'datetime');
+        $account_able->addColumn('last_succes_callup', 'datetime', array('null' => true));
         $account_able->save();
     }
 }

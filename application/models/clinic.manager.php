@@ -1035,4 +1035,43 @@ SQL;
 
     return $this->initList($data);
   }
+
+
+    /**
+     * @param ModelSearchCriteria $criteria
+     *
+     * @return ClinicModel[]
+     */
+    public function getListByModelSearchCriteria(ModelSearchCriteria $criteria)
+    {
+        /**
+         * @var ClinicSearchCriteria $criteria
+         */
+
+        $search_params = $criteria->getSearchParams();
+
+
+        if (!$search_params) {
+            $search_params = new SearchParams();
+        }
+
+        if (!empty($criteria->by_page)) {
+            $limit = $criteria->by_page + 1;
+            $offset = ($criteria->page - 1) * $criteria->by_page;
+
+            $search_params->setOffsetAndLimit($offset, $limit);
+        }
+
+        if (!empty($criteria->name)) {
+            $search_params->addParam('name', $criteria->name, '', ['w_mask'=>'both']);
+        }
+
+        if (!empty($criteria->alias)) {
+            $search_params->addParam('alias', $criteria->alias, '', ['w_mask'=>'both']);
+        }
+
+        $res = $this->getListBySearchParams($search_params);
+        return $res;
+    }
+
 }

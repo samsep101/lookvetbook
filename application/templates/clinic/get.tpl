@@ -148,6 +148,14 @@
 						<?php echo ScheduleViewHelper::view($clinic); ?>
 					<?php endif; ?>
 
+					<?php if($clinic->direct_phone):?>
+                    <p class="our_time">
+                        <span class="h-txt">Прямой номер:</span><br/>
+                        <span class="info-phone" itemprop="telephone">
+							<?=$clinic->direct_phone;?>
+						</span>
+                    </p>
+                    <?php else:?>
 					<p class="our_time">
 						<span class="h-txt">Запись на прием:</span><br/>
 						<span class="info-phone" itemprop="telephone">
@@ -161,6 +169,7 @@
 							?>
 						</span>
 					</p>
+                    <?php endif; ?>
 				</div>
 				<?php $this->block('clinic/blocks/call-centre-operator-hint'); ?>
 

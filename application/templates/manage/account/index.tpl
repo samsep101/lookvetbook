@@ -96,10 +96,10 @@ if ($accounts) {
           <td><?php echo $account->$fname; ?></td>
         <?php } ?>
         <td>
-          <a href="/manage/account/edit?id=<?php echo $account->account_id; ?>">редактировать</a>
+          <a href="/manage/account/edit?id=<?php echo $account->id; ?>">редактировать</a>
         </td>
         <td>
-          <a class="delete-line" data-id="<?php echo $account->account_id; ?>" href="#">удалить</a>
+          <a class="delete-line" data-id="<?php echo $account->id; ?>" href="#">удалить</a>
         </td>
       </tr>
         <?php $counter++;?>

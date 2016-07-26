@@ -289,7 +289,7 @@ class AccountManager extends ModelManager
       $search_params->addParam('email', $criteria->email, '', ['w_mask'=>'both']);
     }
 
-    $search_params->addJoin('account_phone', 'account.id', 'account_phone.account_id');
+    $search_params->addJoin('account_phone', 'account.id', 'account_phone.account_id', 'LEFT JOIN');
     $search_params->addJoinTableFields('account_phone');
 
     if(!empty($criteria->phone_number)) {

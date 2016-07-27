@@ -311,6 +311,8 @@ class AccountManager extends ModelManager
         $asc = 'DESC';
       }
       $search_params->addSortParam($criteria->sort_by, $asc);
+    }else{
+      $search_params->addSortParam('id', 'DESC');
     }
 
     $res = $this->getListBySearchParams($search_params);

@@ -1637,7 +1637,7 @@ if (!Acc::isAuthed())
     $title = $this->request->post('title');
     $phone_number = $this->request->post('phone_number');
     $target_call_id = $this->request->post('target_call_id');
-
+	
     $appeal = new AppealModel();
     $appeal->first_name = $first_name;
     $appeal->middle_name = $middle_name;
@@ -1649,14 +1649,16 @@ if (!Acc::isAuthed())
     $appeal->title = $title;
     $appeal->phone_number = $phone_number;
     $appeal->target_call_id = $target_call_id;
-
+	
     if ($appeal->appeal_type_id == 2) {
       $appeal->do_not_check = array('specialty_id');
     }
-
-    if ($appeal->save()) {
+	
+	
+    if ($appeal->save()) {	  
       JsonResponse::result();
     } else {
+		
       JsonResponse::error($appeal->getValidator()->getErrorCodes());
     }
   }

@@ -88,7 +88,7 @@
 
 		<div class="side-column" <?php /* ?>data-spy="affix" data-offset-top="100"<?php */ ?>>
 			<?php if ($disease_specialties) { ?>
-				<div class="info-box doing-box what-to-do" style="position: fixed; z-index: 10000;width: 272px;">
+				<div class="info-box doing-box what-to-do" style="position: fixed; z-index: 7000;width: 272px;">
 					<h3>Что делать при <span><?php echo trim($disease->prepositional_name);?>?
 						</span></h3>
 					<ol class="todo-list">

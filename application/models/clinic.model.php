@@ -134,6 +134,7 @@
      * @property UserModel[]                                        $users
      * @property DistrictModel                                      $district
      * @property int                                                $district_id
+     * @property int                                                $docdoc_id
      */
     class ClinicModel extends DynamicModel
     {

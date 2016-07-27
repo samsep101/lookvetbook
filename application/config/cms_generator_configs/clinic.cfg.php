@@ -8,6 +8,7 @@
 			'id'					  => 'index',
 			'name'					=> 'input',
 			'direct_phone'					=> 'input',
+			'docdoc_id'					=> 'input',
 			'alias'				   => 'input',
 			'about'				   => array(
 				'type'  => 'text',
@@ -234,6 +235,7 @@
 				'id'					  => 'ID',
 				'name'					=> 'Название',
 				'direct_phone'					=> 'Прямой телефон',
+				'docdoc_id'					=> 'ID DocDoc',
                 'primary_clinic_id' => 'Основная клиника',
 				'alias'				   => 'Алиас',
 				'original_alias'    => 'Оригинальный алиас',
@@ -378,6 +380,7 @@ HTML
 					'Информация'			=> array(
 						'name',
 						'direct_phone',
+						'docdoc_id',
 						'primary_clinic_id',
 						'alias',
 						'original_alias',
@@ -452,6 +455,7 @@ HTML
 					'Информация'			=> array(
 						'name',
 						'direct_phone',
+						'docdoc_id',
 						'primary_clinic_id',
 						'alias',
 						'original_alias',

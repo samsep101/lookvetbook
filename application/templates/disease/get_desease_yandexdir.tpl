@@ -11,6 +11,6 @@
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
+<a href="/action"><img src="/media/images/actions240x400.jpg" width="240"></a>
 
 </div>

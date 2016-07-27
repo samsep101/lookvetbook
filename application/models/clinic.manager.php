@@ -97,6 +97,20 @@ class ClinicManager extends AliasManager
     return;
   }
 
+    /**
+     * @return ClinicModel[]
+     */
+    public function getListWithDocdocId()
+  {
+      $sql = 'SELECT DISTINCT c.*
+                    FROM `' . $this->table_name . '` c                    
+                    WHERE c.docdoc_id > 0';
+
+      $data = $this->db->query($sql);
+
+      return (isset($data)) ? $this->initList($data) : array();
+  }
+
 
   /**
    * return ClinicModel[]

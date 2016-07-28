@@ -23,7 +23,7 @@ class ImageUploader
       }
     }
 
-    move_uploaded_file($uploadData['tmp_name'], $filepath);
+    rename($uploadData['tmp_name'], $filepath);
 
     $image_resizer = new SimpleImage();
     $image_resizer->load($filepath);

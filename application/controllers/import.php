@@ -25,29 +25,41 @@ class ImportController extends BaseController
 
             $q = "delete from doctor_to_clinic where clinic_id='$clinic->id'";
             $db->query($q);
+			
+			$q = "delete from doctor_specialty_to_clinic where clinic_id='$clinic->id'";
+            $db->query($q);
 
             foreach ($data->Doctors as $doc_id){
                 try{
+					echo $doctor_data_url.$doc_id."<br>".PHP_EOL;
                     $s = file_get_contents($doctor_data_url.$doc_id);
                     $docdata = json_decode($s);
                     $docdata = $docdata->Doctor[0];
                 }catch (Exception $exp){
                     continue;
                 }
+				
+				list($last_name, $first_name, $second_name) = explode(' ', $docdata->Name);
 
                 $q = "select doctor.id 
                       from doctor
-                      where doctor.full_lower_name like '$docdata->Name'";
+                      where 
+					  doctor.last_name like '$last_name' and  
+					  doctor.first_name like '$first_name' and 
+					  doctor.second_name like '$second_name' ";
 
                 if ($a = $db->query($q)){
                     $doctor = (new DoctorManager())->getOneById($a[0]['id']);
-                    echo "doctor: $doctor->name<br>".PHP_EOL;
+                    echo "doctor: $doctor->full_lower_name ($doctor->id)<br>".PHP_EOL;
                 }else{
                     $doctor = new DoctorModel();
                     echo "new doctor: $docdata->Name<br>".PHP_EOL;
                 }
 
-                list($doctor->last_name, $doctor->first_name, $doctor->second_name) = explode(' ', $docdata->Name);
+                $doctor->last_name = $last_name;
+				$doctor->first_name = $first_name;
+				$doctor->second_name = $second_name;
+				
                 $doctor->full_lower_name = strtolower($docdata->Name);
                 $doctor->sex_id = ($docdata->Sex == 1) ? 2 : 1;
                 $doctor->rate = (float) $docdata->Rating;
@@ -69,6 +81,19 @@ class ImportController extends BaseController
                 $doctor->is_pregnant = 1;
                 $doctor->is_handicapped = 1;
                 $doctor->save();
+				
+				$q = "select doctor.id 
+                      from doctor
+                      where 
+					  doctor.last_name like '$last_name' and  
+					  doctor.first_name like '$first_name' and 
+					  doctor.second_name like '$second_name' ";
+
+                if ($a = $db->query($q)){
+                    $doctor = (new DoctorManager())->getOneById($a[0]['id']);                    
+                }else{
+                    echo "error doc add: $docdata->Name<br>".PHP_EOL;
+                }
 
                 foreach ($docdata->Specialities as $specialty){
 
@@ -87,21 +112,38 @@ class ImportController extends BaseController
                         $q = "insert into doctor_to_clinic set clinic_id='$clinic->id', doctor_id='$doctor->id', specialty_id='$specialty->id'";
                         $db->query($q);
                     }
+					
+					$q = "insert into doctor_specialty_to_clinic set clinic_id='$clinic->id', doctor_id='$doctor->id', specialty_id='$specialty->id'";
+                    $db->query($q);
                 }
 
                 if ($docdata->Img){
-                    $tmp_name = '/tmp/'.'doctor_'.$doctor->id.'.jpg';
-                    if (!file_exists($tmp_name))
+                    $tmp_name = '/var/www/lookmedb/www/media/upload/clinic/license/tmp_'.'doctor_'.$doctor->id.'.jpg';
+					echo "tmp file name:".$tmp_name."<br>".PHP_EOL;
+                    if (file_exists($tmp_name))
                     {
-                        file_put_contents($tmp_name, file_get_contents($docdata->Img));
+                        unlink($tmp_name);
                     }
+					
+					file_put_contents($tmp_name, file_get_contents($docdata->Img));
+					chmod($tmp_name , 0777);					
 
                     $image_id = ImageUploader::upload(['upload_folder' => 'clinic/license/'], ['name' => 'doctor_'.$doctor->id.'.jpg', 'tmp_name' => $tmp_name], 'doctor_'.$doctor->id);
 
                     $doctor->image_id = $image_id;
                     $doctor->card_image_id = $image_id;
-                    $doctor->doctor_type_id = $image_id;
                     $doctor->save();
+					
+					if (file_exists($tmp_name))
+                    {
+                        unlink($tmp_name);
+                    }
+					
+					$q = "delete from image_to_doctor where doctor_id=$doctor->id";
+					$db->query($q);
+					
+					$q = "insert into image_to_doctor set doctor_id=$doctor->id, image_id=$image_id";
+					$db->query($q);
                 }
 
 

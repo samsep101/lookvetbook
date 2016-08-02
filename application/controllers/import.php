@@ -59,7 +59,7 @@ class ImportController extends BaseController
                 $doctor->last_name = $last_name;
 				$doctor->first_name = $first_name;
 				$doctor->second_name = $second_name;
-                $price = $docdata->Price ? (float) $docdata->Price : '';
+                $price = $docdata->Price > 0 ? (float) $docdata->Price : '';
 				
                 $doctor->full_lower_name = strtolower($docdata->Name);
                 $doctor->sex_id = ($docdata->Sex == 1) ? 2 : 1;
@@ -111,7 +111,7 @@ class ImportController extends BaseController
 
                     $q = "select id from doctor_to_clinic where clinic_id='$clinic->id' and doctor_id='$doctor->id' and specialty_id='$specialty->id'";
                     if (!$db->query($q)){
-                        $q = "insert into doctor_to_clinic set clinic_id='$clinic->id', doctor_id='$doctor->id', specialty_id='$specialty->id', first_visit_price='$price'";
+                        $q = "insert into doctor_to_clinic set clinic_id='$clinic->id', doctor_id='$doctor->id', specialty_id='$specialty->id'". ($price ? " , first_visit_price='$price'" : '');
                         $db->query($q);
                     }
 					

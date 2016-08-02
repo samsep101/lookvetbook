@@ -369,6 +369,7 @@
 								<img src="/media/images/loader.gif">
 							</div>
 							<input type="button" id="generateYandexFeed" class="" value="Сгенерировать Яндекс Feed">
+							<a href="/import/docdoc" target="_blank">Импортировать данные из DocDoc</a>
 						</div>
 						<div class="load-message"></div>
 					</div>

@@ -59,7 +59,7 @@ class ImportController extends BaseController
                 $doctor->last_name = $last_name;
 				$doctor->first_name = $first_name;
 				$doctor->second_name = $second_name;
-                $price = (float) $docdata->Price;
+                $price = $docdata->Price ? (float) $docdata->Price : '';
 				
                 $doctor->full_lower_name = strtolower($docdata->Name);
                 $doctor->sex_id = ($docdata->Sex == 1) ? 2 : 1;

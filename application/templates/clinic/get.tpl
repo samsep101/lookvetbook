@@ -148,7 +148,7 @@
 						<?php echo ScheduleViewHelper::view($clinic); ?>
 					<?php endif; ?>
 
-					<?php if($clinic->direct_phone):?>
+					<?php if(!empty($current_account) && $current_account->is_call_centre_operator && $clinic->direct_phone):?>
                     <p class="our_time">
                         <span class="h-txt">Прямой номер:</span><br/>
                         <span class="info-phone" itemprop="telephone">

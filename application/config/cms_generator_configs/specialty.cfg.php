@@ -5,6 +5,7 @@
     'fields'  => array(
       'id'       => 'index',
       'name'     => 'input',
+      'alias_synonim'     => 'input',
       'dative_name'  => 'input',
       'genitive_name'  => 'input',
       'genitive_name_plural' => 'input',
@@ -64,6 +65,7 @@
       'fields' => array(
         'id'       => 'ID',
         'name'     => 'Название',
+        'alias_synonim'     => 'Синонимы',
         'parent_id'  => 'Родительская специализация',
         'service_name' => 'Название услуги',
         'genitive_name' => 'Название в родительном падеже',
@@ -100,6 +102,7 @@
         'fields' => array(
           'Данные' => array(
             'name',
+            'alias_synonim',
             'genitive_name',
             'genitive_name_plural',
             'dative_name',
@@ -114,6 +117,7 @@
         'fields' => array(
           'Данные' => array(
             'name',
+            'alias_synonim',
             'genitive_name',
             'genitive_name_plural',
             'dative_name',

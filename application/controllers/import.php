@@ -99,7 +99,7 @@ class ImportController extends BaseController
 
                 foreach ($docdata->Specialities as $specialty){
 
-                    $t = (new SpecialtyManager())->getOneByAlias($specialty->Alias);
+                    $t = (new SpecialtyManager())->getOneByAliasOrSyninim($specialty->Alias);
                     if (!$t){
                         echo "<span style='color:red'>specialty $specialty->Name ($specialty->Alias) not found</span><br>".PHP_EOL;
                         continue;

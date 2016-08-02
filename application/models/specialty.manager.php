@@ -78,7 +78,7 @@
         {
             $sql = 'SELECT *
                     FROM specialty
-                    WHERE alias LIKE "' . $this->db->escape($name) . '" or alias_synonim like "%' . $this->db->escape($name) . '%"';
+                    WHERE alias LIKE "' . $this->db->escape($alias) . '" or alias_synonim like "%' . $this->db->escape($alias) . '%"';
 
             $data = $this->db->query($sql);
 

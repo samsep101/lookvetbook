@@ -170,6 +170,7 @@ class ImportController extends BaseController
                     $db->query($q);
                 }
             }
+            flush();
         }
 
         die('<br>finish<br>');

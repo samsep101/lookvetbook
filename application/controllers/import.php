@@ -32,12 +32,14 @@ class ImportController extends BaseController
             foreach ($data->Doctors as $doc_id){
                 try{
 					echo $doctor_data_url.$doc_id."<br>".PHP_EOL;
-                    $s = file_get_contents($doctor_data_url.$doc_id);
+                    $s = file_get_contents($doctor_data_url.$doc_id.'/withSlots/1');
                     $docdata = json_decode($s);
                     $docdata = $docdata->Doctor[0];
                 }catch (Exception $exp){
                     continue;
                 }
+//                if ($docdata->Slots)
+//                    pr($docdata->Slots, 1);
 				
 				list($last_name, $first_name, $second_name) = explode(' ', $docdata->Name);
 

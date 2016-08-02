@@ -93,6 +93,7 @@ class ImportController extends BaseController
                     $doctor = (new DoctorManager())->getOneById($a[0]['id']);                    
                 }else{
                     echo "error doc add: $docdata->Name<br>".PHP_EOL;
+					continue;
                 }
 
                 foreach ($docdata->Specialities as $specialty){
@@ -158,6 +159,10 @@ class ImportController extends BaseController
             $specializations = $db->query($q);
             foreach ($specializations as $specialization){
                 $specialization_id = $specialization['specialization_id'];
+				
+				if (!$specialization_id)
+					continue;
+				
                 $q = "select id from specialization_to_clinic where clinic_id='$clinic->id' and specialization_id='$specialization_id'";
                 if (!$db->query($q)){
                     $q = "insert into specialization_to_clinic set clinic_id='$clinic->id', specialization_id='$specialization_id'";

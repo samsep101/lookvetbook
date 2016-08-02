@@ -556,7 +556,7 @@
             $purpose_of_visit_to_doctor_manager = ModelManagerFactory::getByName('purpose_of_visit_to_doctor');
             $second_visit_price                 = $purpose_of_visit_to_doctor_manager->getFirstVisitPriceByDoctorIdAndClinicIdAndSpecialtyIdAndPurposeOfVisitId($this->id, $clinic_id, $specialty_id, $purpose_of_visit_id);
 
-            if($specialty_id && !$second_visit_price)
+            if(0 && $specialty_id && !$second_visit_price)
             {
                 $doctor_to_clinic_manager = ModelManagerFactory::getByName('doctor_to_clinic');
                 $second_visit_price       = $doctor_to_clinic_manager->getFirstVisitPriceByDoctorIdAndClinicIdAndSpecialtyId($this->id, $clinic_id, $specialty_id);
@@ -580,7 +580,7 @@
              * @var DoctorToClinicManager         $doctor_to_clinic_manager
              */
 
-            if(0 && $specialty_id && $purpose_of_visit_id)
+            if($specialty_id && $purpose_of_visit_id)
             {
                 $purpose_of_visit_to_doctor_manager = ModelManagerFactory::getByName('purpose_of_visit_to_doctor');
                 $second_visit_price                 = $purpose_of_visit_to_doctor_manager->getFirstVisitPriceByDoctorIdAndClinicIdAndSpecialtyIdAndPurposeOfVisitId($this->id, $clinic_id, $specialty_id, $purpose_of_visit_id);

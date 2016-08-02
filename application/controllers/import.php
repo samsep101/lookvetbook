@@ -35,7 +35,6 @@ class ImportController extends BaseController
                     $s = file_get_contents($doctor_data_url.$doc_id);
                     $docdata = json_decode($s);
                     $docdata = $docdata->Doctor[0];
-                    pr($docdata, 1);
                 }catch (Exception $exp){
                     continue;
                 }

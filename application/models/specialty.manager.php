@@ -72,6 +72,20 @@
         }
 
         /**
+         * @return SpecialtyModel
+         */
+        public function getOneByAliasOrSyninim($alias)
+        {
+            $sql = 'SELECT *
+                    FROM specialty
+                    WHERE alias LIKE "' . $this->db->escape($name) . '" or alias_synonim like "%' . $this->db->escape($name) . '%"';
+
+            $data = $this->db->query($sql);
+
+            return (isset($data[0])) ? $this->initOne($data[0]) : NULL;
+        }
+
+        /**
          * return SpecialtyModel[]
          */
         public function getListByDoctorId($doctor_id)

@@ -35,6 +35,7 @@ class ImportController extends BaseController
                     $s = file_get_contents($doctor_data_url.$doc_id);
                     $docdata = json_decode($s);
                     $docdata = $docdata->Doctor[0];
+                    pr($docdata, 1);
                 }catch (Exception $exp){
                     continue;
                 }
@@ -59,6 +60,7 @@ class ImportController extends BaseController
                 $doctor->last_name = $last_name;
 				$doctor->first_name = $first_name;
 				$doctor->second_name = $second_name;
+                $price = (float) $docdata->Price;
 				
                 $doctor->full_lower_name = strtolower($docdata->Name);
                 $doctor->sex_id = ($docdata->Sex == 1) ? 2 : 1;
@@ -100,7 +102,7 @@ class ImportController extends BaseController
 
                     $t = (new SpecialtyManager())->getOneByAlias($specialty->Alias);
                     if (!$t){
-                        echo "specialty $specialty->Name ($specialty->Alias) not found<br>".PHP_EOL;
+                        echo "<span style='color:red'>specialty $specialty->Name ($specialty->Alias) not found</span><br>".PHP_EOL;
                         continue;
                     }
 
@@ -110,7 +112,7 @@ class ImportController extends BaseController
 
                     $q = "select id from doctor_to_clinic where clinic_id='$clinic->id' and doctor_id='$doctor->id' and specialty_id='$specialty->id'";
                     if (!$db->query($q)){
-                        $q = "insert into doctor_to_clinic set clinic_id='$clinic->id', doctor_id='$doctor->id', specialty_id='$specialty->id'";
+                        $q = "insert into doctor_to_clinic set clinic_id='$clinic->id', doctor_id='$doctor->id', specialty_id='$specialty->id', first_visit_price='$price'";
                         $db->query($q);
                     }
 					

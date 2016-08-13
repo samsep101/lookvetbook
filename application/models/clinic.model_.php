@@ -466,6 +466,11 @@
             return ($time_from && $time_to) ? 'c ' . (int)$time_from . '<br>до ' . (int)$time_to : FALSE;
         }
 
+        public function isPrimaryClinic()
+        {
+            return (boolean) (new ClinicManager())->getChildsClinic($this->id);
+        }
+
         public function isPublishNow()
         {
             return (($this->clinic_status_id == ClinicStatusModel::PUBLISHED) && ($this->params['clinic_status_id'] != ClinicStatusModel::PUBLISHED));

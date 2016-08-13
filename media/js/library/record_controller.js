@@ -38,13 +38,19 @@ var RecordController = function ()
         $('.js-hide-on-record-complete').show();
         $('.recordFormSuccess').hide();
 
-        _form = $('.recordPopupForm');
+        _form = $('.fancybox-overlay .recordPopupForm');
 
         _form.find('input[name=doctor_id]').val(doctor_id);
 
         _form.find('input[name=clinic_id]').val(clinic_id);
 
         _form.find('input[name=disease_id]').val(disease_id);
+
+        _grep_id = Math.round(Math.random()*1000000) + 'google_captcha';
+        _form.find('.g-recaptcha-add_review').attr('id', _grep_id);
+        grecaptcha.render(_grep_id, {
+            'sitekey': '6LelcycTAAAAACs6URiEq3D1rLkKudTxC3D1Skj5'
+        })
 
         _form.removeClass('lmmarked');
         _form.find('.datepicker').removeClass('hasDatepicker');
@@ -53,6 +59,8 @@ var RecordController = function ()
 
         $( ".datepicker" ).datepicker();
         $(".inputPhone").mask("+7 (999) 999-99-99");
+
+
     }
 }
 

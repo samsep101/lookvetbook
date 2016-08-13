@@ -57,6 +57,12 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
       $filter_and->addFilter($match);
     }
 
+    if ($criteria->primary_clinic_id) {
+      $match = new \Elastica\Filter\Term();
+      $match->setTerm('primary_clinic_id', (int) $criteria->primary_clinic_id);
+      $filter_and->addFilter($match);
+    }
+
     if ($criteria->specialization_id) {
       $match = new \Elastica\Filter\Term();
       $match->setTerm('specializations', $criteria->specialization_id);

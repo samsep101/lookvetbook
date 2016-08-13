@@ -11,9 +11,9 @@ var AddClinicFormController = function () {
                 //$('input[name="user_phone"]').validate(validation_rules['user_phone']),
                 //$('input[name="user_email"]').validate(validation_rules['user_email']),
                 //$('input[name="user_password"]').validate(validation_rules['password']),
-                $('input[name="address"]').validate(validation_rules['clinic_address_required_and_unique']),
-                $('input[name="latitude"]').validate(validation_rules['coordinates']),
-                $('input[name="longitude"]').validate(validation_rules['coordinates'])
+                //$('input[name="address"]').validate(validation_rules['clinic_address_required_and_unique']),
+                //$('input[name="latitude"]').validate(validation_rules['coordinates']),
+                //$('input[name="longitude"]').validate(validation_rules['coordinates'])
             ],
             callback: self.addClinic
         });

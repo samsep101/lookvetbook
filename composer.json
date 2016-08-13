@@ -12,6 +12,7 @@
   "require": {
     "neeckeloo/closure-compiler-php": "dev-master",
     "guzzlehttp/guzzle": "*",
+    "google/recaptcha": "1.1",
     "robmorgan/phinx": "v0.5.3"
   }
 }

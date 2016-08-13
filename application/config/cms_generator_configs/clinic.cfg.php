@@ -140,6 +140,10 @@
 				'type'  => 'checkbox',
 				'label' => 'Да/Нет'
 			),
+            'visit_disallow'			   => array(
+                'type'  => 'checkbox',
+                'label' => 'Да/Нет'
+            ),
 			'not_work'				=> array(
 				'type'  => 'checkbox',
 				'label' => 'Да/Нет'
@@ -288,6 +292,7 @@
 				'legal_address'		   => 'Юридический адрес',
 				'fact_address'			=> 'Фактический адрес',
 				'is_active'			   => 'Выводить на сайте',
+				'visit_disallow'			   => 'Запись запрещена',
 				'not_work'				=> 'Не работаем с клиникой',
 				'redirect_list'		   => 'Добавить клинику в список отображаемх страниц при отсутствии страницы',
 				'is_state'				=> 'Государственная клиника',
@@ -421,6 +426,7 @@ HTML
 						'week_from',
 						'week_to',
 						'is_active',
+						'visit_disallow',
 						'not_work',
 						'is_state',
 						'is_prescribe_sick_leave',
@@ -496,6 +502,7 @@ HTML
 						'week_from',
 						'week_to',
 						'is_active',
+						'visit_disallow',
 						'not_work',
 						'is_state',
 						'is_prescribe_sick_leave',

@@ -125,7 +125,9 @@
 			</div>
 			<div class="side-box">
 				<div class="btns">
-					<a href="#divider-shadow" onclick="recordController.showForm(0,<?php echo $clinic->id?>,0)" class="btn-find-doctor-2"><span class="txt appoint">Записаться на прием</span></a>
+					<?php if (!$clinic->visit_disallow):?>
+						<a href="#divider-shadow" onclick="recordController.showForm(0,<?php echo $clinic->id?>,0)" class="btn-find-doctor-2"><span class="txt appoint">Записаться на прием</span></a>
+					<?php endif; ?>
 
 					<a class="btn-bookmark btn-bookmark-big click_btn_bookmark">
 						<script>
@@ -148,7 +150,7 @@
 						<?php echo ScheduleViewHelper::view($clinic); ?>
 					<?php endif; ?>
 
-					<?php if(!empty($current_account) && $current_account->is_call_centre_operator && $clinic->direct_phone):?>
+					<?php if($clinic->direct_phone):?>
                     <p class="our_time">
                         <span class="h-txt">Прямой номер:</span><br/>
                         <span class="info-phone" itemprop="telephone">

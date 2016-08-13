@@ -34,6 +34,14 @@ class ClinicController extends BaseController
           
 
     $clinic = $clinic_manager->getOneByIdOrAliasAndIsActive($clinic_id);
+
+      if ($clinic->isPrimaryClinic()){
+          $this->view->page_title = $clinic->name . ', ' . $clinic->city->name . $clinic_metro . ', ' . $clinic->address . ', отзывы, телефон, запись на прием - «'.SITE_NAME.'»';
+          $this->view->clinic = $clinic;
+          $this->render('clinic/primary');
+      }
+
+
     $specialization = $specialization_manager->getOneByAlias($clinic_id);
 
     if ($specialization) {
@@ -467,6 +475,7 @@ class ClinicController extends BaseController
     $params->purpose_of_visit_id = (int)$this->request('purpose_of_visit_id', 0);
     $params->children = $this->request('children', 0);
     $params->handicapped = $this->request('handicapped', 0);
+    $params->primary_clinic_id = $this->request('primary_clinic_id', 0);
     $params->pregnant = $this->request('pregnant', 0);
     $params->day_and_night = $this->request('day_and_night', 0);
     $params->clinic_name = $this->request('clinic_name', '');

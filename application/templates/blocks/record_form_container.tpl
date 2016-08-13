@@ -1,10 +1,18 @@
 <!-- record default form ------>
 <script type="text/javascript">
+    function initializeGrecaptcha() {
+        console.log('[Google Recaptcha] Initialize');
+//        grecaptcha.render('g-recaptcha-add_review', {
+//            'sitekey': '6LelcycTAAAAACs6URiEq3D1rLkKudTxC3D1Skj5'
+//        })
+    }
+
     $( document ).ready(function() {
         $(".datepicker").datepicker();
         $(".inputPhone").mask("+7 (999) 999-99-99");
     });
 </script>
+<script src='http://www.google.com/recaptcha/api.js?render=explicit&onload=initializeGrecaptcha' async defer></script>
 <div id="record_form_container" style="display:none">
     <form action="/ajax/recordToTheVisit" method="POST" class="recordPopupForm linkMapper" rel=".recordFormResult" onComplete="recordComplete()" onsubmit="if (!$(this).find('input[name=full_name]').val() || !$(this).find('input[name=phone]').val()){alert('Вы не заполнили поля имя или телефон'); $(this).find('.doSubmit').val('false');}else{$(this).find('.doSubmit').val('');}">
     <div class="booking record-to-the-doctor-popup" style="display:block">
@@ -52,6 +60,14 @@
                 </div>
                 <div class="shadow-input">
                     <input type="text" name="email" placeholder="example@email.ru">
+                </div>
+            </div>
+            <div class="row flo m-b-10">
+                <div class="text-shadow-input">
+                    &nbsp;
+                </div>
+                <div class="shadow-input">
+                    <div class="g-recaptcha-add_review"></div>
                 </div>
             </div>
             <div class="row flo m-b-20">

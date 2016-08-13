@@ -3,6 +3,7 @@
     class ClinicSearchParams extends ModelSearchCriteria
     {
         public $specialty_id;
+        public $primary_clinic_id;
         public $specialization_id;
         public $purpose_of_visit_id;
         public $children;

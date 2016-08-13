@@ -381,7 +381,7 @@ var YandexMapController = function (form_controller) {
 
             self.form_controller.sendRequest();
         }
-        
+
         if (self.city_id){
             city_info.city_id = window.city_controller.city_id;
             city_info.latitude = window.city_controller.latitude;

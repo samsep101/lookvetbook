@@ -7,6 +7,8 @@ class ClinicManager extends AliasManager
 
   protected $transliterated_field = 'name';
 
+
+
   protected function beforeSave(DynamicModel $clinic)
   {
       /** @var ClinicModel $clinic */
@@ -96,6 +98,19 @@ class ClinicManager extends AliasManager
 
     return;
   }
+    /**
+     * @return ClinicModel[]
+     */
+    public function getChildsClinic($primary_clinic_id)
+    {
+        $sql = 'SELECT DISTINCT c.*
+                    FROM `' . $this->table_name . '` c                    
+                    WHERE c.primary_clinic_id="'.$primary_clinic_id.'"';
+
+        $data = $this->db->query($sql);
+
+        return (isset($data)) ? $this->initList($data) : array();
+    }
 
     /**
      * @return ClinicModel[]

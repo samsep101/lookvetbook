@@ -51,6 +51,10 @@
                     'type'           => 'integer',
                     'include_in_all' => FALSE,
                 ),
+                'primary_clinic_id' => array(
+                    'type'           => 'integer',
+                    'include_in_all' => FALSE,
+                ),
                 'is_children' => array(
                     'type'           => 'boolean',
                     'include_in_all' => FALSE,

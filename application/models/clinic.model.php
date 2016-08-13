@@ -135,6 +135,7 @@
      * @property DistrictModel                                      $district
      * @property int                                                $district_id
      * @property int                                                $docdoc_id
+     * @property int                                                $visit_disallow
      */
     class ClinicModel extends DynamicModel
     {
@@ -475,6 +476,11 @@
             }
 
             return ($time_from && $time_to) ? 'c ' . (int)$time_from . '<br>до ' . (int)$time_to : FALSE;
+        }
+
+        public function isPrimaryClinic()
+        {
+            return (boolean) (new ClinicManager())->getChildsClinic($this->id);
         }
 
         public function isPublishNow()

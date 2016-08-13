@@ -167,7 +167,9 @@
         </div>
 
     <div class="btns flo">
-        <a class="btn-appoint"  onclick="recordController.showForm(0,<?php echo $clinic->id?>,0)">Записаться на прием</a>
+        <?php if (!$clinic->visit_disallow):?>
+            <a class="btn-appoint"  onclick="recordController.showForm(0,<?php echo $clinic->id?>,0)">Записаться на прием</a>
+        <?php endif; ?>
         <a class="btn-appoint btn-border" href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>">Подробнее о клинике</a>
         <div class="clearfix"></div>
     </div>

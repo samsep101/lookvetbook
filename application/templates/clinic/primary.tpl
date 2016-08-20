@@ -4,20 +4,27 @@
 	 */
 ?>
 <script type="text/javascript">
+$( window  ).load( function (){
     var mapController = '';
-    $(document).ready(function(){
+    $(document).ready(function(){		
         mapController = new YandexMapController({});
         mapController.page = 'clinic';
         mapController.setDataUrl('/ajax/getClinicMapCard?big=1&id=');
         mapController.init();
-        data = {primary_clinic_id:'<?=$clinic->id?>'};
-        Ajax.Get('/clinic/ajaxSearch', data, function (data) {
-            Ajax.Get('/ajax/getMapData', {hash:data.result.map}, function (data) {
-                mapController.setData(data.result);
-            });
-        });
-
+		
+		function loadClinicChilds()
+		{
+			data = {primary_clinic_id:'<?=$clinic->id?>'};		
+			Ajax.Get('/clinic/ajaxSearch', data, function (data) {
+				Ajax.Get('/ajax/getMapData', {hash:data.result.map}, function (data) {
+					mapController.setData(data.result);
+				});
+			});
+		}
+        
+		window.setTimeout(loadClinicChilds, 3000);
     });
+});
 </script>
 
 <?php $this->block('blocks/top_number'); ?>

@@ -2480,10 +2480,13 @@ h2 {
     padding : 0 16px 0 17px;
 }
 
-.about-ilness-content .illness-nav.affix {
+.about-ilness-content .illness-nav.affix , .btn-double-floor.disease-doctor.affix{
     position : fixed;
     top      : 0;
     z-index  : 1000;
+}
+.btn-double-floor.disease-doctor.affix{
+    left: auto;
 }
 
 .nav {

@@ -5,13 +5,16 @@
 </p>
 <video src="<?=$video_file_path?>" width="160" height="160" poster="<?=$video_thumb_path?>" controls=""></video>
 <?php foreach ($disease_specialties as $specialty) { ?>
-	<a class="btn-double-floor des-page disease-doctor
+	<a class="btn-double-floor des-page affix-top disease-doctor
 	<?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?>
 	<?php if ($specialty->is_male){?>male-block <?php }?>
     <?php if ($specialty->is_female){?>female-block <?php }?>
     <?php if ($specialty->is_children){?>children-block <?php }?>
     <?php if ($specialty->is_newborn){?>newborn-block <?php }?>
     <?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>"
+
+       data-spy="affix" 
+       data-offset-top="350"
 
        data-action-for-counters="find-doctor"
        data-category-counters="find-doctor"

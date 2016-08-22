@@ -2,6 +2,8 @@
 <div class="inner">
 	<div class="about-ilness-content flo">
 		<div class="main-column">
+			
+			<?php include('get_desease_yandexdir.tpl'); ?>
             <?php $this->block('disease/blocks/adv_left_side'); ?>
             <div class="desease-phone">
 	            <a class="actionLink" href="/action">Акции и спецпредложения</a>
@@ -88,7 +90,7 @@
 
 		<div class="side-column" <?php /* ?>data-spy="affix" data-offset-top="100"<?php */ ?>>
 			<?php if ($disease_specialties) { ?>
-				<div class="info-box doing-box what-to-do" style="position: fixed; z-index: 7000;width: 272px;">
+				<div class="info-box doing-box what-to-do" style="position: relative; z-index: 7000;width: 272px;">
 					<h3>Что делать при <span><?php echo trim($disease->prepositional_name);?>?
 						</span></h3>
 					<ol class="todo-list">
@@ -134,7 +136,6 @@
                            </div>
                         <?php } ?>
 
-			<?php include('get_desease_yandexdir.tpl'); ?>
 			<div id="ban2"></div>
 			<?php include('get_desease_secondopinions.tpl');?>
 

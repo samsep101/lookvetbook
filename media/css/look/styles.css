@@ -9764,3 +9764,15 @@ a.d-pink-btn {
     font-size: 20px;
     margin-bottom: 13px;
 }
+
+.breadcrumb-custom{
+    padding: 15px;
+    font-size: 16px!important;
+    color: #318e9e;
+}
+.breadcrumb-custom a, .breadcrumb-custom a:hover{
+    color: #5FC3D0;
+}
+.breadcrumb-custom a:hover{
+    text-decoration: none;
+}

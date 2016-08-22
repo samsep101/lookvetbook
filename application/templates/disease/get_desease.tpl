@@ -10,19 +10,8 @@
 	            <a href="tel:+7(<?=SITE_PHONE_CODE?>)<?=SITE_PHONE?>">Мы найдём Вам врача +7 (<?php echo SITE_PHONE_CODE; ?>) <?php echo SITE_PHONE; ?></a>
             </div>
 			<div class="main-cont flo">
-				<div class="illness-header flo">
-					<h1 id="disease-title" data-id="<?php echo $disease->id; ?>" data-title="<?php echo $disease->title; ?>"><?php echo $disease->title; ?></h1>
-					<?php if (Acc::isAuthed()) { ?>
-						<a class="btn-bookmark btn-bookmark-illness"></a>
-					<?php } ?>
-					<?php if ($disease->alt_names) { ?>
-						<p class="another"><span>...или:</span>
-							<?php echo $disease->alt_names_string; ?>
-						</p>
-					<?php } ?>
-				</div>
 
-				<ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+				<ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb breadcrumb-custom">
 					<li itemprop="itemListElement" itemscope
 						itemtype="http://schema.org/ListItem">
 						<a itemprop="item" href="/">
@@ -42,6 +31,18 @@
 						<meta itemprop="position" content="3" />
 					</li>
 				</ol>
+
+				<div class="illness-header flo">
+					<h1 id="disease-title" data-id="<?php echo $disease->id; ?>" data-title="<?php echo $disease->title; ?>"><?php echo $disease->title; ?></h1>
+					<?php if (Acc::isAuthed()) { ?>
+						<a class="btn-bookmark btn-bookmark-illness"></a>
+					<?php } ?>
+					<?php if ($disease->alt_names) { ?>
+						<p class="another"><span>...или:</span>
+							<?php echo $disease->alt_names_string; ?>
+						</p>
+					<?php } ?>
+				</div>
 
 				<div class="illness-description">
 					<?php $disease->content = preg_replace('/<br \/>/','',$disease->content);?>

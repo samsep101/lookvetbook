@@ -6,6 +6,7 @@
      * @var AccountModel $current_account
 	 * @var Cache_Lite $cache
      */
+    $doctor_total_count = count($clinic->additional_params['doctors_main_specialty']['total_doctors']);
 ?>
 
 
@@ -122,16 +123,17 @@
     </div>
 
     <div class="address-and-time-area">
-
-        <?php if (!empty($current_account) && $current_account->is_call_centre_operator && $clinic->not_work) { ?>
-            <div class="not-work-message">
-                НЕ РАБОТАЕМ
-            </div>
-        <?php } else { ?>
-            <div class="aata-time">
-                <?php echo ScheduleViewHelper::schedule_in_table($clinic); ?>
-            </div>
-        <?php } ?>
+        <?php if ($doctor_total_count > 0):?>
+            <?php if (!empty($current_account) && $current_account->is_call_centre_operator && $clinic->not_work) { ?>
+                <div class="not-work-message">
+                    НЕ РАБОТАЕМ
+                </div>
+            <?php } else { ?>
+                <div class="aata-time">
+                    <?php echo ScheduleViewHelper::schedule_in_table($clinic); ?>
+                </div>
+            <?php } ?>
+        <?php endif; ?>
 
         <div class="aata-address">
             <div class="aata-street">
@@ -162,7 +164,9 @@
                     $doctor_total_count = count($clinic->additional_params['doctors_main_specialty']['total_doctors']);
                     $specialization_total_count = count($clinic->additional_params['doctors_main_specialty']['total_specializations']);
             ?>
-            В клинике <a href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>?scroll=doctors-area"><?php echo $doctor_total_count . ' ' . SpecialtyHelper::getDoctorWordForm($doctor_total_count); ?></a> по <a href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>?scroll=specialization-area"><?php echo $specialization_total_count . ' ' . SpecializationHelper::getSpecializationWordForm($specialization_total_count); ?></a>
+                <?php if($doctor_total_count > 0):?>
+                    В клинике <a href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>?scroll=doctors-area"><?php echo $doctor_total_count . ' ' . SpecialtyHelper::getDoctorWordForm($doctor_total_count); ?></a> по <a href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>?scroll=specialization-area"><?php echo $specialization_total_count . ' ' . SpecializationHelper::getSpecializationWordForm($specialization_total_count); ?></a>
+                <?php endif; ?>
             <?php } ?>
         </div>
 

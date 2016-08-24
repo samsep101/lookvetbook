@@ -250,7 +250,10 @@ class ClinicController extends BaseController
 
     if ($primary_clinic_id = $this->request('primary_clinic_id', 0)){ /**TODO remove this costil with correct search algoritm */
         $clinics = (new ClinicManager())->getChildsClinic($primary_clinic_id);
-    }else{
+    }elseif ($clinic_name = $this->request('clinic_name', '')){
+        $clinics = (new ClinicManager())->getListByNameOrAddress($clinic_name);
+    }
+    else{
         $clinics = $clinic_search_algorithm->search($params);
     }
 

@@ -157,8 +157,7 @@ class ImportController extends BaseController
             foreach ($clinic_specialty as $specialty){
                 $specialty_ids[$specialty->id] = $specialty->id;
             }
-<<<<<<< HEAD
-			
+
 			if ($specialty_ids){
 				$q = "select DISTINCT specialization_id from specialty_to_specialization where specialty_id in (".implode(',', $specialty_ids).")";
 				$specializations = $db->query($q);
@@ -175,24 +174,7 @@ class ImportController extends BaseController
 					}
 				}
 			}
-=======
-if ($specialty_ids) {
-            $q = "select DISTINCT specialization_id from specialty_to_specialization where specialty_id in (".implode(',', $specialty_ids).")";
-            $specializations = $db->query($q);
-            foreach ($specializations as $specialization){
-                $specialization_id = $specialization['specialization_id'];
-				
-				if (!$specialization_id)
-					continue;
-				
-                $q = "select id from specialization_to_clinic where clinic_id='$clinic->id' and specialization_id='$specialization_id'";
-                if (!$db->query($q)){
-                    $q = "insert into specialization_to_clinic set clinic_id='$clinic->id', specialization_id='$specialization_id'";
-                    $db->query($q);
-                }
-            }
-}
->>>>>>> 1ac04d457831e70f1ff4e893869d6a6f0c97f15a
+
             flush();
         }
 

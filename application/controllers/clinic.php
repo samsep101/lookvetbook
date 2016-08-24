@@ -247,7 +247,13 @@ class ClinicController extends BaseController
     $this->initClinicSearchParams($params);
 
     $clinic_search_algorithm = new ClinicSearchAlgorithm();
-    $clinics = $clinic_search_algorithm->search($params);
+
+    if ($primary_clinic_id = $this->request('primary_clinic_id', 0)){ /**TODO remove this costil with correct search algoritm */
+        $clinics = (new ClinicManager())->getChildsClinic($primary_clinic_id);
+    }else{
+        $clinics = $clinic_search_algorithm->search($params);
+    }
+
 
     $clinic_count = [count($clinics)];
     $specialization_manager = ModelManagerFactory::getByName('specialization');

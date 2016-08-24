@@ -1133,16 +1133,9 @@ $disease_manager->resetAutoIncrement();*/
 			{
 				foreach($diseases as $disease)
 				{
-					$disease_tabs_flags = $disease_block_manager->getActiveDiseaseTabsFlagsByDiseaseId($disease->getId());
-					foreach($disease_tabs_flags as $key => $value)
-					{
-						if($value)
-						{
-							$link = new SitemapLink();
-							$link->url = DiseasePageLinkViewHelper::getLink($disease) . '/' . $key;
-							$links[] = $link;
-						}
-					}
+                    $link = new SitemapLink();
+                    $link->url = DiseasePageLinkViewHelper::getLink($disease);
+                    $links[] = $link;
 				}
 			}
 

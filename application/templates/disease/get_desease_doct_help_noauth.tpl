@@ -22,6 +22,7 @@
        data-position="Right"
        data-url="<?php echo $specialty->specialtyUrl ?>" data-id="<?php echo $specialty->specialty_id; ?>"
        onclick="recordController.showForm(0,0,<?=$disease->id?>)"
+	   style="margin-top: 49px;"
     >
 		<?php $btn_text = (!$disease_green_btn)?'Записаться к '.$specialty->dative_name:'Найти '.$specialty->genitive_name?>
 		<span <?php echo ButtonPaddingHelper::getWideButtonSpecialtyPadding($specialty->dative_name);?> class="just-text"><?php echo $btn_text;?></span>

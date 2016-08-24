@@ -2480,10 +2480,13 @@ h2 {
     padding : 0 16px 0 17px;
 }
 
-.about-ilness-content .illness-nav.affix {
+.about-ilness-content .illness-nav.affix , .btn-double-floor.disease-doctor.affix{
     position : fixed;
     top      : 0;
     z-index  : 1000;
+}
+.btn-double-floor.disease-doctor.affix{
+    left: auto;
 }
 
 .nav {
@@ -9760,4 +9763,16 @@ a.d-pink-btn {
 .adv_text_bf_search_result{
     font-size: 20px;
     margin-bottom: 13px;
+}
+
+.breadcrumb-custom{
+    padding: 15px;
+    font-size: 16px!important;
+    color: #318e9e;
+}
+.breadcrumb-custom a, .breadcrumb-custom a:hover{
+    color: #5FC3D0;
+}
+.breadcrumb-custom a:hover{
+    text-decoration: none;
 }

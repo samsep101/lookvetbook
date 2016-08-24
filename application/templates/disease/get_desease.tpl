@@ -2,25 +2,16 @@
 <div class="inner">
 	<div class="about-ilness-content flo">
 		<div class="main-column">
+			
+			<?php include('get_desease_yandexdir.tpl'); ?>
             <?php $this->block('disease/blocks/adv_left_side'); ?>
             <div class="desease-phone">
 	            <a class="actionLink" href="/action">Акции и спецпредложения</a>
 	            <a href="tel:+7(<?=SITE_PHONE_CODE?>)<?=SITE_PHONE?>">Мы найдём Вам врача +7 (<?php echo SITE_PHONE_CODE; ?>) <?php echo SITE_PHONE; ?></a>
             </div>
 			<div class="main-cont flo">
-				<div class="illness-header flo">
-					<h1 id="disease-title" data-id="<?php echo $disease->id; ?>" data-title="<?php echo $disease->title; ?>"><?php echo $disease->title; ?></h1>
-					<?php if (Acc::isAuthed()) { ?>
-						<a class="btn-bookmark btn-bookmark-illness"></a>
-					<?php } ?>
-					<?php if ($disease->alt_names) { ?>
-						<p class="another"><span>...или:</span>
-							<?php echo $disease->alt_names_string; ?>
-						</p>
-					<?php } ?>
-				</div>
 
-				<ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb">
+				<ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb breadcrumb-custom">
 					<li itemprop="itemListElement" itemscope
 						itemtype="http://schema.org/ListItem">
 						<a itemprop="item" href="/">
@@ -40,6 +31,18 @@
 						<meta itemprop="position" content="3" />
 					</li>
 				</ol>
+
+				<div class="illness-header flo">
+					<h1 id="disease-title" data-id="<?php echo $disease->id; ?>" data-title="<?php echo $disease->title; ?>"><?php echo $disease->title; ?></h1>
+					<?php if (Acc::isAuthed()) { ?>
+						<a class="btn-bookmark btn-bookmark-illness"></a>
+					<?php } ?>
+					<?php if ($disease->alt_names) { ?>
+						<p class="another"><span>...или:</span>
+							<?php echo $disease->alt_names_string; ?>
+						</p>
+					<?php } ?>
+				</div>
 
 				<div class="illness-description">
 					<?php $disease->content = preg_replace('/<br \/>/','',$disease->content);?>
@@ -88,7 +91,7 @@
 
 		<div class="side-column" <?php /* ?>data-spy="affix" data-offset-top="100"<?php */ ?>>
 			<?php if ($disease_specialties) { ?>
-				<div class="info-box doing-box what-to-do" style="position: fixed; z-index: 7000;width: 272px;">
+				<div class="info-box doing-box what-to-do" style="position: relative; z-index: 7000;width: 272px;">
 					<h3>Что делать при <span><?php echo trim($disease->prepositional_name);?>?
 						</span></h3>
 					<ol class="todo-list">
@@ -134,7 +137,6 @@
                            </div>
                         <?php } ?>
 
-			<?php include('get_desease_yandexdir.tpl'); ?>
 			<div id="ban2"></div>
 			<?php include('get_desease_secondopinions.tpl');?>
 

@@ -1,6 +1,6 @@
 <?php /*<a onclick="yaCounterLookmedbook.reachGoal('alkoklinik'); return true;" target="_blank" href="http://www.alcoclinic.ru/uslugi/vyvod-iz-zapoya/?utm_source=lookmedbook.ru&utm_medium=banner&utm_campaign=banner1&utm_content=banner1"><img src="/media/images/zapoi.jpg"></a>*/ ?>
 <?php /* Яндекс.Директ */ ?>
-<div class="info-box disease-banner" style="position: absolute; left: -263px; padding:8px; background: none; box-shadow: none;">
+<div class="info-box disease-banner" style="padding:8px; background: none; box-shadow: none;">
     
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Средний прямоугольник 1 -->

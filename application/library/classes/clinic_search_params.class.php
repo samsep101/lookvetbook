@@ -98,6 +98,7 @@
                 'only_children=' . $this->is_card_pay .
                 'is_card_pay=' . $this->only_children .
                 'twenty_four_hours=' . $this->twenty_four_hours .
+                'primary_clinic_id=' . $this->primary_clinic_id .
                 'have_ramp=' . $this->have_ramp;
 
             if($this->geo_point)

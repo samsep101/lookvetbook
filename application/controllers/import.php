@@ -122,7 +122,7 @@ class ImportController extends BaseController
                 }
 
                 if ($docdata->Img){
-                    $tmp_name = '/var/www/lookmedb/www/media/upload/clinic/license/tmp_'.'doctor_'.$doctor->id.'.jpg';
+                    $tmp_name = '/home/vhost/medbook/www/media/upload/clinic/license/tmp_'.'doctor_'.$doctor->id.'.jpg';
 					echo "tmp file name:".$tmp_name."<br>".PHP_EOL;
                     if (file_exists($tmp_name))
                     {
@@ -157,7 +157,7 @@ class ImportController extends BaseController
             foreach ($clinic_specialty as $specialty){
                 $specialty_ids[$specialty->id] = $specialty->id;
             }
-
+if ($specialty_ids) {
             $q = "select DISTINCT specialization_id from specialty_to_specialization where specialty_id in (".implode(',', $specialty_ids).")";
             $specializations = $db->query($q);
             foreach ($specializations as $specialization){
@@ -172,6 +172,7 @@ class ImportController extends BaseController
                     $db->query($q);
                 }
             }
+}
             flush();
         }
 

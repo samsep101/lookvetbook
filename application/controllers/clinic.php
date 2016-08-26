@@ -35,11 +35,11 @@ class ClinicController extends BaseController
 
     $clinic = $clinic_manager->getOneByIdOrAliasAndIsActive($clinic_id);
 
-      if ($clinic->isPrimaryClinic()){
+    if ($clinic and $clinic->isPrimaryClinic()){
           $this->view->page_title = $clinic->name . ', ' . $clinic->city->name . $clinic_metro . ', ' . $clinic->address . ', отзывы, телефон, запись на прием - «'.SITE_NAME.'»';
           $this->view->clinic = $clinic;
           $this->render('clinic/primary');
-      }
+    }
 
 
     $specialization = $specialization_manager->getOneByAlias($clinic_id);

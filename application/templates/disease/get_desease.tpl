@@ -2,8 +2,6 @@
 <div class="inner">
 	<div class="about-ilness-content flo">
 		<div class="main-column">
-			
-			<?php include('get_desease_yandexdir.tpl'); ?>
             <?php $this->block('disease/blocks/adv_left_side'); ?>
             <div class="desease-phone">
 	            <a class="actionLink" href="/action">Акции и спецпредложения</a>
@@ -136,7 +134,8 @@
                              <div class="ortospy-banner2" onclick="window.location='/clinic/ortospayn';return false;"></div>
                            </div>
                         <?php } ?>
-
+			
+			<?php include('get_desease_yandexdir.tpl'); ?>
 			<div id="ban2"></div>
 			<?php include('get_desease_secondopinions.tpl');?>
 

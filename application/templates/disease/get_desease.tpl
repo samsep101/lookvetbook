@@ -102,7 +102,6 @@
 						</li>
 					</ol>
 				</div>
-                <div style="height: 306px">&nbsp;</div>
 			<?php } ?>
 
 			<?php if ($disease->medicine) { ?>

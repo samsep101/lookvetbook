@@ -209,7 +209,7 @@
 						<td>Получи <b>скидку 20% на все услуги<br/>рентгенолога</b> при посещении врача</td>
 						<td align="center" class="td-phone">
 							<div class="small-text">или по телефону</div>
-							<div class="info-phone">8 (495) 215-09-07</div>
+							<div class="info-phone">8 (<?php echo SITE_PHONE_CODE; ?>) <?php echo SITE_PHONE; ?></div>
 						</td>
 					</tr>
 				</table>

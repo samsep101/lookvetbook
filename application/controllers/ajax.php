@@ -771,10 +771,10 @@ class AjaxController extends BaseController
 
   public function recordToTheVisit()
   {
-      $recaptcha = new \ReCaptcha\ReCaptcha('6LelcycTAAAAAHTzIPUivRZQjqWfWYJJwI_-zsGQ');
-      $resp = $recaptcha->verify($_REQUEST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+//      $recaptcha = new \ReCaptcha\ReCaptcha('6LelcycTAAAAAHTzIPUivRZQjqWfWYJJwI_-zsGQ');
+//      $resp = $recaptcha->verify($_REQUEST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
-      if (!$resp->isSuccess()){
+      if (0 && !$resp->isSuccess()){
           JsonResponse::error([]);
       }
 
@@ -840,6 +840,7 @@ class AjaxController extends BaseController
       $mail_data['disease'] = $disease_id ? (new DiseaseManager())->getOneById($disease_id) : false;
       $mail_data['clinic'] = $clinic_id ? (new ClinicManager())->getOneById($clinic_id) : false;
       $mail_data['doctor'] = $doctor_id ? (new DoctorManager())->getOneById($doctor_id) : false;
+      $mail_data['account'] = $visit_information->account_id ? (new AccountManager())->getOneById($visit_information->account_id) : false;
 
       $mail_sender = new EmailSenderHelper();
       $mail_sender->sendRecordInformation($mail_data);

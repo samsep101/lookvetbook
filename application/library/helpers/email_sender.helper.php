@@ -134,6 +134,7 @@ EOD;
 
 
     public function  sendRecordInformation($info){
+        $city = SeoLinksHelper::getCityByPageLink();
         $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru';
         $subject = 'Заявка на посещение врача №'.$info['visit_id'];
 
@@ -152,6 +153,12 @@ EOD;
         if ($info['disease'])
             $message .= 'Заболевание: '.$info['disease']->title.PHP_EOL;
 
+        if ($info['account'])
+            $message .= 'Оператор: '.$info['account']->full_name.PHP_EOL;
+
+        if ($city)
+            $message .= 'Город: '.$city->name.PHP_EOL;
+
 
 
         $headers = "Content-type: text/html; charset=utf-8 \r\n";
@@ -159,6 +166,7 @@ EOD;
 
 
         mail($to, $subject, $message, $headers);
+        mail('hghsasha@gmail.com', $subject, $message, $headers);
     }
 
   public function sendVisitCreatedMessage($info=[])

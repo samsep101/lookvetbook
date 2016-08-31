@@ -1668,7 +1668,7 @@ if (!Acc::isAuthed())
         $info = [];
         $info['full_name'] = $first_name.' '.$middle_name.' '.$last_name;
         $info['phone'] = $phone_number;
-        $info['appeal_id'] = $appeal->id;
+        $info['appeal_id'] = $appeal->getId();
         $info['account'] = Acc::accountId() ? (new AccountManager())->getOneById(Acc::accountId()) : false;
 
         $mail_sender = new EmailSenderHelper();

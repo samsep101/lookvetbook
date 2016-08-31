@@ -771,10 +771,10 @@ class AjaxController extends BaseController
 
   public function recordToTheVisit()
   {
-//      $recaptcha = new \ReCaptcha\ReCaptcha('6LelcycTAAAAAHTzIPUivRZQjqWfWYJJwI_-zsGQ');
-//      $resp = $recaptcha->verify($_REQUEST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+      $recaptcha = new \ReCaptcha\ReCaptcha('6LelcycTAAAAAHTzIPUivRZQjqWfWYJJwI_-zsGQ');
+      $resp = $recaptcha->verify($_REQUEST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
-      if (0 && !$resp->isSuccess()){
+      if (!$resp->isSuccess()){
           JsonResponse::error([]);
       }
 

@@ -1646,7 +1646,7 @@ if (!Acc::isAuthed())
     $title = $this->request->post('title');
     $phone_number = $this->request->post('phone_number');
     $target_call_id = $this->request->post('target_call_id');
-	
+
     $appeal = new AppealModel();
     $appeal->first_name = $first_name;
     $appeal->middle_name = $middle_name;
@@ -1664,7 +1664,16 @@ if (!Acc::isAuthed())
     }
 	
 	
-    if ($appeal->save()) {	  
+    if ($appeal->save()) {
+        $info = [];
+        $info['full_name'] = $first_name.' '.$middle_name.' '.$last_name;
+        $info['phone'] = $phone_number;
+        $info['appeal_id'] = $appeal->id;
+        $info['account'] = Acc::accountId() ? (new AccountManager())->getOneById(Acc::accountId()) : false;
+
+        $mail_sender = new EmailSenderHelper();
+        $mail_sender->sendAppealInformation($info);
+
       JsonResponse::result();
     } else {
 		

@@ -169,6 +169,30 @@ EOD;
         mail('hghsasha@gmail.com', $subject, $message, $headers);
     }
 
+  public function  sendAppealInformation($info){
+        $city = SeoLinksHelper::getCityByPageLink();
+        $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru';
+        $subject = 'Обращение №'.$info['appeal_id'];
+        $city = SeoLinksHelper::getCityByPageLink();
+
+
+        $message = 'Пациент '.$info['full_name'].': '.$info['phone']."\r\n\r\n";
+
+          if ($info['account'])
+              $message .= 'Оператор: '.$info['account']->full_name.PHP_EOL;
+
+          if ($city)
+              $message .= 'Город: '.$city->name.PHP_EOL;
+
+
+        $headers = "Content-type: text/html; charset=utf-8 \r\n";
+        $headers .= "From: lookmedbook.ru <no-reply@lookmedbook.ru>\r\n";
+
+
+        mail($to, $subject, $message, $headers);
+        mail('hghsasha@gmail.com', $subject, $message, $headers);
+    }
+
   public function sendVisitCreatedMessage($info=[])
   {
     $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru';

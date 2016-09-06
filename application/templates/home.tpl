@@ -419,6 +419,7 @@
 
 <?php $this->block('blocks/record_form_container'); ?>
 <?php $this->block('blocks/learn_form_container'); ?>
+<script src="https://docdoc.ru/widget/js" type="text/javascript"></script>
 </body>
 </html>
 

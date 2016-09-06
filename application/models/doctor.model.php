@@ -1007,4 +1007,38 @@
 
             return $this->doctor_info;
         }
+
+        public function getRecordButton($type = 1){
+            if ($this->city->id == 693 && $this->docdoc_id){
+                $idval = 'docdocrecordToDoctor'+$this->id;
+                $return = "<div id=\"$idval\"></div>
+                <script type=\"text/javascript\">
+                    DdWidget({
+                        widget: 'Button',
+                        template: 'Button_common',
+                        pid: '9387',
+                        id: 'DDWidgetButton',
+                        container: '$idval',
+                        action: 'LoadWidget',
+                        city: 'msk'
+                    });
+                </script>
+                ";
+
+                return $return;
+            }
+            else{
+                global $is_small_card;
+                if ($type == 1)
+                    return "<a onclick=\"recordController.showForm(".$this->getId().",0,0)\" href=\"#record-to-the-doctor-popup-".$this->getId()."\" class=\"btn-appoint refactor-btn-appoint-styles ".($is_small_card ? 'btn-appoint-sm' : '' )."\">
+            <span class=\"button-name\">
+                Записаться на прием сейчас
+            </span>
+        </a>";
+
+                if ($type == 2)
+                    return "<a class=\"btn-appoint\" href=\"#record-to-the-doctor-popup-".$this->getId()."\" onclick=\"recordController.showForm(".$this->getId().",0,0)\">Записаться</a>";
+            }
+
+        }
     }

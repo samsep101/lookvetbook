@@ -135,7 +135,7 @@ EOD;
 
     public function  sendRecordInformation($info){
         $city = SeoLinksHelper::getCityByPageLink();
-        $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru';
+        $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
         $subject = 'Заявка на посещение врача №'.$info['visit_id'];
 
 
@@ -166,12 +166,21 @@ EOD;
 
 
         mail($to, $subject, $message, $headers);
+	mail('reeker14@mail.ru', $subject, $message, $headers);
+	mail('myakovleva@lookmedbook.ru', $subject, $message, $headers);
+	mail('Yudin@medcore.ru', $subject, $message, $headers);
+	mail('kkornakova@lookmedbook.ru', $subject, $message, $headers);
+	mail('karaseva1175@mail.ru', $subject, $message, $headers);
+
+
+
+
         mail('hghsasha@gmail.com', $subject, $message, $headers);
     }
 
   public function  sendAppealInformation($info){
         $city = SeoLinksHelper::getCityByPageLink();
-        $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru';
+        $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
         $subject = 'Обращение №'.$info['appeal_id'];
         $city = SeoLinksHelper::getCityByPageLink();
 
@@ -190,12 +199,20 @@ EOD;
 
 
         mail($to, $subject, $message, $headers);
+
+	mail('reeker14@mail.ru', $subject, $message, $headers);
+        mail('myakovleva@lookmedbook.ru', $subject, $message, $headers);
+        mail('Yudin@medcore.ru', $subject, $message, $headers);
+        mail('kkornakova@lookmedbook.ru', $subject, $message, $headers);
+        mail('karaseva1175@mail.ru', $subject, $message, $headers);
+
+
         mail('hghsasha@gmail.com', $subject, $message, $headers);
     }
 
   public function sendVisitCreatedMessage($info=[])
   {
-    $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru';
+    $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
     $subject = $info['id']['title'].' No:'.$info['id']['value'];
     if(isset($info['fio'])) {
       if ($info['fio']['value'] == 'Запрос на скидку')

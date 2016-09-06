@@ -208,6 +208,7 @@
     <style>
         .dd-button{
             width: 211px !important;
+            font-size: 15px !important;
         }
     </style>
 </head>

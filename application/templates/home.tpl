@@ -207,7 +207,7 @@
     <script src="https://docdoc.ru/widget/js" type="text/javascript"></script>
     <style>
         .dd-button{
-            width: 211px !important;
+            width: 100% !important;
             font-size: 15px !important;
         }
     </style>

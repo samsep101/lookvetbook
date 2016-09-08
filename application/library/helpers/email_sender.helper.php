@@ -167,8 +167,8 @@ EOD;
 
         mail($to, $subject, $message, $headers);
 	mail('reeker14@mail.ru', $subject, $message, $headers);
-	mail('myakovleva@lookmedbook.ru', $subject, $message, $headers);
-	mail('Yudin@medcore.ru', $subject, $message, $headers);
+//	mail('myakovleva@lookmedbook.ru', $subject, $message, $headers);
+//	mail('Yudin@medcore.ru', $subject, $message, $headers);
 	mail('kkornakova@lookmedbook.ru', $subject, $message, $headers);
 	mail('karaseva1175@mail.ru', $subject, $message, $headers);
 
@@ -202,8 +202,8 @@ EOD;
 
 	mail('reeker14@mail.ru', $subject, $message, $headers);
         mail('myakovleva@lookmedbook.ru', $subject, $message, $headers);
-        mail('Yudin@medcore.ru', $subject, $message, $headers);
-        mail('kkornakova@lookmedbook.ru', $subject, $message, $headers);
+//        mail('Yudin@medcore.ru', $subject, $message, $headers);
+//        mail('kkornakova@lookmedbook.ru', $subject, $message, $headers);
         mail('karaseva1175@mail.ru', $subject, $message, $headers);
 
 

@@ -608,6 +608,35 @@
             return $this->name . ' (' . $this->city->name . ', ' . $this->address . ')';
         }
 
+        public function getRecordButton($type = 1){
+            if ($this->city->id == 693 && $this->docdoc_id){
+                $idval = 'docdocrecordToClinic'+$this->id;
+                $return = "<div id=\"$idval\"></div>
+                <script type=\"text/javascript\">
+                    DdWidget({
+                        widget: 'Button',
+                        template: 'Button_common',
+                        pid: '9387',
+                        id: 'DDWidgetButton',
+                        container: '$idval',
+                        action: 'LoadWidget',
+                        city: 'msk'
+                    });
+                </script>
+                ";
+
+                return $return;
+            }
+            else{
+                if ($type == 1)
+                    return "<a class=\"btn-appoint\"  onclick=\"recordController.showForm(0,". $this->id .",0)\">Записаться на прием</a>";
+
+                if ($type == 2)
+                    return "<a href=\"#divider-shadow\" onclick=\"recordController.showForm(0,". $this->id.",0)\" class=\"btn-find-doctor-2\"><span class=\"txt appoint\">Записаться на прием</span></a>";
+            }
+
+        }
+
         public function getFirstVisitPriceByClinicId($clinic_id)
         {
         }

@@ -126,7 +126,7 @@
 			<div class="side-box">
 				<div class="btns">
 					<?php if (!$clinic->visit_disallow):?>
-						<a href="#divider-shadow" onclick="recordController.showForm(0,<?php echo $clinic->id?>,0)" class="btn-find-doctor-2"><span class="txt appoint">Записаться на прием</span></a>
+						<?=$clinic->getRecordButton(2)?>
 					<?php endif; ?>
 
 					<a class="btn-bookmark btn-bookmark-big click_btn_bookmark">

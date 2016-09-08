@@ -49,17 +49,13 @@ function click_on_doctor_record_button($this, doc_id) {
   <?php } else if(!empty($single_doctor_page)) { ?>
 
   <?php if (!$doctor->clinic->visit_disallow):?>
-    <a onclick="recordController.showForm(<?php echo $doctor->getId(); ?>,0,0)" href="#record-to-the-doctor-popup-<?php echo $doctor->getId(); ?>" class="btn-appoint refactor-btn-appoint-styles <?php echo $is_small_card ? 'btn-appoint-sm' : '' ; ?>">
-            <span class="button-name">
-                Записаться на прием сейчас
-            </span>
-        </a>
+	   <?=$doctor->getRecordButton()?>
   <?php endif; ?>
 
 	<?php /* <a style="width: 193px" href="javascript:void(0)" class="btn-bookmarkt btn-bookmark doctor_bookmark doctor_bookmark<?php echo $doctor->getId(); ?>"><i class="icon-add"></i><span class="txt" style="    margin-top: 6px;    display: inline-block;}">Добавить в закладки</span></a> */ ?>
     <?php } else { ?>
       <?php if (!$doctor->clinic->visit_disallow):?>
-        <a class="btn-appoint" href="#record-to-the-doctor-popup-<?php echo $doctor->getId(); ?>" onclick="recordController.showForm(<?php echo $doctor->getId(); ?>,0,0)">Записаться</a>
+		  <?=$doctor->getRecordButton(2)?>
       <?php endif; ?>
     <?php } ?>
 </div>

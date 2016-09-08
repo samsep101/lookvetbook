@@ -21,6 +21,12 @@
         disease_controller.init();
     });
 </script>
+<style>
+    .dd-button{
+        width: 100% !important;
+        font-size: 15px !important;
+    }
+</style>
 <div class="inner-home-main">
     <div class="center">
         <div class="left_search">

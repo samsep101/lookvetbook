@@ -204,6 +204,13 @@
     <meta name=viewport content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/media.css?<?php echo RELEASE_NUMBER?>" type="text/css"/>
     <script type="text/javascript" src="/media/js/responsive-switch.js"></script>
+    <script src="https://docdoc.ru/widget/js" type="text/javascript"></script>
+    <style>
+        .dd-button{
+            width: 100% !important;
+            font-size: 15px !important;
+        }
+    </style>
 </head>
 <body>
 <a href="#"

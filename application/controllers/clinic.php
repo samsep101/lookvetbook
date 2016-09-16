@@ -247,7 +247,6 @@ class ClinicController extends BaseController
     $this->initClinicSearchParams($params);
 
     $clinic_search_algorithm = new ClinicSearchAlgorithm();
-
     if ($primary_clinic_id = $this->request('primary_clinic_id', 0)){ /**TODO remove this costil with correct search algoritm */
         $clinics = (new ClinicManager())->getChildsClinic($primary_clinic_id);
     }elseif (0 && $clinic_name = $this->request('clinic_name', '')){
@@ -256,7 +255,6 @@ class ClinicController extends BaseController
     else{
         $clinics = $clinic_search_algorithm->search($params);
     }
-
 
     $clinic_count = [count($clinics)];
     $specialization_manager = ModelManagerFactory::getByName('specialization');
@@ -295,8 +293,9 @@ class ClinicController extends BaseController
     if ($params->page == 1) {
       $map_file_generator = new ClinicMapDataGenerator();
       $map_file = $map_file_generator->generate($params);
-
-      if ($params->geo_point) {
+ 
+     if (is_object($params->geo_point)) {
+	die('3333');
         /**
          * @var ClinicManager $clinic_manager
          */
@@ -507,6 +506,7 @@ class ClinicController extends BaseController
 
     if ($latitude && $longitude) {
       $params->geo_point = new GeoPoint($latitude, $longitude);
+
       $params->is_metro = $is_metro;
     }
     $clinic_type = $this->request('clinic_type');

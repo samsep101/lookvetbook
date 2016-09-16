@@ -179,7 +179,7 @@ EOD;
     }
 
   public function  sendAppealInformation($info){
-        $city = SeoLinksHelper::getCityByPageLink();
+        /*$city = SeoLinksHelper::getCityByPageLink();
         $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
         $subject = 'Обращение №'.$info['appeal_id'];
         $city = SeoLinksHelper::getCityByPageLink();
@@ -207,7 +207,7 @@ EOD;
         mail('karaseva1175@mail.ru', $subject, $message, $headers);
 
 
-        mail('hghsasha@gmail.com', $subject, $message, $headers);
+        mail('hghsasha@gmail.com', $subject, $message, $headers);*/
     }
 
   public function sendVisitCreatedMessage($info=[])
@@ -234,6 +234,41 @@ EOD;
 
     mail($to, $subject, $message, $headers);
   }
+
+
+    /**
+     * @param VisitModel $visit
+     */
+    public static function sendVisitConfirmMessage($visit)
+    {
+        $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
+        $subject = 'Заявка №'.$visit->id.' подтверждена';
+
+        $message = 'Заявка №'.$visit->id.' подтверждена'.PHP_EOL.PHP_EOL;
+        $message .= 'Пациент:'.$visit->full_name.PHP_EOL;
+        $message .= 'Телефон:'.$visit->phone.PHP_EOL;
+
+        if ($visit->city)
+            $message .= 'Город:'.$visit->city->name.PHP_EOL;
+
+        if ($visit->operator)
+            $message .= 'Оператор:'.$visit->operator->full_name.'('.$visit->operator->email.')'.PHP_EOL;
+
+        if ($visit->clinic)
+            $message .= 'Клиника:'.$visit->clinic->full_name.PHP_EOL;
+
+
+
+        $message .= "\n\n";
+
+        $headers = "Content-type: text/html; charset=utf-8 \r\n";
+        $headers .= "From: ".SITE_DOMAIN." <no-reply@".SITE_DOMAIN.">\r\n";
+
+
+        $emails = explode(',',$to);
+        foreach ($emails as $to)
+            mail($to, $subject, $message, $headers);
+    }
 
 
 

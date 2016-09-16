@@ -35,7 +35,22 @@ class VisitManager extends ModelWAccountidManager
       $model->is_new_visit = 0;
     }
 
+    if (!$model->city_id)
+    {
+        $city = SeoLinksHelper::getCityByPageLink();
+        $model->city_id = $city->id;
+    }
+
+    if (!$model->operator_account_id){
+        $model->operator_account_id = Acc::accountId() ? Acc::accountId() : false;
+    }
+
     $model->phone = preg_replace('/[^0-9]/', '', $model->phone);
+
+      if ($model->status_id == VisitModel::CONFIRMED && !$model->create_mail_sended){
+          EmailSenderHelper::sendVisitConfirmMessage($model);
+          $model->create_mail_sended = 1;
+      }
 
     if ($model->visit_start_time && $model->isChangeStatus() && ($model->status_id == VisitModel::CONFIRMED)) {
       if ($model->account && $model->account->email) {
@@ -156,9 +171,6 @@ class VisitManager extends ModelWAccountidManager
 
         }
     }
-
-
-
 
     /*
     if ($model->doctor_id && $model->status_id == VisitModel::VISITED)

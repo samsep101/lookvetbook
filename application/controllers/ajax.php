@@ -1658,12 +1658,14 @@ if (!Acc::isAuthed())
     $appeal->title = $title;
     $appeal->phone_number = $phone_number;
     $appeal->target_call_id = $target_call_id;
-	
+
+    $city = SeoLinksHelper::getCityByPageLink();
+    $appeal->city_id = $city->id;
+
     if ($appeal->appeal_type_id == 2) {
       $appeal->do_not_check = array('specialty_id');
     }
-	
-	
+
     if ($appeal->save()) {
         $info = [];
         $info['full_name'] = $first_name.' '.$middle_name.' '.$last_name;
@@ -1673,8 +1675,7 @@ if (!Acc::isAuthed())
 
         $mail_sender = new EmailSenderHelper();
         $mail_sender->sendAppealInformation($info);
-
-      JsonResponse::result();
+      JsonResponse::result(true, $appeal->getVisit()->id);
     } else {
 		
       JsonResponse::error($appeal->getValidator()->getErrorCodes());

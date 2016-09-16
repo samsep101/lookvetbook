@@ -443,6 +443,7 @@
                 'fields' => array(
                     'Визит' => array(
                         'visit_number',
+                        'city_id',
                         'widget_site.name',
                         'time_create',
                         'yandex_id',

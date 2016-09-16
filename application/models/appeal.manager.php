@@ -90,6 +90,7 @@ class AppealManager extends ModelWAccountidManager
 
   public function afterSave(DynamicModel $model)
   {
+      /** @var AppealModel $model */
     if ($model->is_with_visit && !$model->visit) {
       /**
        * @var AccountManager $account_manager
@@ -112,6 +113,7 @@ class AppealManager extends ModelWAccountidManager
       $visit_recorder = new VisitRecorder();
       $visit_recorder->record($visit_information);
       $visit_recorder->getVisit();
+
     }
 
     //ALTER TABLE `appeal`  ADD `mailed` tinyint unsigned NULL DEFAULT '0';

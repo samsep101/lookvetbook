@@ -38,6 +38,9 @@ var CallCentreAppealFormController = function () {
                 self.view.hide();
                 message_popup.show('Обращение сохранено');
 
+                if (data.visit_id > 0)
+                    window.location = '/admin/visit/edit/?id=' + data.visit_id;
+
                 if (self.success_request_callback)
                     self.success_request_callback();
             } else {

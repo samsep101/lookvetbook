@@ -58,7 +58,11 @@
      * @property int $second_visit_price_to_clinic
      * @property TargetCallModel $target_call
      * @property int $target_call_id
+     * @property int $operator_account_id
+     * @property boolean $create_mail_sended
      * @property AppealModel $appeal
+     * @property CityModel $city
+     * @property AccountModel $operator
 	 */
 	class VisitModel extends DynamicModel
 	{
@@ -535,5 +539,29 @@
             $this->appeal = $appeal_manager->getOneById($this->appeal_id);
 
             return $this->appeal;
+        }
+
+        protected function _field_city()
+        {
+            if(isset($this->city) && $this->city) {
+                return $this->city;
+            }
+
+            /**
+             * @var AppealManager $appeal_manager
+             */
+            return $this->appeal = (new CityManager())->getOneById($this->city_id);
+        }
+
+        protected function _field_operator()
+        {
+            if(isset($this->operator) && $this->operator) {
+                return $this->operator;
+            }
+
+            /**
+             * @var AppealManager $appeal_manager
+             */
+            return $this->operator = (new AccountManager())->getOneById($this->operator_account_id);
         }
 	}

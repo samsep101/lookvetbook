@@ -135,7 +135,7 @@ class SystemController extends BaseController
       $report_generator->setDateFrom($date_from);
       $report_generator->setDateTo($date_to);
 
-      $filename = $clinic->alias . '_' . $months[$visit_month] . '_' . $visit_year . '.docx';
+      $filename = str_replace('/', '_', $clinic->alias) . '_' . $months[$visit_month] . '_' . $visit_year . '.docx';
       $file_path = './media/reports/' . $filename;
 
       $report_generator->generate($file_path);

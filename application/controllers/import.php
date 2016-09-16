@@ -10,8 +10,13 @@ class ImportController extends BaseController
         $clinic_data_url = 'https://lookmedbook:IzkmbB@back.docdoc.ru/api/rest/1.0.6/json/clinic/';
         $doctor_data_url = 'https://lookmedbook:IzkmbB@back.docdoc.ru/api/rest/1.0.6/json/doctor/';
         foreach ($clinics as $clinic){
+#if ($clinic->id != 3819)continue;
+	
+	
+
             echo "clinic: $clinic->name<br>".PHP_EOL;
             try{
+		echo $clinic_data_url.$clinic->docdoc_id.PHP_EOL;
                 $s = file_get_contents($clinic_data_url.$clinic->docdoc_id);
                 $data = json_decode($s);
                 $data = $data->Clinic[0];

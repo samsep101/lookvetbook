@@ -400,7 +400,7 @@ class AjaxController extends BaseController
     $clinic_id = $this->request('id');
 
     $clinic = ModelManagerFactory::getByName('clinic')->getOneById($clinic_id);
-
+#pr($clinic_id, 1);
     $this->view->clinic = $clinic;
 
     $this->view->clinic_id = $clinic_id;

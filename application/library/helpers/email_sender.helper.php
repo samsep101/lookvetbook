@@ -241,7 +241,7 @@ EOD;
      */
     public static function sendVisitConfirmMessage($visit)
     {
-        $to = ' hghsasha@gmail.com,isharanovich@lookmedbook.ru,karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
+        $to = 'hghsasha@gmail.com,isharanovich@lookmedbook.ru,karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
         $subject = 'Заявка №'.$visit->id.' подтверждена';
 
         $message = 'Заявка №'.$visit->id.' подтверждена'.PHP_EOL.PHP_EOL;

@@ -771,6 +771,11 @@ class AjaxController extends BaseController
 
   public function recordToTheVisit()
   {
+      $a = '';
+      $schedule_date = '';
+      $clinic_id = '';
+      $specialty_id = '';
+
       $recaptcha = new \ReCaptcha\ReCaptcha('6LelcycTAAAAAHTzIPUivRZQjqWfWYJJwI_-zsGQ');
       $resp = $recaptcha->verify($_REQUEST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 

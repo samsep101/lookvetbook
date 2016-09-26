@@ -11,14 +11,16 @@
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-<a href="http://lookvetbook.ru" target="_blank"><img src="/media/banners/vetbook.png"></a>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- Средний прямоугольник 1 -->
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:300px;height:250px"
-         data-ad-client="ca-pub-9282446199553525"
-         data-ad-slot="7330182899"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
+    <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-1191230850516122";
+        /* adxguru\lookmedbook.ru\300x250\0 */
+        google_ad_slot = "5780876127";
+        google_ad_width = 300;
+        google_ad_height = 250;
+        //-->
     </script>
+    <script type="text/javascript"
+            src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+<a href="http://lookvetbook.ru" target="_blank"><img src="/media/banners/vetbook.png"></a>
 </div>

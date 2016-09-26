@@ -11,7 +11,6 @@
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-<a href="http://lookvetbook.ru" target="_blank"><img src="/media/banners/vetbook.png"></a>
     <script type="text/javascript"><!--
         google_ad_client = "ca-pub-1191230850516122";
         /* adxguru\lookmedbook.ru\300x250\0 */
@@ -23,4 +22,5 @@
     <script type="text/javascript"
             src="//pagead2.googlesyndication.com/pagead/show_ads.js">
     </script>
+    <a href="http://lookvetbook.ru" target="_blank"><img src="/media/banners/vetbook.png"></a>
 </div>

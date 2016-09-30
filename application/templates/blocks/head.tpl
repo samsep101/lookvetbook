@@ -112,6 +112,12 @@
         width: 100% !important;
         font-size: 15px !important;
     }
+
+    #our-doctors .clinic-card .btns div {
+        display: inline-block;
+        float: left;
+        width: 50%;
+    }
 </style>
 <script>
 	<?php if($city): ?>

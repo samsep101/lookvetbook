@@ -107,7 +107,12 @@
 <link rel="stylesheet" type="text/css" href="/media/js/jquery-rating/styles/jquery.rating.css?<?php echo RELEASE__NUMBER?>"/>
 
 <script src="/media/js/jquery.event.move.js?<?php echo RELEASE__NUMBER?>"></script>
-
+<style>
+    .dd-button{
+        width: 100% !important;
+        font-size: 15px !important;
+    }
+</style>
 <script>
 	<?php if($city): ?>
     $(document).ready(function () {

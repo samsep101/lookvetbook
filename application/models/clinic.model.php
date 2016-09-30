@@ -609,7 +609,8 @@
         }
 
         public function getRecordButton($type = 1){
-            if ($this->city->id == 693 && $this->docdoc_id){
+            $clinic_with_docdoc_button = [693,770];
+            if ( in_array($this->city->id, $clinic_with_docdoc_button) && $this->docdoc_id){
                 $idval = 'docdocrecordToClinic'+$this->id;
                 $return = "<div id=\"$idval\"></div>
                 <script type=\"text/javascript\">

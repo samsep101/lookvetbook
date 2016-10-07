@@ -295,7 +295,7 @@ class ClinicController extends BaseController
       $map_file = $map_file_generator->generate($params);
  
      if (is_object($params->geo_point)) {
-	die('3333');
+	#die('3333');
         /**
          * @var ClinicManager $clinic_manager
          */

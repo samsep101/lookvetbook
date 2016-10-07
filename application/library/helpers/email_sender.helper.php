@@ -135,7 +135,7 @@ EOD;
 
     public function  sendRecordInformation($info){
         $city = SeoLinksHelper::getCityByPageLink();
-        $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
+        $to = 'carelookmed@yandex.ru,karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
         $subject = 'Заявка на посещение врача №'.$info['visit_id'];
 
 
@@ -167,6 +167,7 @@ EOD;
 
         mail($to, $subject, $message, $headers);
 	mail('reeker14@mail.ru', $subject, $message, $headers);
+	mail('carelookmed@yandex.ru', $subject, $message, $headers);
 //	mail('myakovleva@lookmedbook.ru', $subject, $message, $headers);
 //	mail('Yudin@medcore.ru', $subject, $message, $headers);
 	mail('kkornakova@lookmedbook.ru', $subject, $message, $headers);
@@ -212,7 +213,7 @@ EOD;
 
   public function sendVisitCreatedMessage($info=[])
   {
-    $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
+    $to = 'carelookmed@yandex.ru,karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
     $subject = $info['id']['title'].' No:'.$info['id']['value'];
     if(isset($info['fio'])) {
       if ($info['fio']['value'] == 'Запрос на скидку')
@@ -241,7 +242,7 @@ EOD;
      */
     public static function sendVisitConfirmMessage($visit)
     {
-        $to = 'hghsasha@gmail.com,isharanovich@lookmedbook.ru,karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
+        $to = 'carelookmed@yandex.ru,hghsasha@gmail.com,isharanovich@lookmedbook.ru,karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
         $subject = 'Заявка №'.$visit->id.' подтверждена';
 
         $message = 'Заявка №'.$visit->id.' подтверждена'.PHP_EOL.PHP_EOL;

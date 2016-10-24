@@ -109,7 +109,7 @@
                 }
                 .adv_text{
                     float: left;
-                    width: 40%;
+                    width: 35%;
                     font-size: 16px;
                 }
                 .goods_with_adv{

@@ -107,6 +107,16 @@
                 .adv_text p.showme{
                     display: block;
                 }
+                .adv_text{
+                    float: left;
+                    width: 40%;
+                    font-size: 16px;
+                }
+                .goods_with_adv{
+                    float: right;
+                    width: 60%;
+                }
+
             </style>
             <div class="adv_text">
                 <p class="showme">
@@ -136,7 +146,7 @@
                     воспалительных и вирусных заболеваний печени и для профилактики ее патологий.
                 </p>
                 <p>
-                <div align="center"><img src="/media/images/banners/fosfogliv.jpg"></div>
+                <div align="center"><img src="/media/images/banners/fosfogliv.jpg" width="300"></div>
                 </p>
                 <p>
                     Почему так важно понять, какой гепатопротектор подходит именно вам? Дело в том, что разница в составе, показаниях, противопоказаниях и фармакологических
@@ -222,46 +232,45 @@
                 </p>
             </div>
         <?php endif; ?>
-
-
-
-            <?php if(isset($product_category) && $product_category): ?>
-                <h4>
-                    <a class="category" href="<?php echo ProductCategoryLinkViewHelper::getLink($product_category); ?>">
-                        <?php echo $product_category->name; ?>
-                    </a>
-                    <?php if(isset($product_category) && $product_category && !$product_categories && !$parent_product_category): ?>
-                        <a class="back" href="/shop/catalog">к списку лекарств</a>
-                    <?php endif; ?>
-                </h4>
-            <?php endif; ?>
-
-            <a class="load-next-page view-more" href="javascript:void(0);" data-page="1"><i class="icon-loader"></i></a>
-            <?php if ($product_category->description): ?>
-                <div class="bg_gradient about_good">
-                    <p class="h-txt"><?php echo $product_category->name; ?></p>
-                    <p class="txt"><?php echo $product_category->description; ?></p>
-                </div>
-            <?php endif; ?>
-        <?php else: ?>
-            <div class="bg_gradient catalog_list_container">
-                <?php if(!isset($pattern) && isset($root_product_category) && $root_product_category): ?>
-                    <?php $this->product_category = $root_product_category; ?>
-                    <?php $this->product_categories = $product_categories; ?>
-                    <?php $this->block('shop/catalog/product_categories'); ?>
-                <?php else: ?>
-                    <ul class="catalog_list" style="height: 30px">
-                        <li class="search_pattern"><?php echo 'Результаты поиска по запросу ' .'"' .$pattern .'"'; ?></li>
-                        <h3><a class="back" href="/shop/catalog">вернуться в каталог</a></h3>
-                    </ul>
+        <div class="goods_with_adv">
+                <?php if(isset($product_category) && $product_category): ?>
+                    <h4>
+                        <a class="category" href="<?php echo ProductCategoryLinkViewHelper::getLink($product_category); ?>">
+                            <?php echo $product_category->name; ?>
+                        </a>
+                        <?php if(isset($product_category) && $product_category && !$product_categories && !$parent_product_category): ?>
+                            <a class="back" href="/shop/catalog">к списку лекарств</a>
+                        <?php endif; ?>
+                    </h4>
                 <?php endif; ?>
-            </div>
 
-            <?php if(!isset($pattern)): ?>
-                <h2 style="color: #818080">Популярные лекарства</h2>
+                <a class="load-next-page view-more" href="javascript:void(0);" data-page="1"><i class="icon-loader"></i></a>
+                <?php if ($product_category->description): ?>
+                    <div class="bg_gradient about_good">
+                        <p class="h-txt"><?php echo $product_category->name; ?></p>
+                        <p class="txt"><?php echo $product_category->description; ?></p>
+                    </div>
+                <?php endif; ?>
+            <?php else: ?>
+                <div class="bg_gradient catalog_list_container">
+                    <?php if(!isset($pattern) && isset($root_product_category) && $root_product_category): ?>
+                        <?php $this->product_category = $root_product_category; ?>
+                        <?php $this->product_categories = $product_categories; ?>
+                        <?php $this->block('shop/catalog/product_categories'); ?>
+                    <?php else: ?>
+                        <ul class="catalog_list" style="height: 30px">
+                            <li class="search_pattern"><?php echo 'Результаты поиска по запросу ' .'"' .$pattern .'"'; ?></li>
+                            <h3><a class="back" href="/shop/catalog">вернуться в каталог</a></h3>
+                        </ul>
+                    <?php endif; ?>
+                </div>
+
+                <?php if(!isset($pattern)): ?>
+                    <h2 style="color: #818080">Популярные лекарства</h2>
+                <?php endif; ?>
+                <a class="load-next-page view-more" href="javascript:void(0);" data-page="1"><i class="icon-loader"></i></a>
             <?php endif; ?>
-            <a class="load-next-page view-more" href="javascript:void(0);" data-page="1"><i class="icon-loader"></i></a>
-        <?php endif; ?>
+        </div>
     </div>
 
     <?php /*

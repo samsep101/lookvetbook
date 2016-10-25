@@ -233,19 +233,19 @@
             </div>
         <div class="goods_with_adv">
             <ul class="goods_blocks">
-                <li class="bg_gradient buy product-card product-card-19042" data-id="19042">
-                    <a href="/shop/product/essliver-forte-kapsuly-50-sht">
-                        <img src="/media/upload/product/130x130-resize-1390808051-s3BBHH64HB.jpg">
-                    </a>
-                    <p class="good_name"><a href="/shop/product/essliver-forte-kapsuly-50-sht">Эссливер форте капсулы, 50 шт.</a>
-                        Наброс Фарма                    </p>
-                </li>
                 <li class="bg_gradient buy product-card product-card-20906" data-id="20906">
                     <a href="/shop/product/fosfogliv-forte-kapsuly-30065-mg-50-sht">
                         <img src="/media/upload/product/130x130-resize-1391592395-Nf8n6y4Bit.jpg">
                     </a>
                     <p class="good_name"><a href="/shop/product/fosfogliv-forte-kapsuly-30065-mg-50-sht">Фосфоглив форте капсулы 300+65 мг, 50 шт.</a>
                         Фармстандарт                    </p>
+                </li>
+                <li class="bg_gradient buy product-card product-card-19042" data-id="19042">
+                    <a href="/shop/product/essliver-forte-kapsuly-50-sht">
+                        <img src="/media/upload/product/130x130-resize-1390808051-s3BBHH64HB.jpg">
+                    </a>
+                    <p class="good_name"><a href="/shop/product/essliver-forte-kapsuly-50-sht">Эссливер форте капсулы, 50 шт.</a>
+                        Наброс Фарма                    </p>
                 </li>
             </ul>
         </div>

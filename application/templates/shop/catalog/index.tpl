@@ -109,12 +109,12 @@
                 }
                 .adv_text{
                     float: left;
-                    width: 35%;
+                    width: 55%;
                     font-size: 16px;
                 }
                 .goods_with_adv{
                     float: right;
-                    width: 60%;
+                    width: 40%;
                 }
 
             </style>
@@ -231,8 +231,26 @@
                     аккуратны при выборе медикамента и принимайте лекарства только в соответствии с инструкцией!
                 </p>
             </div>
-        <?php endif; ?>
         <div class="goods_with_adv">
+            <ul class="goods_blocks">
+                <li class="bg_gradient buy product-card product-card-19042" data-id="19042">
+                    <a href="/shop/product/essliver-forte-kapsuly-50-sht">
+                        <img src="/media/upload/product/130x130-resize-1390808051-s3BBHH64HB.jpg">
+                    </a>
+                    <p class="good_name"><a href="/shop/product/essliver-forte-kapsuly-50-sht">Эссливер форте капсулы, 50 шт.</a>
+                        Наброс Фарма                    </p>
+                </li>
+                <li class="bg_gradient buy product-card product-card-20906" data-id="20906">
+                    <a href="/shop/product/fosfogliv-forte-kapsuly-30065-mg-50-sht">
+                        <img src="/media/upload/product/130x130-resize-1391592395-Nf8n6y4Bit.jpg">
+                    </a>
+                    <p class="good_name"><a href="/shop/product/fosfogliv-forte-kapsuly-30065-mg-50-sht">Фосфоглив форте капсулы 300+65 мг, 50 шт.</a>
+                        Фармстандарт                    </p>
+                </li>
+            </ul>
+        </div>
+        <br clear="all">
+        <?php endif; ?>
                 <?php if(isset($product_category) && $product_category): ?>
                     <h4>
                         <a class="category" href="<?php echo ProductCategoryLinkViewHelper::getLink($product_category); ?>">
@@ -270,7 +288,6 @@
                 <?php endif; ?>
                 <a class="load-next-page view-more" href="javascript:void(0);" data-page="1"><i class="icon-loader"></i></a>
             <?php endif; ?>
-        </div>
     </div>
 
     <?php /*

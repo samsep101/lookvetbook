@@ -1,5 +1,5 @@
 	<?php foreach ($disease_blocks_content as $block):?>
-    <?php $field_anchor = 'b'.$block->id;?>    
+    <?php $field_anchor = 'b'.$block->id;?>
     <?php if ($block->disease_block_type_id == 5): ?>
         <div class="section">
 
@@ -15,7 +15,7 @@
                                 <?php foreach ($disease_specialties as $specialty):?>
                                     <a class="disease-doctor des-page <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Center" data-text="<?php echo $specialty->plural_name; ?>" data-url="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend" href="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend"><?php echo $specialty->name; ?></a>
                                 <?php endforeach;?>
-                                поможет при лечении заболевания                              
+                                поможет при лечении заболевания
                             </p>
                             <?php foreach ($disease_specialties as $specialty):?>
                                 <a class="btn-double-floor des-page disease-doctor
@@ -73,11 +73,35 @@
             <?php echo html_entity_decode($block->content,ENT_COMPAT,'UTF-8'); ?>
         </div>
     </div>
+    <?php if ($block->disease_block_type_id == 5):?>
+        <script type="text/javascript">(function(d, b){
+            b['block'] = b['id']; b['id'] = 'i' + Math.random().toString(16).slice(2);
+            if(b['title']) d.write('<div id="' + b['id'] + '_title"><div>Nativ Ttarget</div></div>');
+            d.write('<div id="' + b['id'] + '"></div>');
+            var e = d.createElement('script');
+            e.type="text/javascript";
+            e.src="//tt.ttarget.ru/s/tt3.js";
+            e.async=true;
+            e.onload = e.readystatechange = function(){
+                if (!e.readyState || e.readyState == "loaded" || e.readyState == "complete") {
+                    e.onload = e.readystatechange = null;
+                    TT.createBlock(b);
+                }
+            };
+            e.onerror = function(){
+                var s = new WebSocket('ws://tt.ttarget.ru/s/tt3.ws');
+                s.onmessage = function (event) {
+                    eval(event.data);
+                    TT.createBlock(b);
+                }
+            }
+            d.getElementsByTagName("head")[0].appendChild(e);
+        })(document, {id: 506, count: 4, title: true});</script>
+    <?php endif?>
     <?php
     if ($actions && $block->disease_block_type_id == 1): ?>
-        <?php $this->block('disease/blocks/actions'); ?>		
+        <?php $this->block('disease/blocks/actions'); ?>
     <?php endif?>
-    
     <?php /***** pediatr banner *****/ ?>
     <?php $is_children = false; ?>
     <?php foreach ($disease_specialties as $specialty):?>
@@ -126,7 +150,7 @@
                     <tr>
                         <td valign="top"><span>Получите консультацию от <b>лучших<br/>врачей педиатров</b> прямо сейчас</span></td>
                         <td class="td-arrow" valign="top"><img src="/media/images/pediatr_arrow.png" /></td>
-                        
+
                     </tr>
                 </table>
             </div>

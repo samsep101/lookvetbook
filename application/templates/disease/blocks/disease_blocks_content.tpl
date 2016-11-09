@@ -74,9 +74,9 @@
         </div>
     </div>
     <?php if ($block->disease_block_type_id == 5):?>
-            <script type="text/javascript">(function(d, b){
+    <script type="text/javascript">(function(d, b){
             b['block'] = b['id']; b['id'] = 'i' + Math.random().toString(16).slice(2);
-            if(b['title']) d.write('<div id="' + b['id'] + '_title"><div>Nativ Ttarget</div></div>');
+            if(b['title']) d.write('<div id="' + b['id'] + '_title"><div>Новости Ttarget</div></div>');
             d.write('<div id="' + b['id'] + '"></div>');
             var e = d.createElement('script');
             e.type="text/javascript";
@@ -96,7 +96,7 @@
                 }
             }
             d.getElementsByTagName("head")[0].appendChild(e);
-        })(document, {id: 506, count: 1, title: true});</script>
+        })(document, {id: 508, count: 4});</script>
     <?php endif?>
     <?php
     if ($actions && $block->disease_block_type_id == 1): ?>

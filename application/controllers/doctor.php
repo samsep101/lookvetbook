@@ -1573,8 +1573,6 @@ class DoctorController extends BaseController
     $this->view->doctor = $doctor;
     $this->view->reviews = $reviews;
 
-     
-
     $count = count($reviews);
 
     $html = $this->renderInString('doctor/blocks/card_review_list');

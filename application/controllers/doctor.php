@@ -1570,10 +1570,12 @@ class DoctorController extends BaseController
 
     $doctor = $doctor_manager->getOneById($doctor_id);
 
+      $reviews = array_reverse($reviews);
+
     $this->view->doctor = $doctor;
     $this->view->reviews = $reviews;
 
-      $reviews = array_reverse($reviews);
+
 
     $count = count($reviews);
 

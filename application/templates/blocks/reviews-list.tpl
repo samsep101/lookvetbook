@@ -1,5 +1,4 @@
 <?php $counter = 1; ?>
-<?php $reviews = array_reverse($reviews); ?>
 <?php foreach($reviews as $review): ?>
 	<div id="doctor-review-<?php echo (isset($review->visit) and isset($review->visit->rating)) ? $review->visit->rating->getId() : rand(1,10000); ?>" class="review-box flo <?php if ($counter % 2 == 0) echo 'fright';?>" itemscope itemtype="http://schema.org/Review">
 		<span class="chk-pic"></span>

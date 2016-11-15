@@ -83,6 +83,8 @@
 
 			$data = $this->db->query($sql);
 
+            $data = array_reverse($data);
+
 			return ($data) ? $this->initList($data) : array();
 		}
 

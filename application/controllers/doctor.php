@@ -1570,14 +1570,11 @@ class DoctorController extends BaseController
 
     $doctor = $doctor_manager->getOneById($doctor_id);
 
-      $reviews = array_reverse($reviews);
 
     $this->view->doctor = $doctor;
     $this->view->reviews = $reviews;
 
-
-
-    $count = count($reviews);
+      $count = count($reviews);
 
     $html = $this->renderInString('doctor/blocks/card_review_list');
     JsonResponse::result(array('html' => $html, 'count' => $count));

@@ -1,3 +1,4 @@
+<?php /*
 <div class="actionsList">
     <?php foreach($actions as $e):?>
 	<?php if ($e->name){ ?>
@@ -17,3 +18,4 @@
     <?php } ?>
     <?php endforeach; ?>
 </div>
+*/ ?>

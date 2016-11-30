@@ -31,14 +31,40 @@ class DoctorController extends BaseController
             $doctor_id = str_replace('2', '', $doctor_id);
         }
 
-        $specialty = $specialty_manager->getOneByAlias($doctor_id);
+        $specialty  =   null;
+
+        
         $district_manager = new DistrictManager();
-        $district = $district_manager->getOneByAlias($landing_alias);
+        $metro_manager = new MetroStationManager();
+        $region_manager = new RegionManager();
 
-        $metro = (new MetroStationManager())->getOneByAlias($landing_alias);
-        $region = (new RegionManager())->getOneByAlias($landing_alias);
+        preg_match('/([A-Za-z]+)-((metro-[A-Za-z\-]+))/',$landing_alias,$v);
 
-
+        $district   =   null;
+        $metro      =   null;
+        $region     =   null;
+        if (isset($v) && count($v)) {
+            foreach ($v as $val) {
+                if ($district==null)  $district = $district_manager->getOneByAlias($val);
+                if ($metro==null)     $metro    = $metro_manager->getOneByAlias($val);
+                if ($region==null)    $region   = $region_manager->getOneByAlias($val);
+                if ($specialty==null) $specialty= $specialty_manager->getOneByAlias($val);
+                
+            };
+        } else {
+          $district = $district_manager->getOneByAlias($landing_alias);
+          $metro    = $metro_manager->getOneByAlias($landing_alias);
+          $region   = $region_manager->getOneByAlias($landing_alias);
+          $specialty = $specialty_manager->getOneByAlias($landing_alias);
+        }
+        if ($specialty!=null || $district!=null || $region!=null || $metro!=null) {
+            $this->index($specialty->alias, $district, $metro, $region);
+            unset($specialty);
+            unset($district);
+            unset($metro);
+            unset($region);            
+            
+/*
         if ($region){
             $this->index(null, null, null, $region);
             unset($specialty);
@@ -57,6 +83,7 @@ class DoctorController extends BaseController
         }elseif ($specialty) {
             $this->index($landing_alias);
             unset($specialty);
+*/
         } else {
             $doctor = $doctor_manager->getOneByIdOrAlias($doctor_id);
 
@@ -146,6 +173,8 @@ class DoctorController extends BaseController
             $this->view->doctor_schedules = $doctor_schedules;
             unset($doctor_schedules);
         }
+
+
 
         $this->view->city_id = $this->city->getId();
 
@@ -435,7 +464,7 @@ class DoctorController extends BaseController
             ErrorPageViewHelper::page404('404');
 
         $landing = $this->request('landing');
-
+        
         $specialty_manager = ModelManagerFactory::getByName('specialty');
 
         if (isset($_GET['specialty_id']) && $_GET['specialty_id']) {
@@ -606,7 +635,6 @@ class DoctorController extends BaseController
             $this->view->is_seo_page = 1;
 
             $address_object = NULL;
-
             $previous_address = '/doctor';
             $previous_address .= ($this->request('specialty')) ? '/' . $this->request('specialty') : '/terapevt';
             $doctor_manager = new DoctorManager();
@@ -636,11 +664,9 @@ class DoctorController extends BaseController
                 $address_object = $city;
             }
 
-
             $this->view->address_object = $address_object;
 
             if ($specialty) {
-
                 $doctor_manager = new DoctorManager();
                 if (!$doctor_manager->checkExistsBySpecialtyIdAddressObject($specialty->getId(), $address_object)) {
                     RedirectManager::redirect($previous_address);
@@ -662,7 +688,6 @@ class DoctorController extends BaseController
         $this->view->address->region_id = $region ? $region->getId() : FALSE;
         $this->view->address->street_id = $street ? $street->getId() : FALSE;
         $this->view->setDefaultSpecialty = !empty($setDefaultSpecialty) ? $setDefaultSpecialty : 0;
-
         if (($this->view->address->district_id ||
                 $this->view->address->region_id ||
                 $this->view->address->street_id) &&
@@ -679,9 +704,9 @@ class DoctorController extends BaseController
 
         $b_param = $this->request('b');
         $this->view->is_green = ($b_param && $b_param == 'green') ? 1 : 0;
-
+        
         $this->view->noWrap = 1;
-
+        print_r($this);die();
         $this->render('doctor/search');
     }
 

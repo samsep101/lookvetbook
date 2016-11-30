@@ -162,7 +162,14 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
       $match->setTerm('clinics.district', $criteria->district_id);
       $filter_and->addFilter($match);
     }
-
+/*
+    if ($criteria->metro_station_id) {
+      $match = new \Elastica\Filter\Term();
+      $match->setTerm('clinic.metro_station_id', $criteria->metro_station_id);
+      $filter_and->addFilter($match);
+      die(print_r($criteria));
+    }
+*/
     if ($criteria->region_id) {
       $match = new \Elastica\Filter\Term();
       $match->setTerm('clinics.region', $criteria->region_id);

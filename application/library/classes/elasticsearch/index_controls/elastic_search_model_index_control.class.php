@@ -147,7 +147,8 @@ abstract class ElasticSearchModelIndexControl implements IElasticSearchModelInde
   {
     $result_query = $this->buildQueryObject($criteria);
     $data = $this->getType()->search($result_query);
-
+//    print_r($criteria);
+//    die(print_r($data));
 
     if (Environment::get('get_total_count')) {
       $this->total_hits = $this->getType()->count($result_query);

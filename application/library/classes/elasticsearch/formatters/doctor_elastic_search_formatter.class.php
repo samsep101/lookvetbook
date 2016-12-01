@@ -78,6 +78,10 @@
 					{
 						$clinic_info['street'] = $clinic->street_id;
 					}
+					if($clinic->metro_station_id)
+					{
+						$clinic_info['metro_station_id'] = $clinic->metro_station_id;
+					}
 
 					if($clinic->region)
 					{

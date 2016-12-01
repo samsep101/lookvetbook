@@ -87,6 +87,10 @@
 							'type' => 'integer',
 							'include_in_all' => false
 						),
+						'metro_station_id' => array(
+							'type' => 'integer',
+							'include_in_all' => false
+						),
 						'specialties' => array(
 							'type' => 'integer',
 						)

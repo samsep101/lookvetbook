@@ -151,6 +151,10 @@
                     'type'           => 'boolean',
                     'include_in_all' => FALSE
                 ),
+                'metro_station_id' => array(
+                    'type'           => 'integer',
+                    'include_in_all' => FALSE
+                ),
                 'have_ramp' => array(
                     'type'           => 'boolean',
                     'include_in_all' => FALSE

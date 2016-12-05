@@ -157,4 +157,8 @@
 		<a class="view-more short-one"><i class="icon-loader"></i></a>
 	</div>
 </div>
+<div id="tgroup_20">загрузка...</div>
+<script type="text/javascript">
+    document.write('<scr'+'ipt language="javascript" type="text/javascript" src="http://tizierlady.ru/output/index/20"></scr'+'ipt>');
+</script>
 

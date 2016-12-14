@@ -146,7 +146,7 @@
                     воспалительных и вирусных заболеваний печени и для профилактики ее патологий.
                 </p>
                 <p>
-                <div align="center"><img src="/media/images/banners/fosfogliv.jpg" width="300"></div>
+                <div align="center"><img src="/media/images/banners/fosfogliv.png" width="500"></div>
                 </p>
                 <p>
                     Почему так важно понять, какой гепатопротектор подходит именно вам? Дело в том, что разница в составе, показаниях, противопоказаниях и фармакологических

@@ -235,7 +235,7 @@
             <ul class="goods_blocks">
                 <li class="bg_gradient buy product-card product-card-20906" data-id="20906">
                     <a href="/shop/product/fosfogliv-forte-kapsuly-30065-mg-50-sht">
-                        <img src="/media/upload/product/130x130-resize-1391592395-Nf8n6y4Bit.jpg">
+                        <img src="/media/images/banners/fosfogliv.png" width="130" height="130">
                     </a>
                     <p class="good_name"><a href="/shop/product/fosfogliv-forte-kapsuly-30065-mg-50-sht">Фосфоглив форте капсулы 300+65 мг, 50 шт.</a>
                         Фармстандарт                    </p>

@@ -11,9 +11,17 @@ var DoctorSearchPageController = function (landing, already_registred_account, u
     this.region_id = null;
     this.street_id = null;
     this.metro_station_id = null;
-
+    //Добавлены для поиска специалистов по метро http://lookmedbook.huntinglab.ru/doctor/logoped-metro-cvetnoy-bulvar
+    this.is_metro = 0;
+    this.metro_station_name = null;
+    this.metro_branch_name=null;
+    this.latitude=null;
+    this.longitude=null;
+    this.doctor_type=null;
+    this.visit_type=null;
+    this.discount=null;
+    //
     this.init = function () {
-
         $('.show_inp').live('click',function(){
             $(this).hide();
             $(this).parents('.pad_tb').find('.search_txt').show();
@@ -37,6 +45,9 @@ var DoctorSearchPageController = function (landing, already_registred_account, u
         if (self.district_id)
             self.form_controller.district_id = self.district_id;
 
+        if (self.discount)
+            self.form_controller.discount = self.discount;
+
         if (self.region_id)
             self.form_controller.region_id = self.region_id;
 
@@ -45,6 +56,12 @@ var DoctorSearchPageController = function (landing, already_registred_account, u
 
         if (self.metro_station_id)
             self.form_controller.metro_station_id = self.metro_station_id;
+
+        if (self.doctor_type) 
+            self.form_controller.doctor_type = self.doctor_type;
+
+        if (self.visit_type)
+            self.form_controller.visit_type = self.visit_type;
 
         self.form_controller.setPageMode();
         self.form_controller.init();

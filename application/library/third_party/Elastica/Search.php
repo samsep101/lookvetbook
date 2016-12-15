@@ -434,7 +434,7 @@ class Search
       $data,
       $params
     );
-
+    
     return new ResultSet($response, $query);
   }
 

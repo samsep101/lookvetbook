@@ -163,11 +163,42 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
       $filter_and->addFilter($match);
     }
 
+    if ($criteria->metro_station_id) {
+      $match = new \Elastica\Filter\Term();
+      $match->setTerm('clinics.metro_station_id', $criteria->metro_station_id);
+      $filter_and->addFilter($match);
+    }
+
     if ($criteria->region_id) {
       $match = new \Elastica\Filter\Term();
       $match->setTerm('clinics.region', $criteria->region_id);
       $filter_and->addFilter($match);
     }
+
+    if ($criteria->street_id) {
+      $match = new \Elastica\Filter\Term();
+      $match->setTerm('clinics.street', $criteria->street_id);
+      $filter_and->addFilter($match);
+    }
+
+    if (!empty($criteria->discount) && $criteria->discount==1) {
+      $range = new \Elastica\Filter\Range();
+      $range->addField('date_from', 
+                    array(  'from' => '1970-01-01',
+                            'to' => date('Y-m-d')
+                         ) 
+                 ); 
+/*
+      $range->addField('date_to', 
+                    array(  'from' => date('Y-m-d'),
+                            'to' => '2100-01-01'
+                         ) 
+                 ); 
+ 
+*/      
+      $filter_and->addFilter($range);
+    }
+    //die(print_r($filter_and));
 
     if (!empty($criteria->_id)) {
       $match = new \Elastica\Filter\Term();
@@ -201,7 +232,6 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
     if ($criteria->street_id && !$criteria->region_id) {
       $region_manager = ModelManagerFactory::getByName('street');
       $street = $region_manager->getOneById($criteria->street_id);
-
       $region_id = $street->regions[0]->getId();
       $match = new \Elastica\Filter\Term();
       $match->setTerm('clinics.region', $region_id);
@@ -249,6 +279,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
     // Затем мы получем все остальные результаты, которые между собой также сортируются по баллам
     // Для этого добавляем к запросу одно псевдополе, в котором указываем, соответсвует ли оно критериям
     // геопоиска
+    
     if ($criteria->street_id) {
       //$result_query->addScriptField('is_equal_to_geo', new \Elastica\Script('((doc[\'clinics.street\'].value == '.$criteria->street_id.') ? 1 : 0)'));
       $result_query->addSort(array(

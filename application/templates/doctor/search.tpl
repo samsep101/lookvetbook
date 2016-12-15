@@ -36,10 +36,19 @@
             window.controller.street_id = <?php echo $street->getId(); ?>;
         <?php endif; ?>
         <?php if ($metro_station): ?>
-            window.controller.metro_station_id = <?php echo $metro_station->getId(); ?>;
+            window.controller.metro_station_id = <?php echo $metro_station->getId();?>;
         <?php endif; ?>
-        window.controller.city_id = <?php echo $address->city_id; ?>;
+        <?php if ($this->doctor_type): ?>
+                window.controller.doctor_type = '<?php echo $this->doctor_type; ?>';
+        <?php endif; ?>
+        <?php if ($this->visit_type): ?>
+                window.controller.visit_type = '<?php echo $this->visit_type; ?>';
+        <?php endif; ?>
+        <?php if ($this->discount): ?>
+                window.controller.discount = '<?php echo $this->discount; ?>';
+        <?php endif; ?>
 
+        window.controller.city_id = <?php echo $address->city_id; ?>;
         window.controller.init();
 
         window.doctor_form_controller = controller.form_controller;

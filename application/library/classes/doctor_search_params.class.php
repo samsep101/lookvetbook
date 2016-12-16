@@ -67,6 +67,7 @@ class DoctorSearchParams extends ModelSearchCriteria
   public $is_has_active_clinic = true;
 
   public $exclude_ids = array();
+  public $discount;
 
   public function getParamsHash()
   {
@@ -91,6 +92,7 @@ class DoctorSearchParams extends ModelSearchCriteria
       'district=' . $this->district_id .
       'region=' . $this->region_id .
       'street=' . $this->street_id .
+      'discount=' . $this->discount .
       'is_active=' . $this->is_active .
       'not_work=' . $this->not_work .
       'registry_user_id=' . $this->registry_user_id .

@@ -50,6 +50,7 @@
      * @property string                $end_time_sunday
      * @property int                   $is_confirmed
      * @property int                   $balls
+     * @property ActionModel[]         $actions
      * @property ClinicModel[]         $clinics
      * @property ClinicModel           $clinic
      * @property int                   $reviews_count
@@ -104,6 +105,19 @@
             return $this->clinics;
         }
 
+
+        protected function _field_actions()
+        {
+            /**
+             * @var ActionManager $action_manager
+             */
+            $clinic_manager = ModelManagerFactory::getByName('action');
+            $this->actions  = $clinic_manager->getActionsByDoctorId($this->getId());
+            return $this->actions;
+            
+        }
+        
+        
         protected function _field_clinic()
         {
             if($this->clinics)

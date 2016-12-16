@@ -35,6 +35,10 @@
 					'type' => 'boolean',
 					'include_in_all' => true
 				),
+				'is_children' => array(
+					'type' => 'boolean',
+					'include_in_all' => true
+				),
 				'is_has_morning_time' => array(
 					'type' => 'boolean',
 					'include_in_all' => true
@@ -65,7 +69,30 @@
 					'type' => 'integer',
 					'include_in_all' => false
 				),
-				'clinics' => array(
+				'actions' =>array(
+					'properties' => array(
+						'id' => array(
+							'type' => 'integer',
+							'include_in_all' => false
+                                                 ),
+						'clinic_id' => array(
+							'type' => 'integer',
+							'include_in_all' => false
+                                                 ),
+						'date_from' => array(
+							'type' => 'date',
+                                                        'format'=>'yyyy-MM-dd',
+							'include_in_all' => false
+                                                 ),
+						'date_to' => array(
+							'type' => 'date',
+                                                        'format'=>'yyyy-MM-dd',
+							'include_in_all' => false
+                                                 )
+                                        )
+                                    
+                                ),
+                                'clinics' => array(
 					'properties' => array(
 						'id' => array(
 							'type' => 'integer',
@@ -87,9 +114,13 @@
 							'type' => 'integer',
 							'include_in_all' => false
 						),
+						'metro_station_id' => array(
+							'type' => 'integer',
+							'include_in_all' => false
+						),
 						'specialties' => array(
 							'type' => 'integer',
-						)
+						),
 					),
 				),
 				'is_has_visit_slots' => array(

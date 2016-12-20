@@ -67,7 +67,6 @@
             }
 
             $result['is_children']      = (bool)$model->is_children;
-            $result['primary_clinic_id']      = (int) $model->primary_clinic_id;
             $result['is_pregnant']      = (bool)$model->is_pregnant;
             $result['is_handicapped']   = (bool)$model->is_handicapped;
             $result['is_day_and_night'] = (bool)$model->is_day_and_night;
@@ -129,6 +128,10 @@
             if($model->clinic_status_id)
             {
                 $result['status'] = $model->clinic_status_id;
+            }
+            if($model->metro_station_id)
+            {
+                $result['metro_station_id'] = $model->metro_station_id;
             }
 
             if($model->region_id)

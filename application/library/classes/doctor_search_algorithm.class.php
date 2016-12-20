@@ -53,7 +53,7 @@ class DoctorSearchAlgorithm
     $this->search_params->is_active = 1;
     $this->search_params->is_has_active_clinic = true;
     $this->search_params->sort_by = 'balls';
-
+    
     // Получаем приоритетных врачей
     // (тех, которые отображаются на первых четырех позициях)
     // на страницах с геопоиском это не работает
@@ -63,6 +63,7 @@ class DoctorSearchAlgorithm
       && !$doctor_search_params->street_id
       && !$doctor_search_params->region_id
       && !$doctor_search_params->district_id
+      && !$doctor_search_params->metro_station_id
     ) {
       $doctor_search_params->primary_doctors_ids = $this->getPrimaryDoctorsIds();
     } else {

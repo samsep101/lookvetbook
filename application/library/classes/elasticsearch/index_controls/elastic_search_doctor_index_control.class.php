@@ -183,19 +183,19 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
 
     if (!empty($criteria->discount) && $criteria->discount==1) {
       $range = new \Elastica\Filter\Range();
-      $range->addField('date_from', 
+      $range->addField('date_from',
                     array(  'from' => '1970-01-01',
                             'to' => date('Y-m-d')
-                         ) 
-                 ); 
+                         )
+                 );
 /*
-      $range->addField('date_to', 
+      $range->addField('date_to',
                     array(  'from' => date('Y-m-d'),
                             'to' => '2100-01-01'
-                         ) 
-                 ); 
- 
-*/      
+                         )
+                 );
+
+*/
       $filter_and->addFilter($range);
     }
     //die(print_r($filter_and));
@@ -279,7 +279,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
     // Затем мы получем все остальные результаты, которые между собой также сортируются по баллам
     // Для этого добавляем к запросу одно псевдополе, в котором указываем, соответсвует ли оно критериям
     // геопоиска
-    
+
     if ($criteria->street_id) {
       //$result_query->addScriptField('is_equal_to_geo', new \Elastica\Script('((doc[\'clinics.street\'].value == '.$criteria->street_id.') ? 1 : 0)'));
       $result_query->addSort(array(
@@ -371,6 +371,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
       $result_query->setSize(10000);
       $result_query->setFrom(0);
     }
+    //die(print_r($result_query));
     return $result_query;
   }
 

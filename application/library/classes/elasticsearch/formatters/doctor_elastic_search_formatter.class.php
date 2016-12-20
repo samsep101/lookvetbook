@@ -71,10 +71,10 @@
 					{
 						$action_info['clinic_id'] = $action->clinic_id;
 					}
-                                        $result['actions'][] = $action_info;                                        
+                                        $result['actions'][] = $action_info;
                                 }
                         }
-                        
+
 			if($doctor->clinics)
 			{
 				$result['clinics'] = array();
@@ -107,8 +107,12 @@
 						$clinic_info['metro_station_id'] = $clinic->metro_station_id;
 					}
 
+					if($clinic->metro_station_id)
+					{
+						$clinic_info['metro_station_id'] = $clinic->metro_station_id;
+					}
 
-                                        if($clinic->region)
+					if($clinic->region)
 					{
 						$clinic_info['district'] = $clinic->region->district_id;
 					}

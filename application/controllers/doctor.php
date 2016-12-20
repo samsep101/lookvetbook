@@ -30,15 +30,80 @@ class DoctorController extends BaseController
         if (in_array($doctor_id, $landing_specialty_list)) {
             $doctor_id = str_replace('2', '', $doctor_id);
         }
+        $specialty  =   null;
 
-        $specialty = $specialty_manager->getOneByAlias($doctor_id);
+        
         $district_manager = new DistrictManager();
-        $district = $district_manager->getOneByAlias($landing_alias);
+        $metro_manager = new MetroStationManager();
+        $region_manager = new RegionManager();
+        $street_manager = new StreetManager();
 
-        $metro = (new MetroStationManager())->getOneByAlias($landing_alias);
-        $region = (new RegionManager())->getOneByAlias($landing_alias);
+        $search_flags=array(
+           'doctor_type'=>'adult'
+          ,'visit_type'=>'clinic'
+          ,'is_discounte'=>0
+        );
+        if (strpos($landing_alias,"-detskij"))  
+           $search_flags['doctor_type']='children';
+        if (strpos($landing_alias,"-na-dom"))
+           $search_flags['visit_type']='home';
+        if (strpos($landing_alias,"-skidki"))
+           $search_flags['discount']=1;
+        $landing_alias_e=$landing_alias;
+        $landing_alias_e=  str_replace("-detskij", "", $landing_alias_e);
+        $landing_alias_e=  str_replace("-na-dom", "", $landing_alias_e);
+        $landing_alias_e=  str_replace("-skidki", "", $landing_alias_e);
+        $v=explode('-',$landing_alias_e);
+        $district   =   null;
+        $metro      =   null;
+        $region     =   null;
+        $street     =   null;
+        if (isset($v) && count($v)>0) {
+            for ($i=0;$i<=count($v);++$i) {
+                $r[]=$v[$i];
+                for ($j=0;$j<=count($v);++$j) {
+                      $r[]=$v[$i].'-'.$v[$j];
+                    for ($k=0;$k<=count($v);++$k) {
+                        $r[]=$v[$i].'-'.$v[$j].'-'.$v[$k];
+                        for ($z=0;$z<=count($v);++$z) {
+                            $r[]=$v[$i].'-'.$v[$j].'-'.$v[$k].'-'.$v[$z];
+                            for ($q=0;$q<=count($v);++$q) {
+                                $r[]=$v[$i].'-'.$v[$j].'-'.$v[$k].'-'.$v[$z].'-'.$v[$q];
+                            }
+                        }
+                    }
+                }
+            }
+            //костыль, ищем сначала длинные названия например САДОВАЯ КОРЕТНАЯ потом короткие СОДОВАЯ
+            //иначе найдем первое короткое название и остановимся.
+            //select * from street where name like '%садовая%'
+            usort($r, function($a, $b) {
+             return strlen($b) - strlen($a);
+            });
+            foreach ($r as $val) {
+                if ($district==null)  $district = $district_manager->getOneByAlias($val);
+                if ($metro==null)     $metro    = $metro_manager->getOneByAlias($val);
+                if ($region==null)    $region   = $region_manager->getOneByAlias($val);
+                if ($specialty==null) $specialty= $specialty_manager->getOneByAlias($val);
+                if ($street==null)    $street = $street_manager->getOneByAlias($val);
 
-
+            }
+        } else {
+          $district = $district_manager->getOneByAlias($landing_alias);
+          $metro    = $metro_manager->getOneByAlias($landing_alias);
+          $region   = $region_manager->getOneByAlias($landing_alias);
+          $specialty = $specialty_manager->getOneByAlias($landing_alias);
+          $street = $street_manager->getOneByAlias($landing_alias);
+        }
+        if ($specialty!=null || $district!=null || $region!=null || $metro!=null) {
+            $this->index($specialty->alias, $district, $metro, $region,$street,$search_flags);
+            unset($specialty);
+            unset($district);
+            unset($metro);
+            unset($region);     
+            unset($street);
+            
+/*
         if ($region){
             $this->index(null, null, null, $region);
             unset($specialty);
@@ -57,6 +122,7 @@ class DoctorController extends BaseController
         }elseif ($specialty) {
             $this->index($landing_alias);
             unset($specialty);
+*/
         } else {
             $doctor = $doctor_manager->getOneByIdOrAlias($doctor_id);
 
@@ -146,6 +212,8 @@ class DoctorController extends BaseController
             $this->view->doctor_schedules = $doctor_schedules;
             unset($doctor_schedules);
         }
+
+
 
         $this->view->city_id = $this->city->getId();
 
@@ -429,13 +497,32 @@ class DoctorController extends BaseController
     }
 
 
-    public function index($specialty_alias = NULL, $district = 0, $metro_station = 0, $region = 0)
+    public function index($specialty_alias = NULL, $district = 0, $metro_station = 0, $region = 0, $street =0, $search_flags=null)
     {
+        /*
+        if ($metro_station) {
+            unset($street);
+            unset($district);
+            unset($region);
+            
+        } elseif ($street) {
+            unset($district);
+            unset($region);
+        } elseif ($district) {
+            unset($region);
+        }
+/*        
+        print_r($district);
+        print_r($region);
+        print_r($street);
+        print_r($metro_station);
+        die();
+ */
         if ($_SERVER['REQUEST_URI'] == '/doctor/search')
             ErrorPageViewHelper::page404('404');
 
         $landing = $this->request('landing');
-
+        
         $specialty_manager = ModelManagerFactory::getByName('specialty');
 
         if (isset($_GET['specialty_id']) && $_GET['specialty_id']) {
@@ -527,8 +614,6 @@ class DoctorController extends BaseController
             }
         }
 
-
-
         if (!$region)
         {
             $region_manager = new RegionManager();
@@ -546,15 +631,16 @@ class DoctorController extends BaseController
         }
 
 
-        $street_manager = new StreetManager();
-        $street = NULL;
-        $street_alias = $this->request('street');
-        if ($street_alias) {
-            $street = $street_manager->getOneByAlias($street_alias);
-            if (!$street || !$street->isBelongToDistrict($district->getId()))
-                ErrorPageViewHelper::page404();
+        if (!$street) {
+            $street_manager = new StreetManager();
+            $street = NULL;
+            $street_alias = $this->request('street');
+            if ($street_alias) {
+                $street = $street_manager->getOneByAlias($street_alias);
+                if (!$street || !$street->isBelongToDistrict($district->getId()))
+                    ErrorPageViewHelper::page404();
+            }
         }
-
 
         if (!$metro_station)
         {
@@ -566,10 +652,10 @@ class DoctorController extends BaseController
                 if (!$metro_station || ($metro_station->region_id != $region->getId()))
                     ErrorPageViewHelper::page404();
             }
-        }
-
+        } 
 
         $region_street_alias = $this->request('region_street');
+
         if ($region_street_alias) {
             $region = $region_manager->getOneByAlias($region_street_alias);
 
@@ -601,12 +687,12 @@ class DoctorController extends BaseController
         $this->view->street = $street;
         $this->view->metro_station = $metro_station;
 
+        
         if ($specialty_alias || $city || $street_alias || $region_alias || $region_street_alias || $district_alias) {
 
             $this->view->is_seo_page = 1;
 
             $address_object = NULL;
-
             $previous_address = '/doctor';
             $previous_address .= ($this->request('specialty')) ? '/' . $this->request('specialty') : '/terapevt';
             $doctor_manager = new DoctorManager();
@@ -622,7 +708,7 @@ class DoctorController extends BaseController
                 }
             } elseif ($street) {
                 $address_object = $street;
-                if ($district && $doctor_manager->checkExistsBySpecialtyIdAddressObject($specialty->getId(), $district)) {
+                if ($district && $doctor_manager->checkExistsBySpecialtyIdAddressObject($specialty->getId(), $street)) {
                     $previous_address .= '/' . $this->request('district');
                 }
             } elseif ($region && is_object($specialty)) {
@@ -635,12 +721,9 @@ class DoctorController extends BaseController
             } elseif ($city) {
                 $address_object = $city;
             }
-
-
             $this->view->address_object = $address_object;
 
             if ($specialty) {
-
                 $doctor_manager = new DoctorManager();
                 if (!$doctor_manager->checkExistsBySpecialtyIdAddressObject($specialty->getId(), $address_object)) {
                     RedirectManager::redirect($previous_address);
@@ -655,14 +738,17 @@ class DoctorController extends BaseController
             $this->view->page_description = SeoTextViewHelper::getDescription($specialty, $address_object);
         }
         $this->view->specialty = $specialty;
-
+        if (is_array($search_flags)) {
+            $this->view->visit_type=$search_flags['visit_type'];
+            $this->view->doctor_type=$search_flags['doctor_type'];
+            $this->view->discount=$search_flags['discount'];
+        }
         $this->view->address = new Address();
         $this->view->address->city_id = $city ? $city->getId() : FALSE;
         $this->view->address->district_id = $district ? $district->getId() : FALSE;
         $this->view->address->region_id = $region ? $region->getId() : FALSE;
         $this->view->address->street_id = $street ? $street->getId() : FALSE;
         $this->view->setDefaultSpecialty = !empty($setDefaultSpecialty) ? $setDefaultSpecialty : 0;
-
         if (($this->view->address->district_id ||
                 $this->view->address->region_id ||
                 $this->view->address->street_id) &&
@@ -679,9 +765,7 @@ class DoctorController extends BaseController
 
         $b_param = $this->request('b');
         $this->view->is_green = ($b_param && $b_param == 'green') ? 1 : 0;
-
         $this->view->noWrap = 1;
-
         $this->render('doctor/search');
     }
 
@@ -1389,9 +1473,11 @@ class DoctorController extends BaseController
 
         $this->view->landing_page = $landing;
         $doctor_search_params = $this->getSearchParams();
-
         $specialtyParams = $this->paramsFormFieldsSpecialty($doctor_search_params->specialty_id, $doctor_search_params);
 
+                //die(print_r($doctor_search_params));
+
+        
         //поиск по имени - значит без остальной фильтрации
         if ($doctor_search_params->doctor_name) {
             $doctor_search_params->without_filters = 1;
@@ -1504,6 +1590,7 @@ class DoctorController extends BaseController
         $doctor_search_params->district_id = $this->request('district_id');
         $doctor_search_params->region_id = $this->request('region_id');
         $doctor_search_params->street_id = $this->request('street_id');
+        $doctor_search_params->discount = $this->request('discount');
         $doctor_search_params->metro_station_name = $this->request('metro_station_name', '');
         $doctor_search_params->metro_branch_name = $this->request('metro_branch_name', '');
         $doctor_search_params->metro_station_id = $this->request('metro_station_id', '');

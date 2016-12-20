@@ -6,6 +6,7 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
 
     this.specialty_id = null;
     this.specialty_alias = null;
+    this.discount = null;
     this.purpose_of_visit_id = null;
 
     this.doctor_name = null;
@@ -60,7 +61,6 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
 
     this.init = function () {
         self.attachEvents();
-
         if (this.mode == 'page') {
             city_controller.subscribe(self.setCityInfo);
             city_controller.subscribe(self.changeSpecialtiesListToSearchDoctors);
@@ -182,8 +182,14 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
         self.weekend_time = getParameterByName('weekend_time', 0);
         //self.morning_time = getParameterByName('morning_time', 0);
         self.any_time = getParameterByName('any_time', 1);
-        self.visit_type = getParameterByName('visit_type', 'clinic');
-        self.doctor_type = getParameterByName('doctor_type', 'adult');
+
+        if (self.visit_type==null) {
+            self.visit_type = getParameterByName('visit_type', 'clinic');
+        }
+
+        if (self.doctor_type==null) {
+            self.doctor_type = getParameterByName('doctor_type', 'adult');
+        }
 
         if (self.doctor_type == 'male' || self.doctor_type == 'female' || self.doctor_type == 'pregnant'){
             self.doctor_type = 'adult';
@@ -241,7 +247,6 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
             if (self.doctor_type == 'adult') {
                 $('.doctor-type-adult').addClass('act');
             }
-
             if (self.doctor_type == 'children') {
                 $('.doctor-type-children').addClass('act');
             }
@@ -504,9 +509,11 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
             district_id : self.district_id,
             region_id : self.region_id,
             street_id : self.street_id,
+            discount : self.discount,
             exclude_doctor_ids:exclude_doctor_ids
         };
 
+      
         Ajax.Get('/doctor/ajaxSearch', data, function (data) {
             if (data.status == 0) {
                 if (self.page == 1) {
@@ -653,6 +660,9 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
 
         if (self.metro_station_name > 0)
             str += '&metro_station_name=' + self.metro_station_name;
+
+        if (self.metro_station_id > 0)
+            str += '&metro_station_id=' + self.metro_station_id;
 
         if (self.metro_branch_name > 0)
             str += '&metro_branch_name=' + self.metro_branch_name;

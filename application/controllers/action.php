@@ -12,6 +12,8 @@ class ActionController extends BaseController
     public function index()
     {
         $actions = (new ActionManager())->getList();
+        $actions=array_reverse($actions);
         $this->view->actions = $actions;
+
     }
 }

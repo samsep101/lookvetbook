@@ -10,6 +10,9 @@ class SystemController extends BaseController
 
   public function index()
   {
+    ini_set('memory_limit', '512M');
+    global $memory_allocation_costil1;
+    $memory_allocation_costil1 = 1;
     $this->layout = 'system';
 
     $docx_error = $this->request('docx_error');

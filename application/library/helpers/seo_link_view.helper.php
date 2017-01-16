@@ -90,7 +90,11 @@ class SeoLinkViewHelper
   */
   public static function convertLinks($html)
   {
-    $html = preg_replace_callback('/<a[^>]+/', 'self::catchOuterLinks', $html);
+	global $memory_allocation_costil1;
+
+	if (!isset($memory_allocation_costil1) || (isset($memory_allocation_costil1) && !$memory_allocation_costil1) )
+	    $html = preg_replace_callback('/<a[^>]+/', 'self::catchOuterLinks', $html);
+
     return $html;
   }
 }

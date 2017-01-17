@@ -56,7 +56,7 @@
     </li>
     <div id="doctors_without_clinic" style="display: none">
         <?php $this->doctors = $doctors; ?>
-        <?php /*$this->block('system/blocks/doctors_without_clinic');*/ ?>
+        <?php $this->block('system/blocks/doctors_without_clinic'); ?>
     </div>
 </div>
 

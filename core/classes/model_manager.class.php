@@ -24,7 +24,7 @@ class ModelManager implements ICachedModelManager
   /**
    * @var array
    */
-  protected $models_register = array();
+  public $models_register = array();
 
   protected $insert_type = 'normal';
 

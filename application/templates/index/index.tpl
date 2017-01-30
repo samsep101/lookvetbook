@@ -167,7 +167,7 @@
         </div>
     </div>
 </div>
-
+        <br>
 <?php echo $this->block('index/specialties_groups');?>
 
 

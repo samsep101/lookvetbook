@@ -260,6 +260,9 @@
             $metro_station_to_clinic = $metro_station_to_clinic_manager->getOneByClinicId($this->getId());
             $this->metro_station_id=array_keys($metro_station_manager->decorated_manager->models_register);
             $this->metro_station_id=strval($this->metro_station_id[0]);
+            if(!$this->metro_station_id){
+                $this->metro_station_id=$this->params['metro_station_id'];
+            }
             //логика правлено мной - CyberUnit. Было, зачем-то, вместо сохранения в форме, сброс на изначальное значение. Бреддд.....
             //неплохо было бы еще зашить стирание значения, но пока стремно, хрен его знает, что было в голове программера
             if($metro_station_to_clinic) {

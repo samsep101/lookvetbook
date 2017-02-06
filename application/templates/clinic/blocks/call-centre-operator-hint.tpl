@@ -12,7 +12,7 @@
             <span class="txt" itemprop="tel"><?php echo PhoneNumberViewHelper::getView($clinic->phones[0]->phone_number); ?></span>
         <?php endif; ?>
 
-        <?php if ($clinic->phones[1]->phone_number): ?>
+        <?php if (isset($clinic->phones[1])): ?>
         <div>
             <span class="h-blue">Телефон:</span>
             <span class="txt"><?php echo PhoneNumberViewHelper::getView($clinic->phones[1]->phone_number); ?></span>

@@ -73,6 +73,7 @@
 
 			</div>
 		</div>
+		<br>
 
 		<div class="content read">
 			<?php $this->block('disease/blocks/disease_blocks_content'); ?>

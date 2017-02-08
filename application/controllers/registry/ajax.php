@@ -15,7 +15,7 @@ class AjaxRegistryController extends BaseController
    */
   public function saveModeratedInfo()
   {
-      ClinicModel::$trig=1;
+       ClinicModel::$trig=1;
     if (!RegistryAccessHelper::checkAuth())
       JsonResponse::error(ValidationErrorCodes::NOT_AUTHED);
 

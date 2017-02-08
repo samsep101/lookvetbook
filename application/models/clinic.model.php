@@ -261,7 +261,7 @@
             $metro_station_to_clinic = $metro_station_to_clinic_manager->getOneByClinicId($this->getId());
 
             if(self::$trig==1){
-                $this->metro_station_id=array_keys($metro_station_manager->decorated_manager->models_register);
+                 $this->metro_station_id=array_keys($metro_station_manager->decorated_manager->models_register);
                 $this->metro_station_id=strval($this->metro_station_id[0]);
             }
             //логика правлено мной - CyberUnit. Было, зачем-то, вместо сохранения в форме, сброс на изначальное значение. Бреддд.....

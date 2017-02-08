@@ -128,7 +128,7 @@
         yandex_direct_favicon = true;
         yandex_no_sitelinks = false;
         yandex_direct_height = 90;
-        yandex_direct_width = 705;
+        yandex_direct_width = 695;
         document.write('<scr'+'ipt type="text/javascript" src="//an.yandex.ru/system/context.js"></scr'+'ipt>');
     </script>
     <?php endif; ?>

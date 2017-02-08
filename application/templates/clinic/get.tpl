@@ -156,6 +156,7 @@
                         <span class="info-phone" itemprop="telephone">
 							<?=$clinic->direct_phone;?>
 						</span>
+					<p class="h-txt">Или:</p>
                     </p>
                     <?php else:?>
 					<p class="our_time">
@@ -379,3 +380,5 @@
 	<?php endif; ?>
 
 </script>
+
+		<?php $this->block('blocks/adv/content_page_tiezerlady'); ?>

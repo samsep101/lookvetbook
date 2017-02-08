@@ -127,6 +127,7 @@ class ClinicController extends BaseController
       $main_specialty = $specialty_manager->getMainOneBySpecializationId($specialization->getId());
       $this->view->main_specialty = $main_specialty;
     }
+
   }
 
   public function ajaxAddToMyClinicList()

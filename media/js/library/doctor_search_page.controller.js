@@ -42,6 +42,7 @@ var DoctorSearchPageController = function (landing, already_registred_account, u
         if (self.specialty_id)
             self.form_controller.specialty_id = self.specialty_id;
 
+      
         if (self.district_id)
             self.form_controller.district_id = self.district_id;
 

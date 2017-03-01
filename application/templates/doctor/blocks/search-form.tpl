@@ -9,7 +9,7 @@
             <div class="in_colapse">
                 <div class="sel-box doctor-box">
                     <select id="specialties_to_search_doctor" data-placeholder="Специальность врача" class="chzn-select" name="specialty_id" style="width:390px;">
-                        <?php $this->show_all_option = FALSE; ?>
+                        <?php $this->show_all_option = TRUE; ?>
                         <?php $this->block('blocks/specialties_options'); ?>
                     </select>
                 </div>

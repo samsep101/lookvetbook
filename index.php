@@ -31,10 +31,10 @@ try {
     $m = [];
     if (preg_match('|^(www\.)?(([a-z0-9-]+)\.)?\w+\.\w+$|', $_SERVER['SERVER_NAME'], $m)) {
       if (!empty($m[1])) {
-//        $redirect_domen = str_replace($m[1], '', $_SERVER['SERVER_NAME']);
+        $redirect_domen = str_replace($m[1], '', $_SERVER['SERVER_NAME']);
       }
       if (!empty($m[2]) and !in_array($m[3], $excluded_subdomens)) {
-//        $redirect_domen = str_replace($m[1] . $m[2], '', $_SERVER['SERVER_NAME']);
+        $redirect_domen = str_replace($m[1] . $m[2], '', $_SERVER['SERVER_NAME']);
       }
     }
   }

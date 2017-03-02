@@ -41,18 +41,22 @@ class DoctorController extends BaseController
         $search_flags=array(
            'doctor_type'=>'adult'
           ,'visit_type'=>'clinic'
-          ,'is_discounte'=>0
+          ,'discount'=>0
         );
-        if (strpos($landing_alias,"-detskij"))  
+        if (strpos($landing_alias,"detskij")!==false)// || $landing_alias=='detskij')  
            $search_flags['doctor_type']='children';
-        if (strpos($landing_alias,"-na-dom"))
+        if (strpos($landing_alias,"na-dom")!==false)// || $landing_alias=='na-dom')
            $search_flags['visit_type']='home';
-        if (strpos($landing_alias,"-skidki"))
+        if (strpos($landing_alias,"skidki")!==false)// || $landing_alias=='skidki')
            $search_flags['discount']=1;
+        
         $landing_alias_e=$landing_alias;
         $landing_alias_e=  str_replace("-detskij", "", $landing_alias_e);
         $landing_alias_e=  str_replace("-na-dom", "", $landing_alias_e);
         $landing_alias_e=  str_replace("-skidki", "", $landing_alias_e);
+        $landing_alias_e=  str_replace("detskij", "", $landing_alias_e);
+        $landing_alias_e=  str_replace("na-dom", "", $landing_alias_e);
+        $landing_alias_e=  str_replace("skidki", "", $landing_alias_e);
         $v=explode('-',$landing_alias_e);
         $district   =   null;
         $metro      =   null;
@@ -95,7 +99,17 @@ class DoctorController extends BaseController
           $specialty = $specialty_manager->getOneByAlias($landing_alias);
           $street = $street_manager->getOneByAlias($landing_alias);
         }
-        if ($specialty!=null || $district!=null || $region!=null || $metro!=null) {
+        if (
+                $specialty!=null 
+             || $district!=null 
+             || $region!=null 
+             || $metro!=null 
+             || $street!=null 
+             || $search_flags['doctor_type']!='adult'
+             || $search_flags['visit_type']!='clinic'
+             || $search_flags['discount']!=0
+            
+        ) {
             $this->index($specialty->alias, $district, $metro, $region,$street,$search_flags);
             unset($specialty);
             unset($district);
@@ -749,9 +763,10 @@ class DoctorController extends BaseController
         if (($this->view->address->district_id ||
                 $this->view->address->region_id ||
                 $this->view->address->street_id) &&
-            isset($address_object) && $address_object
+            isset($address_object) && $address_object 
         ) {
-            $this->view->search_page_description = SeoTextViewHelper::getDoctorPageDescription($specialty, $address_object);
+            if (is_object($specialty))
+                $this->view->search_page_description = SeoTextViewHelper::getDoctorPageDescription($specialty, $address_object);
         }
         if ($specialty)
             $this->view->canonical_link = AliasLinkViewHelper::getLink('doctor', $specialty);

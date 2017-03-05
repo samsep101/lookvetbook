@@ -190,6 +190,10 @@
         <?php } ?>
 
     <?php */ ?>
+    <?php if ($block->disease_block_type_id == 3): ?>
+            <div id="teaser_793"><a href="">Тизерная сеть</a></div>
+            <script type="text/javascript">var medtizer793=document.createElement('script'); medtizer793.src='//medshowtiz.ru/show/?block_id=793&title='+document.title+'&r='+escape(document.referrer)+'&'+Math.round(Math.random()*100000);   function f793() { if(!self.medtizer) { medtizer=793; document.body.appendChild(medtizer793); } else { setTimeout('f793()',200); } } f793();</script>
+    <?php endif; ?>
     <?php /* if ($block->disease_block_type_id == 3): ?>
         <div class="section">
             <?php $this->block('disease/blocks/adv_after_reason_block'); ?>

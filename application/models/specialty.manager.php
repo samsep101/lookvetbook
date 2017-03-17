@@ -43,6 +43,16 @@
         }
 
         /**
+         * return SpecialtyModel[]
+         */
+        public function getAllSpecialities()
+        {
+            $data = $this->orm_model->select()->fetchAll();
+
+            return (count($data)) ? $this->initList($data) : array();
+        }
+
+        /**
          * @return SpecialtyModel[]
          */
         public function getRootList()

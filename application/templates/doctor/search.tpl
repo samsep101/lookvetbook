@@ -48,6 +48,7 @@
                 window.controller.discount = '<?php echo $this->discount; ?>';
         <?php endif; ?>
 
+
         window.controller.city_id = <?php echo $address->city_id; ?>;
         window.controller.init();
 

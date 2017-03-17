@@ -71,7 +71,6 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
             self.initParamsFromUrl();
             self.initElements();
             self.sendRequest(false);
-
             self.map_controller = new YandexMapController(self);
             self.map_controller.city_id = self.city_id;
             self.map_controller.page = 'doctor';
@@ -85,7 +84,6 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
             setCustomSelect('select[name="specialty_id"]', self.specialty_id);
             self.loadPurposeOfVisitBlock();
         }
-
         $(document).on('click', '.h1_colapse', function () {
             $(this).toggleClass('active');
 
@@ -482,7 +480,6 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
         exists_cards.each(function(){
             exclude_doctor_ids.push($(this).attr('id').replace('doctor-big-card-',''));
         });
-
         var data = {
             specialty_id:self.specialty_id,
             //purpose_of_visit_id:self.purpose_of_visit_id,

@@ -3,7 +3,7 @@
 class DoctorSearchParams extends ModelSearchCriteria
 {
   public $specialty_id;
-
+  public $specialties_ids = array();
   public $suitable_specialties_ids = array();
 
   public $city_id;
@@ -99,7 +99,9 @@ class DoctorSearchParams extends ModelSearchCriteria
       'primary_doctors_ids=' . join(',', $this->primary_doctors_ids) .
       'has-Visit_lots=' . $this->has_visit_slots .
       'without_filters=' . $this->without_filters .
-      'is_has_clinics=' . (int)$this->is_has_clinic;
+      'is_has_clinics=' . (int)$this->is_has_clinic .
+      'specialties_ids=' . join(',',$this->specialties_ids);
+    
 
 
     if ($this->geo_point) {
@@ -111,6 +113,13 @@ class DoctorSearchParams extends ModelSearchCriteria
       $str .= 'primary_doctors=';
       foreach ($this->primary_doctors_ids as $primary_doctor_id) {
         $str .= $primary_doctor_id . ',';
+      }
+    }
+
+    if ($this->specialties_ids) {
+      $str .= 'specialties_ids=';
+      foreach ($this->specialties_ids as $spc_id) {
+        $str .= $spc_id . ',';
       }
     }
 

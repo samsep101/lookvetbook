@@ -426,6 +426,20 @@
 
 <?php $this->block('blocks/record_form_container'); ?>
 <?php $this->block('blocks/learn_form_container'); ?>
+<!-- Mobile Advert Advertur.ru start -->
+<div id="advertur_140974"></div><script type="text/javascript">
+    (function(w, d, n) {
+        w[n] = w[n] || [];
+        w[n].push({
+            section_id: 140974,
+            place: "advertur_140974",
+            width: 0,
+            height: 0
+        });
+    })(window, document, "advertur_sections");
+</script>
+<script type="text/javascript" src="//ddnk.advertur.ru/v1/s/loader.js" async></script>
+<!-- Mobile Advert Advertur.ru end -->
 </body>
 </html>
 

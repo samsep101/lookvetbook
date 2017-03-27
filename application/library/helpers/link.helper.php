@@ -57,7 +57,13 @@
 
             if($failure)
             {
-                self::redirectRandomURLOrRedirect404($modelName, $params);
+                if (!$modelName=='DoctorModel') {
+                    self::redirectRandomURLOrRedirect404($modelName, $params);
+                } else {
+                    ErrorPageViewHelper::page404('404');
+                    exit();
+                }
+                
             }
         }
 

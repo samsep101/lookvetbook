@@ -47,28 +47,21 @@
 					<?php $disease->content = preg_replace('/<br\/>/','',$disease->content);?>
 					<div class="like_p"><?php echo html_entity_decode($disease->content,ENT_COMPAT,'UTF-8'); ?></div>
 				</div>
-				
-				<!-- Яндекс.Директ -->
-				<script type="text/javascript">
-				yandex_partner_id = 147148;
-				yandex_site_bg_color = 'CCCCCC';
-				yandex_ad_format = 'direct';
-				yandex_direct_type = 'adaptive';
-				yandex_direct_border_type = 'block';
-				yandex_direct_limit = 2;
-				yandex_direct_border_radius = true;
-				yandex_direct_links_underline = true;
-				yandex_direct_border_color = '333333';
-				yandex_direct_title_color = '0000CC';
-				yandex_direct_url_color = '006600';
-				yandex_direct_text_color = '000000';
-				yandex_direct_hover_color = '0066FF';
-				yandex_direct_sitelinks_color = '0000CC';
-				yandex_direct_favicon = true;
-				yandex_no_sitelinks = false;
-				yandex_direct_height = 90;
-				yandex_direct_width = 705;
-				document.write('<scr'+'ipt type="text/javascript" src="//an.yandex.ru/system/context.js"></scr'+'ipt>');
+
+				<div><sjdiv id="SlickJumpNativeAds-sm0072"></sjdiv></div>
+				<script>
+                    (function() {
+                        function a() {
+                            var proto = ('https:' == document.location.protocol ? 'https' : 'http');
+                            var a = document.getElementsByTagName("script")[0], sj = document.createElement("script");
+                            sj.async = !0;
+                            sj.type = 'text/javascript';
+                            sj.src = proto + "://sjsmartcontent.org/static/plugin-site/js/sjplugin.js";
+                            sj.setAttribute("site", "6fmj");
+                            a.parentNode.insertBefore(sj, a);
+                        }
+                        window.addEventListener ? window.addEventListener("DOMContentLoaded", a, !1) : window.attachEvent ? window.attachEvent("onDomReady", a) : window.onDomReady = a;
+                    })();
 				</script>
 
 				<?php if(0 and !empty($disease->alias) and in_array($disease->alias, ['mezhpozvonochnaya-gryzha', 'osteohondroz-pozvonochnika'])) { ?>

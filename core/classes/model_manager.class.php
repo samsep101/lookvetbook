@@ -178,6 +178,10 @@ class ModelManager implements ICachedModelManager
     $data = $this->db->query($sql);
     shuffle($data);
     $found_ids = array_map(function($a){ return $a[$this->id_field_name]; }, array_slice($data, $offset, $limit+1));
+
+    if (!$found_ids)
+        return [];
+
     $search_params->setSelectFields($select_fields);
     $search_params->setJoinSelectFields($join_select_fields);
 

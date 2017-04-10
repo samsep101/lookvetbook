@@ -13,7 +13,10 @@ if (!debug) {
   //xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
 }
 
-//$client = new Raven_Client('https://3eddb6b698414aa28519bd1b864ef789:92e01d140f5c448c81348fd7834e201c@sentry.io/157050');
+
+require_once 'vendor/sentry/sentry/lib/Raven/Autoloader.php';
+Raven_Autoloader::register();
+$client = new Raven_Client('https://3eddb6b698414aa28519bd1b864ef789:92e01d140f5c448c81348fd7834e201c@sentry.io/157050');
 
 try {
   if (!empty($argc)) {

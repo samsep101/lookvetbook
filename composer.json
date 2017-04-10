@@ -13,6 +13,7 @@
     "neeckeloo/closure-compiler-php": "dev-master",
     "guzzlehttp/guzzle": "*",
     "google/recaptcha": "1.1",
-    "robmorgan/phinx": "v0.5.3"
+    "robmorgan/phinx": "v0.5.3",
+    "sentry/sentry": "^1.6"
   }
 }

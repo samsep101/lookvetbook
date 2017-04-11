@@ -1,6 +1,8 @@
 <p><?php foreach ($disease_specialties as $specialty) { ?>
 		<a class="disease-doctor des-page <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Right" data-text="<?php echo $specialty->plural_name; ?>" data-url="<?php echo $specialty->specialtyUrl ?>" href="<?php echo $specialty->specialtyUrl ?>"><?php echo $specialty->name; ?></a>
-	<?php } ?>
+	<?php
+	break;
+	} ?>
 	поможет при лечении заболевания
 </p>
 <video src="<?=$video_file_path?>" width="160" height="160" poster="<?=$video_thumb_path?>" controls=""></video>

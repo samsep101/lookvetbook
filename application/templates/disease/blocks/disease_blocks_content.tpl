@@ -14,7 +14,9 @@
                             <p>Врач
                                 <?php foreach ($disease_specialties as $specialty):?>
                                     <a class="disease-doctor des-page <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Center" data-text="<?php echo $specialty->plural_name; ?>" data-url="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend" href="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend"><?php echo $specialty->name; ?></a>
-                                <?php endforeach;?>
+                                <?php
+                                break;
+                                endforeach;?>
                                 поможет при лечении заболевания
                             </p>
                             <?php foreach ($disease_specialties as $specialty):?>

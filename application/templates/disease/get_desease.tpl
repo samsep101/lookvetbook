@@ -48,7 +48,7 @@
 					<div class="like_p"><?php echo html_entity_decode($disease->content,ENT_COMPAT,'UTF-8'); ?></div>
 				</div>
 
-				<div><sjdiv id="SlickJumpNativeAds-sm0072"></sjdiv></div>
+				<div style="padding: 20px;"><sjdiv id="SlickJumpNativeAds-sm0072"></sjdiv></div>
 				<script>
                     (function() {
                         function a() {

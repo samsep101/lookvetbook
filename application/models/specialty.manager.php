@@ -88,11 +88,23 @@
         {
             $sql = 'SELECT *
                     FROM specialty
-                    WHERE alias LIKE "' . $this->db->escape($alias) . '" or alias_synonim like "%' . $this->db->escape($alias) . '%"';
+                    WHERE alias LIKE "' . $this->db->escape($alias) . '"';
 
             $data = $this->db->query($sql);
 
-            return (isset($data[0])) ? $this->initOne($data[0]) : NULL;
+            if (isset($data[0]))
+            return $this->initOne($data[0]);
+
+            $sql = 'SELECT *
+                    FROM specialty
+                    WHERE alias_synonim like "%' . $this->db->escape($alias) . '%"';
+
+            $data = $this->db->query($sql);
+
+            if (isset($data[0]))
+                return $this->initOne($data[0]);
+
+            return null;
         }
 
         /**

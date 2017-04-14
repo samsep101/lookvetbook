@@ -169,15 +169,7 @@ class DiseaseController extends BaseController
 
 
 
-      if (in_array($disease->alias,['pnevmoniya'])){
-          $this->render('disease_conversion_testA/get');
-      }elseif (in_array($disease->alias,['encefalit'])){
-          $this->render('disease_conversion_testB/get');
-      }else{
-          $this->render('disease/get');
-      }
-
-
+    $this->render('disease/get');
   }
 
   public function ajaxGetDiseaseCardContent()

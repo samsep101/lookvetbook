@@ -211,6 +211,7 @@
             font-size: 15px !important;
         }
     </style>
+    <script async type="text/javascript" src="//sjsmartcontent.org/static/plugin-site/js/sjplugin.js" site="6fmj"></script>
 </head>
 <body>
 <a href="#"

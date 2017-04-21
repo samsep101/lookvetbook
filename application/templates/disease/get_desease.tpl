@@ -49,20 +49,6 @@
 				</div>
 
 				<div style="padding: 20px;"><sjdiv id="SlickJumpNativeAds-sm0072"></sjdiv></div>
-				<script>
-                    (function() {
-                        function a() {
-                            var proto = ('https:' == document.location.protocol ? 'https' : 'http');
-                            var a = document.getElementsByTagName("script")[0], sj = document.createElement("script");
-                            sj.async = !0;
-                            sj.type = 'text/javascript';
-                            sj.src = proto + "://sjsmartcontent.org/static/plugin-site/js/sjplugin.js";
-                            sj.setAttribute("site", "6fmj");
-                            a.parentNode.insertBefore(sj, a);
-                        }
-                        window.addEventListener ? window.addEventListener("DOMContentLoaded", a, !1) : window.attachEvent ? window.attachEvent("onDomReady", a) : window.onDomReady = a;
-                    })();
-				</script>
 
 				<?php if(0 and !empty($disease->alias) and in_array($disease->alias, ['mezhpozvonochnaya-gryzha', 'osteohondroz-pozvonochnika'])) { ?>
 					<div class="desease-banner-line">

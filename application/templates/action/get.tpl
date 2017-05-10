@@ -19,7 +19,7 @@
                                 </a>
                             </div>
                             <div style="float: left;  font-size: 20px;  width: 547px;  margin-top: 11px;">
-                                <a style="color: #000;" href="tel:+7(495)215-09-07">Или позвоните нам и мы все расскажем +7 (495) 215-09-07</a>
+                                <a style="color: #000;" href="tel:+7(495)215-09-07">Или позвоните нам, и мы все расскажем +7 (495) 215-09-07</a>
                             </div>
 		                    <br>
 		                    <br>

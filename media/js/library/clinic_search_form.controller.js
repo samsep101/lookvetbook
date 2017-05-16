@@ -25,6 +25,7 @@ var ClinicSearchFormController = function (landing, already_registred_account, u
   this.is_metro = 0;
   this.metro_station_name = null;
   this.metro_branch_name = null;
+  this.metro_station_id = null;
 
   this.district_id = null;
   this.region_id = null;
@@ -461,6 +462,7 @@ var ClinicSearchFormController = function (landing, already_registred_account, u
       longitude:         self.longitude,
       is_metro:        self.is_metro,
       metro_station_name:    self.metro_station_name,
+      metro_station_id:    self.metro_station_id,
       metro_branch_name:     self.metro_branch_name,
       landing:         1,
       district_id:       self.district_id,
@@ -583,7 +585,18 @@ console.log(data);
       str += '&clinic_type=' + self.clinic_type;
     }
 
-    if (self.pregnant > 0)
+    if (self.district_id) {
+      str += '&district_id=' + self.district_id;
+    }
+
+    if (self.region_id) {
+      str += '&region_id=' + self.region_id;
+    }
+    if (self.street_id) {
+      str += '&street_id=' + self.street_id;
+    }
+
+      if (self.pregnant > 0)
       str += '&pregnant=' + self.pregnant;
 
     if  (self.handicapped > 0)
@@ -606,6 +619,9 @@ console.log(data);
 
     if (self.metro_branch_name)
       str += '&metro_branch_name=' + self.metro_branch_name;
+
+    if (self.metro_station_id)
+      str += '&metro_station_id=' + self.metro_station_id;
 
     if (self.sort_by && (self.sort_by != 'recomend')) {
       str = str + '&sort_by=' + self.sort_by;

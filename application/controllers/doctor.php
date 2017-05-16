@@ -213,7 +213,8 @@ class DoctorController extends BaseController
             $this->view->relations = $relations;
             unset($relations);
 
-            $this->view->page_title = 'Врач ' . mb_strtolower($doctor->specialties_names, 'utf-8') . ', ' . $doctor->full_name . ' - «'.SITE_NAME.'»';
+            $this->view->page_title = $doctor->full_name . ': отзывы, запись на прием, цены и рейтинг на '.SITE_NAME;
+            $this->view->page_description = 'Интересует врач '.$doctor->full_name.'? '.SITE_NAME.' предлагает посмотреть отзывы и рейтинг от клиентов, узнать стоимость и время приема и возможность записи онлайн.';
 
             foreach ($doctor->clinics as $clinic) {
                 foreach ($doctor->specialties as $specialty) {
@@ -732,7 +733,6 @@ class DoctorController extends BaseController
                 $address_object = $city;
             }
             $this->view->address_object = $address_object;
-
             //to do посмотреть, что будет если по всем доктороам пошли, это условие не отработает
             if ($specialty) {
                 $doctor_manager = new DoctorManager();
@@ -742,11 +742,11 @@ class DoctorController extends BaseController
             }
 
             if (isset($setDefaultSpecialty) && $setDefaultSpecialty) {
-                $this->view->page_title = SeoTextViewHelper::getTitle($specialty, $address_object, 0, 1);
+                $this->view->page_title = SeoTextViewHelper::getTitle($specialty, $address_object, 0, 1,$search_flags);
             } else {
-                $this->view->page_title = SeoTextViewHelper::getTitle($specialty, $address_object, 1);
+                $this->view->page_title = SeoTextViewHelper::getTitle($specialty, $address_object, 1,0,$search_flags);
             }
-            $this->view->page_description = SeoTextViewHelper::getDescription($specialty, $address_object);
+            $this->view->page_description = SeoTextViewHelper::getDescription($specialty, $address_object,$search_flags);
         }
         $this->view->specialty = $specialty;
         if (is_array($search_flags)) {

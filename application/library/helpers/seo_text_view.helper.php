@@ -102,15 +102,32 @@
 
 		public static  function getAddressObjectName(DynamicModel $model = NULL)
 		{
-			if ($model) {
+			//print_r($model);die();
+                        if ($model) {
 				if (get_class($model) == 'MetroStationModel')
-					return 'возле метро '.$model->name.' района '.$model->region->name;
-				elseif(get_class($model) == 'StreetModel')
-					return 'возле '.$model->street_type->genitive_name.' '.$model->name;
-				elseif(get_class($model) == 'RegionModel')
-					return 'в районе '.$model->name.' округа '.$model->parent->formal_name;
-				elseif(get_class($model) == 'DistrictModel')
-					return 'в округе '.$model->formal_name.' города '.$model->city->name;
+					return 'на метро '.$model->name;//.' района '.$model->region->name;
+				elseif(get_class($model) == 'StreetModel') {
+                                    $streetToRegionManager = new StreetToRegionManager();
+                                    $region_id = $streetToRegionManager->getOneByStreetId($model->getId())->region_id;
+                                    $regionManager = new RegionManager();
+                                    $region = $regionManager->getOneById($region_id);
+                                    $districtManager = new DistrictManager();
+                                    $district=$districtManager->getOneById($region->district_id);
+                                    $cityManager = new CityManager();
+                                    $city = $cityManager->getOneById($district->city_id);
+                                    return 'на '.$model->street_type->genitive_name.' '.$model->name.' '.' в '.$city->prepositional_name;
+                                }
+				elseif(get_class($model) == 'RegionModel') {
+                                    $districtManager = new DistrictManager();
+                                    $district = $districtManager->getOneById($model->district_id);
+                                    $cityManager = new CityManager();
+                                    $city = $cityManager->getOneById($district->city_id);
+//                                    return 'в районе '.$model->name.' в '.$model->parent->formal_name;
+                                    return 'в районе '.$model->name.' в '.$city->prepositional_name;
+                                }
+				elseif(get_class($model) == 'DistrictModel') {
+                                    return 'в '.$model->formal_name.' в '.$model->city->prepositional_name;
+                                }
 				elseif(get_class($model) == 'CityModel')
 					return 'в '.$model->prepositional_name;
 
@@ -159,14 +176,24 @@
 			return StringHelper::startProposalWord($specialty->plural_name).' '.SeoTextViewHelper::getAddressObjectName($address_object);
 		}
 
-		public static function getTitle($specialty, $address_object, $hideAddress = 0, $defaultTitle = 0)
+		public static function getTitle($specialty, $address_object, $hideAddress = 0, $defaultTitle = 0,$search_flags)
 		{
             $html = '';
+            $seo_doctors='Врачи';
+            if ($search_flags['visit_type']=='home' && $search_flags['doctor_type']!='children')
+                $seo_doctors='Врачи на дом';
+            else if ($search_flags['visit_type']!='home' && $search_flags['doctor_type']=='children')
+                $seo_doctors='Детские врачи';
+            else if ($search_flags['visit_type']=='home' && $search_flags['doctor_type']=='children')
+                $seo_doctors='Детские врачи на дом';
+            
             if($specialty && !$defaultTitle) {
-                if($hideAddress) $html = 'Лучшие ' . $specialty->plural_name . ' ' . SeoTextViewHelper::getAddressObjectNamePagesForTop($address_object) . '. Найти хорошего ' . $specialty->genitive_name . ' ' . SeoTextViewHelper::getAddressObjectOnlyName($address_object) . ', запись на прием онлайн, рейтинг, отзывы – '.SITE_NAME;
-                else $html = self::getH1($specialty, $address_object).' | Выбор хорошего '.$specialty->genitive_name.' '.SeoTextViewHelper::getAddressObjectName($address_object).', отзывы, рейтинг и запись на прием на '.SITE_NAME.'.';
+                if($hideAddress) 
+                    $html = $seo_doctors.' ' . $specialty->plural_name . ' ' . SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
+                else 
+                    $html = self::getH1($specialty, $address_object).' | Выбор хорошего '.$specialty->genitive_name.' '.SeoTextViewHelper::getAddressObjectName($address_object).', отзывы, рейтинг и запись на прием на '.SITE_NAME.'.';
             } elseif($address_object) {
-                $html = 'Найти хорошего врача '.SeoTextViewHelper::getAddressObjectName($address_object) . ' онлайн. Поиск врачей по всем специальностям, отзывы, рейтинг, запись на прием – '.SITE_NAME;
+                $html = $seo_doctors.' '.SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
             } else {
                 $html = 'Найти хорошего врача в Москве онлайн. Поиск врачей по всем специальностям, отзывы, рейтинг, запись на прием – '.SITE_NAME;
             }
@@ -175,17 +202,18 @@
 
 		}
 
-		public static function getDescription($specialty, $address_object)
+		public static function getDescription($specialty, $address_object, $search_flags)
 		{
-            if($specialty) {
-                $html = 'Сервис '.SITE_NAME.' поможет выбрать хорошего '.$specialty->genitive_name.' '.SeoTextViewHelper::getAddressObjectName($address_object).'
-			по отзывам клиентов, узнать стоимость приема врачей и посмотреть их фото.';
-            } else {
-                $html = 'Сервис '.SITE_NAME.' поможет выбрать хорошего врача '.SeoTextViewHelper::getAddressObjectName($address_object).'
-			по отзывам клиентов, узнать стоимость приема врачей и посмотреть их фото.';
-            }
+                    $seo_doctors='врача '.$specialty->genitive_name;
+                    if ($search_flags['visit_type']=='home' && $search_flags['doctor_type']!='children')
+                        $seo_doctors='врача '.$specialty->genitive_name.' на дом';
+                    else if ($search_flags['visit_type']!='home' && $search_flags['doctor_type']=='children')
+                        $seo_doctors='детского врача '.$specialty->genitive_name;
+                    else if ($search_flags['visit_type']=='home' && $search_flags['doctor_type']=='children')
+                        $seo_doctors='детского врача '.$specialty->genitive_name.' на дом';
 
-			return $html;
+                    $html = 'Ищете '.$seo_doctors.' '.SeoTextViewHelper::getAddressObjectName($address_object).'? '.SITE_NAME.' поможет выбрать опытного врача по отзывам и рейтингам клиентов, узнать стоимость и записаться на прием.';
+                    return $html;
 		}
 
         public static function getTopNumberH1($specialty, $address_object) {

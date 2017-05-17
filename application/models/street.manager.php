@@ -66,6 +66,21 @@
             $city_id = intval($city_id);
 
             if($city_id) {
+			$sql = 'SELECT *
+					FROM street s
+					WHERE EXISTS (
+							SELECT *
+							FROM doctor dc
+							INNER JOIN doctor_to_clinic d2c ON d2c.doctor_id = dc.id
+							INNER JOIN clinic c ON c.id = d2c.clinic_id
+							WHERE
+								c.street_id = s.id
+								AND dc.is_active = 1
+                                                                AND c.city_id = '.$city_id.'
+						)
+					ORDER BY `name`';
+                
+/* # переделал в рамках 1751
                 $sql = 'SELECT *
                     FROM street AS strt
                             INNER JOIN clinic AS c ON c.street_id = strt.id
@@ -76,6 +91,8 @@
                         AND dc.second_name IS NOT NULL
                         AND dc.last_name IS NOT NULL
                     ORDER BY strt.name';
+ * 
+ */
 
                 $data = $this->db->query($sql);
             }

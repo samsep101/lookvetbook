@@ -120,6 +120,11 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
       $filter_and->addFilter($match);
     }
 
+    if ($criteria->metro_station_id) {
+      $match = new \Elastica\Filter\Term();
+      $match->setTerm('metro_station_id', $criteria->metro_station_id);
+      $filter_and->addFilter($match);
+    }
 
     if ($criteria->is_active) {
       $match = new \Elastica\Filter\Term();

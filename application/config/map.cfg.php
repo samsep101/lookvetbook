@@ -421,7 +421,81 @@
             'action'     => 'index',
             'controller' => 'landing'
         ),
-
-    );
+        array(
+            'url'        => '/sitemap/doctors',
+            'action'     => 'showDoctors',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/doctors/:p',
+            'action'     => 'showDoctors',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/doctors/location/:location',
+            'action'     => 'showDoctors',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/doctors/:p/location/:location',
+            'action'     => 'showDoctors',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/doctors/location/:location/specialty/:specialty',
+            'action'     => 'showDoctors',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/doctors/:p/location/:location/specialty/:specialty',
+            'action'     => 'showDoctors',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/doctors/specialty/:specialty',
+            'action'     => 'showDoctors',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/doctors/:p/specialty/:specialty',
+            'action'     => 'showDoctors',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/doctors/specialty/:specialty/location/:location',
+            'action'     => 'showDoctors',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/doctors/:p/specialty/:specialty/location/:location',
+            'action'     => 'showDoctors',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/clinics/specialization/:specialization/location/:location',
+            'action'     => 'showClinics',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/clinics/location/:location/specialization/:specialization',
+            'action'     => 'showClinics',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/clinics',
+            'action'     => 'showClinics',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/clinics/location/:location',
+            'action'     => 'showClinics',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/sitemap/clinics/specialization/:specialization',
+            'action'     => 'showClinics',
+            'controller' => 'sitemap'
+        ),
+);
 
     Register::add('map', $map);

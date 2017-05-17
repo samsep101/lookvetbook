@@ -277,6 +277,9 @@
             .adv_text div{
                 display: none;
             }
+            adv_text img{
+                padding: 10px;
+            }
             .adv_text p.showme{
                 display: block;
             }

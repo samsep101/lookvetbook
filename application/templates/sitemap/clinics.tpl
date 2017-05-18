@@ -52,7 +52,7 @@
                 <?php 
                   foreach($districtsList as $s) {
                 ?>
-                <a href="/sitemap/clinics/<?php if ($specialization) {echo 'specialization/'.$specialization.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
+                <a href="/smap/clinics/<?php if ($specialization) {echo 'specialization/'.$specialization.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
                 <?php }
                 ?>
                 <br><br>
@@ -64,7 +64,7 @@
                 <?php 
                   foreach($regionsList as $s) {
                 ?>
-                <a href="/sitemap/clinics/<?php if ($specialization) {echo 'specialization/'.$specialization.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
+                <a href="/smap/clinics/<?php if ($specialization) {echo 'specialization/'.$specialization.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
                 <?php }
                 ?>
                 <br><br>
@@ -76,7 +76,7 @@
                 <?php 
                   foreach($metroStationsList as $s) {
                 ?>
-                <a href="/sitemap/clinics/<?php if ($specialization) {echo 'specialization/'.$specialization.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
+                <a href="/smap/clinics/<?php if ($specialization) {echo 'specialization/'.$specialization.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
                 <?php }
                 ?>
                 <br><br>
@@ -88,7 +88,7 @@
                 <?php 
                   foreach($streetsList as $s) {
                 ?>
-                <a href="/sitemap/clinics/<?php if ($specialization) {echo 'specialization/'.$specialization.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
+                <a href="/smap/clinics/<?php if ($specialization) {echo 'specialization/'.$specialization.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
                 <?php }
                 ?>
                 <br><br>
@@ -103,7 +103,7 @@
                 <?php 
                   foreach($specializationsList as $s) {
                 ?>
-                <a href="/sitemap/clinics/<?php if ($location) {echo 'location/'.$location.'/';} ?>specialization/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
+                <a href="/smap/clinics/<?php if ($location) {echo 'location/'.$location.'/';} ?>specialization/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
                 <?php }
                 ?>
                 <br><br>

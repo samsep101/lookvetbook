@@ -3,7 +3,7 @@
 	<?php
 	break;
 	} ?>
-	поможет при лечении заболевания
+	назначит правильное лечение при <?php echo $disease->prepositional_name;?>
 </p>
 <video src="<?=$video_file_path?>" width="160" height="160" poster="<?=$video_thumb_path?>" controls=""></video>
 <?php foreach ($disease_specialties as $specialty) { ?>

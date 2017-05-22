@@ -18,10 +18,10 @@
                 <a href="/">Главная</a>
             </li>
             <li>
-                <a href="/sitemap/doctors">Все врачи</a>
+                <a href="/smap/doctors">Все врачи</a>
             </li>
             <li>
-                <a href="/sitemap/clinics">Все клиники</a>
+                <a href="/smap/clinics">Все клиники</a>
             </li>
             <li>
                 <a href="/disease">Справочник заболеваний</a>

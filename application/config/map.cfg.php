@@ -422,77 +422,82 @@
             'controller' => 'landing'
         ),
         array(
-            'url'        => '/sitemap/doctors',
+            'url'        => '/smap',
+            'action'     => 'index',
+            'controller' => 'sitemap'
+        ),
+        array(
+            'url'        => '/smap/doctors',
             'action'     => 'showDoctors',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/doctors/:p',
+            'url'        => '/smap/doctors/:p',
             'action'     => 'showDoctors',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/doctors/location/:location',
+            'url'        => '/smap/doctors/location/:location',
             'action'     => 'showDoctors',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/doctors/:p/location/:location',
+            'url'        => '/smap/doctors/:p/location/:location',
             'action'     => 'showDoctors',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/doctors/location/:location/specialty/:specialty',
+            'url'        => '/smap/doctors/location/:location/specialty/:specialty',
             'action'     => 'showDoctors',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/doctors/:p/location/:location/specialty/:specialty',
+            'url'        => '/smap/doctors/:p/location/:location/specialty/:specialty',
             'action'     => 'showDoctors',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/doctors/specialty/:specialty',
+            'url'        => '/smap/doctors/specialty/:specialty',
             'action'     => 'showDoctors',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/doctors/:p/specialty/:specialty',
+            'url'        => '/smap/doctors/:p/specialty/:specialty',
             'action'     => 'showDoctors',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/doctors/specialty/:specialty/location/:location',
+            'url'        => '/smap/doctors/specialty/:specialty/location/:location',
             'action'     => 'showDoctors',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/doctors/:p/specialty/:specialty/location/:location',
+            'url'        => '/smap/doctors/:p/specialty/:specialty/location/:location',
             'action'     => 'showDoctors',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/clinics/specialization/:specialization/location/:location',
+            'url'        => '/smap/clinics/specialization/:specialization/location/:location',
             'action'     => 'showClinics',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/clinics/location/:location/specialization/:specialization',
+            'url'        => '/smap/clinics/location/:location/specialization/:specialization',
             'action'     => 'showClinics',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/clinics',
+            'url'        => '/smap/clinics',
             'action'     => 'showClinics',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/clinics/location/:location',
+            'url'        => '/smap/clinics/location/:location',
             'action'     => 'showClinics',
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/sitemap/clinics/specialization/:specialization',
+            'url'        => '/smap/clinics/specialization/:specialization',
             'action'     => 'showClinics',
             'controller' => 'sitemap'
         ),

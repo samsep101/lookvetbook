@@ -69,7 +69,7 @@
                 <?php 
                   foreach($districtsList as $s) {
                 ?>
-                <a href="/sitemap/doctors/<?php if ($p) {echo $p.'/';} ?><?php if ($specialty) {echo 'specialty/'.$specialty.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
+                <a href="/smap/doctors/<?php if ($p) {echo $p.'/';} ?><?php if ($specialty) {echo 'specialty/'.$specialty.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
                 <?php }
                 ?>
                 <br><br>
@@ -81,7 +81,7 @@
                 <?php 
                   foreach($regionsList as $s) {
                 ?>
-                <a href="/sitemap/doctors/<?php if ($p) {echo $p.'/';} ?><?php if ($specialty) {echo 'specialty/'.$specialty.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
+                <a href="/smap/doctors/<?php if ($p) {echo $p.'/';} ?><?php if ($specialty) {echo 'specialty/'.$specialty.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
                 <?php }
                 ?>
                 <br><br>
@@ -93,7 +93,7 @@
                 <?php 
                   foreach($metroStationsList as $s) {
                 ?>
-                <a href="/sitemap/doctors/<?php if ($p) {echo $p.'/';} ?><?php if ($specialty) {echo 'specialty/'.$specialty.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
+                <a href="/smap/doctors/<?php if ($p) {echo $p.'/';} ?><?php if ($specialty) {echo 'specialty/'.$specialty.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
                 <?php }
                 ?>
                 <br><br>
@@ -105,7 +105,7 @@
                 <?php 
                   foreach($streetsList as $s) {
                 ?>
-                <a href="/sitemap/doctors/<?php if ($p) {echo $p.'/';} ?><?php if ($specialty) {echo 'specialty/'.$specialty.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
+                <a href="/smap/doctors/<?php if ($p) {echo $p.'/';} ?><?php if ($specialty) {echo 'specialty/'.$specialty.'/';} ?>location/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
                 <?php }
                 ?>
                 <br><br>
@@ -120,7 +120,7 @@
                 <?php 
                   foreach($specialitiesList as $s) {
                 ?>
-                <a href="/sitemap/doctors/<?php if ($p) {echo $p.'/';} ?><?php if ($location) {echo 'location/'.$location.'/';} ?>specialty/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
+                <a href="/smap/doctors/<?php if ($p) {echo $p.'/';} ?><?php if ($location) {echo 'location/'.$location.'/';} ?>specialty/<?php echo $s['alias'];?>"><?php echo $s['name']; ?></a>&nbsp;
                 <?php }
                 ?>
                 <br><br>

@@ -69,7 +69,7 @@
 		<div class="side-column" <?php /* ?>data-spy="affix" data-offset-top="100"<?php */ ?>>
 			<?php if ($disease_specialties) { ?>
 		<div class="info-box doing-box what-to-do" style="position: relative; z-index: 7000;width: 256px; left: 10px">
-					<h3>У вас <span><?php echo trim(strtolower($disease->title));?>?
+					<h3>У вас <span><?php echo mb_strtolower(trim($disease->title));?>?
 						</span></h3>
 					<ol class="todo-list">
 						<li>

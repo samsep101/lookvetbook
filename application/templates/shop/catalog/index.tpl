@@ -318,7 +318,6 @@
             <p>
                 Сравнительная таблица «Афобазол или Тенотен?»
             </p>
-            <p><img src="/media/articles/3.jpg" width="580"></p>
             <table border="1" cellspacing="0" cellpadding="0">
                 <tbody>
                 <tr>
@@ -557,7 +556,7 @@
             <ul class="goods_blocks">
                 <li class="bg_gradient buy product-card product-card-17045" data-id="17045">
                     <a href="/shop/product/afobazol-tabletki-10-mg-60-sht">
-                        <img src="/media/images/no_image_product.png">
+                        <img src="/media/articles/afo1.png">
                     </a>
                     <p class="good_name"><a href="/shop/product/afobazol-tabletki-10-mg-60-sht">Афобазол таблетки 10 мг, 60 шт.</a>
                         Фармстандарт                    </p>

@@ -47,8 +47,13 @@
 					<?php $disease->content = preg_replace('/<br\/>/','',$disease->content);?>
 					<div class="like_p"><?php echo html_entity_decode($disease->content,ENT_COMPAT,'UTF-8'); ?></div>
 				</div>
+                                <!-- old slickjumg -->
+                                <!-- перенесеннай тизер medshowtiz 
+                                <div id="teaser_807"><a href="">Тизерная сеть</a></div>
+                                <script type="text/javascript">var medtizer807=document.createElement('script'); medtizer807.src='//medshowtiz.ru/show/?block_id=807&title='+document.title+'&r='+escape(document.referrer)+'&'+Math.round(Math.random()*100000);   function f807() { if(!self.medtizer) { medtizer=807; document.body.appendChild(medtizer807); } else { setTimeout('f807()',200); } } f807();</script>
+                                -->
 
-				<div style="padding: 20px;"><sjdiv id="SlickJumpNativeAds-sm0072"></sjdiv></div>
+                                <div id="webapteka_48">загрузка...</div>
 
 				<?php if(0 and !empty($disease->alias) and in_array($disease->alias, ['mezhpozvonochnaya-gryzha', 'osteohondroz-pozvonochnika'])) { ?>
 					<div class="desease-banner-line">
@@ -141,3 +146,6 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+document.write('<scr'+'ipt language="javascript" type="text/javascript" src="/getout.php?g=48"></scr'+'ipt>');
+</script>

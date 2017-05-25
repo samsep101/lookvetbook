@@ -182,8 +182,7 @@
                 overflow: hidden !important;
             }
             </style>
-            <div id="teaser_807"><a href="">Тизерная сеть</a></div>
-            <script type="text/javascript">var medtizer807=document.createElement('script'); medtizer807.src='//medshowtiz.ru/show/?block_id=807&title='+document.title+'&r='+escape(document.referrer)+'&'+Math.round(Math.random()*100000);   function f807() { if(!self.medtizer) { medtizer=807; document.body.appendChild(medtizer807); } else { setTimeout('f807()',200); } } f807();</script>
+            <div style="padding: 20px;"><sjdiv id="SlickJumpNativeAds-sm0072"></sjdiv></div>
     <?php endif; ?>
     <?php /* if ($block->disease_block_type_id == 3): ?>
         <div class="section">

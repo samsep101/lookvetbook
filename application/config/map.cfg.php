@@ -502,7 +502,7 @@
             'controller' => 'sitemap'
         ),
         array(
-            'url'        => '/venerolog-urolog-ginekolog',
+            'url'        => '/zayavka',
             'action'     => 'index',
             'controller' => 'oneClickSubscribe'
         ),

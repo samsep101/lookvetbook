@@ -131,8 +131,9 @@ var IndexPageController = function () {
                 self.name = ($('input[name="first_name"]').val() != $('input[name="first_name"]').attr('placeholder')) ? $('input[name="first_name"]').val() : '';
                 self.phone = ($('input[name="first_name"]').val() != $('input[name="phone_number"]').attr('placeholder')) ? $('input[name="phone_number"]').val() : '';
                 Ajax.Post('/ajax/addCallToUser', {
-                        name: self.name,
-                        phone: self.phone
+                        name: self.name+' ('+$("#specialties_to_search_doctor option:selected").text()+')',
+                        phone: self.phone//,
+                        //specialty:$("#specialties_to_search_doctor").val();
                     },
                     function (data) {
                         if (data.status == 0) {

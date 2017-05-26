@@ -13,7 +13,6 @@ $(document).ready(function(){
     $(".form-call-step-1-s").css("display","block");
     var controller = new IndexPageController(0,0);
     controller.init();
-    alert('ready');
 
 });
 </script>
@@ -147,6 +146,7 @@ $(document).ready(function(){
                             что выбрали нас!
                         </p>
                     </div>
+
    <!--
                 </a>
        -->             

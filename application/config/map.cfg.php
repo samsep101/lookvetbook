@@ -501,6 +501,11 @@
             'action'     => 'showClinics',
             'controller' => 'sitemap'
         ),
+        array(
+            'url'        => '/venerolog-urolog-ginekolog',
+            'action'     => 'index',
+            'controller' => 'oneClickSubscribe'
+        ),
 );
 
     Register::add('map', $map);

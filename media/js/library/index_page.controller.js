@@ -154,7 +154,6 @@ var IndexPageController = function () {
         });
         
         $('.btn-call-s').click(function() {
-            alert($("#specialties_to_search_doctor option:selected").text());
             if (self.send_call_request) {
                 self.send_call_request = false;
                 self.name = ($('input[name="first_name"]').val() != $('input[name="first_name"]').attr('placeholder')) ? $('input[name="first_name"]').val() : '';

@@ -125,6 +125,7 @@ var IndexPageController = function () {
             event.stopPropagation();
         });
 
+
         $('.btn-call').click(function() {
             if (self.send_call_request) {
                 self.send_call_request = false;

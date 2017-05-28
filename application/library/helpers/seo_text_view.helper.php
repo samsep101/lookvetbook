@@ -115,7 +115,11 @@
                                     $district=$districtManager->getOneById($region->district_id);
                                     $cityManager = new CityManager();
                                     $city = $cityManager->getOneById($district->city_id);
-                                    return 'на '.$model->street_type->genitive_name.' '.$model->name.' '.' в '.$city->prepositional_name;
+                                    if (extension_loaded('morpher')) {
+                                        return 'на '. morpher_inflect($model->street_type->name,'gde').' '.morpher_inflect($model->name,'gde').' '.' в '. morpher_inflect($city->name,'gde');
+                                    } else {
+                                        return 'на '.$model->street_type->genitive_name.' '.$model->name.' '.' в '.$city->prepositional_name;
+                                    }
                                 }
 				elseif(get_class($model) == 'RegionModel') {
                                     $districtManager = new DistrictManager();
@@ -123,14 +127,27 @@
                                     $cityManager = new CityManager();
                                     $city = $cityManager->getOneById($district->city_id);
 //                                    return 'в районе '.$model->name.' в '.$model->parent->formal_name;
-                                    return 'в районе '.$model->name.' в '.$city->prepositional_name;
+                                    if (extension_loaded('morpher')) {
+                                      return 'в районе '.$model->name.' в '.morpher_inflect($city->name,'gde');
+                                    } else {
+                                      return 'в районе '.$model->name.' в '.$city->prepositional_name;
+                                    }
                                 }
 				elseif(get_class($model) == 'DistrictModel') {
-                                    return 'в '.$model->formal_name.' в '.$model->city->prepositional_name;
+                                    if (extension_loaded('morpher')) {
+                                      return 'в '.morpher_inflect($model->name,'gde').' в '.morpher_inflect($model->city->name,'gde');
+                                    } else {
+                                      return 'в '.$model->formal_name.' в '.$model->city->prepositional_name;
+                                    }
                                 }
-				elseif(get_class($model) == 'CityModel')
-					return 'в '.$model->prepositional_name;
-
+				elseif(get_class($model) == 'CityModel'){
+                                    if (extension_loaded('morpher')) {
+                                      return 'в '.morpher_inflect($model->name,'gde');
+                                    } else {
+                                      return 'в '.$model->prepositional_name;
+                                    }
+                                    
+                                }
 			}
 			return '';
 		}

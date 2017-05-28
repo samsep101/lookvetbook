@@ -778,8 +778,14 @@ class ClinicController extends BaseController
 
 //    return $this->view->page_title = $this->getSeoAddress().' Найти клинику. Адреса и телефоны медицинских центров Москвы и других городов России - «'.SITE_NAME.'»';
 
-    if ($this->view->specialization) {
-        $seo_specialization=$this->view->specialization->name;
+    if ($this->view->specialization) {       
+        if (extension_loaded('morpher')) {
+            $seo_specialization=morpher_inflect($this->view->specialization->name,'dat');
+        } else {
+            $seo_specialization=$this->view->specialization->name;
+        }
+                                      
+        
     }
     if ($this->view->clinic->name)
         return $this->view->page_title = $this->view->clinic->name.' - врачи, отзывы, цены, телефоны и адреса, запись на прием на '.SITE_NAME;

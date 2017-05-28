@@ -125,7 +125,6 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
       $match->setTerm('metro_station_id', $criteria->metro_station_id);
       $filter_and->addFilter($match);
     }
-
     if ($criteria->is_active) {
       $match = new \Elastica\Filter\Term();
       $match->setTerm('is_active', TRUE);
@@ -271,7 +270,15 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
     } elseif ($criteria->region_id) {
       $result_query->addSort(array(
         '_script' => array(
-          'script' => '((doc[\'district\'].value == ' . $criteria->district_id . ') ? 1 : 0)',
+          'script' => '((doc[\'region\'].value == ' . $criteria->region_id . ') ? 1 : 0)',
+          "type" => "number",
+          "order" => "desc"
+        )
+      ));
+    } elseif ($criteria->metro_station_id) {
+      $result_query->addSort(array(
+        '_script' => array(
+          'script' => '((doc[\'metro_station_id\'].value == ' . $criteria->metro_station_id . ') ? 1 : 0)',
           "type" => "number",
           "order" => "desc"
         )

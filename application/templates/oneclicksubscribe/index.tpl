@@ -1,4 +1,4 @@
-<script src="/media/js/library/index_page.controller.js">
+<script src="/media/js/library/index_page.controller.js"></script>
 <script language="javascript">
 $(document).ready(function(){
     $(".nav-table").hide();

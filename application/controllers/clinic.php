@@ -222,8 +222,14 @@ class ClinicController extends BaseController
 
     if ($this->view->clinic->name) 
       return 'Интересует '.$this->view->clinic->name.'? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на '.SITE_NAME.'. Заходите!';      
-    else
-      return 'Ищете медицинские центры и клиники '.$seo_specialization.' '.$this->getSeoAddress().'? '.SITE_NAME.' поможет выбрать лучшие клиники и медицинские центры по отзывам, рейтингу и стоимости. Заходите!';      
+    else {
+      if (extension_loaded('morpher')) {
+        return 'Ищете медицинские центры и клиники '.morpher_inflect($seo_specialization,'rod').' '.$this->getSeoAddress().'? '.SITE_NAME.' поможет выбрать лучшие клиники и медицинские центры по отзывам, рейтингу и стоимости. Заходите!';      
+      } else {
+        return 'Ищете медицинские центры и клиники '.$seo_specialization.' '.$this->getSeoAddress().'? '.SITE_NAME.' поможет выбрать лучшие клиники и медицинские центры по отзывам, рейтингу и стоимости. Заходите!';      
+      }
+        
+    }
   }
   public function index($specialization_alias = NULL)
   {
@@ -780,7 +786,7 @@ class ClinicController extends BaseController
 
     if ($this->view->specialization) {       
         if (extension_loaded('morpher')) {
-            $seo_specialization=morpher_inflect($this->view->specialization->name,'dat');
+            $seo_specialization=morpher_inflect($this->view->specialization->name,'rod');
         } else {
             $seo_specialization=$this->view->specialization->name;
         }

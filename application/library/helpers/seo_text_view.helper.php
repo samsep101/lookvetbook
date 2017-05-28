@@ -116,7 +116,7 @@
                                     $cityManager = new CityManager();
                                     $city = $cityManager->getOneById($district->city_id);
                                     if (extension_loaded('morpher')) {
-                                        return morpher_inflect($model->street_type->name,'gde').' '.morpher_inflect($model->name,'im').' '.' в '. morpher_inflect($city->name,'gde');
+                                        return morpher_inflect($model->street_type->name,'gde').' '.morpher_inflect($model->name,'im').' '. morpher_inflect($city->name,'gde');
                                     } else {
                                         return 'на '.$model->street_type->genitive_name.' '.$model->name.' '.' в '.$city->prepositional_name;
                                     }
@@ -128,14 +128,14 @@
                                     $city = $cityManager->getOneById($district->city_id);
 //                                    return 'в районе '.$model->name.' в '.$model->parent->formal_name;
                                     if (extension_loaded('morpher')) {
-                                      return 'в районе '.$model->name.morpher_inflect($city->name,'gde');
+                                      return 'в районе '.$model->name.' '.morpher_inflect($city->name,'gde');
                                     } else {
                                       return 'в районе '.$model->name.' в '.$city->prepositional_name;
                                     }
                                 }
 				elseif(get_class($model) == 'DistrictModel') {
                                     if (extension_loaded('morpher')) {
-                                      return morpher_inflect($model->name,'gde').morpher_inflect($model->city->name,'gde');
+                                      return morpher_inflect($model->name,'gde').' '.morpher_inflect($model->city->name,'gde');
                                     } else {
                                       return 'в '.$model->formal_name.' в '.$model->city->prepositional_name;
                                     }

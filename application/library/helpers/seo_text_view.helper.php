@@ -187,16 +187,31 @@
             else if ($search_flags['visit_type']=='home' && $search_flags['doctor_type']=='children')
                 $seo_doctors='Детские врачи на дом';
             
-            if($specialty && !$defaultTitle) {
-                if($hideAddress) 
-                    $html = $seo_doctors.' ' . $specialty->plural_name . ' ' . SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
-                else 
-                    $html = self::getH1($specialty, $address_object).' | Выбор хорошего '.$specialty->genitive_name.' '.SeoTextViewHelper::getAddressObjectName($address_object).', отзывы, рейтинг и запись на прием на '.SITE_NAME.'.';
-            } elseif($address_object) {
-                $html = $seo_doctors.' '.SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
-            } else {
-                $html = 'Найти хорошего врача в Москве онлайн. Поиск врачей по всем специальностям, отзывы, рейтинг, запись на прием – '.SITE_NAME;
-            }
+            
+            if (extension_loaded('morpher')) {
+                if($specialty && !$defaultTitle) {
+                    if($hideAddress) 
+                        $html = $seo_doctors.' ' . morpher_inflect($specialty->name,'im mn') . ' ' . SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
+                    else 
+                        $html = self::getH1($specialty, $address_object).' | Выбор хорошего '.morpher_inflect($specialty->name,'rof').' '.SeoTextViewHelper::getAddressObjectName($address_object).', отзывы, рейтинг и запись на прием на '.SITE_NAME.'.';
+                } elseif($address_object) {
+                    $html = $seo_doctors.' '.SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
+                } else {
+                    $html = 'Найти хорошего врача в Москве онлайн. Поиск врачей по всем специальностям, отзывы, рейтинг, запись на прием – '.SITE_NAME;
+                }
+            }  else {
+                if($specialty && !$defaultTitle) {
+                    if($hideAddress) 
+                        $html = $seo_doctors.' ' . $morpher_doctor . ' ' . SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
+                    else 
+                        $html = self::getH1($specialty, $address_object).' | Выбор хорошего '.$specialty->genitive_name.' '.SeoTextViewHelper::getAddressObjectName($address_object).', отзывы, рейтинг и запись на прием на '.SITE_NAME.'.';
+                } elseif($address_object) {
+                    $html = $seo_doctors.' '.SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
+                } else {
+                    $html = 'Найти хорошего врача в Москве онлайн. Поиск врачей по всем специальностям, отзывы, рейтинг, запись на прием – '.SITE_NAME;
+                }
+            }          
+            
 
 			return $html;
 

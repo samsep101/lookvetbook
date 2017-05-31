@@ -22,16 +22,16 @@
 </div>
                                 <?php if($disease->alias=='diareya') {
                                 ?>
-                                <div >
-                                    <div  style="font-size: 14px;">
+                                <div class="other-links">
+                                    <div class='like_p' style="font-size: 14px;">
                                     Материал опубликован при поддержке <a href='https://docdoc.ru' target='_blank'>DocDoc.ru</a> - сервиса по поиску <a href='https://docdoc.ru/doctor/gastroenterolog' target='_blank'>врачей</a>
                                     </div>
                                 </div>
                                 <?php
                                 } else if ($disease->alias=='gripp') {
                                  ?>
-                                <div >
-                                    <div  style="font-size: 14px;">
+                                <div class="other-links">
+                                    <div class='like_p' style="font-size: 14px;">
                                     Материал опубликован при поддержке DocDoc.ru - сервиса по поиску врачей в <a href='https://docdoc.ru' target='_blank'>Москве</a> и <a href='https://spb.docdoc.ru' target='_blank'>Санкт-Петербурге</a>.
                                     </div>
                                 </div>

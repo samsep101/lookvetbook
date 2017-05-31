@@ -6,16 +6,17 @@
         <option  value="<?php echo $specialty->getId(); ?>" <?php if ($specialty->gparent == 1) {?>style="font-weight: bold;"<?php }?>
             data-specialty_alias="<?php echo $specialty->alias; ?>"
             data-specialty_name="<?php echo $specialty->name; ?>"
-            data-specialty_plural_name="<?php echo $specialty->plural_name; ?>">
-
-            <?php echo StringHelper::startProposalWord($specialty->name); ?>
-            <?php if ($specialty->id=39)
+            data-specialty_plural_name="<?php echo $specialty->plural_name; ?>"
+            <?php if ($specialty->getId()==39)
              {
              ?>
              selected
              <?php
              }
              ?>
+            >
+
+            <?php echo StringHelper::startProposalWord($specialty->name); ?>
         </option>
         <?php
         }

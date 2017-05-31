@@ -9,7 +9,13 @@
             data-specialty_plural_name="<?php echo $specialty->plural_name; ?>">
 
             <?php echo StringHelper::startProposalWord($specialty->name); ?>
-
+            <?php if ($specialty->id=39)
+             {
+             ?>
+             selected
+             <?php
+             }
+             ?>
         </option>
         <?php
         }

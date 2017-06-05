@@ -58,9 +58,9 @@ class ClinicController extends BaseController
     $specialization =   null;
     if (isset($v) && count($v)>0) {
         for ($i=0;$i<=count($v);++$i) {
-            $r[]=$v[$i];
+            $r[]=(isset($v[$i])) ? $v[$i] : '';
             for ($j=0;$j<=count($v);++$j) {
-                $r[]=$v[$i].'-'.$v[$j];
+                $r[]=(isset($v[$i]) and isset($v[$j])) ? $v[$i].'-'.$v[$j] : '';
                 for ($k=0;$k<=count($v);++$k) {
                     $r[]=(isset($v[$i]) and isset($v[$j]) and isset($v[$k])) ? $v[$i].'-'.$v[$j].'-'.$v[$k] : '';
                     for ($z=0;$z<=count($v);++$z) {

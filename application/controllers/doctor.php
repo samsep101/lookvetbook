@@ -64,15 +64,15 @@ class DoctorController extends BaseController
         $street     =   null;
         if (isset($v) && count($v)>0) {
             for ($i=0;$i<=count($v);++$i) {
-                $r[]=$v[$i];
+                $r[]=(isset($v[$i])) ? $v[$i] : '';
                 for ($j=0;$j<=count($v);++$j) {
-                      $r[]=$v[$i].'-'.$v[$j];
+                    $r[]=(isset($v[$i]) and isset($v[$j])) ? $v[$i].'-'.$v[$j] : '';
                     for ($k=0;$k<=count($v);++$k) {
-                        $r[]=$v[$i].'-'.$v[$j].'-'.$v[$k];
+                        $r[]=(isset($v[$i]) and isset($v[$j]) and isset($v[$k])) ? $v[$i].'-'.$v[$j].'-'.$v[$k] : '';
                         for ($z=0;$z<=count($v);++$z) {
-                            $r[]=$v[$i].'-'.$v[$j].'-'.$v[$k].'-'.$v[$z];
+                            $r[]=(isset($v[$i]) and isset($v[$j]) and isset($v[$k]) and isset($v[$z])) ? $v[$i].'-'.$v[$j].'-'.$v[$k].'-'.$v[$z] : '';
                             for ($q=0;$q<=count($v);++$q) {
-                                $r[]=$v[$i].'-'.$v[$j].'-'.$v[$k].'-'.$v[$z].'-'.$v[$q];
+                                $r[]=(isset($v[$i]) and isset($v[$j]) and isset($v[$k]) and isset($v[$z]) and isset($v[$q])) ? $v[$i].'-'.$v[$j].'-'.$v[$k].'-'.$v[$z].'-'.$v[$q] : '';
                             }
                         }
                     }

@@ -76,7 +76,7 @@
 		 */
 		public function __get($param_name)
 		{
-			if (isset($this->params[$param_name])) {
+			if (isset($this->params[$param_name]) AND !isset($this->{$param_name})) {
 				if (isset($this->fields_models[$param_name])) {
 					if ($this->params[$param_name]) {
 						$model_manager = ModelManagerFactory::getByName($this->fields_models[$param_name]);
@@ -97,18 +97,28 @@
 			}
 
 			// todo: протестировать
-			if(isset($this->{$param_name.'_id'}) || isset($this->params[$param_name.'_id']))
-			{
-				if (!isset($this->{$param_name.'_id'}))
-					$this->{$param_name.'_id'} = $this->params[$param_name.'_id'];
+      $param_name_id = $param_name.'_id';
+			if(isset($this->{$param_name_id}) OR isset($this->params[$param_name_id])) {
 
-				if ($this->{$param_name.'_id'})
+        // проверяем именно свойство, ибо isset существующего свойства вернет false через $this
+        //if(strstr($param_name, 'docdoc')){
+        //  debug(isset($this->{$param_name_id}), 1); // <--false
+        //  debug($this->{$param_name_id});         // <-- NULL свойство пустое, но инициализировано со значением NULL
+        //}
+				if ( false === property_exists($this, $param_name_id)) {
+					$this->{$param_name_id} = $this->params[$param_name_id];
+        }
+
+        //if (!isset($this->{$param_name_id}))
+				//	$this->{$param_name_id} = $this->params[$param_name_id];
+
+				if ($this->{$param_name_id})
 				{
 					if (class_exists($param_name.'Manager', FALSE) || Application::tryToLoadClass($param_name.'Manager'))
 					{
 						$model_manager = ModelManagerFactory::getByName($param_name);
 						if($model_manager) {
-						  $this->{$param_name} = $model_manager->getOneById($this->{$param_name . '_id'});
+						  $this->{$param_name} = $model_manager->getOneById($this->{$param_name_id});
 						}else{
 						  $this->{$param_name} = FALSE;
 						}

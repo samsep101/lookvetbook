@@ -56,3 +56,19 @@
         }
         return $code;
     }
+
+	function debug($dump, $continue = false) {
+		$content = implode('', [
+			'<pre style="font-size:8pt; width:100%">',
+			var_export($dump, 1),
+			'</pre>',
+		]);
+		$r = [
+			'array (' => '<strong style="color:#007934">array (</strong>',
+			'=>' => '<span style="color:#b72d00; font-size:10px">=></span>',
+			'),' => '<strong style="color:#007934">),</strong>'
+		];
+		$content = str_replace(array_keys($r), array_values($r), $content);
+		echo $content;
+		$continue OR exit();
+	}

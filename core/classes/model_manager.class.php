@@ -346,27 +346,31 @@ class ModelManager implements ICachedModelManager
     $params_array = array();
 
     foreach ($this->db_fields as $field) {
-      if ((preg_match('/^(.+)_id$/', $field->getName(), $matches))
+
+      $fname = $field->getName();
+
+      if ((preg_match('/^(.+)_id$/', $fname, $matches))
         && ($model->{$matches[1]} !== NULL)
         && is_object($model->{$matches[1]})
         && ($model->{$matches[1]} instanceof DynamicModel)
         && ($model->{$matches[1]}->getId())
       ) {
-        if (($model->{$field->getName()} === NULL) || ($model->{$field->getName()} != $model->{$matches[1]}->getId())) {
-          $params_array[$field->getName()] = $model->{$matches[1]}->getId();
+        if (($model->{$fname} === NULL) || ($model->{$fname} != $model->{$matches[1]}->getId())) {
+          $params_array[$fname] = $model->{$matches[1]}->getId();
         }
       }
 
-      $value = $model->{$field->getName()};
+      $value = $model->{$fname};
 
       if ((in_array($field->getType(), array('int(11)', 'float')) && $value === '')) {
         $value = NULL;
       }
 
-      if ($field->getForeignKey() && !$value)
+      if ($field->getForeignKey() && !$value) {
         $value = NULL;
+      }
 
-      $params_array[$field->getName()] = $value;
+      $params_array[$fname] = $value;
     }
 
     return $params_array;

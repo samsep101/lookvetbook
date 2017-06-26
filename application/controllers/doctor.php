@@ -157,7 +157,13 @@ class DoctorController extends BaseController
              * @var DoctorReviewManager $doctor_review_manager
              */
             $doctor_review_manager = ModelManagerFactory::getByName('doctor_review');
-            $reviews = $doctor_review_manager->getConfirmedListByDoctorIdWithPagging($doc_id, 0, 4);
+            $reviews = $doctor_review_manager->getConfirmedListByDoctorIdWithPagging($doc_id, 0, 10);
+            $this->view->reviews_count = count($reviews);
+            // если общее кол-во отзывов нечетное - выкидываем последний отзыв чтобы в дизайне не было дыры рядом с нечетным элементом
+            if( ($this->view->reviews_count % 2) == 1){
+            	array_pop($reviews);
+            	$this->view->reviews_count -= 1;
+            }
             $this->view->reviews = $reviews;
             unset($reviews);
 
@@ -185,10 +191,12 @@ class DoctorController extends BaseController
 
             $this->view->doctor = $doctor;
 
-            $doctor_review_manager = new DoctorReviewManager();
+            // убрал т.к дубль кода выше
+            /*$doctor_review_manager = new DoctorReviewManager();
             $reviews = $doctor_review_manager->getConfirmedListByDoctorIdWithPagging($doc_id, 0, 4);
             $this->view->reviews = $reviews;
-            unset($reviews);
+			
+            unset($reviews);*/
 
             $all_reviews = $doctor_review_manager->getConfirmedListByDoctorId($doc_id);
             $this->view->all_reviews = count($all_reviews);

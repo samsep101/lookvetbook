@@ -112,6 +112,27 @@
             return (isset($data[0])) ? $this->initOne($data[0]) : null;
         }
 
+        /** Получение последней картинки по имени файла */
+        public function getOneLastFilename($filename, $model_rows = false)
+        {
+            $sql = 'SELECT *
+                    FROM image
+                    WHERE filename LIKE "' .$this->db->escape($filename). '%"
+                        ORDER BY id DESC
+                    LIMIT 1';
+
+            $data = $this->db->query($sql);
+
+            if(isset($data[0])){
+                if($model_rows) {
+                    return $this->initOne($data[0]);
+                }
+                return $data[0];
+            }
+
+            return false;
+        }
+
         public function generateImages($images) {
             foreach($images as $image)
             {

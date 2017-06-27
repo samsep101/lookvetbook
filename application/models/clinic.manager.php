@@ -115,19 +115,40 @@ class ClinicManager extends AliasManager
     /**
      * @return ClinicModel[]
      */
-    public function getListWithDocdocId()
-  {
-      $sql = 'SELECT DISTINCT c.*
+    public function getListWithDocdocId() {
+        $sql = 'SELECT DISTINCT c.*
                     FROM `' . $this->table_name . '` c                    
                     WHERE c.docdoc_id > 0';
 
-      $data = $this->db->query($sql);
+        $data = $this->db->query($sql);
 
-      return (isset($data)) ? $this->initList($data) : array();
-  }
+        return (isset($data)) ? $this->initList($data) : array();
+    }
+    
+    /**
+     * Получение списка записей конкретных клиник
+     * @return ClinicModel[]
+     */
+    public function getListWithDocdocIdList($docdoc_ids) {
+        
+        if(is_array($docdoc_ids)){
+            
+            $docdoc_ids = array_map('intval', $docdoc_ids);
+            $docdoc_ids = implode(', ', $docdoc_ids);
+            
+            $sql = 'SELECT DISTINCT c.*
+                    FROM `' . $this->table_name . '` c                    
+                    WHERE c.docdoc_id IN ('.$docdoc_ids.')';
+            
+            $data = $this->db->query($sql);
+            
+            return (isset($data)) ? $this->initList($data) : array();
+        }
+        
+        return false;
+    }
 
-
-  /**
+    /**
    * return ClinicModel[]
    */
   public function getActiveListByDoctorId($doctor_id)

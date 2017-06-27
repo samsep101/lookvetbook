@@ -29,6 +29,8 @@ try {
   require('application/config/init.php');
 
   define('CURRENT_HOST', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
+  // абсолютный путь до корня сайта
+  define('ABS_ROOT', realpath(dirname(__FILE__)));
 
   $redirect_domen = $redirect_uri = '';
   if (isset($_SERVER['SERVER_NAME'])) {

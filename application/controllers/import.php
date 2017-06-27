@@ -2,17 +2,35 @@
 
 class ImportController extends BaseController
 {
+    /**
+     * Получение всех или конкретных клиник по docdoc_id
+     * @param type $docdoc_ids
+     * @return type
+     */
+    private function _getClinics($docdoc_ids = false) {
+        
+        $manager = new ClinicManager();
+        
+        if($docdoc_ids) {
+            return $manager->getListWithDocdocIdList($docdoc_ids);
+        }
+
+        return $manager->getListWithDocdocId();
+    }
+
+    /**
+     * Процесс импорта
+     */
     public function docdoc()
     {
         /** @var Db $db */
         $db = Register::get('db');
-        $clinics = (new ClinicManager())->getListWithDocdocId();
+        $clinics = $this->_getClinics();
+        //$clinics = $this->_getClinics([1496, 1497]);
         $clinic_data_url = 'https://lookmedbook:IzkmbB@back.docdoc.ru/api/rest/1.0.6/json/clinic/';
         $doctor_data_url = 'https://lookmedbook:IzkmbB@back.docdoc.ru/api/rest/1.0.6/json/doctor/';
         foreach ($clinics as $clinic){
 #if ($clinic->id != 3819)continue;
-	
-	
 
             echo "clinic: $clinic->name<br>".PHP_EOL;
             try{
@@ -23,6 +41,17 @@ class ImportController extends BaseController
             }catch (Exception $exp){
                 continue;
             }
+
+            // импорт адреса
+            if(!empty($data->Street) AND !empty($data->House) AND !empty($data->StreetId)){
+                $clinic->address = $data->Street.', '.$data->House;
+                $clinic->street_id = (int)$data->StreetId;
+            }
+            if(!empty($data->Latitude) AND !empty($data->Longitude)){
+                $clinic->latitude = $data->Latitude;
+                $clinic->longitude = $data->Longitude;
+            }
+
             $clinic->about = $data->Description;
             $clinic->save();
 
@@ -127,36 +156,36 @@ class ImportController extends BaseController
                 }
 
                 if ($docdata->Img){
-                    $tmp_name = '/home/vhost/medbook/www/media/upload/clinic/license/tmp_'.'doctor_'.$doctor->id.'.jpg';
+                    $tmp_name = ABS_ROOT.'/media/upload/clinic/license/tmp_doctor_'.$doctor->id.'.jpg';
 					echo "tmp file name:".$tmp_name."<br>".PHP_EOL;
                     if (file_exists($tmp_name))
                     {
                         unlink($tmp_name);
                     }
-					
-					file_put_contents($tmp_name, file_get_contents($docdata->Img));
-					chmod($tmp_name , 0777);					
 
-                    $image_id = ImageUploader::upload(['upload_folder' => 'clinic/license/'], ['name' => 'doctor_'.$doctor->id.'.jpg', 'tmp_name' => $tmp_name], 'doctor_'.$doctor->id);
+                    // продолжаем процесс только если картинка сохранена
+                    if(false !== file_put_contents($tmp_name, file_get_contents($docdata->Img))){
 
-                    $doctor->image_id = $image_id;
-                    $doctor->card_image_id = $image_id;
-                    $doctor->save();
-					
-					if (file_exists($tmp_name))
-                    {
-                        unlink($tmp_name);
+                        chmod($tmp_name , 0755);
+
+                        $image_id = ImageUploader::upload(['upload_folder' => 'clinic/license/'], ['name' => 'doctor_'.$doctor->id.'.jpg', 'tmp_name' => $tmp_name], 'doctor_'.$doctor->id);
+
+                        $doctor->image_id = $image_id;
+                        $doctor->card_image_id = $image_id;
+                        $doctor->save();
+
+                        if (file_exists($tmp_name))
+                        {
+                            unlink($tmp_name);
+                        }
+
+                        $q = "delete from image_to_doctor where doctor_id=$doctor->id";
+                        $db->query($q);
+
+                        $q = "insert into image_to_doctor set doctor_id=$doctor->id, image_id=$image_id";
+                        $db->query($q);
                     }
-					
-					$q = "delete from image_to_doctor where doctor_id=$doctor->id";
-					$db->query($q);
-					
-					$q = "insert into image_to_doctor set doctor_id=$doctor->id, image_id=$image_id";
-					$db->query($q);
                 }
-
-
-
             }
             $specialty_ids = [];
             foreach ($clinic_specialty as $specialty){

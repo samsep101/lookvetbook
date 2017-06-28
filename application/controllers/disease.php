@@ -137,6 +137,7 @@ class DiseaseController extends BaseController
     $this->view->disease_specialties = $disease_specialties;
 
     $seo_method = '_seo_'.$this->_segment_section;
+    $this->view->section = $this->_segment_section;
     if(method_exists($this, $seo_method)){
         // если есть спецметод генерации сео - выполняем его
         $this->{$seo_method}();
@@ -625,6 +626,8 @@ class DiseaseController extends BaseController
         // Лабиринтит: симптомы, причины, диагностика и лечение лабиринтита
         $this->view->page_title = sprintf('%s: симптомы, причины, диагностика и лечение %s', $disease->title, $disease->genitive_name);
         $this->view->page_description = $this->_getDescription();
+        // окончание заголовка h2
+        $disease->h2_extend = $disease->genitive_name;
     }
 
     protected function _seo_adult() {
@@ -634,6 +637,7 @@ class DiseaseController extends BaseController
         $this->view->page_title = sprintf('%s у взрослых: симптомы, причины, диагностика и лечение %s у взрослого', $disease->title, $disease->genitive_name);
         $this->view->page_description = str_ireplace($disease->title, $disease->title.' у взрослых', $this->_getDescription());
         $disease->title = $disease->title . ' у взрослых';
+        $disease->h2_extend = $disease->genitive_name . ' у взрослого';
     }
 
     protected function _seo_children() {
@@ -643,6 +647,7 @@ class DiseaseController extends BaseController
         $this->view->page_title = sprintf('%s у детей: симптомы, причины, диагностика и лечение %s у ребенка', $disease->title, $disease->genitive_name);
         $this->view->page_description = str_ireplace($disease->title, $disease->title.' у детей', $this->_getDescription());
         $disease->title = $disease->title . ' у детей';
+        $disease->h2_extend = $disease->genitive_name . ' у ребенка';
     }
 
     protected function _seo_pregnant() {
@@ -652,6 +657,7 @@ class DiseaseController extends BaseController
         $this->view->page_title = sprintf('%s у беременных: симптомы, причины, диагностика и лечение %s у беременной', $disease->title, $disease->genitive_name);
         $this->view->page_description = str_ireplace($disease->title, $disease->title.' у беременных', $this->_getDescription());
         $disease->title = $disease->title . ' у беременных';
+        $disease->h2_extend = $disease->genitive_name . ' у беременной';
     }
 
     protected function _seo_male() {
@@ -661,6 +667,7 @@ class DiseaseController extends BaseController
         $this->view->page_title = sprintf('%s у мужчин: симптомы, причины, диагностика и лечение %s у мужчины', $disease->title, $disease->genitive_name);
         $this->view->page_description = str_ireplace($disease->title, $disease->title.' у мужчин', $this->_getDescription());
         $disease->title = $disease->title . ' у мужчин';
+        $disease->h2_extend = $disease->genitive_name . ' у мужчины';
     }
 
     protected function _seo_female() {
@@ -670,6 +677,7 @@ class DiseaseController extends BaseController
         $this->view->page_title = sprintf('%s у женщин: симптомы, причины, диагностика и лечение %s у женщины', $disease->title, $disease->genitive_name);
         $this->view->page_description = str_ireplace($disease->title, $disease->title.' у женщин', $this->_getDescription());
         $disease->title = $disease->title . ' у женщин';
+        $disease->h2_extend = $disease->genitive_name . ' у женщины';
     }
 
     protected function _getDescription() {

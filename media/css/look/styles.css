@@ -8827,13 +8827,14 @@ h1.help-title {
     background      : url(/media/images/treatment-in-switz-small-left.png);
 }
 .switz-left-version.banner-treatment-in-switz .close {
-	left: 0;
-    top: 6px;
+	left: -2px;
+    top: 3px;
     padding: 0 10px;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 25px;
     display: inline-block;
     right: auto;
+    color: #fff;
 }
 
 .second-opinion-block .second-opinion-2 {

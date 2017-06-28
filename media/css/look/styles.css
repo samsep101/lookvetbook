@@ -8804,6 +8804,38 @@ h1.help-title {
 .second-opinion-block .second-opinion-2, .banner-treatment-in-switz .banner-treatment-in-switz-open {
     background      : url(/media/images/treatment-in-switz-small.png);
 }
+
+.switz-left-version.banner-treatment-in-switz{
+	right:auto;
+	left:0;
+}
+
+.switz-left-version.banner-treatment-in-switz .banner-treatment-in-switz-link {
+    background: url(/media/images/treatment-in-switz-left.png);
+    padding: 23px 0 0 37px;
+    width: 326px;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+.switz-left-version.banner-treatment-in-switz .icon {
+	left: auto;
+    right: 68px;
+    bottom: 20px;
+}
+
+.switz-left-version.banner-treatment-in-switz .banner-treatment-in-switz-open {
+    background      : url(/media/images/treatment-in-switz-small-left.png);
+}
+.switz-left-version.banner-treatment-in-switz .close {
+	left: 0;
+    top: 6px;
+    padding: 0 10px;
+    cursor: pointer;
+    font-size: 17px;
+    display: inline-block;
+    right: auto;
+}
+
 .second-opinion-block .second-opinion-2 {
     display         : block;
     position        : relative;

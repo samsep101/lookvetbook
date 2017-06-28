@@ -533,7 +533,7 @@ h2 {
     border     : 1px solid #DA2D71;
 }
 
-.btn-find-doctor-2.:active {
+.btn-find-doctor-2:active {
     background-position : 0 100%;
 }
 
@@ -575,7 +575,7 @@ h2 {
     text-decoration : none !important;
     text-align      : center;
     text-shadow     : none;
-    border-radius   : none;
+    border-radius   : 0;
     border          : none;
     overflow        : hidden;
 }
@@ -1492,7 +1492,7 @@ h2 {
 
 .left_search .chzn-container-single .chzn-drop {
     width      : 100% !important;
-    max-height : auto;
+    max-height : none;
 }
 
 .content .left_search .search-form .box {
@@ -6248,7 +6248,7 @@ h1.help-title {
 }
 
 .land-popup .reg-popup .intro {
-    min-height     : auto;
+    min-height     : 0;
     text-align     : center;
     padding-bottom : 13px;
 }
@@ -7753,7 +7753,7 @@ h1.help-title {
     color       : #3B3B3B;
 }
 
-.booking h1 {
+.booking h1, .booking .h1 {
     font          : normal 18px 'pf_agora_slab_pro_medium';
     color         : #1F8EBE;
     margin-bottom : 10px;
@@ -9591,7 +9591,7 @@ a.d-pink-btn {
     position   : absolute;
     top        : 50%;
     left       : -150px;
-    margin-toP : -10px;
+    margin-top : -10px;
 }
 
 .d-cards .d-btn-wrap .d-pink-btn:after {
@@ -9603,7 +9603,7 @@ a.d-pink-btn {
     position   : absolute;
     top        : 50%;
     right      : -150px;
-    margin-toP : -10px;
+    margin-top : -10px;
 }
 
 .d-cards-list {

@@ -1,4 +1,4 @@
-	<?php foreach ($disease_blocks_content as $block):?>
+	<?php foreach ($disease_blocks_content as $block): ?>
     <?php $field_anchor = 'b'.$block->id;?>
     <?php if ($block->disease_block_type_id == 5): ?>
         <div class="section">
@@ -69,11 +69,15 @@
 
     <div class="section" id="<?php echo $field_anchor; ?>">
         <h2>
-            <?php if ($block->disease_block_type_id == 1 || $block->disease_block_type_id == 6 || $block->disease_block_type_id == 8): ?>
-                <?php echo $block->disease_block_type->name . ' ' . $disease->genitive_name; ?>
-            <?php else: ?>
-                <?php echo $block->disease_block_type->name; ?>
-            <?php endif; ?>
+            <?php if (in_array($block->disease_block_type_id, [1,6,8])):
+                    echo $block->disease_block_type->name . ' ' . $disease->h2_extend;
+                else:
+                    if($this->section !== 'default') :
+                        echo $block->disease_block_type->name . ' ' . $disease->h2_extend;
+                    else :
+                        echo $block->disease_block_type->name;
+                    endif;
+                endif; ?>
         </h2>
         <div class="like_p">
             <?php $block->content = preg_replace('/<br \/>/','',$block->content);?>

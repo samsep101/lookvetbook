@@ -333,6 +333,30 @@ class Application
     }
   }
 
+  /**
+   * Метод получения УРЛ строки с возможностью разбора на составляющие
+   * @param bool $split - разбивать на контроллер\метод\параметры
+   * @return string|array
+   */
+  public static function getUriPath($split = false) {
+
+      if($split) {
+
+          $path = parse_url($_SERVER['REQUEST_URI'])['path'];
+          $exp = explode('/', trim($path, '/'));
+          $split = [
+              'controller' => !empty($exp[0]) ? $exp[0] : 'index',
+              'method' => !empty($exp[1]) ? $exp[1] : 'index',
+          ];
+          array_shift($exp);
+          array_shift($exp);
+          $split['params'] = !empty($exp) ? $exp : false;
+          return $split;
+      }
+
+      return parse_url($_SERVER['REQUEST_URI'])['path'];
+  }
+
 
   private static function getClassFilePrefix($className)
   {

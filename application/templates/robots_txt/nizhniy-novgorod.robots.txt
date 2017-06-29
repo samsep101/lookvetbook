@@ -1,0 +1,19 @@
+User-agent: Yandex
+Disallow: /*search*
+Disallow: /*utm_
+Disallow: /*_openstat
+Disallow: /*?
+Disallow: /*booking*
+Disallow: /media/js/linkHidingIndexing.js
+Disallow: /disease
+Host: nizhniy-novgorod.lookmedbook.ru
+
+User-agent:*
+Disallow: /*search*
+Disallow: /*utm_
+Disallow: /*_openstat
+Disallow: /*?
+Disallow: /*booking*
+Disallow: /media/js/linkHidingIndexing.js
+Disallow: /disease
+Sitemap: http://nizhniy-novgorod.lookmedbook.ru/sitemap.xml

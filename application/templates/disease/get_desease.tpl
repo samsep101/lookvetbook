@@ -65,6 +65,8 @@
 
 				<?php if ($disease->extended_content || $disease->sources) { include('get_desease_extend.tpl'); } ?>
 
+                <?=$this->afterblocks?>
+
 				<?php if ($disease_specialties) { include('get_desease_special.tpl'); } ?>
                 <?php $this->block('disease/footer_adv'); ?>
 			</div>

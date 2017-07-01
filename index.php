@@ -32,6 +32,31 @@ try {
   // абсолютный путь до корня сайта
   define('ABS_ROOT', realpath(dirname(__FILE__)));
 
+    if(Application::getUriPath(false) == '/robots.txt'){
+
+        $subdomain = str_replace(['.lookmedbook.ru', 'lookmedbook.ru', '.citrus.one'], '', $_SERVER['SERVER_NAME']);
+        $robots_filePath = ABS_ROOT.'/application/templates/robots_txt/'.$subdomain.'.robots.txt';
+        // домены с недефолтным robots
+        if( ! in_array($subdomain, [
+            'sankt-peterburg',
+            'novosibirsk',
+            'chelyabinsk',
+            'omsk',
+            'samara',
+            'kazan',
+            'nizhniy-novgorod',
+            'ekaterinburg'
+        ]) OR ! file_exists($robots_filePath)){
+            // во всех остальных случаях отдаем дефолтный
+            $robots_filePath = ABS_ROOT.'/application/templates/robots_txt/default.robots.txt';
+        }
+
+        header('Content-Type:text/plain; charset=utf8', true);
+        ob_start();
+        include $robots_filePath;
+        exit(ob_get_clean());
+    }
+
   $redirect_domen = $redirect_uri = '';
   if (isset($_SERVER['SERVER_NAME'])) {
     $excluded_subdomens = ['account', 'test', 'sankt-peterburg', 'novosibirsk', 'chelyabinsk', 'omsk', 'samara', 'kazan', 'nizhniy-novgorod', 'ekaterinburg'];

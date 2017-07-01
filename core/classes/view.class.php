@@ -63,10 +63,17 @@ class View extends Dynamic
     echo $this->filter($html);
   }
 
-  public function renderInString($templateName)
+    /**
+     * Рендерим отображение из папки {application}/{templates}/_name_.tpl
+     * - второй параметр позволяет изключить создание переменных в этой области видимости (по сути дублируются)
+     * @param type $templateName
+     * @param type $extractValues
+     * @return type
+     */
+    public function renderInString($templateName, $extractValues = true)
   {
     ob_start();
-    extract($this->__values);
+        $extractValues AND extract($this->__values);
     $this->__template = Application::getTemplatesDir(TRUE) . '/' . $templateName . $this->__extension;
     include($this->__template);
     $html = ob_get_contents();
@@ -108,6 +115,11 @@ class View extends Dynamic
   public function getLayout()
   {
     return $this->__layout;
+  }
+
+  public function getExtension() {
+
+      return $this->__extension;
   }
 
   protected function filter($html)

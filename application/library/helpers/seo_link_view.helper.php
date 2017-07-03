@@ -81,7 +81,11 @@ class SeoLinkViewHelper
         $linkOuter = preg_replace($regV, $replace, $linkOuter);
       }
     }
-    if ($_SERVER['REQUEST_URI']=='/disease/gripp' or $_SERVER['REQUEST_URI']=='/disease/diareya') {
+    if (   $_SERVER['REQUEST_URI']=='/disease/gripp' 
+        or $_SERVER['REQUEST_URI']=='/disease/diareya'
+        or $_SERVER['REQUEST_URI']=='/disease/otit'
+        or $_SERVER['REQUEST_URI']=='/disease/cistit'
+        ) {
         $linkOuter=str_replace('<a rel="nofollow" class="jsLinkHidingIndexing" href="" data-link="https://docdoc.ru" target="_blank"','<a class="jsLinkHidingIndexing" href="https://docdoc.ru" data-link="https://docdoc.ru" target="_blank"',$linkOuter);
         $linkOuter=str_replace('<a rel="nofollow" class="jsLinkHidingIndexing" href="" data-link="https://spb.docdoc.ru" target="_blank"','<a class="jsLinkHidingIndexing" href="https://spb.docdoc.ru" data-link="https://spb.docdoc.ru" target="_blank"',$linkOuter);
         $linkOuter=str_replace('<a rel="nofollow" class="jsLinkHidingIndexing" href="" data-link="https://docdoc.ru/doctor/gastroenterolog" target="_blank"','<a class="jsLinkHidingIndexing" href="https://docdoc.ru/doctor/gastroenterolog" data-link="https://docdoc.ru/doctor/gastroenterolog" target="_blank"',$linkOuter);

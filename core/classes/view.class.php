@@ -71,16 +71,16 @@ class View extends Dynamic
      * @return type
      */
     public function renderInString($templateName, $extractValues = true)
-  {
-    ob_start();
+    {
+        ob_start();
         $extractValues AND extract($this->__values);
-    $this->__template = Application::getTemplatesDir(TRUE) . '/' . $templateName . $this->__extension;
-    include($this->__template);
-    $html = ob_get_contents();
-    ob_end_clean();
+        $this->__template = Application::getTemplatesDir(TRUE) . '/' . $templateName . $this->__extension;
+        include($this->__template);
+        $html = ob_get_contents();
+        ob_end_clean();
 
-    return $this->filter($html);
-  }
+        return $this->filter($html);
+    }
 
         public function block($templateName, $params = null)
         {
@@ -117,8 +117,8 @@ class View extends Dynamic
     return $this->__layout;
   }
 
-  public function getExtension() {
-
+  public function getExtension()
+  {
       return $this->__extension;
   }
 

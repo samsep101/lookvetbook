@@ -176,7 +176,7 @@ class DiseaseController extends BaseController
       $this->view->video_file_path = '/media/images/vids/'.$video.'.mp4';
       $this->view->video_thumb_path = '/media/images/vids/'.$video.'.jpg';
 
-
+    $this->_getAfterBlocksTemplate();
 
     $this->render('disease/get');
   }
@@ -689,5 +689,23 @@ class DiseaseController extends BaseController
             $pervoe_predlozhenie = $a[1];
         }
         return $pervoe_predlozhenie ? $pervoe_predlozhenie : $disease->description;
+    }
+
+    protected function _getAfterBlocksTemplate() {
+
+        $alias = $this->view->disease->alias;
+
+        // проверяем шаблон для отображения после текста описания болезни
+        // если он есть - подключаем его
+        $route = Application::getUriPath(true);
+        $block_after = implode('/', [
+            Application::getTemplatesDir(true),
+            $route['controller'],
+            'blocks-after',
+            $alias . $this->view->getExtension()
+        ]);
+        if(file_exists($block_after)){
+            $this->view->afterblocks = $this->view->renderInString($route['controller'].'/blocks-after/'.$alias, false);
+        }
     }
 }

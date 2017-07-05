@@ -5,7 +5,7 @@
             <a href="#">
                 <img src="/media/articles/catalog/1959/p2.png">
             </a>
-            <p class="good_name"><a href="#">Эскейпб 120 мгб</a> 40 таблеток</p>
+            <p class="good_name"><a href="#">Эскейп 120 мгб</a> 40 таблеток</p>
         </li>
         <li class="bg_gradient buy product-card product-card-divaza">
             <a href="/shop/product/de-nol-tabletki-120-mg-112-sht">

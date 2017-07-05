@@ -4107,7 +4107,8 @@ a.search-doctor-button {
 }
 
 .magazine .way_line.m0 {
-    margin : 7px 0 7px 72px;
+    margin: 0;
+    padding: 25px 0 15px;
 }
 
 .magazine .way_line li, .magazine .way_line a {
@@ -4929,13 +4930,15 @@ a.search-doctor-button {
 }
 
 .catalog_more_ul li {
-    width      : 30%;
-    background : #FFFFFF;
-    margin     : 0.5% 2% 0% 0%;
-    float      : left;
-    height     : 30px;
-    padding    : 1%;
-    overflow   : hidden;
+    width: 32.5%;
+    background: #FFFFFF;
+    margin: 0 5px 5px 0;
+    float: left;
+    height: 50px;
+    padding: 8px 15px;
+    overflow: hidden;
+    border-radius: 3px;
+    box-sizing: border-box;
 }
 
 .catalog_more_ul li:nth-child(3n) {
@@ -4960,8 +4963,9 @@ a.search-doctor-button {
 }
 
 .magazine h4, .magazine h3 {
-    font        : normal 18px 'pf_agora_slab_pro_medium';
-    text-shadow : 1px 1px 1px #FFFFFF;
+    font: normal 18px 'pf_agora_slab_pro_medium';
+    text-shadow: 1px 1px 1px #FFFFFF;
+    padding: 10px 15px;
 }
 
 .magazine h4 {

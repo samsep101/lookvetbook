@@ -25,7 +25,12 @@ body.hidden { overflow-y : scroll;}
 
 .ff-bold {font-family: 'pf_agora_slab_probold';}
 .ff-medium {font-family : 'pf_agora_slab_pro_medium';}
-
+.animate-all {
+	-o-transition: all 100ms ease-in-out;
+    -moz-transition: all 100ms ease-in-out;
+    -webkit-transition: all 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
+}
 
 .container {
 	position: relative;
@@ -227,8 +232,8 @@ a:hover {
 
 .footer {
     height: 130px;
-    margin-top: -8px;
-    background: url(/media/images/footer_background.png) repeat-x;
+    /*margin-top: -8px;*/
+    background: url(/media/responsive/images/footer_background.png) repeat-x;
     position: relative;
 }
 .footer a {
@@ -280,12 +285,10 @@ a:hover {
 }
 .footer-inner-bottom .inner-bottom-copyright {
     float: left;
-    font-size: 14px;
     color: #7D7D7D;
 }
 .footer .reg-link.show_license {
     margin-left: 10px;
-    font-size: 14px;
     font-weight: 500;
 }
 .footer-inner-bottom .inner-bottom-navigation {

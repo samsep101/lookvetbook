@@ -43,6 +43,16 @@ a.btn {
 .btn-reg:active {
     background-position: 0px -91px;
 }
+.btn-reg > i {
+	display:none;
+}
+.btn-reg > i .glyphicon-plus {
+	font-size: 8px;
+    position: relative;
+    left: 1px;
+    top: -6px;
+    /*color: #5AD26A;*/
+}
 
 .btn-enter {
     display: block;

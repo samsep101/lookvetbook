@@ -47,8 +47,8 @@
                             </a>
 
                             <nav>
-                                <a href="#" class="toggle-opener"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
-                                <ul class="nav-table">
+                                <a id="menu-opener" href="#" class="toggle-opener"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
+                                <ul id="menu-container" class="nav-table animate-all">
                                     <li><a class="active doctor-link" href="/doctor">Врачи</a></li>
                                     <li><a class=" clinic-link" href="/clinic">Клиники</a></li>
                                     <li><a class=" disease-link" href="/disease">Заболевания</a></li>
@@ -71,7 +71,10 @@
 
                             <div id="authorization-block-on-disease-page" class="no-auth-buttons">
                                 <a class="btn-enter reg-linking ff-bold" href="javascript:void(0);">Войти</a>
-                                <a class="btn-reg reg-linking ff-bold" data-action-for-counters="top-reg" href="javascript:void(0)">Зарегистрироваться</a>
+                                <a class="btn-reg reg-linking ff-bold" data-action-for-counters="top-reg" href="javascript:void(0)">
+                                    <span>Зарегистрироваться</span>
+                                    <i class="glyphicon glyphicon-user"><i class="glyphicon glyphicon-plus"></i></i>
+                                </a>
                             </div>
 
                         </div>

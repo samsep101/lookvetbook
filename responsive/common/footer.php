@@ -29,6 +29,8 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="/media/responsive/js/main.js"></script>
+
     <link rel="stylesheet" href="/media/css/chosen.css?0.1" type="text/css"/>
     <link rel="stylesheet" href="/media/css/jquery.fancybox.css?0.1" type="text/css"/>
     <link rel="stylesheet" href="/media/css/jquery.jscrollpane.css?0.1" type="text/css"/>

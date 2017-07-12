@@ -65,9 +65,9 @@ class ClinicController extends BaseController
                     $r[]=(isset($v[$i]) and isset($v[$j]) and isset($v[$k])) ? $v[$i].'-'.$v[$j].'-'.$v[$k] : '';
                     for ($z=0;$z<=count($v);++$z) {
                         $r[]=(isset($v[$i]) and isset($v[$j]) and isset($v[$k]) and isset($v[$z])) ? $v[$i].'-'.$v[$j].'-'.$v[$k].'-'.$v[$z] : '';
-                        for ($q=0;$q<=count($v);++$q) {
+                        /*for ($q=0;$q<=count($v);++$q) {
                             $r[]= (isset($v[$i]) and isset($v[$j]) and isset($v[$k]) and isset($v[$z]) and isset($v[$q]))  ? $v[$i].'-'.$v[$j].'-'.$v[$k].'-'.$v[$z].'-'.$v[$q] : '';
-                        }
+                        }*/
                     }
                 }
             }
@@ -78,12 +78,13 @@ class ClinicController extends BaseController
         usort($r, function($a, $b) {
           return strlen($b) - strlen($a);
         });
+        $r = array_slice($r, 0, 60);
         foreach ($r as $val) {
             if ($district==null)        $district = $districtManager->getOneByAlias($val);
             if ($metro==null)           $metro    = $metroManager->getOneByAlias($val);
             if ($region==null)          $region   = $regionManager->getOneByAlias($val);
             if ($street==null)          $street   = $streetManager->getOneByAlias($val);
-            if ($specialization==null)  $specialization = $specialization_manager->getOneByAlias($val);            
+            if ($specialization==null)  $specialization = $specialization_manager->getOneByAlias($val);
          }
     } else {
         $district       = $districtManager->getOneByAlias($clinic_id);
@@ -804,7 +805,6 @@ class ClinicController extends BaseController
         
     }
     if ($this->view->clinic->name) {
-        debug(123);
         $address = $this->view->clinic->address;
         $metro = $this->view->clinic->metro_station->name;
         $city = $this->view->clinic->city->name;

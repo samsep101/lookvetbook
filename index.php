@@ -57,20 +57,25 @@ try {
         exit(ob_get_clean());
     }
 
-  $redirect_domen = $redirect_uri = '';
-  if (isset($_SERVER['SERVER_NAME'])) {
-    $excluded_subdomens = ['account', 'test', 'sankt-peterburg', 'novosibirsk', 'chelyabinsk', 'omsk', 'samara', 'kazan', 'nizhniy-novgorod', 'ekaterinburg'];
-    $m = [];
-    if (preg_match('|^(www\.)?(([a-z0-9-]+)\.)?\w+\.\w+$|', $_SERVER['SERVER_NAME'], $m)) {
-      if (!empty($m[1])) {
-        $redirect_domen = str_replace($m[1], '', $_SERVER['SERVER_NAME']);
-      }
-      if (!empty($m[2]) and !in_array($m[3], $excluded_subdomens)) {
-        $redirect_domen = str_replace($m[1] . $m[2], '', $_SERVER['SERVER_NAME']);
-      }
+    $redirect_domen = $redirect_uri = '';
+    if (!empty($_SERVER['SERVER_NAME'])) {
+        $excluded_subdomens = ['account', 'test', 'sankt-peterburg', 'novosibirsk', 'chelyabinsk', 'omsk', 'samara', 'kazan', 'nizhniy-novgorod', 'ekaterinburg'];
+        // citrus domain (local)
+        if(mb_strstr($_SERVER['SERVER_NAME'], '.citrus.one')){
+            $excluded_subdomens = ['lookmedbook', 'account', 'test'];
+        }
+        $m = [];
+        if (preg_match('|^(www\.)?(([a-z0-9-]+)\.)?\w+\.\w+$|', $_SERVER['SERVER_NAME'], $m)) {
+            if (!empty($m[1])) {
+                $redirect_domen = str_replace($m[1], '', $_SERVER['SERVER_NAME']);
+            }
+            if (!empty($m[2]) and ! in_array($m[3], $excluded_subdomens)) {
+                $redirect_domen = str_replace($m[1] . $m[2], '', $_SERVER['SERVER_NAME']);
+            }
+        }
     }
-  }
-  // редирект со страницы со слешем на конце на страницу без слеша на конце
+    
+    // редирект со страницы со слешем на конце на страницу без слеша на конце
   if (isset($_SERVER['REQUEST_URI']) and preg_match('/^(.+)\/$/ims', $_SERVER['REQUEST_URI'], $matches)) {
     $redirect_uri = $matches[1];
   }

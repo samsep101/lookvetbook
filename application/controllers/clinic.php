@@ -65,9 +65,9 @@ class ClinicController extends BaseController
                     $r[]=(isset($v[$i]) and isset($v[$j]) and isset($v[$k])) ? $v[$i].'-'.$v[$j].'-'.$v[$k] : '';
                     for ($z=0;$z<=count($v);++$z) {
                         $r[]=(isset($v[$i]) and isset($v[$j]) and isset($v[$k]) and isset($v[$z])) ? $v[$i].'-'.$v[$j].'-'.$v[$k].'-'.$v[$z] : '';
-                        for ($q=0;$q<=count($v);++$q) {
+                        /*for ($q=0;$q<=count($v);++$q) {
                             $r[]= (isset($v[$i]) and isset($v[$j]) and isset($v[$k]) and isset($v[$z]) and isset($v[$q]))  ? $v[$i].'-'.$v[$j].'-'.$v[$k].'-'.$v[$z].'-'.$v[$q] : '';
-                        }
+                        }*/
                     }
                 }
             }
@@ -78,12 +78,13 @@ class ClinicController extends BaseController
         usort($r, function($a, $b) {
           return strlen($b) - strlen($a);
         });
+        $r = array_slice($r, 0, 60);
         foreach ($r as $val) {
             if ($district==null)        $district = $districtManager->getOneByAlias($val);
             if ($metro==null)           $metro    = $metroManager->getOneByAlias($val);
             if ($region==null)          $region   = $regionManager->getOneByAlias($val);
             if ($street==null)          $street   = $streetManager->getOneByAlias($val);
-            if ($specialization==null)  $specialization = $specialization_manager->getOneByAlias($val);            
+            if ($specialization==null)  $specialization = $specialization_manager->getOneByAlias($val);
          }
     } else {
         $district       = $districtManager->getOneByAlias($clinic_id);
@@ -220,9 +221,19 @@ class ClinicController extends BaseController
         $seo_specialization=$this->view->specialization->name;
     }
 
-    if ($this->view->clinic->name) 
-      return 'Интересует '.$this->view->clinic->name.'? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на '.SITE_NAME.'. Заходите!';      
-    else {
+    if ($this->view->clinic->name) {
+        $address = $this->view->clinic->address;
+        $metro = $this->view->clinic->metro_station->name;
+        $city = $this->view->clinic->city->name;
+        // Интересует Биомед на ул Луковского (м Суконная слобода, Казань)? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на LookMedBook. Заходите!
+        return vsprintf('Интересует %s %s %s? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на %s. Заходите!', [
+            $this->view->clinic->name,
+            (!empty($address)) ? 'на '.$address : '',
+            (!empty($metro)) ? '('.implode(', ', ['м. '.$metro, $city]).')' : '',
+            SITE_NAME
+        ]);
+        //return 'Интересует '.$this->view->clinic->name.'? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на '.SITE_NAME.'. Заходите!';
+    } else {
       if (extension_loaded('morpher')) {
         return 'Ищете медицинские центры и клиники '.morpher_inflect($seo_specialization,'rod').' '.$this->getSeoAddress().'? '.SITE_NAME.' поможет выбрать лучшие клиники и медицинские центры по отзывам, рейтингу и стоимости. Заходите!';      
       } else {
@@ -793,10 +804,21 @@ class ClinicController extends BaseController
                                       
         
     }
-    if ($this->view->clinic->name)
-        return $this->view->page_title = $this->view->clinic->name.' - врачи, отзывы, цены, телефоны и адреса, запись на прием на '.SITE_NAME;
-    else    
+    if ($this->view->clinic->name) {
+        $address = $this->view->clinic->address;
+        $metro = $this->view->clinic->metro_station->name;
+        $city = $this->view->clinic->city->name;
+        // Биомед на ул Луковского (м Суконная слобода, Казань) - врачи, отзывы, цены, телефоны и адреса, запись на прием на LookMedBook
+        return $this->view->page_title = vsprintf('%s %s %s - врачи, отзывы, цены, телефоны и адреса, запись на прием на %s', [
+            $this->view->clinic->name,
+            (!empty($address)) ? 'на '.$address : '',
+            (!empty($metro)) ? '('.implode(', ', ['м. '.$metro, $city]).')' : '',
+            SITE_NAME
+        ]);
+        //return $this->view->page_title = $this->view->clinic->name.' - врачи, отзывы, цены, телефоны и адреса, запись на прием на '.SITE_NAME;
+    } else {
         return $this->view->page_title = 'Медицинские центры и клиники '.$seo_specialization.' '.$this->getSeoAddress().': цены, отзывы, рейтинги и запись на прием на '.SITE_NAME;
+    }
   }
 
   public function getSeoAddress() {

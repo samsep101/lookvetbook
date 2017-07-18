@@ -103,8 +103,8 @@
         //debug($product_category);
         if(!empty($product_category) AND in_array($product_category->id, [
                 1434,
-                1439,
-                1942,
+                //1439, // Лечение ОРВИ и гриппа
+                //1942, // Афобазол
                 1943,
                 1959,
             ])) : ?>

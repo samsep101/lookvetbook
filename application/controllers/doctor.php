@@ -221,8 +221,7 @@ class DoctorController extends BaseController
             $this->view->relations = $relations;
             unset($relations);
 
-            $this->view->page_title = $doctor->full_name . ': отзывы, запись на прием, цены и рейтинг на '.SITE_NAME;
-            $this->view->page_description = 'Интересует врач '.$doctor->full_name.'? '.SITE_NAME.' предлагает посмотреть отзывы и рейтинг от клиентов, узнать стоимость и время приема и возможность записи онлайн.';
+
 
             foreach ($doctor->clinics as $clinic) {
                 foreach ($doctor->specialties as $specialty) {
@@ -234,6 +233,16 @@ class DoctorController extends BaseController
             }
             $this->view->doctor_schedules = $doctor_schedules;
             unset($doctor_schedules);
+
+            $specnames = [];
+            foreach($doctor->specialties as $one){
+                $specnames[] = $one->name;
+            }
+
+            // Врач диетолог, эндокринолог, терапевт, врач узи Ковшутина Любовь Михайловна: отзывы, запись на прием, цены и рейтинг на LookMedBook
+            //$this->view->page_title = $doctor->full_name . ': отзывы, запись на прием, цены и рейтинг на '.SITE_NAME;
+            $this->view->page_title = sprintf('Врач %s %s: отзывы, запись на прием, цены и рейтинг на '.SITE_NAME, implode(', ', $specnames), $doctor->full_name);
+            $this->view->page_description = 'Интересует врач '.$doctor->full_name.'? '.SITE_NAME.' предлагает посмотреть отзывы и рейтинг от клиентов, узнать стоимость и время приема и возможность записи онлайн.';
         }
 
 

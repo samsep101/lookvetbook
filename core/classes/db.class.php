@@ -119,8 +119,13 @@ class Db
 
     $profiler->startTime('mysql');
 
+    BENCHMARKS AND benchmarks()->query_start($query);
+
     $this->query = $this->connection->query($query);
     $profiler->stopTime('mysql', $query);
+
+    BENCHMARKS AND benchmarks()->query_stop($query);
+    BENCHMARKS AND benchmarks()->count('Кол-во запросов');
 
     if ($this->query === FALSE) {
       throw new Exception($this->connection->error . "\r\n" . $query);

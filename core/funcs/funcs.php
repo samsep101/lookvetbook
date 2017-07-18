@@ -81,3 +81,15 @@
 		
 		$continue OR exit();
 	}
+
+    function benchmarks(){
+
+        static $bc = null;
+
+        if(is_null($bc)){
+
+            $bc = new Benchmarks();
+        }
+
+        return $bc;
+    }

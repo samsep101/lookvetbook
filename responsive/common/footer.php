@@ -1,3 +1,56 @@
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <div class="fake-box" ></div>
+
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="fake-box" bg-red></div>
+            </div>
+            <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12">
+                <div class="fake-box" ></div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                 <div class="fake-box" ></div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="fake-box" bg-red></div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                 <div class="fake-box" style="min-height: 150px"></div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="fake-box" bg-red></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <div class="fake-box" style="min-height: 300px"></div>
+
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="fake-box" bg-red></div>
+            </div>
+            <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12">
+                <div class="fake-box" ></div>
+            </div>
+
+        </div>
+
+    </div>
+
     <div class="container-fluid">
         <div class="row">
             <noindex>
@@ -32,55 +85,25 @@
     <script type="text/javascript" src="/media/responsive/js/main.js"></script>
 
     <link rel="stylesheet" href="/media/css/chosen.css?0.1" type="text/css"/>
-    <link rel="stylesheet" href="/media/css/jquery.fancybox.css?0.1" type="text/css"/>
     <link rel="stylesheet" href="/media/css/jquery.jscrollpane.css?0.1" type="text/css"/>
-    <link rel="stylesheet" href="/media/css/jquery-ui.min.css?0.1" type="text/css"/>
-    <link rel="stylesheet" href="/media/js/jquery-rating/styles/jquery.rating.css?0.1" type="text/css"/>
-    <link rel="stylesheet" href="/media/css/look/styles-widget.css?0.1" type="text/css"/>
+    <link rel="stylesheet" href="/media/libraries/bootstrap-select/css/bootstrap-select.min.css" type="text/css"/>
 
+    <script type="text/javascript" src="/media/js/init.js"></script>
+    <script type="text/javascript" src="/media/responsive/js/compiled.min.js"></script>
 
     <!--[if lte IE 9]>
     <script src="/media/js/jquery.placeholder.min.js?0.1"></script>
     <![endif]-->
 
-    <script type="text/javascript" src="/media/js/js_core.js?0.1"></script>
-
     <!--[if lt IE 10]>
     <script type="text/javascript" src="/media/js/flashcanvas.js?0.1"></script>
     <![endif]-->
 
-    <script type="text/javascript" src="/media/js/js_library.js?43"></script>
-
-    <script type="text/javascript" src="/media/js/jquery-ui-1.10.2.custom.min.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/jquery.maskedinput.min.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/jquery.carouFredSel-6.2.0-packed.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/chosen.jquery.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/jquery.maskedinput-1.3.min.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/bootstrap-affix.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/waypoints.min.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/jquery.fancybox.pack.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/jquery.jscrollpane.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/jquery.jcarousel.min.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/jcarousel.connected-carousels.js?0.1"></script>
-    <script type="text/javascript" src="/js/validation"></script>
-    <script type="text/javascript" src="/media/js/jquery.raty.min.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/cookies.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/linkHidingIndexing.js?0.1"></script>
-    <script type="text/javascript" src="/media/js/jquery-rating/js/jquery.rating-2.0.js?0.1"></script>
-    <script src="/media/js/jquery.event.move.js?0.1"></script>
-
-
-
-
     <script src="http://api-maps.yandex.ru/2.0/?load=package.full,package.clusters,package.overlays&lang=ru-RU" type="text/javascript"></script>
-    <script src="/media/js/geolacation-button.js?0.1"></script>
     <script type="text/javascript" src="/media/js/magazine_total_price.js?0.1"></script>
     <script type="text/javascript" src="/media/js/image_preview.js?0.1"></script>
 
-    <script type="text/javascript" src="/media/js/responsive-switch.js"></script>
     <script src="https://docdoc.ru/widget/js" type="text/javascript"></script>
-
-    <script async type="text/javascript" src="//sjsmartcontent.org/static/plugin-site/js/sjplugin.js" site="6fmj"></script>
 
     <script>
         $(document).ready(function () {

@@ -25,6 +25,7 @@ body.hidden { overflow-y : scroll;}
 
 .ff-bold {font-family: 'pf_agora_slab_probold';}
 .ff-medium {font-family : 'pf_agora_slab_pro_medium';}
+.ff-regular {font-family: 'pf_agora_slab_proregular';}
 .animate-all {
 	-o-transition: all 100ms ease-in-out;
     -moz-transition: all 100ms ease-in-out;
@@ -43,8 +44,12 @@ a:hover {
 	cursor:pointer;
 }
 
-.cp {cursor:pointer}
+.cp {cursor: pointer}
 .dn {display: none;}
+
+.bg-paper {
+	background: url(/media/images/cloth_alike.png) repeat;
+}
 
 .header {
     background: url(/media/responsive/images/header-background.png) 0 -78px repeat-x;
@@ -344,3 +349,54 @@ a:hover {
     color : #ACACAC;
 }
 
+.breadcrumbs {
+	padding: 0 0 15px;
+    margin: 0;
+    list-style: none;
+    overflow: hidden;
+}
+.breadcrumbs.left-logo {
+	padding-left:100px;
+}
+.breadcrumbs > li {
+	display: inline-block;
+    float: left;
+    padding: 0 0 0 20px;
+    position: relative;
+}
+.breadcrumbs > li:before {
+	content: "\e258";
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    margin-top: -6px;
+    font-size: 10px;
+}
+.breadcrumbs > li.home {
+	padding-left:0;
+}
+.breadcrumbs > li.home:before {
+	content:initial;
+	display: none;
+}
+.breadcrumbs > li > a {
+	display: inline-block;
+	padding:4px 10px;
+	border-radius: 4px;
+}
+.breadcrumbs > li.home > a {
+	padding: 5px 7px;
+    font-size: 11px;
+}
+.breadcrumbs > li > a:hover {
+	color: #444;
+}
+
+ul {padding:0 ; margin:0;}

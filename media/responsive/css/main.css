@@ -400,3 +400,67 @@ a:hover {
 }
 
 ul {padding:0 ; margin:0;}
+
+.dd-button{
+	width: 100% !important;
+	font-size: 15px !important;
+}
+
+#our-doctors .clinic-card .btns div {
+	display: inline-block;
+	float: left;
+	width: 50%;
+}
+
+.discount .discount-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font: normal 15px 'pf_agora_sans_promedium';
+    color: white;
+    cursor: pointer;
+    padding: 4px;
+}
+.discount .discount-open .btn-open {
+    margin-right: 5px;
+    padding: 5px 0 0;
+    cursor: pointer;
+    font-size: 17px;
+    float: left;
+}
+.discount .discount-open .percent {
+    display: inline-block;
+    font-size: 19px;
+    vertical-align: top;
+    padding: 3px 0 0;
+}
+.discount .form-discount {
+    position: relative;
+    color: white;
+    padding: 0 0 15px;
+}
+.responsive .discount {
+	padding: 5px 15px;
+	max-width: 210px;
+}
+.form-discount input[type="text"] {
+    color: #989898;
+    font: normal 17px 'pf_agora_sans_promedium';
+    width: 100%;
+    padding: 5px 5px;
+    border: 1px solid #555;
+    box-shadow: inset 0 1px 3px 0px rgba(0,0,0,0.5);
+}
+.form-discount .btn-discount {
+    width: 100%;
+    height: 30px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background: #ffce02;
+    background: -moz-linear-gradient(top, #ffce02 0%, #fa9f22 100%);
+    background: -webkit-linear-gradient(top, #ffce02 0%,#fa9f22 100%);
+    background: linear-gradient(to bottom, #ffce02 0%,#fa9f22 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffce02', endColorstr='#fa9f22',GradientType=0 );
+}

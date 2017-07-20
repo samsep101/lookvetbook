@@ -2,7 +2,7 @@
 
 class DoctorController extends BaseController
 {
-    public $layout = 'home';
+    public $layout = 'responsive';
 
     public function get()
     {

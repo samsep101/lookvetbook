@@ -6,8 +6,8 @@
 
     $mail = [
         'action' => '/?action=send',
-        //'to' => 'cashbacklmb@gmail.com',
-        'to' => 'playmoredevelop@gmail.com',
+        'to' => 'cashbacklmb@gmail.com',
+        //'to' => 'playmoredevelop@gmail.com',
         'from' => adopt('Lookmedbook.ru').'<noreply@lookmedbook.ru>'
     ];
 

@@ -128,6 +128,7 @@
     </div>
 </script>
 
+<script type="text/javascript" src="/media/responsive/js/onready.js?<?=RELEASE_NUMBER?>"></script>
 <script type="text/javascript" src="/media/js/magazine_total_price.js?<?php echo RELEASE__NUMBER ?>"></script>
 <script type="text/javascript" src="/media/js/image_preview.js?<?php echo RELEASE__NUMBER ?>"></script>
 

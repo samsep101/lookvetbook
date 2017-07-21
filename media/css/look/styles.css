@@ -5984,12 +5984,28 @@ h1.help-title {
 }
 
 .reg-popup {
-    width    : 380px;
-    padding  : 30px 110px 32px 170px;
-    position : relative;
-    color    : #3B3B3B;
-    font     : 14px 'pf_agora_sans_promedium';
-    display  : none;
+	padding: 40px 40px 40px 150px;
+    position: relative;
+    color: #3B3B3B;
+    font: 14px 'pf_agora_sans_promedium';
+    display: none;
+    box-sizing: border-box;
+	width: 585px;
+}
+.form-input > input {
+	background: none;
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    box-shadow: inset 0 4px 7px -4px rgba(0,0,0,0.7), 0 4px 2px -4px rgba(0,0,0,0.5);
+    margin: 0 0 15px;
+    box-sizing: border-box;
+    padding: 13px;
+    font: 24px 'pf_agora_slab_proregular';
+    outline: none;
+    text-align: center;
+    width: 100%;
+	color:#666;
 }
 
 .reg-popup .logo {
@@ -6010,9 +6026,13 @@ h1.help-title {
 
 .reg-popup .reg-form .btn-1 {
     font-size : 18px;
-    padding   : 0 12px;
 }
 
+.reg-popup .auth-form .btns:after {
+	content:'';
+	display: block;
+	clear:both;
+}
 .reg-popup .auth-form .btns {
     padding-top   : 3px;
     margin-bottom : 24px;

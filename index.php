@@ -3,6 +3,9 @@ if (php_sapi_name()!='cli') {
   header("Content-Type: text/html; charset=UTF-8");
 }
 
+// по константе проще
+define('SERVER_NAME', $_SERVER['SERVER_NAME']);
+
 require('application/config/site.cfg.php');
 
 if (!debug) {
@@ -28,15 +31,29 @@ try {
   }
   require('application/config/init.php');
 
-  define('CURRENT_HOST', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
-  // бенчмарк запросов
-  define('BENCHMARKS', (bool)(mb_strpos(CURRENT_HOST, '.citrus.one') > 0));
-  // абсолютный путь до корня сайта
-  define('ABS_ROOT', realpath(dirname(__FILE__)));
+    define('CURRENT_HOST', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
+    // бенчмарк запросов
+    define('BENCHMARKS', (bool)(mb_strpos(CURRENT_HOST, '.citrus.one') > 0));
+    // абсолютный путь до корня сайта
+    define('ABS_ROOT', realpath(dirname(__FILE__)));
+
+    $subdomain = Application::getSubdomain();
+
+    if(in_array($subdomain, [
+        'cashback'
+    ])){
+        $filepath = ABS_ROOT.'/application/subdomains/'.$subdomain.'.php';
+        if(file_exists($filepath)){
+            define('SUBDOMAIN_MEDIA', '/media/subdomain_'.$subdomain);
+            ob_start();
+            require $filepath;
+            exit(ob_get_clean());
+        }
+    }
 
     if(Application::getUriPath(false) == '/robots.txt'){
 
-        $subdomain = str_replace(['.lookmedbook.ru', 'lookmedbook.ru', '.citrus.one'], '', $_SERVER['SERVER_NAME']);
+        $subdomain = str_replace(['.lookmedbook.ru', 'lookmedbook.ru', '.citrus.one', 'lookmedbook.dev'], '', SERVER_NAME);
         $robots_filePath = ABS_ROOT.'/application/templates/robots_txt/'.$subdomain.'.robots.txt';
         // домены с недефолтным robots
         if( ! in_array($subdomain, [
@@ -60,23 +77,23 @@ try {
     }
 
     $redirect_domen = $redirect_uri = '';
-    if (!empty($_SERVER['SERVER_NAME'])) {
+    if (mb_strlen(SERVER_NAME)) {
         $excluded_subdomens = ['account', 'test', 'sankt-peterburg', 'novosibirsk', 'chelyabinsk', 'omsk', 'samara', 'kazan', 'nizhniy-novgorod', 'ekaterinburg'];
         // citrus domain (local)
-        if(mb_strstr($_SERVER['SERVER_NAME'], '.citrus.one')){
-            $excluded_subdomens = ['lookmedbook', 'account', 'test'];
+        if(mb_strstr(SERVER_NAME, '.citrus.one') OR mb_strstr(SERVER_NAME, '.dev')){
+            $excluded_subdomens = ['lookmedbook', 'account', 'omsk', 'cashback'];
         }
         $m = [];
-        if (preg_match('|^(www\.)?(([a-z0-9-]+)\.)?\w+\.\w+$|', $_SERVER['SERVER_NAME'], $m)) {
+        if (preg_match('|^(www\.)?(([a-z0-9-]+)\.)?\w+\.\w+$|', SERVER_NAME, $m)) {
             if (!empty($m[1])) {
-                $redirect_domen = str_replace($m[1], '', $_SERVER['SERVER_NAME']);
+                $redirect_domen = str_replace($m[1], '', SERVER_NAME);
             }
             if (!empty($m[2]) and ! in_array($m[3], $excluded_subdomens)) {
-                $redirect_domen = str_replace($m[1] . $m[2], '', $_SERVER['SERVER_NAME']);
+                $redirect_domen = str_replace($m[1] . $m[2], '', SERVER_NAME);
             }
         }
     }
-    
+
     // редирект со страницы со слешем на конце на страницу без слеша на конце
   if (isset($_SERVER['REQUEST_URI']) and preg_match('/^(.+)\/$/ims', $_SERVER['REQUEST_URI'], $matches)) {
     $redirect_uri = $matches[1];

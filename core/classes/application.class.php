@@ -357,6 +357,12 @@ class Application
       return parse_url($_SERVER['REQUEST_URI'])['path'];
   }
 
+  public static function getSubdomain() {
+
+      $subdomain = str_replace(['lookmedbook.ru', 'citrus.one', 'lookmedbook.dev'], '', SERVER_NAME);
+      $subdomain = trim($subdomain, '.');
+      return $subdomain;
+  }
 
   private static function getClassFilePrefix($className)
   {

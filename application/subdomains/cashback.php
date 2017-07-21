@@ -8,7 +8,7 @@
         'action' => '/?action=send',
         'to' => 'cashbacklmb@gmail.com',
         //'to' => 'playmoredevelop@gmail.com',
-        'from' => adopt('Lookmedbook.ru').'<noreply@lookmedbook.ru>'
+        'from' => adopt('Lookmedbook.ru').' <noreply@lookmedbook.ru>'
     ];
 
     if(!empty($_GET['action']) AND $_GET['action'] == 'send'){

@@ -13,6 +13,8 @@
 
     if(!empty($_GET['action']) AND $_GET['action'] == 'send'){
 
+        header('Content-Type: application/json');
+
         $post = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $vars = [
             '{name}' => (!empty($post['name'])) ? $post['name'] : false,
@@ -20,7 +22,7 @@
             '{date}' => date('d.m.Y H:i'),
         ];
 
-        $valid_phone = preg_match('#^[\d\+\-\(\)\s]+$#', $phone);
+        $valid_phone = preg_match('#^[\d\+\-\(\)\s]+$#', $post['phone']);
 
         if($vars['{name}'] AND $vars['{phone}'] AND $valid_phone){
             
@@ -39,7 +41,9 @@
                 'From: '.$mail['from'],
             ]);
             mail($mail['to'], 'Cashback заявка с LookMedBook '.$vars['{date}'], $body, $headers);
+            exit(json_encode(['status' => 'ok']));
         }
+        exit(json_encode(['status' => 'fail']));
     }
 ?>
 <!DOCTYPE html>
@@ -187,19 +191,19 @@
                                     </li>
                                     <li class="partners__item partner">
                                         <div class="partner__img">
-                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/general/2.png">
+                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/ek.jpg">
                                         </div>
                                         <div class="partner__name">Европейская клиника</div>
                                     </li>
                                     <li class="partners__item partner">
                                         <div class="partner__img">
-                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/general/3.jpg">
+                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/sk.jpg">
                                         </div>
                                         <div class="partner__name">Семейная клиника</div>
                                     </li>
                                     <li class="partners__item partner">
                                         <div class="partner__img">
-                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/general/4.jpg">
+                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/medsi.jpg">
                                         </div>
                                         <div class="partner__name">Клиника "Медси"</div>
                                     </li>
@@ -211,7 +215,7 @@
                                     </li>
                                     <li class="partners__item partner">
                                         <div class="partner__img">
-                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/general/6.png">
+                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/oao_med.jpg">
                                         </div>
                                         <div class="partner__name">ОАО "Медицина"</div>
                                     </li>
@@ -380,6 +384,7 @@
 
         <div class="messages">
             <div class="success">Ваша заявка принята. Мы свяжемся с Вами в ближайшее время!</div>
+            <div class="error">Произошла ошибка. Заполните поля формы правильно.</div>
         </div>
 
         <script src="<?=SUBDOMAIN_MEDIA?>/js/maintw8gbs.min.js"></script>
@@ -393,20 +398,28 @@
                     e.preventDefault();
                     var _ = $(this);
                     $.post(_.attr('action'), _.serialize(), function(response){
-                        $message.addClass('visible').fadeIn(200);
+                        $message.addClass('_visible').fadeIn(200);
                         setTimeout(function(){
-                            if($message.hasClass('visible')){
-                                $message.removeClass('visible');
+                            if($message.hasClass('_visible')){
+                                $message.removeClass('_visible');
                                 $message.stop(1,1).fadeOut(1000);
                             }
                         }, 5000);
-                        $('.form .btn').prop('disabled', true);
+                        if(response){
+                            if(response.status){
+                                $message.removeClass('ok fail').addClass(response.status);
+                                if(response.status == 'ok'){
+                                    $('.form .btn').prop('disabled', true);
+                                }
+                            }
+                        }
+                        
                     });
                 }).on('click', '.form .btn', function(e){
                     e.preventDefault();
                     $(this).closest('form').submit();
                 }).on('click', '.messages', function(){
-                    $message.removeClass('visible');
+                    $message.removeClass('_visible');
                     $message.stop(1,1).fadeOut(200);
                 });
             });

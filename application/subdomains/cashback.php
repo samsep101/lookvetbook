@@ -52,8 +52,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Возврат средств за лечение в клиниках Москвы</title>
-        <meta content="" name="description">
+        <title>Кэшбек за медицинские услуги от Lookmedbook</title>
+        <meta content="Ищете кэшбек за медицинские услуги? Возврат до 30% от суммы лечения на Lookmedbook. Узнайте подробности прямо сейчас!" name="description">
         <meta content="" name="keywords">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="telephone=no" name="format-detection">

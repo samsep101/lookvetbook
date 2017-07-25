@@ -11,6 +11,11 @@
         'from' => adopt('Lookmedbook.ru').' <noreply@lookmedbook.ru>'
     ];
 
+    $setting = [
+        'phone' => '8 (499) 350 1448',
+        'teltag' => 'tel:84993501448'
+    ];
+
     if(!empty($_GET['action']) AND $_GET['action'] == 'send'){
 
         header('Content-Type: application/json');
@@ -86,7 +91,7 @@
                             <div class="logo">
                                 <img src="<?=SUBDOMAIN_MEDIA?>/img/general/logo.png" alt="LookMedBook" width="140" height="220">
                             </div>
-                            <div class="phone"><span>тел. горячей линии</span><a href="tel:8(800)123-45-67"><b>8(800)123-45-67</b></a>
+                            <div class="phone"><span>тел. горячей линии</span><a href="<?=$setting['teltag']?>"><b><?=$setting['phone']?></b></a>
                             </div><!--a class="btn btn_white" href="#">Личный кабинет</a><a class="btn" href="#">Вход</a-->
                         </div>
                     </div>
@@ -365,7 +370,7 @@
                             </ul>
                         </div-->
                         <div class="footer__col">
-                            <div class="footer__contact"><span>телефон горячей линии</span><a href="tel:8(800)123-45-67">8(800)123-45-67</a>
+                            <div class="footer__contact"><span>телефон горячей линии</span><a href="<?=$setting['teltag']?>"><?=$setting['phone']?></a>
                             </div>
                         </div>
                     </div>

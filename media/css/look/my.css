@@ -12,7 +12,6 @@ A {
 
 A:hover {
     text-decoration : none; /* Добавляем подчеркивание при наведении курсора на ссылку */
-    color           : red; /* Ссылка красного цвета */
     cursor          : pointer;
 }
 

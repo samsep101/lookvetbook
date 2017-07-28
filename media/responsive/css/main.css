@@ -237,7 +237,7 @@ a:hover {
 
 .footer {
     height: 130px;
-    /*margin-top: -8px;*/
+    margin-top: 0;
     background: url(/media/responsive/images/footer_background.png) repeat-x;
     position: relative;
 }
@@ -350,10 +350,15 @@ a:hover {
 }
 
 .breadcrumbs {
-	padding: 0 0 15px;
+	padding: 0 0 5px;
     margin: 0;
     list-style: none;
     overflow: hidden;
+	color: #1F8EBE;
+	font-family: 'pf_agora_sans_proregular', Arial;
+}
+.breadcrumbs a {
+    color: #1F8EBE;
 }
 .breadcrumbs.left-logo {
 	padding-left:100px;
@@ -386,14 +391,20 @@ a:hover {
 	content:initial;
 	display: none;
 }
-.breadcrumbs > li > a {
+.breadcrumbs > li > a, .breadcrumbs > li > span {
 	display: inline-block;
 	padding:4px 10px;
 	border-radius: 4px;
 }
+.breadcrumbs > li > span {
+	color:#777;
+}
 .breadcrumbs > li.home > a {
 	padding: 5px 7px;
     font-size: 11px;
+}
+.breadcrumbs > li.home > a > span {
+	display:none;
 }
 .breadcrumbs > li > a:hover {
 	color: #444;
@@ -463,4 +474,58 @@ ul {padding:0 ; margin:0;}
     background: -webkit-linear-gradient(top, #ffce02 0%,#fa9f22 100%);
     background: linear-gradient(to bottom, #ffce02 0%,#fa9f22 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffce02', endColorstr='#fa9f22',GradientType=0 );
+}
+
+.header-phone {
+	font-size: 24px;
+	padding-left: 107px;
+}
+.header-phone .text {
+	float:left;
+	padding-bottom: 20px;
+}
+.header-phone .phone {
+	text-align: center;
+	float:right;
+	margin-top: -36px;
+}
+.header-phone .phone span.number_set {
+    font-size: 28px;
+    background: url(/media/images/footer_top_info_phone.png) left 50% no-repeat;
+    font-family: 'pf_agora_slab_proregular';
+    color: #CD2667;
+}
+.header-phone .phone > span {
+	font-size: 22px;
+    padding-left: 20px;
+}
+
+.box-form {
+	border: 1px #CFCFCF solid;
+    background: #FBFBFB;
+    border-radius: 6px;
+    padding: 15px;
+    position: relative;
+}
+.box-form select {
+	width: 100%;
+    padding: 6px 5px;
+    margin: 0 0 9px;
+}
+.box-header {
+	color: #1F8EBE;
+    font: normal 20px 'pf_agora_slab_proregular';
+    text-align: center;
+    margin: 7px 0 12px;
+}
+.box-form .choose-list {
+	color: #3992BE;
+}
+.box-form .choose-list li {
+	padding: 10px 0 0;
+}
+
+.spoiler {
+	overflow:hidden;
+	display:none;
 }

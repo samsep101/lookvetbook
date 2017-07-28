@@ -21,6 +21,7 @@
     if (!isset($_SESSION['isTreatmentInSwitzVisible']) || $_SESSION['isTreatmentInSwitzVisible'] === "1") {
         $treatmentInSwitzVisibleOpen = 'style="display: none;"';
     }
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -48,8 +49,13 @@
         <?php endif ?>
             
     </head>
-    
+
+
     <body class="bg-paper responsive">
+        
+        <?php if($city) : ?>
+            <div class="hidden __citydata" data-id="<?=$city->getId()?>" data-lat="<?=(float) $city->lat?>" data-lng="<?=(float) $city->lng;?>"></div>
+        <?php endif; ?>
 
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDVS826" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -112,7 +118,7 @@
         /2497 -->
         <!-- {/literal} END JIVOSITE CODE -->
 
-        <?php $this->block('blocks/record_form_container'); ?>
+        <?php $this->block('responsive/includes/record_form_container'); ?>
         <?php $this->block('blocks/learn_form_container'); ?>
 
         <!-- Mobile Advert Advertur.ru start -->

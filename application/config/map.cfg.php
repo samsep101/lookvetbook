@@ -506,6 +506,29 @@
             'action'     => 'index',
             'controller' => 'oneClickSubscribe'
         ),
+
+        // роутинг для контроллера Uslugi
+        ['url' => '/uslugi',
+            'controller' => 'uslugi', 'action' => 'index'],
+        ['url' => '/uslugi/district-:district',
+            'controller' => 'uslugi', 'action' => 'district'],
+        ['url' => '/uslugi/area-:district',
+            'controller' => 'uslugi', 'action' => 'area'],
+        ['url' => '/uslugi/metro-:metro',
+            'controller' => 'uslugi', 'action' => 'metro'],
+        ['url' => '/uslugi/street-:street',
+            'controller' => 'uslugi', 'action' => 'street'],
+        ['url' => '/uslugi/:slug',
+            'controller' => 'uslugi', 'action' => 'slug'],
+        ['url' => '/uslugi/:slug/district-:district',
+            'controller' => 'uslugi', 'action' => 'slug_district'],
+        ['url' => '/uslugi/:slug/area-:district',
+            'controller' => 'uslugi', 'action' => 'slug_area'],
+        ['url' => '/uslugi/:slug/metro-:metro',
+            'controller' => 'uslugi', 'action' => 'slug_metro'],
+        ['url' => '/uslugi/:slug/street-:street',
+            'controller' => 'uslugi', 'action' => 'slug_street'],
+        
 );
 
     Register::add('map', $map);

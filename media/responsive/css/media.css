@@ -1,6 +1,8 @@
 @media(min-width: 1200px){
 
-
+	.tree-services .row > .column:nth-child(4n+1) {
+		clear:left;
+	}
 }
 
 @media(max-width: 1199px){ /* md */
@@ -21,6 +23,10 @@
 
 	.header .quick-search .quick-search-input {
 		width: 100%;
+	}
+	
+	.tree-services .row > .column:nth-child(4n+1) {
+		clear:left;
 	}
 }
 
@@ -54,6 +60,13 @@
 	.footer-inner-bottom .inner-bottom-copyright {
 		float: none;
 		display: inline-block;
+	}
+	
+	.tree-services .row > .column:nth-child(4n+1) {
+		clear:none;
+	}
+	.tree-services .row > .column:nth-child(3n+1) {
+		clear:left;
 	}
 }
 
@@ -93,6 +106,10 @@
 		width: 100%;
 		text-align: center;
 	}
+	
+	.tree-services .row > .column:nth-child(3n+1) {
+		clear:none;
+	}
 }
 
 @media(max-width: 680px){
@@ -111,6 +128,12 @@
 		margin: 0;
 		padding: 4px 0 0;
 		display: inline-block;
+	}
+	.responsive .discount {
+		display: none;
+	}
+	.switz-left-version.banner-treatment-in-switz {
+		display:none;
 	}
 }
 

@@ -52,11 +52,3 @@
         f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-PDVS826');</script>
 <!-- End Google Tag Manager -->
-
-<?php if ($city): ?>
-<script>
-    $(function () {
-        window.city_controller = new CityController(<?php echo $city->getId(); ?>,<?php echo (float) $city->lat; ?>,<?php echo (float) $city->lng; ?>);
-    });
-</script>
-<?php endif; ?>

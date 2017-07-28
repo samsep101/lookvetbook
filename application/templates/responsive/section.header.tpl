@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <header class="header">
+        <header class="header" data-active="<?=$controller?>">
             <div class="container">
                 <div class="flo">
 
@@ -11,11 +11,12 @@
                     <nav>
                         <a id="menu-opener" href="#" class="toggle-opener"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
                         <ul id="menu-container" class="nav-table animate-all">
-                            <li><a class="active doctor-link" href="/doctor">Врачи</a></li>
-                            <li><a class=" clinic-link" href="/clinic">Клиники</a></li>
-                            <li><a class=" disease-link" href="/disease">Заболевания</a></li>
-                            <li class="treatment-in-switz"><a class="" href="/shop/catalog">Лекарства</a></li>
-                            <li class="treatment-in-switz"><a class="" href="/action">Акции</a></li>
+                            <li><a class="doctor-link" href="/doctor" data-controller="doctor">Врачи</a></li>
+                            <li><a class="clinic-link" href="/clinic" data-controller="clinic">Клиники</a></li>
+                            <li><a class="disease-link" href="/disease" data-controller="disease">Заболевания</a></li>
+                            <li><a class="" href="/shop/catalog" data-controller="shop">Лекарства</a></li>
+                            <li><a class="" href="/action" data-controller="action">Акции</a></li>
+                            <li><a class="" href="/uslugi" data-controller="uslugi">Услуги</a></li>
                         </ul>
                     </nav>
 

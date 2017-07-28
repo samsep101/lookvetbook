@@ -80,9 +80,22 @@
         <script>
             (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
         </script>
+        
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MTC9Q6C');</script>
+        <!-- End Google Tag Manager -->
     </head>
 
     <body class="page">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MTC9Q6C"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
         <section class="page__wrapper">
             <main class="page__content">
                 <div class="header">
@@ -188,42 +201,27 @@
                             <div class="partners__inner">
                                 <div class="title">Клиники-партнеры</div>
                                 <ul class="partners__list">
-                                    <li class="partners__item partner">
-                                        <div class="partner__img">
-                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/general/1.jpg">
-                                        </div>
-                                        <div class="partner__name">Юсуповская больница</div>
-                                    </li>
-                                    <li class="partners__item partner">
-                                        <div class="partner__img">
-                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/ek.jpg">
-                                        </div>
-                                        <div class="partner__name">Европейская клиника</div>
-                                    </li>
-                                    <li class="partners__item partner">
-                                        <div class="partner__img">
-                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/sk.jpg">
-                                        </div>
-                                        <div class="partner__name">Семейная клиника</div>
-                                    </li>
-                                    <li class="partners__item partner">
-                                        <div class="partner__img">
-                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/medsi.jpg">
-                                        </div>
-                                        <div class="partner__name">Клиника "Медси"</div>
-                                    </li>
-                                    <li class="partners__item partner">
-                                        <div class="partner__img">
-                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/general/5.jpg">
-                                        </div>
-                                        <div class="partner__name">Клиника К+31</div>
-                                    </li>
-                                    <li class="partners__item partner">
-                                        <div class="partner__img">
-                                            <img src="<?=SUBDOMAIN_MEDIA?>/img/oao_med.jpg">
-                                        </div>
-                                        <div class="partner__name">ОАО "Медицина"</div>
-                                    </li>
+                                    <?php foreach([
+                                        'Юсуповская больница' => SUBDOMAIN_MEDIA . '/img/general/1.jpg',
+                                        'Европейская клиника' => SUBDOMAIN_MEDIA .'/img/ek.jpg',
+                                        'Семейная клиника' => SUBDOMAIN_MEDIA .'/img/sk.jpg',
+                                        'Клиника "Медси"' => SUBDOMAIN_MEDIA .'/img/medsi.jpg',
+                                        'Клиника К+31' => SUBDOMAIN_MEDIA .'/img/general/5.jpg',
+                                        'ОАО "Медицина"' => SUBDOMAIN_MEDIA .'/img/oao_med.jpg',
+
+                                        'Sante Clinic' => SUBDOMAIN_MEDIA .'/img/sante.jpg',
+                                        'Госпиталь на Яузе' => SUBDOMAIN_MEDIA .'/img/go_na_ya.jpeg',
+                                        'Медскан' => SUBDOMAIN_MEDIA .'/img/mscan.jpg',
+                                        'ПЭТ Технолоджи' => SUBDOMAIN_MEDIA .'/img/pet.jpg',
+                                        'ФНКЦ ФМБА' => SUBDOMAIN_MEDIA .'/img/fmba.jpg',
+                                        'МЖС-Медикал' => SUBDOMAIN_MEDIA .'/img/mjs.jpg',
+                                        
+                                    ] as $title => $url) : ?>
+                                        <li class="partners__item partner">
+                                            <div class="partner__img"><img src="<?=$url?>"></div>
+                                            <div class="partner__name"><?=$title?></div>
+                                        </li>
+                                    <?php endforeach; ?>
                                 </ul>
                             </div>
                         </div>

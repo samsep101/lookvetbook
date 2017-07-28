@@ -63,6 +63,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="telephone=no" name="format-detection">
         <meta name="HandheldFriendly" content="true">
+        <link rel="icon" href="/media/images/home_page/look/favicon.png" type="image/png">
 
         <link href="<?=SUBDOMAIN_MEDIA?>/css/maintw8gbs.min.css" rel="stylesheet" type="text/css">
         <link href="<?=SUBDOMAIN_MEDIA?>/css/extra.css" rel="stylesheet" type="text/css">
@@ -102,7 +103,7 @@
                     <div class="container">
                         <div class="header__inner"><!--a class="btn" href="#">Регион</a><a class="btn" href="#">Cashback</a-->
                             <div class="logo">
-                                <img src="<?=SUBDOMAIN_MEDIA?>/img/general/logo.png" alt="LookMedBook" width="140" height="220">
+                                <a href="http://lookmedbook.ru/"><img src="<?=SUBDOMAIN_MEDIA?>/img/general/logo.png" alt="LookMedBook" width="140" height="220"></a>
                             </div>
                             <div class="phone"><span>тел. горячей линии</span><a href="<?=$setting['teltag']?>"><b><?=$setting['phone']?></b></a>
                             </div><!--a class="btn btn_white" href="#">Личный кабинет</a><a class="btn" href="#">Вход</a-->

@@ -51,9 +51,9 @@
                                 <!-- перенесеннай тизер medshowtiz -->
                                 <div id="teaser_807"><a href="">Тизерная сеть</a></div>
                                 <script type="text/javascript">var medtizer807=document.createElement('script'); medtizer807.src='//medshowtiz.ru/show/?block_id=807&title='+document.title+'&r='+escape(document.referrer)+'&'+Math.round(Math.random()*100000);   function f807() { if(!self.medtizer) { medtizer=807; document.body.appendChild(medtizer807); } else { setTimeout('f807()',200); } } f807();</script>
-                                
 
-                                
+
+
 
 				<?php if(0 and !empty($disease->alias) and in_array($disease->alias, ['mezhpozvonochnaya-gryzha', 'osteohondroz-pozvonochnika'])) { ?>
 					<div class="desease-banner-line">
@@ -119,7 +119,7 @@
                              <div class="ortospy-banner2" onclick="window.location='/clinic/ortospayn';return false;"></div>
                            </div>
                         <?php } ?>
-			
+
 			<?php include('get_desease_yandexdir.tpl'); ?>
 			<div id="ban2"></div>
 			<?php include('get_desease_secondopinions.tpl');?>
@@ -131,13 +131,14 @@
 <script type="text/javascript">
     document.write('<scr'+'ipt language="javascript" type="text/javascript" src="http://tizierlady.ru/output/index/20"></scr'+'ipt>');
 </script>-->
+<?php /*
     <div id="webapteka_48">загрузка...</div>
 <script type="text/javascript">
 document.write('<scr'+'ipt language="javascript" type="text/javascript" src="/getout.php?g=48"></scr'+'ipt>');
 </script>
 	<div class="pediatr-banner-container"></div>
 
-</div>
+</div> */?>
 
 <div class="inner-2">
 	<?php if ($disease_specialties) { ?>

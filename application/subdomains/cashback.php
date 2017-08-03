@@ -30,7 +30,7 @@
         $valid_phone = preg_match('#^[\d\+\-\(\)\s]+$#', $post['phone']);
 
         if($vars['{name}'] AND $vars['{phone}'] AND $valid_phone){
-            
+
             $body = str_replace(array_keys($vars), array_values($vars), '
                 <h3>Заявка с сайта cashback.lookmedbook.ru</h3>
                 <hr>
@@ -81,7 +81,7 @@
         <script>
             (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
         </script>
-        
+
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -216,7 +216,7 @@
                                         'ПЭТ Технолоджи' => SUBDOMAIN_MEDIA .'/img/pet.jpg',
                                         'ФНКЦ ФМБА' => SUBDOMAIN_MEDIA .'/img/fmba.jpg',
                                         'МЖС-Медикал' => SUBDOMAIN_MEDIA .'/img/mjs.jpg',
-                                        
+
                                     ] as $title => $url) : ?>
                                         <li class="partners__item partner">
                                             <div class="partner__img"><img src="<?=$url?>"></div>
@@ -395,7 +395,7 @@
         <script type="text/javascript" src="/media/js/jquery-1.8.3.min.js?0.1"></script>
         <script>
             $(function(){
-                
+
                 var $message = $('.messages');
 
                 $(document).on('submit', 'form.form', function(e){
@@ -417,7 +417,7 @@
                                 }
                             }
                         }
-                        
+
                     });
                 }).on('click', '.form .btn', function(e){
                     e.preventDefault();
@@ -428,6 +428,35 @@
                 });
             });
         </script>
+         <!— Yandex.Metrika counter —>
+            <script type="text/javascript" >
+                (function (d, w, c) {
+                    (w[c] = w[c] || []).push(function() {
+                        try {
+                            w.yaCounter45499677 = new Ya.Metrika({
+                                id:45499677,
+                                clickmap:true,
+                                trackLinks:true,
+                                accurateTrackBounce:true,
+                                webvisor:true
+                            });
+                        } catch(e) { }
+                    });
+
+                    var n = d.getElementsByTagName("script")[0],
+                        s = d.createElement("script"),
+                        f = function () { n.parentNode.insertBefore(s, n); };
+                    s.type = "text/javascript";
+                    s.async = true;
+                    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+                    if (w.opera == "[object Opera]") {
+                        d.addEventListener("DOMContentLoaded", f, false);
+                    } else { f(); }
+                })(document, window, "yandex_metrika_callbacks");
+            </script>
+            <noscript><div><img src="https://mc.yandex.ru/watch/45499677" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        <!— /Yandex.Metrika counter —>
     </body>
 
 </html>

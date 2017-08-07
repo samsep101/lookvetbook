@@ -8,9 +8,9 @@ class ImportController extends BaseController
      * @return type
      */
     private function _getClinics($docdoc_ids = false) {
-        
+
         $manager = new ClinicManager();
-        
+
         if($docdoc_ids) {
             return $manager->getListWithDocdocIdList($docdoc_ids);
         }
@@ -25,6 +25,9 @@ class ImportController extends BaseController
     {
         /** @var Db $db */
         $db = Register::get('db');
+        $insert = 0;
+        $update = 0;
+        $notfaund = 0;
         $clinics = $this->_getClinics();
         //$clinics = $this->_getClinics([1496, 1497]);
         $clinic_data_url = 'https://lookmedbook:IzkmbB@back.docdoc.ru/api/rest/1.0.6/json/clinic/';
@@ -37,6 +40,7 @@ class ImportController extends BaseController
 		echo $clinic_data_url.$clinic->docdoc_id.PHP_EOL;
                 $s = file_get_contents($clinic_data_url.$clinic->docdoc_id);
                 $data = json_decode($s);
+                //var_dump($data); exit();
                 $data = $data->Clinic[0];
             }catch (Exception $exp){
                 continue;
@@ -53,13 +57,64 @@ class ImportController extends BaseController
             }
 
             $clinic->about = $data->Description;
+
+            $clinicId = $clinic->id;
+
             $clinic->save();
+
+            $metro = $data->Stations;
+
+            /** upadating metro start **/
+
+            $metroStationToClinic =  (new MetroStationToClinicManager()) ->deleteByClinicId($clinicId);
+
+            foreach( $metro as $m ){
+
+
+                $metroBranch  = ( new MetroBranchManager() )->getListByIds( array($m->LineId) );
+                if( !empty ( $metroBranch ) ){
+
+                     $metroStation = ( new MetroStationManager() )->getListByName($m->Name);
+
+
+                    if( !empty( $metroStation ) ){
+
+                        $metroStationId = $metroStation[0]->id;
+
+                        $metroStation = (new MetroStationManager())->getOneById($metroStation[0]->id);
+
+                        if($metroStationToClinic === "insert"){ $insert++; }else{ $update++; }
+
+                    }else{
+
+                        $metroStation = new MetroStationModel();
+
+                    }
+
+                    $metroStation->name =            $m->Name;
+                    $metroStation->metro_branch_id = $m->LineId;
+                    $metroStation->longitude =       $m->Longitude;
+                    $metroStation->latitude =        $m->Latitude;
+                    $metroStation->save();
+                    $metroStationId = $metroStation->id;
+
+                    $metroStationToClinic = new MetroStationToClinicModel();
+                    $metroStationToClinic->clinic_id = $clinicId;
+                    $metroStationToClinic->metro_station_id = $metroStationId;
+                    $metroStationToClinic->save();
+
+                }
+
+            }
+
+
+
 
             $clinic_specialty = [];
 
             $q = "delete from doctor_to_clinic where clinic_id='$clinic->id'";
             $db->query($q);
-			
+
 			$q = "delete from doctor_specialty_to_clinic where clinic_id='$clinic->id'";
             $db->query($q);
 
@@ -69,19 +124,20 @@ class ImportController extends BaseController
                     $s = file_get_contents($doctor_data_url.$doc_id.'/withSlots/1');
                     $docdata = json_decode($s);
                     $docdata = $docdata->Doctor[0];
+                    //var_dump($docdata); exit;
                 }catch (Exception $exp){
                     continue;
                 }
 //                if ($docdata->Slots)
 //                    pr($docdata->Slots, 1);
-				
+
 				list($last_name, $first_name, $second_name) = explode(' ', $docdata->Name);
 
-                $q = "select doctor.id 
+                $q = "select doctor.id
                       from doctor
-                      where 
-					  doctor.last_name like '$last_name' and  
-					  doctor.first_name like '$first_name' and 
+                      where
+					  doctor.last_name like '$last_name' and
+					  doctor.first_name like '$first_name' and
 					  doctor.second_name like '$second_name' ";
 
                 if ($a = $db->query($q)){
@@ -96,7 +152,7 @@ class ImportController extends BaseController
 				$doctor->first_name = $first_name;
 				$doctor->second_name = $second_name;
                 $price = $docdata->Price > 0 ? (float) $docdata->Price : '';
-				
+
                 $doctor->full_lower_name = strtolower($docdata->Name);
                 $doctor->sex_id = ($docdata->Sex == 1) ? 2 : 1;
                 $doctor->rate = (float) $docdata->Rating;
@@ -118,16 +174,16 @@ class ImportController extends BaseController
                 $doctor->is_pregnant = 1;
                 $doctor->is_handicapped = 1;
                 $doctor->save();
-				
-				$q = "select doctor.id 
+
+				$q = "select doctor.id
                       from doctor
-                      where 
-					  doctor.last_name like '$last_name' and  
-					  doctor.first_name like '$first_name' and 
+                      where
+					  doctor.last_name like '$last_name' and
+					  doctor.first_name like '$first_name' and
 					  doctor.second_name like '$second_name' ";
 
                 if ($a = $db->query($q)){
-                    $doctor = (new DoctorManager())->getOneById($a[0]['id']);                    
+                    $doctor = (new DoctorManager())->getOneById($a[0]['id']);
                 }else{
                     echo "error doc add: $docdata->Name<br>".PHP_EOL;
 					continue;
@@ -150,7 +206,7 @@ class ImportController extends BaseController
                         $q = "insert into doctor_to_clinic set clinic_id='$clinic->id', doctor_id='$doctor->id', specialty_id='$specialty->id'". ($price ? " , first_visit_price='$price'" : '');
                         $db->query($q);
                     }
-					
+
 					$q = "insert into doctor_specialty_to_clinic set clinic_id='$clinic->id', doctor_id='$doctor->id', specialty_id='$specialty->id'";
                     $db->query($q);
                 }
@@ -197,10 +253,10 @@ class ImportController extends BaseController
 				$specializations = $db->query($q);
 				foreach ($specializations as $specialization){
 					$specialization_id = $specialization['specialization_id'];
-					
+
 					if (!$specialization_id)
 						continue;
-					
+
 					$q = "select id from specialization_to_clinic where clinic_id='$clinic->id' and specialization_id='$specialization_id'";
 					if (!$db->query($q)){
 						$q = "insert into specialization_to_clinic set clinic_id='$clinic->id', specialization_id='$specialization_id'";
@@ -210,6 +266,8 @@ class ImportController extends BaseController
 			}
 
             flush();
+
+            echo "UPDATE : {$update} ; INSERT : {$insert} ; NOT FOUND: {$notfaund}".PHP_EOL;
         }
 
         die('<br>finish<br>');

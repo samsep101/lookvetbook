@@ -7,7 +7,7 @@ class ElasticaTask
 		/**
 		 * @var ClinicManager $clinic_manager
 		 */
-        if( ! self::elasticIsActive()) return true;
+        //if( ! self::elasticIsActive()) return true;
 		$clinic_manager = ModelManagerFactory::getByName('clinic');
 		$clinic = $clinic_manager->getOneById($clinic_id);
 
@@ -20,7 +20,7 @@ class ElasticaTask
 		/**
 		 * @var DoctorManager $doctor_manager
 		 */
-        if( ! self::elasticIsActive()) return true;
+        //if( ! self::elasticIsActive()) return true;
 		$doctor_manager = ModelManagerFactory::getByName('doctor');
 		$doctor = $doctor_manager->getOneById($doctor_id);
 

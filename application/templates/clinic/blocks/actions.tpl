@@ -6,7 +6,9 @@
             <div class="actionImage">
                 <div class="actionName" style="width: 600px"><a href="<?=$e->getLink()?>"><?=$e->name?></a></div>
 				<?php if ($e->get_image_full_width()){?>
-                    <img src="<?=$e->get_image_full_width()->crop(600, 120)->path?>" width="600" height="120">
+                    <a href="#" class="actions-show-form" onclick="recordController.showForm(0,0,0)">
+                        <img src="<?=$e->get_image_full_width()->crop(600, 120)->path?>" width="600" height="120">
+                    </a>
 				<?php } ?>
             </div>
             <!-- <div class="actionText"><?=$e->info?></div> -->

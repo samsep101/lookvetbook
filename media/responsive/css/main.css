@@ -203,6 +203,10 @@ a:hover {
 	padding: 0 0 0 102px;
 }
 
+.fancybox-inner .flo {
+	padding: 0;
+}
+
 .header nav a.toggle-opener {
     font-size: 29px;
     padding: 5px;

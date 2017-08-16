@@ -1,6 +1,8 @@
 <?php
 
     $slice_count = 4;
+
+    $tree = $this->tree;
     foreach($tree as $id => $one){
         if(!empty($one['subslugs'])){
             $one['showmore_slugs'] = array_slice($one['subslugs'], $slice_count, null, true);
@@ -8,16 +10,12 @@
         }
         $tree[$id] = $one;
     }
-
-    $current_tree = !empty($current_tree) ? $current_tree : $tree;
-
-    if(!empty($page) AND $page == 'slug'){
-        $subslugs = current($current_tree)['subslugs'];
-    }
-
+    $this->tree = $tree;
+    unset($tree);
 ?>
 
 <link rel="stylesheet" href="/media/uslugi/styles.css" type="text/css">
+<script type="text/javascript" src="/media/uslugi/services.js"></script>
 
 <?=$this->renderInString('responsive/includes/breadcrumbs', false)?>
 
@@ -36,7 +34,7 @@
                 <div class="box-header">Найти услугу</div>
                 <select class="chosen-select" name="service">
                     <option selected>Выбрать услугу</option>
-                    <?php foreach($tree as $one) : ?>
+                    <?php foreach($this->tree as $one) : ?>
                         <option value="/uslugi/<?=$one['slug']?>"><?=$one['name']?></option>
                         <?php if(!empty($one['subslugs'])) : foreach($one['subslugs'] as $subone) : ?>
                             <option class="sub" value="/uslugi/<?=$subone['full_slug']?>"><?=$subone['name']?></option>
@@ -73,22 +71,16 @@
 
 
 <div class="container tree-services">
-<?php if(!empty($page) AND $page == 'slug') : ?>
 
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <ul class="pricelist">
-                <?php foreach($subslugs as $subone) : ?>
-                <li><a href="/uslugi/<?=$subone['full_slug']?>"><?=$subone['name']?></a><span> от <?=$subone['price']?> руб.</span></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </div>
+<?php if(!empty($page)) : ?>
+
+    <?php if($page == 'slug') : echo $this->renderInString('uslugi/blocks/page_slug', false); endif;?>
+    <?php if($page == 'article') : echo $this->renderInString('uslugi/blocks/page_article', false); endif;?>
 
 <?php else : ?>
     
     <div class="row">
-        <?php foreach($current_tree as $one) : ?>
+        <?php foreach($this->tree as $one) : ?>
         <div class="column col-lg-3 col-md-3 col-sm-4 col-xs-6">
             <div class="ts-header ff-medium"><a href="/uslugi/<?=$one['slug']?>"><?=$one['name']?></a><span><?=($one['count'] > 0) ? $one['count'] : ''?></span></div>
             <?php if($one['count'] > 0) : ?>
@@ -116,6 +108,9 @@
     </div>
             
 <?php endif; ?>
+
+    <?=$this->renderInString('uslugi/blocks/roots', false);?>
+
 </div>
 
 <script>

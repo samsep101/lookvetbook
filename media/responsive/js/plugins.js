@@ -1,14 +1,20 @@
 $(function(){
 	
+	var controllers = {};
+	
 	$.getScript('/media/js/library/header.controller.js', function(){
-		var header_controller = new HeaderController();
-        header_controller.init();
+		controllers.header = new HeaderController();
+        controllers.header.init();
 	});
 	
 	$.getScript('/media/js/library/footer_block.controller.js', function(){
-		var footer_controller = new FooterBlockController();
-        footer_controller.init();
+		controllers.footer = new FooterBlockController();
+        controllers.footer.init();
 	});
+	
+	$.getScript('/media/js/library/login_form.controller.js');
+	$.getScript('/media/js/library/registration_form.controller.js');
+	$.getScript('/media/js/library/password_recovery.controller.js');
 	
 	$.getScript('/media/js/jquery-ui-1.10.2.custom.min.js', function(){
 		$(".datepicker").datepicker();
@@ -19,7 +25,7 @@ $(function(){
 });
 	
 	$.each([
-		'/media/js/init.js',
+		'/media/js/validation-rules.js',
 		'/media/js/jquery.fancybox.pack.js',
 		'/media/js/jquery.jscrollpane.js',
 		'/media/js/popup.js',

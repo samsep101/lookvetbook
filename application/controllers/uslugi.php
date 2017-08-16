@@ -15,6 +15,11 @@ class Uslugi_SeoController extends BaseController {
         'genitive_name' => ''
     ];
 
+    protected $article = [
+        'name' => '',
+        'genitive_name' => ''
+    ];
+
     protected $seo_method = 'seo_index';
 
     /** @var View */
@@ -24,7 +29,8 @@ class Uslugi_SeoController extends BaseController {
         
         $replace = [
             '%city%' => $this->city->prepositional_name,
-            '%usluga-spec%' => $this->current['genitive_name']
+            '%usluga-spec%' => $this->current['genitive_name'],
+            '%article%' => $this->article['genitive_name'],
         ];
 
         return str_replace(array_keys($replace), array_values($replace), $str);
@@ -57,6 +63,21 @@ class Uslugi_SeoController extends BaseController {
             ['Главная', '/', 'home'],
             ['Все услуги', '/uslugi', ''],
             [$this->current['name'], false, '']
+        ];
+    }
+
+    protected function seo_article() {
+
+        $this->view->h1 = $this->replace_seo('Медицинские услуги в области %article%');
+        $this->view->h2 = $this->replace_seo('Услуги в области %article%');
+        $this->view->page_title = $this->replace_seo('Медицинские услуги в области %article% в %city% - цены клиник с отзывами, рейтингами и записью на прием на Lookmedbook.');
+        $this->view->page_description = $this->replace_seo('Интересуют медицинские услуги в области %article% в %city%? Loomedbook поможет выбрать среди лучших клиник и медицинских центров по отзывам, рейтингу и стоимости.');
+
+        $this->view->breadcrumbs = [
+            ['Главная', '/', 'home'],
+            ['Все услуги', '/uslugi', ''],
+            [$this->current['name'], '/uslugi/'.$this->current['slug'], ''],
+            [$this->article['name'], false, ''],
         ];
     }
 
@@ -117,15 +138,52 @@ class UslugiController extends Uslugi_SeoController {
 
         $this->index();
         $this->seo_method = 'seo_slug';
+        $this->view->page = 'slug';
 
         $this->current = $this->services_model()->getBySlug($this->slug);
-        $this->view->page = 'slug';
 
         if(!empty($this->current['id']) AND array_key_exists($this->current['id'], $this->container['tree'])){
 
             $this->view->current_tree = [ $this->current['id'] => $this->container['tree'][$this->current['id']] ];
         }
+
+        $this->container['roots'] = [];
+        
+        foreach($this->container['tree'] as $id => $one){
+
+            if($one['count'] > 0){
+                $this->container['roots'][$id] = [
+                    'slug' => $one['slug'],
+                    'name' => $one['name'],
+                    'price' => $one['price'],
+                    'count' => !empty($one['count']) ? $one['count'] : 0
+                ];
+            }
+        }
+
+        $this->view->roots = $this->container['roots'];
+
     }
+    
+    # /uslugi/andrologija/mar-test
+    public function article() {
+
+        $this->slug();
+        $this->seo_method = 'seo_article';
+        $this->view->page = 'article';
+
+        $article_slug = $this->request('article', false);
+
+        if(!empty($article_slug)){
+
+            $this->view->btnback = $this->replace_seo('Услуги в области %usluga-spec%');
+            $this->view->btnslug = '/uslugi/'.$this->current['slug'];
+            $this->article = $this->services_model()->getBySlug($article_slug);
+            
+        }
+
+    }
+    
     # /uslugi/district-vao
     public function district() {}
     # /uslugi/area-sokolinaya-gora

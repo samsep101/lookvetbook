@@ -41,6 +41,7 @@
     <script type="text/javascript" src="/media/js/inputmask/jquery.inputmask.js?<?php echo RELEASE__NUMBER?>"></script>
     <script type="text/javascript" src="/media/js/inputmask/jquery.inputmask.numeric.extensions.js?<?php echo RELEASE__NUMBER?>"></script>
     <script type="text/javascript" src="/media/js/inputmask/jquery.inputmask.date.extensions.js?<?php echo RELEASE__NUMBER?>"></script>
+    <script type="text/javascript" src="/media/js/init.js?<?=RELEASE_NUMBER?>"></script>
     <script type="text/javascript" src="/media/responsive/js/plugins.js?<?=RELEASE_NUMBER?>"></script>
 
 <?php else : ?>

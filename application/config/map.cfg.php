@@ -528,6 +528,8 @@
             'controller' => 'uslugi', 'action' => 'slug_metro'],
         ['url' => '/uslugi/:slug/street-:street',
             'controller' => 'uslugi', 'action' => 'slug_street'],
+        ['url' => '/uslugi/:slug/:article',
+            'controller' => 'uslugi', 'action' => 'article'],
         
 );
 

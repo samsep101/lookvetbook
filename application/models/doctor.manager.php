@@ -264,6 +264,22 @@ class DoctorManager extends AliasManager
     return $res;
   }
 
+  public function deleteById($id){
+
+        $backup = ( new DoctorManager())->getOneById( $id );
+
+        $deletedDoctors = new DeletedDoctorModel();
+        $deletedDoctors->first_name  = $backup->first_name;
+        $deletedDoctors->second_name = $backup->second_name;
+        $deletedDoctors->last_name   = $backup->last_name;
+        $deletedDoctors->look_id     = $backup->id;
+        $deletedDoctors->purpose     = "Удаление через панель администратора";
+        $deletedDoctors->dt          = date("Y-m-d H:i:s");
+        $deletedDoctors->save();
+
+        parent::deleteById($id);
+
+  }
   /**
    * return DoctorModel[]
    */
@@ -534,7 +550,7 @@ class DoctorManager extends AliasManager
   public function checkExistsActionBySpecialtyIdAndClinicId($specialty_id, $clinic_id)
   {
     $sql = '  select count(*) as `count`
-                from doctor d
+               from doctor d
                inner join doctor_to_clinic dc on dc.doctor_id=d.id
                inner join specialty_to_doctor sd on (sd.doctor_id=d.id and sd.clinic_id=dc.clinic_id)
                inner join specialty_to_specialization ss on (ss.specialty_id=sd.specialty_id)
@@ -546,8 +562,8 @@ class DoctorManager extends AliasManager
     $data = $this->db->query($sql);
 
     return (bool)$data[0]['count'];
-  }  
-  
+  }
+
   public function checkExistsByCityId($city_id)
   {
     $sql = 'SELECT COUNT(*) as `count`

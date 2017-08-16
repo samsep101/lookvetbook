@@ -6142,7 +6142,7 @@ h1.help-title {
 }
 
 #terms-popup.reg-popup {
-    width   : 463px;
+    width: 666px;
     padding : 35px 40px 32px 157px;
 }
 
@@ -6161,11 +6161,25 @@ h1.help-title {
 }
 
 .reg-popup .terms-cont .scroll-pane {
-    width       : 447px;
+    width: 452px;
     height      : 340px;
     padding-top : 7px;
     overflow    : auto;
     outline     : none;
+}
+.reg-popup .terms-cont .scroll-pane p{padding-right: 10px;box-sizing: border-box;margin-bottom: 0;}
+.reg-popup .terms-cont .scroll-pane ul{padding-left: 20px;margin-bottom: 10px;}
+.reg-popup .terms-cont .scroll-pane ul li{position: relative;}
+.reg-popup .terms-cont .scroll-pane ul li:before {
+    content: "";
+    display: block;
+    height: 5px;
+    width: 5px;
+    background: #000;
+    border-radius: 5px;
+    position: absolute;
+    left: -14px;
+    top: 9px;
 }
 
 .reg-popup .terms-cont p {

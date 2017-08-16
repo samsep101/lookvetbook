@@ -18,7 +18,7 @@ class ClinicController extends BaseController
     $clinic_id = $this->request('id');
     $canbe_original_alias = $this->request('district');
 
-    
+
     $current_item = $this->getLandingPageItem($clinic_id);
 
     if ($current_item) {
@@ -32,7 +32,7 @@ class ClinicController extends BaseController
       if ($clinic_manager->getOneByOriginalAlias($canbe_original_alias)){
           $clinic_id = $clinic_id.'/'.$canbe_original_alias;
       }
-          
+
 
     $clinic = $clinic_manager->getOneByIdOrAliasAndIsActive($clinic_id);
 
@@ -42,14 +42,14 @@ class ClinicController extends BaseController
           $this->view_page->page_description=$this->getClinicPageDescription();
           $this->view->clinic = $clinic;
           $this->render('clinic/primary');
-    } 
+    }
 
     $districtManager = new DistrictManager();
     $regionManager = new RegionManager();
     $streetManager = new StreetManager();
     $metroManager = new MetroStationManager();
 //    $specialization_manager = new SpecializationManager();
-    
+
     $v=explode('-',$clinic_id);
     $district       =   null;
     $metro          =   null;
@@ -91,32 +91,32 @@ class ClinicController extends BaseController
         $metro          = $metroManager->getOneByAlias($clinic_id);
         $region         = $regionManager->getOneByAlias($clinic_id);
         $street         = $streetManager->getOneByAlias($clinic_id);
-        $specialization = $specialization_manager->getOneByAlias($clinic_id);        
+        $specialization = $specialization_manager->getOneByAlias($clinic_id);
     }
-    if ($district) 
+    if ($district)
         $this->view->district = $district;
     if ($region) {
-        $this->view->region=$region; 
+        $this->view->region=$region;
     }
     if ($street)
         $this->view->street=$street;
     if ($metro)
         $this->view->metro_station=$metro;
     //print_r($metro);
-    
-    
+
+
     if ($specialization || $this->view->district || $this->view->region || $this->view->street || $this->view->metro_station) {
       $this->index($specialization->alias);
     } else {
       if (is_numeric($clinic_id) && $clinic->alias) {
         RedirectManager::redirect301(ClinicPageLinkViewHelper::getLink($clinic));
       }
-        
+
         if (!$clinic && strpos($clinic_id,'/') === false && $original_clinic = $clinic_manager->getOneByOriginalAlias($clinic_id)){
             RedirectManager::redirect301(ClinicPageLinkViewHelper::getLink($original_clinic));
         }
-        
-        
+
+
       LinkHelper::checkLinkIsCorrectIfThereIsNoAttemptRedirect($clinic, array('city' => $this->city, 'model' => 'clinic'));
 
       if (isset($clinic) && $clinic && $this->city->name == 'Москва') {
@@ -177,7 +177,7 @@ class ClinicController extends BaseController
 
       $clinic_metro = ($clinic->metro_station_name) ? ', метро ' . $clinic->metro_station_name : '';
       //$this->view->page_title = $clinic->name . ', ' . $clinic->city->name . $clinic_metro . ', ' . $clinic->address . ', отзывы, телефон, запись на прием - «'.SITE_NAME.'»';
-      
+
     }
 
     $spzn_id = $this->request('spzn_id', 0);
@@ -222,24 +222,30 @@ class ClinicController extends BaseController
     }
 
     if ($this->view->clinic->name) {
-        $address = $this->view->clinic->address;
+        $address = str_replace(
+            array( "ул.", "пр.", "ш.", "д.", "стр.", "м.", "пр-т."),
+            array( "ул", "пр", "ш", "", "стр", "м", "пр-т" ),
+            $this->view->clinic->address);
+        $addressArr = explode( ',', $address );
+        $street = $addressArr[ count( $addressArr ) - 2 ].','.$addressArr[ count( $addressArr ) - 1];
         $metro = $this->view->clinic->metro_station->name;
         $city = $this->view->clinic->city->name;
-        // Интересует Биомед на ул Луковского (м Суконная слобода, Казань)? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на LookMedBook. Заходите!
-        return vsprintf('Интересует %s %s %s? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на %s. Заходите!', [
-            $this->view->clinic->name,
-            (!empty($address)) ? 'на '.$address : '',
-            (!empty($metro)) ? '('.implode(', ', ['м. '.$metro, $city]).')' : '',
+        // Биомед на ул Луковского (м Суконная слобода, Казань) - врачи, отзывы, цены, телефоны и адреса, запись на прием на Loo kMedBook
+        return $this->view->page_title = vsprintf('Интересует %s%s%s%s? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на %s. Заходите!', [
+            trim($this->view->clinic->name),
+            (!empty($metro))    ?   " м. ".trim($metro)."," :   "",
+            (!empty($street))   ?   " на ".trim($street)    :   "",
+            (!empty($city))     ?   " (". trim($city).")"   :   "",
             SITE_NAME
         ]);
         //return 'Интересует '.$this->view->clinic->name.'? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на '.SITE_NAME.'. Заходите!';
     } else {
       if (extension_loaded('morpher')) {
-        return 'Ищете медицинские центры и клиники '.morpher_inflect($seo_specialization,'rod').' '.$this->getSeoAddress().'? '.SITE_NAME.' поможет выбрать лучшие клиники и медицинские центры по отзывам, рейтингу и стоимости. Заходите!';      
+        return 'Ищете медицинские центры и клиники '.morpher_inflect($seo_specialization,'rod').' '.$this->getSeoAddress().'? '.SITE_NAME.' поможет выбрать лучшие клиники и медицинские центры по отзывам, рейтингу и стоимости. Заходите!';
       } else {
-        return 'Ищете медицинские центры и клиники '.$seo_specialization.' '.$this->getSeoAddress().'? '.SITE_NAME.' поможет выбрать лучшие клиники и медицинские центры по отзывам, рейтингу и стоимости. Заходите!';      
+        return 'Ищете медицинские центры и клиники '.$seo_specialization.' '.$this->getSeoAddress().'? '.SITE_NAME.' поможет выбрать лучшие клиники и медицинские центры по отзывам, рейтингу и стоимости. Заходите!';
       }
-        
+
     }
   }
   public function index($specialization_alias = NULL)
@@ -386,7 +392,7 @@ class ClinicController extends BaseController
     if ($params->page == 1) {
       $map_file_generator = new ClinicMapDataGenerator();
       $map_file = $map_file_generator->generate($params);
- 
+
      if (is_object($params->geo_point)) {
 	#die('3333');
         /**
@@ -795,24 +801,30 @@ class ClinicController extends BaseController
 
 //    return $this->view->page_title = $this->getSeoAddress().' Найти клинику. Адреса и телефоны медицинских центров Москвы и других городов России - «'.SITE_NAME.'»';
 
-    if ($this->view->specialization) {       
+    if ($this->view->specialization) {
         if (extension_loaded('morpher')) {
             $seo_specialization=morpher_inflect($this->view->specialization->name,'rod');
         } else {
             $seo_specialization=$this->view->specialization->name;
         }
-                                      
-        
+
+
     }
     if ($this->view->clinic->name) {
-        $address = $this->view->clinic->address;
+        $address = str_replace(
+            array( "ул.", "пр.", "ш.", "д.", "стр.", "м.", "пр-т."),
+            array( "ул", "пр", "ш", "", "стр", "м", "пр-т" ),
+            $this->view->clinic->address);
+        $addressArr = explode( ',', $address );
+        $street = $addressArr[ count( $addressArr ) - 2 ].','.$addressArr[ count( $addressArr ) - 1];
         $metro = $this->view->clinic->metro_station->name;
         $city = $this->view->clinic->city->name;
-        // Биомед на ул Луковского (м Суконная слобода, Казань) - врачи, отзывы, цены, телефоны и адреса, запись на прием на LookMedBook
-        return $this->view->page_title = vsprintf('%s %s %s - врачи, отзывы, цены, телефоны и адреса, запись на прием на %s', [
-            $this->view->clinic->name,
-            (!empty($address)) ? 'на '.$address : '',
-            (!empty($metro)) ? '('.implode(', ', ['м. '.$metro, $city]).')' : '',
+        // Биомед на ул Луковского (м Суконная слобода, Казань) - врачи, отзывы, цены, телефоны и адреса, запись на прием на Loo kMedBook
+        return $this->view->page_title = vsprintf('%s%s%s%s - врачи, отзывы, цены, телефоны и адреса, запись на прием на %s', [
+            trim($this->view->clinic->name),
+            (!empty($metro))    ?   " м. ".trim($metro)."," :   "",
+            (!empty($street))   ?   " на ".trim($street)    :   "",
+            (!empty($city))     ?   " (". trim($city).")"   :   "",
             SITE_NAME
         ]);
         //return $this->view->page_title = $this->view->clinic->name.' - врачи, отзывы, цены, телефоны и адреса, запись на прием на '.SITE_NAME;
@@ -831,9 +843,9 @@ class ClinicController extends BaseController
    elseif ($this->view->metro_station)
      return SeoTextViewHelper::getAddressObjectName($this->view->metro_station);
    else
-     return SeoTextViewHelper::getAddressObjectName($this->view->city); 
+     return SeoTextViewHelper::getAddressObjectName($this->view->city);
   }
-  
+
   private function getLandingPageItem($landing_page_alias)
   {
     $clinic_services_manager = ModelManagerFactory::getByName('clinic_services');
@@ -878,7 +890,7 @@ class ClinicController extends BaseController
 
   public function landingPage($landing_page_alias)
   {
-    
+
     if (!$landing_page_alias) $landing_page_alias = $this->request('landing_page_alias');
 
     $current_item = $this->getLandingPageItem($landing_page_alias);

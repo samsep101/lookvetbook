@@ -11,6 +11,10 @@
 
     $current_tree = !empty($current_tree) ? $current_tree : $tree;
 
+    if(!empty($page) AND $page == 'slug'){
+        $subslugs = current($current_tree)['subslugs'];
+    }
+
 ?>
 
 <link rel="stylesheet" href="/media/uslugi/styles.css" type="text/css">
@@ -67,7 +71,21 @@
     </div>
 </div>
 
+
 <div class="container tree-services">
+<?php if(!empty($page) AND $page == 'slug') : ?>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <ul class="pricelist">
+                <?php foreach($subslugs as $subone) : ?>
+                <li><a href="/uslugi/<?=$subone['full_slug']?>"><?=$subone['name']?></a><span> от <?=$subone['price']?> руб.</span></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+
+<?php else : ?>
     
     <div class="row">
         <?php foreach($current_tree as $one) : ?>
@@ -90,13 +108,14 @@
                         <a href="javascript:void(0)" data-fliptext="скрыть" data-showmore=".spoiler">показать все</a>
                     </div>
                 <?php endif; ?>
-            
+
             <?php endif; ?>
 
         </div>
         <?php endforeach; ?>
     </div>
             
+<?php endif; ?>
 </div>
 
 <script>

@@ -1,9 +1,9 @@
 <?php
 
-class ServicesModel extends SimpleModel {
+class ServicesCategoriesModel extends SimpleModel {
     /** @author Playmore 2017 (playmoredevelop@gmail.com) */
 
-    protected $table = 'services';
+    protected $table = 'services_categories';
 
     public function getTree() {
 
@@ -16,6 +16,7 @@ class ServicesModel extends SimpleModel {
             'id_area',
             'id_metro',
             'id_street',
+            'price'
         ], 'parent_id ASC, name ASC');
 
         $tree = [];

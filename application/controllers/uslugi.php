@@ -49,6 +49,7 @@ class Uslugi_SeoController extends BaseController {
     protected function seo_slug() {
 
         $this->view->h1 = $this->replace_seo('Медицинские услуги в области %usluga-spec%');
+        $this->view->h2 = $this->replace_seo('Услуги в области %usluga-spec%');
         $this->view->page_title = $this->replace_seo('Медицинские услуги в области %usluga-spec% в %city% - цены клиник с отзывами, рейтингами и записью на прием на Lookmedbook.');
         $this->view->page_description = $this->replace_seo('Интересуют медицинские услуги в области %usluga-spec% в %city%? Loomedbook поможет выбрать среди лучших клиник и медицинских центров по отзывам, рейтингу и стоимости.');
 
@@ -86,7 +87,8 @@ class UslugiController extends Uslugi_SeoController {
         static $model = null;
 
         if(is_null($model)){
-            $model = new ServicesModel();
+            require_once ABS_ROOT.'/application/models/services.categories.model.php';
+            $model = new ServicesCategoriesModel();
         }
 
         return $model;
@@ -117,6 +119,7 @@ class UslugiController extends Uslugi_SeoController {
         $this->seo_method = 'seo_slug';
 
         $this->current = $this->services_model()->getBySlug($this->slug);
+        $this->view->page = 'slug';
 
         if(!empty($this->current['id']) AND array_key_exists($this->current['id'], $this->container['tree'])){
 

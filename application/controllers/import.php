@@ -276,4 +276,35 @@ class ImportController extends BaseController
 
         die('<br>finish<br>');
     }
+
+
+    public function update_clinic()
+    {
+        $update = "";
+        $new    = "";
+        $path   = __DIR__.'/../../media/upload/clinic/';
+        if( ( $sh = fopen ( $path."clinic.csv", "r" ) ) !== FALSE ){
+
+            while ( ($data = fgetcsv( $sh, 1000, ";" )) !== FALSE ){
+                echo "______________________________".PHP_EOL;
+
+                $clinic = ( new ClinicManager() )->getOneById( (int) $data[0] );
+                if(!empty ( $clinic ) ){
+
+                    $clinic->name = $data[1];
+                    $clinic->save();
+                    $update ++;
+
+                }else{
+
+                    $new ++;
+                }
+
+            }
+
+            fclose( $sh );
+        }
+        echo $update. ": ". $new.PHP_EOL;
+        die(" ready ");
+    }
 }

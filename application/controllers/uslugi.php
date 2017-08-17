@@ -108,8 +108,8 @@ class UslugiController extends Uslugi_SeoController {
         static $model = null;
 
         if(is_null($model)){
-            require_once ABS_ROOT.'/application/models/services.categories.model.php';
-            $model = new ServicesCategoriesModel();
+            require_once ABS_ROOT.'/application/models/services.categories.simplemodel.php';
+            $model = new ServicesCategoriesSimpleModel();
         }
 
         return $model;

@@ -1,6 +1,6 @@
 <?php
 
-class ServicesCategoriesModel extends SimpleModel {
+class ServicesCategoriesSimpleModel extends SimpleModel {
     /** @author Playmore 2017 (playmoredevelop@gmail.com) */
 
     protected $table = 'services_categories';

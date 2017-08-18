@@ -43,6 +43,11 @@
 </table>
 <?php }?>
 <div class="clear"></div>
+
+
+<script type="text/javascript" src="/media/js/jquery.autocomplete.min.js?<?php echo RELEASE_NUMBER?>"></script>
+<script type="text/javascript" src="/media/js/common.js?<?php echo RELEASE_NUMBER?>"></script>
+
 </body>
 </html>
 

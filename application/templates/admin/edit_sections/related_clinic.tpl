@@ -49,9 +49,9 @@
         <ul class="form">
             <li>
                 <label>Связать с клиникой:</label>
-                <input type="text" name="autocomplete_clinic" placeholder="Введите название клиники">
+                <input type="text" name="autocomplete_clinic" placeholder="Введите название клиники" data-ac="clinic">
             </li>
         </ul>
 
-        <input type="button" value="Добавить связь">
+        <input data-trigger="services_to_clinic" type="button" value="Добавить связь">
     </div>

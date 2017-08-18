@@ -1162,4 +1162,36 @@ SQL;
 
     }
 
+    public function getAutocomplete($search) {
+
+        $fields = [
+            'c.id',
+            'c.name',
+            'c.alias',
+        ];
+
+        // SELECT c.* FROM `clinic` c inner join clinic_to_types c2t ON c.id = c2t.clinic_id inner join clinic_type ct ON c2t.clinic_type_id = ct.id limit 100
+        $q = str_replace(['{search}', '{fields}'], [
+            '%'.$search.'%',
+            implode(', ', $fields),
+        ], 'SELECT {fields} FROM clinic c WHERE c.name LIKE \'{search}\' OR c.alias LIKE \'{search}\' ORDER BY c.alias ASC LIMIT 50');
+
+        $q = $this->db->query($q);
+
+        if(!empty($q)){
+
+            $data = [];
+            foreach($q as $row){
+                $data[] = [
+                    'code' => $row['id'],
+                    'value' => $row['name'].' ('.$row['alias'].')'
+                ];
+            }
+
+            return $data;
+        }
+
+        return [];
+    }
+
 }

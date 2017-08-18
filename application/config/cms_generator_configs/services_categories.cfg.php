@@ -58,11 +58,13 @@
         ),
         
         'extra' => [
-            'services_to_clinic' => array(
-				'table' => 'services_to_clinic',
-				'title' => 'Клиники',
-				'field' => 'services_categories_id'
-			),
+            'relations_to_clinic' => [
+                'type' => 'view',
+                'title' => 'Связи с клиниками',
+                'view' => function($view){
+                    return $view->renderInString('admin/edit_sections/related_clinic', false);
+                }
+            ],
         ]
 
     ]);

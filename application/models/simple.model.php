@@ -153,6 +153,26 @@ class SimpleModel {
         return "'".$this->db->escape($value)."'";
     }
 
+    protected function fetch_column($q, $column, $primary = false) {
+
+        $q = $this->db->post($q);
+        
+        if($q->num_rows){
+            $resultset = [];
+            foreach($q as $row){
+                if(!empty($primary) AND array_key_exists($primary, $row)){
+                    $resultset[$row[$primary]] = $row[$column];
+                } else {
+                    $resultset[] = $row[$column];
+                }
+            }
+
+            return $resultset;
+        }
+
+        return false;
+    }
+
     protected function exists($table, $field, $value) {
 
         $q = $this->total($table, $field . ' = ' . $this->escape($value));

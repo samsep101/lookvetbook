@@ -1124,4 +1124,42 @@ SQL;
         return $res;
     }
 
+    public function getClinics($clinics_ids) {
+
+        is_array($clinics_ids) AND $clinics_ids = implode(', ', array_map('intval', $clinics_ids));
+
+        $fields = [
+            'c.id',
+            'c.name',
+            'c.alias',
+            'c.address',
+            'c.latitude',
+            'c.longitude',
+            'c.rate',
+            'c.fact_address',
+            'c.metro_station_id',
+            'c.phone',
+            'c.email',
+            'c.is_active',
+            'ct.id as type_id',
+            'ct.name as type_name',
+            'ct.alias as type_alias',
+        ];
+
+        // SELECT c.* FROM `clinic` c inner join clinic_to_types c2t ON c.id = c2t.clinic_id inner join clinic_type ct ON c2t.clinic_type_id = ct.id limit 100
+        $q = str_replace(['{ids}', '{fields}'], [
+            $clinics_ids,
+            implode(', ', $fields),
+        ], 'SELECT {fields} FROM clinic c
+                LEFT JOIN clinic_to_types c2t ON c.id = c2t.clinic_id
+                LEFT JOIN clinic_type ct ON c2t.clinic_type_id = ct.id
+                WHERE c.id IN ({ids})
+                ORDER BY c.alias ASC');
+
+        $q = $this->db->query($q);
+
+        return $this->initList($q);
+
+    }
+
 }

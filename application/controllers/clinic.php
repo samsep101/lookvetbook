@@ -227,11 +227,15 @@ class ClinicController extends BaseController
             array( "ул", "пр", "ш", "", "стр", "м", "пр-т" ),
             $this->view->clinic->address);
         $addressArr = explode( ',', $address );
-        $street = $addressArr[ count( $addressArr ) - 2 ].','.$addressArr[ count( $addressArr ) - 1];
+        if(count($addressArr) >= 2){
+            $street = $addressArr[ count( $addressArr ) - 2 ].','.$addressArr[ count( $addressArr ) - 1];
+        } else {
+            $street = $address;
+        }
         $metro = $this->view->clinic->metro_station->name;
         $city = $this->view->clinic->city->name;
         // Биомед на ул Луковского (м Суконная слобода, Казань) - врачи, отзывы, цены, телефоны и адреса, запись на прием на Loo kMedBook
-        return $this->view->page_title = vsprintf('Интересует %s%s%s%s? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на %s. Заходите!', [
+        return $this->view->page_description = vsprintf('Интересует %s%s%s%s? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на %s. Заходите!', [
             trim($this->view->clinic->name),
             (!empty($metro))    ?   " м. ".trim($metro)."," :   "",
             (!empty($street))   ?   " на ".trim($street)    :   "",
@@ -816,7 +820,11 @@ class ClinicController extends BaseController
             array( "ул", "пр", "ш", "", "стр", "м", "пр-т" ),
             $this->view->clinic->address);
         $addressArr = explode( ',', $address );
-        $street = $addressArr[ count( $addressArr ) - 2 ].','.$addressArr[ count( $addressArr ) - 1];
+        if(count($addressArr) >= 2){
+            $street = $addressArr[ count( $addressArr ) - 2 ].','.$addressArr[ count( $addressArr ) - 1];
+        } else {
+            $street = $address;
+        }
         $metro = $this->view->clinic->metro_station->name;
         $city = $this->view->clinic->city->name;
         // Биомед на ул Луковского (м Суконная слобода, Казань) - врачи, отзывы, цены, телефоны и адреса, запись на прием на Loo kMedBook

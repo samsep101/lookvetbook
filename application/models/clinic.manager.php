@@ -1141,9 +1141,8 @@ SQL;
             'c.phone',
             'c.email',
             'c.is_active',
-            'ct.id as type_id',
-            'ct.name as type_name',
-            'ct.alias as type_alias',
+            'GROUP_CONCAT(ct.id) as type_id',
+            'GROUP_CONCAT(ct.name) as type_name',
         ];
 
         // SELECT c.* FROM `clinic` c inner join clinic_to_types c2t ON c.id = c2t.clinic_id inner join clinic_type ct ON c2t.clinic_type_id = ct.id limit 100
@@ -1154,6 +1153,7 @@ SQL;
                 LEFT JOIN clinic_to_types c2t ON c.id = c2t.clinic_id
                 LEFT JOIN clinic_type ct ON c2t.clinic_type_id = ct.id
                 WHERE c.id IN ({ids})
+                GROUP BY c.id
                 ORDER BY c.alias ASC');
 
         $q = $this->db->query($q);

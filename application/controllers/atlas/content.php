@@ -9,6 +9,8 @@ class ContentAtlasController extends BaseController {
 
     public function __construct() {
 
+        error_reporting(-1);
+
         if(!empty($_GET['env']) AND $_GET['env'] == 'production'){
             $this->is_production = true;
         }

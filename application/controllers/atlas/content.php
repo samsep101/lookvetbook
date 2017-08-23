@@ -140,8 +140,8 @@ class ContentAtlasController extends BaseController {
                                 $disease['name'],
                                 StringHelpers\slug($disease['name']),
                                 html_entity_decode($project['project_desc']),
-                                $morpher['Р'],
-                                $morpher['П'],
+                                mb_strtolower($morpher['Р']),
+                                mb_strtolower($morpher['П']),
                                 $project['id']
                         );
                     

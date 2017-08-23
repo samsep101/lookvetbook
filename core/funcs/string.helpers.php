@@ -2,6 +2,8 @@
 
 namespace StringHelpers;
 
+mb_internal_encoding('UTF-8');
+
 function slug($text, $separator = '-') {
 
 		$text = preg_replace('#[^a-zA-Zа-яА-Я0-9\s]+#ui', '', $text);

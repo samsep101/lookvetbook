@@ -354,7 +354,12 @@ class Application
           return $split;
       }
 
-      return parse_url($_SERVER['REQUEST_URI'])['path'];
+      if(!empty($_SERVER['REQUEST_URI'])){
+          return parse_url($_SERVER['REQUEST_URI'])['path'];
+      } else {
+          global $uri;
+          return $uri;
+      }
   }
 
   public static function getSubdomain() {

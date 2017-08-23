@@ -4,7 +4,11 @@ if (php_sapi_name()!='cli') {
 }
 
 // по константе проще
-define('SERVER_NAME', $_SERVER['SERVER_NAME']);
+if(!empty($_SERVER['SERVER_NAME'])){
+    define('SERVER_NAME', $_SERVER['SERVER_NAME']);
+} else {
+    define('SERVER_NAME', 'lookmedbook.ru');
+}
 
 require('application/config/site.cfg.php');
 

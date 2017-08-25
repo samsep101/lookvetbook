@@ -2,6 +2,8 @@
 
 namespace StringHelpers;
 
+mb_internal_encoding('UTF-8');
+
 function slug($text, $separator = '-') {
 
 		$text = preg_replace('#[^a-zA-Zа-яА-Я0-9\s]+#ui', '', $text);
@@ -16,7 +18,7 @@ function slug($text, $separator = '-') {
 			"ш" => "sh", "щ" => "sch", "ъ" => "y", "ы" => "i", "ь" => "",
 			"э" => "e", "ю" => "ju", "я" => "ja",
 		));
-		$text = preg_replace('#\s+#', $separator, $text);
+		$text = preg_replace('#\s+#ui', $separator, $text);
 
 		return $text;
 	}

@@ -25,6 +25,7 @@
     if(!empty($relations)){
         $clinics = $manager->getClinics($relations);
     }
+
 ?>
 
 <?php if(!empty($clinics)) : ?>
@@ -34,7 +35,7 @@
             <th>ID</th>
             <th>Название</th>
             <th>Адрес</th>
-            <th>Тип</th>
+            <th style="width: 45%">Тип</th>
             <th>Управление</th>
         </tr>
         <?php foreach($clinics as $clinic) : ?>

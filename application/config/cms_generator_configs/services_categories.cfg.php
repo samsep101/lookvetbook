@@ -65,6 +65,13 @@
                     return $view->renderInString('admin/edit_sections/related_clinic', false);
                 }
             ],
+            'relations_to_doctor' => [
+                'type' => 'view',
+                'title' => 'Связи с врачами из связанных клиник',
+                'view' => function($view){
+                    return $view->renderInString('admin/edit_sections/related_clinic_doctor', false);
+                }
+            ]
         ]
 
     ]);

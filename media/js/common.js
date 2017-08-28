@@ -43,6 +43,16 @@ $(function(){
 		});
 	}
 	
+	function getSelectedCheckboxes(container){
+		
+		var $checkboxes = $(container).find('.__selected:checked');
+		var selected = [];
+		$checkboxes.each(function(){
+			selected.push($(this).val());
+		});
+		return selected;
+	}
+	
 	$(document).on('click', '[data-trigger]', function(e){
 		e.preventDefault();
 		$(document).trigger($(this).data('trigger'), this);
@@ -56,6 +66,20 @@ $(function(){
 	}).on('services_to_clinic_delete', function(e, _this){
 		var $row = $(_this).closest('tr');
 		postRelation('services_to_clinic_delete', $row.data());
+	}).on('services_to_doctor', function(e, _this){
+		var selected = getSelectedCheckboxes('#doctors-table');
+		if(selected.length){
+			postRelation('services_to_doctor', {
+				selected : selected,
+				linkto: $('#doctors-table').data('linkto')
+			});
+		}
+	}).on('services_to_doctor_delete', function(e, _this){
+		var $row = $(_this).closest('tr');
+		postRelation('services_to_doctor_delete', {
+				doctorId : $row.data('docId'),
+				linkto: $('#doctors-table').data('linkto')
+			});
 	});
 	
 	

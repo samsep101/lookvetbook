@@ -1142,7 +1142,7 @@ SQL;
             'c.email',
             'c.is_active',
             'GROUP_CONCAT(ct.id) as type_id',
-            'GROUP_CONCAT(ct.name) as type_name',
+            'GROUP_CONCAT(ct.name) as type_name'
         ];
 
         // SELECT c.* FROM `clinic` c inner join clinic_to_types c2t ON c.id = c2t.clinic_id inner join clinic_type ct ON c2t.clinic_type_id = ct.id limit 100
@@ -1152,7 +1152,7 @@ SQL;
         ], 'SELECT {fields} FROM clinic c
                 LEFT JOIN clinic_to_types c2t ON c.id = c2t.clinic_id
                 LEFT JOIN clinic_type ct ON c2t.clinic_type_id = ct.id
-                WHERE c.id IN ({ids})
+                WHERE c.id IN ({ids}) 
                 GROUP BY c.id
                 ORDER BY c.alias ASC');
 

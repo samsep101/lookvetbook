@@ -51,6 +51,34 @@ class relationsAdminController extends AdminBaseController {
         return $this->json(['success' => 'Связь удалена!', 'do' => 'reload']);
     }
 
+    public function services_to_doctor() {
+
+        $linkto = $this->request('linkto', false);
+        $selected = $this->request('selected', false);
+
+        if($linkto AND !empty($selected) AND is_array($selected)){
+
+            $this->relations()->addServiceToDoctor($linkto, $selected);
+
+            return $this->json(['do' => 'reload']);
+        }
+
+        return $this->json(['error' => 'Не все параметры переданы']);
+    }
+
+    public function services_to_doctor_delete() {
+
+        $linkto = $this->request('linkto', false);
+        $doctor_id = $this->request('doctorId');
+
+        if($linkto AND $doctor_id){
+
+            $this->relations()->removeServiceToDoctor($linkto, $doctor_id);
+        }
+
+        return $this->json(['success' => 'Связь удалена!', 'do' => 'reload']);
+    }
+
     public function beforeAction() {
         return true;
     }

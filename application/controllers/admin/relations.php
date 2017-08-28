@@ -55,10 +55,18 @@ class relationsAdminController extends AdminBaseController {
 
         $linkto = $this->request('linkto', false);
         $selected = $this->request('selected', false);
+        $unlinkAll = boolval($this->request('unlinkAll', false));
 
         if($linkto AND !empty($selected) AND is_array($selected)){
 
             $this->relations()->addServiceToDoctor($linkto, $selected);
+
+            return $this->json(['do' => 'reload']);
+        }
+
+        if($linkto AND $unlinkAll === true AND empty($selected)){
+
+            $this->relations()->unlinkAllDoctors($linkto);
 
             return $this->json(['do' => 'reload']);
         }

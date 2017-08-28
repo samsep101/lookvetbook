@@ -51,10 +51,18 @@ class RelationsSimpleModel extends SimpleModel {
 
                 if( ! in_array($one, $exists)){
 
-                    return $this->insert('services_to_doctor', [
+                    $this->insert('services_to_doctor', [
                         'services_categories_id' => (int)$service_id,
                         'doctor_id' => (int)$one
                     ]);
+                }
+            }
+
+            foreach($exists as $one){
+
+                if( ! in_array($one, $doctor_id)){
+
+                    $this->removeServiceToDoctor($service_id, $one);
                 }
             }
 
@@ -62,13 +70,22 @@ class RelationsSimpleModel extends SimpleModel {
 
             if( ! in_array($doctor_id, $exists)){
 
-                return $this->insert('services_to_doctor', [
+                $this->insert('services_to_doctor', [
                     'services_categories_id' => (int)$service_id,
                     'doctor_id' => (int)$doctor_id
                 ]);
             }
         }
 
+    }
+
+    public function unlinkAllDoctors($services_ids) {
+
+        is_array($services_ids) AND $services_ids = implode(', ', array_map('intval', $services_ids));
+
+        $q = sprintf('DELETE FROM `services_to_doctor` WHERE `services_categories_id` IN (%s)', $services_ids);
+
+        return $this->db->post($q);
     }
 
     public function getServicesRelationsDoctors($services_ids) {

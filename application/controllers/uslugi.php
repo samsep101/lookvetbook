@@ -102,6 +102,16 @@ class UslugiController extends Uslugi_SeoController {
 
     protected $container = [];
 
+    public function __construct() {
+        
+        parent::__construct();
+
+        if(false === Application::config('section.services.available')){
+            ErrorPageViewHelper::page404('404');
+            exit();
+        }
+    }
+
     /** @return ServicesModel */
     public function services_model() {
 

@@ -289,7 +289,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?><?php echo strtolower(SITE_URL);?>/disease<?php } ?>">Заболевания</a>
                         <a class="" href="/shop/catalog">Лекарства</a>
 						<a class="" href="/action">Акции</a>
-						<a class="" href="/uslugi">Услуги</a>
+                        <?php if(Application::config('section.services.available')) : ?>
+                        <a class="" href="/uslugi">Услуги</a>
+                        <?php endif;?>
 
                     <?php /*if($city->is_has_laboratories) { ?>
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'analysis') ? 'active' : ''; ?> analysis-link" href="/analysis">Анализы</a>

@@ -74,10 +74,11 @@
                 <?php endif; ?>
             </td>
             <td>
-                
+                <?php if(in_array($doc->id, $relations_doctors)) : ?>
                 <a href="#" data-trigger="<?=$trigger?>_delete">
                     <img title="Удалить связь" border="0" src="/media/admin/icons/badge-square-cross-16-ns.png">
                 </a>
+                <?php endif; ?>
             </td>
         </tr>
         <?php endforeach; ?>

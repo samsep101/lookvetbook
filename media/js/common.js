@@ -73,6 +73,11 @@ $(function(){
 				selected : selected,
 				linkto: $('#doctors-table').data('linkto')
 			});
+		} else {
+			postRelation('services_to_doctor', {
+				unlinkAll : true,
+				linkto: $('#doctors-table').data('linkto')
+			});
 		}
 	}).on('services_to_doctor_delete', function(e, _this){
 		var $row = $(_this).closest('tr');

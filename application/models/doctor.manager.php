@@ -870,7 +870,9 @@ class DoctorManager extends AliasManager
         ], 'SELECT {fields} FROM doctor d
                 INNER JOIN doctor_to_clinic d2c ON d.id = d2c.doctor_id
                 LEFT JOIN doctor_type dt ON d.doctor_type_id = dt.id
-                WHERE d2c.clinic_id IN ({ids}) AND (d.is_active = 1 AND d.alias != \'\' AND d.alias IS NOT NULL)
+                WHERE d2c.clinic_id IN ({ids}) 
+                    AND d.is_virtual IS NULL
+                    AND (d.is_active = 1 AND d.alias != \'\' AND d.alias IS NOT NULL)
                 GROUP BY d.id
                 ORDER BY d.alias ASC');
 

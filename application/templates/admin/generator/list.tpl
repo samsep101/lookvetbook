@@ -209,11 +209,11 @@
 
 			<?php if ($acl->hasRights($dataModel->getModelName(),'edit')){?>
                 <?php $page_region = (isset($_controller) && $_controller == 'visit') ? '' : '#key[' .$row->getId() .'][]'; ?>
-				<td width="25px;" style="text-align:right;"><a href="<?php echo ADMIN_FOLDER.'/'.$dataModel->getModelName(); ?>/edit/?<?php echo $indexField; ?>=<?php echo $row->getId(); ?>&destination=<?php echo ($destination) ? $destination : urlencode($_SERVER['REQUEST_URI'] .$page_region); ?>"><img title="Редактировать" border="0" class="edit-image" src="/media/admin/icons/pencil-16-ns.png"/></a></td>
+				<td width="25px;" style="text-align:center;"><a href="<?php echo ADMIN_FOLDER.'/'.$dataModel->getModelName(); ?>/edit/?<?php echo $indexField; ?>=<?php echo $row->getId(); ?>&destination=<?php echo ($destination) ? $destination : urlencode($_SERVER['REQUEST_URI'] .$page_region); ?>"><img title="Редактировать" border="0" class="edit-image" src="/media/admin/icons/pencil-16-ns.png"/></a></td>
 			<?php } ?>
 
 			<?php if ($acl->hasRights($dataModel->getModelName(),'delete')){?>
-				<td width="25px;" style="text-align:right;"><a href="<?php echo ADMIN_FOLDER; ?>/<?php echo $dataModel->getModelName(); ?>/delete/?<?php echo $indexField; ?>=<?php echo $row->getId(); ?>&destination=<?php echo $destination; ?>" onclick="return confirm('Вы действительно хотите удалить эту запись?');"><img title="Удалить" border="0" src="/media/admin/icons/badge-square-cross-16-ns.png"/></a></td>
+				<td width="25px;" style="text-align:center;"><a href="<?php echo ADMIN_FOLDER; ?>/<?php echo $dataModel->getModelName(); ?>/delete/?<?php echo $indexField; ?>=<?php echo $row->getId(); ?>&destination=<?php echo $destination; ?>" onclick="return confirm('Вы действительно хотите удалить эту запись?');"><img title="Удалить" border="0" src="/media/admin/icons/badge-square-cross-16-ns.png"/></a></td>
 			<?php }?>
 
 			<?php if ($buttons): ?>

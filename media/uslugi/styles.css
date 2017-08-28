@@ -1,0 +1,137 @@
+.chzn-results > li.sub {
+	padding-left: 30px;
+}
+.tree-services {
+	font-size: 14px;
+	padding-bottom: 40px;
+}
+.tree-services a {
+	display: inline-block;
+    padding: 2px 0;
+}
+.tree-services ul {}
+.tree-services ul > li {}
+.tree-services ul > li > a {
+	color:#000;
+}
+.tree-services .ts-header > span {
+	display: inline-block;
+    padding: 3px 10px;
+}
+.tree-services .ts-header a {
+	color: #1F8EBE;
+}
+.tree-services .ts-header {
+	font-weight: bold;
+    font-size: 16px;
+    position: relative;
+	color: #1F8EBE;
+	padding: 15px 0 5px;
+}
+.tree-services .showmore > a {
+	display: inline-block;
+	padding:5px 0 0;
+}
+.page-h1 h1 {
+	font-size: 22px;
+    padding: 25px 0 10px;
+}
+.tree-services .simple-page {
+	margin-top: 15px;
+	padding: 10px 0 5px;
+	border-radius: 5px;
+	background-color: rgba(255,255,255,0.7);
+	border: 1px solid #fcfcfc;
+	box-shadow: 0 1px 2px #A9A9A9;
+	-o-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -webkit-transition: all 500ms ease-in-out;
+    transition: all 500ms ease-in-out;
+}
+.tree-services .pricelist > li {
+	display: block;
+    padding: 7px 15px;
+    /* margin: 0 0 5px; */
+    position: relative;
+	-o-transition: all 100ms ease-in-out;
+    -moz-transition: all 100ms ease-in-out;
+    -webkit-transition: all 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
+}
+.tree-services .pricelist > li:before {
+	content: '';
+    display: block;
+    border-top: 1px dashed #ccc;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    border-left: 100px solid #fff;
+    border-right: 100px solid #fff;
+}
+.tree-services .pricelist > li:hover {
+	background-color: #fff;
+}
+.tree-services .pricelist > li:hover:before{
+	opacity: 0.3;
+}
+.tree-services .pricelist > li:last-child:before {
+	display:none;
+}
+.tree-services .pricelist > li > a {
+	color: #CD2667;
+    text-decoration: none;
+}
+.tree-services .pricelist > li > a:hover {
+	text-decoration: underline;
+}
+.tree-services .pricelist > li > span {
+	position: absolute;
+    right: 15px;
+    top: 8px;
+}
+.tree-services .view-more {
+	margin: 15px 0;
+}
+.tree-services .simple-page.collapsed {
+	position:relative;
+	max-height: 402px;
+	overflow:hidden;
+}
+.tree-services .simple-page.collapsed:after {
+	content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    display: block;
+    height: 1px;
+    border-bottom: 1px solid #f5f5f5;
+    box-shadow: 17px 0 50px 42px #fff;
+    z-index: 50;
+}
+
+.tree-services h3 {
+	font-size: 18px;
+    padding: 20px 0 10px;
+}
+
+.tree-roots {
+	overflow: hidden;
+}
+.tree-roots > li {
+	font-weight: bold;
+    font-size: 13px;
+    position: relative;
+    padding: 3px 0 3px;
+}
+.tree-roots > li > a {
+	color: #1F8EBE!important;
+}
+.tree-roots > li > span {
+	display: inline-block;
+    font-size: 12px;
+    padding: 0 0 0 5px;
+    color: #555;
+}

@@ -12,7 +12,6 @@ A {
 
 A:hover {
     text-decoration : none; /* Добавляем подчеркивание при наведении курсора на ссылку */
-    color           : red; /* Ссылка красного цвета */
     cursor          : pointer;
 }
 
@@ -2623,14 +2622,6 @@ body.hidden .doctor-special-links {
     font-size   : 12px;
 }
 
-.content .breadcrumbs {
-    padding-top    : 5px;
-    position       : relative;
-    top            : 15px;
-    left           : 90px;
-    padding-bottom : 5px;
-}
-
 .special-block h1 {
     text-align : center;
     color      : #393939;
@@ -2790,31 +2781,6 @@ input:focus, a:focus {
 
 .specialties-block .text {
     text-align : justify;
-}
-
-.breadcrumbs {
-    color : #1F8EBE;
-}
-
-.breadcrumbs a {
-    color : #1F8EBE;
-}
-
-.content .breadcrumbs {
-    padding-top    : 5px;
-    position       : relative;
-    top            : 15px;
-    left           : 78px;
-    padding-bottom : 5px;
-}
-
-.content .top_number .breadcrumbs {
-    padding-top    : 5px;
-    position       : relative;
-    top            : 15px;
-    left           : 0;
-    padding-bottom : 5px;
-    width          : 710px;
 }
 
 .special-block .h1 {
@@ -3981,7 +3947,7 @@ a.search-doctor-button {
     padding             : 0 13px;
     height              : 23px;
     background-size     : cover;
-    background-position : -5px -5 px\0/;
+    background-position : -5px -5px;
     line-height         : 23px;
     font-size           : 12px;
     border-radius       : 5px;

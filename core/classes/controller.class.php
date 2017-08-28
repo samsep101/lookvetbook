@@ -180,8 +180,9 @@ class Controller
    *
    * @return string template path
    */
-  private function getTemplatePath($templateName)
+  protected function getTemplatePath($templateName)
   {
+
 
     $folder = ($this->folder) ? $this->folder . '/' : '';
 

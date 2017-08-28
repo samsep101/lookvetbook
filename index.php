@@ -26,20 +26,21 @@ Raven_Autoloader::register();
 $client = new Raven_Client('https://3eddb6b698414aa28519bd1b864ef789:92e01d140f5c448c81348fd7834e201c@sentry.io/157050');
 
 try {
-  if (!empty($argc)) {
-    chdir(dirname(__FILE__));
-    unset($argv[0]);
-    $uri = '/' . join('/', $argv);
-  } else {
-    $uri = '';
-  }
-  require('application/config/init.php');
+    if (!empty($argc)) {
+        chdir(dirname(__FILE__));
+        unset($argv[0]);
+        $uri = '/' . join('/', $argv);
+    } else {
+        $uri = '';
+    }
 
     define('CURRENT_HOST', isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
     // бенчмарк запросов
     define('BENCHMARKS', (bool)(mb_strpos(CURRENT_HOST, '.citrus.one') > 0));
     // абсолютный путь до корня сайта
     define('ABS_ROOT', realpath(dirname(__FILE__)));
+
+    require('application/config/init.php');
 
     $subdomain = Application::getSubdomain();
 

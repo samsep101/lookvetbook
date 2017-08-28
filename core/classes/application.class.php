@@ -369,6 +369,21 @@ class Application
       return $subdomain;
   }
 
+    public static function config($keyname, $default = false) {
+
+        static $app_cfg = null;
+
+        if(is_null($app_cfg) AND file_exists(ABS_ROOT.'/application/config/application.cfg.php')){
+            $app_cfg = require ABS_ROOT.'/application/config/application.cfg.php';
+        }
+
+        if($app_cfg AND array_key_exists($keyname, $app_cfg)){
+            return $app_cfg[$keyname];
+        }
+
+        return $default;
+    }
+
   private static function getClassFilePrefix($className)
   {
     $fileName = preg_replace('/([a-zA-Z])([A-Z])/s', '\\1_\\2', $className);

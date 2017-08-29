@@ -3,19 +3,27 @@
 class RelationsSimpleModel extends SimpleModel {
     /** @author Playmore 2017 (playmoredevelop@gmail.com) */
 
-    public function addServiceToClinic($service_id, $clinic_id) {
+    public function addServiceToClinic($service_id, $clinic_id, $check_exists = true) {
 
-        $exists = $this->getServicesRelationsClinics($service_id);
+        if($check_exists){
 
-        if( ! in_array($clinic_id, $exists)){
+            $exists = $this->getServicesRelationsClinics($service_id);
 
-            return $this->insert('services_to_clinic', [
-                'services_categories_id' => (int)$service_id,
-                'clinic_id' => (int)$clinic_id
-            ]);
+            if( ! in_array($clinic_id, $exists)){
+
+                return $this->insert('services_to_clinic', [
+                    'services_categories_id' => (int)$service_id,
+                    'clinic_id' => (int)$clinic_id
+                ]);
+            }
+
+            return false;
         }
         
-        return false;
+        return $this->insert('services_to_clinic', [
+            'services_categories_id' => (int)$service_id,
+            'clinic_id' => (int)$clinic_id
+        ]);
     }
 
     public function getServicesRelationsClinics($services_ids) {
@@ -34,11 +42,34 @@ class RelationsSimpleModel extends SimpleModel {
         
     }
 
+    public function getSelect($table, $fkeys, $fvalues) {
+
+        $data = $this->get_orderby($table, [$fkeys, $fvalues], $fvalues.' ASC');
+
+        $assoc = [];
+        foreach($data as $row){
+            $assoc[$row[$fkeys]] = $row[$fvalues];
+        }
+
+        return $assoc;
+    }
+
     public function removeServiceToClinic($service_id, $clinic_id) {
 
         $q = sprintf('DELETE FROM services_to_clinic WHERE services_categories_id = %d AND clinic_id = %d', (int)$service_id, (int)$clinic_id);
 
         return $this->db->post($q);
+    }
+
+    public function clearServicesRelations($service_id) {
+
+        $q = sprintf('DELETE FROM services_to_clinic WHERE services_categories_id = %d', (int)$service_id);
+        $q2 = sprintf('DELETE FROM services_to_doctor WHERE services_categories_id = %d', (int)$service_id);
+
+        $this->db->post($q);
+        $this->db->post($q2);
+
+        return true;
     }
 
     public function addServiceToDoctor($service_id, $doctor_id) {
@@ -108,6 +139,18 @@ class RelationsSimpleModel extends SimpleModel {
         $q = sprintf('DELETE FROM services_to_doctor WHERE services_categories_id = %d AND doctor_id = %d', (int)$service_id, (int)$doctor_id);
 
         return $this->db->post($q);
+    }
+
+    public function getClinicsBySpecialization($specID) {
+
+        $q = sprintf('SELECT DISTINCT(s2c.clinic_id) as clinics
+                FROM `specialization` sp
+                    INNER JOIN specialty_to_specialization s2sp ON sp.id = s2sp.specialization_id
+                    INNER JOIN specialty_to_clinic s2c ON s2sp.specialty_id = s2c.specialty_id
+                WHERE sp.id = %d', (int)$specID);
+
+        return $this->fetch_column($q, 'clinics');
+
     }
 }
 

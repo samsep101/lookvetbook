@@ -51,6 +51,48 @@ class relationsAdminController extends AdminBaseController {
         return $this->json(['success' => 'Связь удалена!', 'do' => 'reload']);
     }
 
+    public function services_to_clinic_auto_relations() {
+
+        $linkto = $this->request('linkto', false);
+        $specID = $this->request('specID', false);
+
+        $count = 0;
+
+        if($linkto AND $specID){
+
+            $clinics = $this->relations()->getClinicsBySpecialization($specID);
+
+            if(!empty($clinics)){
+
+                $exists = $this->relations()->getServicesRelationsClinics($linkto);
+
+                foreach($clinics as $clinicID){
+
+                    if( ! in_array($clinicID, $exists)){
+
+                        $this->relations()->addServiceToClinic($linkto, $clinicID, false);
+
+                        $count++;
+                    }
+                }
+
+                return $this->json(['success' => 'Установлено связей: '.$count, 'do' => 'reload']);
+            }
+            return $this->json(['error' => 'Клиники не найдены']);
+        }
+        
+        return $this->json(['error' => 'Не все параметры переданы']);
+    }
+
+    public function services_categories_clear() {
+
+        $linkto = $this->request('linkto', false);
+
+        $this->relations()->clearServicesRelations($linkto);
+
+        return $this->json(['do' => 'reload']);
+    }
+
     public function services_to_doctor() {
 
         $linkto = $this->request('linkto', false);

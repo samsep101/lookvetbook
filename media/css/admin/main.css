@@ -1592,6 +1592,14 @@ ul.form label {
 	padding:0 0 3px 1px;
 	font-size:10px;
 }
+ul.form select {
+	width: 100%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    padding: 5px 7px;
+    border-radius: 1px;
+    box-sizing: border-box;
+}
 .autocomplete-suggestion.autocomplete-selected {
 	background-color: #F0F58C;
 }

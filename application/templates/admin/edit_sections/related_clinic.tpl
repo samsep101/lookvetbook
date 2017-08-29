@@ -15,6 +15,7 @@
             $trigger = 'services_to_clinic';
             // список связей для выборки клиник
             $relations = $model->getServicesRelationsClinics($current_model_id);
+            $relations_select = $model->getSelect('specialization', 'id', 'name');
             break;
         default:
             $relations = false;
@@ -65,6 +66,23 @@
 
 <?php else : ?>
     <div class="alert alert-info">Связей пока нет.</div>
+
+    <?php if(!empty($relations_select)) : ?>
+    <div class="tools-panel">
+        <ul class="form">
+            <li>
+                <label>Связать с клиниками через специализацию:</label>
+                <select name="apply_relations_to_clinic" data-onchange="<?=$trigger?>_auto_relations" data-linkto="<?=$current_model_id?>">
+                    <option value="_init">- выберите специализацию -</option>
+                    <?php foreach($relations_select as $k => $v) : ?>
+                    <option value="<?=$k?>"><?=$v?></option>
+                    <?php endforeach; ?>
+                </select>
+            </li>
+        </ul>
+    </div>
+    <?php endif;?>
+
 <?php endif; ?>
 
     <div class="tools-panel">

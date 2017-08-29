@@ -134,6 +134,19 @@ class SimpleModel {
 		return $this->db->query($q);
 	}
 
+    protected function get_orderby($table, $fields = '*', $orderby = false) {
+
+        is_array($fields) AND $fields = implode(', ', $fields);
+
+        $q = str_replace(['{fields}', '{table}', '{orderby}'], [
+            $fields,
+			$table,
+            !empty($orderby) ? ' ORDER BY '.$orderby : '',
+		], 'SELECT {fields} FROM {table} {orderby}');
+
+		return $this->db->query($q);
+    }
+
     protected function get_where_orderby($table, $where, $fields = '*', $orderby = false) {
 
         is_array($fields) AND $fields = implode(', ', $fields);

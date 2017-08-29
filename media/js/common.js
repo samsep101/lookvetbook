@@ -56,6 +56,9 @@ $(function(){
 	$(document).on('click', '[data-trigger]', function(e){
 		e.preventDefault();
 		$(document).trigger($(this).data('trigger'), this);
+	}).on('change', '[data-onchange]', function(e){
+		e.preventDefault();
+		$(document).trigger($(this).data('onchange'), $(this));
 	}).on('services_to_clinic', function(e, _this){
 		var $container = $(_this).closest('.tools-panel');
 		var $input = $container.find('[name=autocomplete_clinic]');
@@ -66,6 +69,21 @@ $(function(){
 	}).on('services_to_clinic_delete', function(e, _this){
 		var $row = $(_this).closest('tr');
 		postRelation('services_to_clinic_delete', $row.data());
+	}).on('services_to_clinic_auto_relations', function(e, _this){
+		var specID = $(_this).val();
+		if(specID !== '_init'){
+			var data = $(_this).data();
+			data.specID = specID;
+			if(confirm('Будет выполнен автоматический поиск связей для всех клиник по выбранной специализации. Продолжить?')){
+				postRelation('services_to_clinic_auto_relations', data);
+			}
+		}
+	}).on('services_categories_clear', function(e, _this){
+		
+		if(confirm('Будут удалены все связи текущей услуги с клиниками и врачами!')){
+			postRelation('services_categories_clear', {linkto: $('#current').val()});
+		}
+		
 	}).on('services_to_doctor', function(e, _this){
 		var selected = getSelectedCheckboxes('#doctors-table');
 		if(selected.length){

@@ -93,9 +93,11 @@ $(function() {
 </div>
 
 <input type="hidden" name="form[<?php echo $indexField; ?>]" value="<?php echo $indexValue; ?>" />
+<input type="hidden" name="current" id="current" value="<?=$this->model->id?>">
 <p>
 	<input type="button" onclick="$($($(this).parent()).parent()).submit()" value="Сохранить" id="submit_action">
 	<input type="button" onclick="window.location.reload()" value="Отменить" id="cancel_action">
+    <?=$this->dataModel->displayButtons()?>
 </p>
 
 <?php if($extra = $this->dataModel->getExtra()): ?>

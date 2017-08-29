@@ -72,6 +72,10 @@
                     return $view->renderInString('admin/edit_sections/related_clinic_doctor', false);
                 }
             ]
-        ]
+        ],
+
+        'buttons' => [
+            'Удалить все связи' => 'services_categories_clear'
+        ],
 
     ]);

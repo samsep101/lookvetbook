@@ -40,6 +40,8 @@ class ModelManager implements ICachedModelManager
 
   protected $total_hits = null;
 
+  protected $cityID = 2;
+
   public function __construct($table = '')
   {
     if ($table) {
@@ -52,6 +54,12 @@ class ModelManager implements ICachedModelManager
 
     $this->orm_model = new Orm(DB_PREFIX . $this->table_name);
     $this->db = Register::get('db');
+  }
+
+  public function setCityID($cityID) {
+
+      ($cityID > 0) AND $this->cityID = (int)$cityID;
+      return $this;
   }
 
   public function getGroupName()

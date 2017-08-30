@@ -100,6 +100,11 @@ class UslugiController extends Uslugi_SeoController {
     public $layout = 'responsive';
     public $template = 'index';
 
+    protected $id = false;
+    protected $parent_id = 0;
+    /** @var ClinicManager */
+    protected $clinic_manager = false;
+
     protected $container = [];
 
     public function __construct() {
@@ -110,9 +115,12 @@ class UslugiController extends Uslugi_SeoController {
             ErrorPageViewHelper::page404('404');
             exit();
         }
+
+        $this->clinic_manager = ModelManagerFactory::getByName('clinic');
+        $this->clinic_manager->setCityID($this->city->id);
     }
 
-    /** @return ServicesModel */
+    /** @return ServicesCategoriesSimpleModel */
     public function services_model() {
 
         static $model = null;
@@ -120,6 +128,21 @@ class UslugiController extends Uslugi_SeoController {
         if(is_null($model)){
             require_once ABS_ROOT.'/application/models/services.categories.simplemodel.php';
             $model = new ServicesCategoriesSimpleModel();
+            $model->setCityID($this->city->id);
+        }
+
+        return $model;
+    }
+
+    /** @return RelationsSimpleModel */
+    public function relations_model() {
+
+        static $model = null;
+
+        if(is_null($model)){
+            require_once ABS_ROOT.'/application/models/relations.simplemodel.php';
+            $model = new RelationsSimpleModel();
+            $model->setCityID($this->city->id);
         }
 
         return $model;
@@ -152,9 +175,31 @@ class UslugiController extends Uslugi_SeoController {
 
         $this->current = $this->services_model()->getBySlug($this->slug);
 
-        if(!empty($this->current['id']) AND array_key_exists($this->current['id'], $this->container['tree'])){
+        if(!empty($this->current['id'])){
 
-            $this->view->current_tree = [ $this->current['id'] => $this->container['tree'][$this->current['id']] ];
+            $this->id = (int)$this->current['id'];
+            $this->parent_id = (int)$this->current['parent_id'];
+            
+            if(array_key_exists($this->id, $this->container['tree'])){
+                
+                $this->view->current_tree = [ $this->id => $this->container['tree'][$this->id] ];
+            }
+
+            $clinics_count = $this->services_model()->getClinicsCount($this->id);
+            $clinics = [];
+            if($clinics_count > 0){
+                $clinics = $this->clinic_manager->getClinicsByServicesID($this->id);
+            } else {
+                if($this->parent_id > 0){
+                    $clinics = $this->clinic_manager->getClinicsByServicesID($this->parent_id);
+                }
+            }
+
+            foreach($clinics as $cKey => $clinic){
+                $clinics[$cKey] = $this->processedClinicItem($clinic);
+            }
+
+            $this->view->clinics = $clinics;
         }
 
         $this->container['roots'] = [];
@@ -224,6 +269,69 @@ class UslugiController extends Uslugi_SeoController {
         $templatePath = $this->getTemplatePath($this->template);
 
         return $this->view->render($templatePath);
+    }
+
+    private function processedClinicItem(ClinicModel $clinic) {
+
+        $additional_params = array();
+
+        foreach ($clinic->types AS $type) {
+            $id = $type->getId();
+
+            switch ($id) {
+                case 5: {
+                        $additional_params['multidisciplinary'] = 1;
+                        break;
+                    }
+                case 11: {
+                        $additional_params['accepts-children'] = 1;
+                        break;
+                    }
+                case 28: {
+                        $additional_params['twenty-four-hours'] = 1;
+                        break;
+                    }
+            }
+        }
+
+        foreach ($clinic->features AS $feature) {
+            if ($feature->getId() == 14) {
+                $additional_params['have-ramp'] = 1;
+                break;
+            }
+        }
+
+        foreach ($clinic->services AS $service) {
+            if ($service->getId() == 1) {
+                $additional_params['medical-certificates'] = 1;
+                break;
+            }
+        }
+
+        $count_doctors = 0;
+        foreach ($clinic->doctors AS $doctor) {
+            $count_doctors++;
+            if ($doctor->is_leave_the_house) {
+                $additional_params['leave-the-house'] = 1;
+                break;
+            }
+        }
+
+        $clinic->total_doctors = $count_doctors;
+
+        $clinic->total_specializations = count($clinic->specializations);
+
+        if ($clinic->only_adult) {
+            $additional_params['accepts-children'] = 0;
+        }
+
+        if ($clinic->is_card_pay) {
+            $additional_params['payment-cards'] = 1;
+        }
+
+        $clinic->additional_params = $additional_params;
+
+        return $clinic;
     }
 
 }

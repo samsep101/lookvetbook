@@ -7,10 +7,17 @@ class SimpleModel {
      * @var Db
      */
 	protected $db = null;
+    protected $cityID = 2;
 
     public function __construct() {
 
         $this->db = Register::get('db');
+    }
+
+    public function setCityID($cityID) {
+
+        ($cityID > 0) AND $this->cityID = (int)$cityID;
+        return $this;
     }
 
     /**

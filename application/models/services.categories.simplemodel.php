@@ -4,6 +4,7 @@ class ServicesCategoriesSimpleModel extends SimpleModel {
     /** @author Playmore 2017 (playmoredevelop@gmail.com) */
 
     protected $table = 'services_categories';
+    protected $m2m_clinics = 'services_to_clinic';
 
     public function getTree() {
 
@@ -78,10 +79,16 @@ class ServicesCategoriesSimpleModel extends SimpleModel {
         $q = str_replace(['{table}', '{slug}'], [
             $this->table,
             $this->escape($slug)
-		], 'SELECT id, slug, name, genitive_name FROM {table} WHERE slug = {slug} LIMIT 1');
+		], 'SELECT id, slug, name, genitive_name, parent_id FROM {table} WHERE slug = {slug} LIMIT 1');
 
 		return $this->db->get($q);
     }
+
+    public function getClinicsCount($services_id) {
+
+        return $this->total($this->m2m_clinics, '`services_categories_id` = ' . (int)$services_id);
+    }
+
 }
 
 /* END CLASS: ServicesModel extends SimpleModel */

@@ -35,3 +35,29 @@
         <?php endif; ?>
 
     </div>
+
+<div class="clinic-list">
+
+    <?php foreach($this->clinics as $clinic) : ?>
+    <div class="item" data-clinic-id="<?=$clinic->id?>">
+
+        <div class="col-lg-6 col-md-6 col-sm-5 col-xs-12">
+            <div class="avatar">
+                <?=ClinicAvatarViewHelper::viewOnCard($clinic, 74, 31); ?>
+            </div>
+            <div class="info">
+                <div class="name"><a href="<?=ClinicPageLinkViewHelper::getLink($clinic); ?>"><?=$clinic->name?></a></div>
+                <div class="rate"><?=RateViewHelper::view($clinic->rate, 0, $clinic->is_best); ?></div>
+            </div>
+
+            <?php include Application::getTemplatesDir(true).'/__common/clinic_item_additional.tpl'?>
+
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
+            <?php include Application::getTemplatesDir(true).'/__common/clinic_item_address_and_time.tpl'?>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <?php endforeach; ?>
+
+</div>

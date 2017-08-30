@@ -7,8 +7,6 @@ class ClinicManager extends AliasManager
 
   protected $transliterated_field = 'name';
 
-
-
   protected function beforeSave(DynamicModel $clinic)
   {
       /** @var ClinicModel $clinic */
@@ -1122,6 +1120,49 @@ SQL;
 
         $res = $this->getListBySearchParams($search_params);
         return $res;
+    }
+
+    public function getClinicsByServicesID($services_id, $orderby = 'c.alias ASC') {
+
+        $selected = implode('`, `', [
+            'id',
+            'region_id',
+            'name',
+            'alias',
+            'clinic_type_id',
+            'address',
+            'street_id',
+            'latitude',
+            'longitude',
+            'rate',
+            'start_time_monday',
+            'end_time_monday',
+            'start_time_tuesday',
+            'end_time_tuesday',
+            'start_time_wednesday',
+            'end_time_wednesday',
+            'start_time_thursday',
+            'end_time_thursday',
+            'start_time_friday',
+            'end_time_friday',
+            'start_time_saturday',
+            'end_time_saturday',
+            'start_time_sunday',
+            'end_time_sunday',
+            'image_id',
+            'not_work',
+            'is_best',
+        ]);
+
+        $q = sprintf('SELECT `%s` FROM clinic c
+                    INNER JOIN services_to_clinic s2c ON c.id = s2c.clinic_id
+                WHERE s2c.services_categories_id = %d AND c.city_id = %d
+                GROUP BY c.id
+                ORDER BY %s', $selected, (int)$services_id, $this->cityID, $orderby);
+
+        $q = $this->db->query($q);
+
+        return $this->initList($q);
     }
 
     public function getClinics($clinics_ids) {

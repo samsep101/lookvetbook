@@ -135,3 +135,31 @@
     padding: 0 0 0 5px;
     color: #555;
 }
+.clinic-list {}
+.clinic-list .item .tsl-text{
+	font-size: 12px;
+}
+.clinic-list .item .address-and-time-area {
+	font-size:12px;
+}
+.clinic-list .item {
+	background-color: #fff;
+    overflow: hidden;
+    border-radius: 3px;
+    padding: 15px 10px;
+	position: relative;
+	margin: 0 0 10px;
+}
+.clinic-list .item .info {
+	position: relative;
+	padding:0 0 0 100px;
+}
+.clinic-list .item .avatar {}
+.clinic-list .item .name > a {
+	line-height: 1.3;
+    color: #1F8EBE;
+    font-size: 16px;
+    font-family: "pf_agora_sans_probold";
+    display: inline-block;
+}
+.clinic-list .item .rate {}

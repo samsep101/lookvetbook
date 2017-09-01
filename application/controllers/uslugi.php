@@ -1,12 +1,13 @@
 <?php
 
 require_once ABS_ROOT.'/core/funcs/string.helpers.php';
+require_once ABS_ROOT.'/core/classes/SnippetPagination.php';
 
 class Uslugi_SeoController extends BaseController {
     /** @author Playmore 2017 (playmoredevelop@gmail.com) */
 
     protected $slug = false;
-    protected $subslug = false;
+    protected $slug_article = false;
     protected $metro = false;
     protected $district = false;
     protected $area = false;
@@ -166,6 +167,7 @@ class UslugiController extends Uslugi_SeoController {
         $this->setSegments();
 
         $this->container['tree'] = $this->services_model()->getTree();
+        $this->view->districts = $this->services_model()->getDistricts();
         $this->view->tree = $this->container['tree'];
     }
     # /uslugi/akusherstvo
@@ -187,13 +189,19 @@ class UslugiController extends Uslugi_SeoController {
                 $this->view->current_tree = [ $this->id => $this->container['tree'][$this->id] ];
             }
 
-            $clinics_count = $this->services_model()->getClinicsCount($this->id);
+            $clinics_count = $this->services_model()->getClinicCountRoots($this->id);
             $clinics = [];
+
+            $pagination = new SnippetPagination();
+
             if($clinics_count > 0){
-                $clinics = $this->clinic_manager->getClinicsByServicesID($this->id);
+                $pagination = $pagination->make($clinics_count, 12);
+                $clinics = $this->clinic_manager->getClinicsByServicesID($this->id, $pagination->perpage, $pagination->offset);
             } else {
                 if($this->parent_id > 0){
-                    $clinics = $this->clinic_manager->getClinicsByServicesID($this->parent_id);
+                    $clinics_count = $this->services_model()->getClinicCountRoots($this->parent_id);
+                    $pagination = $pagination->make($clinics_count, 12);
+                    $clinics = $this->clinic_manager->getClinicsByServicesID($this->parent_id, $pagination->perpage, $pagination->offset);
                 }
             }
 
@@ -202,23 +210,16 @@ class UslugiController extends Uslugi_SeoController {
             }
 
             $this->view->clinics = $clinics;
+            $pagination->getmethod = true;
+            $pagination->replaces['{text.prev}'] = '<i class="glyphicon glyphicon-chevron-left"></i>';
+            $pagination->replaces['{text.next}'] = '<i class="glyphicon glyphicon-chevron-right"></i>';
+            $this->view->pagination = $pagination;
+            $this->view->base_url = implode('/', ['/uslugi', $this->slug]);
+
+            $this->view->current_slug = $this->slug;
         }
 
-        $this->container['roots'] = [];
-        
-        foreach($this->container['tree'] as $id => $one){
-
-            if($one['count'] > 0){
-                $this->container['roots'][$id] = [
-                    'slug' => $one['slug'],
-                    'name' => $one['name'],
-                    'price' => $one['price'],
-                    'count' => !empty($one['count']) ? $one['count'] : 0
-                ];
-            }
-        }
-
-        $this->view->roots = $this->container['roots'];
+        $this->setRoots();
 
     }
     
@@ -235,6 +236,7 @@ class UslugiController extends Uslugi_SeoController {
 
             $this->view->btnback = $this->replace_seo('Услуги в области %usluga-spec%');
             $this->view->btnslug = '/uslugi/'.$this->current['slug'];
+            $this->view->current_slug = $this->slug.'/'.$article_slug;
             $this->article = $this->services_model()->getBySlug($article_slug);
             
         }
@@ -250,7 +252,18 @@ class UslugiController extends Uslugi_SeoController {
     # /uslugi/street-scherbakovskaya
     public function street() {}
     # /uslugi/akusherstvo/district-vao
-    public function slug_district() {}
+    public function slug_district() {
+
+        if(!empty($this->district)){
+
+            // подготавливаем фильтры сразу в модели
+            $this->services_model()->districID = 1;
+        }
+
+        // и далее вызываем метод формирования дочерней страницы
+        // при этом в запросах клиник уже будут данные для фильтров
+        $this->slug();
+    }
     # /uslugi/akusherstvo/area-sokolinaya-gora
     public function slug_area() {}
     # /uslugi/akusherstvo/metro-baumanskaya
@@ -334,6 +347,25 @@ class UslugiController extends Uslugi_SeoController {
         $clinic->additional_params = $additional_params;
 
         return $clinic;
+    }
+
+    private function setRoots() {
+
+        $this->container['roots'] = [];
+
+        foreach($this->container['tree'] as $id => $one){
+
+            if($one['count'] > 0){
+                $this->container['roots'][$id] = [
+                    'slug' => $one['slug'],
+                    'name' => $one['name'],
+                    'price' => $one['price'],
+                    'count' => !empty($one['count']) ? $one['count'] : 0
+                ];
+            }
+        }
+
+        $this->view->roots = $this->container['roots'];
     }
 
 }

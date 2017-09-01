@@ -48,3 +48,11 @@ function slug($text, $separator = '-') {
 	function plural($n, array $forms) {
 		return $n % 10 == 1 && $n % 100 != 11 ? $forms[0] : ($n % 10 >= 2 && $n % 10 <= 4 && ($n % 100 < 10 || $n % 100 >= 20) ? $forms[1] : $forms[2]);
 	}
+
+    function format_phone($phone) {
+        $phone = preg_replace('#[^\d]+#', '', $phone);
+        if(mb_strlen($phone) == 11){
+            return vsprintf('%d (%d%d%d) %d%d%d-%d%d-%d%d', str_split($phone));
+        }
+        return $phone;
+    }

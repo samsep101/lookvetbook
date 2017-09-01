@@ -4,6 +4,7 @@ class ServicesCategoriesSimpleModel extends SimpleModel {
     /** @author Playmore 2017 (playmoredevelop@gmail.com) */
 
     protected $table = 'services_categories';
+    protected $table_district = 'district';
     protected $m2m_clinics = 'services_to_clinic';
 
     public function getTree() {
@@ -89,6 +90,27 @@ class ServicesCategoriesSimpleModel extends SimpleModel {
     public function getClinicsCount($services_id) {
 
         return $this->total($this->m2m_clinics, '`services_categories_id` = ' . (int)$services_id);
+    }
+
+    public function getClinicCountRoots($services_id) {
+
+        $q = $this->replace([
+            '{t.relations}' => $this->m2m_clinics,
+            '{services_id}' => (int)$services_id,
+            '{city_id}' => $this->cityID,
+        ], 'SELECT COUNT(DISTINCT(s2c.clinic_id)) as total
+                FROM {t.relations} s2c
+                    INNER JOIN clinic c ON s2c.clinic_id = c.id
+                WHERE s2c.services_categories_id = {services_id}
+                    AND c.primary_clinic_id IS NULL
+                    AND c.city_id = {city_id}');
+
+        return intval($this->db->get($q, 'total')['total']);
+    }
+
+    public function getDistricts() {
+
+        return $this->get_where_orderby($this->table_district, 'city_id = '.$this->cityID);
     }
 
 }

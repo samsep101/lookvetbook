@@ -115,7 +115,7 @@ class SimpleModel {
 			(!empty($where)) ? ' WHERE '.$where : ''
 		], 'SELECT COUNT(1) as total FROM {table}{where}');
 
-		$q = $this->db->single($q);
+		$q = $this->db->query($q)[0];
 
 		return intval($q['total']);
 	}

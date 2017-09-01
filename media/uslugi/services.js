@@ -13,4 +13,11 @@ $(function($){
 		}
 	});
 	
+	$(document).on('change', '#service_name', function(){
+		var _ = $(this);
+		if(_.val()){
+			window.location.href = _.val();
+		}
+	});
+	
 });

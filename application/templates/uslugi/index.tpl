@@ -34,29 +34,28 @@
             <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
                 <div class="box-form">
                     <div class="box-header">Найти услугу</div>
-                    <select class="chosen-select" name="service">
+                    <select class="chosen-select" name="service" id="service_name">
                         <option selected>Выбрать услугу</option>
-                        <?php foreach($this->tree as $one) : ?>
-                            <option value="/uslugi/<?=$one['slug']?>"><?=$one['name']?></option>
-                            <?php if(!empty($one['subslugs'])) : foreach($one['subslugs'] as $subone) : ?>
-                                <option class="sub" value="/uslugi/<?=$subone['full_slug']?>"><?=$subone['name']?></option>
+                        <?php foreach($this->tree as $one) : 
+                            $attrs = ($this->current_slug == $one['slug']) ? 'selected' : '';
+                        ?>
+                            <option value="/uslugi/<?=$one['slug']?>" <?=$attrs?>><?=$one['name']?></option>
+                            <?php if(!empty($one['subslugs'])) : foreach($one['subslugs'] as $subone) :
+                                $attrs = ($this->current_slug == $subone['full_slug']) ? 'selected' : '';
+                            ?>
+                                <option class="sub" value="/uslugi/<?=$subone['full_slug']?>" <?=$attrs?>><?=$subone['name']?></option>
                             <?php endforeach; endif; ?>
                         <?php endforeach; ?>
                     </select>
                     <select class="chosen-select" name="service">
                         <option>Выбрать округ</option>
+                        <?php foreach($this->districts as $one) : ?>
+                            <option value="<?=$one['alias']?>" data-id="<?=$one['id']?>"><?=$one['name']?></option>
+                        <?php endforeach; ?>
                     </select>
                     <select class="chosen-select" name="service">
                         <option>Выбрать станцию метро</option>
                     </select>
-                    <ul class="choose-list main-form-refactor-checkbox like-head-label">
-                        <li>
-                            <div class="chekBox filter-action"><span></span>Акция<input type="hidden"></div>
-                        </li>
-                        <li>
-                            <div class="chekBox filter-rating"><span></span>Рейтинг<input type="hidden"></div>
-                        </li>
-                    </ul>
                 </div>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12"></div>
@@ -114,7 +113,7 @@
 
     <?php endif; ?>
 
-    <div class="container">
+    <div class="container" style="padding-top:15px;">
         <?=$this->renderInString('uslugi/blocks/roots', false);?>
     </div>
 

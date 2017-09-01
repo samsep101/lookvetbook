@@ -54,10 +54,12 @@
                     <?=ClinicAvatarViewHelper::viewOnCard($clinic, 74, 31); ?>
                 </div>
                 <div class="info">
-                    <div class="name"><a href="<?=ClinicPageLinkViewHelper::getLink($clinic); ?>"><?=$clinic->name?></a></div>
+                    <div class="name ff-bold"><a href="<?=ClinicPageLinkViewHelper::getLink($clinic); ?>"><?=$clinic->name?></a></div>
                     <div class="rate"><?=RateViewHelper::view($clinic->rate, 0, $clinic->is_best); ?></div>
                     <?php include Application::getTemplatesDir(true).'/__common/clinic_item_additional.tpl'?>
-                    <div class="phone"><i class="glyphicon glyphicon-phone"></i>&nbsp;<?=$clinic->phone?></div>
+                    <?php //if($clinic->phone) : ?>
+                    <div class="phone ff-medium"><i class="glyphicon glyphicon-phone"></i>&nbsp;<?=$clinic->phone?><?=  \StringHelpers\format_phone('+7920-12-12-356')?></div>
+                    <?php //endif; ?>
                 </div>
                 <?php if($clinic->address) : ?>
                 <div class="info-address">
@@ -84,3 +86,5 @@
     <div class="clearfix"></div>
 
 </div>
+
+<?php if($this->pagination->total > $this->pagination->perpage) : echo $this->pagination->html($this->base_url); endif;?>

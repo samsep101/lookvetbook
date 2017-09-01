@@ -38,3 +38,13 @@ function slug($text, $separator = '-') {
 
         return false;
     }
+
+    /**
+	 * ->plural($N, ['булочка','булочки','булочек']) // 1,2,5
+	 * @param int $n
+	 * @param array $forms
+	 * @return string
+	 */
+	function plural($n, array $forms) {
+		return $n % 10 == 1 && $n % 100 != 11 ? $forms[0] : ($n % 10 >= 2 && $n % 10 <= 4 && ($n % 100 < 10 || $n % 100 >= 20) ? $forms[1] : $forms[2]);
+	}

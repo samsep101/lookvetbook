@@ -1,5 +1,7 @@
 <?php
 
+require_once ABS_ROOT.'/core/funcs/string.helpers.php';
+
 class Uslugi_SeoController extends BaseController {
     /** @author Playmore 2017 (playmoredevelop@gmail.com) */
 

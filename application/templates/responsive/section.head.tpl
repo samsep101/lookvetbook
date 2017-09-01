@@ -18,10 +18,7 @@
 <?php endif; ?>
 
 <link rel="stylesheet" href="/media/responsive/styles.min.css?<?php echo RELEASE__NUMBER ?>"/>
-
-<link rel="stylesheet" href="/media/css/jquery.fancybox.css" type="text/css"/>
 <link rel="stylesheet" href="/media/css/jquery.jscrollpane.css" type="text/css"/>
-<link rel="stylesheet" href="/media/css/jquery-ui.min.css" type="text/css"/>
 <!--[if lt IE 9]>
 <link rel="stylesheet" type="text/css" media="screen,projection" href="/media/css/for_ie.css?<?php echo RELEASE__NUMBER ?>"/>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js?"></script>

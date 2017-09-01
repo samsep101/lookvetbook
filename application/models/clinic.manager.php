@@ -1135,6 +1135,7 @@ SQL;
             'latitude',
             'longitude',
             'rate',
+            'city_id',
             'start_time_monday',
             'end_time_monday',
             'start_time_tuesday',
@@ -1150,19 +1151,51 @@ SQL;
             'start_time_sunday',
             'end_time_sunday',
             'image_id',
+            'phone',
             'not_work',
             'is_best',
+            'primary_clinic_id',
         ]);
 
-        $q = sprintf('SELECT `%s` FROM clinic c
-                    INNER JOIN services_to_clinic s2c ON c.id = s2c.clinic_id
-                WHERE s2c.services_categories_id = %d AND c.city_id = %d
-                GROUP BY c.id
-                ORDER BY %s', $selected, (int)$services_id, $this->cityID, $orderby);
+        // корневые клиники привязанные к услуге
+        $q = sprintf('SELECT `%s` FROM services_to_clinic s2c
+                    INNER JOIN clinic c ON s2c.clinic_id = c.id
+                    WHERE s2c.services_categories_id = %d
+                        AND c.primary_clinic_id IS NULL
+                        AND c.city_id = %d
+                    GROUP BY s2c.clinic_id
+                    ORDER BY %s', $selected, (int)$services_id, $this->cityID, $orderby);
+
+        // массив остальных клиник привязанных к услуге
+        $q2 = sprintf('SELECT `%s` FROM services_to_clinic s2c
+                    INNER JOIN clinic c ON s2c.clinic_id = c.id
+                    WHERE s2c.services_categories_id = %d
+                        AND (c.primary_clinic_id IS NOT NULL AND c.primary_clinic_id > 0)
+                        AND c.city_id = %d
+                    GROUP BY s2c.clinic_id
+                    ORDER BY %s', $selected, (int)$services_id, $this->cityID, $orderby);
 
         $q = $this->db->query($q);
+        $q2 = $this->db->query($q2);
 
-        return $this->initList($q);
+        $results = [];
+        if(!empty($q)){
+            foreach($q as $root){
+                $results[$root['id']] = $root;
+            }
+        }
+        
+        if(!empty($q2)){
+            foreach($q2 as $filials){
+                $fid = $filials['id'];
+                $pid = $filials['primary_clinic_id'];
+                if(array_key_exists($pid, $results)){
+                    $results[$pid]['childs'][$fid] = $filials;
+                }
+            }
+        }
+
+        return $this->initList($results);
     }
 
     public function getClinics($clinics_ids) {

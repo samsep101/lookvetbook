@@ -204,6 +204,11 @@ class SimpleModel {
 
         return $this->db->post('TRUNCATE '.$table.';');
     }
+
+    protected function replace($replace, $query) {
+
+        return str_replace(array_keys($replace), array_values($replace), $query);
+    }
 }
 
 /* END CLASS: SimpleModel */

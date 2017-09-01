@@ -8,17 +8,19 @@ class ServicesCategoriesSimpleModel extends SimpleModel {
 
     public function getTree() {
 
-        $rows = $this->get_where_orderby($this->table, 'status = 1', [
-            'id',
-            'slug',
-            'name',
-            'parent_id',
-            'id_district',
-            'id_area',
-            'id_metro',
-            'id_street',
-            'price'
-        ], 'parent_id ASC, name ASC');
+        $q = $this->replace([
+            '{services}' => $this->table,
+            '{relations}' => $this->m2m_clinics,
+            '{city}' => $this->cityID,
+        ], 'SELECT sc.id, slug, sc.name, parent_id, id_district, id_area, id_metro, id_street, price, SUM(IF(c.city_id = {city}, 1, 0)) as total
+                FROM `{services}` sc
+                LEFT JOIN `{relations}` s2c ON sc.id = s2c.services_categories_id
+                LEFT JOIN `clinic` c ON s2c.clinic_id = c.id
+                WHERE sc.status = 1
+                GROUP BY sc.id
+                ORDER BY parent_id ASC, name ASC');
+
+        $rows = $this->db->query($q);
 
         $tree = [];
 

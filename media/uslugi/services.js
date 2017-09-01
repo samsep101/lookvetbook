@@ -1,6 +1,6 @@
 $(function($){
 	
-	$('.tree-services').on('click', '.view-more', function(e){
+	$('.services-events').on('click', '.view-more', function(e){
 		
 		e.preventDefault();
 		var _ = $(this);

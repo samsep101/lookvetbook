@@ -16,10 +16,7 @@
         <div class="aata-metro">
             <?php if ($clinic->metro_stations) :
                     foreach ($clinic->metro_stations as $metro_station) :
-                        if ($metro_station->metro_branch) :
-                            echo MetroBranchIconViewHelper::getImage($metro_station->metro_branch);
-                        endif;
-                        echo $metro_station->name.'<br>';
+                        echo '<span class="metro"><span>&#9899;</span>'.$metro_station->name.'</span>';
                 endforeach;
             endif; ?>
         </div>

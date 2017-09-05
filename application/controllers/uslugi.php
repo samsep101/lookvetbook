@@ -1,10 +1,13 @@
 <?php
 
+require_once ABS_ROOT.'/core/funcs/string.helpers.php';
+require_once ABS_ROOT.'/core/classes/SnippetPagination.php';
+
 class Uslugi_SeoController extends BaseController {
     /** @author Playmore 2017 (playmoredevelop@gmail.com) */
 
     protected $slug = false;
-    protected $subslug = false;
+    protected $slug_article = false;
     protected $metro = false;
     protected $district = false;
     protected $area = false;
@@ -100,6 +103,11 @@ class UslugiController extends Uslugi_SeoController {
     public $layout = 'responsive';
     public $template = 'index';
 
+    protected $id = false;
+    protected $parent_id = 0;
+    /** @var ClinicManager */
+    protected $clinic_manager = false;
+
     protected $container = [];
 
     public function __construct() {
@@ -110,9 +118,12 @@ class UslugiController extends Uslugi_SeoController {
             ErrorPageViewHelper::page404('404');
             exit();
         }
+
+        $this->clinic_manager = ModelManagerFactory::getByName('clinic');
+        $this->clinic_manager->setCityID($this->city->id);
     }
 
-    /** @return ServicesModel */
+    /** @return ServicesCategoriesSimpleModel */
     public function services_model() {
 
         static $model = null;
@@ -120,6 +131,21 @@ class UslugiController extends Uslugi_SeoController {
         if(is_null($model)){
             require_once ABS_ROOT.'/application/models/services.categories.simplemodel.php';
             $model = new ServicesCategoriesSimpleModel();
+            $model->setCityID($this->city->id);
+        }
+
+        return $model;
+    }
+
+    /** @return RelationsSimpleModel */
+    public function relations_model() {
+
+        static $model = null;
+
+        if(is_null($model)){
+            require_once ABS_ROOT.'/application/models/relations.simplemodel.php';
+            $model = new RelationsSimpleModel();
+            $model->setCityID($this->city->id);
         }
 
         return $model;
@@ -141,6 +167,7 @@ class UslugiController extends Uslugi_SeoController {
         $this->setSegments();
 
         $this->container['tree'] = $this->services_model()->getTree();
+        $this->view->districts = $this->services_model()->getDistricts();
         $this->view->tree = $this->container['tree'];
     }
     # /uslugi/akusherstvo
@@ -152,26 +179,47 @@ class UslugiController extends Uslugi_SeoController {
 
         $this->current = $this->services_model()->getBySlug($this->slug);
 
-        if(!empty($this->current['id']) AND array_key_exists($this->current['id'], $this->container['tree'])){
+        if(!empty($this->current['id'])){
 
-            $this->view->current_tree = [ $this->current['id'] => $this->container['tree'][$this->current['id']] ];
-        }
-
-        $this->container['roots'] = [];
-        
-        foreach($this->container['tree'] as $id => $one){
-
-            if($one['count'] > 0){
-                $this->container['roots'][$id] = [
-                    'slug' => $one['slug'],
-                    'name' => $one['name'],
-                    'price' => $one['price'],
-                    'count' => !empty($one['count']) ? $one['count'] : 0
-                ];
+            $this->id = (int)$this->current['id'];
+            $this->parent_id = (int)$this->current['parent_id'];
+            
+            if(array_key_exists($this->id, $this->container['tree'])){
+                
+                $this->view->current_tree = [ $this->id => $this->container['tree'][$this->id] ];
             }
+
+            $clinics_count = $this->services_model()->getClinicCountRoots($this->id);
+            $clinics = [];
+
+            $pagination = new SnippetPagination();
+
+            if($clinics_count > 0){
+                $pagination = $pagination->make($clinics_count, 12);
+                $clinics = $this->clinic_manager->getClinicsByServicesID($this->id, $pagination->perpage, $pagination->offset);
+            } else {
+                if($this->parent_id > 0){
+                    $clinics_count = $this->services_model()->getClinicCountRoots($this->parent_id);
+                    $pagination = $pagination->make($clinics_count, 12);
+                    $clinics = $this->clinic_manager->getClinicsByServicesID($this->parent_id, $pagination->perpage, $pagination->offset);
+                }
+            }
+
+            foreach($clinics as $cKey => $clinic){
+                $clinics[$cKey] = $this->processedClinicItem($clinic);
+            }
+
+            $this->view->clinics = $clinics;
+            $pagination->getmethod = true;
+            $pagination->replaces['{text.prev}'] = '<i class="glyphicon glyphicon-chevron-left"></i>';
+            $pagination->replaces['{text.next}'] = '<i class="glyphicon glyphicon-chevron-right"></i>';
+            $this->view->pagination = $pagination;
+            $this->view->base_url = implode('/', ['/uslugi', $this->slug]);
+
+            $this->view->current_slug = $this->slug;
         }
 
-        $this->view->roots = $this->container['roots'];
+        $this->setRoots();
 
     }
     
@@ -188,6 +236,7 @@ class UslugiController extends Uslugi_SeoController {
 
             $this->view->btnback = $this->replace_seo('Услуги в области %usluga-spec%');
             $this->view->btnslug = '/uslugi/'.$this->current['slug'];
+            $this->view->current_slug = $this->slug.'/'.$article_slug;
             $this->article = $this->services_model()->getBySlug($article_slug);
             
         }
@@ -203,7 +252,18 @@ class UslugiController extends Uslugi_SeoController {
     # /uslugi/street-scherbakovskaya
     public function street() {}
     # /uslugi/akusherstvo/district-vao
-    public function slug_district() {}
+    public function slug_district() {
+
+        if(!empty($this->district)){
+
+            // подготавливаем фильтры сразу в модели
+            $this->services_model()->districID = 1;
+        }
+
+        // и далее вызываем метод формирования дочерней страницы
+        // при этом в запросах клиник уже будут данные для фильтров
+        $this->slug();
+    }
     # /uslugi/akusherstvo/area-sokolinaya-gora
     public function slug_area() {}
     # /uslugi/akusherstvo/metro-baumanskaya
@@ -224,6 +284,88 @@ class UslugiController extends Uslugi_SeoController {
         $templatePath = $this->getTemplatePath($this->template);
 
         return $this->view->render($templatePath);
+    }
+
+    private function processedClinicItem(ClinicModel $clinic) {
+
+        $additional_params = array();
+
+        foreach ($clinic->types AS $type) {
+            $id = $type->getId();
+
+            switch ($id) {
+                case 5: {
+                        $additional_params['multidisciplinary'] = 1;
+                        break;
+                    }
+                case 11: {
+                        $additional_params['accepts-children'] = 1;
+                        break;
+                    }
+                case 28: {
+                        $additional_params['twenty-four-hours'] = 1;
+                        break;
+                    }
+            }
+        }
+
+        foreach ($clinic->features AS $feature) {
+            if ($feature->getId() == 14) {
+                $additional_params['have-ramp'] = 1;
+                break;
+            }
+        }
+
+        foreach ($clinic->services AS $service) {
+            if ($service->getId() == 1) {
+                $additional_params['medical-certificates'] = 1;
+                break;
+            }
+        }
+
+        $count_doctors = 0;
+        foreach ($clinic->doctors AS $doctor) {
+            $count_doctors++;
+            if ($doctor->is_leave_the_house) {
+                $additional_params['leave-the-house'] = 1;
+                break;
+            }
+        }
+
+        $clinic->total_doctors = $count_doctors;
+
+        $clinic->total_specializations = count($clinic->specializations);
+
+        if ($clinic->only_adult) {
+            $additional_params['accepts-children'] = 0;
+        }
+
+        if ($clinic->is_card_pay) {
+            $additional_params['payment-cards'] = 1;
+        }
+
+        $clinic->additional_params = $additional_params;
+
+        return $clinic;
+    }
+
+    private function setRoots() {
+
+        $this->container['roots'] = [];
+
+        foreach($this->container['tree'] as $id => $one){
+
+            if($one['count'] > 0){
+                $this->container['roots'][$id] = [
+                    'slug' => $one['slug'],
+                    'name' => $one['name'],
+                    'price' => $one['price'],
+                    'count' => !empty($one['count']) ? $one['count'] : 0
+                ];
+            }
+        }
+
+        $this->view->roots = $this->container['roots'];
     }
 
 }

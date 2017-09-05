@@ -36,7 +36,7 @@
 	font-size: 22px;
     padding: 25px 0 10px;
 }
-.tree-services .simple-page {
+.simple-page {
 	margin-top: 15px;
 	padding: 10px 0 5px;
 	border-radius: 5px;
@@ -48,17 +48,18 @@
     -webkit-transition: all 500ms ease-in-out;
     transition: all 500ms ease-in-out;
 }
-.tree-services .pricelist > li {
+.pricelist > li {
 	display: block;
     padding: 7px 15px;
     /* margin: 0 0 5px; */
     position: relative;
+	font-size: 14px;
 	-o-transition: all 100ms ease-in-out;
     -moz-transition: all 100ms ease-in-out;
     -webkit-transition: all 100ms ease-in-out;
     transition: all 100ms ease-in-out;
 }
-.tree-services .pricelist > li:before {
+.pricelist > li:before {
 	content: '';
     display: block;
     border-top: 1px dashed #ccc;
@@ -70,36 +71,38 @@
     border-left: 100px solid #fff;
     border-right: 100px solid #fff;
 }
-.tree-services .pricelist > li:hover {
+.pricelist > li:hover {
 	background-color: #fff;
 }
-.tree-services .pricelist > li:hover:before{
+.pricelist > li:hover:before{
 	opacity: 0.3;
 }
-.tree-services .pricelist > li:last-child:before {
+.pricelist > li:last-child:before {
 	display:none;
 }
-.tree-services .pricelist > li > a {
+.pricelist > li > a {
 	color: #CD2667;
     text-decoration: none;
+	display: inline-block;
+    padding: 2px 0;
 }
-.tree-services .pricelist > li > a:hover {
+.pricelist > li > a:hover {
 	text-decoration: underline;
 }
-.tree-services .pricelist > li > span {
+.pricelist > li > span {
 	position: absolute;
     right: 15px;
     top: 8px;
 }
-.tree-services .view-more {
+.view-more {
 	margin: 15px 0;
 }
-.tree-services .simple-page.collapsed {
+.simple-page.collapsed {
 	position:relative;
 	max-height: 402px;
 	overflow:hidden;
 }
-.tree-services .simple-page.collapsed:after {
+.simple-page.collapsed:after {
 	content: '';
     position: absolute;
     left: 0;
@@ -119,12 +122,13 @@
 
 .tree-roots {
 	overflow: hidden;
+	padding: 10px 0 40px;
 }
 .tree-roots > li {
 	font-weight: bold;
     font-size: 13px;
     position: relative;
-    padding: 3px 0 3px;
+    padding: 5px 0;
 }
 .tree-roots > li > a {
 	color: #1F8EBE!important;
@@ -134,4 +138,131 @@
     font-size: 12px;
     padding: 0 0 0 5px;
     color: #555;
+}
+.clinic-list {
+	padding-bottom: 15px;
+}
+.clinic-list .column {
+	margin: 0 0 10px;
+}
+.clinic-list .item .tsl-text{
+	font-size: 12px;
+}
+.clinic-list .item .address-and-time-area {
+	font-size:12px;
+	margin-top: 0;
+}
+.clinic-list .item {
+	background-color: #fff;
+    overflow: hidden;
+    border-radius: 3px;
+    padding: 15px 10px 0;
+	position: relative;
+}
+.clinic-list .item .info {
+	position: relative;
+	padding:0 0 0 100px;
+	min-height: 55px;
+}
+.clinic-list .item .avatar {}
+.clinic-list .item .name > a {
+	line-height: 1.5em;
+    color: #1F8EBE;
+    font-size: 16px;
+    display: inline-block;
+}
+.clinic-list .item .name {
+	padding-right: 100px;
+}
+.clinic-list .item .phone > i {
+	color: #CD2667;
+    font-size: 12px;
+}
+.clinic-list .item .phone {
+	font-size: 15px;
+    padding: 5px 0 10px;
+    line-height: 15px;
+}
+.clinic-list .item .rate {
+	display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 2px;
+}
+.clinic-list .item .tsl-item {
+	padding: 0!important;
+}
+.clinic-list .item .tsl-icon {
+	margin: 5px 0 0!important;
+}
+.clinic-list .item .metro {
+	display: inline-block;
+    padding-right: 3px;
+	padding-top: 2px;
+}
+.clinic-list .item .metro > span {
+	color: #1F8EBE;
+    display: inline-block;
+    padding-right: 3px;
+}
+
+.subclinic-list {
+    background-color: #fff;
+    padding: 0 10px 10px;
+    border-top: 1px solid #eee;
+    border-radius: 0 0 5px 5px;
+}
+.subclinic-list .sub-item {
+	position:relative;
+	padding: 5px 0;
+}
+.subclinic-list .sub-item .name {
+	padding-right: 100px;
+}
+.subclinic-list .sub-item .rate{
+	position: absolute;
+    right: 0;
+    top: 9px;
+}
+
+.subclinic-list .sub-item .address > i {
+	font-size: 14px;
+    position: absolute;
+    left: -2px;
+    top: 0;
+    color: #999;
+}
+.subclinic-list .sub-item .address {
+	font-size: 12px;
+    color: #444;
+    line-height: 15px;
+    position: relative;
+    padding-left: 17px;
+}
+.subclinic-list .sub-item .shedule {}
+.subclinic-list .sub-item .shedule > .line {
+	display:inline-block;
+	padding:0 5px 0 0;
+}
+.pagination {
+	    padding: 0 0 15px;
+}
+.pagination > a {
+	display: inline-block;
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px -3px rgba(0,0,0,0.5);
+    border: 1px solid #fff;
+}
+.pagination > a > i {
+	    font-size: 9px;
+}
+.pagination > span {
+	display: inline-block;
+    background-color: #f5f5f5;
+    padding: 5px 10px;
+    border-radius: 3px;
+    box-shadow: inset 0 2px 5px -3px rgba(0,0,0,0.5);
+    border: 1px solid #fff;
 }

@@ -20,10 +20,6 @@ $(function(){
 		$(".datepicker").datepicker();
 	});
 	
-	$.ajaxSetup({
-  cache: true
-});
-	
 	$.each([
 		'/media/js/validation-rules.js',
 		'/media/js/jquery.fancybox.pack.js',
@@ -33,7 +29,8 @@ $(function(){
 		'/media/js/popup_message.js',
 		'/media/js/jquery.form.js',
 		'/media/js/jquery.form.validation.js',
-		'/media/js/actions.js'
+		'/media/js/actions.js',
+		'/media/responsive/js/bootstrap.min.js'
 	], function(){
 		var URL = this;
 		$.ajax({
@@ -46,6 +43,5 @@ $(function(){
 	if($.fn.mask){
 		$(".inputPhone").mask("+7 (999) 999-99-99");
 	}
-	
 	
 });

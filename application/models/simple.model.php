@@ -7,10 +7,17 @@ class SimpleModel {
      * @var Db
      */
 	protected $db = null;
+    protected $cityID = 2;
 
     public function __construct() {
 
         $this->db = Register::get('db');
+    }
+
+    public function setCityID($cityID) {
+
+        ($cityID > 0) AND $this->cityID = (int)$cityID;
+        return $this;
     }
 
     /**
@@ -108,7 +115,7 @@ class SimpleModel {
 			(!empty($where)) ? ' WHERE '.$where : ''
 		], 'SELECT COUNT(1) as total FROM {table}{where}');
 
-		$q = $this->db->single($q);
+		$q = $this->db->query($q)[0];
 
 		return intval($q['total']);
 	}
@@ -196,6 +203,11 @@ class SimpleModel {
     protected function truncate($table) {
 
         return $this->db->post('TRUNCATE '.$table.';');
+    }
+
+    protected function replace($replace, $query) {
+
+        return str_replace(array_keys($replace), array_values($replace), $query);
     }
 }
 

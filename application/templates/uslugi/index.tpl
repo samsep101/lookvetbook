@@ -17,99 +17,105 @@
 <link rel="stylesheet" href="/media/uslugi/styles.css" type="text/css">
 <script type="text/javascript" src="/media/uslugi/services.js"></script>
 
-<?=$this->renderInString('responsive/includes/breadcrumbs', false)?>
+<div class="services-events">
 
-<div class="container">
-    <div class="header-phone ff-medium">
-        <div class="text">Есть вопросы? Не нашел нужную услугу?</div>
-        <div class="phone"><span>Звони, мы поможем</span><br><span class="number_set">+7(800) 333-27-00</span><br></div>
-        <div class="clearfix"></div>
+    <?=$this->renderInString('responsive/includes/breadcrumbs', false)?>
+
+    <div class="container">
+        <div class="header-phone ff-medium">
+            <div class="text">Есть вопросы? Не нашел нужную услугу?</div>
+            <div class="phone"><span>Звони, мы поможем</span><br><span class="number_set">+7(800) 333-27-00</span><br></div>
+            <div class="clearfix"></div>
+        </div>
     </div>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
-            <div class="box-form">
-                <div class="box-header">Найти услугу</div>
-                <select class="chosen-select" name="service">
-                    <option selected>Выбрать услугу</option>
-                    <?php foreach($this->tree as $one) : ?>
-                        <option value="/uslugi/<?=$one['slug']?>"><?=$one['name']?></option>
-                        <?php if(!empty($one['subslugs'])) : foreach($one['subslugs'] as $subone) : ?>
-                            <option class="sub" value="/uslugi/<?=$subone['full_slug']?>"><?=$subone['name']?></option>
-                        <?php endforeach; endif; ?>
-                    <?php endforeach; ?>
-                </select>
-                <select class="chosen-select" name="service">
-                    <option>Выбрать округ</option>
-                </select>
-                <select class="chosen-select" name="service">
-                    <option>Выбрать станцию метро</option>
-                </select>
-                <ul class="choose-list main-form-refactor-checkbox like-head-label">
-                    <li>
-                        <div class="chekBox filter-action"><span></span>Акция<input type="hidden"></div>
-                    </li>
-                    <li>
-                        <div class="chekBox filter-rating"><span></span>Рейтинг<input type="hidden"></div>
-                    </li>
-                </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
+                <div class="box-form">
+                    <div class="box-header">Найти услугу</div>
+                    <select class="chosen-select" name="service" id="service_name">
+                        <option selected>Выбрать услугу</option>
+                        <?php foreach($this->tree as $one) : 
+                            $attrs = ($this->current_slug == $one['slug']) ? 'selected' : '';
+                        ?>
+                            <option value="/uslugi/<?=$one['slug']?>" <?=$attrs?>><?=$one['name']?></option>
+                            <?php if(!empty($one['subslugs'])) : foreach($one['subslugs'] as $subone) :
+                                $attrs = ($this->current_slug == $subone['full_slug']) ? 'selected' : '';
+                            ?>
+                                <option class="sub" value="/uslugi/<?=$subone['full_slug']?>" <?=$attrs?>><?=$subone['name']?></option>
+                            <?php endforeach; endif; ?>
+                        <?php endforeach; ?>
+                    </select>
+                    <select class="chosen-select" name="service">
+                        <option>Выбрать округ</option>
+                        <?php foreach($this->districts as $one) : ?>
+                            <option value="<?=$one['alias']?>" data-id="<?=$one['id']?>"><?=$one['name']?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <select class="chosen-select" name="service">
+                        <option>Выбрать станцию метро</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12"></div>
+        </div>
+    </div>
+
+    <div class="container page-h1 ff-regular">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h1><?=$h1?></h1>
             </div>
         </div>
-        <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12"></div>
     </div>
-</div>
 
-<div class="container page-h1 ff-regular">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <h1><?=$h1?></h1>
+
+
+    <?php if(!empty($page)) : ?>
+
+        <div class="container">
+            <?php if($page == 'slug') : echo $this->renderInString('uslugi/blocks/page_slug', false); endif;?>
+            <?php if($page == 'article') : echo $this->renderInString('uslugi/blocks/page_article', false); endif;?>
         </div>
-    </div>
-</div>
 
+    <?php else : ?>
 
-<div class="container tree-services">
+        <div class="container tree-services">
+            <div class="row">
+                <?php foreach($this->tree as $one) : ?>
+                <div class="column col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                    <div class="ts-header ff-medium"><a href="/uslugi/<?=$one['slug']?>"><?=$one['name']?></a><span><?=($one['count'] > 0) ? $one['count'] : ''?></span></div>
+                    <?php if($one['count'] > 0) : ?>
 
-<?php if(!empty($page)) : ?>
-
-    <?php if($page == 'slug') : echo $this->renderInString('uslugi/blocks/page_slug', false); endif;?>
-    <?php if($page == 'article') : echo $this->renderInString('uslugi/blocks/page_article', false); endif;?>
-
-<?php else : ?>
-    
-    <div class="row">
-        <?php foreach($this->tree as $one) : ?>
-        <div class="column col-lg-3 col-md-3 col-sm-4 col-xs-6">
-            <div class="ts-header ff-medium"><a href="/uslugi/<?=$one['slug']?>"><?=$one['name']?></a><span><?=($one['count'] > 0) ? $one['count'] : ''?></span></div>
-            <?php if($one['count'] > 0) : ?>
-
-                <ul>
-                    <?php foreach($one['subslugs'] as $subone) : ?>
-                    <li><a href="/uslugi/<?=$subone['full_slug']?>"><?=$subone['name']?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-                <?php if(!empty($one['showmore_slugs'])) : ?>
-                    <div class="showmore">
-                        <ul class="spoiler">
-                            <?php foreach($one['showmore_slugs'] as $subone) : ?>
+                        <ul>
+                            <?php foreach($one['subslugs'] as $subone) : ?>
                             <li><a href="/uslugi/<?=$subone['full_slug']?>"><?=$subone['name']?></a></li>
                             <?php endforeach; ?>
                         </ul>
-                        <a href="javascript:void(0)" data-fliptext="скрыть" data-showmore=".spoiler">показать все</a>
-                    </div>
-                <?php endif; ?>
+                        <?php if(!empty($one['showmore_slugs'])) : ?>
+                            <div class="showmore">
+                                <ul class="spoiler">
+                                    <?php foreach($one['showmore_slugs'] as $subone) : ?>
+                                    <li><a href="/uslugi/<?=$subone['full_slug']?>"><?=$subone['name']?></a></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                                <a href="javascript:void(0)" data-fliptext="скрыть" data-showmore=".spoiler">показать все</a>
+                            </div>
+                        <?php endif; ?>
 
-            <?php endif; ?>
+                    <?php endif; ?>
 
+                </div>
+                <?php endforeach; ?>
+            </div>
         </div>
-        <?php endforeach; ?>
-    </div>
-            
-<?php endif; ?>
 
-    <?=$this->renderInString('uslugi/blocks/roots', false);?>
+    <?php endif; ?>
+
+    <div class="container" style="padding-top:15px;">
+        <?=$this->renderInString('uslugi/blocks/roots', false);?>
+    </div>
 
 </div>
 

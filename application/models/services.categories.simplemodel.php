@@ -4,20 +4,24 @@ class ServicesCategoriesSimpleModel extends SimpleModel {
     /** @author Playmore 2017 (playmoredevelop@gmail.com) */
 
     protected $table = 'services_categories';
+    protected $table_district = 'district';
+    protected $m2m_clinics = 'services_to_clinic';
 
     public function getTree() {
 
-        $rows = $this->get_where_orderby($this->table, 'status = 1', [
-            'id',
-            'slug',
-            'name',
-            'parent_id',
-            'id_district',
-            'id_area',
-            'id_metro',
-            'id_street',
-            'price'
-        ], 'parent_id ASC, name ASC');
+        $q = $this->replace([
+            '{services}' => $this->table,
+            '{relations}' => $this->m2m_clinics,
+            '{city}' => $this->cityID,
+        ], 'SELECT sc.id, slug, sc.name, parent_id, id_district, id_area, id_metro, id_street, price, SUM(IF(c.city_id = {city}, 1, 0)) as total
+                FROM `{services}` sc
+                LEFT JOIN `{relations}` s2c ON sc.id = s2c.services_categories_id
+                LEFT JOIN `clinic` c ON s2c.clinic_id = c.id
+                WHERE sc.status = 1
+                GROUP BY sc.id
+                ORDER BY parent_id ASC, name ASC');
+
+        $rows = $this->db->query($q);
 
         $tree = [];
 
@@ -78,10 +82,37 @@ class ServicesCategoriesSimpleModel extends SimpleModel {
         $q = str_replace(['{table}', '{slug}'], [
             $this->table,
             $this->escape($slug)
-		], 'SELECT id, slug, name, genitive_name FROM {table} WHERE slug = {slug} LIMIT 1');
+		], 'SELECT id, slug, name, genitive_name, parent_id FROM {table} WHERE slug = {slug} LIMIT 1');
 
 		return $this->db->get($q);
     }
+
+    public function getClinicsCount($services_id) {
+
+        return $this->total($this->m2m_clinics, '`services_categories_id` = ' . (int)$services_id);
+    }
+
+    public function getClinicCountRoots($services_id) {
+
+        $q = $this->replace([
+            '{t.relations}' => $this->m2m_clinics,
+            '{services_id}' => (int)$services_id,
+            '{city_id}' => $this->cityID,
+        ], 'SELECT COUNT(DISTINCT(s2c.clinic_id)) as total
+                FROM {t.relations} s2c
+                    INNER JOIN clinic c ON s2c.clinic_id = c.id
+                WHERE s2c.services_categories_id = {services_id}
+                    AND c.primary_clinic_id IS NULL
+                    AND c.city_id = {city_id}');
+
+        return intval($this->db->get($q, 'total')['total']);
+    }
+
+    public function getDistricts() {
+
+        return $this->get_where_orderby($this->table_district, 'city_id = '.$this->cityID);
+    }
+
 }
 
 /* END CLASS: ServicesModel extends SimpleModel */

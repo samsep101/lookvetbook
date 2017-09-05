@@ -3,6 +3,10 @@
 	.tree-services .row > .column:nth-child(4n+1) {
 		clear:left;
 	}
+	
+	.clinic-list > .column:nth-child(2n+1) {
+		clear:left;
+	}
 }
 
 @media(max-width: 1199px){ /* md */
@@ -26,6 +30,10 @@
 	}
 	
 	.tree-services .row > .column:nth-child(4n+1) {
+		clear:left;
+	}
+	
+	.clinic-list > .column:nth-child(2n+1) {
 		clear:left;
 	}
 }
@@ -66,6 +74,9 @@
 		clear:none;
 	}
 	.tree-services .row > .column:nth-child(3n+1) {
+		clear:left;
+	}
+	.clinic-list > .column:nth-child(2n+1) {
 		clear:left;
 	}
 }

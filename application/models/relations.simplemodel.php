@@ -143,10 +143,9 @@ class RelationsSimpleModel extends SimpleModel {
 
     public function getClinicsBySpecialization($specID) {
 
-        $q = sprintf('SELECT DISTINCT(s2c.clinic_id) as clinics
+        $q = sprintf('SELECT DISTINCT(sp2c.clinic_id) as clinics
                 FROM `specialization` sp
-                    INNER JOIN specialty_to_specialization s2sp ON sp.id = s2sp.specialization_id
-                    INNER JOIN specialty_to_clinic s2c ON s2sp.specialty_id = s2c.specialty_id
+                    INNER JOIN specialization_to_clinic sp2c ON sp.id = sp2c.specialization_id
                 WHERE sp.id = %d', (int)$specID);
 
         return $this->fetch_column($q, 'clinics');

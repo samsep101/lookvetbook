@@ -221,4 +221,71 @@
 
             return $result;
         }
+
+        public static function get_format_days(array $clinicRow, $raw = false) {
+            
+            $clinicDays = [];
+            $before_start = false;
+            $before_end = false;
+            $group = 0;
+            foreach([
+                'monday' => 'Пн',
+                'tuesday' => 'Вт',
+                'wednesday' => 'Ср',
+                'thursday' => 'Чт',
+                'friday' => 'Пт',
+                'saturday' => 'Сб',
+                'sunday' => 'Вс',
+            ] as $alias => $name){
+                
+                $current_start = $clinicRow['start_time_'.$alias];
+                $current_end = $clinicRow['end_time_'.$alias];
+
+                if(empty($current_start) OR empty($current_end)){
+                    continue;
+                }
+
+                if(false !== $before_start){
+                    if($current_start !== $before_start){
+                        $group++;
+                    }
+                    if($current_end !== $before_end){
+                        $group++;
+                    }
+                }
+
+                $clinicDays[$group][$alias] = [
+                    'name' => $name,
+                    'start' => $before_start = $current_start,
+                    'end' => $before_end = $current_end
+                ];
+            }
+
+            if($raw){
+                return $clinicDays;
+            }
+
+            $result = [];
+            foreach($clinicDays as $group => $days){
+                $first = current($days);
+                $last = end($days);
+                $separator = ' - ';
+                if(count($days) <= 2){
+                    $separator = ', ';
+                }
+                $result[] = implode('', [
+                    $first['name'],
+                    count($days) == 1 ? '' : $separator,
+                    count($days) == 1 ? '' : $last['name'],
+                    ':&nbsp;<b>',
+                    $first['start'],
+                    '-',
+                    $last['end'],
+                    '</b>'
+                ]);
+                
+            }
+
+            return '<span class="line">'.implode('</span><span class="line">', $result).'</span>';
+        }
     }

@@ -184,6 +184,8 @@
     </script>
 <?php endif; ?>
 
+<link rel="stylesheet" href="/media/css/jquery.fancybox.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/jquery-ui.min.css" type="text/css"/>
 <script type="text/javascript" src="/media/js/jquery-rating/js/jquery.rating-2.0.js?<?php echo RELEASE__NUMBER?>"></script>
 <link rel="stylesheet" type="text/css" href="/media/js/jquery-rating/styles/jquery.rating.css?<?php echo RELEASE__NUMBER?>"/>
 <script src="/media/js/jquery.event.move.js?<?php echo RELEASE__NUMBER?>"></script>

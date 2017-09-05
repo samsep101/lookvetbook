@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'section.services.available' => true,
+    'section.services.available' => false,
 ];

@@ -35,9 +35,20 @@ if (isset($_COOKIE['already_registred_account'])) {
 			$('.btn-bookmark-illness').html('<i class="icon-add"></i> <span class="txt">Добавить в закладки</span>');
 		<?php } ?>
 
+    $('.illness-nav').affix({
+        offset: {
+          top: function() { return $('#hero').height(); }
+        }
+      });
+
 	});
 </script>
+<link rel="stylesheet" href="/media/css/product-article.css?rnd=<?= Articles_Viewer::RND?>" type="text/css">
+<script type="text/javascript" src="/media/js/articles-spoiler.js?rnd=<?= Articles_Viewer::RND?>"></script>
+
+
 
 <?php if ($disease) { 	include('get_desease.tpl'); } ?>
 <?php $this->block('blocks/adv/content_page'); ?>
+
 

@@ -141,7 +141,7 @@ class DiseaseController extends BaseController
     if(method_exists($this, $seo_method)){
         // если есть спецметод генерации сео - выполняем его
         $this->{$seo_method}();
-        
+
     } else {
         // дефолтная генерация title,desc
         $pageTitleTemplate = '%s симптомы, причины, диагностика, лечение. %s у %s ';
@@ -158,7 +158,7 @@ class DiseaseController extends BaseController
     }
 
     $this->view->label_for_counters = 'disease-page';
-    
+
     $this->view->canonical_link = DiseasePageLinkViewHelper::getLink($disease);
     $this->view->site_url_not_using = 1;
 
@@ -621,7 +621,7 @@ class DiseaseController extends BaseController
   }
 
     protected function _seo_default() {
-        
+
         $disease = $this->view->disease;
         // Лабиринтит: симптомы, причины, диагностика и лечение лабиринтита
         $this->view->page_title = sprintf('%s: симптомы, причины, диагностика и лечение %s', $disease->title, $disease->genitive_name);
@@ -704,8 +704,17 @@ class DiseaseController extends BaseController
             'blocks-after',
             $alias . $this->view->getExtension()
         ]);
+        $blocks_before = implode('/', [
+            Application::getTemplatesDir(true),
+            $route['controller'],
+            'blocks-before',
+            $alias . $this->view->getExtension()
+        ]);
         if(file_exists($block_after)){
             $this->view->afterblocks = $this->view->renderInString($route['controller'].'/blocks-after/'.$alias, false);
+        }
+        if(file_exists($blocks_before)){
+            $this->view->beforeblocks = $this->view->renderInString($route['controller'].'/blocks-before/'.$alias, false);
         }
     }
 }

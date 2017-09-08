@@ -8,6 +8,7 @@
 	            <a href="tel:+7(<?=SITE_PHONE_CODE?>)<?=SITE_PHONE?>">Мы найдём Вам врача +7 (<?php echo SITE_PHONE_CODE; ?>) <?php echo SITE_PHONE; ?></a>
             </div>
 			<div class="main-cont flo">
+                <div id="hero">
 
 				<ol itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb breadcrumb-custom">
 					<li itemprop="itemListElement" itemscope
@@ -53,9 +54,9 @@
                                 <script type="text/javascript">var medtizer807=document.createElement('script'); medtizer807.src='//medshowtiz.ru/show/?block_id=807&title='+document.title+'&r='+escape(document.referrer)+'&'+Math.round(Math.random()*100000);   function f807() { if(!self.medtizer) { medtizer=807; document.body.appendChild(medtizer807); } else { setTimeout('f807()',200); } } f807();</script>
 
 
-
-
-				<?php if(0 and !empty($disease->alias) and in_array($disease->alias, ['mezhpozvonochnaya-gryzha', 'osteohondroz-pozvonochnika'])) { ?>
+                <?=$this->beforeblocks?>
+                </div>
+                <?php if(0 and !empty($disease->alias) and in_array($disease->alias, ['mezhpozvonochnaya-gryzha', 'osteohondroz-pozvonochnika'])) { ?>
 					<div class="desease-banner-line">
 						<div class="ortospy-banner"></div>
 					</div>
@@ -68,6 +69,7 @@
                 <?=$this->afterblocks?>
 
 				<?php if ($disease_specialties) { include('get_desease_special.tpl'); } ?>
+
                 <?php $this->block('disease/footer_adv'); ?>
 			</div>
 			<div id="cards-wrap"></div>

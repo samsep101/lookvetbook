@@ -16,6 +16,17 @@ $(function() {
 			$($(this).next()).hide();
 		}
 	});
+    $(document).on('click', '.generatorEditDiv .section-header', function(){
+        var _ = $(this);
+        var id = _.closest('.generatorEditDiv').attr('id');
+        if(_.hasClass('open')){
+            $('#'+ id +'-container').slideUp(150);
+            _.removeClass('open');
+        } else {
+            _.addClass('open');
+            $('#'+ id +'-container').slideDown(150);
+        }
+    });
 });
 </script>
 <?php //ini_set("memory_limit", "256M");?>
@@ -82,89 +93,104 @@ $(function() {
 </div>
 
 <input type="hidden" name="form[<?php echo $indexField; ?>]" value="<?php echo $indexValue; ?>" />
+<input type="hidden" name="current" id="current" value="<?=$this->model->id?>">
 <p>
 	<input type="button" onclick="$($($(this).parent()).parent()).submit()" value="Сохранить" id="submit_action">
 	<input type="button" onclick="window.location.reload()" value="Отменить" id="cancel_action">
+    <?=$this->dataModel->displayButtons()?>
 </p>
 
 <?php if($extra = $this->dataModel->getExtra()): ?>
 
 	<?php $extra_id = 0; ?>
-	<?php foreach($extra as $v): ?>
-		<?php if(!Acl::userGrant($v['table'].'_list')): ?>
-		<?php continue; ?>
-		<?php endif; ?>
-		<div id="extra-<?php echo $extra_id; ?>" class="generatorEditDiv">
-			<h4><?php echo $v['title']; ?></h4>
-			<div id="extra-<?php echo $extra_id; ?>-container">
+	<?php foreach($extra as $name => $v): ?>
 
-			</div>
-		</div>
-		<script type="text/javascript">
-			<?php
-				$where = '';
-				$hide_fields = array();
-				$params = array();
-				if (isset($v['field'])){
-					$where = '&where['.$v['field'].']='.$model->getId();
-					$hide_fields[] = 'hide_fields[]='.$v['field'];
-					$params[] = 'params['.$v['field'].']='.$model->getId();
-					$sort_by = array();
-					if(isset($v['sort_by']) && $v['sort_by'] && is_array($v['sort_by']))
-					{
-						$sort_counter = 0;
-						foreach($v['sort_by'] as $sort_item)
-						{
-							$sort_by[] = 'sort_by['.$sort_counter.'][field]='.$sort_item['field'].'&sort_by['.$sort_counter.'][desc]='.$sort_item['desc'];
-						}
+        <?php if(!empty($v['type'])) :
+            $id = implode('-', [$v['type'], $name]);
+        ?>
+            <div id="<?=$id?>" class="generatorEditDiv">
+                <div class="section-header open"><?=$v['title']; ?></div>
+                <div id="<?=$id.'-container'?>">
+                    <?php if(!empty($v['view'])) :
+                        // выполняем вьюху
+                        echo call_user_func_array($v['view'], [$this]);
+                    endif;?>
+                </div>
+            </div>
+        <?php else :
+            if(!Acl::userGrant($v['table'].'_list')): continue; endif;
+        ?>
+            <div id="extra-<?php echo $extra_id; ?>" class="generatorEditDiv">
+                <h4><?php echo $v['title']; ?></h4>
+                <div id="extra-<?php echo $extra_id; ?>-container">
 
-						$sort_by = '&'.join('&',$sort_by);
-					}
-				}
+                </div>
+            </div>
+            <script type="text/javascript">
+                <?php
+                    $where = '';
+                    $hide_fields = array();
+                    $params = array();
+                    if (isset($v['field'])){
+                        $where = '&where['.$v['field'].']='.$model->getId();
+                        $hide_fields[] = 'hide_fields[]='.$v['field'];
+                        $params[] = 'params['.$v['field'].']='.$model->getId();
+                        $sort_by = array();
+                        if(isset($v['sort_by']) && $v['sort_by'] && is_array($v['sort_by']))
+                        {
+                            $sort_counter = 0;
+                            foreach($v['sort_by'] as $sort_item)
+                            {
+                                $sort_by[] = 'sort_by['.$sort_counter.'][field]='.$sort_item['field'].'&sort_by['.$sort_counter.'][desc]='.$sort_item['desc'];
+                            }
 
-				$arr = array();
-				if (isset($v['fields'])){
-					foreach($v['fields'] as $field_name1 => $field_name2)
-					{
-						$arr[] = 'where['.$field_name1.']='.$model->{$field_name2};
-						$hide_fields[] = 'hide_fields[]='.$field_name2;
-						$params[] = 'params['.$field_name1.']='.$model->{$field_name2};
-					}
-					$where = '&'.join('&',$arr);
+                            $sort_by = '&'.join('&',$sort_by);
+                        }
+                    }
 
-				}
+                    $arr = array();
+                    if (isset($v['fields'])){
+                        foreach($v['fields'] as $field_name1 => $field_name2)
+                        {
+                            $arr[] = 'where['.$field_name1.']='.$model->{$field_name2};
+                            $hide_fields[] = 'hide_fields[]='.$field_name2;
+                            $params[] = 'params['.$field_name1.']='.$model->{$field_name2};
+                        }
+                        $where = '&'.join('&',$arr);
 
-				$params = '&'.join('&', $params);
-				$hide_fields = '&'.join('&', $hide_fields);
+                    }
 
-				$ajax_destination = 'destination=/admin/'.$this->dataModel->getModelName().'/edit?id='.$model->getId();
+                    $params = '&'.join('&', $params);
+                    $hide_fields = '&'.join('&', $hide_fields);
 
-				/*if ($destination)
-					$ajax_destination .= urlencode('&').'destination='.$destination;*/
+                    $ajax_destination = 'destination=/admin/'.$this->dataModel->getModelName().'/edit?id='.$model->getId();
 
-				$ajax_destination = '&'.$ajax_destination;
-			?>
+                    /*if ($destination)
+                        $ajax_destination .= urlencode('&').'destination='.$destination;*/
 
-			ajax('/admin/<?php echo $v['table']; ?>?ajax=1<?php echo $ajax_destination; ?><?php echo $where; ?><?php echo $params; ?><?php echo $hide_fields ?><?php echo (isset($sort_by) && $sort_by) ? $sort_by : ''; ?>', 'extra-<?php echo $extra_id; ?>-container');
-			function loadExtra<?php echo $extra_id; ?>Page(page)
-			{
-				if (page == undefined) page = 1;
+                    $ajax_destination = '&'.$ajax_destination;
+                ?>
 
-				$(document).on('click', '#extra-<?php echo $extra_id; ?>-container .pager a', function(){
-					if (!$(this).data('page'))
-						return;
+                ajax('/admin/<?php echo $v['table']; ?>?ajax=1<?php echo $ajax_destination; ?><?php echo $where; ?><?php echo $params; ?><?php echo $hide_fields ?><?php echo (isset($sort_by) && $sort_by) ? $sort_by : ''; ?>', 'extra-<?php echo $extra_id; ?>-container');
+                function loadExtra<?php echo $extra_id; ?>Page(page)
+                {
+                    if (page == undefined) page = 1;
 
-					ajax('/admin/<?php echo $v['table']; ?>?ajax=1<?php echo $where; ?><?php echo $ajax_destination; ?><?php echo $params; ?><?php echo $hide_fields; ?>&page='+$(this).data('page')<?php echo (isset($sort_by) && $sort_by) ? $sort_by : ''; ?>, 'extra-<?php echo $extra_id; ?>-container');
+                    $(document).on('click', '#extra-<?php echo $extra_id; ?>-container .pager a', function(){
+                        if (!$(this).data('page'))
+                            return;
 
-					$(document).scrollTo($('#extra-<?php echo $extra_id; ?>'));
-					return false;
-				});
-			}
+                        ajax('/admin/<?php echo $v['table']; ?>?ajax=1<?php echo $where; ?><?php echo $ajax_destination; ?><?php echo $params; ?><?php echo $hide_fields; ?>&page='+$(this).data('page')<?php echo (isset($sort_by) && $sort_by) ? $sort_by : ''; ?>, 'extra-<?php echo $extra_id; ?>-container');
 
-			loadExtra<?php echo $extra_id; ?>Page();
+                        $(document).scrollTo($('#extra-<?php echo $extra_id; ?>'));
+                        return false;
+                    });
+                }
 
-		</script>
+                loadExtra<?php echo $extra_id; ?>Page();
 
+            </script>
+        <?php endif; ?>
 		<?php $extra_id++; ?>
 	<?php endforeach; ?>
 <?php endif; ?>

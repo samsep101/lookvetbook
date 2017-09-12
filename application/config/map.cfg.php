@@ -508,4 +508,20 @@
         ),
 );
 
+    // роутинг для контроллера Uslugi
+    if(Application::config('section.services.available', false)){
+
+        array_push($map, ['url' => '/uslugi',                           'controller' => 'uslugi', 'action' => 'index']);
+        array_push($map, ['url' => '/uslugi/district-:district',        'controller' => 'uslugi', 'action' => 'district']);
+        array_push($map, ['url' => '/uslugi/area-:district',            'controller' => 'uslugi', 'action' => 'area']);
+        array_push($map, ['url' => '/uslugi/metro-:metro',              'controller' => 'uslugi', 'action' => 'metro']);
+        array_push($map, ['url' => '/uslugi/street-:street',            'controller' => 'uslugi', 'action' => 'street']);
+        array_push($map, ['url' => '/uslugi/:slug',                     'controller' => 'uslugi', 'action' => 'slug']);
+        array_push($map, ['url' => '/uslugi/:slug/district-:district',  'controller' => 'uslugi', 'action' => 'slug_district']);
+        array_push($map, ['url' => '/uslugi/:slug/area-:district',      'controller' => 'uslugi', 'action' => 'slug_area']);
+        array_push($map, ['url' => '/uslugi/:slug/metro-:metro',        'controller' => 'uslugi', 'action' => 'slug_metro']);
+        array_push($map, ['url' => '/uslugi/:slug/street-:street',      'controller' => 'uslugi', 'action' => 'slug_street']);
+        array_push($map, ['url' => '/uslugi/:slug/:article',            'controller' => 'uslugi', 'action' => 'article']);
+    }
+
     Register::add('map', $map);

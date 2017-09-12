@@ -848,4 +848,38 @@ class DoctorManager extends AliasManager
     parent::beforeSave($doctor);
   }
 
+  public function getByClinics($clinics_ids) {
+
+        is_array($clinics_ids) AND $clinics_ids = implode(', ', array_map('intval', $clinics_ids));
+
+        $fields = [
+            'd.id',
+            'd.first_name',
+            'd.second_name',
+            'd.last_name',
+            'd.full_lower_name',
+            'd.alias',
+            'dt.id as type_id',
+            'dt.name as type_name',
+        ];
+
+        // SELECT c.* FROM `clinic` c inner join clinic_to_types c2t ON c.id = c2t.clinic_id inner join clinic_type ct ON c2t.clinic_type_id = ct.id limit 100
+        $q = str_replace(['{ids}', '{fields}'], [
+            $clinics_ids,
+            implode(', ', $fields),
+        ], 'SELECT {fields} FROM doctor d
+                INNER JOIN doctor_to_clinic d2c ON d.id = d2c.doctor_id
+                LEFT JOIN doctor_type dt ON d.doctor_type_id = dt.id
+                WHERE d2c.clinic_id IN ({ids}) 
+                    AND d.is_virtual IS NULL
+                    AND (d.is_active = 1 AND d.alias != \'\' AND d.alias IS NOT NULL)
+                GROUP BY d.id
+                ORDER BY d.alias ASC');
+
+        $q = $this->db->query($q);
+
+        return $this->initList($q);
+
+    }
+
 }

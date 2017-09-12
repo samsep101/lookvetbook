@@ -40,6 +40,8 @@ class ModelManager implements ICachedModelManager
 
   protected $total_hits = null;
 
+  protected $cityID = 2;
+
   public function __construct($table = '')
   {
     if ($table) {
@@ -52,6 +54,12 @@ class ModelManager implements ICachedModelManager
 
     $this->orm_model = new Orm(DB_PREFIX . $this->table_name);
     $this->db = Register::get('db');
+  }
+
+  public function setCityID($cityID) {
+
+      ($cityID > 0) AND $this->cityID = (int)$cityID;
+      return $this;
   }
 
   public function getGroupName()
@@ -216,30 +224,31 @@ class ModelManager implements ICachedModelManager
   }
 
 
-  protected function initOne($info)
-  {
-    if (!$info) {
-      return NULL;
+    protected function initOne($info) {
+
+        if (!$info) {
+            return NULL;
+        }
+
+        // if (isset($this->models_register[$id]) && $this->model_register_enable && static::$model_register_enable_global)
+        //      return $this->models_register[$id];
+        if (count($info)) {
+            
+            if (!class_exists($this->model_name, FALSE) && !Application::tryToLoadClass($this->model_name)) {
+                throw new Exception('Не удалось найти класс ' . $this->model_name);
+            }
+
+            $id = $info[$this->id_field_name];
+            $this->models_register[$id] = new $this->model_name();
+            $this->models_register[$id]->setParams($id, $info);
+
+            return $this->models_register[$id];
+        } else {
+            return NULL;
+        }
     }
-    $id = $info[$this->id_field_name];
 
-//            if (isset($this->models_register[$id]) && $this->model_register_enable && static::$model_register_enable_global)
-//                return $this->models_register[$id];
-
-    if (count($info)) {
-      if (!class_exists($this->model_name, FALSE) && !Application::tryToLoadClass($this->model_name)) {
-        throw new Exception('Не удалось найти класс ' . $this->model_name);
-      }
-      $this->models_register[$id] = new $this->model_name();
-      $this->models_register[$id]->setParams($id, $info);
-
-      return $this->models_register[$id];
-    } else {
-      return NULL;
-    }
-  }
-
-  public function save(DynamicModel $model)
+    public function save(DynamicModel $model)
   {
     if ($model->validate()) {
       if ($model && (strtolower($this->model_name) == strtolower(get_class($model)))) {

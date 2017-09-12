@@ -282,7 +282,7 @@ class ImportController extends BaseController
     {
         $update = "";
         $new    = "";
-        $path   = __DIR__.'/../../media/upload/clinic/';
+        $path   = __DIR__.'/../../imports/';
         if( ( $sh = fopen ( $path."clinic.csv", "r" ) ) !== FALSE ){
 
             while ( ($data = fgetcsv( $sh, 1000, ";" )) !== FALSE ){

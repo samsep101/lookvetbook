@@ -7,8 +7,6 @@ class ClinicManager extends AliasManager
 
   protected $transliterated_field = 'name';
 
-
-
   protected function beforeSave(DynamicModel $clinic)
   {
       /** @var ClinicModel $clinic */
@@ -1122,6 +1120,155 @@ SQL;
 
         $res = $this->getListBySearchParams($search_params);
         return $res;
+    }
+
+    public function getClinicsByServicesID($services_id, $limit = 10, $offset = 0, $orderby = 'c.alias ASC') {
+
+        $selected = implode('`, `', [
+            'id',
+            'region_id',
+            'name',
+            'alias',
+            'clinic_type_id',
+            'address',
+            'street_id',
+            'latitude',
+            'longitude',
+            'rate',
+            'city_id',
+            'start_time_monday',
+            'end_time_monday',
+            'start_time_tuesday',
+            'end_time_tuesday',
+            'start_time_wednesday',
+            'end_time_wednesday',
+            'start_time_thursday',
+            'end_time_thursday',
+            'start_time_friday',
+            'end_time_friday',
+            'start_time_saturday',
+            'end_time_saturday',
+            'start_time_sunday',
+            'end_time_sunday',
+            'image_id',
+            'phone',
+            'not_work',
+            'is_best',
+            'primary_clinic_id',
+        ]);
+
+        $page < 1 AND $page = 1;
+
+        // корневые клиники привязанные к услуге
+        $q = sprintf('SELECT `%s` FROM services_to_clinic s2c
+                    INNER JOIN clinic c ON s2c.clinic_id = c.id
+                    WHERE s2c.services_categories_id = %d
+                        AND c.primary_clinic_id IS NULL
+                        AND c.city_id = %d
+                    GROUP BY s2c.clinic_id
+                    ORDER BY %s LIMIT %d OFFSET %d', $selected, (int)$services_id, $this->cityID, $orderby, $limit, $offset);
+
+        $q = $this->db->query($q);
+
+        $results = [];
+        if(!empty($q)){
+            
+            foreach($q as $root){
+                $results[$root['id']] = $root;
+            }
+
+            // массив остальных клиник привязанных к услуге
+            $q2 = sprintf('SELECT `%s` FROM services_to_clinic s2c
+                        INNER JOIN clinic c ON s2c.clinic_id = c.id
+                        WHERE s2c.services_categories_id = %d AND c.primary_clinic_id IN (%s)
+                            AND c.city_id = %d
+                        GROUP BY s2c.clinic_id
+                        ORDER BY %s', $selected, (int)$services_id, implode(', ', array_keys($results)), $this->cityID, $orderby);
+
+            $q2 = $this->db->query($q2);
+
+            if(!empty($q2)){
+                foreach($q2 as $filials){
+                    $fid = $filials['id'];
+                    $pid = $filials['primary_clinic_id'];
+                    if(array_key_exists($pid, $results)){
+                        $results[$pid]['childs'][$fid] = $filials;
+                    }
+                }
+            }
+        }
+
+        return $this->initList($results);
+    }
+
+    public function getClinics($clinics_ids) {
+
+        is_array($clinics_ids) AND $clinics_ids = implode(', ', array_map('intval', $clinics_ids));
+
+        $fields = [
+            'c.id',
+            'c.name',
+            'c.alias',
+            'c.address',
+            'c.latitude',
+            'c.longitude',
+            'c.rate',
+            'c.fact_address',
+            'c.metro_station_id',
+            'c.phone',
+            'c.email',
+            'c.is_active',
+            'GROUP_CONCAT(ct.id) as type_id',
+            'GROUP_CONCAT(ct.name) as type_name'
+        ];
+
+        // SELECT c.* FROM `clinic` c inner join clinic_to_types c2t ON c.id = c2t.clinic_id inner join clinic_type ct ON c2t.clinic_type_id = ct.id limit 100
+        $q = str_replace(['{ids}', '{fields}'], [
+            $clinics_ids,
+            implode(', ', $fields),
+        ], 'SELECT {fields} FROM clinic c
+                LEFT JOIN clinic_to_types c2t ON c.id = c2t.clinic_id
+                LEFT JOIN clinic_type ct ON c2t.clinic_type_id = ct.id
+                WHERE c.id IN ({ids}) 
+                GROUP BY c.id
+                ORDER BY c.alias ASC');
+
+        $q = $this->db->query($q);
+
+        return $this->initList($q);
+
+    }
+
+    public function getAutocomplete($search) {
+
+        $fields = [
+            'c.id',
+            'c.name',
+            'c.alias',
+        ];
+
+        // SELECT c.* FROM `clinic` c inner join clinic_to_types c2t ON c.id = c2t.clinic_id inner join clinic_type ct ON c2t.clinic_type_id = ct.id limit 100
+        $q = str_replace(['{search}', '{fields}'], [
+            '%'.$search.'%',
+            implode(', ', $fields),
+        ], 'SELECT {fields} FROM clinic c WHERE c.name LIKE \'{search}\' OR c.alias LIKE \'{search}\' ORDER BY c.alias ASC LIMIT 50');
+
+        $q = $this->db->query($q);
+
+        if(!empty($q)){
+
+            $data = [];
+            foreach($q as $row){
+                $data[] = [
+                    'code' => $row['id'],
+                    'value' => $row['name'].' ('.$row['alias'].')'
+                ];
+            }
+
+            return $data;
+        }
+
+        return [];
     }
 
 }

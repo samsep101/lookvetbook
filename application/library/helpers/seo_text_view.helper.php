@@ -146,7 +146,7 @@
                                     } else {
                                       return 'в '.$model->prepositional_name;
                                     }
-                                    
+
                                 }
 			}
 			return '';
@@ -203,13 +203,13 @@
                 $seo_doctors='Детские врачи';
             else if ($search_flags['visit_type']=='home' && $search_flags['doctor_type']=='children')
                 $seo_doctors='Детские врачи на дом';
-            
-            
+
+
             if (extension_loaded('morpher')) {
                 if($specialty && !$defaultTitle) {
-                    if($hideAddress) 
+                    if($hideAddress)
                         $html = $seo_doctors.' ' . morpher_inflect($specialty->name,'im mn') . ' ' . SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
-                    else 
+                    else
                         $html = self::getH1($specialty, $address_object).' | Выбор хорошего '.morpher_inflect($specialty->name,'rof').' '.SeoTextViewHelper::getAddressObjectName($address_object).', отзывы, рейтинг и запись на прием на '.SITE_NAME.'.';
                 } elseif($address_object) {
                     $html = $seo_doctors.' '.SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
@@ -218,17 +218,17 @@
                 }
             }  else {
                 if($specialty && !$defaultTitle) {
-                    if($hideAddress) 
+                    if($hideAddress)
                         $html = $seo_doctors.' ' . $morpher_doctor . ' ' . SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
-                    else 
+                    else
                         $html = self::getH1($specialty, $address_object).' | Выбор хорошего '.$specialty->genitive_name.' '.SeoTextViewHelper::getAddressObjectName($address_object).', отзывы, рейтинг и запись на прием на '.SITE_NAME.'.';
                 } elseif($address_object) {
                     $html = $seo_doctors.' '.SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
                 } else {
                     $html = 'Найти хорошего врача в Москве онлайн. Поиск врачей по всем специальностям, отзывы, рейтинг, запись на прием – '.SITE_NAME;
                 }
-            }          
-            
+            }
+
 
 			return $html;
 
@@ -260,4 +260,139 @@
 
             return $text;
         }
+
+        public static function GetClinicSeoTitle( DynamicModel $clinic ) {
+
+            if( $clinic ){
+
+                $moderateSeo = self::getModerateClinicSeo( $clinic );
+                $address_to_title = 1;
+                $metro_to_title = 1;
+
+                if( !empty($moderateSeo) ){
+
+                    if( $moderateSeo->seo_title != "" ){ return  $moderateSeo->seo_title; }
+                    $address_to_title   = $moderateSeo->address_to_title;
+                    $metro_to_title     = $moderateSeo->metro_to_title;
+                    $seo_address        = $moderateSeo->seo_address;
+
+                }
+
+                $seo_address = ( $seo_address !="" ) ? $seo_address : $clinic->address;
+                if( $seo_address ){
+                        $street = str_replace(
+                        array( "ул.", "пр.", "ш.", "д.", "стр.", "м.", "пр-т."),
+                        array( "ул", "пр", "ш", "", "стр", "м", "пр-т" ),
+                        $seo_address);
+                        /* $addressArr = explode( ',', $address );
+                        if(count($addressArr) >= 2){
+                            $street = $addressArr[ count( $addressArr ) - 2 ].','.$addressArr[ count( $addressArr ) - 1];
+                        } else {
+                            $street = $address;
+                        }*/
+                        $metro = $clinic->metro_station->name;
+                        $city = $clinic->city->name;
+                        // Биомед на ул Луковского (м Суконная слобода, Казань) - врачи, отзывы, цены, телефоны и адреса, запись на прием на Loo kMedBook
+                        return $title = vsprintf('%s%s%s%s - врачи, отзывы, цены, телефоны и адреса, запись на прием на %s', [
+                            trim($clinic->name),
+                            (!empty($metro) && $metro_to_title)    ?   " м ".trim($metro)."," :   "",
+                            (!empty($street) && $address_to_title)   ?   " на ".trim($street)    :   "",
+                            (!empty($city))     ?   " (". trim($city).")"   :   "",
+                            SITE_NAME
+                        ]);
+                   }else{
+
+                        return  $title = 'Медицинские центры и клиники '.$this->getSeoAddress().': цены, отзывы, рейтинги и запись на прием на '.SITE_NAME;
+
+                    }
+                }else{
+
+                    return $title = 'Медицинские центры и клиники '.$this->getSeoAddress().': цены, отзывы, рейтинги и запись на прием на '.SITE_NAME;
+
+                }
+        }
+
+        public static function newGetClinicPageDescription( DynamicModel $clinic ){
+            if( $clinic ){
+
+                $moderateSeo = self::getModerateClinicSeo( $clinic );
+                $address_to_description = 1;
+                $metro_to_description = 1;
+
+                if( !empty($moderateSeo) ){
+
+
+                    if( $moderateSeo->seo_descritpion != "" ){ return  $moderateSeo->seo_descritpion; }
+                    $address_to_description   = $moderateSeo->address_to_description;
+                    $metro_to_description     = $moderateSeo->metro_to_description;
+                    $seo_address              = $moderateSeo->seo_address;
+
+                }
+
+                $seo_address = ( $seo_address !="" ) ? $seo_address : $clinic->address;
+
+                if( $seo_address ){
+                        $street = str_replace(
+                            array( "ул.", "пр.", "ш.", "д.", "стр.", "м.", "пр-т."),
+                            array( "ул", "пр", "ш", "", "стр", "м", "пр-т" ),
+                            $seo_address);
+                        /* $addressArr = explode( ',', $address );
+                        if(count($addressArr) >= 2){
+                            $street = $addressArr[ count( $addressArr ) - 2 ].','.$addressArr[ count( $addressArr ) - 1];
+                        } else {
+                            $street = $address;
+                        } */
+                        $metro = $clinic->metro_station->name;
+                        $city = $clinic->city->name;
+
+                        // Биомед на ул Луковского (м Суконная слобода, Казань) - врачи, отзывы, цены, телефоны и адреса, запись на прием на Loo kMedBook
+                        return $description = vsprintf('Интересует %s%s%s%s? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на %s. Заходите!', [
+                            trim($clinic->name),
+                            (!empty($metro) && $metro_to_description)       ?   " м ".trim($metro)."," :   "",
+                            (!empty($street) && $address_to_description)    ?   " на ".trim($street)    :   "",
+                            (!empty($city))     ?   " (". trim($city).")"   :   "",
+                            SITE_NAME
+                        ]);
+                        //return 'Интересует '.$clinic->name.'? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на '.SITE_NAME.'. Заходите!';
+                    } else {
+                        return 'Ищете медицинские центры и клиники '.$clinic->name.' '.$this->getSeoAddress().'? '.SITE_NAME.' поможет выбрать лучшие клиники и медицинские центры по отзывам, рейтингу и стоимости. Заходите!';
+                    }
+            }
+        }
+
+    public static function getModerateClinicSeo(DynamicModel $clinic = NULL){
+
+            if( $clinic ){
+
+                $moderateSeo = ( new ModerateClinicSeoManager() )->getByClinicId($clinic->id);
+
+                if( $moderateSeo ){
+
+                    return $moderateSeo;
+
+                }else{
+
+                    return false;
+
+                }
+
+            }
+
+        }
+
+        public function getSeoAddress(DynamicModel $clinic) {
+
+                if ($clinic->district)
+                  return self::getAddressObjectName($clinic->district);
+                elseif ($clinic>region)
+                  return self::getAddressObjectName($clinic->region);
+                elseif ($clinic->street)
+                  return self::getAddressObjectName($clinic->street);
+                elseif ($clinic->metro_station)
+                  return self::getAddressObjectName($clinic->metro_station);
+                else
+                  return self::getAddressObjectName($clinic->city);
+
+        }
+
 	}

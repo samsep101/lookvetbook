@@ -3,7 +3,7 @@
 class Articles_Viewer extends View {
     /** @author Playmore 2017 (playmoredevelop@gmail.com) */
 
-    const RND = 3;
+    const RND = 4;
 
     public function showCatalogArticle($category_id) {
 

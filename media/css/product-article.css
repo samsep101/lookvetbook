@@ -168,3 +168,6 @@
 .oh{overflow: hidden}
 .mb15{margin-bottom: 15px;}
 .mt20{margin-top: 20px;}
+.w100{width:100%}
+.panel-post{padding: 25px; font-size:14px; line-height: 18px;}
+.services-menu .chzn-container-single{width:100% !important;}

@@ -620,6 +620,30 @@ class DiseaseController extends BaseController
     }
   }
 
+  public function ajaxGetBeforeBlock(){
+
+      $alias = $this->view->disease->alias;
+
+      $disease_slug = $this->request->post('slug');
+        $blocks_before = implode('/', [
+            Application::getTemplatesDir(true),
+            'disease',
+            'blocks-before',
+            $disease_slug.'.tpl'
+        ]);
+
+        if(file_exists($blocks_before)){
+
+            ob_start();
+            include $blocks_before;
+
+            $beforeblocks = ob_get_clean();
+
+        }
+      JsonResponse::result($beforeblocks);
+
+  }
+
     protected function _seo_default() {
 
         $disease = $this->view->disease;

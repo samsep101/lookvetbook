@@ -250,6 +250,11 @@
             'controller' => 'disease'
         ),
         array(
+            'url'        => '/disease/ajaxGetBeforeBlock',
+            'action'     => 'ajaxGetBeforeBlock',
+            'controller' => 'disease'
+        ),
+        array(
             'url'        => '/disease/test',
             'action'     => 'test',
             'controller' => 'disease'

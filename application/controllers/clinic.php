@@ -217,32 +217,17 @@ class ClinicController extends BaseController
   }
 
   public function getClinicPageDescription() {
+
+
+
     if ($this->view->specialization) {
         $seo_specialization=$this->view->specialization->name;
     }
 
     if ($this->view->clinic->name) {
-        $address = str_replace(
-            array( "ул.", "пр.", "ш.", "д.", "стр.", "м.", "пр-т."),
-            array( "ул", "пр", "ш", "", "стр", "м", "пр-т" ),
-            $this->view->clinic->address);
-        $addressArr = explode( ',', $address );
-        if(count($addressArr) >= 2){
-            $street = $addressArr[ count( $addressArr ) - 2 ].','.$addressArr[ count( $addressArr ) - 1];
-        } else {
-            $street = $address;
-        }
-        $metro = $this->view->clinic->metro_station->name;
-        $city = $this->view->clinic->city->name;
-        // Биомед на ул Луковского (м Суконная слобода, Казань) - врачи, отзывы, цены, телефоны и адреса, запись на прием на Loo kMedBook
-        return $this->view->page_description = vsprintf('Интересует %s%s%s%s? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на %s. Заходите!', [
-            trim($this->view->clinic->name),
-            (!empty($metro))    ?   " м. ".trim($metro)."," :   "",
-            (!empty($street))   ?   " на ".trim($street)    :   "",
-            (!empty($city))     ?   " (". trim($city).")"   :   "",
-            SITE_NAME
-        ]);
-        //return 'Интересует '.$this->view->clinic->name.'? Отзывы и рейтинг от реальных клиентов, актуальные цены, телефоны и адреса, а также возможность записи на удобное время на '.SITE_NAME.'. Заходите!';
+
+        return  SeoTextViewHelper::newGetClinicPageDescription($this->view->clinic);
+
     } else {
       if (extension_loaded('morpher')) {
         return 'Ищете медицинские центры и клиники '.morpher_inflect($seo_specialization,'rod').' '.$this->getSeoAddress().'? '.SITE_NAME.' поможет выбрать лучшие клиники и медицинские центры по отзывам, рейтингу и стоимости. Заходите!';
@@ -814,31 +799,14 @@ class ClinicController extends BaseController
 
 
     }
-    if ($this->view->clinic->name) {
-        $address = str_replace(
-            array( "ул.", "пр.", "ш.", "д.", "стр.", "м.", "пр-т."),
-            array( "ул", "пр", "ш", "", "стр", "м", "пр-т" ),
-            $this->view->clinic->address);
-        $addressArr = explode( ',', $address );
-        if(count($addressArr) >= 2){
-            $street = $addressArr[ count( $addressArr ) - 2 ].','.$addressArr[ count( $addressArr ) - 1];
-        } else {
-            $street = $address;
-        }
-        $metro = $this->view->clinic->metro_station->name;
-        $city = $this->view->clinic->city->name;
-        // Биомед на ул Луковского (м Суконная слобода, Казань) - врачи, отзывы, цены, телефоны и адреса, запись на прием на Loo kMedBook
-        return $this->view->page_title = vsprintf('%s%s%s%s - врачи, отзывы, цены, телефоны и адреса, запись на прием на %s', [
-            trim($this->view->clinic->name),
-            (!empty($metro))    ?   " м. ".trim($metro)."," :   "",
-            (!empty($street))   ?   " на ".trim($street)    :   "",
-            (!empty($city))     ?   " (". trim($city).")"   :   "",
-            SITE_NAME
-        ]);
-        //return $this->view->page_title = $this->view->clinic->name.' - врачи, отзывы, цены, телефоны и адреса, запись на прием на '.SITE_NAME;
-    } else {
-        return $this->view->page_title = 'Медицинские центры и клиники '.$seo_specialization.' '.$this->getSeoAddress().': цены, отзывы, рейтинги и запись на прием на '.SITE_NAME;
+
+    if( $this->view->clinic != null ){
+        return SeoTextViewHelper::GetClinicSeoTitle($this->view->clinic);
+    }else{
+        return 'Медицинские центры и клиники '.$this->getSeoAddress().': цены, отзывы, рейтинги и запись на прием на '.SITE_NAME;
     }
+
+
   }
 
   public function getSeoAddress() {

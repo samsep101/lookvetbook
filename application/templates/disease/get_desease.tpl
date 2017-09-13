@@ -48,13 +48,31 @@
 					<?php $disease->content = preg_replace('/<br\/>/','',$disease->content);?>
 					<div class="like_p"><?php echo html_entity_decode($disease->content,ENT_COMPAT,'UTF-8'); ?></div>
 				</div>
-                                <!-- old slickjumg -->
-                                <!-- перенесеннай тизер medshowtiz -->
-                                <div id="teaser_807"><a href="">Тизерная сеть</a></div>
-                                <script type="text/javascript">var medtizer807=document.createElement('script'); medtizer807.src='//medshowtiz.ru/show/?block_id=807&title='+document.title+'&r='+escape(document.referrer)+'&'+Math.round(Math.random()*100000);   function f807() { if(!self.medtizer) { medtizer=807; document.body.appendChild(medtizer807); } else { setTimeout('f807()',200); } } f807();</script>
+                    <!-- old slickjumg -->
+                    <!-- перенесеннай тизер medshowtiz -->
+                    <div id="teaser_807"><a href="">Тизерная сеть</a></div>
+                    <script type="text/javascript">var medtizer807=document.createElement('script'); medtizer807.src='//medshowtiz.ru/show/?block_id=807&title='+document.title+'&r='+escape(document.referrer)+'&'+Math.round(Math.random()*100000);   function f807() { if(!self.medtizer) { medtizer=807; document.body.appendChild(medtizer807); } else { setTimeout('f807()',200); } } f807();</script>
 
+                    <?php if( $this->beforeblocks != "" ): ?>
+                    <div id="before-disease">
+                       <?php // var_dump($disease); ?>
+                       <script type="text/javascript">
+                       $(document).ready(function(){
+                       var data = 'slug=' + '<?=$disease->alias?>' ;
+                            $.ajax({
+                                type    : 'POST',
+                                url     : '/disease/ajaxGetBeforeBlock',
+                                dataType: 'json',
+                                data    : data,
+                                success : function(res){
+                                    $('#before-disease').html(res['result']);
+                                }
+                            });
+                        });
+                        </script>
+                    </div>
+                    <?php endif; ?>
 
-                <?=$this->beforeblocks?>
                 </div>
                 <?php if(0 and !empty($disease->alias) and in_array($disease->alias, ['mezhpozvonochnaya-gryzha', 'osteohondroz-pozvonochnika'])) { ?>
 					<div class="desease-banner-line">
@@ -136,7 +154,8 @@
 
 <div id="webapteka_48">загрузка...</div>
 <script type="text/javascript">
-document.write('<scr'+'ipt language="javascript" type="text/javascript" src="/getout.php?g=48"></scr'+'ipt>');
+    document.write('<scr'+'ipt language="javascript" type="text/javascript" src="/getout.php?g=48"></scr'+'ipt>');
+
 </script>
 	<div class="pediatr-banner-container"></div>
 

@@ -27,10 +27,10 @@ class ServicesCategoriesSimpleModel extends SimpleModel {
 
         // каталог двухуровневый поэтому делаем по простому
         foreach($rows as $one){
-            
+
             $id = $one['id'];
             $parent_id = $one['parent_id'];
-            
+
             unset($one['id']);
             unset($one['parent_id']);
 
@@ -82,7 +82,7 @@ class ServicesCategoriesSimpleModel extends SimpleModel {
         $q = str_replace(['{table}', '{slug}'], [
             $this->table,
             $this->escape($slug)
-		], 'SELECT id, slug, name, genitive_name, parent_id FROM {table} WHERE slug = {slug} LIMIT 1');
+		], 'SELECT id, slug, name, genitive_name, parent_id, description FROM {table} WHERE slug = {slug} LIMIT 1');
 
 		return $this->db->get($q);
     }

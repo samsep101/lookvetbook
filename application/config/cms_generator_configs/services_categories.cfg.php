@@ -22,6 +22,7 @@
             ],
             'status'      => 'checkbox',
             'price' => 'input',
+            'description' => 'htmlarea'
         ),
         'generator' => array(
             'fields' => array(
@@ -31,7 +32,8 @@
                 'genitive_name' => 'Падеж',
                 'parent_id' => 'Родительская услуга',
                 'status'      => 'Активна?',
-                'price' => 'Стоимость услуги'
+                'price' => 'Стоимость услуги',
+                'description' => "Статья-описание об услуге",
             ),
             'list'   => array(
                 'fields'  => ['id', 'name', 'slug', 'parent_id', 'price'], /*поля кот. отображаются в списке "суперадминистратор"*/
@@ -43,20 +45,20 @@
             ),
             'edit'   => array(
                 'fields' => array(
-                    'Услуга' => ['slug', 'name', 'genitive_name', 'parent_id', 'price', 'status']
+                    'Услуга' => ['slug', 'name', 'genitive_name', 'parent_id', 'price', 'status','description']
                 ),
                 'title'  => 'Редактирование',
                 'submit' => 'Сохранить',
             ),
             'add'    => array(
                 'fields' => array(
-                    'Услуга' => ['slug', 'name', 'genitive_name', 'parent_id', 'price', 'status']
+                    'Услуга' => ['slug', 'name', 'genitive_name', 'parent_id', 'price', 'status','description']
                 ),
                 'title'  => 'Создать',
                 'submit' => 'Создать',
             ),
         ),
-        
+
         'extra' => [
             'relations_to_clinic' => [
                 'type' => 'view',

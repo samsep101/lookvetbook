@@ -12,6 +12,8 @@ class Uslugi_SeoController extends BaseController {
     protected $district = false;
     protected $area = false;
     protected $street = false;
+    protected $article_slug = false;
+
 
     protected $current = [
         'name' => '',
@@ -27,9 +29,9 @@ class Uslugi_SeoController extends BaseController {
 
     /** @var View */
     public $view;
-    
+
     protected function replace_seo($str) {
-        
+
         $replace = [
             '%city%' => $this->city->prepositional_name,
             '%usluga-spec%' => $this->current['genitive_name'],
@@ -37,7 +39,7 @@ class Uslugi_SeoController extends BaseController {
         ];
 
         return str_replace(array_keys($replace), array_values($replace), $str);
-        
+
     }
 
     protected function seo_index() {
@@ -54,7 +56,7 @@ class Uslugi_SeoController extends BaseController {
             ['Все услуги', '/uslugi', '']
         ];
     }
-    
+
     protected function seo_slug() {
 
         $this->view->h1 = $this->replace_seo('Медицинские услуги в области %usluga-spec%');
@@ -111,7 +113,7 @@ class UslugiController extends Uslugi_SeoController {
     protected $container = [];
 
     public function __construct() {
-        
+
         parent::__construct();
 
         if(false === Application::config('section.services.available')){
@@ -153,12 +155,13 @@ class UslugiController extends Uslugi_SeoController {
 
     public function setSegments() {
 
-        $this->slug = $this->request('slug', false);
-        $this->subslug = $this->request('subslug', false);
-        $this->metro = $this->request('metro', false);
-        $this->district = $this->request('district', false);
-        $this->area = $this->request('area', false);
-        $this->street = $this->request('street', false);
+        $this->slug             = $this->request('slug', false);
+        $this->subslug          = $this->request('subslug', false);
+        $this->metro            = $this->request('metro', false);
+        $this->district         = $this->request('district', false);
+        $this->area             = $this->request('area', false);
+        $this->street           = $this->request('street', false);
+        $this->article_slug     = $this->request('article',false);
     }
 
     # /uslugi
@@ -178,14 +181,24 @@ class UslugiController extends Uslugi_SeoController {
         $this->view->page = 'slug';
 
         $this->current = $this->services_model()->getBySlug($this->slug);
+        $this->id = $this->current['id'];
+        $this->parent_id = (int)$this->current['parent_id'];
 
-        if(!empty($this->current['id'])){
+        if( $this->article_slug ){
 
-            $this->id = (int)$this->current['id'];
-            $this->parent_id = (int)$this->current['parent_id'];
-            
+            $this->view->article = $this->services_model()->getBySlug($this->article_slug);
+            $this->id = $this->view->article['id'];
+            $this->parent_id = (int)$this->view->article['parent_id'];
+
+        }
+
+        if(!empty($this->id)){
+
+            //$this->id = (int)$this->current['id'];
+            //$this->parent_id = (int)$this->current['parent_id'];
+
             if(array_key_exists($this->id, $this->container['tree'])){
-                
+
                 $this->view->current_tree = [ $this->id => $this->container['tree'][$this->id] ];
             }
 
@@ -222,13 +235,14 @@ class UslugiController extends Uslugi_SeoController {
         $this->setRoots();
 
     }
-    
+
     # /uslugi/andrologija/mar-test
     public function article() {
 
         $this->slug();
         $this->seo_method = 'seo_article';
         $this->view->page = 'article';
+        $this->view->current = $this->current;
 
         $article_slug = $this->request('article', false);
 
@@ -238,11 +252,11 @@ class UslugiController extends Uslugi_SeoController {
             $this->view->btnslug = '/uslugi/'.$this->current['slug'];
             $this->view->current_slug = $this->slug.'/'.$article_slug;
             $this->article = $this->services_model()->getBySlug($article_slug);
-            
+
         }
 
     }
-    
+
     # /uslugi/district-vao
     public function district() {}
     # /uslugi/area-sokolinaya-gora

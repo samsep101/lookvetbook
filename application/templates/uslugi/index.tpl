@@ -16,6 +16,10 @@
 
 <link rel="stylesheet" href="/media/uslugi/styles.css" type="text/css">
 <script type="text/javascript" src="/media/uslugi/services.js"></script>
+<link rel="stylesheet" href="/media/css/product-article.css?rnd=<?= Articles_Viewer::RND?>" type="text/css">
+<script type="text/javascript" src="/media/js/articles-spoiler.js?rnd=<?= Articles_Viewer::RND?>"></script>
+
+
 
 <div class="services-events">
 
@@ -31,12 +35,12 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 services-menu">
                 <div class="box-form">
                     <div class="box-header">Найти услугу</div>
                     <select class="chosen-select" name="service" id="service_name">
                         <option selected>Выбрать услугу</option>
-                        <?php foreach($this->tree as $one) : 
+                        <?php foreach($this->tree as $one) :
                             $attrs = ($this->current_slug == $one['slug']) ? 'selected' : '';
                         ?>
                             <option value="/uslugi/<?=$one['slug']?>" <?=$attrs?>><?=$one['name']?></option>
@@ -47,7 +51,7 @@
                             <?php endforeach; endif; ?>
                         <?php endforeach; ?>
                     </select>
-                    <select class="chosen-select" name="service">
+                    <?php /* <select class="chosen-select" name="service">
                         <option>Выбрать округ</option>
                         <?php foreach($this->districts as $one) : ?>
                             <option value="<?=$one['alias']?>" data-id="<?=$one['id']?>"><?=$one['name']?></option>
@@ -55,7 +59,7 @@
                     </select>
                     <select class="chosen-select" name="service">
                         <option>Выбрать станцию метро</option>
-                    </select>
+                    </select> */?>
                 </div>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12"></div>

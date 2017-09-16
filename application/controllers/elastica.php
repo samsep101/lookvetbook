@@ -21,7 +21,9 @@ class ElasticaController extends BaseController
   public function createIndex()
   {
     $manager = new ElasticSearchIndexControl();
-    $manager->deleteIndex(Register::get('ELASTIC_SEARCH_INDEX'));
+    if ($manager->getIndex(Register::get('ELASTIC_SEARCH_INDEX'))->exists()) {
+      $manager->deleteIndex(Register::get('ELASTIC_SEARCH_INDEX'));
+    }
     $manager->createIndex(Register::get('ELASTIC_SEARCH_INDEX'));
     exit;//так было на сервере!!
   }

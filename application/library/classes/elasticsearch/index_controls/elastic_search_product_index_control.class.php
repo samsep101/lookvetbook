@@ -32,13 +32,13 @@
 			 */
 			$query = new \Elastica\Query\Match();
 
-			$filter_and = new \Elastica\Filter\BoolAnd();
+            $bool_filter = new \Elastica\Query\BoolQuery();
 			if($criteria->is_active)
 			{
-				$filter = new \Elastica\Filter\Term();
+				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('is_active', true);
 
-				$filter_and->addFilter($filter);
+				$bool_filter->addFilter($filter);
 			}
 
 			if($criteria->full_name)
@@ -50,71 +50,72 @@
 
 			if($criteria->product_categories)
 			{
-				$filter = new \Elastica\Filter\Term();
+				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('product_category', $criteria->product_categories);
-				$filter_and->addFilter($filter);
+				$bool_filter->addFilter($filter);
 			}
 
 			if($criteria->is_leader)
 			{
-				$filter = new \Elastica\Filter\Term();
+				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('is_leader', true);
-				$filter_and->addFilter($filter);
+				$bool_filter->addFilter($filter);
 			}
 
 			if($criteria->manufacturer_id)
 			{
-				$filter = new \Elastica\Filter\Term();
+				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('manufacturer', true);
-				$filter_and->addFilter($filter);
+				$bool_filter->addFilter($filter);
 			}
 
 			if($criteria->image_find_status_id)
 			{
-				$filter = new \Elastica\Filter\Term();
+				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('image_find_status', $criteria->image_find_status_id);
-				$filter_and->addFilter($filter);
+				$bool_filter->addFilter($filter);
 			}
 
 			if($criteria->fill_information_status_id)
 			{
-				$filter = new \Elastica\Filter\Term();
+				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('fill_information_status', $criteria->fill_information_status_id);
-				$filter_and->addFilter($filter);
+				$bool_filter->addFilter($filter);
 			}
 
 			if($criteria->product_itself)
 			{
-				$filter = new \Elastica\Filter\Term();
+				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('id', $criteria->product_itself);
-				$not = new \Elastica\Filter\BoolNot($filter);
-				$filter_and->addFilter($not);
+                $filter_no = new \Elastica\Query\BoolQuery();
+                $filter_no->addMustNot($filter);
+				$bool_filter->addFilter($filter_no);
 			}
 
 			$result_query = new \Elastica\Query();
-			if(count($query->getParams()))
+			if($query->getParams())
 			{
-				$result_query->setQuery($query);
+			    $bool_filter->addMust($query);
 			}
 
-			if(count($filter_and->getFilters()))
+			if($bool_filter->getParams())
 			{
-				$result_query->setFilter($filter_and);
+				$result_query->setQuery($bool_filter);
 			}
 
 			switch(!$criteria->full_name && $criteria->sort_by)
 			{
 				case 'name':
-					$result_query->addSort(array(
-						'full_name_sort' => array(
+					$result_query->addSort([
+						'full_name_sort' => [
 							'order' => 'ASC',
-						)
-					));
+                        ]
+                    ]);
 					break;
 			}
 
 			$this->addPaging($criteria, $result_query);
-			$result_query->setFields(array('id'));
+			$result_query->setStoredFields(['id']);
 
 			return $result_query;
 		}

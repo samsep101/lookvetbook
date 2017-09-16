@@ -47,6 +47,7 @@ class DoctorSearchAlgorithm
     return $this->next_page_flag;
   }
 
+
   public function search(DoctorSearchParams $doctor_search_params)
   {
     $this->search_params = $doctor_search_params;
@@ -71,14 +72,21 @@ class DoctorSearchAlgorithm
 
     if ($doctor_search_params->specialty_id || $doctor_search_params->purpose_of_visit_id) {
       $specialty_manager = new SpecialtyManager();
+      $specialty = $specialty_manager->getOneByIdOrAlias($doctor_search_params->specialty_id);
 
-      $suitable_specialties = $specialty_manager->getSuitableListBySpecialtyIdAndPurposeOfVisitId($doctor_search_params->specialty_id, $doctor_search_params->purpose_of_visit_id);
+      $specialities = array_map(function($v) {return $v->id;}, $this->manager->getRelatedSpecialties($specialty));
+
+      // todo получение всех специальностей, пока так, затем можно переделать на более адекватный код
+      $specialities[] = $doctor_search_params->specialty_id;
+
+      $suitable_specialties = $specialty_manager->getSuitableListBySpecialtyIdAndPurposeOfVisitId($specialities, $doctor_search_params->purpose_of_visit_id);
 
       if ($suitable_specialties) {
         foreach ($suitable_specialties as $suitable_specialty) {
           $doctor_search_params->suitable_specialties_ids[] = $suitable_specialty->getId();
         }
       }
+      $doctor_search_params->suitable_specialties_ids = array_unique(array_merge($doctor_search_params->suitable_specialties_ids, $specialities));
     }
 
     $doctor_search_params->get_extra_item = true;

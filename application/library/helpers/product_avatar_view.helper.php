@@ -12,12 +12,11 @@
 
 			if($product->image_id && $product->is_image_confirmed)
 			{
-				return $product->image->resize($width, $height)->path;
+			  $image = $product->image->resize($width, $height);
+			  if ($image) {
+          return $image->path;
+        }
 			}
-			else
-			{
-				return '/media/images/no_image_product.png';
-			}
-
+      return '/media/images/no_image_product.png';
 		}
 	}

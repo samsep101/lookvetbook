@@ -42,6 +42,7 @@ class DoctorSearchParams extends ModelSearchCriteria
 
   public $page;
   public $by_page;
+  public $sort_salt;
 
   public $get_extra_item = false;
 

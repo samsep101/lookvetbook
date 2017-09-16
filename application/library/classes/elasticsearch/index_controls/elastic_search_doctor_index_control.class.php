@@ -22,9 +22,12 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
     /**
      * @var DoctorSearchParams $criteria
      */
-    $filter_and = new Elastica\Filter\BoolAnd();
+    $filter = new \Elastica\Query\BoolQuery();
 
     $query = new Elastica\Query\Match();
+
+    $result_query = new \Elastica\Query();
+    $result_query->setStoredFields(['id', 'is_equal_to_geo']);
 
     if ($criteria->doctor_name) {
       $query->setFieldQuery('full_name', $criteria->doctor_name);
@@ -32,9 +35,9 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
       $criteria->specialty_id = null;
     } else {
       if ($criteria->not_virtual) {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('is_virtual', false);
-        $filter_and->addFilter($match);
+        $filter->addFilter($match);
       }
 
       if ($criteria->specialty_id) {
@@ -47,79 +50,77 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
             $specialties[] = $specialty_id;
         }
 
-        $match = new \Elastica\Filter\Term();
-        $match->setTerm('specialties', $specialties);
-        $filter_and->addFilter($match);
+        $match = new \Elastica\Query\Terms();
+        $match->setTerms('specialty_ids', $specialties);
+        $filter->addFilter($match);
       }
 
       if ($criteria->purpose_of_visit_id) {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('purposes_of_visit', $criteria->purpose_of_visit_id);
-        $filter_and->addFilter($match);
-
+        $filter->addFilter($match);
       }
 
       if ($criteria->visit_type == 'home') {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('is_leave_the_house', 1);
-        $filter_and->addFilter($match);
+        $filter->addFilter($match);
       }
 
       if ($criteria->doctor_sex_id) {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('sex', $criteria->doctor_sex_id);
-        $filter_and->addFilter($match);
+        $filter->addFilter($match);
       }
 
       if ($criteria->morning_time) {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('is_has_morning_time', $criteria->morning_time);
-        $filter_and->addFilter($match);
+        $filter->addFilter($match);
       }
 
       if ($criteria->evening_time) {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('is_has_evening_time', $criteria->evening_time);
-        $filter_and->addFilter($match);
+        $filter->addFilter($match);
       }
 
       if ($criteria->weekend_time) {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('is_has_weekend_time', $criteria->weekend_time);
-        $filter_and->addFilter($match);
+        $filter->addFilter($match);
       }
 
       if ($criteria->doctor_type == 'adult') {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('is_adult', 1);
-        $filter_and->addFilter($match);
+        $filter->addFilter($match);
       }
 
       if ($criteria->doctor_type == 'children') {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('is_children', 1);
-        $filter_and->addFilter($match);
+        $filter->addFilter($match);
       }
 
       if ($criteria->doctor_type == 'pregnant') {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('is_pregnant', 1);
-        $filter_and->addFilter($match);
+        $filter->addFilter($match);
       }
 
       if ($criteria->has_avatar) {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('is_has_avatar', true);
-        $filter_and->addFilter($match);
+        $filter->addFilter($match);
       }
 
       if ($criteria->primary_doctors_ids) {
-        foreach ($criteria->primary_doctors_ids as $id) {
-          $match = new \Elastica\Filter\Term();
-          $match->setTerm('id', $id);
-          $match_not = new \Elastica\Filter\BoolNot($match);
-          $filter_and->addFilter($match_not);
-        }
+        $match = new \Elastica\Query\Terms();
+        $match->setTerms('id', $criteria->primary_doctors_ids);
+        $match_not = new \Elastica\Query\BoolQuery();
+        $match_not->addMustNot($match);
+        $filter->addFilter($match_not);
       }
     }
 
@@ -133,109 +134,112 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
 
       $roles = array(RoleModel::FREELANCE_MANAGER, RoleModel::ACCOUNT_MANAGER);
       if (in_array($user->role_id, $roles)) {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('registry_users', $criteria->registry_user_id);
-        $filter_and->addFilter($match);
+        $filter->addFilter($match);
       }
     }
 
     if ($criteria->is_active) {
-      $match = new \Elastica\Filter\Term();
+      $match = new \Elastica\Query\Term();
       $match->setTerm('is_active', true);
-      $filter_and->addFilter($match);
+      $filter->addFilter($match);
     }
 
     if ($criteria->city_id) {
-      $match = new \Elastica\Filter\Term();
+      $match = new \Elastica\Query\Term();
       $match->setTerm('cities', $criteria->city_id);
-      $filter_and->addFilter($match);
+      $filter->addFilter($match);
     }
 
     if (!empty($criteria->clinic_id)) {
-      $match = new \Elastica\Filter\Term();
+      $match = new \Elastica\Query\Term();
       $match->setTerm('clinics.id', $criteria->clinic_id);
-      $filter_and->addFilter($match);
+      $filter->addFilter($match);
     }
 
     if ($criteria->district_id) {
-      $match = new \Elastica\Filter\Term();
+      $match = new \Elastica\Query\Term();
       $match->setTerm('clinics.district', $criteria->district_id);
-      $filter_and->addFilter($match);
+      $filter->addFilter($match);
     }
 
     if ($criteria->metro_station_id) {
-      $match = new \Elastica\Filter\Term();
+      $match = new \Elastica\Query\Term();
       $match->setTerm('clinics.metro_station_id', $criteria->metro_station_id);
-      $filter_and->addFilter($match);
+      $filter->addFilter($match);
     }
 
     if ($criteria->region_id) {
-      $match = new \Elastica\Filter\Term();
+      $match = new \Elastica\Query\Term();
       $match->setTerm('clinics.region', $criteria->region_id);
-      $filter_and->addFilter($match);
+      $filter->addFilter($match);
     }
 
     if ($criteria->street_id) {
-      $match = new \Elastica\Filter\Term();
+      $match = new \Elastica\Query\Term();
       $match->setTerm('clinics.street', $criteria->street_id);
-      $filter_and->addFilter($match);
+      $filter->addFilter($match);
     }
 
     if (!empty($criteria->discount) && $criteria->discount==1) {
-      $range = new \Elastica\Filter\Range();
-      $range->addField('date_from', 
+      $range = new \Elastica\Query\Range();
+      $range->addField('date_from',
                     array(  'from' => '1970-01-01',
                             'to' => date('Y-m-d')
-                         ) 
-                 ); 
+                         )
+                 );
 /*
-      $range->addField('date_to', 
+      $range->addField('date_to',
                     array(  'from' => date('Y-m-d'),
                             'to' => '2100-01-01'
-                         ) 
-                 ); 
- 
-*/      
-      $filter_and->addFilter($range);
+                         )
+                 );
+
+*/
+      $filter->addFilter($range);
     }
     //die(print_r($filter_and));
 
     if (!empty($criteria->_id)) {
-      $match = new \Elastica\Filter\Term();
+      $match = new \Elastica\Query\Term();
       $match->setTerm('_id', $criteria->_id);
-      $filter_and->addFilter($match);
+      $filter->addFilter($match);
     }
 
-    if (!empty($criteria->ids) and count($criteria->ids)) {
-      $filter_or = new Elastica\Filter\BoolOr();
+    if (!empty($criteria->ids)) {
+      $filter_or = new \Elastica\Query\BoolQuery();
       foreach ($criteria->ids as $_id) {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('_id', $_id);
-        $filter_or->addFilter($match);
+        $filter_or->addShould($match);
       }
-      $filter_and->addFilter($filter_or);
+      $filter->addFilter($filter_or);
     }
 
 
-    if (!empty($criteria->ids_no) and count($criteria->ids_no)) {
-      $filter_or = new Elastica\Filter\BoolOr();
+    if (!empty($criteria->ids_no)) {
+      $filter_or = new \Elastica\Query\BoolQuery();
+
       foreach ($criteria->ids_no as $_id) {
-        $match = new \Elastica\Filter\Term();
+        $match = new \Elastica\Query\Term();
         $match->setTerm('_id', $_id);
-        $filter_no = new \Elastica\Filter\BoolNot($match);
+
+        $filter_no = new \Elastica\Query\BoolQuery();
+        $filter_no->addMustNot($filter_no);
+
         $filter_or->addFilter($filter_no);
       }
-      $filter_and->addFilter($filter_or);
+      $filter->addFilter($filter_or);
     }
-
 
     if ($criteria->street_id && !$criteria->region_id) {
       $region_manager = ModelManagerFactory::getByName('street');
       $street = $region_manager->getOneById($criteria->street_id);
       $region_id = $street->regions[0]->getId();
-      $match = new \Elastica\Filter\Term();
+      $match = new \Elastica\Query\Term();
       $match->setTerm('clinics.region', $region_id);
-      $filter_and->addFilter($match);
+      $filter->addFilter($match);
     }
 
     if($criteria->geo_point) {
@@ -244,33 +248,34 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
         'lon' => $criteria->geo_point->getLongitude()
       );
       //$match = new \Elastica\Filter\GeoDistance('clinics.geo_point', $point, ($criteria->distance / 1000) . 'km');
-      $match = new \Elastica\Filter\GeoDistance('clinics.geo_point', $point, '1km');
-      $filter_and->addFilter($match);
+
+      $distance = $criteria->distance ? (string)(int) $criteria->distance : '1000';
+      $match = new \Elastica\Query\GeoDistance('clinics.geo_point', $point, $distance . 'm');
+      $filter->addFilter($match);
     }
 
     if ($criteria->is_has_clinic !== null) {
-      $match = new \Elastica\Filter\Term();
+      $match = new \Elastica\Query\Term();
       $match->setTerm('is_has_clinic', $criteria->is_has_clinic);
-      $filter_and->addFilter($match);
+      $filter->addFilter($match);
     }
 
     if ($criteria->is_has_active_clinic) {
-      $match = new \Elastica\Filter\Term();
+      $match = new \Elastica\Query\Term();
       $match->setTerm('is_has_active_clinic', true);
-      $filter_and->addFilter($match);
+      $filter->addFilter($match);
     }
 
     if ($criteria->has_visit_slots) {
-      $match = new \Elastica\Filter\Term();
+      $match = new \Elastica\Query\Term();
       $match->setTerm('is_has_visit_slots', true);
-      $filter_and->addFilter($match);
+      $filter->addFilter($match);
     }
 
-    $result_query = new \Elastica\Query();
-    $result_query->setFields(array('id', 'is_equal_to_geo'));
+    $complex_query = new \Elastica\Query\BoolQuery();
 
-    if (count($query->getParams())) {
-      $result_query->setQuery($query);
+    if ($query->getParams()) {
+        $complex_query->addMust($query);
     }
 
     // Если выполняется, то мы сортируем результаты группами
@@ -279,53 +284,78 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
     // Затем мы получем все остальные результаты, которые между собой также сортируются по баллам
     // Для этого добавляем к запросу одно псевдополе, в котором указываем, соответсвует ли оно критериям
     // геопоиска
-    
+
     if ($criteria->street_id) {
       //$result_query->addScriptField('is_equal_to_geo', new \Elastica\Script('((doc[\'clinics.street\'].value == '.$criteria->street_id.') ? 1 : 0)'));
-      $result_query->addSort(array(
-        '_script' => array(
-          'script' => '((doc[\'clinics.street\'].value == ' . $criteria->street_id . ') ? 1 : 0)',
-          "type" => "number",
-          "order" => "desc"
-        )
-      ));
+
+      $result_query->addSort([
+        '_script' => [
+          'type' => 'number',
+          'script' => [
+            'lang' => 'painless',
+            'inline' => '((doc[\'clinics.street\'].value == ' . (int) $criteria->street_id . ') ? 1 : 0)',
+          ],
+          "order" => "desc",
+        ]
+      ]);
     } elseif ($criteria->region_id) {
       //$result_query->addScriptField('is_equal_to_geo', new \Elastica\Script('((doc[\'clinics.region\'].value == '.$criteria->region_id.') ? 1 : 0)'));
-      $result_query->addSort(array(
-        '_script' => array(
-          'script' => '((doc[\'clinics.region\'].value == ' . $criteria->region_id . ') ? 1 : 0)',
-          "type" => "number",
-          "order" => "desc"
-        )
-      ));
+
+      $result_query->addSort([
+        '_script' => [
+          'type' => 'number',
+          'script' => [
+            'lang' => 'painless',
+            'inline' => '((doc[\'clinics.region\'].value == ' . (int) $criteria->region_id . ') ? 1 : 0)',
+          ],
+          "order" => "desc",
+        ]
+      ]);
+
     } elseif ($criteria->district_id) {
       //$result_query->addScriptField('is_equal_to_geo', new \Elastica\Script('((doc[\'clinics.district\'].value == '.$criteria->district_id.') ? 1 : 0)'));
-      $result_query->addSort(array(
-        '_script' => array(
-          'script' => '((doc[\'clinics.district\'].value == ' . $criteria->district_id . ') ? 1 : 0)',
-          "type" => "number",
-          "order" => "desc"
-        )
-      ));
+
+      $result_query->addSort([
+        '_script' => [
+          'type' => 'number',
+          'script' => [
+            'lang' => 'painless',
+            'inline' => '((doc[\'clinics.district\'].value == ' . (int) $criteria->district_id . ') ? 1 : 0)'
+          ],
+          "order" => "desc",
+        ]
+      ]);
     }
 
-    if (0 and $criteria->geo_point) {//TODO: починить запрос дальности от гео-точки. сейчас выдает ошибку у эластика
-      $result_query->addSort(array(
-        '_script' => array(
-//          'script' => '((doc[\'clinics.geo_point\'].arcDistanceInKm(' . $criteria->geo_point->getLatitude() . ', ' . $criteria->geo_point->getLongitude() . ') < ' . ($criteria->distance / 1000) . ') ? 1 : 0)',
-          'script' => '((doc[\'clinics.geo_point\'].arcDistanceInKm(' . $criteria->geo_point->getLatitude() . ', ' . $criteria->geo_point->getLongitude() . ') < ' . ('1') . ') ? 1 : 0)',
-          "type" => "number",
-          "order" => "desc"
-        )
-      ));
+    if ($criteria->geo_point) {
+      $distance = ($criteria->distance ? (int) $criteria->distance : 1000);
+      $result_query->addSort([
+        '_script' => [
+          'type' => 'number',
+          'script' => [
+            'lang' => 'painless',
+            'inline' => '(doc[\'clinics.geo_point\'].arcDistance(' . (float)$criteria->geo_point->getLatitude() . ', ' . (float) $criteria->geo_point->getLongitude() . ')) <= ' . $distance . ' ? 1 : 0'
+          ],
+          "order" => "desc",
+        ]
+      ]);
     }
 
-    if ($filter_and->getFilters()) {
-      $result_query->setFilter($filter_and);
+    if ($filter->getParams()) {
+      $complex_query->addFilter($filter);
     }
 
+    $result_query->setQuery($complex_query);
 
-    switch (!$criteria->doctor_name && $criteria->sort_by) {
+    if ($criteria->doctor_name) {
+      $result_query->addSort([
+        '_score' => [
+          'order' => 'desc'
+        ]
+      ]);
+    }
+
+    switch ($criteria->sort_by) {
       case 'balls':
       case 'rate':
         $result_query->addSort(array(
@@ -353,20 +383,37 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
         break;
     }
 
+      if ($criteria->sort_salt) {
+          // сортировка по псевдополю для "перетасовывания" врачей в листинге
+          $result_query->addSort([
+              '_script' => [
+                  'type'   => 'string',
+                  'script' => [
+                      'lang'   => 'painless',
+                      'inline' => "(doc['_uid'] + params.salt).hashCode()",
+                      'params' => [
+                          'salt' => (string)(int)$criteria->sort_salt
+                      ]
+                  ]
+              ]
+          ]);
+      }
+
     if ($criteria->page && $criteria->by_page) {
-      $size = $criteria->by_page+2;//TODO: какая-то хрень с количеством. Говоришь вывести два, выводит одного. Сделал четыре, неплохо было бы понять, какого хрена так...
-
-//TODO:  эти врачи могут быть и не найдены, поэтому закоментил. Пушшай себе пока впустую ищет, чуть по-позже разберемся
-//      if (count($criteria->primary_doctors_ids) and ($criteria->page == 1)) {
-//        $size -= count($criteria->primary_doctors_ids);
-//      }
-
+      $size = $criteria->by_page;
       if ($criteria->get_extra_item) {
         $result_query->setSize($size + 1);
       } else {
         $result_query->setSize($size);
       }
-      $result_query->setFrom(($criteria->page - 1) * $criteria->by_page);
+
+      $from = ($criteria->page - 1) * $criteria->by_page;
+
+      if ($criteria->page > 1) {
+        $from -= count($criteria->primary_doctors_ids);
+      }
+
+      $result_query->setFrom($from);
     } else {
       $result_query->setSize(10000);
       $result_query->setFrom(0);
@@ -379,6 +426,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
     $result = parent::search($criteria, $need_to_get_total_hits);
     if ($criteria->page == 1) {
       $result = array_merge($criteria->primary_doctors_ids, $result);
+      $result = array_slice($result, 0, $criteria->by_page + 1);
     }
 
     return $result;

@@ -15,13 +15,16 @@
 					'include_in_all' => true,
 				),
 				'full_name' => array(
-					'type' => 'string',
+					'type' => 'text',
 					'include_in_all' => true,
-					'analyzer' => 'autocomplete'
+					'analyzer' => 'autocomplete',
+          'search_analyzer' => 'searchAnalyzer',
+          'index' => true,
+          'store' => true,
 				),
 				'full_name_sort' => array(
-					'type' => 'string',
-					'index' => 'not_analyzed'
+					'type' => 'keyword',
+					'index' => true
 				),
 				'product_category' => array(
 					'type' => 'integer',

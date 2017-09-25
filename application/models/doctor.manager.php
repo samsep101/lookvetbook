@@ -770,6 +770,9 @@ class DoctorManager extends AliasManager
       $specialization = $specialization[0];
       $specialty_manager = ModelManagerFactory::getByName('specialty');
       $main_specialty = $specialty_manager->getMainOneBySpecializationId($specialization->getId(), $specialty->getId());
+      if (!is_array($main_specialty)) {
+        $main_specialty = [$main_specialty];
+      }
     }
 
     return $main_specialty;

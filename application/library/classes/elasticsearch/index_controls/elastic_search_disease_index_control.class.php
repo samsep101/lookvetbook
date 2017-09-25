@@ -45,9 +45,16 @@
 				$query->setFields(['name', 'alt_name']);
 				$query->setType('most_fields');
 				$query->setOperator(\Elastica\Query\MultiMatch::OPERATOR_AND);
-				$query->setMinimumShouldMatch("40%");
+				$query->setMinimumShouldMatch("80%");
 				$bool_query->addMust($query);
 			}
+
+			if ($criteria->tag) {
+			  $query = new \Elastica\Query\Match();
+			  $query->setFieldQuery('tags', $criteria->tag);
+			  $query->setFieldOperator('tags', \Elastica\Query\MultiMatch::OPERATOR_AND);
+        $bool_query->addMust($query);
+      }
 
 			$result_query = new \Elastica\Query();
 			if($bool_query->getParams())

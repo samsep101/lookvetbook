@@ -33,23 +33,21 @@
 
 			$bool_filter = new \Elastica\Query\BoolQuery();
 
-            /*if($criteria->geo_point)
-			{
-				$location = array(
-					'lat' => $criteria->geo_point->getLatitude(),
-					'lon' => $criteria->geo_point->getLongitude()
-				);
-				$distance = ($criteria->distance/1000).'km';
-				$filter = new \Elastica\Filter\GeoDistance('geo_point', $location, $distance);
-				$filter_and->addFilter($filter);
-			} */
-
+      if ($criteria->geo_point) {
+        $point = array(
+          'lat' => $criteria->geo_point->getLatitude(),
+          'lon' => $criteria->geo_point->getLongitude()
+        );
+        $distance = $criteria->distance ? (string)(int) $criteria->distance : '1000';
+        $match = new \Elastica\Query\GeoDistance('geo_point', $point, $distance . 'm');
+        $bool_filter->addFilter($match);
+      }
 
 			if($criteria->urgent_tests)
 			{
 				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('is_has_urgent_tests', true);
-                $bool_filter->addFilter($filter);
+        $bool_filter->addFilter($filter);
 			}
 
 			if($criteria->card_pay)
@@ -63,7 +61,7 @@
 			{
 				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('is_work_seven_days', true);
-                $bool_filter->addFilter($filter);
+        $bool_filter->addFilter($filter);
 			}
 
 			if($criteria->easy_entry)
@@ -77,21 +75,21 @@
 			{
 				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('is_without_turn', true);
-                $bool_filter->addFilter($filter);
+        $bool_filter->addFilter($filter);
 			}
 
 			if($criteria->day_and_night)
 			{
 				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('is_day_and_night', true);
-                $bool_filter->addFilter($filter);
+        $bool_filter->addFilter($filter);
 			}
 
 			if($criteria->city_id)
 			{
 				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('city', $criteria->city_id);
-                $bool_filter->addFilter($filter);
+        $bool_filter->addFilter($filter);
 			}
 
 			$result_query = new \Elastica\Query();
@@ -105,7 +103,7 @@
             'type' => 'number',
             'script' => [
               'lang' => 'painless',
-              'inline' => '(doc[\'geo_point\'].arcDistance(' . $criteria->geo_point->getLatitude() . ', ' . $criteria->geo_point->getLongitude() . ')) <= ' . $distance .  ' ? 1 : 0'
+              'inline' => '(doc[\'geo_point\'].arcDistance(' . (float)$criteria->geo_point->getLatitude() . ', ' . (float)$criteria->geo_point->getLongitude() . ')) <= ' . $distance .  ' ? 1 : 0'
             ],
             "order" => "desc",
           ]

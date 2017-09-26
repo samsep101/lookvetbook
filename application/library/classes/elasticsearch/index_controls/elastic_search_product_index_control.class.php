@@ -43,15 +43,15 @@
 
 			if($criteria->full_name)
 			{
-                $name = preg_replace('/\-/', '\\-', $criteria->full_name);
+        $name = preg_replace('/\-/', '\\-', $criteria->full_name);
 				$query->setFieldQuery('full_name', $name);
 				$query->setFieldOperator('full_name', 'AND');
 			}
 
 			if($criteria->product_categories)
 			{
-				$filter = new \Elastica\Query\Term();
-				$filter->setTerm('product_category', $criteria->product_categories);
+				$filter = new \Elastica\Query\Terms();
+				$filter->setTerms('product_category', $criteria->product_categories);
 				$bool_filter->addFilter($filter);
 			}
 

@@ -33,8 +33,6 @@
 
 			$bool_filter = new \Elastica\Query\BoolQuery();
 
-//			$filter_and = new \Elastica\Filter\BoolAnd();
-
             /*if($criteria->geo_point)
 			{
 				$location = array(

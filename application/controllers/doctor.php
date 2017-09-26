@@ -1535,7 +1535,6 @@ class DoctorController extends BaseController
 
         $clinics_count = $this->ajaxSearch__clinics_count($doctors, $doctor_search_params);
         if ($specialty) {
-//            list($doctors, $total_number_doctors, $getNextPageFlag) = $this->ajaxSearch__search_wo_doctname($doctor_search_params, $doctor_manager, $specialty, $doctors, $exclude_doctor_ids);
             $doctors_total_count = !empty($total_number_doctors) ? $total_number_doctors : $doctor_manager->getCountByModelSearchCriteria($doctor_search_params);
             $specialty_name = SpecialtyHelper::getNameByCount($doctor_search_params->specialty_id, $doctors_total_count);
             $canonicalLink = AliasLinkViewHelper::getLink('doctor', $specialty);

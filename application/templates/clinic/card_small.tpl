@@ -6,7 +6,13 @@
      * @var AccountModel $current_account
 	 * @var Cache_Lite $cache
      */
-    $doctor_total_count = count($clinic->additional_params['doctors_main_specialty']['total_doctors']);
+    if (isset($clinic->additional_params['doctors_main_specialty']['total_doctors'])) {
+      $doctor_total_count = count($clinic->additional_params['doctors_main_specialty']['total_doctors']);
+    } else if (isset($clinic->additional_params['doctors_main_specialty']['doctors'])) {
+      $doctor_total_count = count($clinic->additional_params['doctors_main_specialty']['doctors']);
+    } else {
+      $doctor_total_count = 0;
+    }
 ?>
 
 

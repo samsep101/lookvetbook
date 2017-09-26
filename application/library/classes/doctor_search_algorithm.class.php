@@ -74,7 +74,10 @@ class DoctorSearchAlgorithm
       $specialty_manager = new SpecialtyManager();
       $specialty = $specialty_manager->getOneByIdOrAlias($doctor_search_params->specialty_id);
 
-      $specialities = array_map(function($v) {return $v->id;}, $this->manager->getRelatedSpecialties($specialty));
+      $specialities = array_map(function ($v) {
+        return $v->id;
+      }, array_filter($this->manager->getRelatedSpecialties($specialty)
+      ));
 
       // todo получение всех специальностей, пока так, затем можно переделать на более адекватный код
       $specialities[] = $doctor_search_params->specialty_id;

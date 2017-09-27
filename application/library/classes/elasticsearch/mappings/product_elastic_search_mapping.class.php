@@ -24,7 +24,6 @@
 				),
 				'full_name_sort' => array(
 					'type' => 'keyword',
-//					'index' => true
 				),
 				'product_category' => array(
 					'type' => 'integer',

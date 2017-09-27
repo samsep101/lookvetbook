@@ -29,37 +29,40 @@
 			/**
 			 * @var DiseaseSearchCriteria $criteria
 			 */
-			$query = new \Elastica\Query\Match();
+			$bool_query = new \Elastica\Query\BoolQuery();
 
-			$filter_and = new \Elastica\Filter\BoolAnd();
 			if($criteria->is_active)
 			{
-				$filter = new \Elastica\Filter\Term();
+				$filter = new \Elastica\Query\Term();
 				$filter->setTerm('is_active', true);
-
-				$filter_and->addFilter($filter);
+                $bool_query->addFilter($filter);
 			}
 
 			if($criteria->name)
 			{
 				$query = new \Elastica\Query\MultiMatch();
 				$query->setQuery($criteria->name);
-				$query->setFields(array('name', 'alt_name'));
+				$query->setFields(['name', 'alt_name']);
+				$query->setType('most_fields');
+				$query->setOperator(\Elastica\Query\MultiMatch::OPERATOR_AND);
+				$query->setMinimumShouldMatch("80%");
+				$bool_query->addMust($query);
 			}
+
+			if ($criteria->tag) {
+			  $query = new \Elastica\Query\Match();
+			  $query->setFieldQuery('tags', $criteria->tag);
+			  $query->setFieldOperator('tags', \Elastica\Query\MultiMatch::OPERATOR_AND);
+        $bool_query->addMust($query);
+      }
 
 			$result_query = new \Elastica\Query();
-			if(count($query->getParams()))
+			if($bool_query->getParams())
 			{
-				$result_query->setQuery($query);
+				$result_query->setQuery($bool_query);
 			}
-
-			if(count($filter_and->getFilters()))
-			{
-				$result_query->setFilter($filter_and);
-			}
-
 			$this->addPaging($criteria, $result_query);
-			$result_query->setFields(array('id'));
+			$result_query->setStoredFields(['id']);
 
 			return $result_query;
 		}

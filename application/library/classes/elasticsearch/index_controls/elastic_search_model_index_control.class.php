@@ -203,10 +203,6 @@ abstract class ElasticSearchModelIndexControl implements IElasticSearchModelInde
 
     $mapping = new \Elastica\Type\Mapping();
     $mapping->setType($type);
-    $mapping->setParam('index_analyzer', 'indexAnalyzer');
-    $mapping->setParam('search_analyzer', 'searchAnalyzer');
-
-    $mapping->setParam('_boost', array('name' => '_boost', 'nullvalue' => '1.0'));
 
     $mapper = $this->getObjectFactory()->getMapper();
     $mapping->setProperties($mapper->getFieldsMapping());

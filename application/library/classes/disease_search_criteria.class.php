@@ -3,5 +3,5 @@
 	{
 		public $name;
 		public $is_active = true;
-		public $tag = true;
+		public $tag = null;
 	}

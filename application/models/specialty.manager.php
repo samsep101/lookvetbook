@@ -609,12 +609,13 @@
             return $this->initList($data);
         }
 
-        public function getSuitableListBySpecialtyIdAndPurposeOfVisitId($specialty_id, $purpose_of_visit_id)
+        public function getSuitableListBySpecialtyIdAndPurposeOfVisitId($specialty_ids, $purpose_of_visit_id)
         {
-            $sql = 'SELECT s.*
+          $specialty_ids = implode(", ", array_map(function($value) {return (int)$value;}, $specialty_ids));
+          $sql = 'SELECT s.*
 					FROM specialty s
 					INNER JOIN suitable_specialty ss ON s.id = ss.suitable_specialty_id
-					WHERE ss.specialty_id = ' . (int)$specialty_id . '
+					WHERE ss.specialty_id IN ('. $specialty_ids . ')
 						AND ss.purpose_of_visit_id = ' . (int)$purpose_of_visit_id;
 
             $data = $this->db->query($sql);

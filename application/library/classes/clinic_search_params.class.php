@@ -41,7 +41,7 @@
 
         public $metro_station_name;
         public $metro_branch_name;
-        public $distance = 2000;
+        public $distance = 9000;
 
         public $page;
         public $by_page;

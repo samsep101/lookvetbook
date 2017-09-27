@@ -17,10 +17,10 @@
 
 			if($doctor->specialties)
 			{
-				$result['specialties'] = array();
+				$result['specialty_ids'] = array();
 				foreach($doctor->specialties as $specialty)
 				{
-					$result['specialties'][] = $specialty->getId();
+					$result['specialty_ids'][] = $specialty->getId();
 				}
 			}
 

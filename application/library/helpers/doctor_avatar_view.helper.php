@@ -61,14 +61,20 @@
                 foreach($doctor->images as $image){
                     $html .= '<li><a data-fancybox-type="iframe" href="/doctor/getDoctorPhotos?doctor_id='.$doctor->getId().'">';
 
+                    $croppedImage = $image->cropWithWatermark($width, $height);
+
                     if($first)
                     {
                         $first = 0;
-                        $html .= '<img src="'.$image->cropWithWatermark($width, $height)->path.'" alt="'.$doctor->specialties_names.' '.$doctor->full_name.'" itemprop="image" />';
+                        if ($croppedImage) {
+                            $html .= '<img src="'.$image->cropWithWatermark($width, $height)->path.'" alt="'.$doctor->specialties_names.' '.$doctor->full_name.'" itemprop="image" />';
+                        } else {
+                            $html .= '<img src="/media/images/no_photo_doctor.jpg" width="186" height="241" alt="'.$doctor->specialties_names.' '.$doctor->full_name.'" itemprop="photo" />';
+                        }
                     }
                     else
                     {
-                        $html .= '<img src="'.$image->cropWithWatermark($width, $height)->path.'" alt="'.$doctor->specialties_names.' '.$doctor->full_name.'">';
+                        $html .= $croppedImage ? '<img src="'.$image->cropWithWatermark($width, $height)->path.'" alt="'.$doctor->specialties_names.' '.$doctor->full_name.'">' : '';
                     }
 
                     $html .= '</a></li>';
@@ -96,7 +102,10 @@
                     $html .= '<div class="carousel carousel-navigation">';
                         $html .= '<ul>';
                         foreach($doctor->images as $image) {
-                            $html .= '<li><img src="'.$image->crop($width, $height)->path.'" alt="'.$doctor->specialties_names.' '.$doctor->full_name.'"></li>';
+                            $croppedImage = $image->crop($width, $height);
+                            if ($croppedImage) {
+                                $html .= '<li><img src="'. $croppedImage->path.'" alt="'.$doctor->specialties_names.' '.$doctor->full_name.'"></li>';
+                            }
                         }
                         $html .= '</ul>';
                     $html .='</div>';

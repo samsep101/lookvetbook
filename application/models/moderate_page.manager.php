@@ -41,7 +41,7 @@ class ModeratePageManager
     // о клинике
     $sql = '
         SELECT SQL_CALC_FOUND_ROWS * FROM (
-          SELECT ' . ModeratePageTypeModel::CLINIC_ABOUT . ' type_id,
+          (SELECT ' . ModeratePageTypeModel::CLINIC_ABOUT . ' type_id,
             a.clinic_id as entry_id,
             a.dt,
             a.moderate_status_id
@@ -64,13 +64,13 @@ class ModeratePageManager
       }
     }
 
-    $sql .= ' LIMIT 5 ';
+    $sql .= ' LIMIT 5) ';
 
 
     // лицензии клиники
     $sql .= '
       UNION
-        SELECT ' . ModeratePageTypeModel::CLINIC_LICENSE . ' type_id,
+        (SELECT ' . ModeratePageTypeModel::CLINIC_LICENSE . ' type_id,
           a.clinic_id as entry_id,
           a.dt,
           a.moderate_status_id
@@ -92,13 +92,13 @@ class ModeratePageManager
         $sql .= ' WHERE ' . join(' AND ', $where) . ' ';
     }
     //TODO: саня зачем-то убрал и забыл вернуть? спросить!
-    $sql .=  ' LIMIT 5 ';
+    $sql .=  ' LIMIT 5) ';
 
     // реквизиты клиники
     $sql .= '
           UNION
 
-          SELECT ' . ModeratePageTypeModel::CLINIC_REQUISITES . ' type_id,
+          (SELECT ' . ModeratePageTypeModel::CLINIC_REQUISITES . ' type_id,
             a.clinic_id as entry_id,
             a.dt,
             a.moderate_status_id
@@ -121,13 +121,13 @@ class ModeratePageManager
     }
 
     //TODO: саня зачем-то убрал и забыл вернуть? спросить!
-    $sql .=  ' LIMIT 5 ';
+    $sql .=  ' LIMIT 5) ';
 
     // описание клиники
     $sql .= '
           UNION
 
-          SELECT ' . ModeratePageTypeModel::CLINIC_DESCRIPTION . ' type_id,
+          (SELECT ' . ModeratePageTypeModel::CLINIC_DESCRIPTION . ' type_id,
             a.clinic_id as entry_id,
             a.dt,
             a.moderate_status_id
@@ -150,13 +150,13 @@ class ModeratePageManager
     }
 
     //TODO: саня зачем-то убрал и забыл вернуть? спросить!
-    $sql .=  ' LIMIT 5 ';
+    $sql .=  ' LIMIT 5) ';
 
     // фотографии клиники
     $sql .= '
           UNION
 
-          SELECT ' . ModeratePageTypeModel::CLINIC_PHOTOS . ' type_id,
+          (SELECT ' . ModeratePageTypeModel::CLINIC_PHOTOS . ' type_id,
             a.clinic_id as entry_id,
             a.dt,
             a.moderate_status_id
@@ -179,13 +179,13 @@ class ModeratePageManager
     }
 
     //TODO: саня зачем-то убрал и забыл вернуть? спросить!
-    $sql .=  ' LIMIT 5 ';
+    $sql .=  ' LIMIT 5) ';
 
     // страница о докторе
     $sql .= '
           UNION
 
-          SELECT ' . ModeratePageTypeModel::DOCTOR_ABOUT . ' type_id,
+          (SELECT ' . ModeratePageTypeModel::DOCTOR_ABOUT . ' type_id,
             a.doctor_id as entry_id,
             a.dt,
             a.moderate_status_id
@@ -211,13 +211,13 @@ class ModeratePageManager
     }
 
     //TODO: саня зачем-то убрал и забыл вернуть? спросить!
-    $sql .=  ' LIMIT 5 ';
+    $sql .=  ' LIMIT 5) ';
 
     // фотографии доктора
     $sql .= '
           UNION
 
-          SELECT ' . ModeratePageTypeModel::DOCTOR_PHOTOS . ' type_id,
+          (SELECT ' . ModeratePageTypeModel::DOCTOR_PHOTOS . ' type_id,
             a.doctor_id as entry_id,
             a.dt,
             a.moderate_status_id
@@ -243,13 +243,13 @@ class ModeratePageManager
     }
 
     //TODO: саня зачем-то убрал и забыл вернуть? спросить!
-    $sql .=  ' LIMIT 5 ';
+    $sql .=  ' LIMIT 5) ';
 
     // списки для клиники
     $sql .= '
           UNION
 
-          SELECT CASE
+          (SELECT CASE
               WHEN (a.list_name = "feature_to_clinic") THEN ' . ModeratePageTypeModel::CLINIC_FEATURES . '
               WHEN (a.list_name = "specialty_to_clinic") THEN ' . ModeratePageTypeModel::CLINIC_SPECIALTIES . '
             END type_id,
@@ -280,13 +280,13 @@ class ModeratePageManager
     }
 
     //TODO: саня зачем-то убрал и забыл вернуть? спросить!
-    $sql .=  ' LIMIT 5 ';
+    $sql .=  ' LIMIT 5) ';
 
     // списки врачей
     $sql .= '
           UNION
 
-          SELECT ' . ModeratePageTypeModel::DOCTOR_SPECIALTIES . ' type_id,
+          (SELECT ' . ModeratePageTypeModel::DOCTOR_SPECIALTIES . ' type_id,
             a.entity_id as entry_id,
             a.dt,
             a.moderate_status_id
@@ -312,7 +312,7 @@ class ModeratePageManager
         $sql .= ' AND ' . join(' AND ', $where) . ' ';
     }
 
-    $sql .= ') m ';
+    $sql .= ') ) m ';
 
     $where = array();
     if ($params->moderate_status_id) {

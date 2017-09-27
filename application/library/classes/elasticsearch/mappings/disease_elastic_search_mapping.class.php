@@ -15,18 +15,23 @@
 					'include_in_all' => true,
 				),
 				'name' => array(
-					'type' => 'string',
+					'type' => 'text',
+					'index' => true,
 					'include_in_all' => true,
 					'analyzer' => 'autocomplete',
-					'_boost' => 5,
+					'search_analyzer' => 'searchAnalyzer',
+					'boost' => 2,
 				),
 				'alt_name' => array(
-					'type' => 'string',
+					'type' => 'text',
+					'index' => true,
 					'include_in_all' => false,
-					'analyzer' => 'autocomplete'
+					'analyzer' => 'autocomplete',
+          'search_analyzer' => 'searchAnalyzer',
 				),
 				'tags' => array(
-					'type' => 'string',
+					'type' => 'keyword',
+					'index' => true,
 					'include_in_all' => false,
 				),
 				'is_active' => array(

@@ -20,17 +20,19 @@
             $html = '';
 
             if ($clinic->card_image) {
-                $html = '<a href="'.ClinicPageLinkViewHelper::getLink($clinic).'">';
-                $html .= '<img src="' . $clinic->card_image->crop($width, $height)->path . '" alt="' . $clinic->name . '"/>';
-                $html .= '</a>';
-                return $html;
-
+                $croppedImage = $clinic->card_image->crop($width, $height);
+                if ($croppedImage) {
+                    $html = '<a href="'.ClinicPageLinkViewHelper::getLink($clinic).'">';
+                    $html .= '<img src="' . $croppedImage->path . '" alt="' . $clinic->name . '"/>';
+                    $html .= '</a>';
+                }
             } else {
                 $html = '<a href="'.ClinicPageLinkViewHelper::getLink($clinic).'">';
                 $html .= '<img src="/media/images/no_clinic_small.gif" width="74" height="31" alt="' . $clinic->name . '"/>';
                 $html .= '</a>';
-                return $html;
             }
+
+            return $html;
         }
 
         public static function viewOnPage(ClinicModel $clinic, $width, $height)

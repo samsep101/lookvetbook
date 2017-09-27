@@ -8,7 +8,10 @@
 
 	        if ($metro_branch->image)
 	        {
-		        $image_path = $metro_branch->image->crop(17,14)->path;
+	            $croppedImage = $metro_branch->image->crop(17,14);
+	            if ($croppedImage) {
+                    $image_path = $croppedImage->path;
+                }
 	        }
             if ($image_path)
                 $image ='<img src="'.$image_path.'" alt="'.$metro_branch->name.'">';

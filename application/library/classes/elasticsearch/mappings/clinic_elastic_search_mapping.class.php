@@ -44,8 +44,9 @@
                     ),
                 ),
                 'address' => array(
-                    'type'           => 'string',
-                    'include_in_all' => TRUE
+                    'type'           => 'text',
+                    'index'          => true,
+                    'include_in_all' => TRUE,
                 ),
                 'specializations' => array(
                     'type'           => 'integer',
@@ -72,8 +73,12 @@
                     'include_in_all' => FALSE,
                 ),
                 'name' => array(
-                    'type'           => 'string',
-                    'include_in_all' => TRUE
+                    'type'           => 'text',
+                    'index'          => true,
+                    'include_in_all' => TRUE,
+                    'analyzer'       => 'autocomplete',
+                    'search_analyzer' => 'searchAnalyzer',
+                    'boost' => 2,
                 ),
                 'doctors' => array(
                     'type'           => 'integer',
@@ -136,8 +141,9 @@
                     'include_in_all' => FALSE,
                 ),
                 'rate' => array(
-                    'type'           => 'float',
-                    'include_in_all' => FALSE
+                  'type' => 'scaled_float',
+                  'scaling_factor' => 100,
+                  'include_in_all' => true,
                 ),
                 'only_children' => array(
                     'type'           => 'boolean',

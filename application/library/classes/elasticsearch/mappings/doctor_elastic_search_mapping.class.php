@@ -19,7 +19,7 @@
 					'type' => 'integer',
 					'include_in_all' => true
 				),
-				'specialties' => array(
+				'specialty_ids' => array(
 					'type' => 'integer',
 					'include_in_all' => false
 				),
@@ -56,9 +56,11 @@
 					'include_in_all' => true
 				),
 				'full_name' => array(
-					'type' => 'string',
+					'type' => 'text',
 					'include_in_all' => true,
-					'search_analyzer' => 'autocomplete',
+					'analyzer' => 'autocomplete',
+          'search_analyzer' => 'searchAnalyzer',
+          'index' => true,
 					'store' => true,
 				),
 				'sex' => array(
@@ -156,8 +158,9 @@
 					'include_in_all' => true
 				),
 				'rate' => array(
-					'type' => 'float',
-					'include_in_all' => true
+					'type' => 'scaled_float',
+					'scaling_factor' => 100,
+					'include_in_all' => true,
 				),
 				'is_has_clinic' => array(
 					'type' => 'boolean',

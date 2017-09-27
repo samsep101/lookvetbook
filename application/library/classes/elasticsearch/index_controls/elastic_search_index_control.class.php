@@ -26,7 +26,6 @@ class ElasticSearchIndexControl implements IElasticSearchIndexControl
     return $this->elastica_api;
   }
 
-
   /**
    * Создание нового индекса
    *
@@ -38,34 +37,34 @@ class ElasticSearchIndexControl implements IElasticSearchIndexControl
   {
     $index = $this->getIndex($index_name);
     $index->create(array(
-      'number_of_shards' => 4,
+      'number_of_shards'   => 4,
       'number_of_replicas' => 1,
-      'analysis' => array(
+      'analysis'           => array(
         'analyzer' => array(
-          'indexAnalyzer' => array(
-            'type' => 'custom',
+          'indexAnalyzer'  => array(
+            'type'      => 'custom',
             'tokenizer' => 'standard',
-            'filter' => array('lowercase', 'russian_morphology', 'mynGram', 'tags_filter'),
+            'filter'    => array('lowercase', 'russian_morphology', 'tags_filter'),
           ),
           'searchAnalyzer' => array(
-            'type' => 'custom',
+            'type'      => 'custom',
             'tokenizer' => 'standard',
-            'filter' => array('lowercase', 'russian_morphology', 'mynGram', 'tags_filter'),
+            'filter'    => array('lowercase', 'russian_morphology', 'tags_filter'),
           ),
-          'autocomplete' => array(
-            'type' => 'custom',
+          'autocomplete'   => array(
+            'type'      => 'custom',
             'tokenizer' => 'standard',
-            'filter' => array('lowercase', 'russian_morphology', 'mynGram', 'tags_filter'),
+            'filter'    => array('lowercase', 'russian_morphology', 'tags_filter'),
           ),
         ),
-        'filter' => array(
-          'mynGram' => array(
-            "type" => "EdgeNGram",
+        'filter'   => array(
+          'mynGram'     => array(
+            "type"     => "edgeNGram",
             "min_gram" => 3,
             "max_gram" => 30
           ),
           "tags_filter" => array(
-            "type" => "word_delimiter",
+            "type"       => "word_delimiter",
             "type_table" => array("-" => "ALPHA"),
           ),
         ),

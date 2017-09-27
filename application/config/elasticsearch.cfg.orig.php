@@ -23,10 +23,10 @@
 	Register::add('ELASTIC_SEARCH_INDEX', 'lookmedbook');
 
 	Register::add('ELASTICA_SERVERS', array(
-		array(
+		"servers" => array(array(
 			'host' => 'localhost',
 			'port' => 9200
-		)
+		))
 	));
 
 	$index_models = array(

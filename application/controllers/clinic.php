@@ -218,13 +218,9 @@ class ClinicController extends BaseController
 
   public function getClinicPageDescription() {
 
+    $seo_specialization= $this->view->specialization ? $this->view->specialization->name : null;
 
-
-    if ($this->view->specialization) {
-        $seo_specialization=$this->view->specialization->name;
-    }
-
-    if ($this->view->clinic->name) {
+    if (isset($this->view->clinic->name)) {
 
         return  SeoTextViewHelper::newGetClinicPageDescription($this->view->clinic);
 

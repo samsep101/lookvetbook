@@ -7,6 +7,8 @@
 
 			$validator = new Validator();
 			$validator->validate($doctor_review->doctor_review_text, $validation_rules->get('doctor_review'), $doctor_review);
+			$validator->validate($doctor_review->doctor_id, $validation_rules->get('doctor'), $doctor_review);
+			$validator->validate($doctor_review->account_id, $validation_rules->get('account'), $doctor_review);
 
 			if(!$validator->checkStatus())
 			{

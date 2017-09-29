@@ -287,9 +287,8 @@ class ModelManager implements ICachedModelManager
   {
     $params_array = $this->formParamsArrayFromModel($model);
     $id = $this->orm_model->insert($params_array);
-    $this->models_register[$id] = $model->setId($id);
-
     $model->setId($id);
+    $this->models_register[$id] = $model;
   }
 
   public function delete(DynamicModel $object)

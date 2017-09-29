@@ -42,7 +42,7 @@
     'extra'   => array(
       'specializations' => array(
         'table' => 'specialty_to_specialization',
-        'title' => 'Области медицины',
+        'title' => 'Области ' . MEDICYNY,
         'field' => 'specialty_id'
       ),
       'synonyms' => array(
@@ -75,7 +75,7 @@
         'specializations_count'  => ' ',
         'purposes_of_visit_count'  => ' ',
         'for_whom'  => 'Взрослая/Детская',
-        'view_specializations'  => 'Области медицины',
+        'view_specializations'  => 'Области ' . MEDICYNY,
       ),
       'list'   => array(
         'fields'  => array(

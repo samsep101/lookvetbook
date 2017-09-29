@@ -1,7 +1,7 @@
 <?php
 $specialization_synonym = array(
 	'table'     => DB_PREFIX . 'specialization_synonym',
-	'title'     => 'Синонимы областей медицины',
+	'title'     => 'Синонимы областей ' . MEDICYNY,
 	'fields'    => array(
 		'id'           => 'index',
 		'name'         => 'input',
@@ -21,7 +21,7 @@ $specialization_synonym = array(
 		'fields' => array(
 			'id'           => 'ID',
 			'name'         => 'Название',
-			'specialization_id'         => 'Область медицины',
+			'specialization_id'         => 'Область ' . MEDICYNY,
 		),
 		'list'   => array(
 			'fields'  => array('specialization_id', 'name'),

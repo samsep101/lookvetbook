@@ -1605,9 +1605,6 @@ class DoctorController extends BaseController
             'topNumberH1' => $topNumberH1,
             'canonicalLink' => $canonicalLink,
             'defaultSpecialty' => $defaultSpecialty,
-            'memory' => memory_get_peak_usage(),
-            'xdebug' => xdebug_get_tracefile_name(),
-            'xdebug_prof' => xdebug_get_profiler_filename(),
         );
 
         JsonResponse::result($result);

@@ -31,4 +31,10 @@ define('DOCTORA', 'врача');
 define('MEDICYNY', 'медицины');
 
 
+define('DOCTOR', 'ветеринар');
+define('DOCTORA', 'ветеринара');
+
+define('MEDICYNY', 'ветеринарии');
+
+
 

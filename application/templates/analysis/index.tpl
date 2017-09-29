@@ -11,6 +11,13 @@
         var analysis_page_controller = new AnalysisPageController();
 		analysis_page_controller.city_id = <?php echo $city->getId(); ?>;
 		analysis_page_controller.city_alias = "<?php echo $city->alias; ?>";
+
+        analysis_page_controller.card_pay = <?php echo $card_pay; ?>;
+        analysis_page_controller.urgent_tests = <?php echo $urgent_tests; ?>;
+        analysis_page_controller.day_and_night = <?php echo $day_and_night; ?>;
+        analysis_page_controller.work_seven_days = <?php echo $work_seven_days; ?>;
+        analysis_page_controller.easy_entry = <?php echo $easy_entry; ?>;
+
         analysis_page_controller.init();
     });
 </script>
@@ -43,23 +50,23 @@
                 <p class="h-txt">Выбрать критерии:</p>
                 <ul class="choose-list">
                     <li class="urgent_tests">
-                        <div class="chekBox"><span></span>Срочно<input type="hidden" value="0">
+                        <div class="chekBox <? if ($urgent_tests) echo 'act';?>"><span></span>Срочно<input type="hidden" value="0">
                         </div>
                     </li>
                     <li class="day_and_night">
-                        <div class="chekBox"><span></span>24 часа<input type="hidden" value="0">
+                        <div class="chekBox <? if ($day_and_night) echo 'act';?>"><span></span>24 часа<input type="hidden" value="0">
                         </div>
                     </li>
                     <li class="work_seven_days">
-                        <div class="chekBox"><span></span>Без выходных<input type="hidden" value="0">
+                        <div class="chekBox <? if ($work_seven_days) echo 'act';?>"><span></span>Без выходных<input type="hidden" value="0">
                         </div>
                     </li>
                     <li class="easy_entry">
-                        <div class="chekBox"><span></span>Вход для колясок<input type="hidden" value="0">
+                        <div class="chekBox <? if ($easy_entry) echo 'act';?>"><span></span>Вход для колясок<input type="hidden" value="0">
                         </div>
                     </li>
                     <li class="card_pay">
-                        <div class="chekBox"><span></span>Оплата по карте<input type="hidden" value="0">
+                        <div class="chekBox <? if ($card_pay) echo 'act';?>"><span></span>Оплата по карте<input type="hidden" value="1">
                         </div>
                     </li>
                 </ul>

@@ -43,16 +43,6 @@
         }
 
         /**
-         * return SpecialtyModel[]
-         */
-        public function getAllSpecialities()
-        {
-            $data = $this->orm_model->select()->fetchAll();
-
-            return (count($data)) ? $this->initList($data) : array();
-        }
-
-        /**
          * @return SpecialtyModel[]
          */
         public function getRootList()
@@ -79,32 +69,6 @@
             $data = $this->db->query($sql);
 
             return (isset($data[0])) ? $this->initOne($data[0]) : NULL;
-        }
-
-        /**
-         * @return SpecialtyModel
-         */
-        public function getOneByAliasOrSyninim($alias)
-        {
-            $sql = 'SELECT *
-                    FROM specialty
-                    WHERE alias LIKE "' . $this->db->escape($alias) . '"';
-
-            $data = $this->db->query($sql);
-
-            if (isset($data[0]))
-            return $this->initOne($data[0]);
-
-            $sql = 'SELECT *
-                    FROM specialty
-                    WHERE alias_synonim like "%' . $this->db->escape($alias) . '%"';
-
-            $data = $this->db->query($sql);
-
-            if (isset($data[0]))
-                return $this->initOne($data[0]);
-
-            return null;
         }
 
         /**
@@ -570,10 +534,11 @@
             if (count($data) == 0){
                 $sql = 'SELECT *, 1 as is_adult, 1 as is_male, 1 as is_female, 1 as is_children, 1 as is_newborn, 1 as is_pregnant
                     FROM specialty s                    
-                    WHERE s.id = 29';
+                    WHERE s.id = 1';
 
                 $data = $this->db->query($sql);
             }
+
 
             return count($data) ? $this->initList($data) : array();
         }
@@ -612,7 +577,7 @@
         public function getSuitableListBySpecialtyIdAndPurposeOfVisitId($specialty_ids, $purpose_of_visit_id)
         {
           $specialty_ids = implode(", ", array_map(function($value) {return (int)$value;}, $specialty_ids));
-          $sql = 'SELECT s.*
+            $sql = 'SELECT s.*
 					FROM specialty s
 					INNER JOIN suitable_specialty ss ON s.id = ss.suitable_specialty_id
 					WHERE ss.specialty_id IN ('. $specialty_ids . ')
@@ -718,7 +683,7 @@
          */
         public function getSuitableListBySpecialtyId($specialty_id)
         {
-            $sql = 'SELECT s.*
+          $sql = 'SELECT s.*
 					FROM specialty s
 					INNER JOIN suitable_specialty ss ON s.id = ss.suitable_specialty_id
 					WHERE ss.specialty_id = ' . (int)$specialty_id;

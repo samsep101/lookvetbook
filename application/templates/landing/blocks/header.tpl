@@ -17,7 +17,7 @@
             <a href="#reviews">Отзывы</a>
 
             <div class="phone-block phone-with-time">
-                <span class=""> 8 (<?php echo SITE_PHONE_CODE; ?>) <span class="bigger-span"><?php echo SITE_PHONE; ?></span> </span>
+                <span class=""> 8 (495) <span class="bigger-span">215-09-07</span> </span>
                 <span class="small-time">с 9:00 до 21:00 </span>
             </div>
         </div>

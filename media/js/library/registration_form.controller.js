@@ -73,9 +73,15 @@ var RegistrationFormController = function (action_for_counters) {
 
         self.email =  self.popup.getElement('input[name="email"]').val();
         self.password = self.popup.getElement('input[name="password"]').val();
+        self.pet_type = self.popup.getElement('input[name="pet_type"]').val();
+        self.pet_name = self.popup.getElement('input[name="pet_name"]').val();
+        self.pet_age = self.popup.getElement('input[name="pet_age"]').val();
 
         var options = {
             email: self.email,
+            pet_type: self.pet_type,
+            pet_name: self.pet_name,
+            pet_age: self.pet_age,
             password: self.password
         };
 

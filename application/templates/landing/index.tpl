@@ -33,7 +33,7 @@
             </div>
             <div class="landing-checkbox next">
                 <span>Мы эксперты в области</span>
-                <span>оказания медицинских</span>
+                <span>оказания ветеринарных</span>
                 <span>услуг</span>
             </div>
         </div>

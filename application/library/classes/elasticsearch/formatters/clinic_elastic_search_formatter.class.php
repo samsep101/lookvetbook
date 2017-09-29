@@ -129,10 +129,6 @@
             {
                 $result['status'] = $model->clinic_status_id;
             }
-            if($model->metro_station_id)
-            {
-                $result['metro_station_id'] = $model->metro_station_id;
-            }
 
             if($model->region_id)
             {

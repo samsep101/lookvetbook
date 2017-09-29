@@ -37,19 +37,4 @@ class ActionManager extends AliasManager
 
         return (count($data)) ? $this->initList($data) : array();
     }
-
-    public function getActionsByDoctorId($doctor_id){
-        $sql = '  select a.*
-                    from doctor d
-                   inner join doctor_to_clinic dc on dc.doctor_id=d.id
-                   inner join specialty_to_doctor sd on (sd.doctor_id=d.id and sd.clinic_id=dc.clinic_id)
-                   inner join specialty_to_specialization ss on (ss.specialty_id=sd.specialty_id)
-                   inner join specialization s on (s.id=ss.specialization_id)
-                   inner join `action` a on (a.clinic_id=dc.clinic_id and now() between a.date_from and a.date_to)
-                   inner join action_to_specialization asp on (asp.action_id=a.id and asp.specialization_id=s.id)
-                   where d.id='.(int)$doctor_id;
-        $data = $this->db->query($sql);
-        return (isset($data)) ? $this->initList($data) : array();
-    }
-
 }

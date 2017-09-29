@@ -36,7 +36,7 @@ $(function() {
 	<?php foreach ($groups as $groupName=>$groupSettings){?>
 		<div id="tabSettings-<?php echo $i; ?>" class="generatorEditDiv">
 		<h4><?php echo $groupName; ?></h4>
-		    <div <?=(isset($tabs) && count($tabs) != 1)?'style="display:none;"':'';?>>
+		    <div <?php =(isset($tabs) && count($tabs) != 1)?'style="display:none;"':'';?>>
 				<table width="100%" cellspacing="0" cellpadding="0" class="list">
 					
 					<tbody>

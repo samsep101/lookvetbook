@@ -1,5 +1,6 @@
-	<?php foreach ($disease_blocks_content as $block): ?>
+<?php foreach ($disease_blocks_content as $block):?>
     <?php $field_anchor = 'b'.$block->id;?>
+
     <?php if ($block->disease_block_type_id == 5): ?>
         <div class="section">
 
@@ -14,52 +15,58 @@
                             <p>Врач
                                 <?php foreach ($disease_specialties as $specialty):?>
                                     <a class="disease-doctor des-page <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Center" data-text="<?php echo $specialty->plural_name; ?>" data-url="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend" href="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend"><?php echo $specialty->name; ?></a>
-                                <?php
-                                break;
-                                endforeach;?>
-                                поможет при лечении заболевания
+                                <?php endforeach;?>
+                                поможет при лечении заболевания                              
                             </p>
                             <?php foreach ($disease_specialties as $specialty):?>
-                                <a class="btn-double-floor des-page disease-doctor
-                                <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?>
-<?php if ($specialty->is_male){?>male-block <?php }?>
-<?php if ($specialty->is_female){?>female-block <?php }?>
-<?php if ($specialty->is_children){?>children-block <?php }?>
-<?php if ($specialty->is_newborn){?>newborn-block <?php }?>
-<?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>"
+                            <a class="btn-double-floor des-page disease-doctor
+	<?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?>
+	<?php if ($specialty->is_male){?>male-block <?php }?>
+    <?php if ($specialty->is_female){?>female-block <?php }?>
+    <?php if ($specialty->is_children){?>children-block <?php }?>
+    <?php if ($specialty->is_newborn){?>newborn-block <?php }?>
+    <?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>"
 
-                                   data-action-for-counters="find-doctor"
-                                   data-category-counters="find-doctor"
-                                   data-action="FindDocButton"
-                                   data-position="Right"
-                                   data-url="<?php echo $specialty->specialtyUrl ?>"
-                                   data-id="<?php echo $specialty->specialty_id; ?>"
-                                   onclick="recordController.showForm(0,0,<?=$disease->id?>)"
-                                   >
-  									<?php $btn_text = (!$disease_green_btn)?'Записаться к врачу '.$specialty->dative_name:'Найти врача '.$specialty->genitive_name?>
-                                    <span <?php echo ButtonPaddingHelper::getWideButtonSpecialtyPadding($specialty->dative_name);?> class="just-text"><?php echo $btn_text;?></span>
-                                </a>
-                            <?php
-                             break;
-                             endforeach;?>
+                               data-action-for-counters="find-doctor"
+                               data-category-counters="find-doctor"
+                               data-action="FindDocButton"
+                               data-position="Right"
+                               data-url="<?php echo $specialty->specialtyUrl ?>" data-id="<?php echo $specialty->specialty_id; ?>"
+                               onclick="recordController.showForm(0,0,<?=$disease->id?>)"
+                            >
+                                <?php $btn_text = (!$disease_green_btn)?'Записаться к '.$specialty->dative_name:'Найти '.$specialty->genitive_name?>
+                                <span <?php echo ButtonPaddingHelper::getWideButtonSpecialtyPadding($specialty->dative_name);?> class="just-text"><?php echo $btn_text;?></span>
+                            </a>
+                            <?php endforeach;?>
                             <?php else: ?>
                             <p>Врач
                                 <?php foreach ($disease_specialties as $specialty):?>
                                     <a class="disease-doctor des-page <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="disease-right-doctor" data-action="FindDocLink" data-position="Center" href="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend" data-text="<?php echo $specialty->plural_name; ?>"><?php echo $specialty->name; ?></a>
-                                <?php
-                                 break;
-                                 endforeach;?>
+                                <?php endforeach;?>
                                 поможет при лечении заболевания
                             </p>
                             <?php foreach ($disease_specialties as $specialty):?>
-                                <a class="btn-double-floor des-page disease-doctor <?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?><?php if ($specialty->is_male){?>male-block <?php }?><?php if ($specialty->is_female){?>female-block <?php }?><?php if ($specialty->is_children){?>children-block <?php }?><?php if ($specialty->is_newborn){?>newborn-block <?php }?><?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>" data-id="<?php echo $specialty->specialty_id; ?>" data-category-counters="find-doctor" data-action-for-counters="find-doctor" data-action="FindDocButton" data-position="Center" href="/doctor?specialty_id=<?php echo $specialty->specialty_id; ?>&time_of_visit=any&sort_by=recomend">
- 									<?php $btn_text = (!$disease_green_btn)?'Записаться к врачу '.$specialty->dative_name:'Найти врача '.$specialty->genitive_name?>
-                                    <span <?php echo ButtonPaddingHelper::getWideButtonSpecialtyPadding($specialty->dative_name);?> class="just-text"><?php echo $btn_text;?></span>
-                                </a>
-                            <?php
-                            break;
-                            endforeach;?>
+                            <a class="btn-double-floor des-page disease-doctor
+	<?php if ($specialty->is_adult){?>adult-block male-block female-block <?php }?>
+	<?php if ($specialty->is_male){?>male-block <?php }?>
+    <?php if ($specialty->is_female){?>female-block <?php }?>
+    <?php if ($specialty->is_children){?>children-block <?php }?>
+    <?php if ($specialty->is_newborn){?>newborn-block <?php }?>
+    <?php if ($specialty->is_pregnant){?>pregnant-block<?php }?>"
+
+                               data-action-for-counters="find-doctor"
+                               data-category-counters="find-doctor"
+                               data-action="FindDocButton"
+                               data-position="Right"
+                               data-url="<?php echo $specialty->specialtyUrl ?>" data-id="<?php echo $specialty->specialty_id; ?>"
+                               onclick="recordController.showForm(0,0,<?=$disease->id?>)"
+                            >
+                                <?php $btn_text = (!$disease_green_btn)?'Записаться к '.$specialty->dative_name:'Найти '.$specialty->genitive_name?>
+                                <span <?php echo ButtonPaddingHelper::getWideButtonSpecialtyPadding($specialty->dative_name);?> class="just-text"><?php echo $btn_text;?></span>
+                            </a>
+                            <?php endforeach;?>
                             <?php endif; ?>
+                            <?php $this->block('disease/blocks/adv_after_reason_block'); ?>
                         </li>
                     </ol>
                 </div>
@@ -69,15 +76,11 @@
 
     <div class="section" id="<?php echo $field_anchor; ?>">
         <h2>
-            <?php if (in_array($block->disease_block_type_id, [1,6,8])):
-                    echo $block->disease_block_type->name . ' ' . $disease->h2_extend;
-                else:
-                    if($this->section !== 'default') :
-                        echo $block->disease_block_type->name . ' ' . $disease->h2_extend;
-                    else :
-                        echo $block->disease_block_type->name;
-                    endif;
-                endif; ?>
+            <?php if ($block->disease_block_type_id == 1 || $block->disease_block_type_id == 6 || $block->disease_block_type_id == 8): ?>
+                <?php echo $block->disease_block_type->name . ' ' . $disease->genitive_name; ?>
+            <?php else: ?>
+                <?php echo $block->disease_block_type->name; ?>
+            <?php endif; ?>
         </h2>
         <div class="like_p">
             <?php $block->content = preg_replace('/<br \/>/','',$block->content);?>
@@ -85,43 +88,12 @@
             <?php echo html_entity_decode($block->content,ENT_COMPAT,'UTF-8'); ?>
         </div>
     </div>
-    <?php if ($block->disease_block_type_id == 5):?>
-
-    <?php endif?>
-    <?php
-    if ($actions && $block->disease_block_type_id == 1): ?>
-        <?php $this->block('disease/blocks/actions'); ?>
-    <?php endif?>
+    
     <?php /***** pediatr banner *****/ ?>
     <?php $is_children = false; ?>
     <?php foreach ($disease_specialties as $specialty):?>
     	<?php if ($specialty->is_children) { $is_children = true; break; } ?>
     <?php endforeach;?>
-
-    <?php if ($block->disease_block_type_id == 3): ?>
-    <!-- Яндекс.Директ -->
-    <script type="text/javascript">
-        yandex_partner_id = 147148;
-        yandex_site_bg_color = 'CCCCCC';
-        yandex_ad_format = 'direct';
-        yandex_direct_type = 'adaptive';
-        yandex_direct_border_type = 'block';
-        yandex_direct_limit = 2;
-        yandex_direct_border_radius = true;
-        yandex_direct_links_underline = true;
-        yandex_direct_border_color = '333333';
-        yandex_direct_title_color = '0000CC';
-        yandex_direct_url_color = '006600';
-        yandex_direct_text_color = '000000';
-        yandex_direct_hover_color = '0066FF';
-        yandex_direct_sitelinks_color = '0000CC';
-        yandex_direct_favicon = true;
-        yandex_no_sitelinks = false;
-        yandex_direct_height = 90;
-        yandex_direct_width = 695;
-        document.write('<scr'+'ipt type="text/javascript" src="//an.yandex.ru/system/context.js"></scr'+'ipt>');
-    </script>
-    <?php endif; ?>
 
     <?php /* Баннер для педиаторов ?>
 
@@ -165,7 +137,7 @@
                     <tr>
                         <td valign="top"><span>Получите консультацию от <b>лучших<br/>врачей педиатров</b> прямо сейчас</span></td>
                         <td class="td-arrow" valign="top"><img src="/media/images/pediatr_arrow.png" /></td>
-
+                        
                     </tr>
                 </table>
             </div>
@@ -180,17 +152,4 @@
         <?php } ?>
 
     <?php */ ?>
-    <?php if ($block->disease_block_type_id == 1): ?>
-            <style>
-            #teaser_793 {
-                overflow: hidden !important;
-            }
-            </style>
-            <div style="padding: 20px;"><sjdiv id="SlickJumpNativeAds-sm0072"></sjdiv></div>
-    <?php endif; ?>
-    <?php /* if ($block->disease_block_type_id == 3): ?>
-        <div class="section">
-            <?php $this->block('disease/blocks/adv_after_reason_block'); ?>
-        </div>
-    <?php endif; */?>
 <?php endforeach?>

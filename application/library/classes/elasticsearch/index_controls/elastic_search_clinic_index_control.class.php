@@ -249,7 +249,7 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
           'type' => 'number',
           'script' => [
             'lang' => 'painless',
-            'inline' => '(doc[\'geo_point\'].arcDistance(' . (float)$criteria->geo_point->getLatitude() . ', ' . (float) $criteria->geo_point->getLongitude() . ')) <= 1000 ? 1 : 0'
+            'source' => '(doc[\'geo_point\'].arcDistance(' . (float)$criteria->geo_point->getLatitude() . ', ' . (float) $criteria->geo_point->getLongitude() . ')) <= 1000 ? 1 : 0'
           ],
           "order" => "desc",
         ]
@@ -268,7 +268,7 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
           'type' => 'number',
           'script' => [
             'lang' => 'painless',
-            'inline' => '((doc[\'street\'].value == ' . (int) $criteria->street_id . ') ? 1 : 0)',
+            'source' => '((doc[\'street\'].value == ' . (int) $criteria->street_id . ') ? 1 : 0)',
           ],
           "order" => "desc",
         ]
@@ -279,7 +279,7 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
           'type' => 'number',
           'script' => [
             'lang' => 'painless',
-            'inline' => '((doc[\'region\'].value == ' . (int) $criteria->region_id . ') ? 1 : 0)',
+            'source' => '((doc[\'region\'].value == ' . (int) $criteria->region_id . ') ? 1 : 0)',
           ],
           "order" => "desc",
         ]
@@ -290,7 +290,7 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
           'type' => 'number',
           'script' => [
             'lang' => 'painless',
-            'inline' => '((doc[\'metro_station_id\'].value == ' . (int) $criteria->metro_station_id . ') ? 1 : 0)',
+            'source' => '((doc[\'metro_station_id\'].value == ' . (int) $criteria->metro_station_id . ') ? 1 : 0)',
           ],
           "order" => "desc",
         ]
@@ -302,7 +302,7 @@ class ElasticSearchClinicIndexControl extends ElasticSearchModelIndexControl
           'type' => 'number',
           'script' => [
             'lang' => 'painless',
-            'inline' => '((doc[\'district\'].value == ' . (int) $criteria->district_id . ') ? 1 : 0)'
+            'source' => '((doc[\'district\'].value == ' . (int) $criteria->district_id . ') ? 1 : 0)'
           ],
           "order" => "desc",
         ]

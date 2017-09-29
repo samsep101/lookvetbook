@@ -15,12 +15,8 @@ class ClinicMapDataGenerator
        * @var ClinicManager $clinic_manager
        */
       $clinic_manager = ModelManagerFactory::getByName('clinic');
-    if ($clinic_search_params->primary_clinic_id){
-        $clinics = (new ClinicManager())->getChildsClinic($clinic_search_params->primary_clinic_id);
-    }else{
-        $clinics = $clinic_manager->getListByClinicSearchParams($clinic_search_params);
-    }
-
+      $clinics = $clinic_manager->getListByClinicSearchParams($clinic_search_params);
+    //pr($clinics, 1);
 
       $str = '';
 

@@ -15,7 +15,6 @@ class AjaxRegistryController extends BaseController
    */
   public function saveModeratedInfo()
   {
-       ClinicModel::$trig=1;
     if (!RegistryAccessHelper::checkAuth())
       JsonResponse::error(ValidationErrorCodes::NOT_AUTHED);
 
@@ -224,6 +223,7 @@ class AjaxRegistryController extends BaseController
               }
             }
           }
+
           if ($model->save()) {
             $response['moderate_entity_id'] = $model->doctor_id;
             $response['revision_number'] = $model->revision_number;
@@ -243,7 +243,6 @@ class AjaxRegistryController extends BaseController
           $clinic->save();
         }
       }
-
       // публикация данных
       if ($moderate_status_id == ModerateStatusModel::PUBLISHED) {
         if (isset($model_manager)) {
@@ -263,7 +262,6 @@ class AjaxRegistryController extends BaseController
       $result = array(
         'role_id' => Acl::userRole()
       );
-
       JsonResponse::result($response);
     } catch (Exception $e) {
       Test::dump($e);

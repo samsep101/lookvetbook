@@ -107,18 +107,7 @@
 <link rel="stylesheet" type="text/css" href="/media/js/jquery-rating/styles/jquery.rating.css?<?php echo RELEASE__NUMBER?>"/>
 
 <script src="/media/js/jquery.event.move.js?<?php echo RELEASE__NUMBER?>"></script>
-<style>
-    .dd-button{
-        width: 100% !important;
-        font-size: 15px !important;
-    }
 
-    #our-doctors .clinic-card .btns div {
-        display: inline-block;
-        float: left;
-        width: 50%;
-    }
-</style>
 <script>
 	<?php if($city): ?>
     $(document).ready(function () {
@@ -140,12 +129,3 @@
 <script type="text/javascript" src="/media/js/image_preview.js?<?php echo RELEASE__NUMBER?>"></script>
 
 <link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/styles-widget.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
-
-
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PDVS826');</script>
-<!-- End Google Tag Manager -->

@@ -12,8 +12,6 @@
      * @var bool $is_leader
      * @var bool $show_total_count
      */
-
-     $Articles_Viewer = new Articles_Viewer();
 ?>
 
 <script type="text/javascript">
@@ -48,7 +46,8 @@
             <hr class="separator_h"/>
         <?php endif; ?>
     <?php endif; ?>
-    
+
+    <div class="block_left" style="width: auto; float: none;">
         <?php if(isset($product_category) && $product_category): ?>
             <?php if(isset($parent_product_category) || $product_categories): ?>
                 <div class="bg_gradient catalog_more_h flo">
@@ -98,61 +97,43 @@
                 </div>
             <?php endif; ?>
 
-        <?php
-        // подключение статей
-        //debug($product_category);
-        if(!empty($product_category) AND in_array($product_category->id, [
-                1434,
-                //1439, // Лечение ОРВИ и гриппа
-                //1942, // Афобазол
-                1943,
-                1959,
-            ])) : ?>
-                <link rel="stylesheet" href="/media/css/product-article.css?rnd=<?= Articles_Viewer::RND?>" type="text/css">
-                <script type="text/javascript" src="/media/js/articles-spoiler.js?rnd=<?= Articles_Viewer::RND?>"></script>
-                <div class="shop-product-article catalog __container">
-                    <?=$Articles_Viewer->showCatalogArticle($product_category->id)?>
-                    <div class="shop-product-article-showmore"><a class="__showmore" data-switch="Свернуть статью" href="javascript:void(0)">Читать далее...</a></div>
-                </div>
-        <?php endif; ?>
-
             <?php if(isset($product_category) && $product_category): ?>
-                    <h4>
-                        <a class="category" href="<?php echo ProductCategoryLinkViewHelper::getLink($product_category); ?>">
-                            <?php echo $product_category->name; ?>
-                        </a>
-                        <?php if(isset($product_category) && $product_category && !$product_categories && !$parent_product_category): ?>
-                            <a class="back" href="/shop/catalog">к списку лекарств</a>
-                        <?php endif; ?>
-                    </h4>
-                <?php endif; ?>
-
-                <a class="load-next-page view-more" href="javascript:void(0);" data-page="1"><i class="icon-loader"></i></a>
-                <?php if ($product_category->description): ?>
-                    <div class="bg_gradient about_good">
-                        <p class="h-txt"><?php echo $product_category->name; ?></p>
-                        <p class="txt"><?php echo $product_category->description; ?></p>
-                    </div>
-                <?php endif; ?>
-            <?php else: ?>
-                <div class="bg_gradient catalog_list_container">
-                    <?php if(!isset($pattern) && isset($root_product_category) && $root_product_category): ?>
-                        <?php $this->product_category = $root_product_category; ?>
-                        <?php $this->product_categories = $product_categories; ?>
-                        <?php $this->block('shop/catalog/product_categories'); ?>
-                    <?php else: ?>
-                        <ul class="catalog_list" style="height: 30px">
-                            <li class="search_pattern"><?php echo 'Результаты поиска по запросу ' .'"' .$pattern .'"'; ?></li>
-                            <h3><a class="back" href="/shop/catalog">вернуться в каталог</a></h3>
-                        </ul>
+                <h4>
+                    <a class="category" href="<?php echo ProductCategoryLinkViewHelper::getLink($product_category); ?>">
+                        <?php echo $product_category->name; ?>
+                    </a>
+                    <?php if(isset($product_category) && $product_category && !$product_categories && !$parent_product_category): ?>
+                        <a class="back" href="/shop/catalog">к списку лекарств</a>
                     <?php endif; ?>
-                </div>
-
-                <?php if(!isset($pattern)): ?>
-                    <h2 style="color: #818080">Популярные лекарства</h2>
-                <?php endif; ?>
-                <a class="load-next-page view-more" href="javascript:void(0);" data-page="1"><i class="icon-loader"></i></a>
+                </h4>
             <?php endif; ?>
+
+            <a class="load-next-page view-more" href="javascript:void(0);" data-page="1"><i class="icon-loader"></i></a>
+            <?php if ($product_category->description): ?>
+                <div class="bg_gradient about_good">
+                    <p class="h-txt"><?php echo $product_category->name; ?></p>
+                    <p class="txt"><?php echo $product_category->description; ?></p>
+                </div>
+            <?php endif; ?>
+        <?php else: ?>
+            <div class="bg_gradient catalog_list_container">
+                <?php if(!isset($pattern) && isset($root_product_category) && $root_product_category): ?>
+                    <?php $this->product_category = $root_product_category; ?>
+                    <?php $this->product_categories = $product_categories; ?>
+                    <?php $this->block('shop/catalog/product_categories'); ?>
+                <?php else: ?>
+                    <ul class="catalog_list" style="height: 30px">
+                        <li class="search_pattern"><?php echo 'Результаты поиска по запросу ' .'"' .$pattern .'"'; ?></li>
+                        <h3><a class="back" href="/shop/catalog">вернуться в каталог</a></h3>
+                    </ul>
+                <?php endif; ?>
+            </div>
+
+            <?php if(!isset($pattern)): ?>
+                <h2 style="color: #818080">Популярные лекарства</h2>
+            <?php endif; ?>
+            <a class="load-next-page view-more" href="javascript:void(0);" data-page="1"><i class="icon-loader"></i></a>
+        <?php endif; ?>
     </div>
 
     <?php /*

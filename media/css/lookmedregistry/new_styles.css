@@ -1304,12 +1304,4 @@ div.connected-carousels.iframe div.stage div.carousel ul li {
 }
 
 
-.col-50{
-    width: 50%; box-sizing: border-box; float:left
-}
-.full {width: auto !important;}
-.w100{width:100%;}
-.both{clear:both;}
-.mb20{margin-bottom: 20px}
-.white-table{background: #fff; margin: 20px 0; }
-.white-table td{border:1px solid; padding: 10px; font-size: 14px;}
+

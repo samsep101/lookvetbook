@@ -264,22 +264,6 @@ class DoctorManager extends AliasManager
     return $res;
   }
 
-  public function deleteById($id){
-
-        $backup = ( new DoctorManager())->getOneById( $id );
-
-        $deletedDoctors = new DeletedDoctorModel();
-        $deletedDoctors->first_name  = $backup->first_name;
-        $deletedDoctors->second_name = $backup->second_name;
-        $deletedDoctors->last_name   = $backup->last_name;
-        $deletedDoctors->look_id     = $backup->id;
-        $deletedDoctors->purpose     = "Удаление через панель администратора";
-        $deletedDoctors->dt          = date("Y-m-d H:i:s");
-        $deletedDoctors->save();
-
-        parent::deleteById($id);
-
-  }
   /**
    * return DoctorModel[]
    */
@@ -547,23 +531,6 @@ class DoctorManager extends AliasManager
     return (bool)$data[0]['count'];
   }
 
-  public function checkExistsActionBySpecialtyIdAndClinicId($specialty_id, $clinic_id)
-  {
-    $sql = '  select count(*) as `count`
-               from doctor d
-               inner join doctor_to_clinic dc on dc.doctor_id=d.id
-               inner join specialty_to_doctor sd on (sd.doctor_id=d.id and sd.clinic_id=dc.clinic_id)
-               inner join specialty_to_specialization ss on (ss.specialty_id=sd.specialty_id)
-               inner join specialization s on (s.id=ss.specialization_id)
-               inner join `action` a on (a.clinic_id=dc.clinic_id and now() between a.date_from and a.date_to)
-               inner join action_to_specialization asp on (asp.action_id=a.id and asp.specialization_id=s.id)
-               where dc.clinic_id='.(int)$clinic_id.' sd.specialty_id='.(int)$specialty_id;
-
-    $data = $this->db->query($sql);
-
-    return (bool)$data[0]['count'];
-  }
-
   public function checkExistsByCityId($city_id)
   {
     $sql = 'SELECT COUNT(*) as `count`
@@ -770,9 +737,6 @@ class DoctorManager extends AliasManager
       $specialization = $specialization[0];
       $specialty_manager = ModelManagerFactory::getByName('specialty');
       $main_specialty = $specialty_manager->getMainOneBySpecializationId($specialization->getId(), $specialty->getId());
-      if (!is_array($main_specialty)) {
-        $main_specialty = [$main_specialty];
-      }
     }
 
     return $main_specialty;
@@ -850,39 +814,5 @@ class DoctorManager extends AliasManager
 
     parent::beforeSave($doctor);
   }
-
-  public function getByClinics($clinics_ids) {
-
-        is_array($clinics_ids) AND $clinics_ids = implode(', ', array_map('intval', $clinics_ids));
-
-        $fields = [
-            'd.id',
-            'd.first_name',
-            'd.second_name',
-            'd.last_name',
-            'd.full_lower_name',
-            'd.alias',
-            'dt.id as type_id',
-            'dt.name as type_name',
-        ];
-
-        // SELECT c.* FROM `clinic` c inner join clinic_to_types c2t ON c.id = c2t.clinic_id inner join clinic_type ct ON c2t.clinic_type_id = ct.id limit 100
-        $q = str_replace(['{ids}', '{fields}'], [
-            $clinics_ids,
-            implode(', ', $fields),
-        ], 'SELECT {fields} FROM doctor d
-                INNER JOIN doctor_to_clinic d2c ON d.id = d2c.doctor_id
-                LEFT JOIN doctor_type dt ON d.doctor_type_id = dt.id
-                WHERE d2c.clinic_id IN ({ids}) 
-                    AND d.is_virtual IS NULL
-                    AND (d.is_active = 1 AND d.alias != \'\' AND d.alias IS NOT NULL)
-                GROUP BY d.id
-                ORDER BY d.alias ASC');
-
-        $q = $this->db->query($q);
-
-        return $this->initList($q);
-
-    }
 
 }

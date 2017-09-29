@@ -27,7 +27,6 @@
                 <ul class="inner-bottom-navigation">
                     <li><a class="help-link jsLinkHidingIndexing" data-link="/help">Помощь</a></li>
                     <li><a class="about-link jsLinkHidingIndexing" data-link="/about">О проекте</a></li>
-                    <li><a class="about-link jsLinkHidingIndexing" data-link="/smap">Карта сайта</a></li>
                 </ul>
             </div>
         </div>

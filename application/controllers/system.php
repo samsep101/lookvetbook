@@ -10,9 +10,6 @@ class SystemController extends BaseController
 
   public function index()
   {
-    ini_set('memory_limit', '512M');
-    global $memory_allocation_costil1;
-    $memory_allocation_costil1 = 1;
     $this->layout = 'system';
 
     $docx_error = $this->request('docx_error');
@@ -138,7 +135,7 @@ class SystemController extends BaseController
       $report_generator->setDateFrom($date_from);
       $report_generator->setDateTo($date_to);
 
-      $filename = str_replace('/', '_', $clinic->alias) . '_' . $months[$visit_month] . '_' . $visit_year . '.docx';
+      $filename = $clinic->alias . '_' . $months[$visit_month] . '_' . $visit_year . '.docx';
       $file_path = './media/reports/' . $filename;
 
       $report_generator->generate($file_path);

@@ -10,8 +10,9 @@ input, select, textarea, button {
 
 body {
     background: #252525;
-    margin: 0;
-    padding: 0 20px;
+    margin: 5px;
+    margin-left: 20px;
+    margin-right: 40px;
     background: url('/media/images/bg_grey.jpg');
 }
 
@@ -176,21 +177,21 @@ table.cms-list tr td {
 }
 
 table.list {
-    width: 100%;
+    width: 99%;
     border-collapse: collapse;
-    margin: 10px 0;
+    margin: 10px;
     clear: both;
-    box-sizing: border-box;
-    border: 1px solid #efefef;
 }
 
 table.list tr th {
+    padding-bottom: 5px;
+    padding-top: 5px;
     text-align: left;
+    padding-left: 5px;
     border-bottom: 1px solid #e4e4e4;
     background: #fafafa;
     font-weight: normal;
-    color: #666666;
-    padding: 7px 5px;
+    color: #666666
 }
 
 table.list tr td {
@@ -641,13 +642,12 @@ table .smallGrey {
 
 .actionBar {
     background: #4c93e8;
-    padding: 2px 5px;
-    color: #fff;
-    margin-bottom: 15px;
+    padding: 0px;
+    color: white;
+    height: 28px;
+    margin-bottom: 20px;
     margin-top: 0px;
     border-bottom: 1px solid #0066CC;
-    overflow: hidden;
-    border-radius: 2px;
 }
 
 .actionBar a {
@@ -729,8 +729,8 @@ table .smallGrey {
 }
 
 .pager {
+    padding-left: 5px;
     margin-bottom: 10px;
-    overflow: hidden;
 }
 
 .pager a {
@@ -744,7 +744,6 @@ table .smallGrey {
     margin: 2px;
     text-align: center;
     color: white;
-	border-radius: 2px;
 }
 
 .taskAddDiv {
@@ -870,7 +869,7 @@ div.projectDesc {
     padding: 10px;
     margin-right: 10px;
     margin-top: 60px;
-    border-right: 1px dotted #000;
+    border-right: 1px solid #0f569f;
 }
 
 #leftMenu ul {
@@ -884,11 +883,15 @@ div.projectDesc {
 
 #leftMenu ul li a {
     padding: 10px;
-    color: #fff;
-    display: inline-block;
-    width: 100%;
+    color: white;
+    display: block;
+    width: 80%;
+    margin: 5px;
+    padding-left: 30px;
+    background: url('/mhadmin/media/img/icons/page-24-ns.png') no-repeat 0px 50%;
+    background-color: none;
+    margin-left: 0px !important;
     font-size: 11px;
-    box-sizing: border-box;
 }
 
 #leftMenu ul li a span {
@@ -1062,6 +1065,7 @@ div.projectDesc {
 #leftMenu ul li.menuCat {
     padding: 0;
     margin: 0;
+    padding-left: 25px;
 }
 
 #leftMenu ul li.menuCat a {
@@ -1108,8 +1112,10 @@ div.projectDesc {
 }
 
 #rightContent {
-    padding: 5px 15px 15px;
-    background: #fff;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background: white;
 }
 
 .companyPersons {
@@ -1291,7 +1297,6 @@ div.minHeight {
     border: 1px solid #e4e4e4;
     padding: 10px;
     margin-bottom: 10px;
-	border-radius: 1px;
 }
 
 .generatorEditDiv h4 {
@@ -1310,33 +1315,6 @@ div.minHeight {
 .generatorTable .label {
     text-align: right;
     width: 20%;
-    vertical-align: middle;
-}
-.generatorTable tr input,
-.generatorTable tr select,
-#filter-block input[type=text],
-.form input[type=text]
-{
-	width: 100%;
-    max-width: 400px;
-    border: 1px solid #ccc;
-    padding: 5px 7px;
-    border-radius: 1px;
-	box-sizing: border-box;
-}
-.generatorTable tr input[type=checkbox]{
-	width: auto;
-	max-width: none;
-}
-#filter-block input[type=text] {
-	width:100px;
-	max-width: none;
-}
-#filter-block .filter-row {
-	padding: 0 0 2px 0;
-}
-#filter-block .filter-buttons-row {
-	padding-top:5px;
 }
 
 .projectNavigation {
@@ -1481,6 +1459,9 @@ div.total-count-info {
 .admin .fancybox-skin {
     background: white;
 }
+table.list {
+    width: 98%;
+}
 
 td.label {
     vertical-align: top;
@@ -1526,110 +1507,6 @@ td.label {
 }
 
 .filling_input {
-	background: url("../../images/dropdown_select_field.gif") 99% center no-repeat;
+	background: url("../../images/dropdown_select_field.gif") right center no-repeat;
 }
 
-#generatorData {
-	padding: 10px 0 0;
-}
-
-input[type=button]{
-	padding: 10px 15px;
-    box-sizing: border-box;
-    background: #efefef;
-    border: 1px dashed #aaa;
-    border-radius: 1px;
-    font-size: 10px;
-	-o-transition: all 100ms ease-in-out;
-    -moz-transition: all 100ms ease-in-out;
-    -webkit-transition: all 100ms ease-in-out;
-    transition: all 100ms ease-in-out;
-}
-input[type=button]:hover{
-	border-style: solid;
-	border-color: #0066CC;
-	background: #4c93e8;
-	color:#fff;
-	cursor:pointer;
-	box-shadow: 0 1px 5px -2px rgba(0,0,0,0.5);
-}
-table.list tr:hover > td {
-	background: #eee;
-}
-.section-header {
-	padding: 12px 14px;
-    background: #13507C;
-    color: #fff;
-    border-radius: 2px;
-    cursor: pointer;
-}
-.section-header:hover {
-	background: #258;
-}
-.tools-panel {
-	padding: 8px 0 0;
-}
-.tools-panel table {
-	width:50%;
-}
-.tools-panel table tr > td:first-child {
-	text-align: right;
-	width:40%;
-}
-.alert-info {
-	padding: 7px 10px;
-    background-color: #F0F58C;
-    margin-top: 8px;
-}
-ul.form {
-	padding:0;
-	margin:0;
-	list-style: none;
-	padding-bottom: 8px;
-}
-ul.form label {
-	display:block;
-	padding:0 0 3px 1px;
-	font-size:10px;
-}
-ul.form select {
-	width: 100%;
-    max-width: 400px;
-    border: 1px solid #ccc;
-    padding: 5px 7px;
-    border-radius: 1px;
-    box-sizing: border-box;
-}
-.autocomplete-suggestion.autocomplete-selected {
-	background-color: #F0F58C;
-}
-.message-box {
-	position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 100%;
-    max-width: 300px;
-}
-.message-box .alert {
-	padding: 12px 20px;
-    background-color: rgba(255,255,255,0.95);
-    color: #444;
-    border-radius: 0 3px 3px 0;
-    font-size: 10px;
-    border: 2px solid #fff;
-    border-left: 2px solid #444;
-    line-height: 1.6em;
-    box-shadow: 0 4px 12px -6px rgba(0,0,0,0.5);
-}
-.message-box .alert.success {
-	background-color: rgba(69, 223, 130,0.95);
-	color:#fff;
-	border-color: #3c7;
-	border-left: 2px solid #444;
-}
-.message-box .alert.error {
-	background-color: rgba(243, 65, 103,0.95);
-	color:#fff;
-	border-color: #e35;
-	border-left: 2px solid #444;
-}

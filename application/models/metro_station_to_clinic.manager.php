@@ -35,12 +35,4 @@ class MetroStationToClinicManager extends ModelManager {
 			$this->db->query($sql);
 
 		}
-
-        public function getClinicMetroID( $clinicId, $metroStationId ){
-
-            $sql = "SELECT id FROM {$this->table_name} WHERE metro_station_id = {$metroStationId} AND clinic_id = {$clinicId}";
-            $data = $this->db->query($sql);
-            return ($data) ? $this->initOne($data[0]) : null;
-        }
-
 }

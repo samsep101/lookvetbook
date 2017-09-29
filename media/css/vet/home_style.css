@@ -471,6 +471,7 @@ p.h-text {
     color: #f48221;
     font: normal 14px/18px 'pf_agora_slab_pro_medium';
 }
+
 .abs {position: absolute;font:normal 17px/0.8 'pf_agora_sans_proregular';text-shadow:0 0 0 #000;color: #f48221;text-align: center;}
 .abs small {font-size: 12.5px;}
 .abs1 small{
@@ -893,43 +894,44 @@ p.h-text {
     margin: 0 0 -20px;
     padding: 0 0 20px;
 }
-    .specialties-groups-wrapper .specialties-shadow-block {
-        background: url(/media/images/shadowBottomImageGrayBG.png) repeat-x scroll 0 0 transparent;
-        position: absolute;
-        height: 19px;
-        width: 100%;
-    }
-    .specialties-groups-wrapper .specialties-groups {
-        margin: 0 auto;
-        max-width: 1000px;
-        min-width: 800px;
-        padding: 50px 60px;
-        width: auto;
-    }
-        .specialties-groups-wrapper .specialties-groups .sg-title {
-            margin: 12px 0 36px;
-            color: #438b94;
-            font-family: 'PF Agora Slab Pro Regular','PF Agora Slab Pro';
-            font-size: 28px;
-            font-style: normal;
-            font-weight: 400;
-        }
-            .specialties-groups-wrapper .specialties-groups ul li a span.specialty-name-firs-letter {
-                color: #2e88bc;
-                font-family: 'PF Agora Sans Pro Bold','PF Agora Sans Pro';
-                font-size: 16px;
-                font-style: normal;
-            }
-            .specialties-groups-wrapper .specialties-groups ul li a.first-specialty span.specialty-name-firs-letter {
-                font-size: 15px;
-                font-weight: 700;
-                text-decoration: underline;
-            }
-            .specialties-groups-wrapper .specialties-groups ul li a span.specialty-name-other-part {
-                font-family: 'PF Agora Sans Pro Bold','PF Agora Sans Pro';
-                font-size: 16px;
-                font-style: normal;
-            }
+.specialties-groups-wrapper .specialties-shadow-block {
+    background: url(/media/images/shadowBottomImageGrayBG.png) repeat-x scroll 0 0 transparent;
+    position: absolute;
+    height: 19px;
+    width: 100%;
+}
+.specialties-groups-wrapper .specialties-groups {
+    margin: 0 auto;
+    max-width: 1000px;
+    min-width: 800px;
+    padding: 50px 60px;
+    width: auto;
+}
+.specialties-groups-wrapper .specialties-groups .sg-title {
+    margin: 12px 0 36px;
+    color: #438b94;
+    font-family: 'PF Agora Slab Pro Regular','PF Agora Slab Pro';
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+}
+.specialties-groups-wrapper .specialties-groups ul li a span.specialty-name-firs-letter {
+    color: #2e88bc;
+    font-family: 'PF Agora Sans Pro Bold','PF Agora Sans Pro';
+    font-size: 16px;
+    font-style: normal;
+}
+.specialties-groups-wrapper .specialties-groups ul li a.first-specialty span.specialty-name-firs-letter {
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+.specialties-groups-wrapper .specialties-groups ul li a span.specialty-name-other-part {
+    font-family: 'PF Agora Sans Pro Bold','PF Agora Sans Pro';
+    font-size: 16px;
+    font-style: normal;
+}
+
 
 .search-form .search-by-name .show_input, .search-form .search-by-name .show_inp {
     display : none;

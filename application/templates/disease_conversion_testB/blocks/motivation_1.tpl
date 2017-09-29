@@ -5,7 +5,7 @@
             Укус клеща, если не было прививки, может стать причиной развития вирусного энцефалита, последствия которого - тяжелая инвалидизация или смерть.
             В эндемичных по клещевому энцефалиту регионах необходима вакцинация, чтобы не заразиться в случае укуса клеща.
             <br>
-            <a class="btn-appoint" href="#record-to-the-doctor-popup-1635" onclick="$('.disease-doc-hide').slideToggle('slow');" style="width: 250px">Записаться на вакцинацию</a>
+            <a class="btn-appoint" href="#record-to-the-doctor-popup-1635" onclick="$('.disease-doc-hide').slideToggle('slow');" style="width: 250px">Записаться на вакцинауию</a>
         </p>
     </div>
     <div class="col-2 disease-doc-image">

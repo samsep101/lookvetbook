@@ -170,25 +170,48 @@
     <?php endif;*/ ?>
 
 	<script>
-    (function (i, s, o, g, r, a, m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-    m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m)
-    })
-    (window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    ga('create', '<?php echo AnalyticCounterHelper::getCounterIdByCityIdAndCounterTypeId(empty($city)?'':$city->getId(), AnalyticCounterTypeModel::GOOGLE_COUNTER); ?>', '<?php echo strtolower(SITE_DOMAIN);?>');
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('send', 'pageview');
+	  ga('create', 'UA-41082608-10', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+    <script type="text/javascript">
+        window.__mixm__ = window.__mixm__ || [];
+        window.__mixm__.push(['uAdvArId',1294931922]);
+// только на страницах карточки товара передавайте его айди (вместо 'ID товара') из вашего прайса и раскомментируйте вызов этого параметра
+// window.__mixm__.push(['skulist', 'ID товара']);
+        <?php if ($doctor) {?>
+        window.__mixm__.push(['skulist', '<?php echo $doctor->getId()?>']);
+        <?php } ?>
+(function(){function t(){if(!e){e=1;var t=0,a="def";for(i=0;o.__mixm__.length>i;i++){if("uAdvArId"==o.__mixm__[i][0]){t="u"+o.__mixm__[i][1];break}"mAdvId"==o.__mixm__[i][0]&&(a="m"+o.__mixm__[i][1])}t||(t=a);var n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=("https:"==document.location.protocol?"https://":"http://")+"js.mixmarket.biz/a"+t+".js?t="+(new Date).getTime();var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(n,r)}}var e=0,a=document,n=a.documentElement,o=window;"complete"==a.readyState||"loaded"==a.readyState||"interactive"==a.readyState?t():a.addEventListener?a.addEventListener("DOMContentLoaded",t,!1):a.attachEvent?(n.doScroll&&o==o.top&&function(){try{n.doScroll("left")}catch(e){return setTimeout(arguments.callee,0),void 0}t()}(),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t()})):o.onload=t})();        
     </script>
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title><?php echo (isset($page_title)) ? $page_title : SITE_NAME; ?></title>
     <meta name="description" content="<?php echo (isset($page_description)) ? $page_description : ''.SITE_NAME.' - поиск врача и запись на прием, информация обо всех известных заболеваниях.'; ?>">
-    <link rel="icon" href="/media/images/home_page/<?php echo CSS_DIR; ?>/favicon.png" type="image/png">
+
+<link rel="apple-touch-icon" sizes="57x57" href="/media/favicon/<?php echo CSS_DIR; ?>/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/media/favicon/<?php echo CSS_DIR; ?>/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/media/favicon/<?php echo CSS_DIR; ?>/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/media/favicon/<?php echo CSS_DIR; ?>/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/media/favicon/<?php echo CSS_DIR; ?>/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/media/favicon/<?php echo CSS_DIR; ?>/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/media/favicon/<?php echo CSS_DIR; ?>/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/media/favicon/<?php echo CSS_DIR; ?>/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/media/favicon/<?php echo CSS_DIR; ?>/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/media/favicon/<?php echo CSS_DIR; ?>/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/media/favicon/<?php echo CSS_DIR; ?>/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/media/favicon/<?php echo CSS_DIR; ?>/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/media/favicon/<?php echo CSS_DIR; ?>/favicon-16x16.png">
+<link rel="manifest" href="/media/favicon/<?php echo CSS_DIR; ?>/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/media/favicon/<?php echo CSS_DIR; ?>/ms-icon-144x144.png">
+
+
+    <!--link rel="icon" href="/media/images/home_page/<?php echo CSS_DIR; ?>/favicon.png" type="image/png"-->
     <?php $this->block('blocks/head'); ?>
     <?php if (isset($home_page)):?>
         <link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/home_style.css?<?php echo RELEASE_NUMBER?>" type="text/css" media="screen, projection" />    
@@ -204,24 +227,8 @@
     <meta name=viewport content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/media/css/<?php echo CSS_DIR; ?>/media.css?<?php echo RELEASE_NUMBER?>" type="text/css"/>
     <script type="text/javascript" src="/media/js/responsive-switch.js"></script>
-    <script src="https://docdoc.ru/widget/js" type="text/javascript"></script>
-    <style>
-        .dd-button{
-            width: 100% !important;
-            font-size: 15px !important;
-        }
-    </style>
-    <script async type="text/javascript" src="//sjsmartcontent.org/static/plugin-site/js/sjplugin.js" site="6fmj"></script>
 </head>
 <body>
-   
-
-
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDVS826"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
- 
 <a href="#"
       class="rs-link adaptive-switch-link"
       data-link-desktop="Перейти на полную версию"
@@ -280,18 +287,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="sp-links left-links">
                 <nav>
                     <?php if($city->is_has_doctors) { ?>
-                        <a class="<?php echo (isset($menu_active) && $menu_active == 'doctor') ? 'active' : ''; ?> doctor-link" href="/doctor">Врачи</a>
+                        <a class="<?php echo (isset($menu_active) && $menu_active == 'doctor') ? 'active' : ''; ?> doctor-link" href="/doctor">Ветеринары</a>
                     <?php } ?>
                     <?php if($city->is_has_clinics) { ?>
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'clinic') ? 'active' : ''; ?> clinic-link" href="/clinic">Клиники</a>
                     <?php } ?>
 
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?><?php echo strtolower(SITE_URL);?>/disease<?php } ?>">Заболевания</a>
-                        <a class="" href="/shop/catalog">Лекарства</a>
-						<a class="" href="/action">Акции</a>
-                        <?php if(Application::config('section.services.available')) : ?>
-                        <a class="" href="/uslugi">Услуги</a>
-                        <?php endif;?>
+                        <a class="" href="http://swiss.lookmedbook.ru/">Лечение в Швейцарии</a>
 
                     <?php /*if($city->is_has_laboratories) { ?>
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'analysis') ? 'active' : ''; ?> analysis-link" href="/analysis">Анализы</a>
@@ -303,8 +306,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <div class="sp-links right-links">
-                <a class="a-dashed popup_city" style="margin-left:30px;" href="javascript:void(0);"><?php echo $city->name; ?></a>
-                <span class="phone"><small><? if (SITE_PHONE_CODE == '800'){echo '+7'; }?> (<?php echo SITE_PHONE_CODE; ?>)</small> <a href="tel:+7(<?php echo SITE_PHONE_CODE; ?>)<?php echo SITE_PHONE; ?>"><?php echo SITE_PHONE; ?></a> <span class="flo"></span><span class="calltime">с 09 до 21</span></span>
+                <a class="a-dashed popup_city" href="javascript:void(0);"><?php echo $city->name; ?></a>
+                <span class="phone"><small>(<?php echo SITE_PHONE_CODE; ?>)</small> <?php echo SITE_PHONE; ?> <span class="flo"></span><span class="calltime">с 09 до 21</span></span>
                 <a class="a-dashed" href="javascript:void(0);"><small class="order-call">Заказать звонок</small>
                     <div class="form-call form-call-step-1">
                         <p class="h-txt">Заказать звонок</p>
@@ -342,7 +345,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <?php endif; ?>
 		<?php if(isset($home_page) && $home_page) { ?>
 			<div class="link_bottom">
-				<a data-link="<?php echo SeoLinkViewHelper::getCityPageLink($specialty, $city); ?>" class="jsLinkHidingIndexing">Врачи <?php echo $city->genitive_name; ?></a>
+				<a data-link="<?php echo SeoLinkViewHelper::getCityPageLink($specialty, $city); ?>" class="jsLinkHidingIndexing">Ветеринары <?php echo $city->genitive_name; ?></a>
 
                 <?php if($city->is_has_laboratories) { ?>
                     <a style="margin: 0 0 0 10px;" class="<?php echo (isset($menu_active) && $menu_active == 'analysis') ? 'active' : ''; ?> analysis-link" href="/analysis">Анализы</a>
@@ -369,7 +372,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <?php $discountVisibility1 = (isset($_SESSION['isDiscountVisible']) && $_SESSION['isDiscountVisible'] === "0")?'style="display: none;"':''; ?>
 <?php $discountVisibility2 = (!isset($_SESSION['isDiscountVisible']) || $_SESSION['isDiscountVisible'] === "1")?'style="display: none;"':''; ?>
-<?php if (!isset($_SESSION['sentDiscountRequest']) || !$_SESSION['sentDiscountRequest']) {?>
+<?php if (1 || !isset($_SESSION['sentDiscountRequest']) || !$_SESSION['sentDiscountRequest']) {?>
 <div class="discount">
 	<div class="discount-open"><span class="btn-open" <?php echo $discountVisibility2; ?>><</span>%</div>
 	<div class="discount-close" <?php echo $discountVisibility1; ?>>x</div>
@@ -398,9 +401,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }
 ?>
 
-<div class="switz-left-version banner-treatment-in-switz <?php echo $treatmentInSwitzClass; ?>">
+<div class="banner-treatment-in-switz <?php echo $treatmentInSwitzClass; ?>">
     <a href="http://swiss.lookmedbook.ru/" class="banner-treatment-in-switz-link" <?php echo $treatmentInSwitzVisibleClose; ?>><div class="icon"></div>Лечение в Швейцарии <br/> Бесплатная консультация </a>
-    <div class="close" <?php echo $treatmentInSwitzVisibleClose; ?>>&times;</div>
+    <div class="close" <?php echo $treatmentInSwitzVisibleClose; ?>>x</div>
     <div class="banner-treatment-in-switz-open" <?php echo $treatmentInSwitzVisibleOpen; ?>>
         <div class="icon"></div>
     </div>
@@ -431,29 +434,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!--[if IE]><script type="text/javascript" src="http://www.xiper.net/examples/js-plugins/html5-and-css3/explorer-canvas/excanvas.js"></script><![endif]-->
 
 <!-- BEGIN JIVOSITE CODE {literal} -->
-<!-- 2497
 <script type='text/javascript'>
-    (function(){ var widget_id = 'iiJvHkBseA';var d=document;var w=window;function l(){
+    (function(){ var widget_id = 'YPP0Wc0aCs';var d=document;var w=window;function l(){
         var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
-/2497 -->
 <!-- {/literal} END JIVOSITE CODE -->
 
 <?php $this->block('blocks/record_form_container'); ?>
 <?php $this->block('blocks/learn_form_container'); ?>
-<!-- Mobile Advert Advertur.ru start -->
-<div id="advertur_140974"></div><script type="text/javascript">
-    (function(w, d, n) {
-        w[n] = w[n] || [];
-        w[n].push({
-            section_id: 140974,
-            place: "advertur_140974",
-            width: 0,
-            height: 0
-        });
-    })(window, document, "advertur_sections");
+<script type="text/javascript">
+    (function(){function t(){if(!e){e=1;var t=0,a="def";for(i=0;o.__mixm__.length>i;i++){if("uAdvArId"==o.__mixm__[i][0]){t="u"+o.__mixm__[i][1];break}"mAdvId"==o.__mixm__[i][0]&&(a="m"+o.__mixm__[i][1])}t||(t=a);var n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=("https:"==document.location.protocol?"https://":"http://")+"js.mixmarket.biz/a"+t+".js?t="+(new Date).getTime();var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(n,r)}}var e=0,a=document,n=a.documentElement,o=window;"complete"==a.readyState||"loaded"==a.readyState||"interactive"==a.readyState?t():a.addEventListener?a.addEventListener("DOMContentLoaded",t,!1):a.attachEvent?(n.doScroll&&o==o.top&&function(){try{n.doScroll("left")}catch(e){return setTimeout(arguments.callee,0),void 0}t()}(),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t()})):o.onload=t})();
 </script>
-<script type="text/javascript" src="//ddnk.advertur.ru/v1/s/loader.js" async></script>
-<!-- Mobile Advert Advertur.ru end -->
+
 </body>
 </html>
 

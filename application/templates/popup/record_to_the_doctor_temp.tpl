@@ -1,5 +1,5 @@
 <div id="record-to-the-doctor-popup-<?php echo $doctor->getId(); ?>" class="booking reg-popup record-to-the-doctor-popup" style="width: 460px">
-    <img class="logo" alt="" src="/media/images/main_logo.png">
+    <img class="logo" alt="" src="/media/images/<?=CSS_DIR?>/main_logo.png">
     <div class="all">
             <h2 class="ctitle">Записаться к врачу вы можете:</h2>
         <?php foreach($doctor->clinics as $clinic): ?>

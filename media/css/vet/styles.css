@@ -1640,7 +1640,6 @@ h2 {
 /*.search-form .search-by-name .show_input, .search-form .search-by-name .show_inp {
     display : none;
 }*/
-
 .content .left_search .search-form .choose-section .choose-list {
     margin-bottom : 0;
     padding-top   : 7px;
@@ -9734,7 +9733,9 @@ header .nav-table td.treatment-in-switz, header .nav-table td.lekarstva, .banner
     font-size: 20px;
     margin-bottom: 13px;
 }
+
 .deseaseRow .list-item {
     float: left;
     width: 230px;
 }
+

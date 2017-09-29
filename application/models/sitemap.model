@@ -1,6 +1,0 @@
-<?php
-
-class SitemapModel extends DynamicModel {
-
-    
-}

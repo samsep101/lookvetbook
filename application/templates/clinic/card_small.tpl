@@ -6,13 +6,6 @@
      * @var AccountModel $current_account
 	 * @var Cache_Lite $cache
      */
-    if (isset($clinic->additional_params['doctors_main_specialty']['total_doctors'])) {
-      $doctor_total_count = count($clinic->additional_params['doctors_main_specialty']['total_doctors']);
-    } else if (isset($clinic->additional_params['doctors_main_specialty']['doctors'])) {
-      $doctor_total_count = count($clinic->additional_params['doctors_main_specialty']['doctors']);
-    } else {
-      $doctor_total_count = 0;
-    }
 ?>
 
 
@@ -129,17 +122,16 @@
     </div>
 
     <div class="address-and-time-area">
-        <?php if ($doctor_total_count > 0):?>
-            <?php if (!empty($current_account) && $current_account->is_call_centre_operator && $clinic->not_work) { ?>
-                <div class="not-work-message">
-                    НЕ РАБОТАЕМ
-                </div>
-            <?php } else { ?>
-                <div class="aata-time">
-                    <?php echo ScheduleViewHelper::schedule_in_table($clinic); ?>
-                </div>
-            <?php } ?>
-        <?php endif; ?>
+
+        <?php if (!empty($current_account) && $current_account->is_call_centre_operator && $clinic->not_work) { ?>
+            <div class="not-work-message">
+                НЕ РАБОТАЕМ
+            </div>
+        <?php } else { ?>
+            <div class="aata-time">
+                <?php echo ScheduleViewHelper::schedule_in_table($clinic); ?>
+            </div>
+        <?php } ?>
 
         <div class="aata-address">
             <div class="aata-street">
@@ -158,7 +150,7 @@
         </div>
         <div class="clearfix"></div>
     </div>
-
+    <?php /*
         <div class="specialization-link">
             <?php
                 $count = isset($clinic->additional_params['doctors_main_specialty']['count']) ? $clinic->additional_params['doctors_main_specialty']['count'] : 0;
@@ -170,16 +162,12 @@
                     $doctor_total_count = count($clinic->additional_params['doctors_main_specialty']['total_doctors']);
                     $specialization_total_count = count($clinic->additional_params['doctors_main_specialty']['total_specializations']);
             ?>
-                <?php if($doctor_total_count > 0):?>
-                    В клинике <a href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>?scroll=doctors-area"><?php echo $doctor_total_count . ' ' . SpecialtyHelper::getDoctorWordForm($doctor_total_count); ?></a> по <a href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>?scroll=specialization-area"><?php echo $specialization_total_count . ' ' . SpecializationHelper::getSpecializationWordForm($specialization_total_count); ?></a>
-                <?php endif; ?>
+            В клинике <a href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>?scroll=doctors-area"><?php echo $doctor_total_count . ' ' . SpecialtyHelper::getDoctorWordForm($doctor_total_count); ?></a> по <a href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>?scroll=specialization-area"><?php echo $specialization_total_count . ' ' . SpecializationHelper::getSpecializationWordForm($specialization_total_count); ?></a>
             <?php } ?>
         </div>
-
+    */ ?>
     <div class="btns flo">
-        <?php if (!$clinic->visit_disallow):?>
-            <?=$clinic->getRecordButton()?>
-        <?php endif; ?>
+        <a class="btn-appoint"  onclick="recordController.showForm(0,<?php echo $clinic->id?>,0)">Записаться на прием</a>
         <a class="btn-appoint btn-border" href="<?php echo ClinicPageLinkViewHelper::getLink($clinic); ?>">Подробнее о клинике</a>
         <div class="clearfix"></div>
     </div>

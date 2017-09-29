@@ -8,7 +8,7 @@ class FormViewProcessor
 
   private $is_list_element = FALSE;
 
-  public function __construct($config_name, DynamicModel $model = NULL)
+  public function __construct($config_name, DynamicModel $model)
   {
     $this->model = $model;
     $config = CmsGeneratorConfigRegister::get($config_name);

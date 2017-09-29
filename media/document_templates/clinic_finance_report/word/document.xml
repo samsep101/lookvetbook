@@ -1867,7 +1867,7 @@
                                             <w:sz w:val="24"/>
                                             <w:szCs w:val="24"/>
                                         </w:rPr>
-                                        <w:t>ООО «М-Софт Медикал Имаджинг»</w:t>
+                                        <w:t>ООО Юридическое бюро «Защитник» управляющей компан</w:t>
                                     </w:r>
                                     <w:proofErr w:type="gramStart"/>
                                     <w:r w:rsidRPr="007B0266">
@@ -1877,6 +1877,7 @@
                                             <w:sz w:val="24"/>
                                             <w:szCs w:val="24"/>
                                         </w:rPr>
+                                        <w:t>ии ООО</w:t>
                                     </w:r>
                                     <w:proofErr w:type="gramEnd"/>
                                     <w:r w:rsidRPr="007B0266">
@@ -1886,6 +1887,7 @@
                                             <w:sz w:val="24"/>
                                             <w:szCs w:val="24"/>
                                         </w:rPr>
+                                        <w:t xml:space="preserve"> «М-Софт </w:t>
                                     </w:r>
                                     <w:proofErr w:type="spellStart"/>
                                     <w:r w:rsidRPr="007B0266">
@@ -1895,6 +1897,7 @@
                                             <w:sz w:val="24"/>
                                             <w:szCs w:val="24"/>
                                         </w:rPr>
+                                        <w:t>Медикал</w:t>
                                     </w:r>
                                     <w:proofErr w:type="spellEnd"/>
                                     <w:r w:rsidRPr="007B0266">
@@ -1914,6 +1917,7 @@
                                             <w:sz w:val="24"/>
                                             <w:szCs w:val="24"/>
                                         </w:rPr>
+                                        <w:t>Имаджинг</w:t>
                                     </w:r>
                                     <w:proofErr w:type="spellEnd"/>
                                     <w:r w:rsidRPr="007B0266">
@@ -1923,6 +1927,7 @@
                                             <w:sz w:val="24"/>
                                             <w:szCs w:val="24"/>
                                         </w:rPr>
+                                        <w:t>»</w:t>
                                     </w:r>
                                 </w:p>
                                 <w:p w:rsidR="00DA74B1" w:rsidRDefault="00DA74B1" w:rsidP="00FA4D70">
@@ -1953,7 +1958,7 @@
                                             <w:sz w:val="24"/>
                                             <w:szCs w:val="24"/>
                                         </w:rPr>
-                                        <w:t>Генеральный директор</w:t>
+                                        <w:t>Управляющий партнер</w:t>
                                     </w:r>
                                 </w:p>
                                 <w:p w:rsidR="00DA74B1" w:rsidRDefault="00DA74B1" w:rsidP="00FA4D70">
@@ -1985,7 +1990,7 @@
                                             <w:sz w:val="24"/>
                                             <w:szCs w:val="24"/>
                                         </w:rPr>
-                                        <w:t>________________ Б.А.Юдин</w:t>
+                                        <w:t>________________ Д.А. Угрюмов</w:t>
                                     </w:r>
                                 </w:p>
                                 <w:p w:rsidR="00A353DA" w:rsidRDefault="00A353DA" w:rsidP="00FA4D70">

@@ -40,14 +40,14 @@ ClinicInformationFormController.prototype.getValidation = function()
     result.push($('input[name="phone_number"]').validate(validation_rules['clinic_phone']));
     result.push($('input[name="email"]').validate(validation_rules['clinic_email']));
     //result.push($('input[name="form[director_fio]"]').validate(validation_rules['director_fio']));
-    //result.push($('input[name="form[full_name]"]').validate(validation_rules['clinic_full_name']));
-    //result.push($('select[name="form[city_id]"]').validate(validation_rules['required']));
-    //result.push($('input[name="form[address]"]').validate(validation_rules['clinic_address']));
-    //result.push($('select[name="form[clinic_type_id]"]').validate(validation_rules['required']));
-    //result.push($('input[name="form[longitude]"]').validate(validation_rules['coordinates']));
-    //result.push($('input[name="form[latitude]"]').validate(validation_rules['coordinates']));
-    //result.push($('input[name="form[postcode]"]').validate(validation_rules['clinic_postcode']));
-    //result.push($('input[name="form[date_contract]"]').validate(validation_rules['date']));
+    result.push($('input[name="form[full_name]"]').validate(validation_rules['clinic_full_name']));
+    result.push($('select[name="form[city_id]"]').validate(validation_rules['required']));
+    result.push($('input[name="form[address]"]').validate(validation_rules['clinic_address']));
+    result.push($('select[name="form[clinic_type_id]"]').validate(validation_rules['required']));
+    result.push($('input[name="form[longitude]"]').validate(validation_rules['coordinates']));
+    result.push($('input[name="form[latitude]"]').validate(validation_rules['coordinates']));
+    result.push($('input[name="form[postcode]"]').validate(validation_rules['clinic_postcode']));
+    result.push($('input[name="form[date_contract]"]').validate(validation_rules['date']));
 
     return result;
 

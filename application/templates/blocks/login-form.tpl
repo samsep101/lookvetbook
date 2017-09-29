@@ -1,5 +1,5 @@
 <div id="authorization-popup" class="reg-popup">
-    <img class="logo" src="/media/images/main_logo.png" alt="">
+    <img class="logo" src="/media/images/<?=CSS_DIR?>/main_logo.png" alt="">
     <p class="intro">Еще не зарегистрирован?
         <a class="reg-link" id="registration-popup-link" data-action-for-counters="home-login-reg" href="#registration-popup">
             Зарегистрироваться

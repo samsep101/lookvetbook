@@ -17,7 +17,7 @@
     <form action="/ajax/recordToTheVisit" method="POST" class="recordPopupForm linkMapper" rel=".recordFormResult" onComplete="recordComplete()" onsubmit="if (!$(this).find('input[name=full_name]').val() || !$(this).find('input[name=phone]').val()){alert('Вы не заполнили поля имя или телефон'); $(this).find('.doSubmit').val('false');}else{$(this).find('.doSubmit').val('');}">
     <div class="booking record-to-the-doctor-popup" style="display:block">
         <div class="all">
-            <h3 class="h1">Запись на прием</h3>
+            <h1>Запись на прием</h1>
             <div class="step-block-1 flo" style="display: none">
                 <!-- place for info where user want to visit -->
             </div>
@@ -62,6 +62,7 @@
                     <input type="text" name="email" placeholder="example@email.ru">
                 </div>
             </div>
+
             <div class="row flo m-b-10">
                 <div class="text-shadow-input">
                     &nbsp;
@@ -70,6 +71,7 @@
                     <div class="g-recaptcha-add_review"></div>
                 </div>
             </div>
+            
             <div class="row flo m-b-20">
                 <div class="record_process_result"></div>
                 <div class="inner-top-info" style="text-align: center;font-size: 1.2em;">

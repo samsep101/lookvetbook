@@ -2,8 +2,6 @@
 
 class DiseaseController extends BaseController
 {
-    private $_segment_name = false;
-    private $_segment_section = 'default';
   //зачем-то зашиты урлы редиректа болезней
   private $redirectList = [
       'aktinomikoz/adult' => 'aktinomikoz/male',
@@ -53,19 +51,9 @@ class DiseaseController extends BaseController
       'zhenskoe-besplodie/female' => 'besplodie-zhenskoe',
     ];
 
-    public function __construct() {
-
-        parent::__construct();
-
-        $uri = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
-
-        !empty($uri[1]) AND $this->_segment_name = $uri[1];
-        !empty($uri[2]) AND $this->_segment_section = $uri[2];
-    }
 
   public function get($disease_id = null)
   {
-
     if (!$disease_id) {
       $disease_id = $this->request('id');
     }
@@ -137,30 +125,33 @@ class DiseaseController extends BaseController
     }
 
     $this->view->disease_specialties = $disease_specialties;
+    /*
+      Шаблон заголовка страницы ($pageTitleTemplate)
+      Использует три параметра:
+      <название болезни> - $diseaseName
+      <название болезни> - $diseaseName
+      <перечисление по типу> - $diseaseTypes
+    
+      Старый шаблон: $this->view->page_title = $disease->title.' - «'.SITE_NAME.''.SITE_NAME.'»'
+    */
 
-    $seo_method = '_seo_'.$this->_segment_section;
-    $this->view->section = $this->_segment_section;
-    if(method_exists($this, $seo_method)){
-        // если есть спецметод генерации сео - выполняем его
-        $this->{$seo_method}();
+    $pageTitleTemplate = '%s симптомы, причины, диагностика, лечение. %s у %s ';
+    $diseaseName = !empty($disease->title) ? '' : $disease->title;
+    $diseaseTypes = array();
 
-    } else {
-        // дефолтная генерация title,desc
-        $pageTitleTemplate = '%s симптомы, причины, диагностика, лечение. %s у %s ';
-        $diseaseName = !empty($disease->title) ? '' : $disease->title;
-        $diseaseTypes = array();
-
-        foreach ($disease_tabs_flags AS $dtfKey => $dtfValue) {
-          if ($dtfValue) {
-            $diseaseTypes[] = mb_convert_case(DiseaseTabNameViewHelper::getNameByTabFlag($dtfKey, 1), MB_CASE_LOWER, "UTF-8");
-          }
-        }
-        $this->view->page_title = sprintf($pageTitleTemplate, $diseaseName, $diseaseName, implode(', ', $diseaseTypes));
-        $this->view->page_description = $this->_getDescription();
+    foreach ($disease_tabs_flags AS $dtfKey => $dtfValue) {
+      if ($dtfValue) {
+        $diseaseTypes[] = mb_convert_case(DiseaseTabNameViewHelper::getNameByTabFlag($dtfKey, 1), MB_CASE_LOWER, "UTF-8");
+      }
     }
-
+    $this->view->page_title = sprintf($pageTitleTemplate, $diseaseName, $diseaseName, implode(', ', $diseaseTypes));
     $this->view->label_for_counters = 'disease-page';
 
+    $pervoe_predlozhenie = '';
+    if (preg_match('$\s*?([A-ZА-ЯЁ].*?\.)$', strip_tags($disease->content), $a))
+      $pervoe_predlozhenie = $a[1];
+
+    $this->view->page_description = $pervoe_predlozhenie ? $pervoe_predlozhenie : $disease->description;
     $this->view->canonical_link = DiseasePageLinkViewHelper::getLink($disease);
     $this->view->site_url_not_using = 1;
 
@@ -170,17 +161,22 @@ class DiseaseController extends BaseController
     $dis_param = $this->request('dis');
     $this->view->disease_green_btn = ($dis_param && $dis_param == 'new3') ? 1 : 0;
     $this->view->actions = (new ActionManager())->getListForDisease($disease->getId());
-    if ($this->view->actions)
-	    $this->view->actions = array($this->view->actions[array_rand($this->view->actions)]);
 
-      $videos = ['1','2','3'];
+      $videos = ['1'];
       $video = $videos[array_rand($videos)];
       $this->view->video_file_path = '/media/images/vids/'.$video.'.mp4';
       $this->view->video_thumb_path = '/media/images/vids/'.$video.'.jpg';
 
-    $this->_getAfterBlocksTemplate();
 
-    $this->render('disease/get');
+      if (in_array($disease->alias,['pnevmoniya'])){
+          $this->render('disease_conversion_testA/get');
+      }elseif (in_array($disease->alias,['encefalit'])){
+          $this->render('disease_conversion_testB/get');
+      }else{
+          $this->render('disease/get');
+      }
+
+
   }
 
   public function ajaxGetDiseaseCardContent()
@@ -621,126 +617,4 @@ class DiseaseController extends BaseController
       JsonResponse::error(ValidationErrorCodes::WRONG_DISEASE);
     }
   }
-
-  public function ajaxGetBeforeBlock(){
-
-      $alias = $this->view->disease->alias;
-
-      $disease_slug = $this->request->post('slug');
-        $blocks_before = implode('/', [
-            Application::getTemplatesDir(true),
-            'disease',
-            'blocks-before',
-            $disease_slug.'.tpl'
-        ]);
-
-        if(file_exists($blocks_before)){
-
-            ob_start();
-            include $blocks_before;
-
-            $beforeblocks = ob_get_clean();
-
-        }
-      JsonResponse::result($beforeblocks);
-
-  }
-
-    protected function _seo_default() {
-
-        $disease = $this->view->disease;
-        // Лабиринтит: симптомы, причины, диагностика и лечение лабиринтита
-        $this->view->page_title = sprintf('%s: симптомы, причины, диагностика и лечение %s', $disease->title, $disease->genitive_name);
-        $this->view->page_description = $this->_getDescription();
-        // окончание заголовка h2
-        $disease->h2_extend = $disease->genitive_name;
-    }
-
-    protected function _seo_adult() {
-
-        $disease = $this->view->disease;
-        // Лабиринтит у взрослых: симптомы, причины, диагностика и лечение лабиринтита у взрослого
-        $this->view->page_title = sprintf('%s у взрослых: симптомы, причины, диагностика и лечение %s у взрослого', $disease->title, $disease->genitive_name);
-        $this->view->page_description = str_ireplace($disease->title, $disease->title.' у взрослых', $this->_getDescription());
-        $disease->title = $disease->title . ' у взрослых';
-        $disease->h2_extend = $disease->genitive_name . ' у взрослого';
-    }
-
-    protected function _seo_children() {
-
-        $disease = $this->view->disease;
-        // Лабиринтит у детей: симптомы, причины, диагностика и лечение лабиринтита у ребенка
-        $this->view->page_title = sprintf('%s у детей: симптомы, причины, диагностика и лечение %s у ребенка', $disease->title, $disease->genitive_name);
-        $this->view->page_description = str_ireplace($disease->title, $disease->title.' у детей', $this->_getDescription());
-        $disease->title = $disease->title . ' у детей';
-        $disease->h2_extend = $disease->genitive_name . ' у ребенка';
-    }
-
-    protected function _seo_pregnant() {
-
-        $disease = $this->view->disease;
-        // Лабиринтит у беременных: симптомы, причины, диагностика и лечение лабиринтита у беременной
-        $this->view->page_title = sprintf('%s у беременных: симптомы, причины, диагностика и лечение %s у беременной', $disease->title, $disease->genitive_name);
-        $this->view->page_description = str_ireplace($disease->title, $disease->title.' у беременных', $this->_getDescription());
-        $disease->title = $disease->title . ' у беременных';
-        $disease->h2_extend = $disease->genitive_name . ' у беременной';
-    }
-
-    protected function _seo_male() {
-
-        $disease = $this->view->disease;
-        // Желтая лихорадка у мужчин: симптомы, причины, диагностика и лечение желтой лихорадки у мужчины
-        $this->view->page_title = sprintf('%s у мужчин: симптомы, причины, диагностика и лечение %s у мужчины', $disease->title, $disease->genitive_name);
-        $this->view->page_description = str_ireplace($disease->title, $disease->title.' у мужчин', $this->_getDescription());
-        $disease->title = $disease->title . ' у мужчин';
-        $disease->h2_extend = $disease->genitive_name . ' у мужчины';
-    }
-
-    protected function _seo_female() {
-
-        $disease = $this->view->disease;
-        // Желтая лихорадка у женщин: симптомы, причины, диагностика и лечение желтой лихорадки у женщины
-        $this->view->page_title = sprintf('%s у женщин: симптомы, причины, диагностика и лечение %s у женщины', $disease->title, $disease->genitive_name);
-        $this->view->page_description = str_ireplace($disease->title, $disease->title.' у женщин', $this->_getDescription());
-        $disease->title = $disease->title . ' у женщин';
-        $disease->h2_extend = $disease->genitive_name . ' у женщины';
-    }
-
-    protected function _getDescription() {
-
-        $disease = $this->view->disease;
-
-        $pervoe_predlozhenie = '';
-        if (preg_match('$\s*?([A-ZА-ЯЁ].*?\.)$', strip_tags($disease->content), $a)) {
-            $pervoe_predlozhenie = $a[1];
-        }
-        return $pervoe_predlozhenie ? $pervoe_predlozhenie : $disease->description;
-    }
-
-    protected function _getAfterBlocksTemplate() {
-
-        $alias = $this->view->disease->alias;
-
-        // проверяем шаблон для отображения после текста описания болезни
-        // если он есть - подключаем его
-        $route = Application::getUriPath(true);
-        $block_after = implode('/', [
-            Application::getTemplatesDir(true),
-            $route['controller'],
-            'blocks-after',
-            $alias . $this->view->getExtension()
-        ]);
-        $blocks_before = implode('/', [
-            Application::getTemplatesDir(true),
-            $route['controller'],
-            'blocks-before',
-            $alias . $this->view->getExtension()
-        ]);
-        if(file_exists($block_after)){
-            $this->view->afterblocks = $this->view->renderInString($route['controller'].'/blocks-after/'.$alias, false);
-        }
-        if(file_exists($blocks_before)){
-            $this->view->beforeblocks = $this->view->renderInString($route['controller'].'/blocks-before/'.$alias, false);
-        }
-    }
 }

@@ -79,13 +79,9 @@
                     WHERE vr.doctor_id = ' . (int)$doctor_id . '
                         AND vr.is_confirmed = 1
                         AND vr.doctor_review_text IS NOT NULL
-                    GROUP BY vr.doctor_review_text
                     LIMIT ' . $page . ', ' . $by_page . ';';
 
 			$data = $this->db->query($sql);
-            $data = array_reverse($data);
-
-            $data = array_reverse($data);
 
 			return ($data) ? $this->initList($data) : array();
 		}

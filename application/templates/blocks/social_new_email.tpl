@@ -1,5 +1,5 @@
 <div id="landing-forgotpass-popup" class="reg-popup">
-    <img class="logo" src="/media/images/main_logo.png" alt="">
+    <img class="logo" src="/media/images/<?=CSS_DIR?>/main_logo.png" alt="">
     <p>На указанный email мы вышлем письмо <br>с подтверждением регистрации</p>
     <div class="form forgot-form">
         <div id="forgotpass-form">

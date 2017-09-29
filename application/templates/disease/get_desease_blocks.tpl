@@ -1,6 +1,7 @@
 	<div id="tabs">
 		<div class="illness-nav-wrap">
 			<div class="illness-nav" data-spy="affix">
+				<?php /*
 				<div class="nav">
 					<ul>
 						<?php foreach ($disease_tabs_flags as $key=>$value) { ?>
@@ -10,11 +11,9 @@
                                 </li>
 							<?php } ?>
 						<?php } ?>
-						<li data-tab-name="actions" class="tab-people tab-actions">
-							<a href="/action" id="">Акции</a>
-						</li>
 					</ul>
 				</div>
+				*/?>
 				<div id="MyBigAjaxElement"></div>
 				<!--add class "carousel" to sub-nav for sliding-->
 
@@ -32,12 +31,7 @@
 									<?php $field_anchor = 'b'.$block->id;?>
 
 									<?php if ($block->$field_name == 1) { ?>
-										<li><a
-													data-section-id="<?php echo $block->disease_block_type_id?>"
-													class="section-name content-active-<?php echo DiseaseBlockAliasViewHelper::getAlias($block->disease_block_type_id); ?>"
-													data-section-name="content-active-<?php echo DiseaseBlockAliasViewHelper::getAlias($block->disease_block_type_id); ?>" d
-													ata-t="<?php echo $field_anchor; ?>"
-													href="<?php echo DiseasePageLinkViewHelper::getLink($disease); ?>#<?php echo $field_anchor; ?>"><?php echo $block->disease_block_type->name; ?></a></li>
+										<li><a data-section-id="<?php echo $block->disease_block_type_id?>" class="section-name content-active-<?php echo DiseaseBlockAliasViewHelper::getAlias($block->disease_block_type_id); ?>" data-section-name="content-active-<?php echo DiseaseBlockAliasViewHelper::getAlias($block->disease_block_type_id); ?>" data-t="<?php echo $field_anchor; ?>" href="<?php echo DiseasePageLinkViewHelper::getLink($disease); ?>/<?php echo $key; ?>#<?php echo $field_anchor; ?>"><?php echo $block->disease_block_type->name; ?></a></li>
 										<?php $sub_counter++;?>
 									<?php } ?>
 								<?php } ?>
@@ -78,7 +72,6 @@
 
 			</div>
 		</div>
-		<br>
 
 		<div class="content read">
 			<?php $this->block('disease/blocks/disease_blocks_content'); ?>

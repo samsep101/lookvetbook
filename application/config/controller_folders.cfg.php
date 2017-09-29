@@ -1,5 +1,5 @@
 <?php
-    $controller_folders = array('admin', 'api', 'manage', 'registry', 'shop', 'widget_api', 'atlas');
+    $controller_folders = array('admin', 'api', 'manage', 'registry', 'shop', 'widget_api');
     Register::add('controller_folders', $controller_folders);
 
     $default_controllers = array(

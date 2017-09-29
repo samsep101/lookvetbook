@@ -18,7 +18,6 @@ class ClinicController extends BaseController
     $clinic_id = $this->request('id');
     $canbe_original_alias = $this->request('district');
 
-
     $current_item = $this->getLandingPageItem($clinic_id);
 
     if ($current_item) {
@@ -35,78 +34,10 @@ class ClinicController extends BaseController
 
 
     $clinic = $clinic_manager->getOneByIdOrAliasAndIsActive($clinic_id);
+    $specialization = $specialization_manager->getOneByAlias($clinic_id);
 
-    if ($clinic and $clinic->isPrimaryClinic()){
-//          $this->view->page_title = $clinic->name.' - врачи, отзывы, цены, телефоны и адреса, запись на прием на '.SITE_NAME;
-          $this->view->page_title = $this->getClinicPageTitle($specialty);
-          $this->view_page->page_description=$this->getClinicPageDescription();
-          $this->view->clinic = $clinic;
-          $this->render('clinic/primary');
-    }
-
-    $districtManager = new DistrictManager();
-    $regionManager = new RegionManager();
-    $streetManager = new StreetManager();
-    $metroManager = new MetroStationManager();
-//    $specialization_manager = new SpecializationManager();
-
-    $v=explode('-',$clinic_id);
-    $district       =   null;
-    $metro          =   null;
-    $region         =   null;
-    $street         =   null;
-    $specialization =   null;
-    if (isset($v) && count($v)>0) {
-        for ($i=0;$i<=count($v);++$i) {
-            $r[]=(isset($v[$i])) ? $v[$i] : '';
-            for ($j=0;$j<=count($v);++$j) {
-                $r[]=(isset($v[$i]) and isset($v[$j])) ? $v[$i].'-'.$v[$j] : '';
-                for ($k=0;$k<=count($v);++$k) {
-                    $r[]=(isset($v[$i]) and isset($v[$j]) and isset($v[$k])) ? $v[$i].'-'.$v[$j].'-'.$v[$k] : '';
-                    for ($z=0;$z<=count($v);++$z) {
-                        $r[]=(isset($v[$i]) and isset($v[$j]) and isset($v[$k]) and isset($v[$z])) ? $v[$i].'-'.$v[$j].'-'.$v[$k].'-'.$v[$z] : '';
-                        /*for ($q=0;$q<=count($v);++$q) {
-                            $r[]= (isset($v[$i]) and isset($v[$j]) and isset($v[$k]) and isset($v[$z]) and isset($v[$q]))  ? $v[$i].'-'.$v[$j].'-'.$v[$k].'-'.$v[$z].'-'.$v[$q] : '';
-                        }*/
-                    }
-                }
-            }
-        }
-            //костыль, ищем сначала длинные названия например САДОВАЯ КОРЕТНАЯ потом короткие СОДОВАЯ
-            //иначе найдем первое короткое название и остановимся.
-            //select * from street where name like '%садовая%'
-        usort($r, function($a, $b) {
-          return strlen($b) - strlen($a);
-        });
-        $r = array_slice($r, 0, 60);
-        foreach ($r as $val) {
-            if ($district==null)        $district = $districtManager->getOneByAlias($val);
-            if ($metro==null)           $metro    = $metroManager->getOneByAlias($val);
-            if ($region==null)          $region   = $regionManager->getOneByAlias($val);
-            if ($street==null)          $street   = $streetManager->getOneByAlias($val);
-            if ($specialization==null)  $specialization = $specialization_manager->getOneByAlias($val);
-         }
-    } else {
-        $district       = $districtManager->getOneByAlias($clinic_id);
-        $metro          = $metroManager->getOneByAlias($clinic_id);
-        $region         = $regionManager->getOneByAlias($clinic_id);
-        $street         = $streetManager->getOneByAlias($clinic_id);
-        $specialization = $specialization_manager->getOneByAlias($clinic_id);
-    }
-    if ($district)
-        $this->view->district = $district;
-    if ($region) {
-        $this->view->region=$region;
-    }
-    if ($street)
-        $this->view->street=$street;
-    if ($metro)
-        $this->view->metro_station=$metro;
-    //print_r($metro);
-
-
-    if ($specialization || $this->view->district || $this->view->region || $this->view->street || $this->view->metro_station) {
-      $this->index($specialization->alias);
+    if ($specialization) {
+      $this->index($clinic_id);
     } else {
       if (is_numeric($clinic_id) && $clinic->alias) {
         RedirectManager::redirect301(ClinicPageLinkViewHelper::getLink($clinic));
@@ -115,6 +46,7 @@ class ClinicController extends BaseController
         if (!$clinic && strpos($clinic_id,'/') === false && $original_clinic = $clinic_manager->getOneByOriginalAlias($clinic_id)){
             RedirectManager::redirect301(ClinicPageLinkViewHelper::getLink($original_clinic));
         }
+
 
 
       LinkHelper::checkLinkIsCorrectIfThereIsNoAttemptRedirect($clinic, array('city' => $this->city, 'model' => 'clinic'));
@@ -152,9 +84,7 @@ class ClinicController extends BaseController
         if (preg_match('$\s*?([A-ZА-ЯЁ].*?\.)$', strip_tags($clinic->about), $a))
             $pervoe_predlozhenie = $a[1];
 
-//      $this->view->page_description = $pervoe_predlozhenie;
-      $this->view->page_title = $this->getClinicPageTitle();
-      $this->view->page_description = $this->getClinicPageDescription();
+      $this->view->page_description = $pervoe_predlozhenie;
 
       $specialty_manager = new SpecialtyManager();
 
@@ -176,8 +106,7 @@ class ClinicController extends BaseController
       $this->view->purposes = $purposes;
 
       $clinic_metro = ($clinic->metro_station_name) ? ', метро ' . $clinic->metro_station_name : '';
-      //$this->view->page_title = $clinic->name . ', ' . $clinic->city->name . $clinic_metro . ', ' . $clinic->address . ', отзывы, телефон, запись на прием - «'.SITE_NAME.'»';
-
+      $this->view->page_title = $clinic->name . ', ' . $clinic->city->name . $clinic_metro . ', ' . $clinic->address . ', отзывы, телефон, запись на прием - «'.SITE_NAME.'»';
     }
 
     $spzn_id = $this->request('spzn_id', 0);
@@ -190,7 +119,6 @@ class ClinicController extends BaseController
       $main_specialty = $specialty_manager->getMainOneBySpecializationId($specialization->getId());
       $this->view->main_specialty = $main_specialty;
     }
-
   }
 
   public function ajaxAddToMyClinicList()
@@ -216,27 +144,6 @@ class ClinicController extends BaseController
     }
   }
 
-  public function getClinicPageDescription() {
-
-
-
-    if ($this->view->specialization) {
-        $seo_specialization=$this->view->specialization->name;
-    }
-
-    if ($this->view->clinic->name) {
-
-        return  SeoTextViewHelper::newGetClinicPageDescription($this->view->clinic);
-
-    } else {
-      if (extension_loaded('morpher')) {
-        return 'Ищете медицинские центры и клиники '.morpher_inflect($seo_specialization,'rod').' '.$this->getSeoAddress().'? '.SITE_NAME.' поможет выбрать лучшие клиники и медицинские центры по отзывам, рейтингу и стоимости. Заходите!';
-      } else {
-        return 'Ищете медицинские центры и клиники '.$seo_specialization.' '.$this->getSeoAddress().'? '.SITE_NAME.' поможет выбрать лучшие клиники и медицинские центры по отзывам, рейтингу и стоимости. Заходите!';
-      }
-
-    }
-  }
   public function index($specialization_alias = NULL)
   {
     if ($_SERVER['REQUEST_URI'] == '/clinic/search') ErrorPageViewHelper::page404('404');
@@ -294,6 +201,13 @@ class ClinicController extends BaseController
       $address_object = $city;
       $this->view->address_object = $address_object;
     }
+      $pettype_manager = ModelManagerFactory::getByName('pettype');
+      $petservice_manager = ModelManagerFactory::getByName('petservice');
+
+      $pettypes = $pettype_manager->getSortedList('name');
+      $petservices = $petservice_manager->getSortedList('name');
+      $this->view->pettypes = $pettypes;
+      $this->view->petservices = $petservices;
 
     $this->view->city = $city;
     $this->view->city_id = $city_id;
@@ -311,11 +225,8 @@ class ClinicController extends BaseController
 
     $this->view->load_map = TRUE;
 
-//    $this->view->page_title = $this->getClinicPageTitle($specialization);
-    $this->view->page_title = $this->getClinicPageTitle(null);
-//    $this->view_page->page_description=$this->getClinicPageDescription();
-//    $this->view->page_description = 'Найти клинику - вся информация обо всех известных заболеваниях на сервисе '.SITE_NAME.'';
-    $this->view->page_description = $this->getClinicPageDescription();
+    $this->view->page_title = $this->getClinicPageTitle($specialization);
+    $this->view->page_description = 'Найти клинику - вся информация обо всех известных заболеваниях на сервисе '.SITE_NAME.'';
 
     $this->view->canonical_link = '/clinic';
     $this->view->page_type = 'clinic';
@@ -333,17 +244,10 @@ class ClinicController extends BaseController
 
     $params = new ClinicSearchParams();
     $this->initClinicSearchParams($params);
+
     $clinic_search_algorithm = new ClinicSearchAlgorithm();
-    if ($primary_clinic_id = $this->request('primary_clinic_id', 0)){ /**TODO remove this costil with correct search algoritm */
-        $clinics = (new ClinicManager())->getChildsClinic($primary_clinic_id);
-    }elseif (0 && $clinic_name = $this->request('clinic_name', '')){
-        $clinics = (new ClinicManager())->getListByNameOrAddress('%'.$clinic_name.'%');
-    }
-    else{
-        $clinics = $clinic_search_algorithm->search($params);
-//        print_r($params);
-//        print_r($clinics);
-    }
+    $clinics = $clinic_search_algorithm->search($params);
+
     $clinic_count = [count($clinics)];
     $specialization_manager = ModelManagerFactory::getByName('specialization');
     $specialization = $specialization_manager->getOneById($params->specialization_id);
@@ -382,8 +286,7 @@ class ClinicController extends BaseController
       $map_file_generator = new ClinicMapDataGenerator();
       $map_file = $map_file_generator->generate($params);
 
-     if (is_object($params->geo_point)) {
-	#die('3333');
+      if ($params->geo_point) {
         /**
          * @var ClinicManager $clinic_manager
          */
@@ -571,7 +474,6 @@ class ClinicController extends BaseController
     $params->purpose_of_visit_id = (int)$this->request('purpose_of_visit_id', 0);
     $params->children = $this->request('children', 0);
     $params->handicapped = $this->request('handicapped', 0);
-    $params->primary_clinic_id = $this->request('primary_clinic_id', 0);
     $params->pregnant = $this->request('pregnant', 0);
     $params->day_and_night = $this->request('day_and_night', 0);
     $params->clinic_name = $this->request('clinic_name', '');
@@ -584,7 +486,6 @@ class ClinicController extends BaseController
     $params->district_id = $this->request('district_id');
     $params->region_id = $this->request('region_id');
     $params->street_id = $this->request('street_id');
-    $params->metro_station_id = $this->request('metro_station_id');
     $params->twenty_four_hours = $this->request('twenty_four_hours', 0);
     $params->is_card_pay = $this->request('is_card_pay', 0);
     $params->have_ramp = $this->request('have_ramp', 0);
@@ -595,7 +496,6 @@ class ClinicController extends BaseController
 
     if ($latitude && $longitude) {
       $params->geo_point = new GeoPoint($latitude, $longitude);
-
       $params->is_metro = $is_metro;
     }
     $clinic_type = $this->request('clinic_type');
@@ -754,7 +654,7 @@ class ClinicController extends BaseController
     ));
   }
 
-  private function getClinicPageTitle($specialty=null)
+  private function getClinicPageTitle($specialty)
   {
     if (!is_integer($specialty)) {
       if (get_class($specialty) == 'ClinicServicesModel') {
@@ -767,6 +667,7 @@ class ClinicController extends BaseController
         }
       }
     }
+
     if (is_object($specialty) && get_class($specialty) == 'SpecialtyModel' && $specialty->id) {
       $specialty_id = $specialty->id;
 
@@ -787,39 +688,7 @@ class ClinicController extends BaseController
       }
     }
 
-
-//    return $this->view->page_title = $this->getSeoAddress().' Найти клинику. Адреса и телефоны медицинских центров Москвы и других городов России - «'.SITE_NAME.'»';
-
-    if ($this->view->specialization) {
-        if (extension_loaded('morpher')) {
-            $seo_specialization=morpher_inflect($this->view->specialization->name,'rod');
-        } else {
-            $seo_specialization=$this->view->specialization->name;
-        }
-
-
-    }
-
-    if( $this->view->clinic != null ){
-        return SeoTextViewHelper::GetClinicSeoTitle($this->view->clinic);
-    }else{
-        return 'Медицинские центры и клиники '.$this->getSeoAddress().': цены, отзывы, рейтинги и запись на прием на '.SITE_NAME;
-    }
-
-
-  }
-
-  public function getSeoAddress() {
-   if ($this->view->district)
-     return SeoTextViewHelper::getAddressObjectName($this->view->district);
-   elseif ($this->view->region)
-     return SeoTextViewHelper::getAddressObjectName($this->view->region);
-   elseif ($this->view->street)
-     return SeoTextViewHelper::getAddressObjectName($this->view->street);
-   elseif ($this->view->metro_station)
-     return SeoTextViewHelper::getAddressObjectName($this->view->metro_station);
-   else
-     return SeoTextViewHelper::getAddressObjectName($this->view->city);
+    return $this->view->page_title = 'Найти клинику. Адреса и телефоны медицинских центров Москвы и других городов России - «'.SITE_NAME.'»';
   }
 
   private function getLandingPageItem($landing_page_alias)
@@ -831,6 +700,7 @@ class ClinicController extends BaseController
     $type = $clinic_type_manager->getItemByAlias($landing_page_alias);
 
     $result_item = $service ? $service : ($type ? $type : array());
+
     if (empty($result_item) || !$result_item->perceived_as_page) return array();
     else return $result_item;
   }
@@ -866,7 +736,6 @@ class ClinicController extends BaseController
 
   public function landingPage($landing_page_alias)
   {
-
     if (!$landing_page_alias) $landing_page_alias = $this->request('landing_page_alias');
 
     $current_item = $this->getLandingPageItem($landing_page_alias);

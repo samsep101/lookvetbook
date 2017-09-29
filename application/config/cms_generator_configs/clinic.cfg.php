@@ -7,8 +7,6 @@
 		'fields'	=> array(
 			'id'					  => 'index',
 			'name'					=> 'input',
-			'direct_phone'					=> 'input',
-			'docdoc_id'					=> 'input',
 			'alias'				   => 'input',
 			'about'				   => array(
 				'type'  => 'text',
@@ -140,10 +138,6 @@
 				'type'  => 'checkbox',
 				'label' => 'Да/Нет'
 			),
-            'visit_disallow'			   => array(
-                'type'  => 'checkbox',
-                'label' => 'Да/Нет'
-            ),
 			'not_work'				=> array(
 				'type'  => 'checkbox',
 				'label' => 'Да/Нет'
@@ -238,9 +232,7 @@
 			'fields' => array(
 				'id'					  => 'ID',
 				'name'					=> 'Название',
-				'direct_phone'					=> 'Прямой телефон',
-				'docdoc_id'					=> 'ID DocDoc',
-                'primary_clinic_id' => 'Основная клиника',
+        'primary_clinic_id' => 'Основная клиника',
 				'alias'				   => 'Алиас',
 				'original_alias'    => 'Оригинальный алиас',
 				'about'				   => 'Описание',
@@ -292,7 +284,6 @@
 				'legal_address'		   => 'Юридический адрес',
 				'fact_address'			=> 'Фактический адрес',
 				'is_active'			   => 'Выводить на сайте',
-				'visit_disallow'			   => 'Запись запрещена',
 				'not_work'				=> 'Не работаем с клиникой',
 				'redirect_list'		   => 'Добавить клинику в список отображаемх страниц при отсутствии страницы',
 				'is_state'				=> 'Государственная клиника',
@@ -321,23 +312,6 @@
 						'desc'  => 'ASC'
 					),
 				),
-                'filters' => array(
-                    'use_class_params' => 'ClinicSearchCriteria',
-                    'filters' => array(
-                        'Название' => array(
-                            'name' => array(
-                                'type' => 'input',
-                                'title' => ''
-                            ),
-                        ),
-                        'Алиас' => array(
-                            'alias' => array(
-                                'type' => 'input',
-                                'title' => ''
-                            ),
-                        )
-                    )
-                ),
 				'additionalHTML' => <<<HTML
 					<script type="application/javascript">
 						$(function() {
@@ -374,7 +348,6 @@
 								<img src="/media/images/loader.gif">
 							</div>
 							<input type="button" id="generateYandexFeed" class="" value="Сгенерировать Яндекс Feed">
-							<a href="/import/docdoc" target="_blank">Импортировать данные из DocDoc</a>
 						</div>
 						<div class="load-message"></div>
 					</div>
@@ -385,8 +358,6 @@ HTML
 				'fields'  => array(
 					'Информация'			=> array(
 						'name',
-						'direct_phone',
-						'docdoc_id',
 						'primary_clinic_id',
 						'alias',
 						'original_alias',
@@ -426,7 +397,6 @@ HTML
 						'week_from',
 						'week_to',
 						'is_active',
-						'visit_disallow',
 						'not_work',
 						'is_state',
 						'is_prescribe_sick_leave',
@@ -461,8 +431,6 @@ HTML
 				'fields'  => array(
 					'Информация'			=> array(
 						'name',
-						'direct_phone',
-						'docdoc_id',
 						'primary_clinic_id',
 						'alias',
 						'original_alias',
@@ -502,7 +470,6 @@ HTML
 						'week_from',
 						'week_to',
 						'is_active',
-						'visit_disallow',
 						'not_work',
 						'is_state',
 						'is_prescribe_sick_leave',

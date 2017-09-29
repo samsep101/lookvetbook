@@ -52,10 +52,10 @@
                     <?php echo $view_processor->getView('is_yandex_send'); ?>
                 </div>
                 <div style="display: block; float: right; margin: 10px 42px 0 20px;">
-                    <?php echo $view_processor->getView('only_adult'); ?>
+                    <?php /* echo $view_processor->getView('only_adult'); */?>
                 </div>
                 <div style="display: block; float: right; margin: 10px 0 0 0;">
-                    <?php echo $view_processor->getView('only_children'); ?>
+                    <?php /* echo $view_processor->getView('only_children'); */?>
                 </div>
                 <div style="display: block; float: left; margin-top: 10px;">
                     <?php echo $view_processor->getView('not_work'); ?>

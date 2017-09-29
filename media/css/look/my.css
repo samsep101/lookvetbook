@@ -12,6 +12,7 @@ A {
 
 A:hover {
     text-decoration : none; /* Добавляем подчеркивание при наведении курсора на ссылку */
+    color           : red; /* Ссылка красного цвета */
     cursor          : pointer;
 }
 
@@ -2622,6 +2623,14 @@ body.hidden .doctor-special-links {
     font-size   : 12px;
 }
 
+.content .breadcrumbs {
+    padding-top    : 5px;
+    position       : relative;
+    top            : 15px;
+    left           : 90px;
+    padding-bottom : 5px;
+}
+
 .special-block h1 {
     text-align : center;
     color      : #393939;
@@ -2781,6 +2790,31 @@ input:focus, a:focus {
 
 .specialties-block .text {
     text-align : justify;
+}
+
+.breadcrumbs {
+    color : #1F8EBE;
+}
+
+.breadcrumbs a {
+    color : #1F8EBE;
+}
+
+.content .breadcrumbs {
+    padding-top    : 5px;
+    position       : relative;
+    top            : 15px;
+    left           : 78px;
+    padding-bottom : 5px;
+}
+
+.content .top_number .breadcrumbs {
+    padding-top    : 5px;
+    position       : relative;
+    top            : 15px;
+    left           : 0;
+    padding-bottom : 5px;
+    width          : 710px;
 }
 
 .special-block .h1 {
@@ -3947,7 +3981,7 @@ a.search-doctor-button {
     padding             : 0 13px;
     height              : 23px;
     background-size     : cover;
-    background-position : -5px -5px;
+    background-position : -5px -5 px\0/;
     line-height         : 23px;
     font-size           : 12px;
     border-radius       : 5px;
@@ -4073,8 +4107,7 @@ a.search-doctor-button {
 }
 
 .magazine .way_line.m0 {
-    margin: 0;
-    padding: 25px 0 15px;
+    margin : 7px 0 7px 72px;
 }
 
 .magazine .way_line li, .magazine .way_line a {
@@ -4896,15 +4929,13 @@ a.search-doctor-button {
 }
 
 .catalog_more_ul li {
-    width: 32.5%;
-    background: #FFFFFF;
-    margin: 0 5px 5px 0;
-    float: left;
-    height: 50px;
-    padding: 8px 15px;
-    overflow: hidden;
-    border-radius: 3px;
-    box-sizing: border-box;
+    width      : 30%;
+    background : #FFFFFF;
+    margin     : 0.5% 2% 0% 0%;
+    float      : left;
+    height     : 30px;
+    padding    : 1%;
+    overflow   : hidden;
 }
 
 .catalog_more_ul li:nth-child(3n) {
@@ -4929,9 +4960,8 @@ a.search-doctor-button {
 }
 
 .magazine h4, .magazine h3 {
-    font: normal 18px 'pf_agora_slab_pro_medium';
-    text-shadow: 1px 1px 1px #FFFFFF;
-    padding: 10px 15px;
+    font        : normal 18px 'pf_agora_slab_pro_medium';
+    text-shadow : 1px 1px 1px #FFFFFF;
 }
 
 .magazine h4 {
@@ -6806,7 +6836,7 @@ a.btn-double-floor {
 .oneAction {
     position: relative;
     display: block;
-    width: 633px !important;
+    width: 230px;
     height: 260px;
     float: left;
     min-height: 1px;
@@ -6817,7 +6847,7 @@ a.btn-double-floor {
     box-sizing: border-box;
 }
 .oneAction .actionName{
-    position: static;
+    position: absolute;
     width: 100%!important;
     font-size: 16px;
     line-height: 20px;
@@ -6850,13 +6880,7 @@ a.btn-double-floor {
 .actionLink{
     display: inline-block;
     line-height: 1em;
-    font-family: 'pf_agora_slab_probold';
+    font-family: 'pf_agora_slab_prolight';
     font-size: 14px;
-    padding: 9px 15px 11px 15px;
-    margin-right: 8px;
-    background: rgb(252, 110, 111);
-    color: #fff!important;
-    text-decoration: none!important;
-    text-align: right;
-    border-radius: 15px 15px 0 0;
+    padding-left: 80px;
 }

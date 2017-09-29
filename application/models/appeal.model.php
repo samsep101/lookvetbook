@@ -19,7 +19,6 @@
      * @property int $is_with_visit
      * @property datetime $dt_create
      * @property int $account_id
-     * @property int $city_id
      * @property AccountModel $account
      *
      * @property int $visit_id
@@ -45,14 +44,6 @@
             $str = trim($str);
 
             return $str;
-        }
-
-        /**
-         * @return VisitModel|null
-         */
-        public function getVisit()
-        {
-            return $this->_field_visit();
         }
 
         protected function _field_visit()

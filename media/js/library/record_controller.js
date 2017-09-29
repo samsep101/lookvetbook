@@ -49,8 +49,8 @@ var RecordController = function ()
         _grep_id = Math.round(Math.random()*1000000) + 'google_captcha';
         _form.find('.g-recaptcha-add_review').attr('id', _grep_id);
         grecaptcha.render(_grep_id, {
-            'sitekey': '6LelcycTAAAAACs6URiEq3D1rLkKudTxC3D1Skj5'
-        })
+            'sitekey': '6LfixiEUAAAAAIS4CwpK0GVPZ5SHrbZvRPyuHPnZ'
+        });
 
         _form.removeClass('lmmarked');
         _form.find('.datepicker').removeClass('hasDatepicker');
@@ -59,8 +59,7 @@ var RecordController = function ()
 
         $( ".datepicker" ).datepicker();
         $(".inputPhone").mask("+7 (999) 999-99-99");
-
-
+        this.document.write('<img src="http://mixmarket.biz/uni/tev.php?id=1294937483&r='+escape(document.referrer)+'&t='+(new Date()).getTime()+'" width="1" height="1"/>');
     }
 }
 
@@ -74,12 +73,11 @@ function recordComplete(){
         if ($.cookie('admitad_uid'))
             admitad_submit(document, window, $.cookie('admitad_uid'));
         
-        if ($.cookie('utm_campaign') == 'mixuni'){
-            alert(data['visit_id']);
-            mixmarket_submit(data['visit_id']);
-        }
+        // if ($.cookie('utm_campaign') == 'mixuni'){
+        //     mixmarket_submit(data['visit_id']);
+        // }
 
-        
+        mixmarket_submit(data['visit_id']);
         
         
     }else{

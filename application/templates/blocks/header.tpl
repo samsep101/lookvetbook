@@ -30,7 +30,7 @@
                     <tr>
                         <?php if (!$city || $city->hasDoctors() && $city) { ?>
                             <td>
-                                <a class="<?php echo (isset($menu_active) && $menu_active == 'doctor') ? 'active' : ''; ?> doctor-link" href="<?php if($city && $city->isUsed()) { echo '/doctor';} else echo SITE_URL.'/doctor'; ?>">Врачи</a>
+                                <a class="<?php echo (isset($menu_active) && $menu_active == 'doctor') ? 'active' : ''; ?> doctor-link" href="<?php if($city && $city->isUsed()) { echo '/doctor';} else echo SITE_URL.'/doctor'; ?>">Ветеринары</a>
                             </td>
                         <?php } ?>
                         <?php if (!$city || $city->hasClinics() ) { ?>
@@ -44,14 +44,8 @@
                             </td>
                         <?php } ?>
                         <td class="treatment-in-switz">
-                            <a class="" href="/shop/catalog">Лекарства</a>
+                            <a class="" href="http://swiss.lookmedbook.ru/">Лечение в Швейцарии</a>
                         </td>
-						<td class="treatment-in-switz">
-                            <a class="" href="/action">Акции</a>
-                        </td>
-                        <?php if(Application::config('section.services.available')) : ?>
-                        <td><a href="/uslugi">Услуги</a></td>
-                        <?php endif;?>
                         <?php if(defined('SHOP_ENABLE') && SHOP_ENABLE) { ?>
                             <td class="lekarstva">
                                 <a class="<?php echo (isset($menu_active) && $menu_active == 'shop') ? 'active' : ''; ?> shop-link" href="<?php if($city && $city->isUsed()) { echo '/shop/catalog';} else echo SITE_URL.'/shop/catalog'; ?> ">Лекарства<span class="n_goods"></span></a><span class="n_goods"></span>

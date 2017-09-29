@@ -14,8 +14,6 @@
     "guzzlehttp/guzzle": "*",
     "google/recaptcha": "1.1",
     "robmorgan/phinx": "v0.5.3",
-    "sentry/sentry": "^1.6",
-    "sunra/php-simple-html-dom-parser": "1.5.1.x-dev",
     "ruflin/elastica": "^5.3",
     "zendframework/zend-http": "2.5.5",
     "zendframework/zend-stdlib": "3.0.1",

@@ -50,31 +50,7 @@
 			$result['doctor_type'] = (int)$doctor->doctor_type_id;
 			$result['is_has_visit_slots'] = (bool)$doctor->is_has_visit_slots;
 			$result['reviews_count'] = (int)$doctor->reviews_count;
-			if($doctor->actions)
-			{
-                                $result['actions'] = array();
-				foreach($doctor->actions as $action)
-				{
-					$action_info  = array(
-						'id' => $action->getId()
-					);
 
-					if($action->date_from)
-					{
-						$action_info['date_from'] = $action->date_from;
-					}
-					if($action->date_to)
-					{
-						$action_info['date_to'] = $action->date_to;
-					}
-					if($action->clinic_id)
-					{
-						$action_info['clinic_id'] = $action->clinic_id;
-					}
-                                        $result['actions'][] = $action_info;                                        
-                                }
-                        }
-                        
 			if($doctor->clinics)
 			{
 				$result['clinics'] = array();
@@ -98,17 +74,12 @@
 						$clinic_info['region'] = $clinic->region_id;
 					}
 
-                                        if($clinic->street_id)
+					if($clinic->street_id)
 					{
 						$clinic_info['street'] = $clinic->street_id;
 					}
-					if($clinic->metro_station_id)
-					{
-						$clinic_info['metro_station_id'] = $clinic->metro_station_id;
-					}
 
-
-                                        if($clinic->region)
+					if($clinic->region)
 					{
 						$clinic_info['district'] = $clinic->region->district_id;
 					}

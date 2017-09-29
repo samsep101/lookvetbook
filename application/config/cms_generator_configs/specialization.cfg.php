@@ -1,7 +1,7 @@
 <?php
     $specialization = array(
         'table'     => DB_PREFIX . 'specialization',
-        'title'     => 'Области ' . MEDICYNY,
+        'title'     => 'Области ветеринарии',
         'fields'    => array(
             'id'                => 'index',
             'name'              => 'input',
@@ -84,9 +84,9 @@
                     'for_whom',
                     'view_specialties',
                 ),
-                'title'   => 'Области ' . MEDICYNY,
+                'title'   => 'Области ветеринаринарии',
                 'legend'  => array(
-                    '#000000' => 'область '. MEDICYNY .' не имеет специализаций'
+                    '#000000' => 'область ветеринарии не имеет специализаций'
                 ),
                 'sort_by' => array(
                     array(

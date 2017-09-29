@@ -19,7 +19,7 @@
 <div class="equal-elements">
     <?php if($equal_elements_type == 'clinic'): ?>
         <p class="clinic-service-list">
-            <?php $seo_text = 'Карточка медицинского учреждения ' .$clinic->name .': '; ?>
+            <?php $seo_text = 'Карточка ветеринарного учреждения ' .$clinic->name .': '; ?>
             <?php $number = 0; ?>
             <?php foreach($clinic->specializations as $specialization): ?>
                 <?php if($number != 0): ?>
@@ -47,7 +47,7 @@
     <p class="all-elements" <?php echo ($equal_elements_type == 'doctor') ? 'style="text-align: left; margin-left: 20px"' : ''; ?>>
         <?php if($equal_elements_type == 'clinic'): ?>
             <a class="show-all" href="javascript:void(0)">
-                Другие медицинские учреждения в <?php echo($clinic->district->formal_name); ?>
+                Другие ветеринарные учреждения в <?php echo($clinic->district->formal_name); ?>
             </a>
         <?php else: ?>
             <a class="show-all" href="javascript:void(0)">

@@ -11,22 +11,11 @@
             <span class="h-blue">Телефон:</span>
             <span class="txt" itemprop="tel"><?php echo PhoneNumberViewHelper::getView($clinic->phones[0]->phone_number); ?></span>
         <?php endif; ?>
-
-        <?php if (isset($clinic->phones[1])): ?>
-        <div>
-            <span class="h-blue">Телефон:</span>
-            <span class="txt"><?php echo PhoneNumberViewHelper::getView($clinic->phones[1]->phone_number); ?></span>
-        </div>
+        <?php if ($clinic->site): ?>
+            <div>
+                <span class="h-blue">Сайт:</span>
+                <span class="txt"><a href="<?php echo UrlViewHelper::getLinkView($clinic->site); ?>" target="_blank"><?php echo UrlViewHelper::getShortView($clinic->site); ?></a></span>
+            </div>
         <?php endif; ?>
-
     </div>
-
-<div class="phone_a clinic-info-hint clinic-info-hint-<?php echo $clinic->getId(); ?>">
-    <?php if ($clinic->site): ?>
-
-    <span class="h-blue">Сайт:</span>
-    <span class="txt"><a href="<?php echo UrlViewHelper::getLinkView($clinic->site); ?>" target="_blank"><?php echo UrlViewHelper::getShortView($clinic->site); ?></a></span>
-
-    <?php endif; ?>
-</div>
 <?php endif; ?>

@@ -134,86 +134,22 @@ EOD;
 
 
     public function  sendRecordInformation($info){
-        $city = SeoLinksHelper::getCityByPageLink();
-        $to = 'carelookmed@yandex.ru,karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
+        $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru';
         $subject = 'Заявка на посещение врача №'.$info['visit_id'];
 
 
         $message = 'Пациент '.$info['full_name'].': '.$info['phone']."\r\n\r\n";
-
-        if ($info['schedule_date'])
-            $message .= 'Запись на: '.$info['schedule_date'].' '.($info['after_work'] ? 'после работы' : '').PHP_EOL;
-
-        if ($info['doctor'])
-            $message .= 'Доктор: '.$info['doctor']->full_lower_name.PHP_EOL;
-
-        if ($info['clinic'])
-            $message .= 'Клиника: '.$info['clinic']->name.PHP_EOL;
-
-        if ($info['disease'])
-            $message .= 'Заболевание: '.$info['disease']->title.PHP_EOL;
-
-        if ($info['account'])
-            $message .= 'Оператор: '.$info['account']->full_name.PHP_EOL;
-
-        if ($city)
-            $message .= 'Город: '.$city->name.PHP_EOL;
-
-
-
-        $headers = "Content-type: text/html; charset=utf-8 \r\n";
-        $headers .= "From: lookmedbook.ru <no-reply@lookmedbook.ru>\r\n";
-
-
-        mail($to, $subject, $message, $headers);
-	mail('reeker14@mail.ru', $subject, $message, $headers);
-	mail('carelookmed@yandex.ru', $subject, $message, $headers);
-//	mail('myakovleva@lookmedbook.ru', $subject, $message, $headers);
-//	mail('Yudin@medcore.ru', $subject, $message, $headers);
-	mail('kkornakova@lookmedbook.ru', $subject, $message, $headers);
-	mail('karaseva1175@mail.ru', $subject, $message, $headers);
-
-
-
-
-        mail('hghsasha@gmail.com', $subject, $message, $headers);
-    }
-
-  public function  sendAppealInformation($info){
-        /*$city = SeoLinksHelper::getCityByPageLink();
-        $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
-        $subject = 'Обращение №'.$info['appeal_id'];
-        $city = SeoLinksHelper::getCityByPageLink();
-
-
         $message = 'Пациент '.$info['full_name'].': '.$info['phone']."\r\n\r\n";
-
-          if ($info['account'])
-              $message .= 'Оператор: '.$info['account']->full_name.PHP_EOL;
-
-          if ($city)
-              $message .= 'Город: '.$city->name.PHP_EOL;
-
-
         $headers = "Content-type: text/html; charset=utf-8 \r\n";
         $headers .= "From: lookmedbook.ru <no-reply@lookmedbook.ru>\r\n";
 
 
         mail($to, $subject, $message, $headers);
-
-	mail('reeker14@mail.ru', $subject, $message, $headers);
-        mail('myakovleva@lookmedbook.ru', $subject, $message, $headers);
-//        mail('Yudin@medcore.ru', $subject, $message, $headers);
-//        mail('kkornakova@lookmedbook.ru', $subject, $message, $headers);
-        mail('karaseva1175@mail.ru', $subject, $message, $headers);
-
-
-        mail('hghsasha@gmail.com', $subject, $message, $headers);*/
     }
 
   public function sendVisitCreatedMessage($info=[])
   {
-    $to = 'carelookmed@yandex.ru,karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
+    $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru';
     $subject = $info['id']['title'].' No:'.$info['id']['value'];
     if(isset($info['fio'])) {
       if ($info['fio']['value'] == 'Запрос на скидку')
@@ -235,41 +171,6 @@ EOD;
 
     mail($to, $subject, $message, $headers);
   }
-
-
-    /**
-     * @param VisitModel $visit
-     */
-    public static function sendVisitConfirmMessage($visit)
-    {
-        $to = 'carelookmed@yandex.ru,hghsasha@gmail.com,isharanovich@lookmedbook.ru,karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,lookmedbook@lookmedbook.ru';
-        $subject = 'Заявка №'.$visit->id.' подтверждена';
-
-        $message = 'Заявка №'.$visit->id.' подтверждена'.PHP_EOL.PHP_EOL;
-        $message .= 'Пациент:'.$visit->full_name.PHP_EOL;
-        $message .= 'Телефон:'.$visit->phone.PHP_EOL;
-
-        if ($visit->city)
-            $message .= 'Город:'.$visit->city->name.PHP_EOL;
-
-        if ($visit->operator)
-            $message .= 'Оператор:'.$visit->operator->full_name.'('.$visit->operator->email.')'.PHP_EOL;
-
-        if ($visit->clinic)
-            $message .= 'Клиника:'.$visit->clinic->full_name.PHP_EOL;
-
-
-
-        $message .= "\n\n";
-
-        $headers = "Content-type: text/html; charset=utf-8 \r\n";
-        $headers .= "From: ".SITE_DOMAIN." <no-reply@".SITE_DOMAIN.">\r\n";
-
-
-        $emails = explode(',',$to);
-        foreach ($emails as $to)
-            mail($to, $subject, $message, $headers);
-    }
 
 
 

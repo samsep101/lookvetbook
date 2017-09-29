@@ -533,7 +533,7 @@ h2 {
     border     : 1px solid #DA2D71;
 }
 
-.btn-find-doctor-2:active {
+.btn-find-doctor-2.:active {
     background-position : 0 100%;
 }
 
@@ -575,7 +575,7 @@ h2 {
     text-decoration : none !important;
     text-align      : center;
     text-shadow     : none;
-    border-radius   : 0;
+    border-radius   : none;
     border          : none;
     overflow        : hidden;
 }
@@ -1492,7 +1492,7 @@ h2 {
 
 .left_search .chzn-container-single .chzn-drop {
     width      : 100% !important;
-    max-height : none;
+    max-height : auto;
 }
 
 .content .left_search .search-form .box {
@@ -2480,13 +2480,10 @@ h2 {
     padding : 0 16px 0 17px;
 }
 
-.about-ilness-content .illness-nav.affix , .btn-double-floor.disease-doctor.affix{
+.about-ilness-content .illness-nav.affix {
     position : fixed;
     top      : 0;
     z-index  : 1000;
-}
-.btn-double-floor.disease-doctor.affix{
-    left: auto;
 }
 
 .nav {
@@ -3249,28 +3246,28 @@ ul.list-2 li {
     min-height : 290px;
 }
 
-.type-and-service-area {
+.clinic-search-result .clinic-card .type-and-service-area {
     position   : relative;
     min-height : 26px;
 }
 
-.type-and-service-area .multidisciplinary {
+.clinic-search-result .clinic-card .type-and-service-area .multidisciplinary {
     float     : left;
     padding   : 6px 5px 0 0;
     font-size : 14px;
 }
 
-.type-and-service-area .types-services-list {
+.clinic-search-result .clinic-card .type-and-service-area .types-services-list {
 }
 
-.type-and-service-area .tsl-item {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-item {
     position : relative;
     float    : left;
     height   : 25px;
     padding  : 0 0 0 10px;
 }
 
-.type-and-service-area .tsl-description {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-description {
     position              : absolute;
     display               : none;
     bottom                : 30px;
@@ -3282,12 +3279,12 @@ ul.list-2 li {
     border-radius         : 5px;
 }
 
-.type-and-service-area .tsl-text {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-text {
     white-space : nowrap;
     padding     : 2px 10px;
 }
 
-.type-and-service-area .tsl-pointer {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-pointer {
     background : url("/media/images/cream-pointer.png") no-repeat scroll 0 -2px transparent;
     bottom     : -7px;
     height     : 7px;
@@ -3296,12 +3293,15 @@ ul.list-2 li {
     width      : 14px;
 }
 
-.type-and-service-area .tsl-item:hover .tsl-description {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-item:hover .tsl-description {
     position : absolute;
     display  : block;
 }
 
-.type-and-service-area .tsl-icon {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-text {
+}
+
+.clinic-search-result .clinic-card .type-and-service-area .tsl-icon {
     width    : 17px;
     height   : 17px;
     overflow : hidden;
@@ -3309,66 +3309,66 @@ ul.list-2 li {
     margin   : 6px 0 0;
 }
 
-.type-and-service-area .tsl-icon.icon-twenty-four-hours {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-icon.icon-twenty-four-hours {
     background : url(/media/images/clinic_card_icon2.png) scroll no-repeat 0 0 transparent;
 }
 
-.type-and-service-area .tsl-item:hover .tsl-icon.icon-twenty-four-hours {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-item:hover .tsl-icon.icon-twenty-four-hours {
     background : url(/media/images/clinic_card_icon2.png) scroll no-repeat 0 -17px transparent;
 }
 
-.type-and-service-area .tsl-icon.icon-accepts-children {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-icon.icon-accepts-children {
     width      : 14px;
     background : url(/media/images/clinic_card_icon4.png) scroll no-repeat 0 0 transparent;
 }
 
-.type-and-service-area .tsl-item:hover .tsl-icon.icon-accepts-children {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-item:hover .tsl-icon.icon-accepts-children {
     background : url(/media/images/clinic_card_icon4.png) scroll no-repeat 0 -17px transparent;
 }
 
-.type-and-service-area .tsl-icon.icon-have-ramp {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-icon.icon-have-ramp {
     height     : 15px;
     width      : 32px;
     margin     : 8px 0 0;
     background : url(/media/images/clinic_card_icon1.png) scroll no-repeat 0 0 transparent;
 }
 
-.type-and-service-area .tsl-item:hover .tsl-icon.icon-have-ramp {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-item:hover .tsl-icon.icon-have-ramp {
     background : url(/media/images/clinic_card_icon1.png) scroll no-repeat 0 -15px transparent;
 }
 
-.type-and-service-area .tsl-icon.icon-payment-cards {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-icon.icon-payment-cards {
     height     : 15px;
     width      : 25px;
     margin     : 8px 0 0;
     background : url(/media/images/clinic_card_icon3.png) scroll no-repeat 0 0 transparent;
 }
 
-.type-and-service-area .tsl-item:hover .tsl-icon.icon-payment-cards {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-item:hover .tsl-icon.icon-payment-cards {
     background : url(/media/images/clinic_card_icon3.png) scroll no-repeat 0 -15px transparent;
 }
 
-.type-and-service-area .tsl-icon.icon-medical-certificates {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-icon.icon-medical-certificates {
     width      : 13px;
     background : url(/media/images/clinic_card_icon5.png) scroll no-repeat 0 0 transparent;
 }
 
-.type-and-service-area .tsl-item:hover .tsl-icon.icon-medical-certificates {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-item:hover .tsl-icon.icon-medical-certificates {
     background : url(/media/images/clinic_card_icon5.png) scroll no-repeat 0 -17px transparent;
 }
 
-.type-and-service-area .tsl-icon.icon-leave-the-house {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-icon.icon-leave-the-house {
     height     : 15px;
     width      : 21px;
     margin     : 8px 0 0;
     background : url(/media/images/clinic_card_icon6.png) scroll no-repeat 0 0 transparent;
 }
 
-.type-and-service-area .tsl-item:hover .tsl-icon.icon-leave-the-house {
+.clinic-search-result .clinic-card .type-and-service-area .tsl-item:hover .tsl-icon.icon-leave-the-house {
     background : url(/media/images/clinic_card_icon6.png) scroll no-repeat 0 -15px transparent;
 }
 
-.address-and-time-area {
+.clinic-search-result .clinic-card .address-and-time-area {
     background            : none scroll no-repeat 0 0 #FBFBED;
     border                : 1px solid #E4E4E4;
     -webkit-border-radius : 5px;
@@ -3379,7 +3379,7 @@ ul.list-2 li {
     min-height            : 55px;
 }
 
-.aata-time {
+.clinic-search-result .clinic-card .aata-time {
     float : right;
 }
 
@@ -3411,32 +3411,38 @@ ul.list-2 li {
     width: auto;
 }
 
-.aata-time > table td {
+.clinic-search-result .clinic-card .aata-time > table td {
     color       : #000000;
     font-family : 'pf_agora_sans_probold';
 }
 
-.aata-time > table td.first-cell {
+.clinic-search-result .clinic-card .aata-time > table td.first-cell {
     color       : #505050;
     font-family : "pf_agora_sans_proregular", Arial;
     padding     : 0 7px 0 0;
     text-align  : right;
 }
 
-.aata-time > table td.free {
+.clinic-search-result .clinic-card .aata-time > table td.free {
     color : #999999;
 }
 
-.aata-address {
+.clinic-search-result .clinic-card .aata-address {
     overflow : hidden;
 }
 
-.aata-metro > img {
+.clinic-search-result .clinic-card .aata-metro {
+}
+
+.clinic-search-result .clinic-card .aata-metro > img {
     height : 10px;
     margin : 0 5px -1px 0;
 }
 
-.aata-street > img {
+.clinic-search-result .clinic-card .aata-street {
+}
+
+.clinic-search-result .clinic-card .aata-street > img {
     height : 16px;
     margin : 0 8px -3px 0;
 }
@@ -5975,28 +5981,12 @@ h1.help-title {
 }
 
 .reg-popup {
-	padding: 40px 40px 40px 150px;
-    position: relative;
-    color: #3B3B3B;
-    font: 14px 'pf_agora_sans_promedium';
-    display: none;
-    box-sizing: border-box;
-	width: 585px;
-}
-.form-input > input {
-	background: none;
-    background-color: rgba(255,255,255,0.6);
-    border-radius: 4px;
-    border: 1px solid #bbb;
-    box-shadow: inset 0 4px 7px -4px rgba(0,0,0,0.7), 0 4px 2px -4px rgba(0,0,0,0.5);
-    margin: 0 0 15px;
-    box-sizing: border-box;
-    padding: 13px;
-    font: 24px 'pf_agora_slab_proregular';
-    outline: none;
-    text-align: center;
-    width: 100%;
-	color:#666;
+    width    : 380px;
+    padding  : 30px 110px 32px 170px;
+    position : relative;
+    color    : #3B3B3B;
+    font     : 14px 'pf_agora_sans_promedium';
+    display  : none;
 }
 
 .reg-popup .logo {
@@ -6017,13 +6007,9 @@ h1.help-title {
 
 .reg-popup .reg-form .btn-1 {
     font-size : 18px;
+    padding   : 0 12px;
 }
 
-.reg-popup .auth-form .btns:after {
-	content:'';
-	display: block;
-	clear:both;
-}
 .reg-popup .auth-form .btns {
     padding-top   : 3px;
     margin-bottom : 24px;
@@ -6133,7 +6119,7 @@ h1.help-title {
 }
 
 #terms-popup.reg-popup {
-    width: 666px;
+    width   : 463px;
     padding : 35px 40px 32px 157px;
 }
 
@@ -6152,25 +6138,11 @@ h1.help-title {
 }
 
 .reg-popup .terms-cont .scroll-pane {
-    width: 452px;
+    width       : 447px;
     height      : 340px;
     padding-top : 7px;
     overflow    : auto;
     outline     : none;
-}
-.reg-popup .terms-cont .scroll-pane p{padding-right: 10px;box-sizing: border-box;margin-bottom: 0;}
-.reg-popup .terms-cont .scroll-pane ul{padding-left: 20px;margin-bottom: 10px;}
-.reg-popup .terms-cont .scroll-pane ul li{position: relative;}
-.reg-popup .terms-cont .scroll-pane ul li:before {
-    content: "";
-    display: block;
-    height: 5px;
-    width: 5px;
-    background: #000;
-    border-radius: 5px;
-    position: absolute;
-    left: -14px;
-    top: 9px;
 }
 
 .reg-popup .terms-cont p {
@@ -6273,7 +6245,7 @@ h1.help-title {
 }
 
 .land-popup .reg-popup .intro {
-    min-height     : 0;
+    min-height     : auto;
     text-align     : center;
     padding-bottom : 13px;
 }
@@ -7778,7 +7750,7 @@ h1.help-title {
     color       : #3B3B3B;
 }
 
-.booking h1, .booking .h1 {
+.booking h1 {
     font          : normal 18px 'pf_agora_slab_pro_medium';
     color         : #1F8EBE;
     margin-bottom : 10px;
@@ -8694,17 +8666,17 @@ h1.help-title {
     position                           : fixed;
     z-index                            : 9999;
     top                                : 50%;
-    left: 0;
+    right                              : 0;
     margin-top                         : -110px;
     padding                            : 5px 10px 5px 10px;
     background                         : #4C4C4C;
     background                         : rgba(76, 76, 76, 0.8);
-    border-top-right-radius             : 10px;
-    -moz-box-border-top-right-radius    : 10px;
-    -webkit-border-top-right-radius     : 10px;
-    border-bottom-right-radius          : 10px;
-    -moz-box-border-bottom-right-radius : 10px;
-    -webkit-border-bottom-right-radius  : 10px;
+    border-top-left-radius             : 10px;
+    -moz-box-border-top-left-radius    : 10px;
+    -webkit-border-top-left-radius     : 10px;
+    border-bottom-left-radius          : 10px;
+    -moz-box-border-bottom-left-radius : 10px;
+    -webkit-border-bottom-left-radius  : 10px;
 }
 
 .discount .discount-open {
@@ -8829,39 +8801,6 @@ h1.help-title {
 .second-opinion-block .second-opinion-2, .banner-treatment-in-switz .banner-treatment-in-switz-open {
     background      : url(/media/images/treatment-in-switz-small.png);
 }
-
-.switz-left-version.banner-treatment-in-switz{
-	right:auto;
-	left:0;
-}
-
-.switz-left-version.banner-treatment-in-switz .banner-treatment-in-switz-link {
-    background: url(/media/images/treatment-in-switz-left.png);
-    padding: 23px 0 0 37px;
-    width: 326px;
-    font-size: 13px;
-    box-sizing: border-box;
-}
-.switz-left-version.banner-treatment-in-switz .icon {
-	left: auto;
-    right: 68px;
-    bottom: 20px;
-}
-
-.switz-left-version.banner-treatment-in-switz .banner-treatment-in-switz-open {
-    background      : url(/media/images/treatment-in-switz-small-left.png);
-}
-.switz-left-version.banner-treatment-in-switz .close {
-	left: -2px;
-    top: 3px;
-    padding: 0 10px;
-    cursor: pointer;
-    font-size: 25px;
-    display: inline-block;
-    right: auto;
-    color: #fff;
-}
-
 .second-opinion-block .second-opinion-2 {
     display         : block;
     position        : relative;
@@ -9649,7 +9588,7 @@ a.d-pink-btn {
     position   : absolute;
     top        : 50%;
     left       : -150px;
-    margin-top : -10px;
+    margin-toP : -10px;
 }
 
 .d-cards .d-btn-wrap .d-pink-btn:after {
@@ -9661,7 +9600,7 @@ a.d-pink-btn {
     position   : absolute;
     top        : 50%;
     right      : -150px;
-    margin-top : -10px;
+    margin-toP : -10px;
 }
 
 .d-cards-list {
@@ -9821,16 +9760,4 @@ a.d-pink-btn {
 .adv_text_bf_search_result{
     font-size: 20px;
     margin-bottom: 13px;
-}
-
-.breadcrumb-custom{
-    padding: 15px;
-    font-size: 16px!important;
-    color: #318e9e;
-}
-.breadcrumb-custom a, .breadcrumb-custom a:hover{
-    color: #5FC3D0;
-}
-.breadcrumb-custom a:hover{
-    text-decoration: none;
 }

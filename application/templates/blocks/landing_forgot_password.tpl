@@ -1,5 +1,5 @@
 <div id="landing-forgotpass-popup" class="reg-popup">
-    <img class="logo" src="/media/images/main_logo.png" alt="">
+    <img class="logo" src="/media/images/<?=CSS_DIR?>/main_logo.png" alt="">
     <p class="intro">Напиши свой email. Мы вышлем инструкцию
         для смены пароля.</p>
     <div class="form forgot-form">

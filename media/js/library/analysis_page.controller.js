@@ -127,6 +127,22 @@ var AnalysisPageController = function(){
             SessionInfo.reset_filter = false;
         }
 
+        _url = '?with_params';
+
+        if (data.urgent_tests)
+            _url += '&srochno=1';
+        if (data.day_and_night)
+            _url += '&kruglosutochno=1';
+        if (data.card_pay)
+            _url += '&oplata_kartoy=1';
+        if (data.work_seven_days)
+            _url += '&bezvihodnih=1';
+        if (data.easy_entry)
+            _url += '&vhoddlykolyasok=1';
+
+        history.replaceState('', '', '/analysis'+_url);
+
+
         Ajax.Get('/analysis/ajaxSearchLaboratory', data, function (data) {
 
             if (data.status == 0) {

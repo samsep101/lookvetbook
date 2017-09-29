@@ -35,12 +35,12 @@ $specialty_to_specialization = array(
         'fields' => array(
             'id'           => 'ID',
             'specialty_id' => 'Специальность',
-            'specialization_id'    => 'Область ' . MEDICYNY,
+            'specialization_id'    => 'Область ветеринарии',
 			'is_main' => 'Основная'
         ),
         'list'   => array(
             'fields'  => array('specialty_id', 'specialization_id', 'is_main'), /*поля кот. отображаются в списке "суперадминистратор"*/
-            'title'   => 'Список связей область ' . MEDICYNY . ' - специализация',
+            'title'   => 'Список связей область ветеринарии - специализация',
             'sort_by' => array(
                 array(
                     'field' => 'specialization_id',

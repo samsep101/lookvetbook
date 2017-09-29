@@ -333,56 +333,6 @@ class Application
     }
   }
 
-  /**
-   * Метод получения УРЛ строки с возможностью разбора на составляющие
-   * @param bool $split - разбивать на контроллер\метод\параметры
-   * @return string|array
-   */
-  public static function getUriPath($split = false) {
-
-      if($split) {
-
-          $path = parse_url($_SERVER['REQUEST_URI'])['path'];
-          $exp = explode('/', trim($path, '/'));
-          $split = [
-              'controller' => !empty($exp[0]) ? $exp[0] : 'index',
-              'method' => !empty($exp[1]) ? $exp[1] : 'index',
-          ];
-          array_shift($exp);
-          array_shift($exp);
-          $split['params'] = !empty($exp) ? $exp : false;
-          return $split;
-      }
-
-      if(!empty($_SERVER['REQUEST_URI'])){
-          return parse_url($_SERVER['REQUEST_URI'])['path'];
-      } else {
-          global $uri;
-          return $uri;
-      }
-  }
-
-  public static function getSubdomain() {
-
-      $subdomain = str_replace(['lookmedbook.ru', 'citrus.one', 'lookmedbook.dev'], '', SERVER_NAME);
-      $subdomain = trim($subdomain, '.');
-      return $subdomain;
-  }
-
-    public static function config($keyname, $default = false) {
-
-        static $app_cfg = null;
-
-        if(is_null($app_cfg) AND file_exists(ABS_ROOT.'/application/config/application.cfg.php')){
-            $app_cfg = require ABS_ROOT.'/application/config/application.cfg.php';
-        }
-
-        if($app_cfg AND array_key_exists($keyname, $app_cfg)){
-            return $app_cfg[$keyname];
-        }
-
-        return $default;
-    }
 
   private static function getClassFilePrefix($className)
   {

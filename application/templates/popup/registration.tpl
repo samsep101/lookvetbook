@@ -2,7 +2,7 @@
     window.validation_span = true;
 </script>
 <div id="registration-popup" class="reg-popup">
-    <img class="logo" src="/media/images/main_logo.png" alt="">
+    <img class="logo" src="/media/images/<?=CSS_DIR?>/main_logo.png" alt="">
 
     <p class="intro">Уже зарегистрированы? <a id="login-popup-link" href="javascript:void(0);">Войти</a></p>
     <div class="form reg-form">
@@ -22,6 +22,21 @@
                 <input type="password" name="password" id="repeat_registration_password" class="password-field" placeholder="Повторите пароль" />
                 <label class="pass_label">Повторите пароль</label>
 
+            </div>
+        </div>
+        <div class="row flo">
+            <div class="txt">
+                <input type="text" name="pet_type" placeholder="Вид животного" />
+            </div>
+        </div>
+        <div class="row flo">
+            <div class="txt">
+                <input type="text" name="pet_name" placeholder="Кличка животного" />
+            </div>
+        </div>
+        <div class="row flo">
+            <div class="txt">
+                <input type="text" name="pet_age" placeholder="Возраст животного" />
             </div>
         </div>
         <div class="btns flo">

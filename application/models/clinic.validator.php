@@ -12,8 +12,9 @@
 			$validator->validate($model->date_contract, $validation_rules->get('date'), $model);
 			$validator->validate($model->name, $validation_rules->get('required'), $model);
 
-            //if (!$model->getId() && $model->latitude && $model->longitude)
-			//    $validator->validate($model->latitude.'|'.$model->longitude, $validation_rules->get('two_coordinates'), $model);
+            /*if (!$model->getId() && $model->latitude && $model->longitude)
+			    $validator->validate($model->latitude.'|'.$model->longitude, $validation_rules->get('two_coordinates'), $model);*/
+			/**TODO found error "validation_rules.class.php:19 Правил валидации с именем two_coordinates не существует!" sources */
 
 			if(!$validator->checkStatus())
 			{

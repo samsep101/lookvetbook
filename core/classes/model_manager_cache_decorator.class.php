@@ -4,7 +4,7 @@
     /**
      * @var ICachedModelManager|ModelManager
      */
-    public $decorated_manager;
+    private $decorated_manager;
 
     /**
      * @var IMemoryCache

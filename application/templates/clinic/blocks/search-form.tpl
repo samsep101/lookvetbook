@@ -11,50 +11,55 @@
                     <?php if(!empty($landing_page) && !empty($current_item)) { ?>
                         <input type="hidden" id="landing_item_id" name="landing_item_id" value="<?php echo $current_item->alias; ?>">
                     <?php } ?>
-                    <div class="sel-box clinic-field-margin-bottom" id="specialty_block">
+                    <div class="sel-box clinic-field-margin-bottom" id="specialty_block" style="height: auto">
 
                         <select data-placeholder="Специализация" id="specialties_to_search_clinic" class="chzn-select" name="specialty_id" style="width:290px;">
                         <?php
-                            $this->specialization = empty($specialization)?'':$specialization;
+                            $this->specialization = empty($specialization) ? '' : $specialization;
                             $this->show_all_option = TRUE;
                             $this->block('blocks/specialization_options');
                         ?>
                         </select>
+                        <span class="label">Кто у вас:</span>
+                        <select id="pettype_to_search_clinic" data-placeholder="Животное" class="chzn-select" name="pettype_id" style="width:100%;">
+                            <?php if (count($pettypes)):?>
+                            <?php foreach($pettypes as $pettype): ?>
+                            <option <?php if ( (isset($current_pettype) && $current_pettype->id == $pettype->getId()) ) echo 'selected="selected"'; ?>
+                            value="<?php echo $pettype->getId(); ?>">
+
+                            <?php echo StringHelper::startProposalWord($pettype->name); ?>
+
+                            </option>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+                        <span class="label">Виды услуг:</span>
+                        <select id="petservice_to_search_clinic" data-placeholder="Животное" class="chzn-select" name="petservice_id" style="width:100%;">
+                            <?php if (count($petservices)):?>
+                            <?php foreach($petservices as $petservice): ?>
+                            <option <?php if ( (isset($current_petservice) && $current_petservice->id == $petservice->getId()) ) echo 'selected="selected"'; ?>
+                            value="<?php echo $petservice->getId(); ?>">
+
+                            <?php echo StringHelper::startProposalWord($petservice->name); ?>
+
+                            </option>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
                     </div>
 
-                    <div class="for-whom-clinic">
-                        <div class="field-label">
-                            Клиника для:
-                        </div>
-                        <ul class="choose-list choose-list-item-line">
-                            <li>
-                                <div class="radioBox clinic-type clinic-type-adult act"><span></span> Взрослых
-                                    <input type="hidden" value="1">
-                                </div>
-                            </li>
-                            <li>
-                                <div class="radioBox clinic-type clinic-type-children"><span></span> Детей
-                                    <input type="hidden">
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+
 
                     <div class="other-clinic-search-params">
                         <ul class="choose-list main-form-refactor-checkbox like-head-label">
                             <li>
                                 <div class="search-param-icon icon-credit-card"></div>
-                                <div class="chekBox is-card-pay"><span></span>Оплата картой<input type="hidden"></div>
+                                <div class="chekBox is-card-pay"><span></span>Вызов на дом<input type="hidden"></div>
                                 <div class="dotted-area"></div>
                             </li>
                             <li>
                                 <div class="search-param-icon icon-time"></div>
-                                <div class="chekBox twenty-four-hours"><span></span>Круглосуточная<input type="hidden"></div>
-                                <div class="dotted-area"></div>
-                            </li>
-                            <li>
-                                <div class="search-param-icon icon-pandus"></div>
-                                <div class="chekBox have-ramp"><span></span>Есть пандус<input type="hidden"></div>
+                                <div class="chekBox have-ramp"><span></span>Есть лаборатория<input type="hidden"></div>
                                 <div class="dotted-area"></div>
                             </li>
                         </ul>
@@ -73,17 +78,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--
-                        <div class="sel-box">
-                            <select data-placeholder="Страховая компания" class="chzn-select" style="width:388px;">
-                                <option value=""></option>
-                                <option value="">United States</option>
-                                <option value="">United Kingdom</option>
-                                <option value="">Zambia</option>
-                                <option value="">Zimbabwe</option>
-                            </select>
-                        </div>
-                        -->
                     </div>
                 </div>
             </div>

@@ -5,7 +5,6 @@
     'fields'  => array(
       'id'       => 'index',
       'name'     => 'input',
-      'alias_synonim'     => 'input',
       'dative_name'  => 'input',
       'genitive_name'  => 'input',
       'genitive_name_plural' => 'input',
@@ -42,7 +41,7 @@
     'extra'   => array(
       'specializations' => array(
         'table' => 'specialty_to_specialization',
-        'title' => 'Области ' . MEDICYNY,
+				'title' => 'Области ветеринарии',
         'field' => 'specialty_id'
       ),
       'synonyms' => array(
@@ -65,7 +64,6 @@
       'fields' => array(
         'id'       => 'ID',
         'name'     => 'Название',
-        'alias_synonim'     => 'Синонимы',
         'parent_id'  => 'Родительская специализация',
         'service_name' => 'Название услуги',
         'genitive_name' => 'Название в родительном падеже',
@@ -75,7 +73,7 @@
         'specializations_count'  => ' ',
         'purposes_of_visit_count'  => ' ',
         'for_whom'  => 'Взрослая/Детская',
-        'view_specializations'  => 'Области ' . MEDICYNY,
+        'view_specializations'  => 'Области ветеринарии',
       ),
       'list'   => array(
         'fields'  => array(
@@ -102,7 +100,6 @@
         'fields' => array(
           'Данные' => array(
             'name',
-            'alias_synonim',
             'genitive_name',
             'genitive_name_plural',
             'dative_name',
@@ -117,7 +114,6 @@
         'fields' => array(
           'Данные' => array(
             'name',
-            'alias_synonim',
             'genitive_name',
             'genitive_name_plural',
             'dative_name',

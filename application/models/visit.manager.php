@@ -35,22 +35,7 @@ class VisitManager extends ModelWAccountidManager
       $model->is_new_visit = 0;
     }
 
-    if (!$model->city_id)
-    {
-        $city = SeoLinksHelper::getCityByPageLink();
-        $model->city_id = $city->id;
-    }
-
-    if (!$model->operator_account_id){
-        $model->operator_account_id = Acc::accountId() ? Acc::accountId() : false;
-    }
-
     $model->phone = preg_replace('/[^0-9]/', '', $model->phone);
-
-      if ($model->status_id == VisitModel::CONFIRMED && !$model->create_mail_sended){
-          EmailSenderHelper::sendVisitConfirmMessage($model);
-          $model->create_mail_sended = 1;
-      }
 
     if ($model->visit_start_time && $model->isChangeStatus() && ($model->status_id == VisitModel::CONFIRMED)) {
       if ($model->account && $model->account->email) {
@@ -132,19 +117,7 @@ class VisitManager extends ModelWAccountidManager
         $client = new GuzzleHttp\Client();
 
         try {
-            $client->post('http://mixmarket.biz/uni/gate.php?cid=1294937485&hash1=f4ebda7792edc5ce0b536db1e0f13a16&pass_=sxfTWjBzuo&e=send', [
-                'multipart' => [
-                    [
-                        'msg' => 'field_name',
-                        'contents' => '<?xml version="1.0" encoding="windows-1251"?>
-	<uni version="1.0">
-		<condition id="1294937485">
-			<object><id>' . $model->id . '</id></object>			
-		</condition>
-	</uni>
-'
-                    ]
-                ]]);
+            $client->get('http://mixmarket.biz/uni/tev.php?id=1294937485&a1='.$model->id);
         }catch (Exception $exp){
 
         }
@@ -154,23 +127,14 @@ class VisitManager extends ModelWAccountidManager
         $client = new GuzzleHttp\Client();
 
         try {
-            $client->post('http://mixmarket.biz/uni/gate.php?cid=1294937484&hash1=ac4455c2f1a26fe1adc40ed0ede4c6b2&pass_=sxfTWjBzuo&e=send', [
-                'multipart' => [
-                    [
-                        'msg' => 'field_name',
-                        'contents' => '<?xml version="1.0" encoding="windows-1251"?>
-	<uni version="1.0">
-		<condition id="1294937484">
-			<object><id>' . $model->id . '</id></object>			
-		</condition>
-	</uni>
-'
-                    ]
-                ]]);
+            $client->get('http://mixmarket.biz/uni/tev.php?id=1294937484&a1='.$model->id);
         }catch (Exception $exp){
 
         }
     }
+
+
+
 
     /*
     if ($model->doctor_id && $model->status_id == VisitModel::VISITED)

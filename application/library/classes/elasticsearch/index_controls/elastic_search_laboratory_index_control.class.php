@@ -103,7 +103,7 @@
             'type' => 'number',
             'script' => [
               'lang' => 'painless',
-              'inline' => '(doc[\'geo_point\'].arcDistance(' . (float)$criteria->geo_point->getLatitude() . ', ' . (float)$criteria->geo_point->getLongitude() . ')) <= ' . $distance .  ' ? 1 : 0'
+              'source' => '(doc[\'geo_point\'].arcDistance(' . (float)$criteria->geo_point->getLatitude() . ', ' . (float)$criteria->geo_point->getLongitude() . ')) <= ' . $distance .  ' ? 1 : 0'
             ],
             "order" => "desc",
           ]

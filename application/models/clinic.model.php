@@ -73,7 +73,6 @@
      * @property ImageModel                                         $image
      * @property string                                             $fio
      * @property string                                             $phone
-     * @property string                                             $direct_phone
      * @property string                                             $email
      * @property string                                             $site
      * @property int                                                $postcode
@@ -134,12 +133,9 @@
      * @property UserModel[]                                        $users
      * @property DistrictModel                                      $district
      * @property int                                                $district_id
-     * @property int                                                $docdoc_id
-     * @property int                                                $visit_disallow
      */
     class ClinicModel extends DynamicModel
     {
-        static $trig=0;
         const REGION_PUBLISHED = 1;
         const REGION_RAW       = 3;
         const REGION_PROBLEM   = 2;
@@ -260,10 +256,6 @@
             $metro_station_to_clinic_manager = ModelManagerFactory::getByName('metro_station_to_clinic');
             $metro_station_to_clinic = $metro_station_to_clinic_manager->getOneByClinicId($this->getId());
 
-            if(self::$trig==1){
-                 $this->metro_station_id=array_keys($metro_station_manager->decorated_manager->models_register);
-                $this->metro_station_id=strval($this->metro_station_id[0]);
-            }
             //логика правлено мной - CyberUnit. Было, зачем-то, вместо сохранения в форме, сброс на изначальное значение. Бреддд.....
             //неплохо было бы еще зашить стирание значения, но пока стремно, хрен его знает, что было в голове программера
             if($metro_station_to_clinic) {
@@ -483,11 +475,6 @@
             return ($time_from && $time_to) ? 'c ' . (int)$time_from . '<br>до ' . (int)$time_to : FALSE;
         }
 
-        public function isPrimaryClinic()
-        {
-            return (boolean) (new ClinicManager())->getChildsClinic($this->id);
-        }
-
         public function isPublishNow()
         {
             return (($this->clinic_status_id == ClinicStatusModel::PUBLISHED) && ($this->params['clinic_status_id'] != ClinicStatusModel::PUBLISHED));
@@ -611,36 +598,6 @@
         protected function _field_name_with_address()
         {
             return $this->name . ' (' . $this->city->name . ', ' . $this->address . ')';
-        }
-
-        public function getRecordButton($type = 1){
-            $clinic_with_docdoc_button = [693,770];
-            if ( in_array($this->city->id, $clinic_with_docdoc_button) && $this->docdoc_id){
-                $idval = 'docdocrecordToClinic'+$this->id;
-                $return = "<div id=\"$idval\"></div>
-                <script type=\"text/javascript\">
-                    DdWidget({
-                        widget: 'Button',
-                        template: 'Button_common',
-                        pid: '9387',
-                        id: 'DDWidgetButton',
-                        container: '$idval',
-                        action: 'LoadWidget',
-                        city: 'msk'
-                    });
-                </script>
-                ";
-
-                return $return;
-            }
-            else{
-                if ($type == 1)
-                    return "<a class=\"btn-appoint\"  onclick=\"recordController.showForm(0,". $this->id .",0)\">Записаться на прием</a>";
-
-                if ($type == 2)
-                    return "<a href=\"#divider-shadow\" onclick=\"recordController.showForm(0,". $this->id.",0)\" class=\"btn-find-doctor-2\"><span class=\"txt appoint\">Записаться на прием</span></a>";
-            }
-
         }
 
         public function getFirstVisitPriceByClinicId($clinic_id)

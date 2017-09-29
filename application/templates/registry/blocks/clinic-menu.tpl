@@ -45,9 +45,6 @@
 
             <li class="<?php echo (isset($menu_active) && $menu_active == 'time') ? 'ui-state-active' : ''; ?>">
                 <a href="/registry/clinic/time<?php echo $param;?>">Время работы клиники</a>
-            </li>
-            <li class="<?php echo (isset($menu_active) && $menu_active == 'seo') ? 'ui-state-active' : ''; ?>">
-                <a href="/registry/clinic/seo<?php echo $param;?>">SEO</a>
             </li
         </ul>
     </div>

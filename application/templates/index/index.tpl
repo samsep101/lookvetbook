@@ -21,19 +21,13 @@
         disease_controller.init();
     });
 </script>
-<style>
-    .dd-button{
-        width: 100% !important;
-        font-size: 15px !important;
-    }
-</style>
 <div class="inner-home-main">
     <div class="center">
         <div class="left_search">
             <div class="search-form">
                 <ul class="tabs flo">
                     <li class="active">
-                        <span id="find_doctor_tab"><i></i>Найти врача</span>
+                        <span id="find_doctor_tab"><i></i>Найти ветеринара</span>
                     </li>
                     <li>
                         <span id="find_clinic_tab"><i></i>Найти клинику</span>
@@ -50,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="abs abs2">Выберите врача<br/>
+            <div class="abs abs2">Выберите ветеринара<br/>
                 <small>или клинику</small></div>
             <div class="abs abs3">Выберите<span class="flo"></span> специализацию<br/>
                 <small>и цель визита</small></div>
@@ -58,13 +52,13 @@
                 <small>специалиста</small></div>
     </div>
         <div class="right_owl">
-            <p class="h-text">Online сервис записи к врачу и в клинику</p>
+            <p class="h-text">Online сервис записи к ветеринару и в клинику</p>
             <span class="abs abs1"><small>
                 Или используйте мобильное<br/>
-                приложение <?php echo SITE_NAME; ?><br/>
-                это удобно! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </small>
+                приложение <?php echo SITE_NAME; ?>
+                    это удобно! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </small>
             </span>
-            <a target="_blank" href="https://itunes.apple.com/ru/app/lookmedbook/id726213572">
+            <a target="_blank" href="/konkurs">
                 <span  class="abs abs5"></span>
                 <span  class="abs abs6"></span>
             </a>
@@ -90,7 +84,7 @@
             Читайте <a href="/disease">о заболеваниях</a> на доступном языке, понятном для обычных людей.
                 </p>
         <p class="l_txt none_pb">
-            Наша команда врачей подготовила информацию о каждом <a href="/disease">заболевании</a>, следуя четкой структуре.
+            Наша команда ветеринаров подготовила информацию о каждом <a href="/disease">заболевании</a>, следуя четкой структуре.
                 </p>
         <p class="l_txt none_pt">
             Благодаря этому можно найти то, что интересно именно Вам.
@@ -133,19 +127,19 @@
     <div class="line-shadow">
     </div>
     <div class="thisiscenter">
-        <h1><?php echo SITE_NAME; ?> - это online сервис записи к врачу и в клинику</h1>
+        <h1><?php echo SITE_NAME; ?> - это online сервис записи к ветеринару и в клинику</h1>
         <ul class="list-about">
             <li>
                 <img class="thisis-li1" src="/media/images/blank.png"/>
                 <p>Наш сервис - это возможность
                     для человека получить всю
-                    медицинскую информацию
+                    ветеринаринарную информацию
                     в одном месте
                 </p>
             </li>
             <li>
                 <img class="thisis-li2" src="/media/images/blank.png"/>
-                <p>Вы можете хранить историю своих визитов в личном кабинете, а также добавлять в избранное интересные Вам клиники и врачей
+                <p>Вы можете хранить историю своих визитов в личном кабинете, а также добавлять в избранное интересные Вам клиники и ветеринаров
                 </p>
             </li>
             <li>
@@ -163,11 +157,11 @@
                 <span>
                 Пользуясь <?php echo SITE_NAME; ?>,<br/>
                 Вы получаете настоящий сервис!</span>
-            <a class="btn-1 btn-doctor" href="/doctor">Найти врача</a>
+            <a class="btn-1 btn-doctor" href="/doctor">Найти ветеринара</a>
         </div>
     </div>
 </div>
-        <br>
+
 <?php echo $this->block('index/specialties_groups');?>
 
 

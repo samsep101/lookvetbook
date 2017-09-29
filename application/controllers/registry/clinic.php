@@ -244,35 +244,7 @@ class ClinicRegistryController extends BaseController
     $this->view->clinic_id = $clinic_id;
 
   }
-
-  public function seo(){
-    $clinic_id = RegistryAccessHelper::checkAccessAndDetermineClinicId();
-
-    $clinic_manager = new ClinicManager();
-    $clinic = $clinic_manager->getOneById($clinic_id);
-    $this->view->clinic = $clinic;
-    $this->view->seo_title = SeoTextViewHelper::GetClinicSeoTitle($clinic);
-    $this->view->seo_description = SeoTextViewHelper::newGetClinicPageDescription($clinic);
-
-    $moderate_clinic_user_seo = new ModerateClinicSeoManager();
-    $seo = $moderate_clinic_user_seo->getByClinicId($clinic_id);
-    //var_dump($seo); exit;
-
-
-    $view_processor = new FormViewProcessor('moderate_clinic_seo', $seo);
-
-    $this->view->view_processor = $view_processor;
-
-    $this->view->entry_id = $clinic_id;
-    $this->view->model_name = 'moderate_clinic_seo';
-    $this->view->model = $clinic_user;
-    $this->view->menu_type = 'clinic';
-    $this->view->menu_active = 'seo';
-    $this->view->clinic_id = $clinic_id;
-    $this->view->seo = $seo;
-  }
-
-
+  
   public function actionDelete(){
       $delete_action = (new ActionManager())->getOneById(intval($this->request('delete_action_id')));
       $manager = new ActionManager();
@@ -280,13 +252,13 @@ class ClinicRegistryController extends BaseController
 
       RedirectManager::redirect('/registry/clinic/action?clinic_id='.intval($this->request('clinic_id')));
   }
-
+  
     public function actionSave(){
 
         if ($this->request('edit_action_id')){
             $new_action = (new ActionManager())->getOneById(intval($this->request('edit_action_id')));
         }else{
-            $new_action = new ActionModel();
+            $new_action = new ActionModel();    
         }
 
 
@@ -310,13 +282,13 @@ class ClinicRegistryController extends BaseController
         );
 
         $file_data = array();
-
+		
         if (!empty($_FILES)) {
-
+			
           if (isset($_FILES['icon'])) {
             $file_data = $_FILES['icon'];
           }
-
+		  
           if ($file_data['error'] == 0){
             $new_action->image_id = $image_id = ImageUploader::upload($upload_data, $file_data, $alias);
             $manager = new ActionManager();
@@ -368,10 +340,10 @@ class ClinicRegistryController extends BaseController
         $this->view->menu_type = 'clinic';
         $this->view->menu_active = 'action';
         $this->view->clinic_id = $clinic_id;
-
+        
         $action_manager = new ActionManager();
         $clinic_actions = $action_manager->getListForClinic($clinic->id);
-
+        
 
         $view_processor = new FormViewProcessor('moderate_clinic_license', $clinic);
         $this->view->view_processor = $view_processor;
@@ -573,51 +545,5 @@ class ClinicRegistryController extends BaseController
     } else {
       JsonResponse::error(ValidationErrorCodes::WRONG_DATA);
     }
-  }
-
-
-  public function ajaxSaveSeoModerate(){
-        if (!RegistryAccessHelper::checkAuth())
-            JsonResponse::error(ValidationErrorCodes::NOT_AUTHED);
-
-        $form = (object)$this->request("form");
-        $message = "";
-        $data = array();
-        if(!empty($form->clinic_id)){
-
-            $clinic_manager = new ClinicManager();
-            $clinic = $clinic_manager->getOneById($form->clinic_id);
-
-            if( !empty( $form->id )    ){
-
-                $seo = ( new ModerateClinicSeoManager() ) -> getOneById($form->id);
-
-            }else{
-
-                $seo = new ModerateClinicSeoModel();
-
-            }
-
-
-            $seo->address_to_title = (int)$form->address_to_title;
-            $seo->metro_to_description = (int)$form->metro_to_description;
-            $seo->address_to_description = (int)$form->address_to_description;
-            $seo->metro_to_title = (int)$form->metro_to_title;
-            $seo->seo_title = $form->seo_title;
-
-            $seo->seo_descritpion = $form->seo_descritpion;
-            $seo->seo_address = $form->seo_address;
-            $seo->clinic_id = (int) $form->clinic_id;
-            $seo->save();
-
-            $data['title'] = SeoTextViewHelper::GetClinicSeoTitle( $clinic );
-            $data['description'] = SeoTextViewHelper::newGetClinicPageDescription( $clinic );
-        }else{
-
-            $message = "Не указан clinic_id";
-
-        }
-
-       JsonResponse::result(array('message' => $message, 'data' => $data));
   }
 }

@@ -36,20 +36,10 @@
             window.controller.street_id = <?php echo $street->getId(); ?>;
         <?php endif; ?>
         <?php if ($metro_station): ?>
-            window.controller.metro_station_id = <?php echo $metro_station->getId();?>;
+            window.controller.metro_station_id = <?php echo $metro_station->getId(); ?>;
         <?php endif; ?>
-        <?php if ($this->doctor_type): ?>
-                window.controller.doctor_type = '<?php echo $this->doctor_type; ?>';
-        <?php endif; ?>
-        <?php if ($this->visit_type): ?>
-                window.controller.visit_type = '<?php echo $this->visit_type; ?>';
-        <?php endif; ?>
-        <?php if ($this->discount): ?>
-                window.controller.discount = '<?php echo $this->discount; ?>';
-        <?php endif; ?>
-
-
         window.controller.city_id = <?php echo $address->city_id; ?>;
+
         window.controller.init();
 
         window.doctor_form_controller = controller.form_controller;
@@ -99,12 +89,12 @@
         </li>
     </ol>
     <p class="count">
-        Мы нашли для Вас <span class="count-digit"></span> <span class="count-doctor"></span> <span class="count-specialty"></span>
+        Мы нашли для Вас <span class="count-digit"></span> <span class="count-specialty"></span>
     </p>
     <div class="divider-shadow" id="divider-shadow"></div>
 </div>
 <div align="center" class="adv_text_bf_search_result">
-    Мы сравним для вас цены и найдем лучшее предложение.<br> Звоните <a href="tel:+7(<?php echo SITE_PHONE_CODE; ?>)<?php echo SITE_PHONE; ?>">+7(<?php echo SITE_PHONE_CODE; ?>)<?php echo SITE_PHONE; ?></a>
+    Мы сравним для вас цены и найдем лучшее предложение.<br> Звоните <a href="tel:+7(495)215-09-07">+7(495)215-09-07</a>
 </div>
 
 <div class="inner-2" style="padding-top: 0;">

@@ -19,7 +19,7 @@
     <div class="cab-page-3 pink-education sova">
         <div class="nav-3">
             <ul class="education-headers">
-                <li class="ui-state-active"> <a class="first-tab-header">Высшее медицинское образование</a></li>
+                <li class="ui-state-active"> <a class="first-tab-header">Высшее ветеринарное образование</a></li>
                 <li><a class="second-tab-header">Среднее специальное</a></li>
             </ul>
         </div>

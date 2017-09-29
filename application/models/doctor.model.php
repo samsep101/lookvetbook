@@ -50,7 +50,6 @@
      * @property string                $end_time_sunday
      * @property int                   $is_confirmed
      * @property int                   $balls
-     * @property ActionModel[]         $actions
      * @property ClinicModel[]         $clinics
      * @property ClinicModel           $clinic
      * @property int                   $reviews_count
@@ -105,19 +104,6 @@
             return $this->clinics;
         }
 
-
-        protected function _field_actions()
-        {
-            /**
-             * @var ActionManager $action_manager
-             */
-            $clinic_manager = ModelManagerFactory::getByName('action');
-            $this->actions  = $clinic_manager->getActionsByDoctorId($this->getId());
-            return $this->actions;
-            
-        }
-        
-        
         protected function _field_clinic()
         {
             if($this->clinics)
@@ -570,7 +556,7 @@
             $purpose_of_visit_to_doctor_manager = ModelManagerFactory::getByName('purpose_of_visit_to_doctor');
             $second_visit_price                 = $purpose_of_visit_to_doctor_manager->getFirstVisitPriceByDoctorIdAndClinicIdAndSpecialtyIdAndPurposeOfVisitId($this->id, $clinic_id, $specialty_id, $purpose_of_visit_id);
 
-            if(0 && $specialty_id && !$second_visit_price)
+            if($specialty_id && !$second_visit_price)
             {
                 $doctor_to_clinic_manager = ModelManagerFactory::getByName('doctor_to_clinic');
                 $second_visit_price       = $doctor_to_clinic_manager->getFirstVisitPriceByDoctorIdAndClinicIdAndSpecialtyId($this->id, $clinic_id, $specialty_id);
@@ -1020,41 +1006,5 @@
             $this->doctor_info   = $doctor_info_manager->getOneByDoctorId($this->id);
 
             return $this->doctor_info;
-        }
-
-        public function getRecordButton($type = 1)
-        {
-            $clinic_with_docdoc_button = [693,770];
-            if (in_array($this->city->id, $clinic_with_docdoc_button) && $this->clinic->docdoc_id){
-                $idval = 'docdocrecordToDoctor'+$this->id;
-                $return = "<div id=\"$idval\"></div>
-                <script type=\"text/javascript\">
-                    DdWidget({
-                        widget: 'Button',
-                        template: 'Button_common',
-                        pid: '9387',
-                        id: 'DDWidgetButton',
-                        container: '$idval',
-                        action: 'LoadWidget',
-                        city: 'msk'
-                    });
-                </script>
-                ";
-
-                return $return;
-            }
-            else{
-                global $is_small_card;
-                if ($type == 1)
-                    return "<a onclick=\"recordController.showForm(".$this->getId().",0,0)\" href=\"#record-to-the-doctor-popup-".$this->getId()."\" class=\"btn-appoint refactor-btn-appoint-styles ".($is_small_card ? 'btn-appoint-sm' : '' )."\">
-            <span class=\"button-name\">
-                Записаться на прием сейчас
-            </span>
-        </a>";
-
-                if ($type == 2)
-                    return "<a class=\"btn-appoint\" href=\"#record-to-the-doctor-popup-".$this->getId()."\" onclick=\"recordController.showForm(".$this->getId().",0,0)\">Записаться</a>";
-            }
-
         }
     }

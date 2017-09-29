@@ -1,5 +1,5 @@
 <div id="new-pass-popup" class="popup">
-    <img class="logo" src="/media/images/main_logo.png" alt="">
+    <img class="logo" src="/media/images/<?=CSS_DIR?>/main_logo.png" alt="">
     <p class="intro">Введи новый пароль</p>
     <div class="form forgot-form">
         <div id="forgotpass-form">

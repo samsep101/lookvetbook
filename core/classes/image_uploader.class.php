@@ -23,10 +23,7 @@ class ImageUploader
       }
     }
 
-	if (isset($uploadData['type']) && $uploadData['type'])
-		move_uploaded_file($uploadData['tmp_name'], $filepath);
-	else		
-		rename($uploadData['tmp_name'], $filepath);
+    move_uploaded_file($uploadData['tmp_name'], $filepath);
 
     $image_resizer = new SimpleImage();
     $image_resizer->load($filepath);

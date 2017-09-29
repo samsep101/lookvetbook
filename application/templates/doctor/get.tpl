@@ -139,7 +139,7 @@
                             <?php $this->block('doctor/blocks/card_buttons'); ?>
                         </div>
                         <div class="registration-phone">
-                            или по телефону: 8 (<?php echo SITE_PHONE_CODE; ?>) <?php echo SITE_PHONE; ?>
+                            или по телефону: 8 (495) 215-09-07
                         </div>
                     </div>
                 </div><!-- end class "descr" -->
@@ -412,7 +412,7 @@
                 <?php $this->doctor = $doctor; ?>
                 <?php $this->block('/doctor/blocks/doctor_appointment'); ?>
                 <div class="registration-phone">
-                    или по телефону: 8 (<?php echo SITE_PHONE_CODE; ?>) <?php echo SITE_PHONE; ?>
+                    или по телефону: 8 (495) 215-09-07
                 </div>
             </div>
         </div>
@@ -447,5 +447,3 @@
             <?php $this->block('blocks/equal_elements'); ?>
         <?php endif; ?>
     </div>
-
-<?php $this->block('blocks/adv/content_page_tiezerlady'); ?>

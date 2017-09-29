@@ -51,5 +51,4 @@ class ActionModel extends DynamicModel {
         $this->specializations ? '' : $this->loadSpecializations();
         return isset($this->specializations[$specialization_id]);
     }
-    
 }

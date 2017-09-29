@@ -125,9 +125,7 @@
 			</div>
 			<div class="side-box">
 				<div class="btns">
-					<?php if (!$clinic->visit_disallow):?>
-						<?=$clinic->getRecordButton(2)?>
-					<?php endif; ?>
+					<a href="#divider-shadow" onclick="recordController.showForm(0,<?php echo $clinic->id?>,0)" class="btn-find-doctor-2"><span class="txt appoint">Записаться на прием</span></a>
 
 					<a class="btn-bookmark btn-bookmark-big click_btn_bookmark">
 						<script>
@@ -150,15 +148,6 @@
 						<?php echo ScheduleViewHelper::view($clinic); ?>
 					<?php endif; ?>
 
-					<?php if($clinic->direct_phone):?>
-                    <p class="our_time">
-                        <span class="h-txt">Прямой номер:</span><br/>
-                        <span class="info-phone" itemprop="telephone">
-							<?=$clinic->direct_phone;?>
-						</span>
-					<p class="h-txt">Или:</p>
-                    </p>
-                    <?php else:?>
 					<p class="our_time">
 						<span class="h-txt">Запись на прием:</span><br/>
 						<span class="info-phone" itemprop="telephone">
@@ -172,7 +161,6 @@
 							?>
 						</span>
 					</p>
-                    <?php endif; ?>
 				</div>
 				<?php $this->block('clinic/blocks/call-centre-operator-hint'); ?>
 
@@ -210,7 +198,7 @@
 						<td>Получи <b>скидку 20% на все услуги<br/>рентгенолога</b> при посещении врача</td>
 						<td align="center" class="td-phone">
 							<div class="small-text">или по телефону</div>
-							<div class="info-phone">8 (<?php echo SITE_PHONE_CODE; ?>) <?php echo SITE_PHONE; ?></div>
+							<div class="info-phone">8 (495) 215-09-07</div>
 						</td>
 					</tr>
 				</table>
@@ -380,5 +368,3 @@
 	<?php endif; ?>
 
 </script>
-
-		<?php $this->block('blocks/adv/content_page_tiezerlady'); ?>

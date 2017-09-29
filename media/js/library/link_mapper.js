@@ -137,4 +137,4 @@ function LinkMapper_remap() {
   linkMapper_setHandlers();
   linkMapper_loadIcon = '/images/loading.gif';
 }
-// console.log("linkMapper loaded");
+//console.log("linkMapper loaded");

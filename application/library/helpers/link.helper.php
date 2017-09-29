@@ -57,13 +57,7 @@
 
             if($failure)
             {
-                if (!$modelName=='DoctorModel') {
-                    self::redirectRandomURLOrRedirect404($modelName, $params);
-                } else {
-                    ErrorPageViewHelper::page404('404');
-                    exit();
-                }
-                
+                self::redirectRandomURLOrRedirect404($modelName, $params);
             }
         }
 
@@ -203,10 +197,11 @@
             {
                 self::doesSuchClinicInAnotherCity($model);
             }
-            else if(!$model->is_active)
+            elseif(!$model->is_active)
             {
                 return TRUE;
             }
+
 
             return FALSE;
         }

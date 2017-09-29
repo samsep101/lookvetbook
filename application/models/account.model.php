@@ -40,8 +40,11 @@
  * @property MobileNotificationTokenModel $mobile_notification_token
  * @property string $password_hash_temp
  * @property string $session_hash
- * @property string $last_succes_callup
  * @property int $is_product_admin
+ *
+ * @property string $pet_type
+ * @property string $pet_name
+ * @property string $pet_age
  */
 class AccountModel extends DynamicModel
 {

@@ -23,6 +23,8 @@ class IndexController extends BaseController
     $district_manager = ModelManagerFactory::getByName('district');
     $city_manager = ModelManagerFactory::getByName('city');
     $specialty_manager = ModelManagerFactory::getByName('specialty');
+    $pettype_manager = ModelManagerFactory::getByName('pettype');
+    $petservice_manager = ModelManagerFactory::getByName('petservice');
     $specialization_manager = ModelManagerFactory::getByName('specialization');
     $doctor_manager = new DoctorManager();
 
@@ -48,12 +50,17 @@ class IndexController extends BaseController
     $moscow_city = $city_manager->getOneByName('Москва');
     $moscow_city_id = $moscow_city->getId();
     $city_id = $city->getId();
-//            $specialties = $specialty_manager->getRootListToSearchDoctorsByCityId($city_id);
+    //$specialties = $specialty_manager->getRootListToSearchDoctorsByCityId($city_id);
     $specializations = $specialization_manager->getSpecializationForCityIDInWhichHaveDoctors($moscow_city_id);
+
     $this->view->specializations = $specializations;
 
     $specialties = $specialty_manager->getHavingDoctorsListByCityId($moscow_city_id);
+    $pettypes = $pettype_manager->getSortedList('name');
+    $petservices = $petservice_manager->getSortedList('name');
     $this->view->specialties = $specialties;
+    $this->view->pettypes = $pettypes;
+    $this->view->petservices = $petservices;
 
     $specialties_groups = SpecialtyHelper::getSpecialtiesLetterGroups($specialties, array(), 1);
     $this->view->specialties_groups = $specialties_groups;

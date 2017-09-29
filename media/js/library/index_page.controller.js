@@ -125,7 +125,6 @@ var IndexPageController = function () {
             event.stopPropagation();
         });
 
-
         $('.btn-call').click(function() {
             if (self.send_call_request) {
                 self.send_call_request = false;
@@ -133,8 +132,7 @@ var IndexPageController = function () {
                 self.phone = ($('input[name="first_name"]').val() != $('input[name="phone_number"]').attr('placeholder')) ? $('input[name="phone_number"]').val() : '';
                 Ajax.Post('/ajax/addCallToUser', {
                         name: self.name,
-                        phone: self.phone//,
-                        //specialty:$("#specialties_to_search_doctor").val();
+                        phone: self.phone
                     },
                     function (data) {
                         if (data.status == 0) {
@@ -147,34 +145,6 @@ var IndexPageController = function () {
                             3000);
                         } else {
                             showErrorLabel(data.data, $('.btn-call'), 1);
-                            self.send_call_request = true;
-                        }
-                    }
-                );
-            }
-        });
-        
-        $('.btn-call-s').click(function() {
-            if (self.send_call_request) {
-                self.send_call_request = false;
-                self.name = ($('input[name="first_name"]').val() != $('input[name="first_name"]').attr('placeholder')) ? $('input[name="first_name"]').val() : '';
-                self.phone = ($('input[name="first_name"]').val() != $('input[name="phone_number"]').attr('placeholder')) ? $('input[name="phone_number"]').val() : '';
-                Ajax.Post('/ajax/addCallToUser', {
-                        name: self.name+' ('+$("#specialties_to_search_doctor option:selected").text()+')',
-                        phone: self.phone//,
-                        //specialty:$("#specialties_to_search_doctor").val();
-                    },
-                    function (data) {
-                        if (data.status == 0) {
-                            $('.form-call-step-1-s').css('display', 'none');
-                            $('.form-call input[type="text"]').val('');
-                            $('.form-call-step-2-s').css('display', 'block');
-                            setTimeout(function () {
-                                self.send_call_request = true;
-                                $('.form-call-step-2-s').fadeOut(500)},
-                            3000);
-                        } else {
-                            showErrorLabel(data.data, $('.btn-call-s'), 1);
                             self.send_call_request = true;
                         }
                     }

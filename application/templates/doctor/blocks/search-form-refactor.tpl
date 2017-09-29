@@ -13,33 +13,38 @@
                         <?php $this->block('blocks/specialties_options'); ?>
                     </select>
                 </div>
-                <div class="choose-section flo">
-                    <div class="col colleft">
-                        <label class="head-label">Врач для:</label>
-                        <ul class="choose-list">
-                            <li>
-                                <div class="radioBox doctor-type doctor-type-adult act"><span></span> Взрослых
-                                    <input type="hidden" value="1">
-                                </div>
-                            </li>
-                            <li>
-                                <div class="radioBox doctor-type doctor-type-children"><span></span> Детей
-                                    <input type="hidden">
-                                </div>
-                            </li>
-                        </ul>
-                        <br>
+                <div class="sel-box doctor-box">
+                <span class="label">Кто у вас:</span>
+                <select id="pettype_to_search_doctor" data-placeholder="Животное" class="chzn-select" name="pettype_id" style="width:100%;">
+                    <?php if (count($pettypes)):?>
+                    <?php foreach($pettypes as $pettype): ?>
+                    <option <?php if ( (isset($current_pettype) && $current_pettype->id == $pettype->getId()) ) echo 'selected="selected"'; ?>
+                    value="<?php echo $pettype->getId(); ?>">
 
-                    </div>
+                    <?php echo StringHelper::startProposalWord($pettype->name); ?>
 
-                    <div class="col colright">
-                        <div class="gender"><span class="legend">Пол врача</span>
-                            <input type="hidden"/>
-                            <span class="man sex-1"></span>
-                            <input type="hidden"/>
-                            <span class="woman sex-2"></span></div>
-                    </div>
+                    </option>
+                    <?php endforeach; ?>
+                    <?php endif; ?>
+                </select>
                 </div>
+                <div class="sel-box doctor-box">
+                <span class="label">Виды услуг:</span>
+                <select id="petservice_to_search_doctor" data-placeholder="Животное" class="chzn-select" name="petservice_id" style="width:100%;">
+                    <?php if (count($petservices)):?>
+                    <?php foreach($petservices as $petservice): ?>
+                    <option <?php if ( (isset($current_petservice) && $current_petservice->getId() == $petservice->getId()) ) echo 'selected="selected"'; ?>
+                    value="<?php echo $petservice->getId(); ?>">
+
+                    <?php echo StringHelper::startProposalWord($petservice->name); ?>
+
+                    </option>
+                    <?php endforeach; ?>
+                    <?php endif; ?>
+                </select>
+                </div>
+
+                
                 <div class="choose-section-refactor flo">
                     <div class="col">
                         <ul class="choose-list like-head-label">

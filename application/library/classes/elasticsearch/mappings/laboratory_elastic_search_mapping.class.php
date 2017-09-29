@@ -13,7 +13,6 @@
 			return array(
 				'id' => array(
 					'type' => 'integer',
-					'include_in_all' => true,
 				),
 				'is_has_urgent_tests' => array(
 					'type' => 'boolean',

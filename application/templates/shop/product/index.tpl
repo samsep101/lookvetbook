@@ -86,17 +86,6 @@
                 */?>
             </div>
 
-            <?php
-                $article = $this->before_article;
-                if($article) : ?>
-                    <link rel="stylesheet" href="/media/css/product-article.css?rnd=1" type="text/css">
-                    <script type="text/javascript" src="/media/js/articles-spoiler.js?rnd=1"></script>
-                    <div class="shop-product-article __container">
-                        <?=$article?>
-                        <div class="shop-product-article-showmore"><a class="__showmore" data-switch="Свернуть статью" href="javascript:void(0)">Читать далее...</a></div>
-                    </div>
-            <?php endif; ?>
-
             <?php if ($product->fill_information_status_id == FillInformationStatusModel::OK):?>
                 <?php if ($product->zip_info || $product->composition || $product->dosage || $product->side_effects || $product->overdosage || $product->storage_condition || $product->pharma_effects || $product->indications || $product->contra_indications):?>
                     <div class="p_grey">
@@ -247,5 +236,3 @@
         </div>
     */?>
 </div>
-
-<?php $this->block('blocks/adv/content_page_tiezerlady'); ?>

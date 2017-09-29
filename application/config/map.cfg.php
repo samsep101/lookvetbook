@@ -42,6 +42,11 @@
             'controller' => 'index',
         ),
         array(
+            'url'        => '/konkurs',
+            'action'     => 'konkurs',
+            'controller' => 'text',
+        ),
+        array(
             'url'        => '/view_table',
             'action'     => 'index_table',
             'controller' => 'index',
@@ -250,11 +255,6 @@
             'controller' => 'disease'
         ),
         array(
-            'url'        => '/disease/ajaxGetBeforeBlock',
-            'action'     => 'ajaxGetBeforeBlock',
-            'controller' => 'disease'
-        ),
-        array(
             'url'        => '/disease/test',
             'action'     => 'test',
             'controller' => 'disease'
@@ -426,107 +426,7 @@
             'action'     => 'index',
             'controller' => 'landing'
         ),
-        array(
-            'url'        => '/smap',
-            'action'     => 'index',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/doctors',
-            'action'     => 'showDoctors',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/doctors/:p',
-            'action'     => 'showDoctors',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/doctors/location/:location',
-            'action'     => 'showDoctors',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/doctors/:p/location/:location',
-            'action'     => 'showDoctors',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/doctors/location/:location/specialty/:specialty',
-            'action'     => 'showDoctors',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/doctors/:p/location/:location/specialty/:specialty',
-            'action'     => 'showDoctors',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/doctors/specialty/:specialty',
-            'action'     => 'showDoctors',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/doctors/:p/specialty/:specialty',
-            'action'     => 'showDoctors',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/doctors/specialty/:specialty/location/:location',
-            'action'     => 'showDoctors',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/doctors/:p/specialty/:specialty/location/:location',
-            'action'     => 'showDoctors',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/clinics/specialization/:specialization/location/:location',
-            'action'     => 'showClinics',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/clinics/location/:location/specialization/:specialization',
-            'action'     => 'showClinics',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/clinics',
-            'action'     => 'showClinics',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/clinics/location/:location',
-            'action'     => 'showClinics',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/smap/clinics/specialization/:specialization',
-            'action'     => 'showClinics',
-            'controller' => 'sitemap'
-        ),
-        array(
-            'url'        => '/zayavka',
-            'action'     => 'index',
-            'controller' => 'oneClickSubscribe'
-        ),
-);
 
-    // роутинг для контроллера Uslugi
-    if(Application::config('section.services.available', false)){
-
-        array_push($map, ['url' => '/uslugi',                           'controller' => 'uslugi', 'action' => 'index']);
-        array_push($map, ['url' => '/uslugi/district-:district',        'controller' => 'uslugi', 'action' => 'district']);
-        array_push($map, ['url' => '/uslugi/area-:district',            'controller' => 'uslugi', 'action' => 'area']);
-        array_push($map, ['url' => '/uslugi/metro-:metro',              'controller' => 'uslugi', 'action' => 'metro']);
-        array_push($map, ['url' => '/uslugi/street-:street',            'controller' => 'uslugi', 'action' => 'street']);
-        array_push($map, ['url' => '/uslugi/:slug',                     'controller' => 'uslugi', 'action' => 'slug']);
-        array_push($map, ['url' => '/uslugi/:slug/district-:district',  'controller' => 'uslugi', 'action' => 'slug_district']);
-        array_push($map, ['url' => '/uslugi/:slug/area-:district',      'controller' => 'uslugi', 'action' => 'slug_area']);
-        array_push($map, ['url' => '/uslugi/:slug/metro-:metro',        'controller' => 'uslugi', 'action' => 'slug_metro']);
-        array_push($map, ['url' => '/uslugi/:slug/street-:street',      'controller' => 'uslugi', 'action' => 'slug_street']);
-        array_push($map, ['url' => '/uslugi/:slug/:article',            'controller' => 'uslugi', 'action' => 'article']);
-    }
+    );
 
     Register::add('map', $map);

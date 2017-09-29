@@ -400,7 +400,7 @@ class AjaxController extends BaseController
     $clinic_id = $this->request('id');
 
     $clinic = ModelManagerFactory::getByName('clinic')->getOneById($clinic_id);
-#pr($clinic_id, 1);
+
     $this->view->clinic = $clinic;
 
     $this->view->clinic_id = $clinic_id;
@@ -771,12 +771,17 @@ class AjaxController extends BaseController
 
   public function recordToTheVisit()
   {
+      /**TODO
+       *
+       * change letter contents
+       */
+
       $a = '';
       $schedule_date = '';
       $clinic_id = '';
       $specialty_id = '';
 
-      $recaptcha = new \ReCaptcha\ReCaptcha('6LelcycTAAAAAHTzIPUivRZQjqWfWYJJwI_-zsGQ');
+      $recaptcha = new \ReCaptcha\ReCaptcha('6LfixiEUAAAAADflck9reflwZzDXSy7Yukcan6Gd');
       $resp = $recaptcha->verify($_REQUEST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 
       if (!$resp->isSuccess()){
@@ -784,6 +789,8 @@ class AjaxController extends BaseController
       }
 
 
+
+      
     $mail_data = [];
     $schedule_id = $this->request->request('schedule_id');
     $doctor_id = $this->request->request('doctor_id');
@@ -839,13 +846,10 @@ class AjaxController extends BaseController
     $visit_recorder = new VisitRecorder();
     $status = $visit_recorder->record($visit_information, $visit_id);
     $visit_id = $mail_data['visit_id'] = $visit_recorder->getVisit()->getId();
-
       $mail_data['after_work'] = $after_work;
-      $mail_data['schedule_date'] = $visit_start_time;
       $mail_data['disease'] = $disease_id ? (new DiseaseManager())->getOneById($disease_id) : false;
       $mail_data['clinic'] = $clinic_id ? (new ClinicManager())->getOneById($clinic_id) : false;
-      $mail_data['doctor'] = $doctor_id ? (new DoctorManager())->getOneById($doctor_id) : false;
-      $mail_data['account'] = $visit_information->account_id ? (new AccountManager())->getOneById($visit_information->account_id) : false;
+
 
       $mail_sender = new EmailSenderHelper();
       $mail_sender->sendRecordInformation($mail_data);
@@ -1664,25 +1668,13 @@ if (!Acc::isAuthed())
     $appeal->phone_number = $phone_number;
     $appeal->target_call_id = $target_call_id;
 
-    $city = SeoLinksHelper::getCityByPageLink();
-    $appeal->city_id = $city->id;
-
     if ($appeal->appeal_type_id == 2) {
       $appeal->do_not_check = array('specialty_id');
     }
 
     if ($appeal->save()) {
-        $info = [];
-        $info['full_name'] = $first_name.' '.$middle_name.' '.$last_name;
-        $info['phone'] = $phone_number;
-        $info['appeal_id'] = $appeal->getId();
-        $info['account'] = Acc::accountId() ? (new AccountManager())->getOneById(Acc::accountId()) : false;
-
-        $mail_sender = new EmailSenderHelper();
-        $mail_sender->sendAppealInformation($info);
-      JsonResponse::result(true, $appeal->getVisit()->id);
+      JsonResponse::result();
     } else {
-		
       JsonResponse::error($appeal->getValidator()->getErrorCodes());
     }
   }

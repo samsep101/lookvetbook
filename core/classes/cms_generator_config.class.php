@@ -416,20 +416,4 @@ class CmsGeneratorConfig
   {
 
   }
-
-    public function displayButtons() {
-
-        if(!empty($this->config['buttons'])){
-
-            $html = [];
-            foreach($this->config['buttons'] as $title => $trigger){
-                
-                $html[] = sprintf('<input type="button" data-trigger="%s" value="%s">', $trigger, $title);
-            }
-
-            return implode(PHP_EOL, $html);
-        }
-
-        return '';
-    }
 }

@@ -271,7 +271,7 @@
             $result = array('html' => $html, 'button_more_enable' => $button_more_enable, 'count' => count($products));
 
             JsonResponse::result($result);
-        }   
+        }
 
         // Поиск товара
         public function search()

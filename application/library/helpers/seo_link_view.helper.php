@@ -81,17 +81,7 @@ class SeoLinkViewHelper
         $linkOuter = preg_replace($regV, $replace, $linkOuter);
       }
     }
-    if (   $_SERVER['REQUEST_URI']=='/disease/gripp' 
-        or $_SERVER['REQUEST_URI']=='/disease/diareya'
-        or $_SERVER['REQUEST_URI']=='/disease/otit'
-        or $_SERVER['REQUEST_URI']=='/disease/cistit'
-        ) {
-        $linkOuter=str_replace('<a rel="nofollow" class="jsLinkHidingIndexing" href="" data-link="https://docdoc.ru" target="_blank"','<a class="jsLinkHidingIndexing" href="https://docdoc.ru" data-link="https://docdoc.ru" target="_blank"',$linkOuter);
-        $linkOuter=str_replace('<a rel="nofollow" class="jsLinkHidingIndexing jsLinkHidingIndexing" href="" data-link="https://docdoc.ru/','<a class="jsLinkHidingIndexing jsLinkHidingIndexing" href="" data-link="https://docdoc.ru/',$linkOuter);
-        $linkOuter=str_replace('<a rel="nofollow" class="jsLinkHidingIndexing" href="" data-link="https://spb.docdoc.ru" target="_blank"','<a class="jsLinkHidingIndexing" href="https://spb.docdoc.ru" data-link="https://spb.docdoc.ru" target="_blank"',$linkOuter);
-        $linkOuter=str_replace('<a rel="nofollow" class="jsLinkHidingIndexing" href="" data-link="https://docdoc.ru/doctor/gastroenterolog" target="_blank"','<a class="jsLinkHidingIndexing" href="https://docdoc.ru/doctor/gastroenterolog" data-link="https://docdoc.ru/doctor/gastroenterolog" target="_blank"',$linkOuter);
-        
-    }
+
     return $linkOuter;
   }
 
@@ -100,11 +90,7 @@ class SeoLinkViewHelper
   */
   public static function convertLinks($html)
   {
-	global $memory_allocation_costil1;
-
-	if (!isset($memory_allocation_costil1) || (isset($memory_allocation_costil1) && !$memory_allocation_costil1) )
-	    $html = preg_replace_callback('/<a[^>]+/', 'self::catchOuterLinks', $html);
-
+    $html = preg_replace_callback('/<a[^>]+/', 'self::catchOuterLinks', $html);
     return $html;
   }
 }

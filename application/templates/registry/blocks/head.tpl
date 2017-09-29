@@ -60,7 +60,6 @@
 
 <script type="text/javascript" src="/media/js/gritter/js/jquery.gritter.min.js?<?php echo RELEASE_NUMBER?>"></script>
 <link rel="stylesheet" href="/media/js/gritter/css/jquery.gritter.css?<?php echo RELEASE_NUMBER?>" />
-<script type="text/javascript" src="/media/js/library/link_mapper.js"></script>
 
 
 <?php $this->block('registry/blocks/js-library'); ?>

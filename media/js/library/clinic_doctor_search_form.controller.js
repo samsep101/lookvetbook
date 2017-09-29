@@ -82,7 +82,8 @@ var ClinicDoctorSearchFormController = function (clinic_id) {
             clinic_id: self.clinic_id,
             purpose_of_visit_id: self.purpose_of_visit_id,
             time_of_visit: self.time_of_visit,
-            page: self.page
+            page: self.page,
+            exclude_ids: self.getExistsDoctorIds()
         };
 
         Ajax.Get('/clinic/ajaxGetDoctorsList', data, function (data) {

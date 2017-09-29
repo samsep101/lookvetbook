@@ -3,7 +3,6 @@
     {
         public function index()
         {
-
             $this->view->city_id = $this->city->getId();
             $this->view->latitude = $this->city->lat;
             $this->view->longitude = $this->city->lng;
@@ -16,6 +15,12 @@
             $this->view->page_description = 'Найти лабораторию - вся информация обо всех известных заболеваниях на сервисе '.SITE_NAME.'';
 
             $this->view->canonical_link = '/analysis';
+
+            $this->view->urgent_tests = isset($_REQUEST['srochno']) ? '1' : '0';
+            $this->view->day_and_night = isset($_REQUEST['kruglosutochno']) ? '1' : '0';
+            $this->view->card_pay = isset($_REQUEST['oplata_kartoy']) ? '1' : '0';
+            $this->view->work_seven_days = isset($_REQUEST['bezvihodnih']) ? '1' : '0';
+            $this->view->easy_entry = isset($_REQUEST['vhoddlykolyasok']) ? '1' : '0';
         }
 
 

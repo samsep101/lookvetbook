@@ -3,7 +3,7 @@
 class DoctorSearchParams extends ModelSearchCriteria
 {
   public $specialty_id;
-  public $specialties_ids = array();
+
   public $suitable_specialties_ids = array();
 
   public $city_id;
@@ -68,7 +68,6 @@ class DoctorSearchParams extends ModelSearchCriteria
   public $is_has_active_clinic = true;
 
   public $exclude_ids = array();
-  public $discount;
 
   public function getParamsHash()
   {
@@ -93,16 +92,13 @@ class DoctorSearchParams extends ModelSearchCriteria
       'district=' . $this->district_id .
       'region=' . $this->region_id .
       'street=' . $this->street_id .
-      'discount=' . $this->discount .
       'is_active=' . $this->is_active .
       'not_work=' . $this->not_work .
       'registry_user_id=' . $this->registry_user_id .
       'primary_doctors_ids=' . join(',', $this->primary_doctors_ids) .
       'has-Visit_lots=' . $this->has_visit_slots .
       'without_filters=' . $this->without_filters .
-      'is_has_clinics=' . (int)$this->is_has_clinic .
-      'specialties_ids=' . join(',',$this->specialties_ids);
-    
+      'is_has_clinics=' . (int)$this->is_has_clinic;
 
 
     if ($this->geo_point) {
@@ -114,13 +110,6 @@ class DoctorSearchParams extends ModelSearchCriteria
       $str .= 'primary_doctors=';
       foreach ($this->primary_doctors_ids as $primary_doctor_id) {
         $str .= $primary_doctor_id . ',';
-      }
-    }
-
-    if ($this->specialties_ids) {
-      $str .= 'specialties_ids=';
-      foreach ($this->specialties_ids as $spc_id) {
-        $str .= $spc_id . ',';
       }
     }
 

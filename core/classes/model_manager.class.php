@@ -24,7 +24,7 @@ class ModelManager implements ICachedModelManager
   /**
    * @var array
    */
-  public $models_register = array();
+  protected $models_register = array();
 
   protected $insert_type = 'normal';
 
@@ -40,8 +40,6 @@ class ModelManager implements ICachedModelManager
 
   protected $total_hits = null;
 
-  protected $cityID = 2;
-
   public function __construct($table = '')
   {
     if ($table) {
@@ -54,12 +52,6 @@ class ModelManager implements ICachedModelManager
 
     $this->orm_model = new Orm(DB_PREFIX . $this->table_name);
     $this->db = Register::get('db');
-  }
-
-  public function setCityID($cityID) {
-
-      ($cityID > 0) AND $this->cityID = (int)$cityID;
-      return $this;
   }
 
   public function getGroupName()
@@ -186,10 +178,6 @@ class ModelManager implements ICachedModelManager
     $data = $this->db->query($sql);
     shuffle($data);
     $found_ids = array_map(function($a){ return $a[$this->id_field_name]; }, array_slice($data, $offset, $limit+1));
-
-    if (!$found_ids)
-        return [];
-
     $search_params->setSelectFields($select_fields);
     $search_params->setJoinSelectFields($join_select_fields);
 
@@ -224,31 +212,30 @@ class ModelManager implements ICachedModelManager
   }
 
 
-    protected function initOne($info) {
-
-        if (!$info) {
-            return NULL;
-        }
-
-        // if (isset($this->models_register[$id]) && $this->model_register_enable && static::$model_register_enable_global)
-        //      return $this->models_register[$id];
-        if (count($info)) {
-            
-            if (!class_exists($this->model_name, FALSE) && !Application::tryToLoadClass($this->model_name)) {
-                throw new Exception('Не удалось найти класс ' . $this->model_name);
-            }
-
-            $id = $info[$this->id_field_name];
-            $this->models_register[$id] = new $this->model_name();
-            $this->models_register[$id]->setParams($id, $info);
-
-            return $this->models_register[$id];
-        } else {
-            return NULL;
-        }
+  protected function initOne($info)
+  {
+    if (!$info) {
+      return NULL;
     }
+    $id = $info[$this->id_field_name];
 
-    public function save(DynamicModel $model)
+//            if (isset($this->models_register[$id]) && $this->model_register_enable && static::$model_register_enable_global)
+//                return $this->models_register[$id];
+
+    if (count($info)) {
+      if (!class_exists($this->model_name, FALSE) && !Application::tryToLoadClass($this->model_name)) {
+        throw new Exception('Не удалось найти класс ' . $this->model_name);
+      }
+      $this->models_register[$id] = new $this->model_name();
+      $this->models_register[$id]->setParams($id, $info);
+
+      return $this->models_register[$id];
+    } else {
+      return NULL;
+    }
+  }
+
+  public function save(DynamicModel $model)
   {
     if ($model->validate()) {
       if ($model && (strtolower($this->model_name) == strtolower(get_class($model)))) {
@@ -355,31 +342,27 @@ class ModelManager implements ICachedModelManager
     $params_array = array();
 
     foreach ($this->db_fields as $field) {
-
-      $fname = $field->getName();
-
-      if ((preg_match('/^(.+)_id$/', $fname, $matches))
+      if ((preg_match('/^(.+)_id$/', $field->getName(), $matches))
         && ($model->{$matches[1]} !== NULL)
         && is_object($model->{$matches[1]})
         && ($model->{$matches[1]} instanceof DynamicModel)
         && ($model->{$matches[1]}->getId())
       ) {
-        if (($model->{$fname} === NULL) || ($model->{$fname} != $model->{$matches[1]}->getId())) {
-          $params_array[$fname] = $model->{$matches[1]}->getId();
+        if (($model->{$field->getName()} === NULL) || ($model->{$field->getName()} != $model->{$matches[1]}->getId())) {
+          $params_array[$field->getName()] = $model->{$matches[1]}->getId();
         }
       }
 
-      $value = $model->{$fname};
+      $value = $model->{$field->getName()};
 
       if ((in_array($field->getType(), array('int(11)', 'float')) && $value === '')) {
         $value = NULL;
       }
 
-      if ($field->getForeignKey() && !$value) {
+      if ($field->getForeignKey() && !$value)
         $value = NULL;
-      }
 
-      $params_array[$fname] = $value;
+      $params_array[$field->getName()] = $value;
     }
 
     return $params_array;

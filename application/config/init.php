@@ -77,4 +77,16 @@ if (isset($_REQUEST['utm_campaign']) && $_REQUEST['utm_campaign'] == 'mixuni'){
 Register::add('db', new Db());
 Register::add('utils', new Utils());
 
+Register::add('SUBDOMAINS', [
+    'sankt-peterburg',
+    'novosibirsk',
+    'chelyabinsk',
+    'omsk',
+    'samara',
+    'kazan',
+    'nizhniy-novgorod',
+    'ekaterinburg'
+]);
+
+
 require_once('core/funcs/funcs.php');

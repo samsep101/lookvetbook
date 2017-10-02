@@ -254,4 +254,21 @@
             SiteTaskManager::updateClinicMetroStationId();
             exit();
         }
+
+        /**
+         * Генерация robots.txt для subdomain
+         */
+        public function generateRobots()
+        {
+            $generatedConfigPath = ABS_ROOT . "/robots/";
+            $template = file_get_contents(ABS_ROOT . "/robots/template.txt");
+
+            foreach (Register::get('SUBDOMAINS') as $subdmomain) {
+                $r = strtr($template, [
+                    '{{domain}}' => "$subdmomain." . SITE_DOMAIN
+                ]);
+                file_put_contents("{$generatedConfigPath}robots_{$subdmomain}.txt", $r);
+            }
+            exit();
+        }
 	}

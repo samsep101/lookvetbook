@@ -1604,7 +1604,7 @@ class DoctorController extends BaseController
             'search_page_description' => $search_page_description,
             'topNumberH1' => $topNumberH1,
             'canonicalLink' => $canonicalLink,
-            'defaultSpecialty' => $defaultSpecialty
+            'defaultSpecialty' => $defaultSpecialty,
         );
 
         JsonResponse::result($result);

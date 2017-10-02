@@ -17,47 +17,36 @@
 			return array(
 				'id' => array(
 					'type' => 'integer',
-					'include_in_all' => true
 				),
 				'specialty_ids' => array(
 					'type' => 'integer',
-					'include_in_all' => false
 				),
 				'cities' => array(
 					'type' => 'integer',
-					'include_in_all' => false
 				),
 				'purposes_of_visit' => array(
 					'type' => 'integer',
-					'include_in_all' => false
 				),
 				'is_leave_the_house' => array(
 					'type' => 'boolean',
-					'include_in_all' => true
 				),
 				'is_children' => array(
 					'type' => 'boolean',
-					'include_in_all' => true
 				),
 				'is_has_morning_time' => array(
 					'type' => 'boolean',
-					'include_in_all' => true
 				),
 				'is_has_evening_time' => array(
 					'type' => 'boolean',
-					'include_in_all' => true
 				),
 				'is_has_weekend_time' => array(
 					'type' => 'boolean',
-					'include_in_all' => true
 				),
 				'is_has_any_time' => array(
 					'type' => 'boolean',
-					'include_in_all' => true
 				),
 				'full_name' => array(
 					'type' => 'text',
-					'include_in_all' => true,
 					'analyzer' => 'autocomplete',
           'search_analyzer' => 'searchAnalyzer',
           'index' => true,
@@ -65,31 +54,25 @@
 				),
 				'sex' => array(
 					'type' => 'integer',
-					'include_in_all' => true
 				),
 				'doctor_type' => array(
 					'type' => 'integer',
-					'include_in_all' => false
 				),
 				'actions' =>array(
 					'properties' => array(
 						'id' => array(
 							'type' => 'integer',
-							'include_in_all' => false
                                                  ),
 						'clinic_id' => array(
 							'type' => 'integer',
-							'include_in_all' => false
                                                  ),
 						'date_from' => array(
 							'type' => 'date',
                                                         'format'=>'yyyy-MM-dd',
-							'include_in_all' => false
                                                  ),
 						'date_to' => array(
 							'type' => 'date',
                                                         'format'=>'yyyy-MM-dd',
-							'include_in_all' => false
                                                  )
                                         )
                                     
@@ -98,27 +81,21 @@
 					'properties' => array(
 						'id' => array(
 							'type' => 'integer',
-							'include_in_all' => false,
 						),
 						'geo_point' => array(
 							'type' => 'geo_point',
-							'include_in_all' => false
 						),
 						'district' => array(
 							'type' => 'integer',
-							'include_in_all' => false
 						),
 						'region' => array(
 							'type' => 'integer',
-							'include_in_all' => false
 						),
 						'street' => array(
 							'type' => 'integer',
-							'include_in_all' => false
 						),
 						'metro_station_id' => array(
 							'type' => 'integer',
-							'include_in_all' => false
 						),
 						'specialties' => array(
 							'type' => 'integer',
@@ -127,44 +104,34 @@
 				),
 				'is_has_visit_slots' => array(
 					'type' => 'boolean',
-					'include_in_all' => true
 				),
 				'is_active' => array(
 					'type' => 'boolean',
-					'include_in_all' => true
 				),
 				'is_has_avatar' => array(
 					'type' => 'boolean',
-					'include_in_all' => true
 				),
 				'is_virtual' => array(
 					'type' => 'boolean',
-					'include_in_all' => true
 				),
 				'is_unbounded' => array(
 					'type' => 'boolean',
-					'include_in_all' => true
 				),
 				'is_adult' => array(
 					'type' => 'boolean',
-					'include_in_all' => true,
 				),
 				'is_pregnant' => array(
 					'type' => 'boolean',
-					'include_in_all' => true,
 				),
 				'balls' => array(
 					'type' => 'float',
-					'include_in_all' => true
 				),
 				'rate' => array(
 					'type' => 'scaled_float',
 					'scaling_factor' => 100,
-					'include_in_all' => true,
 				),
 				'is_has_clinic' => array(
 					'type' => 'boolean',
-					'include_in_all' => true,
 				),
                 'is_has_active_clinic' => array(
                     'type' => 'boolean',
@@ -174,11 +141,9 @@
 				),
                 'reviews_count' => array(
                     'type' => 'integer',
-                    'include_in_all' => true
                 ),
 				'_boost' => array(
 					'type' => 'float',
-					'include_in_all' => true
 				),
 			);
 		}

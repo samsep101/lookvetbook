@@ -219,7 +219,7 @@
             }  else {
                 if($specialty && !$defaultTitle) {
                     if($hideAddress)
-                        $html = $seo_doctors.' ' . $morpher_doctor . ' ' . SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
+                        $html = $seo_doctors.' ' . SeoTextViewHelper::getAddressObjectName($address_object) . ' - запись на прием, цены, отзывы и рейтинги на '.SITE_NAME;
                     else
                         $html = self::getH1($specialty, $address_object).' | Выбор хорошего '.$specialty->genitive_name.' '.SeoTextViewHelper::getAddressObjectName($address_object).', отзывы, рейтинг и запись на прием на '.SITE_NAME.'.';
                 } elseif($address_object) {
@@ -236,13 +236,14 @@
 
 		public static function getDescription($specialty, $address_object, $search_flags)
 		{
-                    $seo_doctors='врача '.$specialty->genitive_name;
+		                $specialtyGenitiveName = $specialty ? $specialty->genitive_name : "";
+                    $seo_doctors='врача '. $specialtyGenitiveName;
                     if ($search_flags['visit_type']=='home' && $search_flags['doctor_type']!='children')
-                        $seo_doctors='врача '.$specialty->genitive_name.' на дом';
+                        $seo_doctors='врача '.$specialtyGenitiveName.' на дом';
                     else if ($search_flags['visit_type']!='home' && $search_flags['doctor_type']=='children')
-                        $seo_doctors='детского врача '.$specialty->genitive_name;
+                        $seo_doctors='детского врача '.$specialtyGenitiveName;
                     else if ($search_flags['visit_type']=='home' && $search_flags['doctor_type']=='children')
-                        $seo_doctors='детского врача '.$specialty->genitive_name.' на дом';
+                        $seo_doctors='детского врача '.$specialtyGenitiveName.' на дом';
 
                     $html = 'Ищете '.$seo_doctors.' '.SeoTextViewHelper::getAddressObjectName($address_object).'? '.SITE_NAME.' поможет выбрать опытного врача по отзывам и рейтингам клиентов, узнать стоимость и записаться на прием.';
                     return $html;

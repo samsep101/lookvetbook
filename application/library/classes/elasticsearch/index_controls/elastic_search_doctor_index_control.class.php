@@ -63,7 +63,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
 
       if ($criteria->visit_type == 'home') {
         $match = new \Elastica\Query\Term();
-        $match->setTerm('is_leave_the_house', 1);
+        $match->setTerm('is_leave_the_house', true);
         $filter->addFilter($match);
       }
 
@@ -75,37 +75,37 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
 
       if ($criteria->morning_time) {
         $match = new \Elastica\Query\Term();
-        $match->setTerm('is_has_morning_time', $criteria->morning_time);
+        $match->setTerm('is_has_morning_time', (bool)$criteria->morning_time);
         $filter->addFilter($match);
       }
 
       if ($criteria->evening_time) {
         $match = new \Elastica\Query\Term();
-        $match->setTerm('is_has_evening_time', $criteria->evening_time);
+        $match->setTerm('is_has_evening_time', (bool)$criteria->evening_time);
         $filter->addFilter($match);
       }
 
       if ($criteria->weekend_time) {
         $match = new \Elastica\Query\Term();
-        $match->setTerm('is_has_weekend_time', $criteria->weekend_time);
+        $match->setTerm('is_has_weekend_time', (bool)$criteria->weekend_time);
         $filter->addFilter($match);
       }
 
       if ($criteria->doctor_type == 'adult') {
         $match = new \Elastica\Query\Term();
-        $match->setTerm('is_adult', 1);
+        $match->setTerm('is_adult', true);
         $filter->addFilter($match);
       }
 
       if ($criteria->doctor_type == 'children') {
         $match = new \Elastica\Query\Term();
-        $match->setTerm('is_children', 1);
+        $match->setTerm('is_children', true);
         $filter->addFilter($match);
       }
 
       if ($criteria->doctor_type == 'pregnant') {
         $match = new \Elastica\Query\Term();
-        $match->setTerm('is_pregnant', 1);
+        $match->setTerm('is_pregnant', true);
         $filter->addFilter($match);
       }
 
@@ -293,7 +293,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
           'type' => 'number',
           'script' => [
             'lang' => 'painless',
-            'inline' => '((doc[\'clinics.street\'].value == ' . (int) $criteria->street_id . ') ? 1 : 0)',
+            'source' => '((doc[\'clinics.street\'].value == ' . (int) $criteria->street_id . ') ? 1 : 0)',
           ],
           "order" => "desc",
         ]
@@ -306,7 +306,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
           'type' => 'number',
           'script' => [
             'lang' => 'painless',
-            'inline' => '((doc[\'clinics.region\'].value == ' . (int) $criteria->region_id . ') ? 1 : 0)',
+            'source' => '((doc[\'clinics.region\'].value == ' . (int) $criteria->region_id . ') ? 1 : 0)',
           ],
           "order" => "desc",
         ]
@@ -320,7 +320,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
           'type' => 'number',
           'script' => [
             'lang' => 'painless',
-            'inline' => '((doc[\'clinics.district\'].value == ' . (int) $criteria->district_id . ') ? 1 : 0)'
+            'source' => '((doc[\'clinics.district\'].value == ' . (int) $criteria->district_id . ') ? 1 : 0)'
           ],
           "order" => "desc",
         ]
@@ -334,7 +334,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
           'type' => 'number',
           'script' => [
             'lang' => 'painless',
-            'inline' => '(doc[\'clinics.geo_point\'].arcDistance(' . (float)$criteria->geo_point->getLatitude() . ', ' . (float) $criteria->geo_point->getLongitude() . ')) <= ' . $distance . ' ? 1 : 0'
+            'source' => '(doc[\'clinics.geo_point\'].arcDistance(' . (float)$criteria->geo_point->getLatitude() . ', ' . (float) $criteria->geo_point->getLongitude() . ')) <= ' . $distance . ' ? 1 : 0'
           ],
           "order" => "desc",
         ]
@@ -390,7 +390,7 @@ class ElasticSearchDoctorIndexControl extends ElasticSearchModelIndexControl
                   'type'   => 'string',
                   'script' => [
                       'lang'   => 'painless',
-                      'inline' => "(doc['_uid'] + params.salt).hashCode()",
+                      'source' => "(doc['_uid'] + params.salt).hashCode()",
                       'params' => [
                           'salt' => (string)(int)$criteria->sort_salt
                       ]

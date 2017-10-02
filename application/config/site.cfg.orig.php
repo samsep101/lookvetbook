@@ -29,6 +29,3 @@ define('DOCTOR', 'врач');
 define('DOCTORA', 'врача');
 
 define('MEDICYNY', 'медицины');
-
-
-

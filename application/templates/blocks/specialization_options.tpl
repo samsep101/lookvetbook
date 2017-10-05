@@ -1,12 +1,12 @@
 <?php $current_setialization = $specialization; ?>
 <?php if (!isset($show_all_option) || ($show_all_option)): ?>
-    <option class="specialization" <?php if(!isset($current_setialization)) echo 'selected="selected"'; ?> value="0" data-specialty_plural_name="Все">Все</option>
+    <option class="specialization" <?php if(empty($current_setialization)) echo 'selected="selected"'; ?> value="0" data-specialty_plural_name="Все">Все</option>
 <?php endif;?>
 <?php if (count($specializations)):?>
     <?php foreach($specializations as $specialization): ?>
 			<?php
 			if(!is_object($specialization)) { continue; } ?>
-        <option <?php if(isset($current_setialization) and is_object($current_setialization) and !isset($home_page) && $current_setialization->id == $specialization->getId()) echo 'selected="selected"'; ?>
+        <option <?php if(!empty($current_setialization) and is_object($current_setialization) and empty($home_page) && $current_setialization->id == $specialization->getId()) echo 'selected="selected"'; ?>
             value="<?php echo $specialization->getId(); ?>"
             class="specialization"
             data-specialty_alias="<?php echo $specialization->alias; ?>"

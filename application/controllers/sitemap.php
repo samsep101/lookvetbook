@@ -14,27 +14,18 @@ class sitemapController extends BaseController
     }
     
     public function index() {
-        $this->view->landing_page = $landing;
-
         $this->view->page_title = 'Карта сайта '.SITE_NAME;
         $this->view->page_description = 'Посмотрите подробную карту сайта  '.SITE_NAME;
         $this->render('sitemap/index');
     }
     
     public function showDoctors() {
-
-        $this->view->landing_page = $landing;
-
         $this->view->page_title = 'Карта сайта '.SITE_NAME;
         $this->view->page_description = 'Посмотрите подробную карту сайта  '.SITE_NAME;
         $location=$this->request('location');
-        if ($location)
-            $this->view->location=$location;
+        $this->view->location=$location;
         $specialty=$this->request('specialty');
-        if ($specialty) {
-            $this->view->specialty=$specialty;
-        }
- 
+        $this->view->specialty=$specialty;
         $doctor_search_params = new DoctorSearchParams();  
         $doctor_search_algorithm = new DoctorSearchAlgorithm();
         $doctor_search_params->city_id=$this->city->getId();
@@ -154,19 +145,13 @@ class sitemapController extends BaseController
     }
     
     public function showClinics() {
-
-        $this->view->landing_page = $landing;
-
         $this->view->page_title = 'Карта сайта '.SITE_NAME;
         $this->view->page_description = 'Посмотрите подробную карту сайта  '.SITE_NAME;
         $location=$this->request('location');
-        if ($location)
-            $this->view->location=$location;
+        $this->view->location=$location;
         $specialization=$this->request('specialization');
-        if ($specialization) {
-            $this->view->specialty=$specialization;
-        }
- 
+        $this->view->specialty=$specialization;
+
         $clinic_search_params = new ClinicSearchParams();  
         $clinic_search_algorithm = new ClinicSearchAlgorithm();
         $clinic_search_params->city_id=$this->city->getId();

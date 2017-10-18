@@ -1498,8 +1498,6 @@ class DoctorController extends BaseController
         $this->view->page_type = 'doctor';
 
         $landing = $this->request('landing');
-        $exclude_doctor_ids = $this->request('exclude_doctor_ids', []);
-        $specialties_ids = $this->request('specialties_ids', []);
         if (!$landing && !Acc::isAuthed()) {
             JsonResponse::error(4);
         }

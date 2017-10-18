@@ -475,11 +475,6 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
             $('.pad_tb .search_txt').show();
         }
 
-        var exists_cards = $('#our-doctors .info-card');
-        var exclude_doctor_ids = [];
-        exists_cards.each(function(){
-            exclude_doctor_ids.push($(this).attr('id').replace('doctor-big-card-',''));
-        });
         var data = {
             specialty_id:self.specialty_id,
             //purpose_of_visit_id:self.purpose_of_visit_id,
@@ -506,8 +501,7 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
             district_id : self.district_id,
             region_id : self.region_id,
             street_id : self.street_id,
-            discount : self.discount,
-            exclude_doctor_ids:exclude_doctor_ids
+            discount : self.discount
         };
 
       

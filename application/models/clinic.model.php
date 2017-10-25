@@ -139,7 +139,6 @@
      */
     class ClinicModel extends DynamicModel
     {
-        static $trig=0;
         const REGION_PUBLISHED = 1;
         const REGION_RAW       = 3;
         const REGION_PROBLEM   = 2;
@@ -247,40 +246,26 @@
                 return $this->metro_station;
             }
 
-            /**
-             * @var MetroStationManager $metro_station_manager
-             * @var MetroStationModel   $metro_station
-             */
-            $metro_station_manager = ModelManagerFactory::getByName('metro_station');
+            $this->metro_station = null;
 
-            /**
-             * @var MetroStationToClinicManager $metro_station_to_clinic_manager
-             * @var MetroStationToClinicModel   $this ->metro_station$metro_station_to_clinic
-             */
-            $metro_station_to_clinic_manager = ModelManagerFactory::getByName('metro_station_to_clinic');
-            $metro_station_to_clinic = $metro_station_to_clinic_manager->getOneByClinicId($this->getId());
-
-            if(self::$trig==1){
-                 $this->metro_station_id=array_keys($metro_station_manager->decorated_manager->models_register);
-                $this->metro_station_id=strval($this->metro_station_id[0]);
-            }
-            //логика правлено мной - CyberUnit. Было, зачем-то, вместо сохранения в форме, сброс на изначальное значение. Бреддд.....
-            //неплохо было бы еще зашить стирание значения, но пока стремно, хрен его знает, что было в голове программера
-            if($metro_station_to_clinic) {
-              if ($this->metro_station_id > 0 and $this->metro_station_id != $metro_station_to_clinic->metro_station_id) {
-                $metro_station_to_clinic_manager->setClinicMetroId($this->getId(), $this->metro_station_id);
-              }
-              if(!$this->metro_station_id) {
-                $this->metro_station_id = $metro_station_to_clinic->metro_station_id;
-              }
+            if (isset($this->metro_station_id)) {
+                /** @var MetroStationManager $metroStationManager */
+                $metroStationManager = ModelManagerFactory::getByName('metro_station');
+                $this->metro_station = $metroStationManager->getOneById($this->metro_station_id);
             }
 
-            if($this->metro_station_id) {
-              $metro_station = $metro_station_manager->getOneById($this->metro_station_id);
-              $this->metro_station = $metro_station;
-            }else{
-              $this->metro_station = NULL;
+            if (empty($this->metro_station)) {
+                /** @var MetroStationToClinicManager $metro_station_to_clinic_manager */
+                $metro_station_to_clinic_manager = ModelManagerFactory::getByName('metro_station_to_clinic');
+                /** @var MetroStationToClinicModel $metro_station_to_clinic */
+                $metro_station_to_clinic = $metro_station_to_clinic_manager->getOneByClinicId($this->getId());
+
+                if ($metro_station_to_clinic) {
+                    $this->metro_station_id = $metro_station_to_clinic->metro_station_id;
+                    $this->metro_station = $metro_station_to_clinic->metro_station;
+                }
             }
+
             return $this->metro_station;
         }
 

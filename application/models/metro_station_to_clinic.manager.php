@@ -17,6 +17,11 @@ class MetroStationToClinicManager extends ModelManager {
 			$this->db->query($sql);
 		}
 
+    /**
+     * @param $clinic_id
+     * @return MetroStationToClinicModel|null
+     * @throws Exception
+     */
 		public function getOneByClinicId($clinic_id)
 		{
 			$sql = 'SELECT * FROM metro_station_to_clinic

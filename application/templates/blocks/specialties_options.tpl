@@ -4,20 +4,20 @@
 	 * @var SpecialtyModel[] $specialties
 	 */
 ?>
-<?php $current_setialty = $specialty; ?>
-<?php if (!isset($this->show_all_option) || ($this->$show_all_option)): ?>
+<?php $currentSpecialty = isset($specialty) ? $specialty : null; ?>
+<?php if (!isset($this->show_all_option) || ($this->show_all_option)): ?>
     <option <?php 
     if(
         (empty($page_type) 
       //#1739or $page_type != 'doctor'
       ) 
-    && !isset($current_setialty)
+    && !isset($currentSpecialty)
     ) echo 'selected="selected"'; ?> value="0" data-specialty_plural_name="Все">Все</option>
 <?php endif;?>
 <?php if (count($specialties)):?>
     <?php foreach($specialties as $specialty): ?>
-        <option <?php if( (isset($current_setialty) && $current_setialty->id == $specialty->getId())
-             //#1739or (!isset($current_setialty) && (!empty($page_type) and $page_type == 'doctor') && $specialty->getId() == 29)
+        <option <?php if( (isset($currentSpecialty) && $currentSpecialty->id == $specialty->getId())
+             //#1739or (!isset($currentSpecialty) && (!empty($page_type) and $page_type == 'doctor') && $specialty->getId() == 29)
              ) {
           echo 'selected="selected"'; 
         } ?>

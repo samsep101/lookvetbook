@@ -623,9 +623,7 @@ class DiseaseController extends BaseController
   }
 
   public function ajaxGetBeforeBlock(){
-
-      $alias = $this->view->disease->alias;
-
+      $beforeblocks = '';
       $disease_slug = $this->request->post('slug');
         $blocks_before = implode('/', [
             Application::getTemplatesDir(true),

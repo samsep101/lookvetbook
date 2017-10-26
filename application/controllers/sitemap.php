@@ -30,6 +30,11 @@ class sitemapController extends BaseController
         $doctor_search_algorithm = new DoctorSearchAlgorithm();
         $doctor_search_params->city_id=$this->city->getId();
         $p=$this->request('p');
+        $this->view->doctor_type = null;
+        $this->view->visit_type = null;
+        $this->view->location_id = null;
+        $this->view->location_name = null;
+        $this->view->location_type = null;
         if ($p=='na-dom') {
             $doctor_search_params->visit_type='home';
             $this->view->visit_type='home';
@@ -43,6 +48,8 @@ class sitemapController extends BaseController
         //получаем округи и районы
         $district = new DistrictManager();
         $districts=$district->getListByCityId($this->city->getId());
+        $districtsList = [];
+        $regionsList = [];
         if ($districts) {
             $region = new RegionManager();
             foreach ($districts as $d) {
@@ -73,6 +80,7 @@ class sitemapController extends BaseController
         //метро
         $metro_stations = new MetroStationManager();
         $stations = $metro_stations->getHavingDoctorsListById($this->city->getId());
+        $metroStationsList = [];
         if ($stations) {
             foreach($stations as $s) {
                 $metroStationsList[]=array('name'=>$s->name,'alias'=>$s->alias);
@@ -89,6 +97,7 @@ class sitemapController extends BaseController
         //улицы
         $streetManager = new StreetManager();
         $streets = $streetManager->getHavingDoctorsListByCityId($this->city->getId());
+        $streetsList = [];
         if ($streets) {
             foreach($streets as $s) {
                 $streetsList[]=array('name'=>$s->prefix.' '.$s->name,'alias'=>$s->alias);
@@ -114,7 +123,10 @@ class sitemapController extends BaseController
             $specialities = $specialtyManager->getHavingDoctorsListByStreetId($this->view->location_id);
         else
              $specialities = $specialtyManager->getHavingDoctorsListByCityId($this->city->getId());
-               
+
+        $specialitiesList = [];
+        $this->view->specialty_id = null;
+        $this->view->specialty_name = null;
         if ($specialities) {
             foreach($specialities as $s) {
                 $doctor_search_params->specialty_id=$s->id;
@@ -151,6 +163,9 @@ class sitemapController extends BaseController
         $this->view->location=$location;
         $specialization=$this->request('specialization');
         $this->view->specialty=$specialization;
+        $this->view->location_id = null;
+        $this->view->location_name = null;
+        $this->view->location_type = null;
 
         $clinic_search_params = new ClinicSearchParams();  
         $clinic_search_algorithm = new ClinicSearchAlgorithm();
@@ -159,6 +174,8 @@ class sitemapController extends BaseController
         //получаем округи и районы
         $district = new DistrictManager();
         $districts=$district->getListByCityId($this->city->getId());
+        $districtsList = [];
+        $regionsList = [];
         if ($districts) {
             $region = new RegionManager();
             foreach ($districts as $d) {
@@ -189,6 +206,7 @@ class sitemapController extends BaseController
         //метро
         $metro_stations = new MetroStationManager();
         $stations = $metro_stations->getHavingDoctorsListById($this->city->getId());
+        $metroStationsList = [];
         if ($stations) {
             foreach($stations as $s) {
                 $metroStationsList[]=array('name'=>$s->name,'alias'=>$s->alias);
@@ -209,7 +227,7 @@ class sitemapController extends BaseController
         //улицы
         $streetManager = new StreetManager();
         $streets = $streetManager->getHavingDoctorsListByCityId($this->city->getId());
-        
+        $streetsList = [];
         if ($streets) {
             foreach($streets as $s) {
                 $streetsList[]=array('name'=>$s->prefix.' '.$s->name,'alias'=>$s->alias);
@@ -226,6 +244,7 @@ class sitemapController extends BaseController
         //специальности
         $specializationManager = new SpecializationManager();
         $specializations = $specializationManager->getSpecializationForCityIDInWhichHaveDoctors($this->city->getId());
+        $specializationsList = [];
         if ($specializations) {
             foreach ($specializations as $s) {
                 $clinic_search_params->specialization_id=$specializationManager->getOneByName ($s->name)->getId();

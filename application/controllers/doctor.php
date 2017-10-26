@@ -342,6 +342,7 @@ class DoctorController extends BaseController
             }
 
             //все врачи специальностей текущего врача из всех базы
+            $specialties_ids = [];
             foreach ($specialties AS $specialty) {
                 $spec_id = $specialty->getId();
                 $specialties_ids[] = $spec_id;

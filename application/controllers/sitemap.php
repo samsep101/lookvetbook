@@ -163,6 +163,9 @@ class sitemapController extends BaseController
         $this->view->location=$location;
         $specialization=$this->request('specialization');
         $this->view->specialty=$specialization;
+        $this->view->specialization = null;
+        $this->view->specialization_name = null;
+        $this->view->specialization_id = null;
         $this->view->location_id = null;
         $this->view->location_name = null;
         $this->view->location_type = null;

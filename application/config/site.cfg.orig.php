@@ -11,12 +11,13 @@ define('UPLOAD_IMAGES_HEIGHT', 800);
 define('ADMIN_FOLDER', '/admin');
 define('MANAGE_FOLDER', '/registry/manage');
 define('REGISTRY_FOLDER', '/registry');
-define('SITE_URL', "https://lookmedbook.cyb");
-define('SITE_DOMAIN', "LookMedBook.cyb");
-define('SITE_NAME', "LookMedBook");
 
 // todo написать функцию, которая будет возвращать протокол
 define('SITE_SCHEME', 'https');
+
+define('SITE_URL', SITE_SCHEME . "://lookmedbook.ru");
+define('SITE_DOMAIN', "lookmedbook.ru");
+define('SITE_NAME', "LookMedBook");
 
 
 define('SHOP_ENABLE', 1);

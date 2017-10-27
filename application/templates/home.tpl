@@ -294,7 +294,7 @@
                     <?php } ?>
 
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?><?php echo strtolower(SITE_URL);?>/disease<?php } ?>">Заболевания</a>
-                        <a class="" href="http://swiss.lookmedbook.ru/">Лечение в Швейцарии</a>
+                        <a class="" href="//swiss.lookmedbook.ru/">Лечение в Швейцарии</a>
 
                     <?php /*if($city->is_has_laboratories) { ?>
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'analysis') ? 'active' : ''; ?> analysis-link" href="/analysis">Анализы</a>

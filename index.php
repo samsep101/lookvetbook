@@ -3,6 +3,12 @@ if (php_sapi_name()!='cli') {
   header("Content-Type: text/html; charset=UTF-8");
 }
 
+if(!empty($_SERVER['SERVER_NAME'])){
+    define('SERVER_NAME', $_SERVER['SERVER_NAME']);
+} else {
+    define('SERVER_NAME', 'lookvetbook.ru');
+}
+
 require('application/config/site.cfg.php');
 
 if (!debug) {

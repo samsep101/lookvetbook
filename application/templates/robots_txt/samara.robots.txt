@@ -16,4 +16,4 @@ Disallow: /*?
 Disallow: /*booking*
 Disallow: /media/js/linkHidingIndexing.js
 Disallow: /disease
-Sitemap: http://samara.lookmedbook.ru/sitemap.xml
+Sitemap: https://samara.lookmedbook.ru/sitemap.xml

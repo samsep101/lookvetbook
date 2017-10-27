@@ -162,7 +162,7 @@ class Controller
       echo '</div></center>';
       echo '</body></html>';
     } else {
-      header("location: http://" . $_SERVER['SERVER_NAME'] . "/error404");
+      header("location: " . SITE_SCHEME . "://" . $_SERVER['SERVER_NAME'] . "/error404");
     }
     die();
   }

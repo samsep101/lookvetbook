@@ -16,4 +16,4 @@ Disallow: /*?
 Disallow: /*booking*
 Disallow: /media/js/linkHidingIndexing.js
 Disallow: /disease
-Sitemap: http://nizhniy-novgorod.lookmedbook.ru/sitemap.xml
+Sitemap: https://nizhniy-novgorod.lookmedbook.ru/sitemap.xml

@@ -351,7 +351,7 @@
 									type: 'POST',
 									success: function(response) {
 										if(response.status == 'exist') {
-											location.href = "http://{$httpHost}/test/saveXMLFileAllClinic";
+											location.href = "//{$httpHost}/test/saveXMLFileAllClinic";
 											errorMessage.hide();
 											button.attr('disabled', false);
 										} else if(response.status == 'notExist') {

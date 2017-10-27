@@ -11,9 +11,14 @@ define('UPLOAD_IMAGES_HEIGHT', 800);
 define('ADMIN_FOLDER', '/admin');
 define('MANAGE_FOLDER', '/registry/manage');
 define('REGISTRY_FOLDER', '/registry');
-define('SITE_URL', "http://lookmedbook.cyb");
+define('SITE_URL', "https://lookmedbook.cyb");
 define('SITE_DOMAIN', "LookMedBook.cyb");
 define('SITE_NAME', "LookMedBook");
+
+// todo написать функцию, которая будет возвращать протокол
+define('SITE_SCHEME', 'https');
+
+
 define('SHOP_ENABLE', 1);
 define('RELEASE_NUMBER', 43);
 define('SITE_PHONE_CODE', '495');
@@ -22,7 +27,7 @@ define('CSS_DIR', 'vet');
 define('PAGE_TITLE', 'Портал медицинских услуг в ');
 define('JUR_ADDRESS', 'Гамсоновский переулок, 2');
 define('JUR_ADDRESS_FULL', '115191, г.Москва, Гамсоновский переулок, д.2');
-define('CONTENT_DISEASE_URL', 'http://admin:21506@content.'.SITE_DOMAIN.'/media/xml/Test.xml');
+define('CONTENT_DISEASE_URL', 'https://admin:21506@content.'.SITE_DOMAIN.'/media/xml/Test.xml');
 
 
 define('DOCTOR', 'врач');

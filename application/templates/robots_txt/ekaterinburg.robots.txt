@@ -16,4 +16,4 @@ Disallow: /*?
 Disallow: /*booking*
 Disallow: /media/js/linkHidingIndexing.js
 Disallow: /disease
-Sitemap: http://ekaterinburg.lookmedbook.ru/sitemap.xml
+Sitemap: https://ekaterinburg.lookmedbook.ru/sitemap.xml

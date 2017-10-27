@@ -16,4 +16,4 @@ Disallow: /*?
 Disallow: /*booking*
 Disallow: /media/js/linkHidingIndexing.js
 Disallow: /disease
-Sitemap: http://omsk.lookmedbook.ru/sitemap.xml
+Sitemap: https://omsk.lookmedbook.ru/sitemap.xml

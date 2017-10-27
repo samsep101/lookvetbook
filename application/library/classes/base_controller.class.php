@@ -101,7 +101,7 @@
 			{
 				if(debug)
 				{
-					if(($_SERVER['HTTP_HOST'] != str_replace('http://','',SITE_URL)) && (!strpos($_SERVER['REQUEST_URI'], 'system')) && (!strpos($_SERVER['REQUEST_URI'], 'ajax') && (!strpos($_SERVER['REQUEST_URI'], 'popup')) && (!strpos($_SERVER['REQUEST_URI'], 'test')) && (!strpos($_SERVER['REQUEST_URI'], 'js/'))))
+					if(($_SERVER['HTTP_HOST'] != str_replace(SITE_SCHEME . '://','',SITE_URL)) && (!strpos($_SERVER['REQUEST_URI'], 'system')) && (!strpos($_SERVER['REQUEST_URI'], 'ajax') && (!strpos($_SERVER['REQUEST_URI'], 'popup')) && (!strpos($_SERVER['REQUEST_URI'], 'test')) && (!strpos($_SERVER['REQUEST_URI'], 'js/'))))
 					{
 						PhpHeaderHelper::status404();
 					}

@@ -36,7 +36,7 @@
 <link rel="stylesheet" href="/media/css/jquery-ui.min.css?<?php echo RELEASE__NUMBER?>" type="text/css"/>
 <!--[if lt IE 9]>
 <link rel="stylesheet" type="text/css" media="screen,projection" href="/media/css/for_ie.css?<?php echo RELEASE__NUMBER?>"/>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js?<?php echo RELEASE__NUMBER?>"></script>
+<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js?<?php echo RELEASE__NUMBER?>"></script>
 <![endif]-->
 <!--[if lte IE 9]>
 <link rel="stylesheet" type="text/css" media="screen,projection" href="/media/css/for_ie9.css?<?php echo RELEASE__NUMBER?>"/>
@@ -98,7 +98,7 @@
 <script type="text/javascript" src="/media/js/inputmask/jquery.inputmask.date.extensions.js?<?php echo RELEASE__NUMBER?>"></script>
 
 <?php if (isset($load_map) && $load_map): ?>
-    <script src="http://api-maps.yandex.ru/2.0/?load=package.full,package.clusters,package.overlays&lang=ru-RU"
+    <script src="https://api-maps.yandex.ru/2.0/?load=package.full,package.clusters,package.overlays&lang=ru-RU"
             type="text/javascript"></script>
     <script src="/media/js/geolacation-button.js?<?php echo RELEASE__NUMBER?>"></script>
 <?php endif; ?>

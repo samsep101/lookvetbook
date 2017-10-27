@@ -121,7 +121,7 @@ class DiseaseController extends BaseController
     $disease_specialties = ModelManagerFactory::getByName('specialty')->getMainListByDiseaseId($disease->getId());
 
     foreach ($disease_specialties AS $dsKey => $dsValue) {
-      $disease_specialties[$dsKey]->specialtyUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/doctor/' . $dsValue->alias;
+      $disease_specialties[$dsKey]->specialtyUrl = '//' . $_SERVER['HTTP_HOST'] . '/doctor/' . $dsValue->alias;
     }
 
     $this->view->disease_specialties = $disease_specialties;
@@ -197,7 +197,7 @@ class DiseaseController extends BaseController
 
     $disease_specialties = ModelManagerFactory::getByName('specialty')->getMainListByDiseaseId($disease->getId());
 
-    foreach ($disease_specialties AS $dsKey => $dsValue) $disease_specialties[$dsKey]->specialtyUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/doctor/' . $dsValue->alias;
+    foreach ($disease_specialties AS $dsKey => $dsValue) $disease_specialties[$dsKey]->specialtyUrl = '//' . $_SERVER['HTTP_HOST'] . '/doctor/' . $dsValue->alias;
 
     $this->view->disease_specialties = $disease_specialties;
 

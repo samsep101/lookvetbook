@@ -50,7 +50,7 @@ try {
     if (!$redirect_uri) {
       $redirect_uri = $_SERVER['REQUEST_URI'];
     }
-    RedirectManager::redirect301('http://' . $redirect_domen . $redirect_uri);
+    RedirectManager::redirect301(SITE_SCHEME . '://' . $redirect_domen . $redirect_uri);
   }
 
   $controller = new Dispatcher();

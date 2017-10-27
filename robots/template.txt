@@ -16,4 +16,4 @@ Disallow: /*?
 Disallow: /*booking*
 Disallow: /media/js/linkHidingIndexing.js
 Disallow: /disease
-Sitemap: http://{{domain}}/sitemap.xml
+Sitemap: https://{{domain}}/sitemap.xml

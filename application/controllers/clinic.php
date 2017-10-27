@@ -168,9 +168,9 @@ class ClinicController extends BaseController
             $query_string = '?' . $query_string;
           }
         }
-        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/clinic/' . $specialty->alias . $query_string;
+        $url = '//' . $_SERVER['HTTP_HOST'] . '/clinic/' . $specialty->alias . $query_string;
       } else {
-        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/clinic' . $query_string;
+        $url = '//' . $_SERVER['HTTP_HOST'] . '/clinic' . $query_string;
       }
 
       RedirectManager::redirect301($url);

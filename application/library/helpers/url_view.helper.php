@@ -2,7 +2,7 @@
     class UrlViewHelper {
         public static function getShortView($url)
         {
-            $url = str_replace('http://', '', $url);
+            $url = str_replace(SITE_SCHEME . '://', '', $url);
             $url = str_replace('www.','' , $url);
             $url = preg_replace('/\/$/', '', $url);
 
@@ -11,9 +11,9 @@
 
         public static function getLinkView($url)
         {
-            if (!preg_match('/^http/', $url))
+            if (!preg_match('/^' . SITE_SCHEME . '/', $url))
             {
-                return 'http://'.$url;
+                return SITE_SCHEME . '://'.$url;
             } else {
                 return $url;
             }

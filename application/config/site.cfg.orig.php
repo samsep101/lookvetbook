@@ -25,12 +25,6 @@ define('JUR_ADDRESS_FULL', '115191, г.Москва, Гамсоновский п
 define('CONTENT_DISEASE_URL', 'http://admin:21506@content.'.SITE_DOMAIN.'/media/xml/Test.xml');
 
 
-define('DOCTOR', 'врач');
-define('DOCTORA', 'врача');
-
-define('MEDICYNY', 'медицины');
-
-
 define('DOCTOR', 'ветеринар');
 define('DOCTORA', 'ветеринара');
 

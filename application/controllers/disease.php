@@ -131,7 +131,7 @@ class DiseaseController extends BaseController
       <название болезни> - $diseaseName
       <название болезни> - $diseaseName
       <перечисление по типу> - $diseaseTypes
-    
+
       Старый шаблон: $this->view->page_title = $disease->title.' - «'.SITE_NAME.''.SITE_NAME.'»'
     */
 

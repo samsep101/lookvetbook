@@ -116,9 +116,6 @@ $doctor_review = array(
                     'desc' => 'DESC'
                 ),
             ),
-            'where' => array(
-                'visit.status_id =' => 7
-            ),
         ),
         'edit' => array(
             'fields' => array(

@@ -180,9 +180,9 @@
         protected function getApiHost($RetryCount = 0)
         {
             if ($RetryCount % 2 == 0) {
-                return 'http://api.unisender.com/ru/api/';
+                return 'https://api.unisender.com/ru/api/';
             } else {
-                return 'http://www.api.unisender.com/ru/api/';
+                return 'https://www.api.unisender.com/ru/api/';
             }
         }
     }

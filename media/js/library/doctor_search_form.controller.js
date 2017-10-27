@@ -82,7 +82,7 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
         else {
             self.specialty_id = 29;
             self.specialty_alias = 'terapevt';
-            setCustomSelect('select[name="specialty_id"]', self.specialty_id);
+            setCustomSelect(self.container + ' select[name="specialty_id"]', self.specialty_id);
             self.loadPurposeOfVisitBlock();
         }
 
@@ -200,7 +200,7 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
 
     this.initElements = function () {
         if (self.specialty_id) {
-            setCustomSelect('select[name="specialty_id"]', self.specialty_id);
+            setCustomSelect(self.container + ' select[name="specialty_id"]', self.specialty_id);
             //self.loadPurposeOfVisitBlock(self.purpose_of_visit_id, false);
         }
 
@@ -274,7 +274,7 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
 
     this.attachEvents = function () {
 
-        $(this.container + ' select[name="specialty_id"]').change(function () {
+        $(self.container + ' select[name="specialty_id"]').change(function () {
 
             self.specialty_id = $(this).val();
             if ($(self.container + ' select[name="specialty_id"] option:selected').data('specialty_name') &&
@@ -300,9 +300,9 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
                 }
             }
 
-            $('select[name="specialty_id"] option').removeAttr('selected');
-            $('select[name="specialty_id"] option[value="' + self.specialty_id + '"]').attr('selected', true);
-            setCustomSelect('select[name="specialty_id"]', self.specialty_id);
+            $(self.container + ' select[name="specialty_id"] option').removeAttr('selected');
+            $(self.container + ' select[name="specialty_id"] option[value="' + self.specialty_id + '"]').attr('selected', true);
+            setCustomSelect(self.container + ' select[name="specialty_id"]', self.specialty_id);
             self.page = 1;
             //self.loadPurposeOfVisitBlock();
         });
@@ -472,12 +472,6 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
             $('.pad_tb .search_txt').show();
         }
 
-        var exists_cards = $('#our-doctors .info-card');
-        var exclude_doctor_ids = [];
-        exists_cards.each(function(){
-            exclude_doctor_ids.push($(this).attr('id').replace('doctor-big-card-',''));
-        });
-
         var data = {
             specialty_id:self.specialty_id,
             //purpose_of_visit_id:self.purpose_of_visit_id,
@@ -503,8 +497,7 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
             city_id : self.city_id,
             district_id : self.district_id,
             region_id : self.region_id,
-            street_id : self.street_id,
-            exclude_doctor_ids:exclude_doctor_ids
+            street_id : self.street_id
         };
 
         Ajax.Get('/doctor/ajaxSearch', data, function (data) {
@@ -686,16 +679,16 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
                 if (!value)
                     self.purpose_of_visit_id = 0;
                 else {
-                    $('select[name="purpose_of_visit_id"] option[value="' + value + '"]').attr('selected', 'selected');
-                    $('select[name="purpose_of_visit_id"]').trigger('liszt:updated');
+                    $(self.container + ' select[name="purpose_of_visit_id"] option[value="' + value + '"]').attr('selected', 'selected');
+                    $(self.container + ' select[name="purpose_of_visit_id"]').trigger('liszt:updated');
                 }
 
                 $(".chzn-select").chosen();
                 $(".chzn-select-deselect").chosen({allow_single_deselect: true});
-                setCustomSelect('select[name="specialty_id"]', self.specialty_id);
+                setCustomSelect(self.container + ' select[name="specialty_id"]', self.specialty_id);
 
                 if (open_form && this.mode == 'page')
-                    $('select[name="purpose_of_visit_id"]').trigger('liszt:open');
+                    $(self.container + 'select[name="purpose_of_visit_id"]').trigger('liszt:open');
             }
         });
     };
@@ -738,11 +731,11 @@ var DoctorSearchFormController = function (landing, already_registred_account, u
             {
                 $('#specialties_to_search_doctor').html(data.result.option);
 
-                $('select[name="specialty_id"]').trigger('liszt:updated');
+                $(self.container + ' select[name="specialty_id"]').trigger('liszt:updated');
                 setCustomSelect('#specialties_to_search_doctor', self.specialty_id);
-                $('select[name="purpose_of_visit_id"]').html('<option value=""></option>');
+                $(self.container + ' select[name="purpose_of_visit_id"]').html('<option value=""></option>');
 
-                $('select[name="purpose_of_visit_id"]').html('<option value=""></option>');
+                $(self.container + ' select[name="purpose_of_visit_id"]').html('<option value=""></option>');
                 self.loadPurposeOfVisitBlock();
             }
         });

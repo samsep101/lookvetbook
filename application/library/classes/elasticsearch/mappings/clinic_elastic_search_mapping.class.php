@@ -122,6 +122,9 @@
                 'twenty_four_hours' => array(
                     'type'           => 'boolean',
                 ),
+                'metro_station_id' => array(
+                    'type'           => 'integer',
+                ),
                 'have_ramp' => array(
                     'type'           => 'boolean',
                 )

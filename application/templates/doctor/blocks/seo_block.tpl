@@ -37,7 +37,7 @@
 
                 </div>
 
-                <?php if($adaThere && $addressDataArray['districtsBlock']) { ?>
+                <?php if($adaThere && !empty($addressDataArray['districtsBlock'])) { ?>
                     <div class="special-block links-block inner-2 specialties-block-modernize districtsBlock geoBlocks">
                         <?php echo $addressDataArray['districtsBlock']; ?>
                     </div>
@@ -50,7 +50,7 @@
 
                 </div>
 
-                <?php if($adaThere && count($addressDataArray['otherAddressData'])) { ?>
+                <?php if($adaThere && !empty($addressDataArray['otherAddressData'])) { ?>
                     <div class="special-block links-block inner-2 specialties-block-modernize otherAddressData geoBlocks">
                         <?php
                             foreach($addressDataArray['otherAddressData'] AS $oadKey => $oadValue)

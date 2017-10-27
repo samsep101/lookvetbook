@@ -24,7 +24,7 @@ var MapController = function () {
             window[initFunc] = function () {
                 self.init.call(self, container);
             };
-            $.getScript("http://api-maps.yandex.ru/2.0/?load=package.full,package.clusters,package.overlays" +
+            $.getScript("https://api-maps.yandex.ru/2.0/?load=package.full,package.clusters,package.overlays" +
                 "&lang=ru-RU&onload=" + encodeURIComponent(initFunc));
 
             return;

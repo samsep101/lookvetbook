@@ -12,7 +12,7 @@
         $(".inputPhone").mask("+7 (999) 999-99-99");
     });
 </script>
-<script src='http://www.google.com/recaptcha/api.js?render=explicit&onload=initializeGrecaptcha' async defer></script>
+<script src='https://www.google.com/recaptcha/api.js?render=explicit&onload=initializeGrecaptcha' async defer></script>
 <div id="record_form_container" style="display:none">
     <form action="/ajax/recordToTheVisit" method="POST" class="recordPopupForm linkMapper" rel=".recordFormResult" onComplete="recordComplete()" onsubmit="if (!$(this).find('input[name=full_name]').val() || !$(this).find('input[name=phone]').val()){alert('Вы не заполнили поля имя или телефон'); $(this).find('.doSubmit').val('false');}else{$(this).find('.doSubmit').val('');}">
     <div class="booking record-to-the-doctor-popup" style="display:block">

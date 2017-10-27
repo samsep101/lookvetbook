@@ -16,9 +16,9 @@
                     <?php endif; ?>
                 </section>
                 <ul class="inner-top-socials">
-                    <li class="socials-vkontakte"><a class="jsLinkHidingIndexing" data-link="http://vk.com/lookmedbook" target="_blank"></a></li>
-                    <li class="socials-odnoklassniki"><a class="jsLinkHidingIndexing" data-link="http://odnoklassniki.ru/group/52035885072448" target="_blank"></a></li>
-                    <li class="socials-facebook"><a class="jsLinkHidingIndexing" data-link="http://www.facebook.com/LookMedBook" target="_blank"></a></li>
+                    <li class="socials-vkontakte"><a class="jsLinkHidingIndexing" data-link="//vk.com/lookmedbook" target="_blank"></a></li>
+                    <li class="socials-odnoklassniki"><a class="jsLinkHidingIndexing" data-link="//odnoklassniki.ru/group/52035885072448" target="_blank"></a></li>
+                    <li class="socials-facebook"><a class="jsLinkHidingIndexing" data-link="//www.facebook.com/LookMedBook" target="_blank"></a></li>
                 </ul>
             </div>
             <div class="footer-inner-bottom">

@@ -38,7 +38,7 @@ class ElasticSearchIndexControl implements IElasticSearchIndexControl
     $index = $this->getIndex($index_name);
     $index->create(array(
       'number_of_shards'   => 4,
-      'number_of_replicas' => 1,
+      'number_of_replicas' => 0,
       'analysis'           => array(
         'analyzer' => array(
           'indexAnalyzer'  => array(

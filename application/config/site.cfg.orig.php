@@ -12,9 +12,11 @@ define('ADMIN_FOLDER', '/admin');
 define('MANAGE_FOLDER', '/registry/manage');
 define('REGISTRY_FOLDER', '/registry');
 
-// todo написать функцию, которая будет возвращать протокол
-define('SITE_SCHEME', 'https');
-
+if (isset($_SERVER['HTTP_X_SCHEME']) && $_SERVER['HTTP_X_SCHEME'] == 'https') {
+    define('SITE_SCHEME', 'https');
+} else {
+    define('SITE_SCHEME', 'http');
+}
 define('SITE_URL', SITE_SCHEME . "://lookmedbook.ru");
 define('SITE_DOMAIN', "lookmedbook.ru");
 define('SITE_NAME', "LookMedBook");

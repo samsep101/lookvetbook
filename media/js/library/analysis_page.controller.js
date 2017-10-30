@@ -193,9 +193,9 @@ var AnalysisPageController = function(){
         self.setCityId(city_info.city_id);
 
         if (city_info.city_alias && (city_info.city_alias != 'moskva'))
-            window.location = 'http://'+city_info.city_alias + '.'+SessionInfo.domain+'/analysis';
+            window.location = '//'+city_info.city_alias + '.'+SessionInfo.domain+'/analysis';
         else if(city_info.city_alias == 'moskva')
-            window.location = 'http://'+SessionInfo.domain+'/analysis';
+            window.location = '//'+SessionInfo.domain+'/analysis';
     };
 
     this.setCityId = function(city_id){

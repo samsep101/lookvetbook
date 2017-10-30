@@ -86,7 +86,7 @@ class YandexContentGenerator
                 $error = null;
                 $original = self::generateOriginalText($disease);
 
-                $url = 'http://webmaster.yandex.ru/api/v2/hosts/'.$host.'/original-texts/';
+                $url = 'https://webmaster.yandex.ru/api/v2/hosts/'.$host.'/original-texts/';
                 $header = array('Authorization: OAuth '.$token, "Content-length: ".strlen(urlencode($original)));
 
                 $result = CurlRequestSender::post($url, urlencode($original), $header);

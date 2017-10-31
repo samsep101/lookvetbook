@@ -154,9 +154,9 @@ var ClinicSearchFormController = function (landing, already_registred_account, u
         self.setCityId(city_info.city_id);
 
         if (city_info.city_alias && (city_info.city_alias != 'moskva'))
-            window.location = 'http://'+city_info.city_alias + '.'+SessionInfo.domain + '/clinic' + self.buildUrl();
+            window.location = '//'+city_info.city_alias + '.'+SessionInfo.domain + '/clinic' + self.buildUrl();
         else if(city_info.city_alias == 'moskva')
-            window.location = 'http://'+SessionInfo.domain+'/clinic' + self.buildUrl();
+            window.location = '//'+SessionInfo.domain+'/clinic' + self.buildUrl();
     };
 
     this.setBlockMode = function () {

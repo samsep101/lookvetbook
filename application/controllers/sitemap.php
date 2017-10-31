@@ -129,20 +129,19 @@ class sitemapController extends BaseController
         $this->view->specialty_name = null;
         if ($specialities) {
             foreach($specialities as $s) {
+                $doctorsList=array();
                 $doctor_search_params->specialty_id=$s->id;
                 if ($specialty==$s->alias) {
                     $this->view->specialty_id=$s->id;
                     $this->view->specialty_name=$s->name;
-                }
-                $doctors = $doctor_search_algorithm->search($doctor_search_params);
-                $doctorsList=array();
-                foreach($doctors as $doc) {
-                    if ($doc->last_name!='' && $doc->first_name!='' && $doc->second_name!='') {
-                    $doctorsList[]=array('name'=>$doc->last_name.' '.$doc->first_name.' '.$doc->second_name,'alias'=>$doc->alias);
+                    $doctors = $doctor_search_algorithm->search($doctor_search_params);
+                    foreach($doctors as $doc) {
+                        if ($doc->last_name!='' && $doc->first_name!='' && $doc->second_name!='') {
+                            $doctorsList[]=array('name'=>$doc->last_name.' '.$doc->first_name.' '.$doc->second_name,'alias'=>$doc->alias);
+                        }
                     }
+                    asort($doctorsList);
                 }
-                asort($doctorsList);
-                //if (count($doctorsList)>0)
                 $specialitiesList[$s->id]=array('name'=>$s->name,'alias'=>$s->alias,'doctors'=>$doctorsList);
             }
             //asort($streetsList);
@@ -252,9 +251,9 @@ class sitemapController extends BaseController
             foreach ($specializations as $s) {
                 $clinic_search_params->specialization_id=$specializationManager->getOneByName ($s->name)->getId();
                 $clinicsList=array();
-                
-                $clinics = $clinic_search_algorithm->search($clinic_search_params);
+
                 if ($specialization==$s->alias) {
+                    $clinics = $clinic_search_algorithm->search($clinic_search_params);
                     $this->view->specialization=$specialization;
                     $this->view->specialization_name=$s->name;
                     //print_r($clinic_search_params);

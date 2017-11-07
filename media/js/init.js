@@ -945,7 +945,7 @@ function send(src){
     if ((location.href.indexOf('mngcgi')!=-1)||(!src)){
         return false;
     }
-    src='https:'== (document.location.protocol ? 'https:' : 'http:') + src;
+    src= ('https:'== document.location.protocol ? 'https:' : 'http:') + src;
     src+='&tail256='+escape(document.referrer?document.referrer:'unknown');
     src=src.split('![rnd]').join(Math.round(Math.random()*1000000000));
     var d=document,b=d.body;

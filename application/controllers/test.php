@@ -218,7 +218,7 @@
             }
 
             //$s = '';
-            $compiler = new Closure\RemoteCompiler();
+            $compiler = new ExtendedRemoteCompilerHelper();
             foreach ($js_file_list as $fname){
                 //$s .= file_get_contents($js_library_folder.'/'.$fname).PHP_EOL;
                 $compiler->addLocalFile($js_library_folder.'/'.$fname);

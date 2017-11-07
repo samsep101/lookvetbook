@@ -126,8 +126,8 @@
 //            }
 
 //            if(empty($specialty) || empty($specialty)) {
-            $last_params       = $_SESSION['last_search_params'];
-            $search_params_key = $_SESSION['last_search_params']->search_params_key;
+            $last_params       = isset($_SESSION['last_search_params']) ? $_SESSION['last_search_params'] : null;
+            $search_params_key = isset($_SESSION['last_search_params']) ? $_SESSION['last_search_params']->search_params_key : null;
             $specialty         = $specialty_manager->getOneByIdOrAlias($last_params->specialty_id);
 //            }
 

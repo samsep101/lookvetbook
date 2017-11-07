@@ -14,6 +14,8 @@ define('REGISTRY_FOLDER', '/registry');
 
 if (isset($_SERVER['HTTP_X_SCHEME']) && $_SERVER['HTTP_X_SCHEME'] == 'https') {
     define('SITE_SCHEME', 'https');
+} elseif (php_sapi_name() === 'cli') {
+    define('SITE_SCHEME', 'https');
 } else {
     define('SITE_SCHEME', 'http');
 }

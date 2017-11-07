@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 $(document).ready(function(){$(".show_input").on("click",function(){$(this).hide();$(this).parent(".search-by-name ").find(".txt").show()});$(".show_inp").on("click",function(){$(this).hide();$(this).parents(".search-by-name").find(".search_txt").show()});$(".left_search .radioBox, .left_search .chekBox").on("click",function(){$(this).parents(".in_colapse").find(".txt").hide();$(this).parents(".in_colapse").find(".show_input").show()});$(".search-form .tabs").each(function(){$(this).find("li").each(function(a){$(this).click(function(){$(this).addClass("active").siblings().removeClass("active").parents(".search-form").find(".section").eq(a).fadeIn(0).siblings(".section").hide()})})});
 navigator.appName.indexOf("Explorer")+1&&9>=parseInt($.browser.version,10)&&$("*[placeholder]").placeholder();$(".good_info .left_nav").each(function(){$(this).find("li").first().addClass("active");$(this).find("li").each(function(a){$(this).click(function(){$(this).addClass("active").siblings().removeClass("active").parents(".good_info").find(".goods_txt").eq(a).css("display","table-cell").siblings(".goods_txt").hide()})})});$(".showhide").live("click",function(){$(this).parents(".orders_claster").hasClass("active")?
 $(this).parents(".orders_claster").removeClass("active").next(".showhide_block").hide(200):($(this).parents(".orders_claster").addClass("active"),$(this).parents(".bg_gradient").children(".showhide_block").show(200))});$(".orders_claster").eq(0).find(".showhide").trigger("click");$(".cab-cont .chzn-select, .inner-2 .chzn-select").chosen();$(".cab-cont .chzn-select-deselect, .inner-2 .chzn-select").chosen({allow_single_deselect:!0});$(".illness-nav .nav li:last").addClass("last");$(".illness-nav .sub-nav li:first").addClass("first");
@@ -242,3 +243,4304 @@ $("body").removeClass("fancybox-lock");null!=a.close_callback&&a.close_callback(
 $(".fancybox-wrap").css("left",($(window).width()-$(".fancybox-wrap").width())/2):$(".fancybox-wrap").css("left",20)}},NewClass=function(){};Popup.locks=0;
 var PopupMessage=function(){var a=this;this.popup=this.close_callback=null;this.show=function(b){a.popup=new Popup;a.popup.close_callback=a.close_callback;a.popup.show('<div style="padding: 50px; font-size: 25px">'+b+"</div>")};this.setCloseCallback=function(b){a.popup.close_callback=b}};
 var SimpleTimer=function(b,c){var a=this;this.value=this.time=b;this.callback=c;this.run=1;setInterval(function(){1==a.run&&(a.value-=100,0>=a.value&&(a.callback(),a.run=0))},100);this.reset=function(){a.run=1;a.value=a.time};this.stop=function(){this.run=0}};
+=======
+$(document).ready(function () {
+    $(".show_input").on("click", function () {
+        $(this).hide();
+        $(this).parent(".search-by-name ").find(".txt").show()
+    });
+    $(".show_inp").on("click", function () {
+        $(this).hide();
+        $(this).parents(".search-by-name").find(".search_txt").show()
+    });
+    $(".left_search .radioBox, .left_search .chekBox").on("click", function () {
+        $(this).parents(".in_colapse").find(".txt").hide();
+        $(this).parents(".in_colapse").find(".show_input").show()
+    });
+    $(".search-form .tabs").each(function () {
+        $(this).find("li").each(function (a) {
+            $(this).click(function () {
+                $(this).addClass("active").siblings().removeClass("active").parents(".search-form").find(".section").eq(a).fadeIn(0).siblings(".section").hide()
+            })
+        })
+    });
+    navigator.appName.indexOf("Explorer") + 1 && 9 >= parseInt($.browser.version, 10) && $("*[placeholder]").placeholder();
+    $(".good_info .left_nav").each(function () {
+        $(this).find("li").first().addClass("active");
+        $(this).find("li").each(function (a) {
+            $(this).click(function () {
+                $(this).addClass("active").siblings().removeClass("active").parents(".good_info").find(".goods_txt").eq(a).css("display", "table-cell").siblings(".goods_txt").hide()
+            })
+        })
+    });
+    $(".showhide").live("click", function () {
+        $(this).parents(".orders_claster").hasClass("active") ? $(this).parents(".orders_claster").removeClass("active").next(".showhide_block").hide(200) : ($(this).parents(".orders_claster").addClass("active"),
+                $(this).parents(".bg_gradient").children(".showhide_block").show(200))
+    });
+    $(".orders_claster").eq(0).find(".showhide").trigger("click");
+    $(".cab-cont .chzn-select, .inner-2 .chzn-select").chosen();
+    $(".cab-cont .chzn-select-deselect, .inner-2 .chzn-select").chosen({
+        allow_single_deselect: !0
+    });
+    $(".illness-nav .nav li:last").addClass("last");
+    $(".illness-nav .sub-nav li:first").addClass("first");
+    $(".illness-nav .sub-nav li:last").addClass("last");
+    $(".wrap").click(function () {
+        $(".search-info .drop-menu, .quick-search .drop-menu, .search-block .drop-menu").slideUp()
+    });
+    $(".quick-search .drop-menu li").click(function () {
+        var a = $(this).html();
+        $(".quick-search-input").val(a)
+    });
+    $(".quick-search-block .drop-menu li").click(function () {
+        var a = $(this).html();
+        $(".quick-search-block .txt").val(a)
+    });
+    $(".search-block .drop-menu li").click(function () {
+        var a = $(this).html();
+        $(".search-block .txt").val(a)
+    });
+    $(".gender span").click(function () {
+        $(this).toggleClass("selected")
+    });
+    $(".about-form .gender span").click(function () {
+        $(".about-form .gender span").removeClass("selected");
+        $(this).toggleClass("selected")
+    });
+    $(".clinic-landing .btn-find-doctor-2, .clinic-landing .comments-count a, .doctor-landing .comments-count, .like_service_ul, .landing-header-links a, .order-link").on("click", function (a) {
+        a.preventDefault();
+        a = $(this).attr("href");
+        a = $(a).offset().top - $().height();
+        $("html, body").animate({
+            scrollTop: a
+        }, 1E3)
+    });
+    $(".other-links li span").click(function () {
+        $(this).parent().children(".drop-box").slideToggle(200);
+        $(this).toggleClass("collapsed")
+    });
+    $(".help-list .help-target").click(function (a) {
+        a.preventDefault();
+        $(this).parent().children(".drop").slideToggle(200);
+        $(this).toggleClass("collapsed")
+    });
+    $(".help-page .sub-menu li").click(function () {
+        $(".help-page .sub-menu li").removeClass("active");
+        $(this).addClass("active")
+    });
+    $(".rating-block-clinics").hide();
+    $(".search-form .tab-clinics").click(function () {
+        $(".rating-block-clinics").show();
+        $(".rating-block-doctors").hide()
+    });
+    $(".search-form .tab-doctors").click(function () {
+        $(".rating-block-clinics").hide();
+        $(".rating-block-doctors").show()
+    });
+    $(".for-whom-clinic .radioBox").click(function () {
+        $(this).hasClass("disable") || ($(".for-whom-clinic .radioBox").removeClass("act").find("input[type=hidden]").val(0),
+                $(this).addClass("act"),
+                $(this).children("span").find("input[type=hidden]").val(1))
+    });
+    $(".colright .radioBox").click(function () {
+        $(".colright").find(".act").removeClass("act");
+        $(this).addClass("act");
+        $(".colright .radioBox").find("input[type=hidden]").val(0);
+        $(this).children("span").find("input[type=hidden]").val(1)
+    });
+    $(".inner .colleft  .radioBox, .inner-2 .colleft  .radioBox").click(function () {
+        $(this).hasClass("disable") || ($(".colleft").find(".act").removeClass("act"),
+                $(this).addClass("act"),
+                $(".colleft .radioBox").find("input[type=hidden]").val(0),
+                $(this).find("input[type=hidden]").val(1))
+    });
+    $(".chekBox-allTime").click(function () {
+        $(this).toggleClass("act")
+    });
+    $(document).on("click", ".chekBox", function (a) {
+        $(this).data("disabled") || ($(this).toggleClass("act"),
+                $(this).parent().find(".search-param-icon").toggleClass("act"),
+                $(this).hasClass("act") ? ($('input[name="form[fact_address]"]').val($('input[name="form[legal_address]"]').val()),
+                $(this).find('input[type="hidden"]').val(1)) : $(this).find('input[type="hidden"]').val(0),
+                a.preventDefault())
+    });
+    $(".choose-section .chekBox-allTime").click(function () {
+        $(".choose-section .chekBox").removeClass("act");
+        $(this).addClass("act");
+        $(".choose-section .first-label .radioBox").addClass("act");
+        $(".choose-section .first-label .radioBox").find("input[type=hidden]").val(1)
+    });
+    $(".choose-section .chekBox").click(function () {
+        $(".choose-section .chekBox-allTime").removeClass("act");
+        $(".choose-section .second-label .radioBox").removeClass("act");
+        $(".choose-section .second-label .radioBox").find("input[type=hidden]").val(0);
+        $(".choose-section .first-label .radioBox").addClass("act");
+        $(".choose-section .first-label .radioBox").find("input[type=hidden]").val(1);
+        $(".choose-section .chekBox-allTime").find("input[type=hidden]").val(0);
+        $(".choose-section .radio").toggleClass("act");
+        $(this).hasClass("act") ? $(this).find("input[type=hidden]").val(1) : $(this).find("input[type=hidden]").val(0)
+    });
+    $(".booking .chekBox, .reg-popup .chekBox, .settings .chekBox").click(function () {
+        0 == $(this).find("input[type=hidden]").val() ? $(this).find("input[type=hidden]").val(1) : $(this).find("input[type=hidden]").val(0)
+    });
+    $(".settings .sms-chk").click(function () {
+        $(this).hasClass("act") ? $(".options-mobile").fadeIn() : $(".options-mobile").fadeOut()
+    });
+    $(".choose-section .chekBox-allTime").click(function () {
+        $(this).hasClass("act") ? $(this).find("input[type=hidden]").val(1) : $(this).find("input[type=hidden]").val(0);
+        $(".choose-section .second-label .radioBox").removeClass("act");
+        $(".choose-section .second-label .radioBox").find("input[type=hidden]").val(0)
+    });
+    $(".inner .choose-section .second-label, .inner-2 .choose-section .second-label").click(function () {
+        $(".choose-section .chekBox, .choose-section .chekBox-allTime").removeClass("act")
+    });
+    $(".choose-section .first-label, .choose-section .chekBox-allTime").click(function () {
+        $(".choose-section .chekBox-allTime").find("input[type=hidden]").val(1)
+    });
+    $(".choose-section .first-label").click(function () {
+        $(".choose-section .chekBox-allTime").addClass("act")
+    });
+    297 > $(".full-width .info-col .about-cont").height() && ($(".full-width .col-about .more-link").hide(),
+            $(".full-width .col-about-doctor .more-link").hide());
+    $(".full-width .info-col .more-link").click(function () {
+        $(this).hide();
+        $(this).parent().children("ul, .about-cont").addClass("expand")
+    });
+    $(function () {
+        $(".reg-link").fancybox({
+            padding: 0,
+            beforeShow: function () {
+                $(".scroll-pane").jScrollPane()
+            },
+            afterLoad: function () {
+                $("#registration-form").validate({
+                    wrapper: "span",
+                    rules: {
+                        password: {
+                            required: !0
+                        },
+                        repeat_password: {
+                            required: !0,
+                            equalTo: "#password"
+                        }
+                    }
+                });
+                $("#registration-form2").validate({
+                    wrapper: "span",
+                    rules: {
+                        password: {
+                            required: !0
+                        },
+                        repeat_password: {
+                            required: !0,
+                            equalTo: "#password"
+                        }
+                    }
+                })
+            }
+        })
+    });
+    $(function () {
+        $("#recovery-password").validate({
+            wrapper: "span"
+        });
+        $("#forgotpass-form").validate({
+            wrapper: "span"
+        });
+        $("#authorization-form").validate({
+            wrapper: "span",
+            rules: {
+                password: {
+                    required: !0
+                }
+            }
+        });
+        $("#authorization-form2").validate({
+            wrapper: "span",
+            rules: {
+                password: {
+                    required: !0
+                }
+            }
+        })
+    });
+    $("input.password-field").focus(function () {
+        this.setAttribute("type", "password")
+    });
+    $(function () {
+        $(".list-item ul").css("height", 100).css("overflow", "hidden");
+        $(".list-item a.adjust").text("\u0415\u0449\u0435 \u0437\u0430\u0431\u043e\u043b\u0435\u0432\u0430\u043d\u0438\u044f");
+        $(".list-item .adjust").toggle(function () {
+            $(this).parent().children(".list-item ul").css("height", "auto").css("overflow", "visible");
+            $(this).text("\u0421\u043a\u0440\u044b\u0442\u044c")
+        }, function () {
+            $(this).parent().children(".list-item ul").css("height", 100).css("overflow", "hidden");
+            $(this).text("\u0415\u0449\u0435 \u0437\u0430\u0431\u043e\u043b\u0435\u0432\u0430\u043d\u0438\u044f")
+        })
+    });
+    $(".stage .map-corn").click(function () {
+        $(".nav .tab-map").addClass("ui-state-active");
+        $(".nav .tab-foto").removeClass("ui-state-active");
+        $("#tabs-1").hide();
+        $("#tabs-2").show()
+    });
+    $(".nav .tab-foto").click(function () {
+        $(this).addClass("ui-state-active");
+        $(".nav .tab-map").removeClass("ui-state-active");
+        $("#tabs-2").hide();
+        $("#tabs-1").show()
+    });
+    $("#map").click(function (a) {
+        $(a.target).closest(".map-card-block, .ymaps-point-overlay div").length || ($(".map-card-block").fadeOut("slow"),
+                a.stopPropagation())
+    });
+    $(document).on("click", ".radio-label-container .radioBox span", function () {
+        $(this).parent().parent().parent().find(".act").removeClass("act");
+        $(this).parent().addClass("act");
+        $(this).parent().parent().parent().find("input[type=hidden]").val(0);
+        $(this).parent().find("input[type=hidden]").val(1)
+    });
+    $(".second-opinion-block .close").click(function () {
+        $(".second-opinion-block .close").css("display", "none");
+        $(".second-opinion-1").hide(300);
+        $(".second-opinion-2").show(300);
+        Ajax.Post("/ajax/changeBannerVisibility", {
+            key: "isSecondOpinionVisible",
+            value: 0
+        })
+    });
+    $(".banner-treatment-in-switz .close").click(function () {
+        $(".banner-treatment-in-switz .close").css("display", "none");
+        $(".banner-treatment-in-switz-link").hide();
+        $(".banner-treatment-in-switz-open").show();
+        $(".banner-treatment-in-switz").addClass("small-banner-visible");
+        Ajax.Post("/ajax/changeBannerVisibility", {
+            key: "isTreatmentInSwitzVisible",
+            value: 0
+        })
+    });
+    $(".second-opinion-block .open").click(function () {
+        $(".second-opinion-block .close").css("display", "block");
+        $(".second-opinion-2").hide(300);
+        $(".second-opinion-1").show(300);
+        Ajax.Post("/ajax/changeBannerVisibility", {
+            key: "isSecondOpinionVisible",
+            value: 1
+        })
+    });
+    $(".banner-treatment-in-switz-open").click(function () {
+        $(".banner-treatment-in-switz .close").css("display", "block");
+        $(".banner-treatment-in-switz-open").hide();
+        $(".banner-treatment-in-switz-link").show();
+        $(".banner-treatment-in-switz").removeClass("small-banner-visible");
+        Ajax.Post("/ajax/changeBannerVisibility", {
+            key: "isTreatmentInSwitzVisible",
+            value: 1
+        })
+    });
+    self.send_discount_request = !0;
+    $('.form-discount input[type="text"]').val("");
+    $('input[name="discount_phone_number"]').inputmask("+7-999-999-99-99");
+    $(".btn-discount").click(function () {
+        self.send_discount_request && (self.send_discount_request = !1,
+                self.phone = $('.form-discount input[name="discount_phone_number"]').val(),
+                Ajax.Post("/ajax/addCallToUser", {
+                    name: "\u0417\u0430\u043f\u0440\u043e\u0441 \u043d\u0430 \u0441\u043a\u0438\u0434\u043a\u0443",
+                    phone: self.phone
+                }, function (a) {
+                    0 == a.status ? ($(".form-discount-step-1").css("display", "none"),
+                            $('.form-discount input[type="text"]').val(""),
+                            $(".form-discount-step-2").css("display", "block"),
+                            setTimeout(function () {
+                                self.send_discount_request = !0;
+                                $(".discount").fadeOut(500)
+                            }, 8E3)) : ($(".btn-discount").parent().find('input[type="text"]').focus(),
+                            self.send_discount_request = !0)
+                }))
+    });
+    $(".discount-close").click(function () {
+        $(".discount-close").css("display", "none");
+        $(".discount-open .btn-open").css("display", "inline");
+        $(".form-discount").hide(200);
+        Ajax.Post("/ajax/changeBannerVisibility", {
+            key: "isDiscountVisible",
+            value: 0
+        })
+    });
+    $(".discount-open").click(function () {
+        $(".form-discount-step-1").show(200, function () {
+            $(".discount-open .btn-open").css("display", "none");
+            $(".discount-close").css("display", "block")
+        });
+        Ajax.Post("/ajax/changeBannerVisibility", {
+            key: "isDiscountVisible",
+            value: 1
+        })
+    })
+});
+var ctx = null, gl_control;
+function extend(a, b) {
+    var c = function () {};
+    c.prototype = b.prototype;
+    a.prototype = new c;
+    a.prototype.constructor = a;
+    a.superclass = b.prototype
+}
+YController = function (a, b) {
+    this.map = null;
+    this.model = a;
+    this.maxZoom = 22;
+    this.logger = a.logger;
+    this.projection = null;
+    this.initMap(b);
+    this.searchControl = null;
+    this.hide_balloon = !0
+}
+;
+YController.prototype.getMap = function () {
+    return this.map
+}
+;
+YController.prototype.getSearchControl = function () {
+    return this.searchControl
+}
+;
+YController.prototype.initMap = function (a) {
+    if (window.ymaps)
+        this.projection = CityMap.Projection(CityMap.Projection.wgs84Mercator),
+                b = this,
+                ymaps.ready(function () {
+                    ymaps.load(["pane.movable.StepwisePane", "geometry.pixel.Point", "overlay.staticGraphics.Placemark", "layer.tileContainer.DomContainer"], function () {
+                        b.map = new ymaps.Map(b.model.container.id, {
+                            behaviors: ["default", "drag", "multiTouch"],
+                            center: [a.center.lat, a.center.lng],
+                            type: "yandex#map",
+                            zoom: a.zoom
+                        });
+                        window.map = b.map;
+                        b.map.container.fitToViewport();
+                        null == a.bounds && (a.bounds = [[56.349122, 36.589145], [54.945227, 39.648837]]);
+                        b.searchControl = new ymaps.control.SearchControl({
+                            provider: "yandex#map",
+                            boundedBy: a.bounds,
+                            strictBounds: !0,
+                            resultsPerPage: 5,
+                            noPlacemark: !0,
+                            width: 400
+                        });
+                        b.map.behaviors.disable("multiTouch");
+                        b.map.controls.add("zoomControl");
+                        b.logger.end("mapLoadTime");
+                        b.balloon = b._getBalloon();
+                        ymaps.layout.storage.add("my#placemark", ymaps.templateLayoutFactory.createClass('<div style="background: url($[properties.icon.src]) -$[properties.icon.origin.x]px -$[properties.icon.origin.y]px no-repeat;position: relative;width: $[properties.icon.size.width]px; height: $[properties.icon.size.height]px;left: -$[properties.icon.anchor.x]px;top: -$[properties.icon.anchor.y]px;"></div>', {}));
+                        ymaps.layout.storage.add("my#shadow", ymaps.templateLayoutFactory.createClass('<div style="background: url($[properties.icon.src]) -$[properties.icon.shadow.origin.x]px -$[properties.icon.shadow.origin.y]px no-repeat;position: relative;width: $[properties.icon.shadow.size.width]px; height: $[properties.icon.shadow.size.height]px;left: -$[properties.icon.shadow.anchor.x]px;top: -$[properties.icon.shadow.anchor.y]px;"></div>', {}));
+                        ymaps.layout.storage.add("my#markerlayout", ymaps.templateLayoutFactory.createClass("<b>$[title]</b>"));
+                        ymaps.layout.storage.add("my#grouplayout", ymaps.templateLayoutFactory.createClass("<p><b>$[title]</b></p>\u041e\u0431\u044a\u0435\u043a\u0442\u043e\u0432: $[count]"));
+                        ymaps.layout.storage.add("my#clusterlayout", ymaps.templateLayoutFactory.createClass("<b>\u041e\u0431\u044a\u0435\u043a\u0442\u043e\u0432: $[count]</b>"));
+                        if (function_exists("GeolocationButton")) {
+                            var c = new GeolocationButton({
+                                data: {
+                                    image: "/media/images/wifi.png",
+                                    title: "\u041e\u043f\u0440\u0435\u0434\u0435\u043b\u0438\u0442\u044c \u043c\u0435\u0441\u0442\u043e\u043f\u043e\u043b\u043e\u0436\u0435\u043d\u0438\u0435"
+                                },
+                                geolocationOptions: {
+                                    enableHighAccuracy: !0
+                                }
+                            }, {
+                                selectOnClick: !1
+                            });
+                            b.map.controls.add(c, {
+                                top: 40,
+                                left: 5
+                            })
+                        }
+                    })
+                });
+    else {
+        var b = this;
+        this.logger.start("mapLoadTime");
+        initFunc = "_citymap" + Math.round(1E3 * Math.random());
+        window[initFunc] = function () {
+            ymaps.load(["pane.movable.StepwisePane", "geometry.pixel.Point", "overlay.staticGraphics.Placemark", "layer.tileContainer.DomContainer"], function () {
+                b.initMap.call(b, a)
+            })
+        }
+        ;
+        $.getScript("https://task_mapi-maps.yandex.ru/2.0/?load=package.full,package.clusters,package.overlays&lang=ru-RU&onload=" + encodeURIComponent(initFunc))
+    }
+}
+;
+YController.prototype._getBalloon = function () {
+    return new function (a) {
+        var b = this;
+        this.open = function (c, d, f) {
+            null == ymaps.layout.storage.get(d) && ymaps.layout.storage.add(d, ymaps.templateLayoutFactory.createClass($(d).html(), {
+                build: function () {
+                    this.constructor.superclass.build.call(this);
+                    a.model.balloon.build(this.getParentElement())
+                },
+                clear: function () {
+                    this.constructor.superclass.clear.call(this);
+                    a.model.balloon.clear(this.getParentElement())
+                }
+            }));
+            var g = [parseFloat(c.lat), parseFloat(c.lng)];
+            balloonLayout = ymaps.templateLayoutFactory.createClass($(d).html(), {
+                build: function () {
+                    balloonLayout.superclass.build.call(this);
+                    a.model.balloon.build(this.getParentElement());
+                    var b = window.map
+                            , d = $(this.getParentElement());
+                    d.find(".corn-top").each(function () {
+                        var a = b.getZoom()
+                                , c = d.find(".map-card-block").width()
+                                , f = d.find(".map-card-block").height()
+                                , q = b.options.get("projection")
+                                , m = q.toGlobalPixels(g, a)
+                                , p = b.getGlobalPixelCenter()
+                                , c = [[m[0] - Math.round(c / 4), m[1] + f + 50], [m[0] + Math.round(c / 1.2), m[1] - 0]]
+                                , f = b.getBounds()
+                                , f = [q.toGlobalPixels(f[0], a), q.toGlobalPixels(f[1], a)]
+                                , m = [0, 0];
+                        c[0][0] < f[0][0] ? m[0] = c[0][0] - f[0][0] - 20 : c[1][0] > f[1][0] && (m[0] = c[1][0] - f[1][0] + 40);
+                        c[0][1] > f[0][1] ? m[1] = c[0][1] - f[0][1] + 40 : c[1][1] < f[1][1] && (m[1] = c[1][1] - f[1][1] - 20);
+                        if (m[0] || m[1])
+                            p[0] += m[0],
+                                    p[1] += m[1],
+                                    b.panTo(q.fromGlobalPixels(p, a), {
+                                        delay: 0,
+                                        duration: 600
+                                    })
+                    }).on("click", ".ymaps-b-balloon__close", function () {
+                        b.balloon.close()
+                    })
+                },
+                clear: function () {
+                    this.constructor.superclass.clear.call(this);
+                    a.model.balloon.clear(this.getParentElement());
+                    $(".partner-balloon").off();
+                    balloonLayout.superclass.clear.call(this)
+                }
+            });
+            c = a.map.balloon.open(g, f, {
+                layout: balloonLayout,
+                shadow: !1,
+                autoPan: !1,
+                autoPanMargin: 30
+            });
+            this.hide_balloon && (void 0 == window.timer ? window.timer = new SimpleTimer(2E3, function () {
+                b.close()
+            }
+            ) : window.timer.reset(),
+                    c.events.add("mouseenter", function () {
+                        window.timer.stop()
+                    }),
+                    c.events.add("mouseleave", function () {
+                        window.timer.reset()
+                    }))
+        }
+        ;
+        this.close = function () {
+            a.map.balloon.close()
+        }
+    }
+    (this)
+}
+;
+YController.prototype.initialize = function () {
+    var a = this;
+    this.map.events.add("typechange", function (b) {
+        a.map.zoomRange.get(a.map.getCenter()).then(function (b) {
+            a.map.getZoom() > b[1] && a.map.setZoom(b[1])
+        })
+    })
+}
+;
+YController.prototype.createHover = function () {
+    var a = this;
+    this._hover = new ymaps.Placemark([], {}, {
+        visible: !1,
+        iconLayout: "my#placemark",
+        iconShadowLayout: "my#shadow"
+    });
+    this.map.geoObjects.add(this._hover);
+    this._hover.events.add("click", function (b) {
+        b.stopImmediatePropagation();
+        a.model.markerEvent.call(a.model, "click")
+    });
+    this.map.events.add("mouseleave", function (b) {
+        b = b.get("coordPosition");
+        a.model.marker = a.model.marker || a.model.getPointByLatLng.call(a.model, b[0], b[1], a.map.getZoom());
+        a.model.markerEvent.call(a.model, "mouseenter")
+    });
+    this.map.events.add("mousemove", function (b) {
+        b = b.get("coordPosition");
+        a.model.marker = a.model.getPointByLatLng.call(a.model, b[0], b[1], a.map.getZoom());
+        a.showHover.call(a, a.model.marker)
+    });
+    this.map.events.add("zoomchange", function (b) {
+        a.showHover.call(a, null)
+    });
+    this.map.events.add("click", function (b) {
+        b = b.get("coordPosition");
+        a.model.marker = a.model.marker || a.model.getPointByLatLng.call(a.model, b[0], b[1], a.map.getZoom());
+        a.model.markerEvent.call(a.model, "click")
+    })
+}
+;
+YController.prototype.showHover = function (a) {
+    if (a) {
+        var b = this.model.getIconImage(a.icon)
+                , c = this.projection.fromGlobalPixels(a.wcoord);
+        this._hover.geometry.setCoordinates([c.lat, c.lng]);
+        this._hover.properties.set({
+            hintContent: a.title,
+            icon: b,
+            marker: a
+        });
+        this._hover.options.set({
+            visible: !0,
+            iconShadow: "undefined" !== typeof b.shadow
+        })
+    } else
+        this._hover.options.set("visible", !1)
+}
+;
+YController.prototype.getBounds = function () {
+    var a = this.map.getBounds();
+    return {
+        west: a[0][1],
+        north: a[1][0],
+        east: a[1][1],
+        south: a[0][0]
+    }
+}
+;
+YController.prototype.setCenter = function (a, b) {
+    this.map.setCenter([a.lat, a.lng], b)
+}
+;
+YController.prototype.getCenter = function () {
+    var a = this.map.getCenter();
+    return {
+        lat: a[0],
+        lng: a[1]
+    }
+}
+;
+YController.prototype.getZoom = function () {
+    return this.map.getZoom()
+}
+;
+YController.prototype.update = function () {
+    this.logger.clear().log("update")
+}
+;
+YController.prototype.mapReady = function () {
+    return !!this.map && !!this.map.getBounds()
+}
+;
+YController.prototype.addLegend = function (a) {}
+;
+YGeoObjectController = function (a) {
+    YGeoObjectController.superclass.constructor.apply(this, arguments);
+    this._cluster = null
+}
+;
+extend(YGeoObjectController, YController);
+YGeoObjectController.prototype.initialize = function () {
+    YGeoObjectController.superclass.initialize.apply(this, arguments);
+    this._cluster = new ymaps.Clusterer;
+    var a = []
+            , b = this;
+    this.logger.start(["mapTime"]);
+    this.model.eachDataTile(function (c) {
+        var d = b.model.getIconImage(b.model._icons[b.model.getSchema(c, "icon")], "big");
+        a.push(new ymaps.Placemark([parseFloat(b.model.getSchema(c, "lat")), parseFloat(b.model.getSchema(c, "lng"))], {
+            clusterCaption: b.model.getSchema(c, "title"),
+            hintContent: b.model.getSchema(c, "title"),
+            icon: d
+        }, {
+            iconLayout: "my#placemark",
+            iconShadowLayout: "my#shadow",
+            iconShadow: "undefined" !== typeof d.shadow
+        }))
+    });
+    this.logger.start("clusterMaxTime");
+    this._cluster.options.set({
+        gridSize: this.model._clusterDistance
+    });
+    this._cluster.options.set({
+        gridSize: 64
+    });
+    this._cluster.add(a);
+    this.logger.end("clusterMaxTime").start("mapDrawTime");
+    this.map.geoObjects.add(this._cluster);
+    this.logger.end(["mapDrawTime", "mapTime"])
+}
+;
+YCanvasController = function (a, b) {
+    YCanvasController.superclass.constructor.apply(this, arguments)
+}
+;
+extend(YCanvasController, YController);
+YCanvasController.prototype.initialize = function () {
+    YCanvasController.superclass.initialize.apply(this, arguments);
+    this.createHover();
+    this.update()
+}
+;
+YCanvasController.prototype.initLayer = function (a) {
+    var b, c;
+    b = this;
+    c = this.map.panes.get("layers");
+    this.layer = new ymaps.Layer(function (a, b) {
+        return a[0] + "," + a[1] + "," + b
+    }
+    , {
+        tileTransparent: !0,
+        pane: c,
+        tileClass: function (a) {
+            a = a.split(",");
+            this.coord = {
+                x: a[0],
+                y: a[1]
+            };
+            this.zoom = a[2];
+            this.content = null;
+            this.ready = !1;
+            this.events = new ymaps.event.Manager({
+                context: this
+            });
+            this.destroy = function () {
+                this.content && this.content.parentNode && this.content.parentNode.removeChild(this.content);
+                this.content = null
+            }
+            ;
+            this.isReady = function () {
+                return this.ready
+            }
+            ;
+            this.renderAt = function (a, c, d) {
+                b.model.zoom != this.zoom && (b.model.zoom = this.zoom,
+                        b.clearMarkers());
+                this.content && this.content.parentNode == a || (this.content && this.content.parentNode == a || (this.content = b.model.renderTile.call(b.model, this.coord, this.zoom),
+                        a.appendChild(this.content)),
+                        this.content.id = this.coord.x + "~" + this.coord.y + "~" + this.zoom,
+                        this.content.style.left = Math.round(c[0][0]) + "px",
+                        this.content.style.top = Math.round(c[0][1]) + "px",
+                        this.content.style.position = "absolute",
+                        this.ready = !0);
+                this.content.id = this.coord.x + "~" + this.coord.y + "~" + this.zoom;
+                this.content.style.left = Math.round(c[0][0]) + "px";
+                this.content.style.top = Math.round(c[0][1]) + "px";
+                this.content.style.position = "absolute";
+                this.ready = !0
+            }
+        },
+        zIndex: 200
+    });
+    a.layers.add(this.layer)
+}
+;
+YCanvasController.prototype.update = function () {
+    YCanvasController.superclass.update.apply(this, arguments);
+    this.layer ? (this.model.logger.log("update layer"),
+            this.layer.update()) : (this.model.logger.log("init layer"),
+            this.initLayer(this.map))
+}
+;
+YCanvasController.prototype.clearMarkers = function () {
+    this.model.tiles = [];
+    this.logger.clear()
+}
+;
+YNativeController = function (a, b) {
+    YNativeController.superclass.constructor.apply(this, arguments);
+    this._tiles = []
+}
+;
+extend(YNativeController, YController);
+YNativeController.prototype.initialize = function () {
+    YNativeController.superclass.initialize.apply(this, arguments);
+    this._markers = new ymaps.GeoObjectCollection({}, {
+        iconLayout: "my#placemark",
+        iconShadowLayout: "my#shadow"
+    });
+    this.map.geoObjects.add(this._markers);
+    var a = this;
+    this._markers.events.add("click", function (b) {
+        b.stopImmediatePropagation();
+        a.model.markerEvent.call(a.model, "click", b.originalEvent.target.properties.get("marker"))
+    });
+    this.map.events.add("zoomchange", function (b) {
+        a.clearMarkers()
+    });
+    this.map.events.add("boundschange", function (b) {
+        a.drawMap.call(a)
+    });
+    this.update()
+}
+;
+YNativeController.prototype.update = function () {
+    YNativeController.superclass.update.apply(this, arguments);
+    this.clearMarkers();
+    this.drawMap()
+}
+;
+YNativeController.prototype.clearMarkers = function () {
+    this._markers.removeAll();
+    this._tiles = []
+}
+;
+YNativeController.prototype.drawMap = function () {
+    this.logger.start("mapTime");
+    var a = this.map.getZoom(), b = [], c;
+    a != this.model.zoom && this.clearMarkers();
+    this.model.zoom = a;
+    for (var d = this.model.getTilesFromBounds(this.getBounds(), a), a = 0; a < d.length; a++)
+        c = d[a],
+                "undefined" == typeof this._tiles[c.coord.x + "~" + c.coord.y] && (this._tiles.push(c.coord.x + "~" + c.coord.y),
+                c = this.model.getTileMarkers(c),
+                b = b.concat(c));
+    this.logger.start("mapDrawTime");
+    a = 0;
+    for (d = b.length; a < d; a++)
+        c = this.model.getIconImage(b[a].icon),
+                c = new ymaps.Placemark([parseFloat(b[a].lat), parseFloat(b[a].lng)], {
+                    hintContent: b[a].title,
+                    icon: c,
+                    marker: b[a]
+                }, {
+                    iconShadow: "undefined" !== typeof c.shadow
+                }),
+                this._markers.add(c);
+    this.logger.inc("visibleCount", d).set({
+        mapDOMCount: $(this.model.container).find("*").length,
+        mapZoom: this.getZoom()
+    }).stop(["mapDrawTime", "mapTime"])
+}
+;
+YFullCanvasController = function (a, b) {
+    YFullCanvasController.superclass.constructor.apply(this, arguments);
+    this._tiles = []
+}
+;
+extend(YFullCanvasController, YController);
+YFullCanvasController.prototype.initialize = function () {
+    YFullCanvasController.superclass.initialize.apply(this, arguments);
+    var a = this.map
+            , b = new function (b) {
+                return {
+                    parent: null,
+                    layout: null,
+                    map: null,
+                    zoom: 0,
+                    controller: b.controller,
+                    events: new ymaps.event.Manager({
+                        context: this
+                    }),
+                    state: new ymaps.data.Manager(b.data),
+                    pane: null,
+                    inaction: !1,
+                    actiontimer: null,
+                    tick: 5,
+                    getParent: function () {
+                        return this._parent
+                    },
+                    setParent: function (a) {
+                        this.parent = a;
+                        this.map = a.getMap();
+                        null == this.layout && this.createLayout()
+                    },
+                    createLayout: function () {
+                        this.getMap().panes.get("controls");
+                        this.getMap().container.getElement();
+                        var b = this;
+                        this.pane = new ymaps.pane.movable.StepwisePane(this.map, {
+                            className: "ymaps-nolan-canvases",
+                            zIndex: 200
+                        });
+                        this.pane.events.add("actionend", function (a) {
+                            b._draw.call(b)
+                        });
+                        this.pane.events.add("zoomchange", function (a) {
+                            b.pane.getZoom();
+                            b._draw.call(b)
+                        });
+                        a.events.add("propertieschange", function (a) {
+                            b._draw.call(b)
+                        });
+                        a.events.add("boundschange", function (a) {
+                            b._draw.call(b)
+                        });
+                        this.layout = document.createElement("canvas");
+                        $(this.layout).css({
+                            position: "absolute",
+                            zIndex: 200
+                        }).appendTo(this.pane.getElement());
+                        this._draw()
+                    },
+                    getMap: function () {
+                        return this.map
+                    },
+                    getContainer: function () {
+                        return this.pane.getElement()
+                    },
+                    _draw: function () {
+                        var a = this.pane.getZoom()
+                                , b = this.pane.getViewport()
+                                , c = b[0][1]
+                                , h = b[0][0]
+                                , e = "undefined" == typeof FlashCanvas ? b[1][0] - b[0][0] : 2E3
+                                , k = "undefined" == typeof FlashCanvas ? b[1][1] - b[0][1] : 2E3;
+                        if (Math.round(a) == a) {
+                            var l = this.pane.fromClientPixels(b[0])
+                                    , b = this.pane.fromClientPixels(b[1])
+                                    , n = this.controller.model.pow2(Math.round(a))
+                                    , l = [{
+                                            x: l[0] / n,
+                                            y: l[1] / n
+                                        }, {
+                                            x: b[0] / n,
+                                            y: b[1] / n
+                                        }];
+                            this.zoom = a;
+                            this.layout.width = e;
+                            this.layout.height = k;
+                            this.controller.model.renderMapCanvas(this.layout, l, a)
+                        } else
+                            a = a > this.zoom ? 1 + a - this.zoom : 1 - this.zoom + a,
+                                    h *= a,
+                                    c *= a,
+                                    e *= a,
+                                    k *= a;
+                        $(this.layout).css({
+                            left: h + "px",
+                            top: c + "px",
+                            width: e + "px",
+                            height: k + "px"
+                        })
+                    }
+                }
+            }
+    ({
+        data: {},
+        controller: this
+    });
+    this.map.controls.add(b);
+    gl_control = b;
+    this.createHover()
+}
+;
+GController = function (a, b) {
+    this.map = null;
+    this.model = a;
+    this.logger = a.logger;
+    this.maxZoom = 22;
+    this._hover = null;
+    this.initMap(b)
+}
+;
+GController.prototype.initMap = function (a) {
+    var b = this;
+    if (window.google) {
+        var c = {
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            zoom: a.zoom,
+            center: new google.maps.LatLng(a.center.lat, a.center.lng),
+            streetViewControl: !1,
+            featureType: "all",
+            panControl: !1,
+            navigationControlOptions: {
+                position: google.maps.ControlPosition.LEFT_CENTER
+            }
+        };
+        this.map = new google.maps.Map(this.model.container, c);
+        "osm" == a.map && (this.map.mapTypes.set("OSM", new google.maps.ImageMapType({
+            getTileUrl: function (a, b) {
+                return "http://tile.openstreetmap.org/" + b + "/" + a.x + "/" + a.y + ".png"
+            },
+            tileSize: new google.maps.Size(256, 256),
+            name: "OpenStreetMap",
+            maxZoom: 18
+        })),
+                this.map.setMapTypeId("OSM"));
+        this.logger.end("mapLoadTime");
+        c = function (a) {
+            this.map = a;
+            this.controller = null;
+            var b = !1
+                    , c = null
+                    , h = []
+                    , e = ""
+                    , k = null;
+            this.onAdd = function () {
+                var a = this.getPanes();
+                a && (k = $(e).appendTo(a.floatPane),
+                        this.controller.model.balloon.build(k[0]),
+                        k.on("mousemove click dblclick", function (a) {
+                            a.stopPropagation()
+                        }))
+            }
+            ;
+            this.onRemove = function () {
+                this.controller.model.balloon.clear(k[0]);
+                k.off("mousemove click dblclick").remove();
+                b = !1
+            }
+            ;
+            this.draw = function () {
+                var a = this.getProjection()
+                        , d = a.fromLatLngToDivPixel(c)
+                        , a = a.fromLatLngToContainerPixel(c)
+                        , e = $(this.map.getDiv())
+                        , e = Math.max(Math.min(0, a.x - 20 - k.width() / 2), a.x + k.width() / 2 + 20 - e.width())
+                        , a = Math.min(0, a.y - k.height() - 20);
+                k.css({
+                    left: d.x + "px",
+                    top: d.y + "px"
+                });
+                (e || a) && this.map.panBy(e, a);
+                b = !0
+            }
+            ;
+            this.open = function (a, b, d) {
+                c = new google.maps.LatLng(a.lat, a.lng);
+                "undefined" == typeof h[b] && (h[b] = $(b).html());
+                e = h[b];
+                e = e.replace(/\$\[(.*?)\]/g, function (a, b) {
+                    return d.hasOwnProperty(b) ? d[b] : ""
+                });
+                this.setMap(this.controller.map)
+            }
+            ;
+            this.close = function () {
+                this.setMap(null)
+            }
+            ;
+            this.isOpen = function () {
+                return b
+            }
+            ;
+            return this
+        }
+        ;
+        extend(c, google.maps.OverlayView);
+        this.balloon = new c(this.map);
+        this.balloon.controller = this
+    } else
+        this.logger.start("mapLoadTime"),
+                initFunc = "_citymap" + Math.round(1E3 * Math.random()),
+                window[initFunc] = function () {
+            b.initMap.call(b, a)
+        }
+        ,
+                this.projection = CityMap.Projection(CityMap.Projection.sphericalMercator),
+                $.getScript("http://maps.google.ru/maps/api/js?sensor=true&callback=" + encodeURIComponent(initFunc))
+}
+;
+GController.prototype.initialize = function () {}
+;
+GController.prototype.createHover = function () {
+    this._hover = new google.maps.Marker({
+        map: this.map,
+        visible: !1,
+        cursor: "pointer"
+    });
+    var a = this;
+    google.maps.event.addListener(this.map, "mousemove", function (b) {
+        a.model.marker = a.model.getPointByLatLng.call(a.model, b.latLng.lat(), b.latLng.lng(), a.map.getZoom());
+        a.showHover.call(a, a.model.marker)
+    });
+    google.maps.event.addListener(this._hover, "click", function (b) {
+        a.showHover.call(a, null);
+        a.model.markerEvent.call(a.model, "click")
+    });
+    google.maps.event.addListener(this.map, "zoomchange", function (b) {
+        a.showHover.call(a, null)
+    });
+    google.maps.event.addDomListener(this.map.getDiv(), "touchstart", function (b) {
+        var c = $(a.map.getDiv()).position()
+                , d = b.pageX - c.left;
+        b = b.pageY - c.top;
+        c = a.getBounds();
+        c = a.projection.toGlobalPixels({
+            lat: c.north,
+            lng: c.west
+        }, a.getZoom());
+        d = a.projection.fromGlobalPixels({
+            x: c.x + d,
+            y: c.y + b
+        }, a.getZoom());
+        a.model.marker = a.model.getPointByLatLng.call(a.model, d.lat, d.lng, a.getZoom());
+        a.model.markerEvent.call(a.model, "click")
+    })
+}
+;
+GController.prototype.showHover = function (a) {
+    if (a) {
+        var b = this.createIcon(a.icon);
+        this._hover.setIcon(b.icon);
+        "undefined" != typeof b.shadow && this._hover.setShadow(b.shadow);
+        this._hover.setTitle(a.title);
+        this._hover.setPosition(new google.maps.LatLng(a.lat, a.lng));
+        this._hover.setVisible(!0)
+    } else
+        this._hover.setVisible(!1)
+}
+;
+GController.prototype.createIcon = function (a) {
+    a = this.model.getIconImage(a);
+    var b = {
+        icon: new google.maps.MarkerImage(a.src, new google.maps.Size(a.size.width, a.size.height), new google.maps.Point(a.origin.x, a.origin.y), new google.maps.Point(a.anchor.x, a.anchor.y))
+    };
+    "undefined" != typeof a.shadow && (b.shadow = new google.maps.MarkerImage(a.src, new google.maps.Size(a.shadow.size.width, a.shadow.size.height), new google.maps.Point(a.shadow.origin.x, a.shadow.origin.y), new google.maps.Point(a.shadow.anchor.x, a.shadow.anchor.y)));
+    return b
+}
+;
+GController.prototype.initialize = function () {}
+;
+GController.prototype.getBounds = function () {
+    var a = this.map.getBounds();
+    return {
+        south: a.getSouthWest().lat(),
+        east: a.getNorthEast().lng(),
+        north: a.getNorthEast().lat(),
+        west: a.getSouthWest().lng()
+    }
+}
+;
+GController.prototype.setCenter = function (a, b) {
+    this.map.setCenter(new google.maps.LatLng(a.lat, a.lng));
+    this.map.setZoom(b)
+}
+;
+GController.prototype.getCenter = function () {
+    var a = this.map.getCenter();
+    return {
+        lat: a.lat(),
+        lng: a.lng()
+    }
+}
+;
+GController.prototype.getZoom = function () {
+    return this.map.getZoom()
+}
+;
+GController.prototype.mapReady = function () {
+    return !!this.map && !!this.map.getBounds()
+}
+;
+GController.prototype.addLegend = function (a) {
+    a.attr("index", 1);
+    this.map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(a[0])
+}
+;
+GController.prototype.update = function () {
+    this.logger.clear()
+}
+;
+GNativeController = function (a) {
+    GNativeController.superclass.constructor.apply(this, arguments);
+    this.placeMarks = [];
+    this.tiles = []
+}
+;
+extend(GNativeController, GController);
+GNativeController.prototype.initialize = function () {
+    GNativeController.superclass.initialize.apply(this, arguments);
+    var a = this;
+    google.maps.event.addListener(this.map, "bounds_changed", function () {
+        a.drawMap.call(a)
+    });
+    this.update()
+}
+;
+GNativeController.prototype.update = function () {
+    GNativeController.superclass.update.apply(this, arguments);
+    this.clearMarkers();
+    this.drawMap()
+}
+;
+GNativeController.prototype.clearMarkers = function () {
+    for (var a = 0; a < this.placeMarks.length; a++)
+        this.placeMarks[a].setMap(null);
+    this.placeMarks = [];
+    this.tiles = [];
+    this.logger.clear()
+}
+;
+GNativeController.prototype.drawMap = function () {
+    this.logger.start("mapTime");
+    var a = this;
+    this.map.getBounds();
+    var b = this.map.getZoom();
+    b != this.model.zoom && this.clearMarkers();
+    this.model.zoom = b;
+    for (var c = [], d = this.model.getTilesFromBounds(this.getBounds(), b), f = 0; f < d.length; f++) {
+        var g = d[f];
+        if (-1 == $.inArray(g.coord.x + "~" + g.coord.y, this.tiles)) {
+            this.tiles.push(g.coord.x + "~" + g.coord.y);
+            var h = this.model.getTileMarkers(g)
+                    , c = c.concat(h);
+            this.logger.log("tile " + g.coord.x + "~" + g.coord.y + "~" + g.zoom + " markers: " + h.length)
+        }
+    }
+    this.logger.start("mapDrawTime");
+    for (f = 0; f < c.length; f++)
+        d = c[f],
+                g = this.createIcon(d.icon),
+                placeMark = new google.maps.Marker({
+                    map: this.map,
+                    icon: g.icon,
+                    shadow: g.shadow,
+                    position: new google.maps.LatLng(d.lat, d.lng),
+                    visible: !0,
+                    title: d.title,
+                    marker: d
+                }),
+                google.maps.event.addListener(placeMark, "click", function (b) {
+                    b.stop();
+                    a.model.markerEvent.call(a.model, "click", this.marker)
+                }),
+                this.placeMarks.push(placeMark),
+                placeMark.setMap(this.map);
+    this.logger.end(["mapDrawTime", "mapTime"]).inc("visibleCount", c.length).set({
+        mapDOMCount: $(this.model.container).find("*").length,
+        mapZoom: b
+    })
+}
+;
+GCanvasController = function (a, b) {
+    GCanvasController.superclass.constructor.apply(this, arguments)
+}
+;
+extend(GCanvasController, GController);
+GCanvasController.prototype.initialize = function (a) {
+    GCanvasController.superclass.initialize.apply(this, arguments);
+    this.tileSize = new google.maps.Size(this.model.TILE_SIZE, this.model.TILE_SIZE);
+    this.createHover();
+    this.update()
+}
+;
+GCanvasController.prototype.update = function () {
+    GCanvasController.superclass.update.apply(this, arguments);
+    this._ready ? this.map.overlayMapTypes.setAt(0, this) : (this.map.overlayMapTypes.insertAt(0, this),
+            this._ready = !0)
+}
+;
+GCanvasController.prototype.getTile = function (a, b, c) {
+    return this.model.renderTile(a, b)
+}
+;
+GCanvasController.prototype.releaseTile = function (a) {}
+;
+GFullCanvasController = function (a, b) {
+    GFullCanvasController.superclass.constructor.apply(this, arguments)
+}
+;
+extend(GFullCanvasController, GController);
+GFullCanvasController.prototype.initialize = function (a) {
+    GFullCanvasController.superclass.initialize.apply(this, arguments);
+    this.model.tileOffset = {
+        x: 0,
+        y: 0
+    };
+    this.canvasOverlay = this.createCanvasOverlay();
+    this.canvasOverlay.setMap(this.map);
+    var b = this;
+    google.maps.event.addListener(this.map, "center_changed", function (a) {
+        b.canvasOverlay.draw()
+    });
+    this.createHover()
+}
+;
+GFullCanvasController.prototype.createCanvasOverlay = function () {
+    var a = function (a) {
+        this.controller = a;
+        var c = null;
+        this._tiles = [];
+        this._ticktimer = this._tick = this._zoom = 0;
+        this.onAdd = function () {
+            var a = this.getPanes()
+                    , b = this.getMap().getDiv()
+                    , g = "undefined" == typeof FlashCanvas ? 256 * Math.ceil(($(b).width() + 1) / 256) : 2E3
+                    , h = "undefined" == typeof FlashCanvas ? 256 * Math.ceil(($(b).height() + 1) / 256) : 2E3;
+            this._offset = {
+                x: (g - $(b).width()) / 2,
+                y: (h - $(b).height()) / 2
+            };
+            a && (c = document.createElement("canvas"),
+                    $(c).css({
+                position: "relative",
+                width: g + "px",
+                height: h + "px"
+            }).attr({
+                width: g,
+                height: h
+            }).appendTo(a.overlayLayer))
+        }
+        ;
+        this.onRemove = function () {
+            $(c).off("mousemove click dblclick").remove()
+        }
+        ;
+        this.draw = function () {
+            this._ticktimer && window.clearTimeout(this._ticktimer);
+            var a = this;
+            this._zoom != this.controller.getZoom() ? (this._tick = 0,
+                    this._zoom = this.controller.getZoom(),
+                    this.render.call(a)) : this._ticktimer = window.setTimeout(function () {
+                a.render.call(a)
+            }, this._tick)
+        }
+        ;
+        this.render = function () {
+            var a = this.getProjection();
+            this.getMap().getDiv();
+            var b = this.controller.getZoom()
+                    , g = this.controller.getBounds()
+                    , h = [this.controller.projection.toGlobalPixels({
+                            lat: g.north,
+                            lng: g.west
+                        }), this.controller.projection.toGlobalPixels({
+                            lat: g.south,
+                            lng: g.east
+                        })]
+                    , a = a.fromLatLngToDivPixel(new google.maps.LatLng(g.north, g.west))
+                    , g = new Date;
+            h[0].x -= this._offset.x / this.controller.model.pow2(b);
+            h[0].y -= this._offset.y / this.controller.model.pow2(b);
+            h[1].x += this._offset.x / this.controller.model.pow2(b);
+            h[1].y += this._offset.y / this.controller.model.pow2(b);
+            this.controller.model.renderMapCanvas(c, h, b);
+            $(c).css({
+                left: a.x - this._offset.x + "px",
+                top: a.y - this._offset.y + "px"
+            });
+            this._tick < new Date - g && (this._tick = new Date - g)
+        }
+        ;
+        return this
+    };
+    extend(a, google.maps.OverlayView);
+    return new a(this)
+}
+;
+GFullCanvasController.prototype.update = function () {
+    GFullCanvasController.superclass.update.apply(this, arguments)
+}
+;
+CityMap = function (a, b) {
+    this.container = a;
+    this.mapTypeOptions = {
+        GOOGLEmapS: "google",
+        YANDEXmapS: "yandex"
+    };
+    this.MAX_INDEXED_ZOOM = 14;
+    this.MAX_ZOOM = this.MAX_LOAD_ATTEMPTS = 20;
+    this.TILE_SIZE = 256;
+    this._pow2 = [];
+    this._data = null;
+    this._tileCache = [];
+    this._groupIcon = this._clusterIcon = this._sprite = this.controller = null;
+    this._dataUrl = "";
+    this._icons = [];
+    this._readyTimer = null;
+    this._loadStart = new Date;
+    this._debug = "undefined" !== typeof b.debug && b.debug;
+    this._legendElement = null;
+    this._clusterDistance = 20;
+    this.groupDistance = 1E-4;
+    this.clusterGrid = this.TILE_SIZE / 2;
+    this.tileOffset = {
+        x: 0,
+        y: 0
+    };
+    this.zoom = 0;
+    this.marker = this.center = null;
+    this.balloon = CityMap.Balloon(this);
+    this.points = [];
+    this.logger = CityMapLogger;
+    this.logger.set({
+        clusterDistance: this._clusterDistance,
+        clusterDepth: this.clusterDepth
+    });
+    this.controller = new window["undefined" == typeof b.controller ? "GCanvasController" : b.controller](this, b);
+    this.ready()
+}
+;
+CityMap.prototype.loadData = function (a) {
+    if ("undefined" != typeof window.citymap && 0 == $("#mapsdata").length)
+        this.logger.log("get data"),
+                $.getScript(a);
+    else {
+        var b = this;
+        window.setTimeout(function () {
+            b.loadData(a)
+        }, 200)
+    }
+}
+;
+CityMap.prototype.ready = function () {
+    var a = this;
+    if (this.controller && this.controller.mapReady() && this._data && this._sprite && (this._sprite.complete || "undefined" != typeof this._sprite.naturalWidth && 0 !== this._sprite.naturalWidth))
+        this._readyTimer && window.clearTimeout(this._readyTimer),
+                this.logger.log("ready"),
+                this.controller.initialize();
+    else {
+        this.logger.log("not ready");
+        if (2E4 < new Date - this._loadStart) {
+            if (!confirm("loading map tmeout. continue?"))
+                return
+        } else
+            this._loadStart = new Date;
+        this._readyTimer = window.setTimeout(function () {
+            a.ready.apply(a, arguments)
+        }, 500)
+    }
+}
+;
+CityMap.prototype.setOptions = function (a) {
+    this._sprite = document.createElement("img");
+    this._sprite.src = a.sprite.src;
+    this._icons = a.icons;
+    this._clusterIcon = a.cluster.icon;
+    this._groupIcon = a.group.icon;
+    this._dataUrl = a.dataUrl;
+    this.setClusterDistance(a.clusterdist ? parseInt(a.clusterdist) : 20);
+    this.wideZoom = a.wideZoom ? parseInt(a.wideZoom) : 14;
+    this.tileOffset = {
+        x: 0,
+        y: 0
+    };
+    for (var b = 0; b < this._icons.length; b++)
+        this.tileOffset.x < this._icons[b].anchor.x && (this.tileOffset.x = this._icons[b].anchor.x),
+                this.tileOffset.y < this._icons[b].anchor.y && (this.tileOffset.y = this._icons[b].anchor.y),
+                "undefined" != typeof this._icons[b].big && this.tileOffset.x < this._icons[b].big.anchor.x && (this.tileOffset.x = this._icons[b].big.anchor.x),
+                "undefined" != typeof this._icons[b].big && this.tileOffset.y < this._icons[b].big.anchor.y && (this.tileOffset.y = this._icons[b].big.anchor.y);
+    this.logger.set("totalIcons", this._icons.length);
+    this._schema = a.schema;
+    this._tileCache = []
+}
+;
+CityMap.prototype.getMap = function () {
+    this.controller.getMap()
+}
+;
+CityMap.prototype.getPoints = function () {
+    return this.points
+}
+;
+CityMap.prototype.setData = function (a) {
+    a = a.split("|");
+    var b, c = 0, d = [];
+    this._data = [];
+    for (this.points = []; b = a.pop(); ) {
+        b = b.split(":");
+        var f = {
+            lat: parseFloat(this.getSchema(b, "lat")),
+            lng: parseFloat(this.getSchema(b, "lng"))
+        };
+        this.points.push(f);
+        b.wcoord = this.controller.projection.toGlobalPixels(f);
+        f = this.controller.projection.globalToTileCoord(b.wcoord, this.MAX_INDEXED_ZOOM);
+        "undefined" == typeof d[f.x] && (d[f.x] = []);
+        "undefined" == typeof d[f.x][f.y] && (d[f.x][f.y] = parseInt(this.getTileId(f, this.MAX_INDEXED_ZOOM), 4).toString(10));
+        f = d[f.x][f.y];
+        "undefined" == typeof this._data[f] && (this._data[f] = []);
+        this._data[f].push(b);
+        c++
+    }
+    this.clearTileCache();
+    void 0 != gl_control && gl_control._draw();
+    $("#map").css("opacity", 1)
+}
+;
+CityMap.prototype.setClusterDistance = function (a) {
+    this._clusterDistance != a && (this._clusterDistance = a,
+            this.logger.clear(["clusterDistance"]).set("clusterDistance", a))
+}
+;
+CityMap.prototype.getSchema = function (a, b) {
+    return "undefined" == typeof this._schema[b] ? null : a[this._schema[b]]
+}
+;
+CityMap.prototype.getIconImage = function (a) {
+    if (void 0 != a) {
+        var b;
+        b = 2 == arguments.length ? "undefined" != typeof a[arguments[1]] ? a[arguments[1]] : a : "undefined" != typeof a.big && this.zoom >= this.wideZoom ? a.big : a;
+        b.src = this._sprite.src;
+        b.title = a.title;
+        return b
+    }
+}
+;
+CityMap.prototype.eachDataTile = function (a) {
+    for (var b in this._data)
+        if (this._data.hasOwnProperty(b))
+            for (var c in this._data[b])
+                this._data[b].hasOwnProperty(c) && a(this._data[b][c])
+}
+;
+CityMap.prototype.getTilesFromBounds = function (a, b) {
+    var c = this.controller.projection.toTileCoord({
+        lat: a.north,
+        lng: a.west
+    }, b)
+            , d = this.controller.projection.toTileCoord({
+                lat: a.south,
+                lng: a.east
+            }, b);
+    return this.getTiles([c, d], b)
+}
+;
+CityMap.prototype.getTilesFromGlobalBounds = function (a, b) {
+    var c = this.controller.projection.globalToTileCoord(a[0], b)
+            , d = this.controller.projection.globalToTileCoord(a[1], b);
+    return this.getTiles([c, d], b)
+}
+;
+CityMap.prototype.getTiles = function (a, b) {
+    for (var c = [], d = a[0], f = a[1], g = d.x > f.x ? d.x : f.x, h = d.y < f.y ? d.y : f.y, e = d.y > f.y ? d.y : f.y, d = d.x < f.x ? d.x : f.x; d <= g; d++)
+        for (f = h; f <= e; f++)
+            c.push({
+                id: this.getTileId({
+                    x: d,
+                    y: f
+                }, b),
+                coord: {
+                    x: d,
+                    y: f
+                },
+                zoom: b
+            });
+    return c
+}
+;
+CityMap.prototype.getTileMarkers = function (a) {
+    var b, c, d = this._getTileCache(a);
+    if (d)
+        return d;
+    var d = [], f, g;
+    this.logger.start("mapSelectTime");
+    if (a.zoom >= this.MAX_INDEXED_ZOOM) {
+        if (g = parseInt(a.id.substr(0, this.MAX_INDEXED_ZOOM + 1), 4).toString(10),
+                g in this._data)
+            for (var h = 0, e = this._data[g].length; h < e; h++)
+                f = this._data[g][h],
+                        b = Math.floor(f.wcoord.x * this.pow2(a.zoom) / this.TILE_SIZE),
+                        c = Math.floor(f.wcoord.y * this.pow2(a.zoom) / this.TILE_SIZE),
+                        b == a.coord.x && c == a.coord.y && d.push(f)
+    } else {
+        c = b = a.id;
+        for (h = a.zoom; h < this.MAX_INDEXED_ZOOM; h++)
+            b += "0",
+                    c += "3";
+        b = parseInt(b, 4);
+        c = parseInt(c, 4);
+        for (g in this._data)
+            this._data.hasOwnProperty(g) && (g = parseInt(g),
+                    g >= b && (g <= c && "undefined" != typeof this._data[g]) && (d = d.concat(this._data[g])))
+    }
+    this.logger.stop("mapSelectTime");
+    g = d.length;
+    d = this.clusterize(a, d);
+    this._setTileCache(a, d);
+    this.logger.max("tileMaxCount", g).max("tileMaxVisibleCount", d.length).inc("visibleTileCount", 1).inc("clusterCount", d.length);
+    return d
+}
+;
+CityMap.prototype.explodeCluster = function (a) {
+    a = Math.max(Math.abs(a.cbounds[0][0] - a.cbounds[1][0]), Math.abs(a.cbounds[0][1] - a.cbounds[1][1]));
+    return Math.min(this.MAX_ZOOM, Math.ceil(Math.log(this._clusterDistance / a) / Math.log(2)) + 1)
+}
+;
+CityMap.prototype._doClusterize = function (a, b) {
+    for (var c = 0, d = 0, f = a.length, g, h = [], e; c < f; ) {
+        e = "undefined" == typeof a[c].type ? {
+            type: "marker",
+            points: [a[c]],
+            count: 1,
+            wcoord: a[c].wcoord,
+            cbounds: [[a[c].wcoord.x, a[c].wcoord.y], [a[c].wcoord.x, a[c].wcoord.y]]
+        } : a[c];
+        for (var k = 0; k < d; k++)
+            if (g = Math.max(Math.abs(e.wcoord.x - h[k].wcoord.x), Math.abs(e.wcoord.y - h[k].wcoord.y)),
+                    g < b) {
+                h[k].type = "cluster" == h[k].type || "cluster" == e.type ? "cluster" : g < this.groupDistance ? "group" : "cluster";
+                h[k].points.push(a[c]);
+                e = null;
+                break
+            }
+        e && (h.push(e),
+                d++);
+        c++
+    }
+    c = 0;
+    for (f = h.length; c < f; c++)
+        if (e = h[c],
+                e.count = e.points.length,
+                e.title = this.getSchema(e.points[0], "title"),
+                "cluster" == e.type) {
+            for (k = 1; k < e.count; k++)
+                e.cbounds[0][0] > e.points[k].wcoord.x && (e.cbounds[0][0] = e.points[k].wcoord.x),
+                        e.cbounds[1][0] < e.points[k].wcoord.x && (e.cbounds[1][0] = e.points[k].wcoord.x),
+                        e.cbounds[0][1] > e.points[k].wcoord.y && (e.cbounds[0][1] = e.points[k].wcoord.y),
+                        e.cbounds[1][1] < e.points[k].wcoord.y && (e.cbounds[1][1] = e.points[k].wcoord.y);
+            e.wcoord = {
+                x: e.cbounds[0][0] + (e.cbounds[1][0] - e.cbounds[0][0]) / 2,
+                y: e.cbounds[0][1] + (e.cbounds[1][1] - e.cbounds[0][1]) / 2
+            };
+            d = this.controller.projection.fromGlobalPixels(e.wcoord);
+            e.lat = d.lat;
+            e.lng = d.lng;
+            e.icon = this._clusterIcon
+        } else
+            e.icon = "group" == e.type ? this._groupIcon : this._icons[this.getSchema(e.points[0], "icon")],
+                    e.lat = parseFloat(this.getSchema(e.points[0], "lat")),
+                    e.lng = parseFloat(this.getSchema(e.points[0], "lng"));
+    return h
+}
+;
+CityMap.prototype.doSeldom = function (a, b, c) {
+    for (var d = 0, f = a.length; d < f; ) {
+        for (var g = !1, h = 0, e = b.length; h < e; h++)
+            if (Math.abs(b[h].wcoord.x - a[d].wcoord.x) < c && Math.abs(b[h].wcoord.y - a[d].wcoord.y) < c) {
+                g = !0;
+                break
+            }
+        g ? (g = Math.max(Math.abs(b[h].wcoord.x - a[d].wcoord.x), Math.abs(b[h].wcoord.y - a[d].wcoord.y)),
+                b[h] = this.makeCluster(b[h], a[d], g),
+                a.splice(d, 1),
+                f--) : d++
+    }
+    return a
+}
+;
+CityMap.prototype.makeCluster = function (a, b, c) {
+    a.type = "cluster" == a.type || "cluster" == b.type ? "cluster" : c < this.groupDistance ? "group" : "cluster";
+    a.points = a.points.concat(b.points);
+    "cluster" == a.type ? (a.cbounds[0][0] > b.cbounds[0][0] && (a.cbounds[0][0] = b.cbounds[0][0]),
+            a.cbounds[1][0] < b.cbounds[1][0] && (a.cbounds[1][0] = b.cbounds[1][0]),
+            a.cbounds[0][1] > b.cbounds[0][1] && (a.cbounds[0][1] = b.cbounds[0][1]),
+            a.cbounds[1][1] < b.cbounds[1][1] && (a.cbounds[1][1] = b.cbounds[1][1]),
+            a.wcoord = {
+                x: a.cbounds[0][0] + (a.cbounds[1][0] - a.cbounds[0][0]) / 2,
+                y: a.cbounds[0][1] + (a.cbounds[1][1] - a.cbounds[0][1]) / 2
+            },
+    b = this.controller.projection.fromGlobalPixels(a.wcoord),
+            a.lat = b.lat,
+            a.lng = b.lng,
+            a.icon = this._clusterIcon) : a.icon = this._groupIcon;
+    a.count = a.points.length;
+    return a
+}
+;
+CityMap.prototype.clusterize = function (a, b) {
+    this.logger.start(["clusterMaxTime", "clusterTime"]);
+    var c, d, f;
+    c = [];
+    d = this.clusterGrid / this.pow2(a.zoom);
+    f = this._clusterDistance / this.pow2(a.zoom);
+    for (var g = 0, h = b.length; g < h; g++) {
+        var e = Math.ceil(b[g].wcoord.x / d)
+                , k = Math.ceil(b[g].wcoord.y / d);
+        e in c || (c[e] = []);
+        k in c[e] || (c[e][k] = []);
+        c[e][k].push(b[g])
+    }
+    d = [];
+    for (var l in c)
+        for (var n in c[l])
+            d = d.concat(this._doClusterize(c[l][n], f));
+    c = null;
+    d = this._doClusterize(d, f);
+    for (l = a.coord.x - 1; l < a.coord.x + 1; l++)
+        for (n = a.coord.y - 1; n < a.coord.y + 1; n++)
+            (l != a.coord.x || n != a.coord.y) && (c = this._getTileCache({
+                coord: {
+                    x: l,
+                    y: n
+                },
+                zoom: a.zoom
+            })) && (d = this.doSeldom(d, c, f));
+    c = null;
+    this.logger.end("clusterMaxTime").stop("clusterTime");
+    this.logger.start("sortTime");
+    d.sort(function (a, b) {
+        return a.lat < b.lat ? 1 : a.lat > b.lat ? -1 : 0
+    });
+    this.logger.stop("sortTime");
+    return d
+}
+;
+CityMap.prototype._getTileCache = function (a) {
+    return "undefined" != typeof this._tileCache[a.zoom] && "undefined" != typeof this._tileCache[a.zoom][a.coord.x] && "undefined" != typeof this._tileCache[a.zoom][a.coord.x][a.coord.y] ? this._tileCache[a.zoom][a.coord.x][a.coord.y] : !1
+}
+;
+CityMap.prototype._setTileCache = function (a, b) {
+    "undefined" == typeof this._tileCache[a.zoom] && (this._tileCache[a.zoom] = []);
+    "undefined" == typeof this._tileCache[a.zoom][a.coord.x] && (this._tileCache[a.zoom][a.coord.x] = []);
+    this._tileCache[a.zoom][a.coord.x][a.coord.y] = b
+}
+;
+CityMap.prototype.renderMapCanvas = function (a, b, c) {
+    this.zoom = c;
+    "undefined" !== typeof FlashCanvas && FlashCanvas.initElement(a);
+    for (var d = this.getTilesFromGlobalBounds(b, c), f, g = [], h = 0; h < d.length; h++)
+        f = d[h],
+                g = g.concat(this.getTileMarkers(f));
+    this.renderCanvas(a, b[0], c, g)
+}
+;
+CityMap.prototype.clearTileCache = function () {
+    this._tileCache = []
+}
+;
+CityMap.prototype.renderTile = function (a, b) {
+    this.zoom != b && (this.zoom = b);
+    a.x = parseInt(a.x);
+    a.y = parseInt(a.y);
+    b = parseInt(b);
+    this.logger.start(["tileMaxTime", "mapTime"]);
+    var c = this.getTileMarkers({
+        coord: a,
+        zoom: b,
+        id: this.getTileId(a, b)
+    })
+            , d = document.createElement("canvas")
+            , f = {
+                x: (a.x * this.TILE_SIZE - this.tileOffset.x) / this.pow2(b),
+                y: (a.y * this.TILE_SIZE - this.tileOffset.y) / this.pow2(b)
+            };
+    d.width = this.TILE_SIZE + 2 * this.tileOffset.x;
+    d.height = this.TILE_SIZE + 2 * this.tileOffset.y;
+    d.style.border = "none";
+    d.style.borderWidth = "0";
+    d.style.overflow = "visible";
+    d.style.width = this.TILE_SIZE + 2 * this.tileOffset.x + "px";
+    d.style.height = this.TILE_SIZE + 2 * this.tileOffset.y + "px";
+    d.style.marginLeft = -this.tileOffset.x + "px";
+    d.style.marginTop = -this.tileOffset.y + "px";
+    d = this.renderCanvas(d, f, b, c);
+    this.logger.end("tileMaxTime").stop("mapTime").inc({
+        visibleCount: c.length
+    }).set({
+        mapZoom: b,
+        mapDOMCount: $(this.container).find("*").length
+    }).log("tile " + a.x + "~" + a.y + "~" + b + "~" + c.length);
+    return d
+}
+;
+CityMap.prototype.renderCanvas = function (a, b, c, d) {
+    this.logger.start(["renderMaxTime", "mapDrawTime"]);
+    for (var f = [], g = 0, h = d.length; g < h; g++) {
+        var e = d[g]
+                , k = {
+                    x: Math.round((e.wcoord.x - b.x) * this.pow2(c)),
+                    y: Math.round((e.wcoord.y - b.y) * this.pow2(c))
+                };
+        void 0 != e.icon && (e = this.getIconImage(e.icon),
+                f.push([this._sprite, e.origin.x, e.origin.y, e.size.width, e.size.height, k.x - e.anchor.x, k.y - e.anchor.y, e.size.width, e.size.height]),
+                "shadow"in e && (k = {
+                    x: k.x - e.shadow.anchor.x,
+                    y: k.y - e.shadow.anchor.y
+                },
+                f.unshift([this._sprite, e.shadow.origin.x, e.shadow.origin.y, e.shadow.size.width, e.shadow.size.height, k.x, k.y, e.shadow.size.width, e.shadow.size.height])))
+    }
+    if (null != ctx)
+        ctx.clearRect(0, 0, a.width, a.height);
+    else {
+        if (!a.getContext)
+            return;
+        ctx = a.getContext("2d")
+    }
+    ctx.rect(0, 0, a.width, a.height);
+    this._debug && (ctx.globalAlpha = 0.1,
+            ctx.fillStyle = "blue",
+            ctx.fill(0, 0, a.width, a.height),
+            ctx.globalAlpha = 1);
+    for (g = 0; g < f.length; g++)
+        ctx.drawImage.apply(ctx, f[g]);
+    this.logger.end("renderMaxTime").stop("mapDrawTime").inc("mapRenderCount");
+    return a
+}
+;
+CityMap.prototype.getIconBounds = function (a, b) {
+    var c = this.getIconImage(a.icon);
+    return {
+        left: c.anchor.x / this.pow2(b),
+        right: (c.size.width - c.anchor.x) / this.pow2(b),
+        top: c.anchor.y / this.pow2(b),
+        bottom: (c.size.height - c.anchor.y) / this.pow2(b)
+    }
+}
+;
+CityMap.prototype.getPointByLatLng = function (a, b, c) {
+    if (this.marker && this.marker.lat == a && this.marker.lng == b)
+        return this.marker.point;
+    a = this.controller.projection.toGlobalPixels({
+        lat: a,
+        lng: b
+    });
+    var d = {
+        x: Math.floor(a.x * this.pow2(c) / this.TILE_SIZE),
+        y: Math.floor(a.y * this.pow2(c) / this.TILE_SIZE)
+    }
+    , f = a.x * this.pow2(c)
+            , g = a.y * this.pow2(c)
+            , h = d.x * this.TILE_SIZE
+            , e = d.y * this.TILE_SIZE;
+    b = [];
+    b.push({
+        coord: d,
+        zoom: c
+    });
+    f - h < this.tileOffset.x && b.push({
+        coord: {
+            x: d.x - 1,
+            y: d.y
+        },
+        zoom: c
+    });
+    h + this.TILE_SIZE - f < this.tileOffset.x && b.push({
+        coord: {
+            x: d.x + 1,
+            y: d.y
+        },
+        zoom: c
+    });
+    g - e < this.tileOffset.y && b.push({
+        coord: {
+            x: d.x,
+            y: d.y - 1
+        },
+        zoom: c
+    });
+    e + this.TILE_SIZE - g < this.tileOffset.y && b.push({
+        coord: {
+            x: d.x,
+            y: d.y + 1
+        },
+        zoom: c
+    });
+    for (d = 0; d < b.length; d++)
+        if (f = this._getTileCache(b[d]))
+            for (g = 0,
+                    h = f.length; g < h; g++)
+                if (e = f[g],
+                        "bounds"in e || (e.bounds = this.getIconBounds(e, c)),
+                        a.x > e.wcoord.x - e.bounds.left && a.x < e.wcoord.x + e.bounds.right && a.y > e.wcoord.y - e.bounds.top && a.y < e.wcoord.y + e.bounds.bottom)
+                    return this.marker = e;
+    return this.marker = null
+}
+;
+CityMap.prototype.markerEvent = function (a, b) {
+    "undefined" != typeof b && (this.marker = b);
+    switch (a) {
+        case "click":
+            if (this.marker)
+                if ("cluster" == this.marker.type) {
+                    if ("click" == a) {
+                        var c = this.explodeCluster(this.marker);
+                        this.controller.setCenter(this.marker, c)
+                    }
+                } else
+                    this.balloon.open(this.marker)
+    }
+}
+;
+CityMap.prototype.showLegend = function () {
+    var a = "", b, c, d;
+    if (0 != this._icons.length) {
+        c = this._icons.concat([this._clusterIcon, this._groupIcon]);
+        for (var f = d = 0; f < c.length; f++)
+            b = c[f],
+                    d = Math.max(d, b.size.width, b.shadow ? b.shadow.size.width : 0),
+                    a += '<tr><td class="citymaps-legend-icon">',
+                    b.shadow ? (a += '<div style="position:relative;width: ' + Math.max(b.size.width, b.shadow.size.width) + "px;  height: " + Math.max(b.size.height, b.shadow.size.height) + 'px; ">',
+                            a += '<div style="width: ' + b.size.width + "px; height: " + b.size.height + "px; background: url(" + this._sprite.src + ") no-repeat -" + b.origin.x + ".0px -" + b.origin.y + ".0px;position: absolute;overflow: hidden;left: " + (b.shadow.anchor.x - b.anchor.x) + "px;top: " + (b.shadow.anchor.y - b.anchor.y) + 'px;"></div>',
+                            a += '<div style="width: ' + b.shadow.size.width + "px; height: " + b.shadow.size.height + "px; overflow : hidden;background: url(" + this._sprite.src + ") no-repeat -" + b.shadow.origin.x + "px -" + b.shadow.origin.y + 'px;"></div>',
+                            a += "</div>") : a += '<div style="width: ' + b.size.width + "px; height: " + b.size.height + "px; background: url(" + this.sprite.src + ") no-repeat -" + (b.origin.x + 1) + "px -" + (b.origin.y + 1) + 'px"></div>',
+                    a += '</td><td class="citymaps-legend-title">' + b.title + "</td></tr>";
+        d += 5;
+        a = $('<div class="citymaps-legend-container" ><table>' + a + "</table></div>");
+        this._legendElement ? this._legendElement.replaceWith(a) : (b = $('<div class="citymaps-legend-wrapper"></div>').append(a).css({
+            width: d + "px"
+        }).mouseenter(function () {
+            $(this).stop(!0, !0).delay(500).animate({
+                width: "120"
+            })
+        }).mouseleave(function () {
+            $(this).stop(!0, !0).animate({
+                width: "+=5"
+            }, function () {
+                $(this).animate({
+                    width: d
+                })
+            })
+        }),
+                this.controller.addLegend(b));
+        this._legendElement = a
+    }
+}
+;
+CityMap.prototype.pow2 = function (a) {
+    "undefined" == typeof this._pow2[a] && (this._pow2[a] = Math.pow(2, a));
+    return this._pow2[a]
+}
+;
+CityMap.prototype.getTileId = function (a, b) {
+    for (var c = 0, d = "", c = "", f = 0, g = b; 0 <= g; g--)
+        c = this.pow2(g),
+                c = ((0 < (a.x & c) ? 1 : 0) + (0 < (a.y & c) ? 2 : 0)).toString(),
+                f <= this.MAX_INDEXED_ZOOM && (d += c),
+                f++;
+    return d
+}
+;
+CityMap.Projection = function (a) {
+    var b = 2 * Math.PI * (a && a.radius || 6378137)
+            , c = 1 / b
+            , d = b / 2
+            , f = 180 / Math.PI
+            , g = []
+            , h = []
+            , e = this
+            , k = new function () {
+                var b = a && a.radius || 6378137
+                        , c = a && "undefined" != typeof a.e ? a.e : 0.0818191908426
+                        , d = c * c
+                        , f = d * d
+                        , g = f * d
+                        , h = f * f
+                        , k = 1 / b
+                        , t = d / 2 + 5 * f / 24 + g / 12 + 13 * h / 360
+                        , u = 7 * f / 48 + 29 * g / 240 + 811 * h / 11520
+                        , v = 7 * g / 120 + 81 * h / 1120
+                        , w = 4279 * h / 161280
+                        , r = Math.PI / 180
+                        , s = 180 / Math.PI;
+                this.mercatorToGeo = function (a) {
+                    var b = this.xToLongitude(a[0]);
+                    return {
+                        lat: this.yToLatitude(a[1]),
+                        lng: b
+                    }
+                }
+                ;
+                this.geoToMercator = function (a) {
+                    return {
+                        x: this.longitudeToX(a.lng),
+                        y: this.latitudeToY(a.lat)
+                    }
+                }
+                ;
+                this.xToLongitude = function (a) {
+                    return cycleRestrict(a * k, -Math.PI, Math.PI) * s
+                }
+                ;
+                this.yToLatitude = function (a) {
+                    a = 0.5 * Math.PI - 2 * Math.atan(1 / Math.exp(a * k));
+                    return (a + t * Math.sin(2 * a) + u * Math.sin(4 * a) + v * Math.sin(6 * a) + w * Math.sin(8 * a)) * s
+                }
+                ;
+                this.longitudeToX = function (a) {
+                    a = e.cycleRestrict(a * r, -Math.PI, Math.PI);
+                    return b * a
+                }
+                ;
+                this.latitudeToY = function (a) {
+                    var d = a * r;
+                    a = c * Math.sin(d);
+                    d = Math.tan(0.25 * Math.PI + 0.5 * d) || 1E-10;
+                    a = Math.pow(Math.tan(0.25 * Math.PI + 0.5 * Math.asin(a)), c);
+                    return b * Math.log(d / a)
+                }
+            }
+    ;
+    this.pow2 = function (a) {
+        "undefined" == typeof h[a] && (h[a] = Math.pow(2, a));
+        return h[a]
+    }
+    ;
+    this.fromGlobalPixels = function (a) {
+        var b = 2 == arguments.length ? arguments[1] : 0;
+        "undefined" == typeof g[b] && (g[b] = this.pow2(b + 8) * c);
+        var e = this._globalPixelXToGeo(a.x, b);
+        return {
+            lat: k.yToLatitude(d - a.y / g[b]),
+            lng: e
+        }
+    }
+    ;
+    this.toGlobalPixels = function (a) {
+        var b = 2 == arguments.length ? arguments[1] : 0;
+        "undefined" == typeof g[b] && (g[b] = this.pow2(b + 8) * c);
+        var e = k.geoToMercator(a);
+        return {
+            x: (d + e.x) * g[b],
+            y: (d - e.y) * g[b]
+        }
+    }
+    ;
+    this.toTileCoord = function (a, b) {
+        var c = this.toGlobalPixels(a, b - 8);
+        return {
+            x: Math.floor(c.x),
+            y: Math.floor(c.y)
+        }
+    }
+    ;
+    this.globalToTileCoord = function (a, b) {
+        return {
+            x: Math.floor(a.x * this.pow2(b - 8)),
+            y: Math.floor(a.y * this.pow2(b - 8))
+        }
+    }
+    ;
+    this.distanceToGlobalPixels = function (a, c, d) {
+        a = b * Math.cos(a.lng * Math.PI / 180) / Math.pow(2, d + 8);
+        return Math.abs(c / a)
+    }
+    ;
+    this._globalPixelXToGeo = function (a, b) {
+        return this.cycleRestrict(Math.PI * a / this.pow2(b + 7) - Math.PI, -Math.PI, Math.PI) * f
+    }
+    ;
+    this.cycleRestrict = function (a, b, c) {
+        return a == Number.POSITIVE_INFINITY ? c : a == Number.NEGATIVE_INFINITY ? b : a - Math.floor((a - b) / (c - b)) * (c - b)
+    }
+    ;
+    return this
+}
+;
+CityMap.Projection.wgs84Mercator = {};
+CityMap.Projection.sphericalMercator = {
+    e: 0
+};
+CityMap.Balloon = function (a) {
+    var b = this;
+    this.marker = null;
+    this.point = -1;
+    this.nli;
+    this.timer = null;
+    this.model = a;
+    this.build = function (a) {
+        $(a).find(".citymaps-balloon-buttons").on("click", "li", function (a) {
+            a.stopPropagation();
+            switch (a.target.className) {
+                case "citymaps-balloon-back":
+                    b.back();
+                    break;
+                case "prev-doctor":
+                    b.prev();
+                    break;
+                case "next-doctor":
+                    b.next();
+                    break;
+                case "prev-doctor-way":
+                    b.prev();
+                    break;
+                case "next-doctor-way":
+                    b.next();
+                    break;
+                case "citymaps-balloon-close":
+                    b.close()
+            }
+        }).end().find(".citymaps-balloon-content").on("mouseenter", "td", function () {
+            $(this).parent().addClass("citymaps-balloon-content-hover")
+        }).on("mouseout", "td", function () {
+            $(this).parent().removeClass("citymaps-balloon-content-hover")
+        }).on("click", "td", function () {
+            $(this).parent().addClass("citymaps-balloon-content-selected");
+            b.open.call(b, b.marker, $(this).parent().index())
+        }).end().find(".citymaps-balloon-buttons li a").each(function () {
+            switch (this.className) {
+                case "citymaps-balloon-back":
+                    $(this).css("display", 0 <= b.point ? "block" : "none");
+                    break;
+                case "prev-doctor":
+                    $(this).css("display", 0 < b.point ? "block" : "none");
+                    break;
+                case "next-doctor":
+                    $(this).css("display", 0 <= b.point && b.point < b.marker.points.length - 1 ? "block" : "none")
+            }
+        });
+        for (var d = 1; d <= b.marker.points.length; d++)
+            1 < b.marker.points.length && $(a).find(".nav-doctor-card").append("<li></li>");
+        $(a).find(".nav-doctor-card li").on("click", function (a) {
+            b.sel($(this).index(".nav-doctor-card li"))
+        });
+        b.actnav(this.nli)
+    }
+    ;
+    this.sel = function (a) {
+        this.open(this.marker, a);
+        this.nli = a
+    }
+    ;
+    this.actnav = function (a) {
+        $(".citymaps-balloon-content").find(".nav-doctor-card li").eq(a).addClass("active")
+    }
+    ;
+    this.clear = function (a) {
+        $(a).find(".citymaps-balloon-content").off("**")
+    }
+    ;
+    this.back = function () {
+        this.marker && "group" == this.marker.type && this.open(this.marker)
+    }
+    ;
+    this.prev = function () {
+        this.marker && 0 < this.point && this.open(this.marker, this.point - 1);
+        this.nli = this.point
+    }
+    ;
+    this.next = function () {
+        this.marker && this.point < this.marker.points.length - 1 && this.open(this.marker, this.point + 1);
+        this.nli = this.point
+    }
+    ;
+    this.open = function (a) {
+        this.nli = 0;
+        var b = this, f, g;
+        this.marker = a;
+        this.point = 2 == arguments.length ? arguments[1] : -1;
+        if ("group" == this.marker.type && -1 == this.point) {
+            var h = "";
+            f = {
+                lat: this.marker.lat,
+                lng: this.marker.lng
+            };
+            for (var e = 0, k = this.marker.points.length; e < k; e++) {
+                point = this.marker.points[e];
+                h += "<tr>";
+                g = this.model.getSchema(point, "data").split("%");
+                for (var l = 0; l < g.length; l++)
+                    h += "<td>" + g[l] + "</td>";
+                h += "</tr>"
+            }
+            this.model.controller.balloon.open(f, "#citymaps-balloon-group-template", {
+                rowContent: h,
+                title: a.title
+            });
+            $(".citymaps-balloon-content table tr:first-child td").trigger("click")
+        } else
+            point = -1 == this.point ? a.points[0] : a.points[this.point],
+                    g = this.model._dataUrl + this.model.getSchema(point, "id"),
+                    f = this.model.controller.projection.fromGlobalPixels(a.wcoord),
+                    $.get(g, function (a) {
+                        b.model.controller.balloon.open.call(b.model.controller.balloon, f, "#citymaps-balloon-template", a)
+                    })
+    }
+    ;
+    this.close = function () {
+        this.model.controller.balloon.close();
+        marker = null
+    }
+    ;
+    return this
+}
+;
+CityMapLogger = {
+    _vars: {},
+    _timer: {},
+    _timeout: null,
+    _logText: "",
+    onchange: null,
+    start: function (a) {
+        var b;
+        "object" != typeof a && (a = [a]);
+        for (var c = 0; c < a.length; c++)
+            if (b = a[c],
+                    "undefined" == typeof this._timer[b] || 0 == this._timer[b])
+                this._timer[b] = new Date;
+        return this
+    },
+    stop: function (a) {
+        var b, c;
+        "object" != typeof a && (a = [a]);
+        for (var d = 0; d < a.length; d++)
+            c = a[d],
+                    b = "undefined" == typeof this._timer[c] ? 0 : new Date - this._timer[c],
+                    "undefined" == typeof this._vars[c] && (this._vars[c] = 0),
+                    this._vars[c] += b,
+                    this._timer[c] = 0;
+        this.change();
+        return this
+    },
+    end: function (a) {
+        var b, c;
+        "object" != typeof a && (a = [a]);
+        for (var d = 0; d < a.length; d++)
+            c = a[d],
+                    b = "undefined" == typeof this._timer[c] ? 0 : new Date - this._timer[c],
+                    "undefined" == typeof this._vars[c] && (this._vars[c] = 0),
+                    this._vars[c] = Math.max(this._vars[c], b),
+                    this._timer[c] = 0;
+        this.change();
+        return this
+    },
+    change: function () {
+        if (this.onchange) {
+            var a = this;
+            this._timeout && window.clearTimeout(this._timeout);
+            this._timeout = window.setTimeout(function () {
+                window.clearTimeout(a._timeout);
+                a._timeout = null;
+                a.onchange()
+            }, 500)
+        }
+        return this
+    },
+    set: function (a) {
+        var b, c;
+        2 == arguments.length && (b = arguments[0],
+                c = arguments[1],
+                a = {},
+                a[b] = c);
+        for (b in a)
+            a.hasOwnProperty(b) && (this._vars[b] = a[b]);
+        this.change();
+        return this
+    },
+    max: function (a) {
+        var b, c;
+        2 == arguments.length && (b = arguments[0],
+                c = arguments[1],
+                a = {},
+                a[b] = c);
+        for (b in a)
+            a.hasOwnProperty(b) && (this._vars[b] = "undefined" == typeof this._vars[b] ? a[b] : Math.max(this._vars[b], a[b]));
+        this.change();
+        return this
+    },
+    inc: function (a) {
+        var b, c;
+        2 == arguments.length ? (b = arguments[0],
+                c = arguments[1],
+                a = {},
+                a[b] = c) : "Object" != typeof a && (b = a,
+                a = {},
+                a[b] = 1);
+        for (b in a)
+            a.hasOwnProperty(b) && (this._vars[b] = "undefined" == typeof this._vars[b] ? "undefined" == typeof a[b] ? 1 : a[b] : this._vars[b] + ("undefined" == typeof a[b] ? 1 : a[b]));
+        this.change();
+        return this
+    },
+    clear: function (a) {
+        "undefined" == typeof a && (a = "visibleCount mapDrawTime mapSelectTime mapTime sortTime clusterTime tileMaxCount tileMaxVisibleCount clusterMaxTime clusterTime mapDOMCount visibleTileCount renderMaxTime tileMaxTime mapTime".split(" "));
+        for (var b in a)
+            a.hasOwnProperty(b) && "undefined" != typeof this._vars[a[b]] && (this._vars[a[b]] = 0);
+        this.change();
+        return this
+    },
+    get: function (a) {
+        return "undefined" == typeof this._vars[a] ? "NaN" : this._vars[a]
+    },
+    log: function (a) {
+        return this
+    },
+    print: function () {
+        var a = this._logText;
+        this._logText = "";
+        return a
+    },
+    update: function () {
+        this.set({
+            mapDOMCount: $(citymap.container).find("*").length,
+            mapZoom: citymap.controller.map.getZoom()
+        });
+        this.change()
+    }
+};
+GisController = function (a, b) {
+    this.map = null;
+    this.model = a;
+    this.logger = a.logger;
+    this.maxZoom = 22;
+    this._hover = null;
+    this.initMap(b)
+}
+;
+GisController.prototype.mapReady = function () {
+    return !!this.map
+}
+;
+GisController.prototype.initMap = function (a) {
+    this.map = new DG.Map(this.model.container);
+    this.map.setCenter(new DG.GeoPoint(a.center.lng, a.center.lat));
+    this.map.setZoom(12);
+    this.projection = CityMap.Projection(CityMap.Projection.sphericalMercator)
+}
+;
+GisFullCanvasController = function (a, b) {
+    GisFullCanvasController.superclass.constructor.apply(this, arguments);
+    this._tiles = []
+}
+;
+extend(GisFullCanvasController, GisController);
+GisController.prototype.initialize = function () {
+    this.model.tileOffset = {
+        x: 0,
+        y: 0
+    };
+    this.canvasOverlay = this.createCanvasOverlay()
+}
+;
+GisController.prototype.createHover = function () {
+    this._hover = new google.maps.Marker({
+        map: this.map,
+        visible: !1,
+        cursor: "pointer"
+    });
+    var a = this;
+    google.maps.event.addListener(this.map, "mousemove", function (b) {
+        a.model.marker = a.model.getPointByLatLng.call(a.model, b.latLng.lat(), b.latLng.lng(), a.map.getZoom());
+        a.showHover.call(a, a.model.marker)
+    });
+    google.maps.event.addListener(this._hover, "click", function (b) {
+        a.showHover.call(a, null);
+        a.model.markerEvent.call(a.model, "click")
+    });
+    google.maps.event.addListener(this.map, "zoomchange", function (b) {
+        a.showHover.call(a, null)
+    });
+    google.maps.event.addDomListener(this.map.getDiv(), "touchstart", function (b) {
+        var c = $(a.map.getDiv()).position()
+                , d = b.pageX - c.left;
+        b = b.pageY - c.top;
+        c = a.getBounds();
+        c = a.projection.toGlobalPixels({
+            lat: c.north,
+            lng: c.west
+        }, a.getZoom());
+        d = a.projection.fromGlobalPixels({
+            x: c.x + d,
+            y: c.y + b
+        }, a.getZoom());
+        a.model.marker = a.model.getPointByLatLng.call(a.model, d.lat, d.lng, a.getZoom());
+        a.model.markerEvent.call(a.model, "click")
+    })
+}
+;
+GisController.prototype.showHover = function (a) {
+    if (a) {
+        var b = this.createIcon(a.icon);
+        this._hover.setIcon(b.icon);
+        "undefined" != typeof b.shadow && this._hover.setShadow(b.shadow);
+        this._hover.setTitle(a.title);
+        this._hover.setPosition(new google.maps.LatLng(a.lat, a.lng));
+        this._hover.setVisible(!0)
+    } else
+        this._hover.setVisible(!1)
+}
+;
+GisFullCanvasController.prototype.createCanvasOverlay = function () {
+    var a = new function (a, c) {
+        return {
+            parent: null,
+            layout: null,
+            map: null,
+            zoom: 0,
+            controller: a.controller,
+            pane: null,
+            inaction: !1,
+            actiontimer: null,
+            tick: 5,
+            getParent: function () {
+                return this._parent
+            },
+            setParent: function (a) {
+                this.parent = a;
+                this.map = a.getMap();
+                null == this.layout && this.createLayout()
+            },
+            createLayout: function () {
+                var a = this.getContainer()
+                        , b = this;
+                this.getMap().addEventListener(this.getMap().getContainerId(), "DgMapMove", function (a) {
+                    b._draw()
+                });
+                this.getMap().addEventListener(this.getMap().getContainerId(), "DgClick", function (a) {
+                    b._draw()
+                });
+                this.layout = document.createElement("canvas");
+                $(this.layout).css({
+                    position: "absolute",
+                    zIndex: 1E3
+                }).appendTo(a);
+                this._draw()
+            },
+            getMap: function () {
+                return this.controller.map
+            },
+            getContainer: function () {
+                return this.getMap().getContainer()
+            },
+            getPane: function () {
+                return this.getMap().getPane()
+            },
+            _draw: function () {
+                var a = this.getMap().getZoom()
+                        , b = this.getMap().getBounds();
+                this.getMap().converter.coordinatesToMapPixels(b.getLeftTop());
+                this.getMap().converter.coordinatesToMapPixels(b.getRightBottom());
+                var c = 0
+                        , h = 0
+                        , e = "undefined" == typeof FlashCanvas ? 256 * Math.ceil(($(this.getContainer()).width() + 1) / 256) : 2E3
+                        , k = "undefined" == typeof FlashCanvas ? 256 * Math.ceil(($(this.getContainer()).height() + 1) / 256) : 2E3;
+                this._offset = {
+                    x: (e - $(this.getContainer()).width()) / 2,
+                    y: (k - $(this.getContainer()).height()) / 2
+                };
+                Math.round(a) == a ? (this.controller.model.pow2(Math.round(a)),
+                        b = [this.controller.projection.toGlobalPixels({
+                                lat: b.getTop(),
+                                lng: b.getLeft()
+                            }), this.controller.projection.toGlobalPixels({
+                                lat: b.getBottom(),
+                                lng: b.getRight()
+                            })],
+                        this.zoom = a,
+                        this.layout.width = e,
+                        this.layout.height = k,
+                        this.controller.model.renderMapCanvas(this.layout, b, a)) : (a = a > this.zoom ? 1 + a - this.zoom : 1 - this.zoom + a,
+                        h *= a,
+                        c *= a,
+                        e *= a,
+                        k *= a);
+                $(this.layout).css({
+                    left: h + "px",
+                    top: c + "px",
+                    width: e + "px",
+                    height: k + "px"
+                })
+            }
+        }
+    }
+    ({
+        data: {},
+        controller: this
+    });
+    a.createLayout();
+    gl_control = a
+}
+;
+(0 > navigator.appName.indexOf("Explorer") || navigator.appName.indexOf("Explorer") + 1 && 8 < parseInt($.browser.version, 10)) && function (e, z, q, l, Y) {
+    var t = e.document, L = t.documentElement, u = e.history || {}, f = e.location, p = !!u.pushState, da = p && u.state === Y, w = f.href, x = e.JSON || {}, F = Object.defineProperty, G = Object.prototype.__defineGetter__, ea = Object.prototype.__defineSetter__, Z = u.pushState, aa = u.replaceState, M = e.sessionStorage, H = Object.prototype.hasOwnProperty, fa = Object.prototype.toString, N = +((e.eval && eval("/*@cc_on 1;@*/") && /msie (\d+)/i.exec(navigator.userAgent) || [])[1] || 0), ga = (new Date).getTime(), A = (F || G) && (!N || 8 < N) ? 0 : 1, k = 8 > N ? t.createElement("iframe") : q, B, I, J, C = "", D = (B = "addEventListener",
+            e[B]) || (B = "attachEvent",
+            C = "on",
+            e[B]), ha = (I = "removeEventListener",
+            e[I]) || (I = "detachEvent",
+            e[I]), ia = (J = "dispatchEvent",
+            e[J]) || (J = "fireEvent",
+            e[J]), O = [], ba = [], T = 0, E = {
+        onpopstate: O,
+        popstate: O,
+        onhashchange: ba,
+        hashchange: ba
+    }, r = function () {
+        var a, c, g, d = {
+            basepath: "/",
+            redirect: 0,
+            type: "/"
+        };
+        g = t.getElementsByTagName("SCRIPT");
+        for (a = 0; g[a]; a++)
+            if (c = /(.*)\/(?:history|spike)(?:\.iegte8)?(?:-\d\.\d(?:\.\d)?\w?)?(?:\.min)?.js\?(.*)$/i.exec(g[a].src) || a === g.length - 1 && 2 === (c = g[a].src.split("?")).length && (c[2] = c[1]) && c) {
+                a = 0;
+                for (g = c[2].split("&"); g[a]; )
+                    c = g[a++].split("="),
+                            d[c[0]] = "true" == c[1] ? z : "false" == c[1] ? q : c[1] || "";
+                d.basepath = d.basepath || "/";
+                break
+            }
+        return d
+    }(), m = function (a) {
+        var c, g, d, b, e, h, v;
+        return function (n, ja) {
+            var ka = RegExp("^" + r.basepath, "i");
+            if (!n) {
+                if (n = f.href,
+                        !p || ja)
+                    n = f.protocol + "//" + f.host + r.basepath + (n.replace(/^[^#]*/, "") || "#").replace(RegExp("^#[/]?(?:" + r.type + ")?"), "")
+            } else if (!p || N) {
+                var P = m()
+                        , k = P._pathname
+                        , l = P._protocol;
+                n = /^(?:[\w0-9]+\:)?\/\//.test(n) ? 0 === n.indexOf("/") ? l + n : n : l + "//" + P._host + (0 === n.indexOf("/") ? n : 0 === n.indexOf("?") ? k + n : 0 === n.indexOf("#") ? k + P._search + n : k.replace(/[^\/]+$/g, "") + n)
+            }
+            if (c !== n) {
+                a.href = c = n;
+                h = a.port;
+                e = a.host;
+                v = a.pathname;
+                if ("http:" === a.protocol && 80 == h || "https:" === a.protocol && 443 == h)
+                    e = a.hostname,
+                            h = "";
+                v = 0 === v.indexOf("/") ? v : "/" + v;
+                g = v + a.search + a.hash;
+                b = v.replace(ka, r.type) + a.search;
+                d = b + a.hash
+            }
+            return {
+                _href: a.protocol + "//" + e + g,
+                _protocol: a.protocol,
+                _host: e,
+                _hostname: a.hostname || f.hostname,
+                _port: h || f.port,
+                _pathname: v,
+                _search: a.search,
+                _hash: a.hash,
+                _relative: g,
+                _nohash: b,
+                _special: d
+            }
+        }
+    }(t.createElement("a")), s = A ? {
+        back: u.back,
+        forward: u.forward,
+        go: u.go,
+        pushState: l,
+        replaceState: l,
+        emulate: !p,
+        toString: function () {
+            return "[object History]"
+        }
+    } : u, Q = {
+        state: {
+            get: function () {
+                return k && k.storage || U()[s.location.href] || l
+            }
+        },
+        length: {
+            get: function () {
+                return u.length
+            }
+        },
+        location: {
+            set: function (a) {
+                e.location = a
+            },
+            get: function () {
+                return p ? f : V
+            }
+        }
+    }, V = {
+        assign: function (a) {
+            f.assign(p || 0 !== a.indexOf("#") ? a : "#" + m()._nohash + a)
+        },
+        reload: f.reload,
+        replace: function (a) {
+            f.replace(p || 0 !== a.indexOf("#") ? a : "#" + m()._nohash + a)
+        },
+        toString: function () {
+            return this.href
+        }
+    }, la = {
+        href: {
+            set: function (a) {
+                f.href = a
+            },
+            get: function () {
+                return m()._href
+            }
+        },
+        protocol: {
+            set: function (a) {
+                f.protocol = a
+            },
+            get: function () {
+                return f.protocol
+            }
+        },
+        host: {
+            set: function (a) {
+                f.host = a
+            },
+            get: function () {
+                return f.host
+            }
+        },
+        hostname: {
+            set: function (a) {
+                f.hostname = a
+            },
+            get: function () {
+                return f.hostname
+            }
+        },
+        port: {
+            set: function (a) {
+                f.port = a
+            },
+            get: function () {
+                return f.port
+            }
+        },
+        pathname: {
+            set: function (a) {
+                f.pathname = a
+            },
+            get: function () {
+                return m()._pathname
+            }
+        },
+        search: {
+            set: function (a) {
+                f.search = a
+            },
+            get: function () {
+                return m()._search
+            }
+        },
+        hash: {
+            set: function (a) {
+                a = 0 === a.indexOf("#") ? a : "#" + a;
+                var c = m();
+                k ? a != c._hash && (s.pushState(l, l, c._nohash + a),
+                        ca({
+                            oldURL: c._href
+                        })) : f.hash = "#" + c._nohash + a
+            },
+            get: function () {
+                return m()._hash
+            }
+        }
+    }, W = function (a, c, g) {
+        var d = a, b, y = q;
+        if (F || G)
+            for (b in c) {
+                if (H.call(c, b))
+                    if (G)
+                        c[b].get && G.call(a, b, c[b].get),
+                                c[b].set && ea.call(a, b, c[b].set);
+                    else if (F)
+                        try {
+                            F(a, b, c[b])
+                        } catch (h) {
+                            if (g)
+                                return q;
+                            y = z;
+                            break
+                        }
+            }
+        else
+            y = z;
+        if (y && A) {
+            g = "StaticClass" + ga + A++;
+            d = ["Class " + g];
+            "execVB"in e || execScript("Function execVB(c) ExecuteGlobal(c) End Function", "VBScript");
+            "VBCVal"in e || execScript("Function VBCVal(o,r) If IsObject(o) Then Set r=o Else r=o End If End Function", "VBScript");
+            for (b in a)
+                d[d.length] = "Public [" + b + "]";
+            H.call(a, "toString") && (a.propertyIsEnumerable("toString") || (d[d.length] = "Public [toString]"),
+                    c["(toString)"] = {
+                get: function () {
+                    return this.toString.call(this)
+                }
+            });
+            for (b in c)
+                H.call(c, b) && (c[b].get && (a["get " + b] = c[b].get,
+                        d.push("Public [get " + b + "]", "Public " + ("(toString)" === b ? "Default " : "") + "Property Get [" + b + "]", "Call VBCVal(me.[get " + b + "].call(me),[" + b + "])", "End Property")),
+                        c[b].set && (a["set " + b] = c[b].set,
+                        d.push("Public [set " + b + "]", "Public Property Let [" + b + "](v)", "Call me.[set " + b + "].call(me,v)", "End Property", "Public Property Set [" + b + "](v)", "Call me.[set " + b + "].call(me,v)", "End Property")));
+            d.push("End Class", "Function " + g + "Factory()", "Set " + g + "Factory=New " + g, "End Function");
+            execVB(d.join("\n"));
+            d = e[g + "Factory"]();
+            for (b in a)
+                d[b] = a[b];
+            H.call(a, "toString") && (d.toString = a.toString)
+        }
+        return d
+    }, R = x.stringify || function (a) {
+        function c(a) {
+            var b = /[\\\"\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g
+                    , c = {
+                        "\b": "\\b",
+                        "\t": "\\t",
+                        "\n": "\\n",
+                        "\f": "\\f",
+                        "\r": "\\r",
+                        '"': '\\"',
+                        "\\": "\\\\"
+                    };
+            b.lastIndex = 0;
+            return b.test(a) ? '"' + a.replace(b, function (a) {
+                var b = c[a];
+                return "string" === typeof b ? b : "\\u" + ("0000" + a.charCodeAt(0).toString(16)).slice(-4)
+            }) + '"' : '"' + a + '"'
+        }
+        var e = function (d) {
+            var b, f, h;
+            b = (typeof d).charCodeAt(2);
+            if (114 === b)
+                d = c(d);
+            else if (109 === b)
+                d = isFinite(d) ? String(d) : "null";
+            else if (111 === b || 108 === b)
+                d = String(d);
+            else if (106 === b)
+                if (d) {
+                    f = (b = "[object Array]" === fa.apply(d)) ? "[" : "{";
+                    if (b)
+                        for (h = 0; h < d.length; h++)
+                            f += (0 == h ? "" : ",") + e(d[h]);
+                    else
+                        for (h in d)
+                            H.call(d, h) && d[h] !== a && (f += (1 == f.length ? "" : ",") + c(h) + ":" + e(d[h]));
+                    d = f + (b ? "]" : "}")
+                } else
+                    d = "null";
+            else
+                d = a;
+            return d
+        };
+        return e
+    }(), X = function () {
+        var a = x.parse;
+        return function (c) {
+            return c ? a ? a(c) : (new Function("return " + c))() : l
+        }
+    }(), U = function (a) {
+        return M ? a ? M.setItem("__hitoryapi__", R(a)) : X(M.getItem("__hitoryapi__")) || {} : {}
+    }, S = function (a, c, g) {
+        var d = 2 === a ? e.onhashchange : e.onpopstate
+                , b = 2 === a ? "hashchange" : "popstate"
+                , f = E[b];
+        t.createEvent ? (a = t.createEvent("Events"),
+                a.initEvent(b, q, q)) : (a = t.createEventObject(),
+                a.type = b);
+        a.state = s.state;
+        a.oldURL = c;
+        a.newURL = g;
+        d && d.call(e, a);
+        c = 0;
+        for (g = f.length; c < g; c++)
+            f[c].call(e, a)
+    }, ca = function () {
+        var a = e.onpopstate || l
+                , c = e.onhashchange || l
+                , g = 0
+                , d = l
+                , b = m()
+                , y = b._href;
+        b._hash.replace(/^#/, "");
+        var h = function () {
+            w && (!(w = 0) && b._relative !== r.basepath) && (clearInterval(d),
+                    setTimeout(S, 10))
+        }
+        , k = function (a) {
+            var b = m();
+            if (T)
+                return y = b._href,
+                        T = 0;
+            var c = a.oldURL || y;
+            a = y = a.newURL || b._href;
+            var b = c.replace(/^.*?(#|$)/, "")
+                    , d = a.replace(/^.*?(#|$)/, "");
+            c == a || g || S();
+            w = g = 0;
+            b != d && S(2, c, a)
+        };
+        D(C + "hashchange", k, q);
+        D(C + "popstate", function () {
+            if (w === f.href)
+                return w = 0;
+            w = 0;
+            S(g = 1)
+        }, q);
+        s.redirect = function (a, b) {
+            r.type = a == l ? r.type : a;
+            r.basepath = b == l ? r.basepath : b;
+            if (e.top == e.self) {
+                var c = m(l, z)._relative
+                        , d = f.search
+                        , g = f.pathname;
+                b = r.basepath;
+                p ? (c != b && RegExp("^" + b + "$", "i").test(g) && (f.href = c),
+                        RegExp("^" + b + "$", "i").test(g + "/") ? f.href = b : RegExp("^" + b, "i").test(g) || (f.href = g.replace(/^\//, b) + d)) : g != b && (f.href = b + "#" + g.replace(RegExp("^" + b, "i"), r.type) + d + f.hash)
+            }
+        }
+        ;
+        s = W(s, A ? Q : u.state === Y ? {
+            state: Q.state,
+            location: Q.location
+        } : {
+            location: Q.location
+        });
+        V = W(V, la);
+        e[B] = function (a, b, c) {
+            E[a] ? (E[a].push(b),
+                    p || O !== E[a] || h()) : 3 < arguments.length ? D(a, b, c, arguments[3]) : D(a, b, c)
+        }
+        ;
+        e[I] = function (a, b, c) {
+            var d = E[a];
+            if (d)
+                for (a = d.length; --a; ) {
+                    if (d[a] === b) {
+                        d.splice(a, 1);
+                        break
+                    }
+                }
+            else
+                ha(a, b, c)
+        }
+        ;
+        e[J] = function (a, b) {
+            var c = E[a]
+                    , d = c === O ? e.onpopstate : e.onhashchange;
+            if (c) {
+                b = b || ("string" == typeof a ? e.event : a);
+                try {
+                    b && (b.target = e)
+                } catch (g) {
+                    try {
+                        b.srcElement = e
+                    } catch (f) {
+                    }
+                }
+                d && d.call(e, b);
+                for (var d = 0, h = c.length; d < h; d++)
+                    c[d].call(e, b);
+                return z
+            }
+            return ia(a, b)
+        }
+        ;
+        A && execScript("Public history, onhashchange", "VBScript");
+        (F || G) && W(e, {
+            onhashchange: {
+                get: function () {
+                    return c
+                },
+                set: function (a) {
+                    c = a || l
+                }
+            },
+            onpopstate: {
+                get: function () {
+                    return a
+                },
+                set: function (b) {
+                    (a = b || l) && !p && h()
+                }
+            }
+        }, 1) || p || (d = setInterval(function () {
+            e.onpopstate && h()
+        }, 100));
+        r.redirect && s.redirect();
+        if (p)
+            D(C + "load", function () {
+                setTimeout(function () {
+                    w = 0
+                }, 0)
+            }, q);
+        else
+            t[B](C + "click", function (a) {
+                var b = a || e.event
+                        , c = b.target || b.srcElement;
+                a = "defaultPrevented"in b ? b.defaultPrevented : b.returnValue === q;
+                c && ("A" === c.nodeName && !a) && (a = m(c.getAttribute("href", 2), z),
+                        a._hash && ("#" !== a._hash && a._hash === a._href.replace(m()._href.split("#").shift(), "")) && (history.location.hash = a._hash,
+                        a = a._hash.replace(/^#/, ""),
+                        (c = t.getElementById(a)) && (c.id === a && "A" === c.nodeName) && (c = c.getBoundingClientRect(),
+                        e.scrollTo(L.scrollLeft || 0, c.top + (L.scrollTop || 0) - (L.clientTop || 0))),
+                        b.preventDefault ? b.preventDefault() : b.returnValue = !1))
+            }, q);
+        return k
+    }(), K = function (a, c, e, d) {
+        var b = U()
+                , k = m()._href
+                , h = e && m(e);
+        e = h ? h._href : k;
+        d && b[k] && delete b[k];
+        (!p || da) && (M && a) && (b[e] = a,
+                U(b),
+                a = l);
+        Z && aa ? d ? aa.call(s, a, c, e) : Z.call(s, a, c, e) : h && h._relative != m()._relative && (T = 1,
+                d ? f.replace("#" + h._special) : f.hash = h._special)
+    };
+    s.replaceState = function (a, c, e) {
+        K(a, c, e, 1)
+    }
+    ;
+    A ? (e.history = s,
+            function (a, c) {
+                if (k) {
+                    var g, d = function () {
+                        var a = m()._href;
+                        c != a && ca({
+                            oldURL: c,
+                            newURL: c = a
+                        })
+                    };
+                    g = setInterval(d, 100);
+                    k.src = "javascript:true;";
+                    k = L.firstChild.appendChild(k).contentWindow;
+                    K = function (a, b, e, n, l) {
+                        var p = k.document
+                                , q = ["<script>", "lfirst=1;", , "storage=" + R(a) + ";", "\x3c/script>"];
+                        if (e = e && m(e)) {
+                            l || clearInterval(g);
+                            if (n)
+                                k.lfirst ? (history.back(),
+                                        K(a, b, e._href, 0, 1)) : (k.storage = a,
+                                        f.replace("#" + e._special));
+                            else if (e._href != c || l)
+                                k.lfirst || (k.lfirst = 1,
+                                        K(k.storage, b, c, 0, 1)),
+                                        q[2] = 'parent.location.hash="' + e._special.replace(/"/g, '\\"') + '";',
+                                        p.open(),
+                                        p.write(q.join("")),
+                                        p.close();
+                            l || (c = m()._href,
+                                    g = setInterval(d, 100))
+                        } else
+                            k.storage = a
+                    }
+                    ;
+                    D(C + "unload", function () {
+                        if (k.storage) {
+                            var a = {};
+                            a[m()._href] = k.storage;
+                            t.cookie = "_historyAPI=" + escape(R(a))
+                        }
+                        clearInterval(g)
+                    }, q);
+                    if (1 < a.length) {
+                        a = unescape(a.pop().split(";").shift());
+                        try {
+                            k.storage = X(a)[m()._href]
+                        } catch (b) {
+                        }
+                    }
+                    x.parse || x.stringify || (x.parse = X,
+                            x.stringify = R,
+                            e.JSON = x)
+                }
+            }(t.cookie.split("_historyAPI="), m()._href)) : e.history.emulate = !p;
+    s.pushState = K
+}(window, !0, !1, null);
+$(document).ready(function () {
+    $(document).click(function (a) {
+        $(a.target).closest(".fancybox-wrap").length || ($(".fancybox-close").click(function () {
+            $(".error_span").remove()
+        }),
+                $("body").hasClass("fancybox-lock") && $(".error_span").remove())
+    });
+    $(".up_page").click(function () {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        return !1
+    });
+    $(".left_search .search-form .head-label.second-label .visit-type").removeClass("radioBox").addClass("chekBox");
+    $(".slider-cards .next-nav, .slider-cards .prev-nav, .all_city .next-nav, .all_city .prev-nav").live("hover", function () {
+        $(this).find(".bg_nav").animate({
+            opacity: 1
+        }, 200)
+    });
+    $(".slider-cards .next-nav, .slider-cards .prev-nav, .all_city .next-nav, .all_city .prev-nav").live("mouseleave", function () {
+        $(this).find(".bg_nav").animate({
+            opacity: 0
+        }, 100)
+    });
+    navigator.appName.indexOf("Explorer") + 1 && 9 >= parseInt($.browser.version, 10) && $("input[placeholder]").placeholder();
+    $(".remove-feature-block .bound-doctor").live("click", function () {
+        $(this).hasClass("pass_doc") ? $(this).removeClass("pass_doc").removeClass("rebound-doctor").addClass("unbound-doctor").text("\u041e\u0442\u0432\u044f\u0437\u0430\u0442\u044c \u0432\u0440\u0430\u0447\u0430 \u043e\u0442 \u043a\u043b\u0438\u043d\u0438\u043a\u0438").parents(".remove-feature-block").find("span,br").remove() : $(this).removeClass("unbound-doctor").addClass("rebound-doctor").before("<span>\u0412\u0440\u0430\u0447 \u0431\u043e\u043b\u044c\u0448\u0435 \u043d\u0435 \u043f\u0440\u0438\u0432\u044f\u0437\u0430\u043d \u043a \u044d\u0442\u043e\u0439 \u043a\u043b\u0438\u043d\u0438\u043a\u0435</span><br/>").addClass("pass_doc").text("\u041e\u0442\u043c\u0435\u043d\u0438\u0442\u044c")
+    })
+});
+function setCookie(a, b, c, d, e, f) {
+    document.cookie = a + "=" + escape(b) + (c ? "; expires=" + c : "") + (d ? "; path=" + d : "") + (e ? "; domain=" + e : "") + (f ? "; secure" : "")
+}
+function getCookie(a) {
+    return (a = document.cookie.match("(^|;) ?" + a + "=([^;]*)(;|$)")) ? a[2] : ""
+}
+function deleteCookie(a) {
+    var b = new Date;
+    b.setTime(b.getTime() - 1);
+    document.cookie = a + ("=; expires=" + b.toGMTString())
+}
+var ajaxLoadCallbacks = [];
+function ajax(a, b) {
+    $("#" + b).html('<img src="/media/img/ajaxLoader.gif" />');
+    Ajax.Get(a, {}, function (a) {
+        $("#" + b).html(a);
+        if (ajaxLoadCallbacks)
+            for (var d in ajaxLoadCallbacks)
+                ajaxLoadCallbacks[d].call()
+    }, !1)
+}
+function showLoader(a) {
+    a.css("opacity", "0.3")
+}
+function removeLoader(a) {
+    a.css("opacity", "1")
+}
+function showOk(a) {
+    alert(a)
+}
+function showError(a) {
+    alert(a)
+}
+var Ajax = function () {};
+Ajax.Post = function (a, b, c, d) {
+    void 0 == d && (d = !0);
+    var e = "json";
+    d || (e = "html");
+    b.csrf = SessionInfo.csrf;
+    $.ajax({
+        url: a,
+        type: "POST",
+        data: b,
+        success: function (a) {
+            c && c(a)
+        },
+        dataType: e
+    })
+}
+;
+Ajax.SyncPost = function (a, b, c, d) {
+    void 0 == d && (d = !0);
+    var e = "json";
+    d || (e = "html");
+    $.ajax({
+        url: a,
+        type: "POST",
+        async: !1,
+        data: b,
+        success: function (a) {
+            c(a)
+        },
+        dataType: e
+    })
+}
+;
+Ajax.Get = function (a, b, c, d) {
+    void 0 == d && (d = !0);
+    $.ajax({
+        url: a,
+        data: b,
+        type: "GET",
+        success: function (a) {
+            c(a)
+        },
+        dataType: d ? "json" : "html"
+    })
+}
+;
+Ajax.SyncGet = function (a) {
+    var b;
+    $.ajax({
+        url: a,
+        type: "GET",
+        async: !1,
+        success: function (a) {
+            b = a
+        },
+        error: function (a) {},
+        dataType: "json"
+    });
+    return b
+}
+;
+function sel(a) {
+    var b = $($(a).parent()).parent();
+    $(b).children().each(function (a) {
+        $(this).css("background", "none");
+        $(this).corner("5px")
+    });
+    $($(a).parent()).css("background", "#0066CC")
+}
+function getParameterByName(a, b) {
+    void 0 == b && (b = "");
+    a = a.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var c = RegExp("[\\?&]" + a + "=([^&#]*)").exec(window.location.search);
+    return null == c ? b : decodeURIComponent(c[1].replace(/\+/g, " "))
+}
+function attachFancybox(a) {
+    a.fancybox({
+        padding: 0,
+        beforeShow: function () {
+            $(".scroll-pane").jScrollPane()
+        }
+    })
+}
+function setCustomSelect(a, b) {
+    $(a + " option").removeAttr("selected");
+    $(a + ' option[value="' + b + '"]').attr("selected", "selected");
+    var c = $(a).attr("id")
+            , d = $(a + ' option[value="' + b + '"]').html();
+    $("#" + c + "_chzn .chzn-single span").html(d)
+}
+function setChosenSelect() {
+    $(".chzn-select").chosen();
+    $(".chzn-select-deselect").chosen({
+        allow_single_deselect: !0
+    })
+}
+function showMessagePopup(a) {
+    Ajax.Get("/ajax/getPopup", {
+        type: "message_popup",
+        message: a
+    }, function (a) {
+        0 == a.status && $("body").append(a.result.html)
+    })
+}
+function showValidationError(a, b) {
+    error_el = $('<span class="error_span" />');
+    error_el.html('<label for="' + a.attr("name") + '" class="error" style="display:block;">' + b + "</label>");
+    a.after(error_el);
+    error_el.delay(2E3).fadeOut(500)
+}
+function showPopup(a, b, c, d) {
+    void 0 == b && (b = "639px");
+    void 0 == c && (c = "auto");
+    void 0 == d && (d = !0);
+    var e = $("<div></div>");
+    e.append($('<div class="fancybox-placeholder" style="display: none;"></div>'));
+    var f = $('<div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;"></div>');
+    e.append(f);
+    c = $('<div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: ' + b + "; height: " + c + '; position: absolute; top: 20px; opacity: 1; overflow: visible;"></div>');
+    f.append(c);
+    var g = $('<div class="fancybox-skin" style="padding: 0px; width: auto; height: auto;"></div>');
+    c.append(g);
+    f = $('<div class="fancybox-outer"></div>');
+    g.append(f);
+    b = $('<div class="fancybox-inner" style="overflow: hidden; width: ' + b + '; height: auto;"></div>');
+    f.append(b);
+    d && (d = $('<a class="fancybox-item fancybox-close" href="javascript:;" title="Close"></a>'),
+            f.append(d),
+            d.click(function () {
+                e.remove();
+                $("body").removeClass("fancybox-lock")
+            }));
+    b.append(a);
+    $("body").addClass("fancybox-lock");
+    $("body").append(e);
+    $(".fancybox-wrap").css("left", ($(window).width() - $(".fancybox-wrap").width()) / 2);
+    $(window).on("resize", function () {
+        0 < $(this).width() - $(".fancybox-wrap").width() ? $(".fancybox-wrap").css("left", ($(this).width() - $(".fancybox-wrap").width()) / 2) : $(".fancybox-wrap").css("left", 20)
+    });
+    $(".city-block .show_all").toggle(function () {
+        $(this).addClass("active");
+        $(this).next(".all_city").show();
+        $(".all_city > ul").each(function (a) {
+            $(".all_city > ul").carouFredSel({
+                auto: !1,
+                prev: ".all_city .prev-nav",
+                next: ".all_city .next-nav",
+                scroll: {
+                    items: 3
+                },
+                circular: !1,
+                infinite: !1
+            })
+        })
+    }, function () {
+        $(this).removeClass("active");
+        $(this).next(".all_city").hide()
+    });
+    navigator.appName.indexOf("Explorer") + 1 && 9 >= parseInt($.browser.version, 10) && $("input[placeholder]").placeholder()
+}
+function showLandingPopup(a) {
+    var b = $('<div id="main-landing-popup"></div>');
+    b.append($('<div class="fancybox-placeholder" style="display: none;"></div>'));
+    var c = $('<div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;"></div>');
+    b.append(c);
+    var d = $('<div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: 680px; height: auto; position: absolute; top: 20px; opacity: 1; overflow: visible;"></div>');
+    c.append(d);
+    c = $('<div class="fancybox-skin" style="padding: 0px; width: auto; height: auto;"></div>');
+    d.append(c);
+    d = $('<div class="fancybox-outer"></div>');
+    c.append(d);
+    c = $('<div class="fancybox-inner" style="overflow: auto;"></div>');
+    d.append(c);
+    var e = $('<a style="display: none" class="fancybox-item fancybox-close" href="javascript:;" title="Close"></a>');
+    d.append(e);
+    c.append(a);
+    $("body").addClass("fancybox-lock");
+    $("body").append(b);
+    $(".fancybox-wrap").css("left", ($(window).width() - $(".fancybox-wrap").width()) / 2)
+}
+function showLandingForgotPassPopup(a) {
+    var b = $('<div id="main-landing-popup"></div>');
+    b.append($('<div class="fancybox-placeholder" style="display: none;"></div>'));
+    var c = $('<div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;"></div>');
+    b.append(c);
+    var d = $('<div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: 660px; height: auto; position: absolute; top: 250px; opacity: 1; overflow: visible;"></div>');
+    c.append(d);
+    c = $('<div class="fancybox-skin" style="padding: 0px; width: auto; height: auto;"></div>');
+    d.append(c);
+    d = $('<div class="fancybox-outer"></div>');
+    c.append(d);
+    c = $('<div class="fancybox-inner" style="overflow: auto;"></div>');
+    d.append(c);
+    var e = $('<a style="display: none" class="fancybox-item fancybox-close" href="javascript:;" title="Close"></a>');
+    d.append(e);
+    c.append(a);
+    $("body").addClass("fancybox-lock");
+    $("body").append(b);
+    $(".fancybox-wrap").css("left", ($(window).width() - $(".fancybox-wrap").width()) / 2)
+}
+function writeLogAccountActivity(a, b) {
+    Ajax.Post("/ajax/logAccountActivity", {
+        code: a,
+        log: b
+    }, function (a) {
+        return 0 == a.status ? !0 : !1
+    })
+}
+function addToBookmark(a, b) {
+    a && Ajax.Post("/doctor/ajaxAddToMyDoctorList", {
+        doctor_id: a
+    }, function (a) {
+        0 == a.status && (a.result.my_doctor ? (b.addClass("btn-bookmark-added"),
+                b.html('<i class="icon-add"></i> <span class="txt txt-added">\u0412 \u0437\u0430\u043a\u043b\u0430\u0434\u043a\u0430\u0445</span>')) : (b.removeClass("btn-bookmark-added"),
+                b.html('<i class="icon-add"></i> <span class="txt">\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432 \u0437\u0430\u043a\u043b\u0430\u0434\u043a\u0438</span>')))
+    })
+}
+function addTobookmarkSmallClinic(a) {
+    a && getSmallClinicBookmarkBlock(a)
+}
+function getSmallClinicBookmarkBlock(a) {
+    Ajax.Post("/clinic/ajaxAddToMyClinicList", {
+        clinic_id: a
+    }, function (b) {
+        0 == b.status && (b.result.my_clinic ? $(".clinic-bookmark-" + a).each(function () {
+            $(this).addClass("btn-bookmark-added");
+            $(this).html('<i class="icon-add"></i> <span class="txt txt-added">\u0412 \u0437\u0430\u043a\u043b\u0430\u0434\u043a\u0430\u0445</span>')
+        }) : $(".clinic-bookmark-" + a).each(function () {
+            $(this).removeClass("btn-bookmark-added");
+            $(this).html('<i class="icon-add"></i> <span class="txt">\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432 \u0437\u0430\u043a\u043b\u0430\u0434\u043a\u0438</span>')
+        }))
+    })
+}
+jQuery.fn.ForceNumericOnly = function () {
+    return this.each(function () {
+        $(this).keydown(function (a) {
+            a = a.charCode || a.keyCode || 0;
+            return 8 == a || 9 == a || 46 == a || 37 <= a && 40 >= a || 48 <= a && 57 >= a || 96 <= a && 105 >= a
+        })
+    })
+}
+;
+function showErrorLabel(a, b, c) {
+    b.addClass("error");
+    b.attr("class");
+    var d = b.attr("name") ? b.attr("name") : b.attr("class");
+    c || $(".error_span").remove();
+    error_el = $('<span class="error_span" />');
+    error_el.html('<label for="' + d + '" class="error" style="display:block;">' + a + "</label>");
+    b.after(error_el);
+    error_el.css({
+        width: b.outerWidth() + "px"
+    });
+    a = b.offset().left;
+    c = 19;
+    0 > a && (c -= a - 20,
+            a = 10,
+            error_el.addClass("custom-error23"),
+            $("head").append($("<style>span.custom-error23:after { right: " + c + "px !important; }</style>")));
+    alert(error_el.outerHeight());
+    error_el.css({
+        position: "absolute",
+        left: a,
+        "z-index": 2E4,
+        "white-space": "inherit",
+        "line-height": "20px",
+        "height": "auto"
+    });
+    error_el.appendTo($("body"));
+    error_el.css({top: b.offset().top - error_el.outerHeight() - 5});
+    error_el.delay(2E3).fadeOut(500);
+    return !1
+}
+function showLandingErrorLabel(a, b, c) {
+    b.addClass("error");
+    b.attr("class");
+    var d = b.attr("name") ? b.attr("name") : b.attr("class");
+    c || $(".error_span").remove();
+    error_el = $('<span class="error_span" />');
+    error_el.html('<label for="' + d + '" class="error" style="display:block;">' + a + "</label>");
+    b.after(error_el);
+    error_el.css({
+        width: b.outerWidth() + "px"
+    });
+    a = b.offset().left - 10;
+    c = 19;
+    0 > a && (c -= a - 20,
+            a = 10,
+            error_el.addClass("custom-error23"),
+            $("head").append($("<style>span.custom-error23:after { right: " + c + "px !important; }</style>")));
+    error_el.css({
+        position: "absolute",
+        top: b.offset().top - error_el.height() - 10,
+        left: a,
+        "z-index": 2E4
+    });
+    error_el.appendTo($("body"));
+    error_el.delay(2E3).fadeOut(500);
+    return !1
+}
+function extend(a, b) {
+    var c = function () {};
+    c.prototype = b.prototype;
+    a.prototype = new c;
+    a.prototype.constructor = a;
+    a.superclass = b.prototype
+}
+function pushHistory(a) {
+    a = {
+        title: $("title").val(),
+        url: a,
+        replace: null
+    };
+    (0 > navigator.appName.indexOf("Explorer") || navigator.appName.indexOf("Explorer") + 1 && 8 < parseInt($.browser.version, 10)) && history.pushState(a, a.title, a.url, 0)
+}
+function setCounters(a, b, c, d) {
+    c || (c = getCounterLabelByPageUrl());
+    void 0 != window.ga && ga("send", "event", a, b, {
+        eventLabel: c,
+        user: d
+    });
+    b = {
+        action: b,
+        label: c,
+        user: d
+    };
+    void 0 != window.yaCounterLookmedbook && yaCounterLookmedbook.reachGoal(a, b)
+}
+function setNewCounters(a, b, c, d, e) {
+    b = b + "/" + c + "/" + d;
+    e && (b += "/" + e);
+    void 0 != window.ga && ga("send", "pageview", b);
+    a && void 0 != window["yaCounter" + a] && eval("yaCounter" + a + ".file('" + b + "')")
+}
+function getCounterLabelByPageUrl() {
+    var a = window.location.pathname;
+    if (/^\/disease\/.+$/im.test(a))
+        return "disease-page";
+    if ("/" == a)
+        return "home";
+    if ("/disease" == a)
+        return "disease-search";
+    if (/^\/doctor\/.+$/im.test(a))
+        return "doctor-page";
+    if ("/doctor" == a)
+        return "doctor-search";
+    if (/^\/clinic\/.+$/im.test(a))
+        return "clinic-page";
+    if ("/clinic" == a)
+        return "clinic-search";
+    if ("/about" == a)
+        return "about";
+    if ("/help" == a)
+        return "help";
+    if ("/account" == a)
+        return "main";
+    a = a.replace("/", "");
+    return a.replace(/\//g, "-")
+}
+function showTopNumber() {
+    var a = new Date;
+    0 == a.getDay() || 6 == a.getDay() ? $(".top_number").hide() : 20 <= a.getHours() || 8 >= a.getHours() ? $(".top_number").hide() : $(".top_number").show()
+}
+function showLoginOrPhoneValidationMessage(a, b) {
+    a.val() ? a.val().match(/[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]/) ? Ajax.Post("/ajax/checkEmail", {
+        email: a.val()
+    }, function (c) {
+        c.result ? showErrorLabel("\u0423\u043a\u0430\u0437\u0430\u043d\u043d\u044b\u0439 \u0430\u0434\u0440\u0435\u0441 \u0435\u0449\u0435 \u043d\u0435 \u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043e\u0432\u0430\u043d", a, "") : showErrorLabel("\u041d\u0435\u0432\u0435\u0440\u043d\u044b\u0439 \u043f\u0430\u0440\u043e\u043b\u044c", b, "")
+    }) : a.val().match(/^((\+7)?|8)[0-9]{10}$/) ? Ajax.Post("/ajax/checkLoginPhone", {
+        phone: a.val()
+    }, function (c) {
+        c.result ? showErrorLabel("\u0423\u043a\u0430\u0437\u0430\u043d\u043d\u044b\u0439 \u0442\u0435\u043b\u0435\u0444\u043e\u043d \u0435\u0449\u0435 \u043d\u0435 \u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043e\u0432\u0430\u043d", a, "") : showErrorLabel("\u041d\u0435\u0432\u0435\u0440\u043d\u044b\u0439 \u043f\u0430\u0440\u043e\u043b\u044c", b, "")
+    }) : showErrorLabel("\u0412 \u043f\u043e\u043b\u0435 \u0442\u0435\u043b\u0435\u0444\u043e\u043d \u0438\u043b\u0438 email \u0434\u043e\u043b\u0436\u0435\u043d \u0431\u044b\u0442\u044c \u0432\u0432\u0435\u0434\u0451\u043d \u043a\u043e\u0440\u0440\u0435\u043a\u0442\u043d\u044b\u0439 \u0442\u0435\u043b\u0435\u0444\u043e\u043d \u0438\u043b\u0438 email-\u0430\u0434\u0440\u0435\u0441", a, "") : showErrorLabel("\u041f\u043e\u043b\u0435 \u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u043e \u0434\u043b\u044f \u0437\u0430\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044f", a, "")
+}
+var SessionInfo = function () {};
+SessionInfo.is_authed = !1;
+SessionInfo.email = "guest";
+SessionInfo.reset_filter = !1;
+var DateHelper = function () {};
+DateHelper.getEngNameByDayNumber = function (a) {
+    switch (a) {
+        case 1:
+            return "monday";
+        case 2:
+            return "tuesday";
+        case 3:
+            return "wednesday";
+        case 4:
+            return "thursday";
+        case 5:
+            return "friday";
+        case 6:
+            return "saturday";
+        case 0:
+            return "sunday"
+    }
+}
+;
+DateHelper.getRuMonthGenitiveNameByMonthNumber = function (a) {
+    switch (a) {
+        case 1:
+            return "\u044f\u043d\u0432\u0430\u0440\u044f";
+        case 2:
+            return "\u0444\u0435\u0432\u0440\u0430\u043b\u044f";
+        case 3:
+            return "\u043c\u0430\u0440\u0442\u0430";
+        case 4:
+            return "\u0430\u043f\u0440\u0435\u043b\u044f";
+        case 5:
+            return "\u043c\u0430\u044f";
+        case 6:
+            return "\u0438\u044e\u043d\u044f";
+        case 7:
+            return "\u0438\u044e\u043b\u044f";
+        case 8:
+            return "\u0430\u0432\u0433\u0443\u0441\u0442\u0430";
+        case 9:
+            return "\u0441\u0435\u043d\u0442\u044f\u0431\u0440\u044f";
+        case 10:
+            return "\u043e\u043a\u0442\u044f\u0431\u0440\u044f";
+        case 11:
+            return "\u043d\u043e\u044f\u0431\u0440\u044f";
+        case 12:
+            return "\u0434\u0435\u043a\u0430\u0431\u0440\u044f"
+    }
+    return ""
+}
+;
+DateHelper.getDayNumberByEngName = function (a) {
+    switch (a) {
+        case "monday":
+            return 1;
+        case "tuesday":
+            return 2;
+        case "wednesday":
+            return 3;
+        case "thursday":
+            return 4;
+        case "friday":
+            return 5;
+        case "saturday":
+            return 6;
+        case "sunday":
+            return 7
+    }
+    return !1
+}
+;
+DateHelper.getRuNameByDayNumber = function (a) {
+    switch (a) {
+        case 1:
+            return "\u041f\u043e\u043d\u0435\u0434\u0435\u043b\u044c\u043d\u0438\u043a";
+        case 2:
+            return "\u0412\u0442\u043e\u0440\u043d\u0438\u043a";
+        case 3:
+            return "\u0421\u0440\u0435\u0434\u0443";
+        case 4:
+            return "\u0427\u0435\u0442\u0432\u0435\u0440\u0433";
+        case 5:
+            return "\u041f\u044f\u0442\u043d\u0438\u0446\u0443";
+        case 6:
+            return "\u0421\u0443\u0431\u0431\u043e\u0442\u0443";
+        case 0:
+            return "\u0412\u043e\u0441\u043a\u0440\u0435\u0441\u0435\u043d\u044c\u0435"
+    }
+}
+;
+DateHelper.getTimeByDate = function (a) {
+    var b = 10 > a.getHours() ? "0" + a.getHours() : a.getHours();
+    a = 10 > a.getMinutes() ? "0" + a.getMinutes() : a.getMinutes();
+    return b + ":" + a
+}
+;
+DateHelper.getHoursByTime = function (a) {
+    return a.match(/^([0-9]{2}):([0-9]{2})$/)[1]
+}
+;
+DateHelper.getMinutesByTime = function (a) {
+    return a.match(/^([0-9]{2}):([0-9]{2})$/)[2]
+}
+;
+DateHelper.compareDates = function (a, b) {
+    a = parseInt(a.split("-").reverse().join(""));
+    b = parseInt(b.split("-").reverse().join(""));
+    return a == b ? 0 : a - b
+}
+;
+DateHelper.getDateByDayNameAndWeekNumberAndYear = function (a, b, c) {
+    a = DateHelper.getDayNumberByEngName(a);
+    b = b || 1;
+    a = a || 1;
+    c = c || (new Date).getFullYear();
+    c = new Date(c, 0, 7 * b);
+    c.setDate(c.getDate() - (c.getDay() || 7) + a);
+    return c
+}
+;
+DateHelper.getRuNameByDate = function (a) {
+    return (a = a.match(/^([0-9]{4})\-([0-9]{2})-([0-9]{2})/)) ? a[3] + " " + DateHelper.getRuMonthGenitiveNameByMonthNumber(parseInt(a[2])) : ""
+}
+;
+var ElementsHelper = function () {};
+ElementsHelper.blockElement = function (a) {
+    lock_div = $('<div class="lock-div"></div>');
+    lock_div.css({
+        position: "absolute",
+        left: 0,
+        top: 170,
+        width: a.width() + 300,
+        height: a.height() + 50,
+        "z-index": 1E3
+    });
+    var b = a.height();
+    setInterval(function () {
+        var c = a.height();
+        b != c && lock_div.css({
+            position: "absolute",
+            left: 0,
+            top: 170,
+            width: a.width() + 300,
+            height: a.height() + 50,
+            "z-index": 1E3
+        })
+    }, 100);
+    a.append(lock_div)
+}
+;
+DateHelper.isToday = function (a) {
+    var b = new Date
+            , c = b.getYear() + 1900
+            , d = b.getMonth() + 1;
+    10 > d && (d = "0" + d);
+    b = b.getDate();
+    10 > b && (d = "0" + b);
+    return c + "-" + d + "-" + b == a
+}
+;
+function send(a) {
+    if (-1 != location.href.indexOf("mngcgi") || !a)
+        return !1;
+    a = "https:" == document.location.protocol ? "https:" : "http:" + a;
+    a += "&tail256=" + escape(document.referrer ? document.referrer : "unknown");
+    a = a.split("![rnd]").join(Math.round(1E9 * Math.random()));
+    var b = document
+            , c = b.body;
+    if (c) {
+        var d = b.createElement("img");
+        with (d.style)
+            position = "absolute",
+                    width = height = 0;
+        d.onload = d.onerror = function () {
+            c.removeChild(d)
+        }
+        ;
+        d.src = a;
+        c.insertBefore(d, c.firstChild)
+    } else
+        (new Image).src = a
+}
+var Loader = function () {};
+Loader.start = function () {
+    Loader.run_flag = 1;
+    setTimeout(function () {
+        if (0 != Loader.run_flag) {
+            var a;
+            a = '<div id="facebookG"><div id="blockG_1" class="facebook_blockG"></div>';
+            a += '<div id="blockG_2" class="facebook_blockG">';
+            a += "</div>";
+            a += '<div id="blockG_3" class="facebook_blockG">';
+            a += "</div>";
+            a += "</div>";
+            $("body").append(a);
+            $("body").css("opacity", "0.5")
+        }
+    }, 200)
+}
+;
+Loader.stop = function () {
+    Loader.run_flag = 0;
+    $("#facebookG").remove();
+    $("body").css("opacity", "1")
+}
+;
+Loader.run_flag = 0;
+var Notifier = function () {};
+Notifier.errorNotify = function (a) {
+    $.gritter.add({
+        title: "",
+        text: a,
+        time: 2E3,
+        class_name: "error-notify"
+    })
+}
+;
+function array_unique(a) {
+    var b, c, d;
+    for (c = a.length; c; )
+        for (b = --c; 0 < b; )
+            if (a[c] === a[--b]) {
+                for (d = b; --b && a[c] === a[b]; )
+                    ;
+                c -= a.splice(b + 1, d - b).length
+            }
+    return a
+}
+function function_exists(a) {
+    var b = {};
+    return a && "[object Function]" === b.toString.call(a)
+}
+function setCursorDefault() {
+    $("a").each(function () {
+        if ("javascript:void(0)" == $(this).attr("href")) {
+            $(this).css("cursor", "default");
+            var a = $(this).css("color");
+            $(this).hover(function () {
+                $(this).css("color", a)
+            });
+            "underline" == $(this).css("text-decoration") ? $(this).hover(function () {
+                $(this).css("text-decoration", "underline")
+            }) : $(this).hover(function () {
+                $(this).css("text-decoration", "none")
+            })
+        }
+    })
+}
+;
+(function (c) {
+    c.fn.ajaxSubmit = function (a) {
+        function f() {
+            function b() {
+                if (!r++) {
+                    m.detachEvent ? m.detachEvent("onload", b) : m.removeEventListener("load", b, !1);
+                    var a = !0;
+                    try {
+                        if (q)
+                            throw "timeout";
+                        var e, g;
+                        g = m.contentWindow ? m.contentWindow.document : m.contentDocument ? m.contentDocument : m.document;
+                        l.responseText = g.body ? g.body.innerHTML : null;
+                        l.responseXML = g.XMLDocument ? g.XMLDocument : g;
+                        l.getResponseHeader = function (a) {
+                            return {
+                                "content-type": d.dataType
+                            }[a]
+                        }
+                        ;
+                        if ("json" == d.dataType || "script" == d.dataType) {
+                            var h = g.getElementsByTagName("textarea")[0];
+                            l.responseText = h ? h.value : l.responseText
+                        } else
+                            "xml" != d.dataType || (l.responseXML || null == l.responseText) || (l.responseXML = f(l.responseText));
+                        e = c.httpData(l, d.dataType)
+                    } catch (t) {
+                        a = !1,
+                                c.handleError(d, l, "error", t)
+                    }
+                    a && (d.success(e, "success"),
+                            n && c.event.trigger("ajaxSuccess", [l, d]));
+                    n && c.event.trigger("ajaxComplete", [l, d]);
+                    n && !--c.active && c.event.trigger("ajaxStop");
+                    d.complete && d.complete(l, a ? "success" : "error");
+                    setTimeout(function () {
+                        k.remove();
+                        l.responseXML = null
+                    }, 100)
+                }
+            }
+            function f(a, b) {
+                window.ActiveXObject ? (b = new ActiveXObject("Microsoft.XMLDOM"),
+                        b.async = "false",
+                        b.loadXML(a)) : b = (new DOMParser).parseFromString(a, "text/xml");
+                return b && b.documentElement && "parsererror" != b.documentElement.tagName ? b : null
+            }
+            var e = h[0]
+                    , d = c.extend({}, c.ajaxSettings, a)
+                    , g = "jqFormIO" + (new Date).getTime()
+                    , k = c('<iframe id="' + g + '" name="' + g + '" />')
+                    , m = k[0]
+                    , u = c.browser.opera && 9 > window.opera.version();
+            if (c.browser.msie || u)
+                m.src = 'javascript:false;document.write("");';
+            k.css({
+                position: "absolute",
+                top: "-1000px",
+                left: "-1000px"
+            });
+            var l = {
+                responseText: null,
+                responseXML: null,
+                status: 0,
+                statusText: "n/a",
+                getAllResponseHeaders: function () {},
+                getResponseHeader: function () {},
+                setRequestHeader: function () {}
+            }
+            , n = d.global;
+            n && !c.active++ && c.event.trigger("ajaxStart");
+            n && c.event.trigger("ajaxSend", [l, d]);
+            var r = 0
+                    , q = 0;
+            setTimeout(function () {
+                var a = e.encoding ? "encoding" : "enctype"
+                        , c = h.attr("target")
+                        , f = h.attr("action");
+                h.attr({
+                    target: g,
+                    method: "POST",
+                    action: d.url
+                });
+                e[a] = "multipart/form-data";
+                d.timeout && setTimeout(function () {
+                    q = !0;
+                    b()
+                }, d.timeout);
+                k.appendTo("body");
+                m.attachEvent ? m.attachEvent("onload", b) : m.addEventListener("load", b, !1);
+                e.submit();
+                h.attr({
+                    action: f,
+                    target: c
+                })
+            }, 10)
+        }
+        "function" == typeof a && (a = {
+            success: a
+        });
+        a = c.extend({
+            url: this.attr("action") || window.location.toString(),
+            type: this.attr("method") || "GET"
+        }, a || {});
+        var b = {};
+        this.trigger("form-pre-serialize", [this, a, b]);
+        if (b.veto)
+            return this;
+        var e = this.formToArray(a.semantic);
+        if (a.data)
+            for (var d in a.data)
+                e.push({
+                    name: d,
+                    value: a.data[d]
+                });
+        if (a.beforeSubmit && !1 === a.beforeSubmit(e, this, a))
+            return this;
+        this.trigger("form-submit-validate", [e, this, a, b]);
+        if (b.veto)
+            return this;
+        b = c.param(e);
+        "GET" == a.type.toUpperCase() ? (a.url += (0 <= a.url.indexOf("?") ? "&" : "?") + b,
+                a.data = null) : a.data = b;
+        var h = this
+                , g = [];
+        a.resetForm && g.push(function () {
+            h.resetForm()
+        });
+        a.clearForm && g.push(function () {
+            h.clearForm()
+        });
+        if (!a.dataType && a.target) {
+            var k = a.success || function () {}
+            ;
+            g.push(function (b) {
+                c(a.target).html(b).each(k, arguments)
+            })
+        } else
+            a.success && g.push(a.success);
+        a.success = function (a, b) {
+            for (var c = 0, d = g.length; c < d; c++)
+                g[c](a, b, h)
+        }
+        ;
+        b = c("input:file", this).fieldValue();
+        e = !1;
+        for (d = 0; d < b.length; d++)
+            b[d] && (e = !0);
+        a.iframe || e ? c.browser.safari && a.closeKeepAlive ? c.get(a.closeKeepAlive, f) : f() : c.ajax(a);
+        this.trigger("form-submit-notify", [this, a]);
+        return this
+    }
+    ;
+    c.fn.ajaxForm = function (a) {
+        return this.ajaxFormUnbind().bind("submit.form-plugin", function () {
+            c(this).ajaxSubmit(a);
+            return !1
+        }).each(function () {
+            c(":submit,input:image", this).bind("click.form-plugin", function (a) {
+                var b = this.form;
+                b.clk = this;
+                if ("image" == this.type)
+                    if (void 0 != a.offsetX)
+                        b.clk_x = a.offsetX,
+                                b.clk_y = a.offsetY;
+                    else if ("function" == typeof c.fn.offset) {
+                        var e = c(this).offset();
+                        b.clk_x = a.pageX - e.left;
+                        b.clk_y = a.pageY - e.top
+                    } else
+                        b.clk_x = a.pageX - this.offsetLeft,
+                                b.clk_y = a.pageY - this.offsetTop;
+                setTimeout(function () {
+                    b.clk = b.clk_x = b.clk_y = null
+                }, 10)
+            })
+        })
+    }
+    ;
+    c.fn.ajaxFormUnbind = function () {
+        this.unbind("submit.form-plugin");
+        return this.each(function () {
+            c(":submit,input:image", this).unbind("click.form-plugin")
+        })
+    }
+    ;
+    c.fn.formToArray = function (a) {
+        var f = [];
+        if (0 == this.length)
+            return f;
+        var b = this[0]
+                , e = a ? b.getElementsByTagName("*") : b.elements;
+        if (!e)
+            return f;
+        for (var d = 0, h = e.length; d < h; d++) {
+            var g = e[d]
+                    , k = g.name;
+            if (k)
+                if (a && b.clk && "image" == g.type)
+                    g.disabled || b.clk != g || f.push({
+                        name: k + ".x",
+                        value: b.clk_x
+                    }, {
+                        name: k + ".y",
+                        value: b.clk_y
+                    });
+                else if ((g = c.fieldValue(g, !0)) && g.constructor == Array)
+                    for (var p = 0, s = g.length; p < s; p++)
+                        f.push({
+                            name: k,
+                            value: g[p]
+                        });
+                else
+                    null !== g && "undefined" != typeof g && f.push({
+                        name: k,
+                        value: g
+                    })
+        }
+        if (!a && b.clk)
+            for (a = b.getElementsByTagName("input"),
+                    d = 0,
+                    h = a.length; d < h; d++)
+                e = a[d],
+                        (k = e.name) && (!e.disabled && "image" == e.type && b.clk == e) && f.push({
+                    name: k + ".x",
+                    value: b.clk_x
+                }, {
+                    name: k + ".y",
+                    value: b.clk_y
+                });
+        return f
+    }
+    ;
+    c.fn.formSerialize = function (a) {
+        return c.param(this.formToArray(a))
+    }
+    ;
+    c.fn.fieldSerialize = function (a) {
+        var f = [];
+        this.each(function () {
+            var b = this.name;
+            if (b) {
+                var e = c.fieldValue(this, a);
+                if (e && e.constructor == Array)
+                    for (var d = 0, h = e.length; d < h; d++)
+                        f.push({
+                            name: b,
+                            value: e[d]
+                        });
+                else
+                    null !== e && "undefined" != typeof e && f.push({
+                        name: this.name,
+                        value: e
+                    })
+            }
+        });
+        return c.param(f)
+    }
+    ;
+    c.fn.fieldValue = function (a) {
+        for (var f = [], b = 0, e = this.length; b < e; b++) {
+            var d = c.fieldValue(this[b], a);
+            null === d || ("undefined" == typeof d || d.constructor == Array && !d.length) || (d.constructor == Array ? c.merge(f, d) : f.push(d))
+        }
+        return f
+    }
+    ;
+    c.fieldValue = function (a, f) {
+        var b = a.name
+                , e = a.type
+                , d = a.tagName.toLowerCase();
+        "undefined" == typeof f && (f = !0);
+        if (f && (!b || a.disabled || "reset" == e || "button" == e || ("checkbox" == e || "radio" == e) && !a.checked || ("submit" == e || "image" == e) && a.form && a.form.clk != a || "select" == d && -1 == a.selectedIndex))
+            return null;
+        if ("select" == d) {
+            var h = a.selectedIndex;
+            if (0 > h)
+                return null;
+            for (var b = [], d = a.options, g = (e = "select-one" == e) ? h + 1 : d.length, h = e ? h : 0; h < g; h++) {
+                var k = d[h];
+                if (k.selected) {
+                    k = c.browser.msie && !k.attributes.value.specified ? k.text : k.value;
+                    if (e)
+                        return k;
+                    b.push(k)
+                }
+            }
+            return b
+        }
+        return a.value
+    }
+    ;
+    c.fn.clearForm = function () {
+        return this.each(function () {
+            c("input,select,textarea", this).clearFields()
+        })
+    }
+    ;
+    c.fn.clearFields = c.fn.clearInputs = function () {
+        return this.each(function () {
+            var a = this.type
+                    , c = this.tagName.toLowerCase();
+            "text" == a || "password" == a || "textarea" == c ? this.value = "" : "checkbox" == a || "radio" == a ? this.checked = !1 : "select" == c && (this.selectedIndex = -1)
+        })
+    }
+    ;
+    c.fn.resetForm = function () {
+        return this.each(function () {
+            ("function" == typeof this.reset || "object" == typeof this.reset && !this.reset.nodeType) && this.reset()
+        })
+    }
+    ;
+    c.fn.enable = function (a) {
+        void 0 == a && (a = !0);
+        return this.each(function () {
+            this.disabled = !a
+        })
+    }
+    ;
+    c.fn.select = function (a) {
+        void 0 == a && (a = !0);
+        return this.each(function () {
+            var f = this.type;
+            "checkbox" == f || "radio" == f ? this.checked = a : "option" == this.tagName.toLowerCase() && (f = c(this).parent("select"),
+                    a && (f[0] && "select-one" == f[0].type) && f.find("option").select(!1),
+                    this.selected = a)
+        })
+    }
+}
+)(jQuery);
+var validatorUtilities = {
+    defaults: {
+        tests: [],
+        invalid: function () {},
+        valid: function () {}
+    },
+    tests: {
+        init: function (a, b, d) {
+            try {
+                return this[a](d, b)
+            } catch (e) {
+                return this.required(d, b)
+            }
+        },
+        none: function () {
+            return !0
+        },
+        email: function (a) {
+            return "" == a ? !0 : -1 != a.indexOf("..") ? !1 : /^[A-Za-z0-9]([a-zA-Z0-9_\.\-])*\@[A-Za-z0-9](([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(a)
+        },
+        email_right: function (a) {
+            return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(a)
+        },
+        phone: function (a) {
+            return "" == a ? !0 : /^\+?7\-?[0-9]{3}\-?[0-9]{3}\-?[0-9]{2}\-?[0-9]{2}$/.test(a)
+        },
+        time: function (a) {
+            return "" == a ? !0 : /^(([0-1][0-9])|(2[0-3])):([0-5][0-9])$/.test(a)
+        },
+        date: function (a) {
+            if ("" == a)
+                return !0;
+            var b = a.match(/^([0-9]{2})-([0-9]{2})-([0-9]{4})$/);
+            if (null != b) {
+                a = b[1];
+                var d = b[2]
+                        , b = b[3]
+            } else if (b = a.match(/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/),
+                    null != b)
+                a = b[3],
+                        d = b[2],
+                        b = b[1];
+            else
+                return !1;
+            var e = new Date(b, d - 1, a);
+            return b == e.getYear() + 1900 && d - 1 == e.getMonth() && a == e.getDate()
+        },
+        required: function (a) {
+            return "" != a && 0 != a && "\u0424\u0430\u043c\u0438\u043b\u0438\u044f" != a && "\u0418\u043c\u044f" != a && "\u041e\u0442\u0447\u0435\u0441\u0442\u0432\u043e" != a
+        },
+        not_required_phone: function (a) {
+            return "" == a || /^\+?7\-?[0-9]{3}\-?[0-9]{3}\-?[0-9]{2}\-?[0-9]{2}$/.test(a)
+        },
+        min_length: function (a, b) {
+            return "" == a ? !0 : a.length >= b
+        },
+        max_length: function (a, b) {
+            return a.length <= b
+        },
+        postcode_length: function (a, b) {
+            return a.length == b
+        },
+        length_range: function (a, b) {
+            r = b.split("-");
+            return a.length >= r[0] && a.length <= r[1]
+        },
+        letters_with_symbols: function (a) {
+            return "" == a ? !0 : /^[A-Za-z\u0410-\u042f\u0430-\u044f\u00ab\u00bb \(\)\."\-,0-9]+$/g.test(a)
+        },
+        match: function (a, b) {
+            v1 = $("#" + b).val();
+            v1 == $("#" + b).attr("placeholder") && (v1 = "");
+            return a == v1
+        },
+        password: function (a) {
+            return "" == a ? !0 : /^[A-Za-z0-9]+$/.test(a)
+        },
+        digits: function (a) {
+            return !/\D/g.test(a)
+        },
+        numeric: function (a) {
+            return !/\D/g.test(a)
+        },
+        letters: function (a) {
+            return !/\d/g.test(a)
+        },
+        words_count: function (a, b) {
+            return "" == a ? !0 : a.match(/([a-zA-Z\u0430-\u044f\u0410-\u042f-]+)/g).length == b
+        },
+        min_words_count: function (a, b) {
+            return "" == a ? !0 : a.match(/([a-zA-Z\u0430-\u044f\u0410-\u042f-]+)/g).length >= b
+        },
+        regex: function (a, b) {
+            return "" == a ? !0 : RegExp(b, "g").test(a)
+        },
+        unique: function (a, b) {
+            if ("" == a)
+                return !0;
+            $('input[type="submit"]').attr("enabled", "false");
+            var d = !0;
+            $.ajax({
+                type: "Get",
+                async: !1,
+                url: "/ajax/checkUnique",
+                data: {
+                    fields: b,
+                    value: a
+                },
+                success: function (a) {
+                    $('input[type="submit"]').attr("enabled", "true");
+                    d = a.result
+                },
+                error: function (a) {
+                    d = !0
+                },
+                dataType: "json"
+            });
+            return d
+        }
+    },
+    placeholderAction: function (a, b) {
+        var d = a.val()
+                , e = a.data("placeholder");
+        e && ("" == d && b && "blur" == b.type ? (a.val(e),
+                a.addClass("placeholded")) : d == e && (b && "focus" == b.type) && (a.val(""),
+                a.removeClass("placeholded")))
+    },
+    status: {
+        check: function (a, b, d) {
+            b ? this.valid(a) : this.invalid(a, d);
+            return b
+        },
+        valid: function (a) {
+            a.parent("div .txt").removeClass("input-error");
+            a.parent("div .txt").addClass("input-success");
+            a.removeClass("error")
+        },
+        invalid: function (a, b) {
+            a.parent("div .txt").addClass("input-error");
+            a.parent("div .txt").removeClass("input-success");
+            a.addClass("error");
+            a.attr("class");
+            var d = a.attr("name") ? a.attr("name") : a.attr("class");
+            error_el = $('<span class="error_span" />');
+            error_el.html('<label for="' + d + '" class="error" style="display:block;">' + b + "</label>");
+            1 != a.data("block-error-label") && a.after(error_el);
+            error_el.css({
+                width: a.outerWidth() + "px"
+            });
+            a.data("error-label-element") && (a = $(a.data("error-label-element")).next());
+            var d = 19
+                    , e = a;
+            a.hasClass("chzn-select") && (e = $("#" + a.attr("id") + "_chzn div b"));
+            var g = e.offset().left - 10;
+            0 > g && (d -= g - 20,
+                    g = 10,
+                    error_el.addClass("custom-error23"),
+                    $("head").append($("<style>span.custom-error23:after { right: " + d + "px !important; }</style>")));
+            error_el.css({
+                position: "absolute",
+                left: a.offset().left,
+                "z-index": 2E4,
+                "white-space": "inherit",
+                "line-height": "20px",
+                "height": "auto"
+            });
+            1 != a.data("block-error-label") && error_el.appendTo($("body"));
+            error_el.css({top: a.offset().top - error_el.outerHeight() - 5});
+            a.data("block-error-label", 1);
+            error_el.delay(2E3).fadeOut(500);
+            setTimeout(function () {
+                a.data("block-error-label", 0)
+            }, 2500);
+            return !1
+        }
+    }
+};
+$.fn.validate = function (a, b) {
+    var d = $(this), e = [], g = [], h;
+    for (h in a) {
+        var k = h
+                , l = a[h].message;
+        value = a[h].value;
+        g.push({
+            name: k,
+            value: value,
+            message: l
+        })
+    }
+    e.push({
+        obj: d,
+        tests: g
+    });
+    $(this).each(function (a) {
+        var d = $(this);
+        1 != d.data("used") && (d.data("used", 1),
+                $(this).on("blur", function (a) {
+            for (var g in e) {
+                a = $(this).val();
+                a == e[g].obj.attr("placeholder") && (a = "");
+                for (test_index in e[g].tests)
+                    if (!validatorUtilities.status.check(d, validatorUtilities.tests.init(e[g].tests[test_index].name, e[g].tests[test_index].value, a), e[g].tests[test_index].message))
+                        return !1;
+                b && b()
+            }
+        }).on("focus", function (a) {
+            validatorUtilities.placeholderAction(d, a)
+        }))
+    });
+    return this
+}
+;
+$.fn.validation = function (a) {
+    var b = $(this)
+            , d = [];
+    for (arg in a.validate)
+        void 0 !== a.validate[arg].data && a.validate[arg].data("pushed", 1),
+                void 0 !== a.validate[arg].data ? d.push(a.validate[arg].get().reverse()) : d.push(a.validate[arg]);
+    $.data(b, "validate", d);
+    $(this).each(function () {
+        $(this).unbind("click");
+        $(this).click(function () {
+            var d = $.data(b, "validate")
+                    , g = !0;
+            for (f = 0; f < d.length; f++)
+                for (c = 0; c < d[f].length; c++) {
+                    var h = $(d[f][c]);
+                    h.blur();
+                    h.hasClass("error") && (g = !1)
+                }
+            g ? a.callback && a.callback.call(this) : a.error_callback && a.error_callback.call(this);
+            return g
+        })
+    });
+    return b
+}
+;
+var ModalWindow = function () {
+    var a = this;
+    this.no_action = this.yes_action = null;
+    this.yes_button_text = "\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c";
+    this.no_button_text = "\u0423\u0439\u0442\u0438 \u0431\u0435\u0437 \u0441\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f";
+    this.popup = null;
+    this.setYesAction = function (a) {
+        this.yes_action = a
+    }
+    ;
+    this.setNoAction = function (a) {
+        this.no_action = a
+    }
+    ;
+    this.show = function (b) {
+        b = $("<p>" + b + "</p>");
+        var c = $('<span class="buttons ask-section btns"></span>')
+                , d = $('<input type="button" value="' + a.yes_button_text + '" class="btn-1" id="ask_section_save_butoon" />')
+                , e = $('<a href="javascript:void(0)" id="ask_section_no_butoon">' + a.no_button_text + '.<input type="button" value="" class="btn-1" style="display: none" /></a>');
+        c.append(d);
+        c.append(e);
+        popup_info = $('<div id="modal_window_popup" class="modal-popup"></div>').append(b).append(c);
+        a.popup = new Popup;
+        a.popup.show(popup_info, "430px", "150px", !1, "300px");
+        d.click(function () {
+            a.popup.close();
+            void 0 != a.yes_action && a.yes_action()
+        });
+        e.click(function () {
+            a.popup.close();
+            void 0 != a.no_action && a.no_action()
+        })
+    }
+    ;
+    this.showDefaultPopup = function (b) {
+        popup_info = $('<div class="reg-popup" id="success-popup" style="display: block;"><img alt="" src="/media/images/main_logo.png" class="logo"><p class="success-txt">' + b + "</p></div>");
+        a.popup = new Popup;
+        a.popup.show(popup_info, "670px", "270px", !0, "250px")
+    }
+};
+var Popup = function () {
+    var a = this;
+    this.container = this.close_callback = this.popup_block = null;
+    this.show = function (b, c, d, k) {
+        Popup.locks++;
+        if (a.popup_block)
+            a.popup_block.css("display", "block");
+        else {
+            void 0 == c && (c = "639px");
+            void 0 == d && (d = "auto");
+            void 0 == k && (k = !0);
+            var h = $("<div></div>");
+            h.append($('<div class="fancybox-placeholder" style="display: none;"></div>'));
+            var f = $('<div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;"></div>');
+            h.append(f);
+            var g = $('<div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: ' + c + "; height: " + d + "; position: absolute; top: " + l + '; opacity: 1; overflow: visible;"></div>');
+            f.append(g);
+            f = $('<div class="fancybox-skin" style="padding: 0px; width: auto; height: auto;"></div>');
+            g.append(f);
+            d = $('<div class="fancybox-outer"></div>');
+            f.append(d);
+            var e = $('<div class="fancybox-inner" style="overflow: hidden; width: ' + c + ';"></div>');
+            d.append(e);
+            k && (c = $('<a class="fancybox-item fancybox-close" href="javascript:;" title="Close"></a>'),
+                    d.append(c),
+                    c.click(function () {
+                        a.hide();
+                        $(".error_span").css("display", "none")
+                    }));
+            e.append(b);
+            a.container = e;
+            $("body").addClass("fancybox-lock");
+            $("body").append(h);
+            $(".fancybox-wrap").css("left", ($(window).width() - $(".fancybox-wrap").width()) / 2);
+            var l = $(window).height() < e.height() ? 10 : ($(window).height() - e.height()) / 2;
+            g.css("top", l);
+            0 < $(window).width() - $(".fancybox-wrap").width() ? $(".fancybox-wrap").css("left", ($(window).width() - $(".fancybox-wrap").width()) / 2) : $(".fancybox-wrap").css("left", 20);
+            g.css("top", l);
+            a.popup_block = h;
+            $(window).on("resize", function () {
+                var a = $(window).height() < e.height() ? 10 : ($(window).height() - e.height()) / 2;
+                g.css("top", a);
+                0 < $(this).width() - $(".fancybox-wrap").width() ? $(".fancybox-wrap").css("left", ($(this).width() - $(".fancybox-wrap").width()) / 2) : $(".fancybox-wrap").css("left", 20)
+            });
+            $(".fallback").click(function () {
+                a.close()
+            })
+        }
+    }
+    ;
+    this.hide = function () {
+        a.popup_block.remove();
+        Popup.locks--;
+        0 >= Popup.locks && $("body").removeClass("fancybox-lock");
+        null != a.close_callback && a.close_callback()
+    }
+    ;
+    this.close = function () {
+        a.popup_block.remove();
+        Popup.locks--;
+        0 >= Popup.locks && $("body").removeClass("fancybox-lock");
+        null != a.close_callback && a.close_callback()
+    }
+    ;
+    this.setCloseCallback = function (b) {
+        a.close_callback = b
+    }
+    ;
+    this.setContent = function (b) {
+        a.container.html(b);
+        a.fit()
+    }
+    ;
+    this.getContent = function () {
+        return a.container.html()
+    }
+    ;
+    this.getElement = function (b) {
+        return a.popup_block.find(b)
+    }
+    ;
+    this.fit = function () {
+        var a = $(window).height() < $(".fancybox-inner").height() ? 10 : ($(window).height() - $(".fancybox-inner").height()) / 2;
+        $(".fancybox-wrap").css("top", a);
+        0 < $(window).width() - $(".fancybox-wrap").width() ? $(".fancybox-wrap").css("left", ($(window).width() - $(".fancybox-wrap").width()) / 2) : $(".fancybox-wrap").css("left", 20)
+    }
+}
+, NewClass = function () {};
+Popup.locks = 0;
+var PopupMessage = function () {
+    var a = this;
+    this.popup = this.close_callback = null;
+    this.show = function (b) {
+        a.popup = new Popup;
+        a.popup.close_callback = a.close_callback;
+        a.popup.show('<div style="padding: 50px; font-size: 25px">' + b + "</div>")
+    }
+    ;
+    this.setCloseCallback = function (b) {
+        a.popup.close_callback = b
+    }
+};
+var SimpleTimer = function (b, c) {
+    var a = this;
+    this.value = this.time = b;
+    this.callback = c;
+    this.run = 1;
+    setInterval(function () {
+        1 == a.run && (a.value -= 100,
+                0 >= a.value && (a.callback(),
+                        a.run = 0))
+    }, 100);
+    this.reset = function () {
+        a.run = 1;
+        a.value = a.time
+    }
+    ;
+    this.stop = function () {
+        this.run = 0
+    }
+};
+>>>>>>> Stashed changes

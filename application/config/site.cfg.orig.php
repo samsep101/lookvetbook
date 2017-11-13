@@ -32,7 +32,7 @@ define('CSS_DIR', 'vet');
 define('PAGE_TITLE', 'Портал медицинских услуг в ');
 define('JUR_ADDRESS', 'Гамсоновский переулок, 2');
 define('JUR_ADDRESS_FULL', '115191, г.Москва, Гамсоновский переулок, д.2');
-define('CONTENT_DISEASE_URL', 'https://admin:21506@content.'.SITE_DOMAIN.'/media/xml/Test.xml');
+define('CONTENT_DISEASE_URL', 'http://admin:21506@content.'.SITE_DOMAIN.'/media/xml/Test.xml');
 
 
 define('DOCTOR', 'ветеринар');

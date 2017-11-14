@@ -131,7 +131,7 @@ class DiseaseController extends BaseController
       <название болезни> - $diseaseName
       <название болезни> - $diseaseName
       <перечисление по типу> - $diseaseTypes
-    
+
       Старый шаблон: $this->view->page_title = $disease->title.' - «'.SITE_NAME.''.SITE_NAME.'»'
     */
 
@@ -401,11 +401,22 @@ class DiseaseController extends BaseController
   public function parseDiseasesAndDiseaseBlocks()
   {
     set_time_limit(0);
-
     ini_set("memory_limit", "128M");
-    $xml_data = simplexml_load_file(CONTENT_DISEASE_URL);
+
+    $ch = curl_init();
+
+    curl_setopt($ch,CURLOPT_URL,CONTENT_DISEASE_URL);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+
+    $output = curl_exec($ch);
+
+    curl_close($ch);
+
+    $xml_data = simplexml_load_string($output);
 
     if ($xml_data) {
+      $diseases_counter = 0;
+      echo "sucsess".PHP_EOL;
       self::clearDiseaseAltNamesAndDiseaseTagsAndAndDiseaseBlocksAndSpecialtyToDisease();
       ModelManagerFactory::getByName('disease')->setIsActive(0);
 
@@ -418,6 +429,8 @@ class DiseaseController extends BaseController
       $specialty_manager = ModelManagerFactory::getByName('specialty');
 
       foreach ($xml_data->disease as $disease_data) {
+
+        echo $disease_data->info->title.PHP_EOL;
         $disease = ModelManagerFactory::getByName('disease')->getOneByContentProjectId($disease_data->info->project_id);
 
         if ($disease) {
@@ -565,8 +578,11 @@ class DiseaseController extends BaseController
 
             $disease_block_manager->save($disease_block);
           }
+          $diseases_counter ++;
         }
       }
+    }else{
+        echo "Не удалось скачать файл!"; exit;
     }
 
     $this->redirectUrl('/admin/disease');

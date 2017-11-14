@@ -403,16 +403,7 @@ class DiseaseController extends BaseController
     set_time_limit(0);
     ini_set("memory_limit", "128M");
 
-    $ch = curl_init();
-
-    curl_setopt($ch,CURLOPT_URL,CONTENT_DISEASE_URL);
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-
-    $output = curl_exec($ch);
-
-    curl_close($ch);
-
-    $xml_data = simplexml_load_string($output);
+    $xml_data = simplexml_load_file(CONTENT_DISEASE_URL);
 
     if ($xml_data) {
       $diseases_counter = 0;

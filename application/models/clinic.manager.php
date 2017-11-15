@@ -448,7 +448,7 @@ class ClinicManager extends AliasManager
   }
 
   /**
-   * return ClinicModel
+   * @return ClinicModel
    */
   public function getOneByRegistryUserId($registry_user_id)
   {

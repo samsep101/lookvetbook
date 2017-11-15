@@ -61,7 +61,7 @@
 
         public function google()
         {
-            $file = file_get_contents('http://webcache.googleusercontent.com/search?q=cache:UgLt0PhT0OoJ:energyfc.ru/index.php/component/joomsport/view_match/120+&cd=3&hl=ru&ct=clnk');
+            $file = file_get_contents('https://webcache.googleusercontent.com/search?q=cache:UgLt0PhT0OoJ:energyfc.ru/index.php/component/joomsport/view_match/120+&cd=3&hl=ru&ct=clnk');
             Test::dump($file);
 
         }
@@ -218,7 +218,7 @@
             }
 
             //$s = '';
-            $compiler = new Closure\RemoteCompiler();
+            $compiler = new ExtendedRemoteCompilerHelper();
             foreach ($js_file_list as $fname){
                 //$s .= file_get_contents($js_library_folder.'/'.$fname).PHP_EOL;
                 $compiler->addLocalFile($js_library_folder.'/'.$fname);
@@ -423,7 +423,7 @@
 
         public function testYandex()
         {
-            $url  = 'http://geocode-maps.yandex.ru/1.x/?geocode=37.611006,55.757962&format=json&kind=district';
+            $url  = 'https://geocode-maps.yandex.ru/1.x/?geocode=37.611006,55.757962&format=json&kind=district';
             $data = CurlRequestSender::get($url);
 
             Test::dump(json_decode($data));
@@ -1964,7 +1964,7 @@
 
         public function testYandexRecord()
         {
-            $url    = 'http://lookmedbook.ru/api/yandex';
+            $url    = SITE_SCHEME . '://lookmedbook.ru/api/yandex';
             $result = array(
                 'comment'          => '\u0442\u0435\u0441\u0442 \u0442\u0435\u0441\u0442',
                 'bookType'         => 'static-resource-only',
@@ -2833,7 +2833,7 @@
 
                                     if(file_exists($sitemapPath))
                                     {
-                                        $dataPart .= "\n\tSitemap: http://" . $cValue->alias . '.lookmedbook.ru/' . $sitemapsPath . '/' . $fileName;
+                                        $dataPart .= "\n\tSitemap: " . SITE_SCHEME . "://" . $cValue->alias . '.lookmedbook.ru/' . $sitemapsPath . '/' . $fileName;
                                     }
                                     $dataPart .= "\n\n";
                                 }

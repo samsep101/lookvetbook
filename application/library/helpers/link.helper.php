@@ -8,17 +8,17 @@
             $url = self::getDomain();
             if($city->name == 'Москва')
             {
-                return 'http://' . $url;
+                return SITE_SCHEME . '://' . $url;
             }
             else
             {
-                return 'http://' . $city->alias . '.' . $url;
+                return SITE_SCHEME . '://' . $city->alias . '.' . $url;
             }
         }
 
         public static function getDomain()
         {
-            $url = str_replace('http://', '', SITE_URL);
+            $url = str_replace(SITE_SCHEME . '://', '', SITE_URL);
             $url = str_replace('/', '', $url);
 
             return $url;

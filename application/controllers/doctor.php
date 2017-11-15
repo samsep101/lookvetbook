@@ -224,12 +224,12 @@ class DoctorController extends BaseController
         $clinics_names[$clin_id] = $clinic->name;
       }
 
-      //все врачи специальностей текущего врача из всех базы
-      foreach ($specialties AS $specialty) {
-        $spec_id = $specialty->getId();
-        $specialties_ids[] = $spec_id;
-        $specialties_names[$spec_id] = $specialty->name;
-      }
+            //все врачи специальностей текущего врача из всех базы
+            $specialties_ids = [];foreach ($specialties AS $specialty) {
+                $spec_id = $specialty->getId();
+                $specialties_ids[] = $spec_id;
+                $specialties_names[$spec_id] = $specialty->name;
+            }
 
       $doctors = [];
       $doctor_search_params = new DoctorSearchParams();
@@ -427,7 +427,7 @@ class DoctorController extends BaseController
         $query_string = preg_replace('/specialty_id=([0-9]+)?&?/', '', $_SERVER['QUERY_STRING']);
         if ($query_string)
           $query_string = '?' . $query_string;
-        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/doctor/' . $specialty->alias . $query_string;
+        $url = '//' . $_SERVER['HTTP_HOST'] . '/doctor/' . $specialty->alias . $query_string;
         RedirectManager::redirect301($url);
       }
     }
@@ -1357,12 +1357,10 @@ class DoctorController extends BaseController
     $this->layout = 'ajax';
     $this->view->page_type = 'doctor';
 
-    $landing = $this->request('landing');
-    $exclude_doctor_ids = $this->request('exclude_doctor_ids', []);
-
-    if (!$landing && !Acc::isAuthed()) {
-      JsonResponse::error(4);
-    }
+        $landing = $this->request('landing');
+        if (!$landing && !Acc::isAuthed()) {
+            JsonResponse::error(4);
+        }
 
     $this->view->landing_page = $landing;
     $doctor_search_params = $this->getSearchParams();

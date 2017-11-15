@@ -19,7 +19,7 @@
 
 		protected function _field_clinic()
 		{
-            if ($this->visit->clinic_id) {
+            if ($this->visit && $this->visit->clinic_id) {
 			    $this->clinic = $this->visit->clinic;
             }
             else {

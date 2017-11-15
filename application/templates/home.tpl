@@ -184,10 +184,10 @@
         window.__mixm__.push(['uAdvArId',1294931922]);
 // только на страницах карточки товара передавайте его айди (вместо 'ID товара') из вашего прайса и раскомментируйте вызов этого параметра
 // window.__mixm__.push(['skulist', 'ID товара']);
-        <?php if ($doctor) {?>
+        <?php if (isset($doctor)) {?>
         window.__mixm__.push(['skulist', '<?php echo $doctor->getId()?>']);
         <?php } ?>
-(function(){function t(){if(!e){e=1;var t=0,a="def";for(i=0;o.__mixm__.length>i;i++){if("uAdvArId"==o.__mixm__[i][0]){t="u"+o.__mixm__[i][1];break}"mAdvId"==o.__mixm__[i][0]&&(a="m"+o.__mixm__[i][1])}t||(t=a);var n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=("https:"==document.location.protocol?"https://":"http://")+"js.mixmarket.biz/a"+t+".js?t="+(new Date).getTime();var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(n,r)}}var e=0,a=document,n=a.documentElement,o=window;"complete"==a.readyState||"loaded"==a.readyState||"interactive"==a.readyState?t():a.addEventListener?a.addEventListener("DOMContentLoaded",t,!1):a.attachEvent?(n.doScroll&&o==o.top&&function(){try{n.doScroll("left")}catch(e){return setTimeout(arguments.callee,0),void 0}t()}(),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t()})):o.onload=t})();        
+(function(){function t(){if(!e){e=1;var t=0,a="def";for(i=0;o.__mixm__.length>i;i++){if("uAdvArId"==o.__mixm__[i][0]){t="u"+o.__mixm__[i][1];break}"mAdvId"==o.__mixm__[i][0]&&(a="m"+o.__mixm__[i][1])}t||(t=a);var n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=("https:"==document.location.protocol?"https://":"http://")+"js.mixmarket.biz/a"+t+".js?t="+(new Date).getTime();var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(n,r)}}var e=0,a=document,n=a.documentElement,o=window;"complete"==a.readyState||"loaded"==a.readyState||"interactive"==a.readyState?t():a.addEventListener?a.addEventListener("DOMContentLoaded",t,!1):a.attachEvent?(n.doScroll&&o==o.top&&function(){try{n.doScroll("left")}catch(e){return setTimeout(arguments.callee,0),void 0}t()}(),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t()})):o.onload=t})();
     </script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title><?php echo (isset($page_title)) ? $page_title : SITE_NAME; ?></title>
@@ -294,7 +294,7 @@
                     <?php } ?>
 
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'disease') ? 'active' : ''; ?> disease-link" href="<?php if($city->getId() == 2) { ?>/disease<?php } else { ?><?php echo strtolower(SITE_URL);?>/disease<?php } ?>">Заболевания</a>
-                        <a class="" href="http://swiss.lookmedbook.ru/">Лечение в Швейцарии</a>
+                        <a class="" href="//swiss.lookmedbook.ru/">Лечение в Швейцарии</a>
 
                     <?php /*if($city->is_has_laboratories) { ?>
                         <a class="<?php echo (isset($menu_active) && $menu_active == 'analysis') ? 'active' : ''; ?> analysis-link" href="/analysis">Анализы</a>
@@ -402,7 +402,7 @@
 ?>
 
 <div class="banner-treatment-in-switz <?php echo $treatmentInSwitzClass; ?>">
-    <a href="http://swiss.lookmedbook.ru/" class="banner-treatment-in-switz-link" <?php echo $treatmentInSwitzVisibleClose; ?>><div class="icon"></div>Лечение в Швейцарии <br/> Бесплатная консультация </a>
+    <a href="//swiss.lookmedbook.ru/" class="banner-treatment-in-switz-link" <?php echo $treatmentInSwitzVisibleClose; ?>><div class="icon"></div>Лечение в Швейцарии <br/> Бесплатная консультация </a>
     <div class="close" <?php echo $treatmentInSwitzVisibleClose; ?>>x</div>
     <div class="banner-treatment-in-switz-open" <?php echo $treatmentInSwitzVisibleOpen; ?>>
         <div class="icon"></div>

@@ -154,9 +154,9 @@ var ClinicSearchFormController = function (landing, already_registred_account, u
         self.setCityId(city_info.city_id);
 
         if (city_info.city_alias && (city_info.city_alias != 'moskva'))
-            window.location = 'http://'+city_info.city_alias + '.'+SessionInfo.domain + '/clinic' + self.buildUrl();
+            window.location = '//'+city_info.city_alias + '.'+SessionInfo.domain + '/clinic' + self.buildUrl();
         else if(city_info.city_alias == 'moskva')
-            window.location = 'http://'+SessionInfo.domain+'/clinic' + self.buildUrl();
+            window.location = '//'+SessionInfo.domain+'/clinic' + self.buildUrl();
     };
 
     this.setBlockMode = function () {
@@ -214,7 +214,7 @@ var ClinicSearchFormController = function (landing, already_registred_account, u
         }
 */
         if (self.specialty_id) {
-            setCustomSelect('select[name="specialty_id"]', self.specialty_id);
+            setCustomSelect(self.container + ' select[name="specialty_id"]', self.specialty_id);
 //            self.loadPurposeOfVisitBlock(self.purpose_of_visit_id, false);
         }
 /*
@@ -302,7 +302,7 @@ var ClinicSearchFormController = function (landing, already_registred_account, u
         }
 
 
-        var option = $('select[name="specialty_id"] option[value="' + self.specialty_id + '"]:selected');
+        var option = $(self.container + ' select[name="specialty_id"] option[value="' + self.specialty_id + '"]:selected');
         if(option.hasClass('specialization'))
         {
             self.specialization_id = option.val();
@@ -314,9 +314,9 @@ var ClinicSearchFormController = function (landing, already_registred_account, u
         $(this.container + ' select[name="specialty_id"]').change(function () {
             self.specialty_id = $(this).val();
             self.page = 1;
-            $('select[name="specialty_id"] option').removeAttr('selected');
+            $(self.container + ' select[name="specialty_id"] option').removeAttr('selected');
 
-            var option = $('select[name="specialty_id"] option[value="' + self.specialty_id + '"]');
+            var option = $(self.container + ' select[name="specialty_id"] option[value="' + self.specialty_id + '"]');
 
             option.attr('selected', true);
             if(option.hasClass('specialization'))
@@ -654,8 +654,8 @@ console.log(data);
                 if (!value)
                     self.purpose_of_visit_id = 0;
                 else {
-                    $('select[name="purpose_of_visit_id"] option[value="' + value + '"]').attr('selected', 'selected');
-                    $('select[name="purpose_of_visit_id"]').trigger('liszt:updated');
+                    $(self.container + ' select[name="purpose_of_visit_id"] option[value="' + value + '"]').attr('selected', 'selected');
+                    $(self.container + ' select[name="purpose_of_visit_id"]').trigger('liszt:updated');
                 }
 
                 $(".chzn-select").chosen();
@@ -712,8 +712,8 @@ console.log(data);
                 $('#specialties_to_search_clinic').html(data.result.option);
                 $('#specialties_to_search_clinic').trigger('liszt:updated');
 
-                $('select[name="purpose_of_visit_id"]').html('<option value=""></option>');
-                $('select[name="purpose_of_visit_id"]').trigger('liszt:updated');
+                $(self.container + ' select[name="purpose_of_visit_id"]').html('<option value=""></option>');
+                $(self.container + ' select[name="purpose_of_visit_id"]').trigger('liszt:updated');
             }
         });
     }

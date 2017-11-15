@@ -40,7 +40,7 @@ YController.prototype.initMap = function (options) {
             });
         };
         // todo mode=standard
-        $.getScript("http://api-maps.yandex.ru/2.0/?load=package.full,package.clusters,package.overlays" +
+        $.getScript("https://api-maps.yandex.ru/2.0/?load=package.full,package.clusters,package.overlays" +
             "&lang=ru-RU&onload=" + encodeURIComponent(initFunc));
 
 
@@ -631,7 +631,7 @@ GController.prototype.initMap = function (options) {
             self.initMap.call(self, options);
         };
         this.projection = CityMap.Projection(CityMap.Projection.sphericalMercator);
-        $.getScript("http://maps.google.ru/maps/api/js?sensor=true&callback=" + encodeURIComponent(initFunc));
+        $.getScript("//maps.google.ru/maps/api/js?sensor=true&callback=" + encodeURIComponent(initFunc));
         return;
     }
     var mapOptions = {

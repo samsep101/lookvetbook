@@ -61,7 +61,7 @@
 
 			$sql = 'SELECT  '.$this->selected_field_joins.'
                     FROM '.$this->table_name.' vr
-                    INNER JOIN visit v ON v.id = vr.visit_id
+                    LEFT OUTER JOIN visit v ON v.id = vr.visit_id
                     WHERE vr.doctor_id = ' . (int)$doctor_id . '
                         AND vr.is_confirmed = 1
                         AND vr.doctor_review_text IS NOT NULL';
@@ -75,7 +75,7 @@
 		{
 			$sql = 'SELECT  '.$this->selected_field_joins.'
                     FROM visit_rating vr
-                    left JOIN visit v ON v.id = vr.visit_id
+                    LEFT OUTER JOIN visit v ON v.id = vr.visit_id
                     WHERE vr.doctor_id = ' . (int)$doctor_id . '
                         AND vr.is_confirmed = 1
                         AND vr.doctor_review_text IS NOT NULL
@@ -90,7 +90,7 @@
 		{
 			$sql = 'SELECT COUNT(*) as result
                     FROM visit_rating vr
-                    INNER JOIN visit v ON vr.visit_id = v.id
+                    LEFT OUTER JOIN visit v ON vr.visit_id = v.id
                     WHERE vr.doctor_id = ' . (int)$doctor_id . '
                         AND v.status_id in (' . VisitModel::FEDDBACK . ',' . VisitModel::VISITED . ')
                         AND vr.is_confirmed = 1
@@ -110,7 +110,7 @@
 
 			$sql = 'SELECT  '.$this->selected_field_joins.'
                     FROM visit_rating vr
-                    INNER JOIN visit v ON vr.visit_id = v.id
+                    LEFT OUTER JOIN visit v ON vr.visit_id = v.id
                     WHERE vr.doctor_id = ' . (int)$doctor_id . '
                         AND v.status_id in (' . VisitModel::FEDDBACK . ',' . VisitModel::VISITED . ')
                         AND vr.is_confirmed = 1
@@ -135,7 +135,7 @@
 		{
 			$sql = 'SELECT  '.$this->selected_field_joins.'
                     FROM visit_rating vr
-                    INNER JOIN visit v ON vr.visit_id = v.id
+                    LEFT OUTER JOIN visit v ON vr.visit_id = v.id
                     WHERE v.account_id = ' . (int)$account_id . '
                         AND v.status_id in (' . VisitModel::FEDDBACK . ',' . VisitModel::VISITED . ')
                         AND v.visit_start_time < NOW()

@@ -18,9 +18,9 @@ var IndexPageController = function () {
         }
         window.city_controller.subscribe(function(city_info){
             if (city_info.city_alias && (city_info.city_alias != 'moskva'))
-                window.location = 'http://'+city_info.city_alias + '.'+SessionInfo.domain;
+                window.location = '//'+city_info.city_alias + '.'+SessionInfo.domain;
             else if(city_info.city_alias == 'moskva')
-                window.location = 'http://'+SessionInfo.domain+'/';
+                window.location = '//'+SessionInfo.domain+'/';
         });
         $('.popup_city').click(function(){
             if($(this).attr('data-disabled') != '1') {

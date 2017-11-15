@@ -340,7 +340,7 @@ class DiseaseManager extends AliasManager
 
     if (count($similarDisease)) {
       foreach ($similarDisease AS $sdKey => $sdValue)
-        $similarDisease[$sdKey]['link'] = 'http://' . $_SERVER['HTTP_HOST'] . '/disease/' . $sdValue['alias'];
+        $similarDisease[$sdKey]['link'] = SITE_SCHEME . '://' . $_SERVER['HTTP_HOST'] . '/disease/' . $sdValue['alias'];
     } else $similarDisease = array();
 
 

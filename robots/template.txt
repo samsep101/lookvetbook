@@ -5,7 +5,8 @@ Disallow: /*_openstat
 Disallow: /*?
 Disallow: /*booking*
 Disallow: /media/js/linkHidingIndexing.js
-Host: lookmedbook.ru
+Disallow: /disease
+Host: {{domain}}
 
 User-agent:*
 Disallow: /*search*
@@ -14,5 +15,5 @@ Disallow: /*_openstat
 Disallow: /*?
 Disallow: /*booking*
 Disallow: /media/js/linkHidingIndexing.js
-Sitemap: https://lookmedbook.ru/sitemap.xml
-
+Disallow: /disease
+Sitemap: https://{{domain}}/sitemap.xml

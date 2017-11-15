@@ -3,6 +3,12 @@ if (php_sapi_name()!='cli') {
   header("Content-Type: text/html; charset=UTF-8");
 }
 
+if(!empty($_SERVER['SERVER_NAME'])){
+    define('SERVER_NAME', $_SERVER['SERVER_NAME']);
+} else {
+    define('SERVER_NAME', 'lookvetbook.ru');
+}
+
 require('application/config/site.cfg.php');
 
 if (!debug) {
@@ -50,7 +56,7 @@ try {
     if (!$redirect_uri) {
       $redirect_uri = $_SERVER['REQUEST_URI'];
     }
-    RedirectManager::redirect301('http://' . $redirect_domen . $redirect_uri);
+    RedirectManager::redirect301(SITE_SCHEME . '://' . $redirect_domen . $redirect_uri);
   }
 
   $controller = new Dispatcher();

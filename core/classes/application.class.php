@@ -48,7 +48,7 @@ class Application
       session_start();
     } else {
       session_start();
-      $url = str_replace('http://', '', SITE_URL);
+      $url = str_replace(SITE_SCHEME . '://', '', SITE_URL);
       setcookie('LMDSSSN', session_id(), time() + 30 * 24 * 60 * 60, null, '.' . $url);
       setcookie('LMDHOST', SITE_URL, time() + 30 * 24 * 60 * 60, null, '.' . $url);
     }

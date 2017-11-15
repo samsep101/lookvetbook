@@ -15,11 +15,11 @@
 
 			if ($model->alias)
 			{
-				return 'http://'.$subdomain.LinkHelper::getDomain().'/'.$controller_name.'/'.$model->alias;
+				return SITE_SCHEME . '://'.$subdomain.LinkHelper::getDomain().'/'.$controller_name.'/'.$model->alias;
 			}
 			else
 			{
-				return 'http://'.$subdomain.LinkHelper::getDomain().'/'.$controller_name.'/get?id='.$model->getId();
+				return SITE_SCHEME . '://'.$subdomain.LinkHelper::getDomain().'/'.$controller_name.'/get?id='.$model->getId();
 			}
 		}
 	}

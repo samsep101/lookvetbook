@@ -95,7 +95,7 @@
                 <?php else: ?>
                     <div class="soc-item vk flo">
                         <span class="icon"></span>
-                        <a href="http://oauth.vk.com/authorize?client_id=<?php echo SettingsManager::get('vk_client_id'); ?>&scope=friends,photos,groups,offline&redirect_uri=<?php echo SITE_URL; ?>/account/joinVkAccount&response_type=code">
+                        <a href="https://oauth.vk.com/authorize?client_id=<?php echo SettingsManager::get('vk_client_id'); ?>&scope=friends,photos,groups,offline&redirect_uri=<?php echo SITE_URL; ?>/account/joinVkAccount&response_type=code">
                             <input class="soc-btn" type="submit" value="Связать с Вконтакте">
                         </a>
                         <div class="clear"></div>
@@ -139,7 +139,7 @@
                 <?php else: ?>
                     <div class="soc-item odn flo">
                         <span class="icon"></span>
-                        <a href="http://www.odnoklassniki.ru/oauth/authorize?scope=VALUABLE ACCESS&client_id=<?php echo SettingsManager::get('ok_client_id'); ?>&response_type=code&redirect_uri=<?php echo SITE_URL; ?>/account/joinOkAccount">
+                        <a href="https://www.odnoklassniki.ru/oauth/authorize?scope=VALUABLE ACCESS&client_id=<?php echo SettingsManager::get('ok_client_id'); ?>&response_type=code&redirect_uri=<?php echo SITE_URL; ?>/account/joinOkAccount">
                             <input class="soc-btn" type="submit" value="Связать с Одноклассниками">
                         </a>
                         <div class="clear"></div>

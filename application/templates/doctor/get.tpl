@@ -15,7 +15,7 @@
         $already_registred_account = 0;
 ?>
 
-<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"> </script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"> </script>
 <script type="text/javascript">
     $(document).ready(function(){
         var doctor_controller = new DoctorPageController(<?php echo $doctor->getId(); ?>, <?php echo (isset($landing_page) && !Acc::isAuthed()) ? false : true; ?>, <?php echo $already_registred_account; ?>,"<?php echo $_SERVER['REQUEST_URI']; ?>", <?php echo (isset($recording)) ? $recording : 0; ?>);

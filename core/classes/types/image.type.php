@@ -46,13 +46,16 @@ EOD;
 
 
             if ($image) {
-                $result .= '
-				<tr>
-				        <td class="td_main">' .
-                    '<a class="screenshot" href="' .$image->path .'" rel="' .$image->path .'" onclick="event.preventDefault()" style="cursor:default"><img src="' . $image->resize(180, 150)->path . '" /></a>'
-                    . '<span class="deleteImageButton" onclick="$(this).parent().parent().remove(); $(\'#image-' . $image->getId() . '\').val(\'\')">[Удалить]</span>
-                        </td>
-                </tr>';
+                $resizedImage = $image->resize(180, 150);
+                if ($resizedImage) {
+                    $result .= '
+                    <tr>
+                            <td class="td_main">' .
+                            '<a class="screenshot" href="' .$image->path .'" rel="' .$image->path .'" onclick="event.preventDefault()" style="cursor:default"><img src="' . $image->resize(180, 150)->path . '" /></a>'
+                            . '<span class="deleteImageButton" onclick="$(this).parent().parent().remove(); $(\'#image-' . $image->getId() . '\').val(\'\')">[Удалить]</span>
+                            </td>
+                    </tr>';
+                }
             }
             $result .= '</table>';
 

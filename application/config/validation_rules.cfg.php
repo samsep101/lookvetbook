@@ -410,6 +410,28 @@
     );
 
     $validation_rules->add(
+        'doctor',
+        array(
+            'required' => array(
+                'value'   => TRUE,
+                'message' => 'Вы не выбрали врача',
+                'code'    => ValidationErrorCodes::WRONG_REVIEW_DATA
+            ),
+        )
+    );
+
+    $validation_rules->add(
+        'account',
+        array(
+            'required' => array(
+                'value'   => TRUE,
+                'message' => 'Вы не выбрали пользователя',
+                'code'    => ValidationErrorCodes::WRONG_REVIEW_DATA
+            ),
+        )
+    );
+
+    $validation_rules->add(
         'clinic_review',
         array(
             'required' => array(

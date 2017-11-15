@@ -18,6 +18,9 @@ class DoctorPriceHelper
       if (!$specialty_id) {
         foreach ($specialties AS $sValue) {
           $doctor->specialty = $doctorSpecialtyToClinic->getOneByDoctorIdAndClinicIdAndSpecialtyId($dValue->id, $clinic_id, $sValue->id);
+          if (!$doctor->specialty) {
+              continue;
+          }
           $first_visit_price_tmp = $doctor->getFirstVisitPrice($clinic_id, $doctor->specialty->specialty_id);
           $second_visit_price_tmp = $doctor->getSecondVisitPrice($clinic_id, $doctor->specialty->specialty_id);
 

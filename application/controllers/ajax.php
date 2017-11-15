@@ -1781,7 +1781,7 @@ if (!Acc::isAuthed())
     $data = array(
       'html' => $html,
 //				'title' => SeoTextViewHelper::getTitle($specialty, $city, 1),
-      'description' => SeoTextViewHelper::getDescription($specialty, $city)
+      'description' => SeoTextViewHelper::getDescription($specialty, $city, [])
     );
     JsonResponse::result($data);
   }

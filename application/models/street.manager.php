@@ -46,14 +46,12 @@
 		{
 			$sql = 'SELECT *
 					FROM street s
-					WHERE EXISTS (
-							SELECT *
+					WHERE id IN (
+							SELECT DISTINCT c.street_id
 							FROM doctor dc
 							INNER JOIN doctor_to_clinic d2c ON d2c.doctor_id = dc.id
 							INNER JOIN clinic c ON c.id = d2c.clinic_id
-							WHERE
-								c.street_id = s.id
-								AND dc.is_active = 1
+							WHERE dc.is_active = 1
 						)
 					ORDER BY `name`';
 			$data = $this->db->query($sql);
@@ -67,15 +65,17 @@
 
             if($city_id) {
                 $sql = 'SELECT *
-                    FROM street AS strt
-                            INNER JOIN clinic AS c ON c.street_id = strt.id
-                            INNER JOIN doctor_to_clinic d2c ON d2c.doctor_id = c.id
-                            INNER JOIN doctor AS dc ON dc.id = d2c.doctor_id
-                    WHERE c.city_id = ' . $city_id . '
-                        AND dc.first_name IS NOT NULL
-                        AND dc.second_name IS NOT NULL
-                        AND dc.last_name IS NOT NULL
-                    ORDER BY strt.name';
+					FROM street s
+					WHERE id IN (
+							SELECT DISTINCT c.street_id
+							FROM doctor dc
+							INNER JOIN doctor_to_clinic d2c ON d2c.doctor_id = dc.id
+							INNER JOIN clinic c ON c.id = d2c.clinic_id
+							WHERE
+								dc.is_active = 1
+                                AND c.city_id = '.$city_id.'
+						)
+					ORDER BY `name`';
 
                 $data = $this->db->query($sql);
             }

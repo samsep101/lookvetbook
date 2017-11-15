@@ -10,7 +10,7 @@
     </div>
     <div class="col-2 disease-doc-image">
         <div class="avatar">
-            <img src="http://lookmedbook.ru/media/upload/clinic/license/74x111-crop-1390897859-GNTQf82KG8.jpg">
+            <img src="//lookmedbook.ru/media/upload/clinic/license/74x111-crop-1390897859-GNTQf82KG8.jpg">
         </div>
     </div>
     <br clear="all">

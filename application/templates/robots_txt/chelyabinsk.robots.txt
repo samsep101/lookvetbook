@@ -16,4 +16,4 @@ Disallow: /*?
 Disallow: /*booking*
 Disallow: /media/js/linkHidingIndexing.js
 Disallow: /disease
-Sitemap: http://chelyabinsk.lookmedbook.ru/sitemap.xml
+Sitemap: https://chelyabinsk.lookmedbook.ru/sitemap.xml

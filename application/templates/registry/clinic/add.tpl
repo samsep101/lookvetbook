@@ -48,7 +48,7 @@
                 <input type="text" style="margin-top: 10px;" name="latitude" class="grey_placeholder"/>
                 <br><span style="margin-left: 150px" class="ex_registry">Пример: 55.7377</span>
             </div>
-            <a href="http://api.yandex.ru/maps/tools/getlonglat/" target="_blank" style="font-size: 16px">Получение координат</a>
+            <a href="https://api.yandex.ru/maps/tools/getlonglat/" target="_blank" style="font-size: 16px">Получение координат</a>
 
             <div class="row-record" style="margin-top: 40px">
                 <label style="width: 370px">Кто предоставил информацию по брифу</label>

@@ -3,7 +3,7 @@
 	{
 		public static function getCityByPageLink()
 		{
-			$url = trim(str_replace('http://', '', SITE_URL), '/');
+			$url = trim(str_replace(SITE_SCHEME . '://', '', SITE_URL), '/');
 
 			$city = null;
 
@@ -12,7 +12,7 @@
 			 */
 			$city_manager = ModelManagerFactory::getByName('city');
 
-			if (preg_match('/^(http:\/\/)?([A-Za-z\-]+)\.'.$url.'$/', SERVER_NAME, $matches))
+			if (preg_match('/^(' . SITE_SCHEME . ':\/\/)?([A-Za-z\-]+)\.'.$url.'$/', SERVER_NAME, $matches))
 			{
 				$alias = $matches[2];
 				$city = $city_manager->getOneByAlias($alias);

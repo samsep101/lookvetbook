@@ -9,9 +9,9 @@
                                 <a class="info-mail jsLinkHidingIndexing" href="mailto:help@lookmedbook.ru">help@lookmedbook.ru</a>
                             </section>
                             <ul class="inner-top-socials">
-                                <li class="socials-vkontakte"><a class="jsLinkHidingIndexing" target="_blank" href="http://vk.com/lookmedbook"></a></li>
-                                <li class="socials-odnoklassniki"><a class="jsLinkHidingIndexing" target="_blank" href="http://odnoklassniki.ru/group/52035885072448"></a></li>
-                                <li class="socials-facebook"><a class="jsLinkHidingIndexing" target="_blank" href="http://www.facebook.com/LookMedBook"></a></li>
+                                <li class="socials-vkontakte"><a class="jsLinkHidingIndexing" target="_blank" href="https://vk.com/lookmedbook"></a></li>
+                                <li class="socials-odnoklassniki"><a class="jsLinkHidingIndexing" target="_blank" href="https://odnoklassniki.ru/group/52035885072448"></a></li>
+                                <li class="socials-facebook"><a class="jsLinkHidingIndexing" target="_blank" href="https://www.facebook.com/LookMedBook"></a></li>
                             </ul>
                         </div>
                         <div class="footer-inner-bottom">
@@ -46,7 +46,7 @@
     <script type="text/javascript" src="/media/js/flashcanvas.js?0.1"></script>
     <![endif]-->
 
-    <script src="http://api-maps.yandex.ru/2.0/?load=package.full,package.clusters,package.overlays&lang=ru-RU" type="text/javascript"></script>
+    <script src="https://api-maps.yandex.ru/2.0/?load=package.full,package.clusters,package.overlays&lang=ru-RU" type="text/javascript"></script>
     <script type="text/javascript" src="/media/js/magazine_total_price.js?0.1"></script>
     <script type="text/javascript" src="/media/js/image_preview.js?0.1"></script>
 

@@ -1,7 +1,7 @@
 <?php
     class YandexGeocoder
     {
-        private $url_template = 'http://geocode-maps.yandex.ru/1.x/?geocode=%name%&format=json';
+        private $url_template = 'https://geocode-maps.yandex.ru/1.x/?geocode=%name%&format=json';
 
 		public $api_data;
 

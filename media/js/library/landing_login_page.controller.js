@@ -168,7 +168,7 @@ var LandingLoginPageController = function (page_url, specialty_text, recording, 
         var vk_cliend_id = $('.socials input[name="vk_client_id"]').val();
         var vk_dest_url = '?destination='+self.page_url;
         var vk_redirect_url = site_url+'/account/vk_login'+vk_dest_url;
-        var vk_link = 'http://oauth.vk.com/authorize?client_id='+vk_cliend_id+'&scope=photos,offline&redirect_uri='+vk_redirect_url+'&response_type=code';
+        var vk_link = 'https://oauth.vk.com/authorize?client_id='+vk_cliend_id+'&scope=photos,offline&redirect_uri='+vk_redirect_url+'&response_type=code';
         self.popup.getElement('#vk_login').attr('href', vk_link);
 
         var fb_cliend_id = $('.socials input[name="fb_client_id"]').val();
@@ -186,7 +186,7 @@ var LandingLoginPageController = function (page_url, specialty_text, recording, 
         var ok_cliend_id = $('.socials input[name="ok_client_id"]').val();
         var ok_dest_url = '?destination='+self.page_url;
         var ok_redirect_url = site_url+'/account/ok_login'+ok_dest_url;
-        var ok_link = 'http://www.odnoklassniki.ru/oauth/authorize?client_id='+ok_cliend_id+'&response_type=code&redirect_uri='+ok_redirect_url;
+        var ok_link = 'https://www.odnoklassniki.ru/oauth/authorize?client_id='+ok_cliend_id+'&response_type=code&redirect_uri='+ok_redirect_url;
         self.popup.getElement('#ok_login').attr('href', ok_link);
     }
 }

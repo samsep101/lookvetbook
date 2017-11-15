@@ -5,12 +5,12 @@
     <ul>
 
         <li class="socials-vkontakte">
-            <a id="vk_login" href="http://oauth.vk.com/authorize?client_id=<?php echo SettingsManager::get('vk_client_id'); ?>&scope=photos,offline&redirect_uri=<?php echo SITE_URL; ?>/account/vk_login&response_type=code"></a>
+            <a id="vk_login" href="https://oauth.vk.com/authorize?client_id=<?php echo SettingsManager::get('vk_client_id'); ?>&scope=photos,offline&redirect_uri=<?php echo SITE_URL; ?>/account/vk_login&response_type=code"></a>
             <input type="hidden" name="vk_client_id" value="<?php echo SettingsManager::get('vk_client_id'); ?>">
         </li>
 
         <li class="socials-odnoklassniki">
-            <a id="ok_login" href="http://www.odnoklassniki.ru/oauth/authorize?client_id=<?php echo SettingsManager::get('ok_client_id'); ?>&response_type=code&redirect_uri=<?php echo SITE_URL; ?>/account/ok_login"></a>
+            <a id="ok_login" href="https://www.odnoklassniki.ru/oauth/authorize?client_id=<?php echo SettingsManager::get('ok_client_id'); ?>&response_type=code&redirect_uri=<?php echo SITE_URL; ?>/account/ok_login"></a>
             <input type="hidden" name="ok_client_id" value="<?php echo SettingsManager::get('ok_client_id'); ?>">
         </li>
 

@@ -17,7 +17,7 @@ var AboutPageController = function(city_id) {
                 //self.map_controller.setData(data.result);
                 var map = self.map_controller.getMap();
                 var placemark = new ymaps.Placemark([48, 40], {
-                    balloonContent: '<img src="http://img-fotki.yandex.ru/get/6114/82599242.2d6/0_88b97_ec425cf5_M" />',
+                    balloonContent: '<img src="//img-fotki.yandex.ru/get/6114/82599242.2d6/0_88b97_ec425cf5_M" />',
                     iconContent: "Азербайджан"
                 }, {
                     preset: "twirl#yellowStretchyIcon",

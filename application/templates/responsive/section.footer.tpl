@@ -149,7 +149,7 @@
 
 
 <?php if (isset($load_map) && $load_map): ?>
-    <script src="http://api-maps.yandex.ru/2.0/?load=package.full,package.clusters,package.overlays&lang=ru-RU" type="text/javascript"></script>
+    <script src="https://api-maps.yandex.ru/2.0/?load=package.full,package.clusters,package.overlays&lang=ru-RU" type="text/javascript"></script>
     <script src="/media/js/geolacation-button.js?<?php echo RELEASE__NUMBER?>"></script>
     <script type="text/template" id="citymaps-balloon-template">
         <div class="citymaps-balloon-wrapper">

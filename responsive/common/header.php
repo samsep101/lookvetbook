@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" href="/media/images/home_page/look/favicon.png" type="image/png">
-        <link rel="canonical" href="http://lookmedbook.citrus.one//doctor" />
+        <link rel="canonical" href="https://lookmedbook.ru//doctor" />
 
         <link rel="stylesheet" href="/media/responsive/styles.min.css?0.1" type="text/css" />
 

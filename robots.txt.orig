@@ -22,5 +22,5 @@ Disallow: /*_openstat
 Disallow: /*?
 Disallow: /*booking*
 Disallow: /media/js/linkHidingIndexing.js
-Sitemap: http://lookmedbook.ru/sitemap.xml
+Sitemap: https://lookmedbook.ru/sitemap.xml
 

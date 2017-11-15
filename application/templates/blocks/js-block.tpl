@@ -1,5 +1,5 @@
 !--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
 <![endif]-->
 
 <script src="/media/js/jquery-1.9.1.js"></script>
@@ -27,6 +27,6 @@
 
 <!-- scripts for disease page-->
 <script src="/media/js/vendor/bootstrap/bootstrap-affix.js" type="text/javascript"></script>
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script src="//code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
 

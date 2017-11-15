@@ -1,4 +1,8 @@
 User-agent: Yandex
+Allow: /media/css/*
+Allow: /media/images/*
+Allow: /media/js/*
+Allow: /media/responsive/*
 Disallow: /*search*
 Disallow: /*utm_
 Disallow: /*_openstat
@@ -8,6 +12,10 @@ Disallow: /media/js/linkHidingIndexing.js
 Host: lookmedbook.ru
 
 User-agent:*
+Allow: /media/css/*
+Allow: /media/images/*
+Allow: /media/js/*
+Allow: /media/responsive/*
 Disallow: /*search*
 Disallow: /*utm_
 Disallow: /*_openstat

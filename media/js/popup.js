@@ -11,6 +11,7 @@ var Popup = function(){
         if (self.popup_block)
         {
             self.popup_block.css('display', 'block');
+            self.popup_block.css('visibility', 'visible');
             return;
         }
 
@@ -110,7 +111,7 @@ var Popup = function(){
     };
 
     this.hide = function(){
-        self.popup_block.remove();
+        self.popup_block.css('visibility','hidden');
 
         Popup.locks--;
         if (Popup.locks <= 0)

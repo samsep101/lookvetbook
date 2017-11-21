@@ -10,7 +10,7 @@ Disallow: /*?
 Disallow: /*booking*
 Disallow: /media/js/linkHidingIndexing.js
 Disallow: /disease
-Host: {{domain}}
+Host: https://{{domain}}
 
 User-agent:*
 Allow: /media/css/*

@@ -158,13 +158,7 @@ var ClinicDoctorSearchFormController = function (clinic_id) {
     };
 
     this.setSpecialtyId = function (specialty_id) {
-        $('#doctor_search_form select[name="specialty_id"] option').removeAttr('selected');
-        $('#doctor_search_form select[name="specialty_id"] option[value="' + specialty_id + '"]').attr('selected', true);
-
-        var id = $('#doctor_search_form select[name="specialty_id"]').attr('id');
-        var text = $('#doctor_search_form select[name="specialty_id"] option[value="' + specialty_id + '"]').html();
-        var selector = '#' + id + '_chzn .chzn-single span';
-        $('#' + id + '_chzn .chzn-single span').html(text);
+        $('#doctor_search_form').find('select[name="specialty_id"]').val(specialty_id).trigger("liszt:updated");
         self.specialty_id = specialty_id;
         self.show_doctors_card_anyway = true;
         self.sendRequest();

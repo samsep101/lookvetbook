@@ -78,6 +78,9 @@
                     Мы всегда рады вам помочь! <span class="info-phone">8 495 215 09 07</span>
                 </div>
             </div>
+            <div class="row flo m-b-10" style="text-align: center;">
+              <a class="reg-link show_license" href="javascript:void(0);">Пользовательское соглашение</a>
+            </div>
             <div class="row flo m-b-10 a-c">
                 <input style="width:200px;" type="submit" class="btn-1 resume-btn js-hide-on-record-complete" value="Записаться">
             </div>

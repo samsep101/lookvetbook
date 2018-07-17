@@ -98,7 +98,7 @@
                         </li>
                     </ol>
                 </div>
-                <div style="height: 306px">&nbsp;</div>
+                <div style="height: 336px">&nbsp;</div>
 			<?php } ?>
 
 			<?php if ($disease->medicine) { ?>
@@ -121,9 +121,6 @@
 			<?php if(!empty($disease->alias) and in_array($disease->alias, ['varikoznaya-bolezn', 'hronicheskaya-venoznaya-nedostatochnost'])) {
 				include('wikimed.tpl');
 			} ?>
-			<?php include('get_desease_maxlab.tpl'); ?>
-			<?php //include('get_desease_byt_molodoj_babkoj.tpl'); ?>
-			<?php //include('get_desease_amazonaws.tpl'); ?>
 
 			<?php if(!empty($disease->alias) and in_array($disease->alias, ['mezhpozvonochnaya-gryzha', 'osteohondroz-pozvonochnika'])) { ?>
                            <div class="desease-banner-line">

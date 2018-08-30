@@ -16,6 +16,10 @@
 			return '/media/upload/' . $this->params['folder'] . $this->params['filename'];
 		}
 
+        public function exists()
+        {
+            return file_exists($this->path) && is_readable($this->path);
+        }
 
 		protected function  _field_image_info()
 		{

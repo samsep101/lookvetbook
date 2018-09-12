@@ -1,4 +1,12 @@
-<?php $this->container = '#clinic-photos-form'; ?>
+<?php
+/**
+ * @var string $model_name
+ * @var int $entry_id
+ * @var \ModerateClinicCardImageModel $model
+ * @var \ModerateImageToClinicModel[] $clinic_images
+ */
+$this->container = '#clinic-photos-form';
+?>
 <script type="text/javascript">
     $(document).ready(function(){
         var form_controller = new ClinicPhotosController();
@@ -47,9 +55,13 @@
                             <div class="carousel carousel-stage clinic-carousel" data-holder-for="image_to_clinic">
                                 <ul>
                                     <?php if ($clinic_images): ?>
-                                    <?php foreach($clinic_images as $clinic_image): ?>
+                                        <?php foreach($clinic_images as $clinic_image): ?>
                                         <li data-name="image_to_clinic">
-                                            <img src="<?php echo $clinic_image->image->crop(660, 360)->path; ?>">
+                                            <?php if ($clinic_image->image->exists()) { ?>
+                                                <img src="<?php echo $clinic_image->image->crop(660, 360)->path; ?>">
+                                            <?php } else { ?>
+                                                <img src="<?= $clinic_image->image->path ?>">
+                                            <?php } ?>
                                             <input class="hidden" name="image_id" value="<?php echo $clinic_image->image_id; ?>"/>
                                         </li>
                                     <?php endforeach; ?>

@@ -2145,7 +2145,6 @@ div.moderate_comment_input_block {
     width      : 22px;
     height     : 22px;
     position   : relative;
-    top        : -360px;
     left       : 630px;
     cursor     : pointer;
     display    : block;
@@ -2153,7 +2152,7 @@ div.moderate_comment_input_block {
 
 .connected-carousels .clinic-carousel.carousel-stage {
     width  : 660px;
-    height : 360px;
+    height : 390px;
 }
 
 .connected-carousels .clinic-carousel.carousel-stage li {

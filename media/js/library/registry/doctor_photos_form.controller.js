@@ -20,16 +20,14 @@ DoctorPhotosFormController.prototype.initFields = function()
         self.addSetMainPhotoButton();
     });
 
-    //$('.carousel-stage ul li').append('<input class="set-main-photo-button" type="button" value="Сделать главной"  /><span class="delete-photo-button"></span>');
     $('.carousel-stage ul li').each(function(){
+        $(this).prepend('<span class="delete-photo-button"></span>');
         var img = $(this).find('img');
 
         if (img.data('width') < img.data('height'))
         {
-            $(this).append('<input class="set-main-photo-button" type="button" value="Сделать главной"  />');
+            $(this).prepend('<input class="set-main-photo-button" type="button" value="Сделать главной"  />');
         }
-
-        $(this).append('<span class="delete-photo-button"></span>');
     });
 
     $(document).on('click', '.delete-photo-button', function(){
@@ -125,17 +123,15 @@ DoctorPhotosFormController.prototype.initDoctorPhotos = function(){
     image_upload_controller.button_selector = 'add_doctor_photos';
     image_upload_controller.preview_container_selector = '#photo-progress-block';
     image_upload_controller.setSuccessCallback(function(data){
-        var html = '<li data-name="image_to_doctor" style="width: 660px;"><img src="'+data.resized_image.path+'" />';
-        html += '<input type="hidden" name="image_id" value="'+data.resized_image.image_id+'" />';
-        html += '</li>';
+        var html = '<li data-name="image_to_doctor" style="width: 660px;">'
+            + '<img src="'+data.resized_image.path+'" />'
+            + '<input type="hidden" name="image_id" value="'+data.resized_image.image_id+'" />'
+            + (data.original_image.width < data.original_image.height
+                ? '<input class="set-main-photo-button" type="button" value="Сделать главной" />'
+                : '')
+            + '<span class="delete-photo-button"></span>'
+            + '</li>';
         $('.carousel-stage ul').append(html);
-
-
-        if (data.original_image.width < data.original_image.height)
-        {
-            $('.carousel-stage ul li').last().append('<input class="set-main-photo-button" type="button" value="Сделать главной"  />');
-        }
-        $('.carousel-stage ul li').last().append('<span class="delete-photo-button"></span>');
 
         var navigation_li = '<li data-jcarouselcontrol="true"><img src="'+data.resized_image.path+'" /></li>';
         $('.carousel-navigation ul').append(navigation_li);

@@ -134,11 +134,10 @@ EOD;
 
 
     public function  sendRecordInformation($info){
-        $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru';
+        $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,glyapustina@lookmedbook.ru';
         $subject = 'Заявка на посещение врача №'.$info['visit_id'];
 
 
-        $message = 'Пациент '.$info['full_name'].': '.$info['phone']."\r\n\r\n";
         $message = 'Пациент '.$info['full_name'].': '.$info['phone']."\r\n\r\n";
         $headers = "Content-type: text/html; charset=utf-8 \r\n";
         $headers .= "From: lookmedbook.ru <no-reply@lookmedbook.ru>\r\n";
@@ -149,7 +148,7 @@ EOD;
 
   public function sendVisitCreatedMessage($info=[])
   {
-    $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru';
+    $to = 'karaseva1175@mail.ru,reeker14@mail.ru,myakovleva@lookmedbook.ru,Yudin@medcore.ru,kkornakova@lookmedbook.ru,glyapustina@lookmedbook.ru';
     $subject = $info['id']['title'].' No:'.$info['id']['value'];
     if(isset($info['fio'])) {
       if ($info['fio']['value'] == 'Запрос на скидку')

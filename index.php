@@ -9,6 +9,9 @@ if(!empty($_SERVER['SERVER_NAME'])){
     define('SERVER_NAME', 'lookvetbook.ru');
 }
 
+// абсолютный путь до корня сайта
+define('ABS_ROOT', realpath(__DIR__));
+
 require('application/config/site.cfg.php');
 
 if (!debug) {

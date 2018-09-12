@@ -13,7 +13,7 @@
 
 		public function beforeSave(DynamicModel $model)
 		{
-			$model->license_issue_date = $model->license_issue_date ? date('Y-m-d', strtotime($model->license_issue_date)) : '';
-			$model->license_validity_date = $model->license_validity_date ? date('Y-m-d', strtotime($model->license_validity_date)) : '';
+			$model->license_issue_date = $model->license_issue_date ? date('Y-m-d', strtotime($model->license_issue_date)) : null;
+			$model->license_validity_date = $model->license_validity_date ? date('Y-m-d', strtotime($model->license_validity_date)) : null;
 		}
 	}

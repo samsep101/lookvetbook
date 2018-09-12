@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var string $model_name
+ * @var int $entry_id
+ * @var \ModerateDoctorCardImageModel $model
+ * @var \ModerateImageToDoctorModel[] $doctor_images
+ */
+?>
 <script type="text/javascript" xmlns="http://www.w3.org/1999/html">
     $(document).ready(function(){
         window.validation_span = true;
@@ -49,7 +57,11 @@
                             <?php if ($doctor_images): ?>
                                 <?php foreach($doctor_images as $image): ?>
                                     <li style="display: table-cell; width: 658px;" data-name="image_to_doctor">
+                                        <?php if ($image->image->exists()) { ?>
                                         <img src="<?php echo $image->image->resize(675, 450)->path; ?>" alt="" data-width="<?php echo $image->image->width; ?>" data-height="<?php echo $image->image->height; ?>">
+                                        <?php } else { ?>
+                                        <img src="<?php echo $image->image->path; ?>" alt="" data-width="<?php echo $image->image->width; ?>" data-height="<?php echo $image->image->height; ?>">
+                                        <?php } ?>
                                         <input type="hidden" name="image_id"  value="<?php echo $image->image->getId(); ?>" />
                                     </li>
                                 <?php endforeach; ?>

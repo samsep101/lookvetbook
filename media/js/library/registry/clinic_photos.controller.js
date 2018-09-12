@@ -29,10 +29,12 @@ extend(ClinicPhotosController, ModerateFormController);
         image_upload_controller_2.button_selector = 'add_clinic_photo';
         image_upload_controller_2.preview_container_selector = '#photo-progress-block';
         image_upload_controller_2.setSuccessCallback(function(data){
-            var html = '<li data-name="image_to_clinic"><img src="'+data.resized_image.path+'" />';
-            html += '<input type="hidden" name="image_id" value="'+data.resized_image.image_id+'" />';
-            html += '<input class="set-main-photo-button" type="button" value="Сделать главной"  /><span class="delete-photo-button"></span>';
-            html += '</li>';
+            var html = '<li data-name="image_to_clinic">'
+                + '<input type="hidden" name="image_id" value="'+data.resized_image.image_id+'" />'
+                + '<input class="set-main-photo-button" type="button" value="Сделать главной" />'
+                + '<span class="delete-photo-button"></span>'
+                + '<img src="'+data.resized_image.path+'" />'
+                + '</li>';
             $('.carousel-stage ul').append(html);
 
             var navigation_li = '<li data-jcarouselcontrol="true"><img src="'+data.resized_image.path+'" /></li>';
@@ -48,18 +50,16 @@ extend(ClinicPhotosController, ModerateFormController);
             $(this).parent().remove();
         });
 
-        $('.carousel-stage ul li').append('<input class="set-main-photo-button" type="button" value="Сделать главной"  /><span class="delete-photo-button"></span>');
+        $('.carousel-stage ul li').prepend('<input class="set-main-photo-button" type="button" value="Сделать главной"  /><span class="delete-photo-button"></span>');
 
         $(document).on('click', '.set-main-photo-button', function(){
             var li = $(this).parent();
-            var image_index = $('.carousel-stage ul li').index(li);
             $('.carousel-stage ul li').first().before(li);
             connectCarousel();
         });
 
         $(document).on('click', '.delete-photo-button', function(){
             var li = $(this).parent();
-            var image_index = $('.carousel-stage ul li').index(li);
             li.remove();
         });
     };

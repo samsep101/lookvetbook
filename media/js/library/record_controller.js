@@ -59,7 +59,6 @@ var RecordController = function ()
 
         $( ".datepicker" ).datepicker();
         $(".inputPhone").mask("+7 (999) 999-99-99");
-        this.document.write('<img src="http://mixmarket.biz/uni/tev.php?id=1294937483&r='+escape(document.referrer)+'&t='+(new Date()).getTime()+'" width="1" height="1"/>');
     }
 }
 

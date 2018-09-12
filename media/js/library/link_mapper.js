@@ -135,6 +135,6 @@ function LinkMapper_go() {
 
 function LinkMapper_remap() {
   linkMapper_setHandlers();
-  linkMapper_loadIcon = '/images/loading.gif';
+  linkMapper_loadIcon = '/media/images/loader.gif';
 }
 //console.log("linkMapper loaded");

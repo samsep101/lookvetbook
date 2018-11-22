@@ -94,7 +94,7 @@
     <div class="divider-shadow" id="divider-shadow"></div>
 </div>
 <div align="center" class="adv_text_bf_search_result">
-    Мы сравним для вас цены и найдем лучшее предложение.<br> Звоните <a href="tel:+7(495)215-09-07">+7(495)215-09-07</a>
+    Мы сравним для вас цены и найдем лучшее предложение.<br> Звоните <a href="tel:+7(495)215-09-27">+7(495)215-09-27</a>
 </div>
 
 <div class="inner-2" style="padding-top: 0;">

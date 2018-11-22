@@ -73,7 +73,7 @@
         <div class="row flo m-b-20">
             <div class="record_process_result"></div>
             <div class="inner-top-info" style="text-align: center;font-size: 1.2em;">
-                Мы всегда рады вам помочь! <span class="info-phone">8 495 215 09 07</span>
+                Мы всегда рады вам помочь! <span class="info-phone">8 495 215 09 27</span>
             </div>
         </div>
         <div class="row flo m-b-10 a-c">

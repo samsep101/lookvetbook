@@ -139,7 +139,7 @@
                             <?php $this->block('doctor/blocks/card_buttons'); ?>
                         </div>
                         <div class="registration-phone">
-                            или по телефону: 8 (495) 215-09-27
+                            или по телефону: 8 (495) 215-09-07
                         </div>
                     </div>
                 </div><!-- end class "descr" -->
@@ -412,7 +412,7 @@
                 <?php $this->doctor = $doctor; ?>
                 <?php $this->block('/doctor/blocks/doctor_appointment'); ?>
                 <div class="registration-phone">
-                    или по телефону: 8 (495) 215-09-27
+                    или по телефону: 8 (495) 215-09-07
                 </div>
             </div>
         </div>

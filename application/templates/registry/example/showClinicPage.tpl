@@ -70,7 +70,7 @@
                     <?php endif; ?>
                     <p class="our_time">
                         <span class="h-txt">Запись на прием:</span><br/>
-                        +7 (495) 215 09 27
+                        +7 (495) 215 09 07
                     </p>
                 </div>
             </div>

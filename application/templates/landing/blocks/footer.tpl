@@ -21,7 +21,7 @@
                 <a class="btn-1 btn-doctor order-link order-link-bottom" href="#how-to-doctor" data-action="SimpleBookStartButton">Записаться на прием к <?php if (isset($specialty)) echo $specialty->lp_dative_name;?></a>
             </div>
             <div class="ax_paragraph">
-                <span class="big-phone">8 (495) 215-09-27 </span>
+                <span class="big-phone">8 (495) 215-09-07 </span>
                 <span class="small-time">с 9:00 до 21:00 </span>
             </div>
             <div class="ax_paragraph">

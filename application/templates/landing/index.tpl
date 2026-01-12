@@ -110,7 +110,7 @@
                 <img class="white-symptom-footer-phone-img white-symptom-footer-part" width="41" height="40" alt="" src="/media/images/landing/phone.png">
                 <!--<span class="white-symptom-footer-phone">8 (495) 787-39-53</span>-->
                 <div class="white-symptom-footer-phone white-symptom-footer-part phone-with-time">
-                    <span class="big-phone">8 (495) 215-09-27 </span>
+                    <span class="big-phone">8 (495) 215-09-07 </span>
                     <span class="small-time">с 9:00 до 21:00 </span>
                 </div>
             </div>

@@ -71,7 +71,7 @@
         <p class="txt">
             Напишите нам на почту <a class="blue-txt" href="mailto:sales@lookmedbook.ru">sales@lookmedbook.ru</a>
             <br><br>
-            или позвоните по телефону <span class="blue-txt">+7 (495) 215 09 27</span>
+            или позвоните по телефону <span class="blue-txt">+7 (495) 215 09 07</span>
         </p>
     </div>
 </div>

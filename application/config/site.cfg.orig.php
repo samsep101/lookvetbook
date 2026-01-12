@@ -27,7 +27,7 @@ define('SITE_NAME', "LookMedBook");
 define('SHOP_ENABLE', 1);
 define('RELEASE_NUMBER', 43);
 define('SITE_PHONE_CODE', '495');
-define('SITE_PHONE', '215-09-27');
+define('SITE_PHONE', '215-09-07');
 define('CSS_DIR', 'vet');
 define('PAGE_TITLE', 'Портал медицинских услуг в ');
 define('JUR_ADDRESS', 'Гамсоновский переулок, 2');

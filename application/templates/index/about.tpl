@@ -66,7 +66,7 @@
         <ul>
             <li>
                 <p class="h-txt">Телефон:</p>
-                <p class="txt">+7 495 215 09 27</p>
+                <p class="txt">+7 495 215 09 07</p>
             </li>
             <li>
                 <p class="h-txt">E-mail:</p>

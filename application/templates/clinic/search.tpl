@@ -107,7 +107,7 @@
     <div class="divider-shadow" id="divider-shadow"></div>
 </div>
 <div align="center" class="adv_text_bf_search_result">
-    Мы сравним для вас цены и найдем лучшее предложение.<br> Звоните <a href="tel:+7(495)215-09-27">+7(495)215-09-27</a>
+    Мы сравним для вас цены и найдем лучшее предложение.<br> Звоните <a href="tel:+7(495)215-09-07">+7(495)215-09-07</a>
 </div>
 
 <div class="inner-2 clinic-search-result <?php if($current_account  && $current_account->is_call_centre_operator) echo 'account_active'; ?>">

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<companies version="1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="companies.xsd">
+  <known-features>
+    <known-enum-single name="hogh_school_ownship"/>
+    <enum-value name="hogh_school_ownship">state_high_school</enum-value>
+    <enum-value name="hogh_school_ownship">nonstate_high_school</enum-value>
+    <known-boolean name="home_visit"/>
+  </known-features>
+</companies>

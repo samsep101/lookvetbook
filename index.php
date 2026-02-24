@@ -1,6 +1,6 @@
 ﻿<?php
 if (php_sapi_name()!='cli') {
-  header("Content-Type: text/html; charset=UTF-8");
+//  header("Content-Type: text/html; charset=UTF-8");
 }
 
 if(!empty($_SERVER['SERVER_NAME'])){
@@ -9,6 +9,7 @@ if(!empty($_SERVER['SERVER_NAME'])){
     define('SERVER_NAME', 'lookvetbook.ru');
 }
 
+#define(debug, true);
 // абсолютный путь до корня сайта
 define('ABS_ROOT', realpath(__DIR__));
 

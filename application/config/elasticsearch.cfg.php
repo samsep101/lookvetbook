@@ -11,8 +11,8 @@
 
         Register::add('ELASTICA_SERVERS', array(
                 "servers" => array(array(
-                        'host' => 'localhost',
-                        'port' => 9400
+                        'host' => 'vet_elastic',
+                        'port' => 9200
                 ))
         ));
 

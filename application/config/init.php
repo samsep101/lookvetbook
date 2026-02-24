@@ -74,7 +74,7 @@ if (isset($_REQUEST['utm_campaign']) && $_REQUEST['utm_campaign'] == 'mixuni'){
 
 
 
-Register::add('db', new Db());
+Register::add('db', new Db("vet_mysql", "look_vet", "dfghmt563", "lookvetbook"));
 Register::add('utils', new Utils());
 
 Register::add('SUBDOMAINS', [

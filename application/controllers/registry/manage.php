@@ -4,14 +4,16 @@
         public function __construct()
         {
             parent::__construct();
-
+	
             $this->layout = 'registry';
 
             if (!Acl::isAuthed(RoleModel::ACCOUNT_SUPER_MANAGER)
 				&& !Acl::isAuthed(RoleModel::FREELANCE_MANAGER)
 				&& !Acl::isAuthed(RoleModel::ACCOUNT_MANAGER)
-				)
-                RedirectManager::redirect('/admin');
+				){
+		
+					RedirectManager::redirect('/admin');
+	    }
         }
 
 		/**
@@ -19,7 +21,8 @@
 		 */
 		public function index()
         {
-			$moderate_page_manager = new ModeratePageManager();
+		
+		$moderate_page_manager = new ModeratePageManager();
 	        $updates = $moderate_page_manager->getTheUpdatedPagesByUserIdWithLimit(Acl::userId(), 0, 10);
 	        $this->view->updates = $updates;
 

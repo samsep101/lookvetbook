@@ -3,6 +3,7 @@ version: '3.8'
 
 services:
   php:
+    restart: unless-stopped
     container_name: vet_php
     build: .
     # или используйте image: если уже собрали
@@ -11,6 +12,7 @@ services:
     networks:
       - app-network
   nginx:
+    restart: unless-stopped
     container_name: vet_nginx
     image: docker.io/nginx:alpine
     ports:
@@ -23,6 +25,7 @@ services:
     networks:
       - app-network
   elastic: 
+    restart: unless-stopped
     container_name: vet_elastic 
     image:  docker.elastic.co/elasticsearch/elasticsearch:5.6.0
     environment:
@@ -36,13 +39,29 @@ services:
     networks:
       - app-network
   memcached:
+    restart: unless-stopped
     container_name: vet_memcached
     image: docker.io/memcached:alpine
     ports:
       - "11212:11211"
     networks:
       - app-network
+  backup:
+    build: ./backup
+    restart: unless-stopped
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=look_vet
+      - DB_PASSWORD=dfghmt563
+      - DB_NAME=lookvetbook
+    volumes:
+      - ../backups/lookvetbook:/backups
+    networks:
+      - app-network
+    depends_on:
+      - mysql
   mysql:
+    restart: unless-stopped
     container_name: vet_mysql
     image: docker.io/mysql:5.5  # MySQL 5.7 - самая стабильная с PHP 5.6
     ports:

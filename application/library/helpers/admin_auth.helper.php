@@ -2,7 +2,7 @@
     class AdminAuthHelper {
         public static function redirectToDefaultPage()
         {
-            if (Acl::isAuthed(RoleModel::ACCOUNT_REGISTRY))
+		if (Acl::isAuthed(RoleModel::ACCOUNT_REGISTRY))
             {
                 RedirectManager::redirect(REGISTRY_FOLDER);
             }

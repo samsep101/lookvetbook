@@ -1,5 +1,6 @@
 <?php
 
+
 date_default_timezone_set('Europe/Moscow');
 
 function __autoload_application($className)
@@ -38,18 +39,15 @@ Application::loadConfig('memcache');
 Application::loadConfig('controller_decorators');
 Application::loadConfig('elasticsearch');
 
-
 Application::afterInit();
-
 if (isset($_SERVER['REQUEST_URI'])) {
   if (strpos($_SERVER['REQUEST_URI'], 'admin') !== FALSE) {
-    Application::loadAllConfigInFolder('cms_generator_configs');
+	  Application::loadAllConfigInFolder('cms_generator_configs');
   }
   if (strpos($_SERVER['REQUEST_URI'], 'registry') !== FALSE) {
     Application::loadAllConfigInFolder('manage_configs');
   }
 }
-
 
 if (isset($_REQUEST['admitad_uid'])){
   setcookie(
